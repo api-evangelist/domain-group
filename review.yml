@@ -1,0 +1,493 @@
+aid: domain-group
+name: Domain Group
+review:
+  question: Does Domain Group expose a real, self-serve public developer surface with
+    downloadable machine-readable contracts, and what is its RESO posture?
+  answer: yes - self-serve portal with three downloadable OpenAPI 3.0.4 documents;
+    no RESO posture of any kind
+  date: '2026-07-26'
+  reviewer: API Evangelist
+  openapiHarvested: true
+  openapiScopeNote: |
+    The Domain developer portal is a Next.js application. No spec is served
+    from /swagger.json, /openapi.json, /api-docs, or any /$metadata path
+    (all 404). The Live API Browser chunk
+    (s.domainstatic.com.au/devportal-frontend-web/master-511/_next/static/chunks/195-432bd5292845bd02.js)
+    fetches "/static/latest/media/{version}/openapi.json", and the portal's
+    own Libraries page (/docs/latest/libraries) links the same three files
+    publicly and by name. All three were fetched anonymously (HTTP 200) and
+    parse as valid OpenAPI 3.0.4. Nothing was fabricated.
+
+sectorPosture:
+  homeMarket: Australia
+  tier: portal-marketplace
+  valueChainPosition: |
+    Domain Group is one half of Australia's residential portal duopoly - Domain
+    against REA Group's realestate.com.au - sitting above the state land
+    registries and PEXA's electronic conveyancing rail rather than on them.
+    Domain is a marketplace and a data vendor: it aggregates agency-supplied
+    listings, derives price and rental estimates, suburb performance and
+    demographics from that flow, and resells the result to agents, banks,
+    fintechs, and PropTech builders. It is not a registry, a title source, or
+    a settlement network, and it does not touch conveyancing.
+  ownership: |
+    Domain Holdings Australia Ltd (formerly ASX:DHG) was acquired by CoStar
+    Group, which completed its acquisition of the remaining 83% of Domain's
+    shares on 27 August 2025, per CoStar Group's own press room. Domain now
+    operates as a CoStar Group business in Australia.
+
+  resoPosture:
+    summary: No RESO reference found anywhere on Domain's public surface.
+    certified: false
+    webApiCertification: none found
+    dataDictionaryCertification: none found
+    dataDictionaryVersion: null
+    resoDirectoryEvidence: |
+      No RESO certification directory listing was found for Domain Group,
+      Domain Holdings Australia, or domain.com.au. RESO is a North American
+      standards body chartered by the National Association of REALTORS; its
+      certification programme and MLS map cover US and Canadian MLSs. Australia
+      has no MLS system at all - listing distribution runs portal-direct from
+      agency CRMs to Domain and to REA Group - so there is no organisation in
+      the Australian market for RESO to certify and no incentive for Domain to
+      seek certification.
+    odataEndpoint: none
+    metadataDocument: none
+    universalPropertyIdentifier: |
+      No RESO Universal Property Identifier (UPI) is used or referenced. Domain
+      identifies properties with its own opaque Domain property id (e.g.
+      "RF-8884-AK") and, in the PropertyRadar package, additionally accepts the
+      Australian G-NAF (Geocoded National Address File) identifier via
+      GET /v1/propertyradar/portfolio/{PortfolioId}/properties/gnaf/{GnafId}.
+      G-NAF is the Australian national address identifier, not a RESO UPI.
+    probes:
+      - url: https://api.domain.com.au/$metadata
+        status: 404
+        note: No OData service document.
+      - url: https://api.domain.com.au/v1/$metadata
+        status: 404
+        note: No OData service document.
+      - url: https://api.domain.com.au/odata/$metadata
+        status: 404
+        note: No OData service document.
+      - url: https://developer.domain.com.au/static/latest/media/latest/openapi.json
+        status: 200
+        note: |
+          Full-text search of all three harvested OpenAPI documents for the
+          word-bounded terms RESO, OData, $metadata, "Data Dictionary", MLS,
+          IDX, and UPI returned zero matches in every file.
+      - url: https://developer.domain.com.au/docs/latest/apis
+        status: 200
+        note: |
+          Word-bounded search of the portal home, the API package index, the
+          authentication tree, the conventions tree, and the Listings
+          Management guides for RESO, MLS, OData, and $metadata returned zero
+          matches.
+    honestStatement: |
+      Domain Group is not RESO certified, is not listed in the RESO
+      certification directory, serves no OData endpoint, publishes no
+      $metadata document, and does not use the RESO UPI. It nonetheless
+      publishes a better machine-readable contract than most RESO-certified
+      US organisations, because it ships three public OpenAPI 3.0.4 documents
+      that any developer can download without an account. Certification is not
+      reachability, and here the absence of certification coincides with the
+      presence of a real, fetchable contract.
+
+  accessGate:
+    classification: self-serve
+    entryPoint: https://developer.domain.com.au/
+    whatADeveloperMustDo: |
+      Sign up at developer.domain.com.au using a GitHub account, a Google
+      account, or a plain email address; create a Project; create an OAuth
+      client (or an API key) under that project; then add API packages to the
+      project. Per the portal's own FAQ: "when you sign up you immediately
+      receive access to 'Agencies and Listings' and 'Properties and Locations'
+      once you create a project." No board, association, MLS, or brokerage
+      membership exists or is required - Australia has no MLS. No licence is
+      countersigned to read; the click-through Domain Group API Terms and
+      Conditions govern all use of the data.
+    whatIsGatedBeyondThat:
+      - gate: account manager negotiation
+        detail: |
+          The Getting Started guide instructs developers to "Agree on the API
+          required with your account manager" before adding packages beyond the
+          two granted on signup. Paid plans set daily quotas and per-minute rate
+          limits per package; no pricing is published anywhere on the portal
+          (developer.domain.com.au/pricing returns 404).
+      - gate: application-approval for write / Listings Management
+        detail: |
+          Production access to the Listings Management (CRM Live) package
+          requires emailing api@domain.com.au with business and technical
+          contacts after passing a documented maturity checklist in the sandbox
+          (both sale and lease listings created and updated without error across
+          residential/commercial/business channels, correct agent contacts,
+          images and floorplans, archive-with-sold-data, sold-price-withheld,
+          real-time not batched posting, token caching and refresh-token
+          revocation handling). Domain then grants the CRM (Live) package to a
+          named client id.
+      - gate: broker/agent authorisation per agency
+        detail: |
+          Beyond Domain's own approval, the developer must email the principal
+          agent of each agency requesting permission to take control of that
+          agency's listings, cc'ing api@domain.com.au. Reading full listing
+          detail, listing enquiries, and listing performance statistics
+          additionally requires a user-context token from a user the agency has
+          linked in Domain Agent Admin (Agency -> Agent List -> Add Login /
+          Invite Agent), or via support@domain.com.au. GET /v1/me/agencies and
+          GET /v1/me/providers exist to verify that association.
+      - gate: media agency restriction
+        detail: |
+          The Campaign API and Campaign API - Preview packages are documented as
+          available to "authenticated media agencies" only.
+    summary: |
+      Self-serve to read, application-approval plus broker authorisation to
+      write. The honest single-value classification for the front door is
+      self-serve, because a developer with nothing but an email address can
+      obtain working credentials against two live packages without speaking to
+      anyone. Everything to do with putting listings onto domain.com.au is
+      broker-authorised.
+
+  openData:
+    exists: false
+    detail: |
+      Domain Group publishes no open, unlicensed, publicly callable dataset.
+      Every endpoint on api.domain.com.au requires credentials - anonymous
+      requests to GET /v1/properties/{id}/priceEstimate and GET /v1/agencies
+      both return HTTP 401 with "Unable to verify credentials". The only
+      genuinely open artifacts are the three OpenAPI documents and the OpenID
+      Connect discovery document, which describe the API but carry no property
+      data. All data use is governed by the Domain Group API Terms and
+      Conditions. Australia's open-data counterweight in property lives
+      elsewhere - G-NAF and the state land registries - not with the portals.
+
+  authModel:
+    schemes:
+      - type: apiKey
+        name: x-api-key
+        in: header
+        note: Declared in all three OpenAPI documents as securityScheme "apikey".
+          Documented as simpler but less secure, and explicitly unable to reach
+          user-specific data.
+      - type: oauth2
+        flows:
+          - clientCredentials
+          - authorizationCode
+          - implicit
+        tokenUrl: https://auth.domain.com.au/v1/connect/token
+        authorizationUrl: https://auth.domain.com.au/v1/connect/authorize
+        refreshUrl: https://auth.domain.com.au/v1/connect/token
+        note: |
+          Declared in all three OpenAPI documents as securityScheme "oauth2".
+          Endpoints needing a user context (agency statistics, full listing
+          detail, enquiries) require authorization code or implicit; everything
+          else can use client credentials.
+      - type: openIdConnect
+        discovery: https://auth.domain.com.au/v1/.well-known/openid-configuration
+        status: 200
+        note: |
+          Fetched anonymously and saved verbatim to
+          well-known/domain-group-openid-configuration.json. Issuer
+          https://auth.domain.com.au/v1. Advertises PAR, DPoP signing algs,
+          CIBA/backchannel auth, device authorization, introspection,
+          revocation, PKCE (S256 and plain), and RS256 id_token signing. The
+          scopes_supported list is Domain's consumer/enterprise identity scope
+          set (roles, address, offline_access, auction-results-api,
+          mi-market-data-api and similar) and is distinct from the API scopes
+          declared in the OpenAPI documents.
+    apiScopes: |
+      25 OAuth scopes are declared in the latest OpenAPI document, all of the
+      form api_<resource>_<read|write>: api_addresslocators_read,
+      api_agencies_read, api_agencies_write, api_authorities_write,
+      api_avm_read, api_campaignperformance_read, api_dataset_read,
+      api_demographics_read, api_enquiries_read, api_enquiries_write,
+      api_listingperformance_read, api_listings_read, api_listings_write,
+      api_locations_read, api_projectperformance_read, api_properties_read,
+      api_propertyportfolio_read, api_propertyportfolio_write,
+      api_propertyreports_read, api_salesresults_read, api_statistics_write,
+      api_suburbhistorical_read, api_suburbperformance_read,
+      api_suburbsummary_read, api_webhooks_write.
+    unauthenticatedProbe:
+      - url: https://api.domain.com.au/v1/properties/RF-8884-AK/priceEstimate
+        status: 401
+        body: '{"type":"https://developer.domain.com.au/docs/latest/conventions/access","title":"Not
+          Authorized","detail":"Unable to verify credentials"}'
+        note: RFC 7807 problem+json shaped error; header x-domain-security
+          "Unable to verify credentials"; served by Envoy.
+      - url: https://api.domain.com.au/v1/agencies?q=ray
+        status: 401
+
+findings:
+  summary: |
+    Domain Group runs one of the few genuinely self-serve developer surfaces in
+    the residential real estate sector. developer.domain.com.au is publicly
+    readable end to end (376 URLs in its sitemap, robots.txt Allow: /), signup
+    is via GitHub/Google/email, and two API packages are granted the moment a
+    project is created. Thirteen API packages are documented - Address
+    Suggestions, Agents & Listings, Campaign API, Campaign API - Preview,
+    Listings Management, Price Estimation, Properties & Locations, Property
+    Enrichment, Property Package, PropertyRadar, Rental AVM, Schools Data, and
+    Webhooks - spanning listings/search, property records, valuation (sale and
+    rental AVM), market statistics, schools, portfolio monitoring, advertising
+    performance, and event notification. Three OpenAPI 3.0.4 documents are
+    published on the Libraries page and were harvested: latest (99 paths, 108
+    operations, 28 tags), v1 (85 paths, 93 operations), and v2 (19 paths, 20
+    operations). Production base URL is https://api.domain.com.au/ with a
+    sandbox at https://api.domain.com.au/sandbox/. Webhooks are real and
+    documented. No prebuilt SDKs exist - the Libraries page says so explicitly
+    and tells developers to generate their own with openapi-generator,
+    swagger-codegen, or NSwag. No Postman collection is published. No GraphQL,
+    AsyncAPI, or MCP surface is published. There is no RESO posture of any kind.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.domain.com.au/
+      documented: true
+      note: Primary production environment. Returns 401 without credentials.
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.domain.com.au/sandbox/
+      documented: true
+      note: |
+        Sandbox for Listings Management and other write applications. Data is
+        refreshed every Sunday and is explicitly not production quality; it is
+        not intended for testing read-only applications.
+    - protocol: OAuth2 / OpenID Connect
+      scheme: https
+      baseURL: https://auth.domain.com.au/v1
+      documented: true
+    - protocol: Webhooks
+      scheme: https
+      documented: true
+      note: |
+        Outbound push notifications with subscription CRUD under
+        /v1/webhooks/{id}/subscriptions and /v1/subscriptions/{id}, plus
+        configuration, processing, subscription, and troubleshooting guides. A
+        separate webhook subscription surface exists for Authorities
+        (PUT/DELETE /v1/authorities/webhooks/subscription).
+    - protocol: GraphQL
+      documented: false
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No streaming or bidirectional surface is documented.
+  accessModel: self-serve
+  selfServeSignup: true
+  publicDocs: true
+  sdksPublished: false
+  postmanPublished: false
+  apiProductsDocumented:
+    - Address Suggestions
+    - Agents & Listings
+    - Campaign API
+    - Campaign API - Preview
+    - Listings Management
+    - Price Estimation
+    - Properties & Locations
+    - Property Enrichment
+    - Property Package
+    - PropertyRadar
+    - Rental AVM API
+    - Schools Data
+    - Webhooks
+  rateLimiting: |
+    Documented at /docs/latest/conventions/rate-limiting. Token generation
+    limited to 3000 requests per hour. General limit of 1000-3000 requests per
+    minute depending on plan, applied even to "Unlimited" plans. Per-package
+    daily quotas reset at 10am AEST. Responses carry X-Quota-PerMinute-Limit,
+    X-Quota-PerMinute-Remaining, X-Quota-PerDay-Limit, X-Quota-PerDay-Remaining;
+    429 responses carry Retry-After and X-Quota-Exceeded.
+  versioning: |
+    Path-based v1 and v2 with a combined "latest" spec. The portal serves three
+    documentation trees (/docs/latest, /docs/v1, /docs/v2) and three matching
+    OpenAPI documents. Domain recommends the latest combined spec because it
+    contains all currently active v1 and v2 endpoints.
+
+sources:
+  - url: https://developer.domain.com.au/
+    type: DeveloperPortal
+    status: 200
+    fetched: '2026-07-26'
+    note: |
+      Public developer portal home. "Sign up today using your Github, Google
+      account or plain email account to create your account and start your
+      project." Lists twelve API packages plus a contact route for custom data.
+  - url: https://developer.domain.com.au/docs/latest/apis
+    type: APIReference
+    status: 200
+    fetched: '2026-07-26'
+    note: |
+      Index of all thirteen API packages. FAQ confirms Agencies and Listings
+      plus Properties and Locations are granted immediately on project creation.
+  - url: https://developer.domain.com.au/docs/latest/libraries
+    type: Documentation
+    status: 200
+    fetched: '2026-07-26'
+    note: |
+      Publishes the OpenAPI documents by name and links all three:
+      /static/latest/media/latest/openapi.json,
+      /static/latest/media/v2/openapi.json,
+      /static/latest/media/v1/openapi.json. States that prebuilt client
+      libraries are not available and points at openapi-generator,
+      swagger-codegen, and NSwag.
+  - url: https://developer.domain.com.au/static/latest/media/latest/openapi.json
+    type: OpenAPI
+    status: 200
+    fetched: '2026-07-26'
+    note: |
+      OpenAPI 3.0.4, "Domain Public API" version "latest", 1,017,636 bytes,
+      99 paths / 108 operations / 28 tags. Saved verbatim to
+      openapi/domain-group-openapi-latest.json. Parses as valid JSON.
+  - url: https://developer.domain.com.au/static/latest/media/v1/openapi.json
+    type: OpenAPI
+    status: 200
+    fetched: '2026-07-26'
+    note: |
+      OpenAPI 3.0.4, "Domain Public API" version "v1", 871,971 bytes, 85 paths
+      / 93 operations / 20 tags. Saved verbatim to
+      openapi/domain-group-openapi-v1.json. Parses as valid JSON.
+  - url: https://developer.domain.com.au/static/latest/media/v2/openapi.json
+    type: OpenAPI
+    status: 200
+    fetched: '2026-07-26'
+    note: |
+      OpenAPI 3.0.4, "Domain Public API" version "v2", 249,508 bytes, 19 paths
+      / 20 operations / 12 tags. Saved verbatim to
+      openapi/domain-group-openapi-v2.json. Parses as valid JSON.
+  - url: https://auth.domain.com.au/v1/.well-known/openid-configuration
+    type: OpenIDConnect
+    status: 200
+    fetched: '2026-07-26'
+    note: |
+      Anonymous OpenID Connect discovery document, 2,641 bytes. Saved verbatim
+      to well-known/domain-group-openid-configuration.json.
+  - url: https://developer.domain.com.au/docs/latest/authentication
+    type: Documentation
+    status: 200
+    fetched: '2026-07-26'
+    note: Two authentication methods - API Key and OAuth 2.0. API Keys cannot
+      reach user-specific data.
+  - url: https://developer.domain.com.au/docs/latest/authentication/oauth
+    type: Documentation
+    status: 200
+    fetched: '2026-07-26'
+    note: Client Credentials, Authorization Code, and Implicit grant types
+      documented.
+  - url: https://developer.domain.com.au/docs/latest/conventions/access
+    type: Documentation
+    status: 200
+    fetched: '2026-07-26'
+    note: |
+      "All Production API access is via https://api.domain.com.au/ ... You will
+      not be able to access any API Endpoint until the required API package(s)
+      have been added to your project."
+  - url: https://developer.domain.com.au/docs/latest/conventions/sandbox
+    type: Documentation
+    status: 200
+    fetched: '2026-07-26'
+    note: |
+      Sandbox at https://api.domain.com.au/sandbox/, refreshed every Sunday,
+      for write applications only. "You will be required to complete a testing
+      and sign-off process before moving your application to production."
+  - url: https://developer.domain.com.au/docs/latest/conventions/rate-limiting
+    type: RateLimits
+    status: 200
+    fetched: '2026-07-26'
+  - url: https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/production-access
+    type: Documentation
+    status: 200
+    fetched: '2026-07-26'
+    note: |
+      The write gate. Maturity checklist, then "please contact api@domain.com.au
+      for access to the CRM (Live) package", then "Email the principal agent of
+      the agency, requesting permission to take control of listings management,
+      cc'ing api@domain.com.au".
+  - url: https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/agency-authorisation
+    type: Documentation
+    status: 200
+    fetched: '2026-07-26'
+    note: |
+      Agency-level authorisation required to read full listing details, listing
+      enquiries, and listing performance statistics. User must be linked to the
+      agency in Domain Agent Admin or via support@domain.com.au.
+  - url: https://developer.domain.com.au/docs/latest/getting-started/creating-first-project
+    type: Documentation
+    status: 200
+    fetched: '2026-07-26'
+    note: '"Agree on the API required with your account manager" before adding
+      packages.'
+  - url: https://api.domain.com.au/v1/properties/RF-8884-AK/priceEstimate
+    type: APIBaseURL
+    status: 401
+    fetched: '2026-07-26'
+    note: Confirmed live production host; 401 "Unable to verify credentials"
+      anonymously.
+  - url: https://api.domain.com.au/$metadata
+    type: Probe
+    status: 404
+    fetched: '2026-07-26'
+    note: No OData/RESO service metadata document.
+  - url: https://developer.domain.com.au/sitemap.xml
+    type: Sitemap
+    status: 200
+    fetched: '2026-07-26'
+    note: 376 public documentation URLs across /docs/latest, /docs/v1, /docs/v2.
+  - url: https://developer.domain.com.au/robots.txt
+    type: Robots
+    status: 200
+    fetched: '2026-07-26'
+    note: 'User-agent: * Allow: / - the whole portal is crawlable.'
+  - url: https://github.com/domain-group
+    type: GitHubOrganization
+    status: 200
+    fetched: '2026-07-26'
+    note: |
+      Real GitHub organisation "Domain Group" (verified via api.github.com/orgs/domain-group)
+      with 0 public repositories. Its listed blog, tech.domain.com.au, no longer
+      resolves in DNS and was therefore not recorded.
+  - url: https://www.domain.com.au/
+    type: Website
+    status: 403
+    fetched: '2026-07-26'
+    note: |
+      Consumer marketplace. Returns 403 to non-browser clients (bot protection);
+      recorded as the corporate/consumer website but not scraped.
+  - url: https://www.costargroup.com/press-room/2025/costar-group-completes-acquisition-domain-ushering-new-era-innovation-australias
+    type: Announcement
+    fetched: '2026-07-26'
+    note: |
+      CoStar Group completed its acquisition of Domain Holdings Australia on
+      27 August 2025, acquiring the remaining 83% of shares.
+  - url: https://developers.domain.com.au/
+    type: Probe
+    status: 0
+    fetched: '2026-07-26'
+    note: DNS does not resolve.
+  - url: https://docs.domain.com.au/
+    type: Probe
+    status: 0
+    fetched: '2026-07-26'
+    note: DNS does not resolve.
+  - url: https://developer.domain.com.au/.well-known/security.txt
+    type: Probe
+    status: 404
+    fetched: '2026-07-26'
+    note: No security.txt on the developer portal or on api.domain.com.au (404).
+
+actions:
+  openapiHarvested: true
+  specsSaved:
+    - openapi/domain-group-openapi-latest.json
+    - openapi/domain-group-openapi-v1.json
+    - openapi/domain-group-openapi-v2.json
+  wellKnownSaved:
+    - well-known/domain-group-openid-configuration.json
+  apisYmlCreated: true
+  reason: |
+    Domain Group publishes three real, downloadable, valid OpenAPI 3.0.4
+    documents and an anonymous OpenID Connect discovery document. All four were
+    fetched anonymously at HTTP 200 on 2026-07-26 and saved verbatim with their
+    source URLs recorded above. Thirteen documented API packages are listed in
+    apis.yml with their real package documentation URLs and the verified
+    production base URL https://api.domain.com.au. Nothing was invented: no
+    RESO certification, no OData endpoint, no UPI, no SDK, no Postman
+    collection, and no open dataset is claimed, because none exists.

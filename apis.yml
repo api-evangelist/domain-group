@@ -1,0 +1,400 @@
+aid: domain-group
+url: https://raw.githubusercontent.com/api-evangelist/domain-group/refs/heads/main/apis.yml
+name: Domain Group
+kind: company
+description: >-
+  Domain Group (Domain Holdings Australia Ltd, trading as domain.com.au)
+  is the second of Australia's two national residential property portals, alongside
+  REA Group's realestate.com.au, and since 27 August 2025 has been a wholly owned
+  subsidiary of CoStar Group. Headquartered in Sydney, Domain operates the
+  domain.com.au consumer marketplace plus commercial, agent, and developer-project
+  brands, and sits in the middle of the Australian value chain between selling and
+  leasing agencies on one side and buyers, renters, banks, and PropTech builders on
+  the other. Unlike most of the real estate sector, Domain runs a genuine,
+  self-serve public developer portal at developer.domain.com.au: a developer signs
+  up with GitHub, Google, or email, creates a project, and is immediately granted
+  the "Agents & Listings" and "Properties & Locations" packages, with the remaining
+  eleven packages - Address Suggestions, Campaign reporting, Listings Management,
+  Price Estimation, Property Enrichment, Property Package, PropertyRadar, Rental AVM,
+  Schools Data, and Webhooks - added per project and negotiated with an account
+  manager. Domain publishes three machine-readable OpenAPI 3.0.4 documents (latest,
+  v1, v2) directly from its Libraries page, backs them with an OpenID Connect
+  discovery document at auth.domain.com.au, and serves everything from
+  api.domain.com.au behind API-key or OAuth 2.0 (client credentials, authorization
+  code, implicit) credentials. Write access is a different gate entirely: uploading
+  or updating listings requires sandbox sign-off by email to api@domain.com.au and
+  written permission from the principal agent of each agency, making listing
+  management broker-authorised even though the read surface is self-serve. Domain
+  carries no RESO Web API or RESO Data Dictionary certification, exposes no OData
+  $metadata document and no Universal Property Identifier - RESO is a North American
+  NAR-driven standard with no presence in the Australian portal duopoly - and it
+  publishes no open, unlicensed dataset; all data is licensed under the Domain Group
+  API Terms and Conditions.
+image: https://s.domainstatic.com.au/domain/144.png
+tags:
+- Real Estate
+- Australia
+- Property Listings
+- Property Data
+- Valuation
+- AVM
+- Rentals
+- Listing Management
+- PropTech
+- Portal Marketplace
+created: '2026-07-26'
+modified: '2026-07-26'
+specificationVersion: '0.19'
+apis:
+- aid: domain-group:domain-address-suggestions-api
+  name: Domain Address Suggestions API
+  description: Search for valid Australian property addresses and resolve them to
+    Domain property identifiers. Backed by GET /v1/properties/_suggest and
+    GET /v1/addressLocators. Requires the api_properties_read or
+    api_addresslocators_read scope.
+  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  baseURL: https://api.domain.com.au
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  tags:
+  - Address
+  - Geocoding
+  - Real Estate
+  properties:
+  - type: OpenAPI
+    url: openapi/domain-group-openapi-latest.json
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  - type: APIReference
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion/references/properties_suggest
+  - type: DeveloperPortal
+    url: https://developer.domain.com.au/
+- aid: domain-group:domain-agents-listings-api
+  name: Domain Agents & Listings API
+  description: Access data on agencies, agents, and for-sale, for-rent, commercial,
+    business, and project listings directly from Domain. Covers agency and agent
+    search and profiles, residential/commercial/business listing search, listing
+    locations, project search, and enquiry submission. Granted automatically on
+    signup along with Properties & Locations.
+  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings
+  baseURL: https://api.domain.com.au
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  tags:
+  - Property Listings
+  - Agents
+  - Agencies
+  - Real Estate
+  properties:
+  - type: OpenAPI
+    url: openapi/domain-group-openapi-latest.json
+  - type: OpenAPI
+    url: openapi/domain-group-openapi-v1.json
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings
+  - type: APIReference
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings/references/listings_detailedresidentialsearch
+  - type: DeveloperPortal
+    url: https://developer.domain.com.au/
+- aid: domain-group:domain-campaign-api
+  name: Domain Campaign API
+  description: Lets authenticated media agencies retrieve advertising campaign
+    performance metrics for Domain listings and developer projects, via
+    GET /v1/campaign/listing-performance and GET /v1/campaign/project-performance.
+    Restricted to authorised media agency clients.
+  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api
+  baseURL: https://api.domain.com.au
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  tags:
+  - Advertising
+  - Analytics
+  - Real Estate
+  properties:
+  - type: OpenAPI
+    url: openapi/domain-group-openapi-latest.json
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api
+  - type: APIReference
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api/references/campaign_getlistingperformance_report
+  - type: DeveloperPortal
+    url: https://developer.domain.com.au/
+- aid: domain-group:domain-campaign-api-preview
+  name: Domain Campaign API - Preview
+  description: Preview channel of the Campaign API, giving authorised media agencies
+    early access to campaign performance metrics ahead of general release. Documented
+    as a separate API package on the Domain developer portal.
+  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api_preview
+  baseURL: https://api.domain.com.au
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  tags:
+  - Advertising
+  - Analytics
+  - Preview
+  properties:
+  - type: OpenAPI
+    url: openapi/domain-group-openapi-latest.json
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api_preview
+  - type: DeveloperPortal
+    url: https://developer.domain.com.au/
+- aid: domain-group:domain-listings-management-api
+  name: Domain Listings Management API
+  description: View, create, and update residential, commercial, business, project,
+    and off-market listings on domain.com.au, and manage the resulting enquiries,
+    listing reports, and performance statistics. This is the CRM upload surface used
+    by Australian agency software; production access requires a sandbox sign-off
+    process by email to api@domain.com.au plus written authorisation from the
+    principal agent of each agency whose listings are being managed.
+  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_listing_management
+  baseURL: https://api.domain.com.au
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  tags:
+  - Listing Management
+  - CRM
+  - Enquiries
+  - Real Estate
+  properties:
+  - type: OpenAPI
+    url: openapi/domain-group-openapi-latest.json
+  - type: OpenAPI
+    url: openapi/domain-group-openapi-v2.json
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_listing_management
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/upload-listings
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/agency-authorisation
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/production-access
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/migrating-from-xml
+  - type: DeveloperPortal
+    url: https://developer.domain.com.au/
+- aid: domain-group:domain-price-estimation-api
+  name: Domain Price Estimation API
+  description: Returns the current automated price estimate for a Domain property
+    identifier via GET /v1/properties/{propertyId}/priceEstimate, including lower,
+    mid, and upper price, a confidence indicator, and estimate history. Requires the
+    api_properties_read scope.
+  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation
+  baseURL: https://api.domain.com.au
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  tags:
+  - Valuation
+  - AVM
+  - Property Data
+  properties:
+  - type: OpenAPI
+    url: openapi/domain-group-openapi-latest.json
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation
+  - type: APIReference
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation/references/properties_getpriceestimate
+  - type: DeveloperPortal
+    url: https://developer.domain.com.au/
+- aid: domain-group:domain-properties-locations-api
+  name: Domain Properties & Locations API
+  description: Property records, address locators, location profiles, weekend auction
+    and sales results, suburb performance and historical statistics, and suburb
+    demographics. Granted automatically on signup along with Agents & Listings, and
+    the package most commonly used by banks and fintechs for suburb medians and
+    market performance.
+  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations
+  baseURL: https://api.domain.com.au
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  tags:
+  - Property Data
+  - Market Statistics
+  - Demographics
+  - Auction Results
+  properties:
+  - type: OpenAPI
+    url: openapi/domain-group-openapi-latest.json
+  - type: OpenAPI
+    url: openapi/domain-group-openapi-v2.json
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations
+  - type: APIReference
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations/references/suburbperformance_get_bynamedsuburb
+  - type: DeveloperPortal
+    url: https://developer.domain.com.au/
+- aid: domain-group:domain-property-enrichment-api
+  name: Domain Property Enrichment API
+  description: Enhances a known property with additional Domain-held detail through
+    GET /v1/propertyenrichment, alongside the v2 property features and zoning/perils
+    endpoints. Sold as a separate API package.
+  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment
+  baseURL: https://api.domain.com.au
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  tags:
+  - Property Data
+  - Enrichment
+  - Zoning
+  properties:
+  - type: OpenAPI
+    url: openapi/domain-group-openapi-latest.json
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment
+  - type: APIReference
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment/references/propertyenrichment_get
+  - type: DeveloperPortal
+    url: https://developer.domain.com.au/
+- aid: domain-group:domain-property-package-api
+  name: Domain Property Package API
+  description: A bundled package giving comprehensive property coverage in one
+    subscription - address suggestion, property records, price estimates, residential
+    listing search, location profiles, project data, schools, suburb performance, and
+    demographics - assembled from endpoints that also appear in the narrower packages.
+  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_property
+  baseURL: https://api.domain.com.au
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  tags:
+  - Property Data
+  - Bundle
+  - Real Estate
+  properties:
+  - type: OpenAPI
+    url: openapi/domain-group-openapi-latest.json
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property
+  - type: APIReference
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property/references/properties_get
+  - type: DeveloperPortal
+    url: https://developer.domain.com.au/
+- aid: domain-group:domain-propertyradar-api
+  name: Domain PropertyRadar API
+  description: Create and manage watchlist portfolios of properties and read them
+    back in summary or full form, including lookup by G-NAF address identifier.
+    Covers POST/GET/DELETE on /v1/propertyradar/portfolio and its property members.
+    Requires api_propertyportfolio_read and api_propertyportfolio_write scopes.
+  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar
+  baseURL: https://api.domain.com.au
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  tags:
+  - Property Portfolio
+  - Monitoring
+  - Property Data
+  properties:
+  - type: OpenAPI
+    url: openapi/domain-group-openapi-latest.json
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar
+  - type: APIReference
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar/references/propertyradar_listportfolios
+  - type: DeveloperPortal
+    url: https://developer.domain.com.au/
+- aid: domain-group:domain-rental-avm-api
+  name: Domain Rental AVM API
+  description: Automated rental estimates for a Domain property identifier via
+    GET /v1/properties/{propertyId}/rentalEstimate, plus the /v1/avm and
+    /v1/avmReport endpoints. Requires the api_avm_read scope.
+  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm
+  baseURL: https://api.domain.com.au
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  tags:
+  - Rentals
+  - AVM
+  - Valuation
+  properties:
+  - type: OpenAPI
+    url: openapi/domain-group-openapi-latest.json
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm
+  - type: APIReference
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm/references/properties_getrentalestimate
+  - type: DeveloperPortal
+    url: https://developer.domain.com.au/
+- aid: domain-group:domain-schools-data-api
+  name: Domain Schools Data API
+  description: Detailed information on Australian schools, retrievable by school
+    identifier (GET /v2/schools/{id}) or by latitude and longitude
+    (GET /v2/schools/{latitude}/{longitude}) for school-catchment style property
+    search experiences.
+  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_schools_data
+  baseURL: https://api.domain.com.au
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  tags:
+  - Schools
+  - Location Data
+  - Property Data
+  properties:
+  - type: OpenAPI
+    url: openapi/domain-group-openapi-latest.json
+  - type: OpenAPI
+    url: openapi/domain-group-openapi-v2.json
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_schools_data
+  - type: APIReference
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_schools_data/references/schools_search_bylocation
+  - type: DeveloperPortal
+    url: https://developer.domain.com.au/
+- aid: domain-group:domain-webhooks-api
+  name: Domain Webhooks API
+  description: Subscription management for push notifications when data changes in
+    the Domain system. Create, read, list, and delete webhook subscriptions via
+    /v1/webhooks/{id}/subscriptions and /v1/subscriptions/{id}, with configuration,
+    processing, and troubleshooting guides. Requires the api_webhooks_write scope.
+  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks
+  baseURL: https://api.domain.com.au
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  tags:
+  - Webhooks
+  - Events
+  - Real Estate
+  properties:
+  - type: OpenAPI
+    url: openapi/domain-group-openapi-latest.json
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/guides/subscriptions
+  - type: APIReference
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/references/webhooks_createsubscription
+  - type: DeveloperPortal
+    url: https://developer.domain.com.au/
+common:
+- type: Website
+  url: https://www.domain.com.au/
+- type: DeveloperPortal
+  url: https://developer.domain.com.au/
+- type: Documentation
+  url: https://developer.domain.com.au/docs/latest
+- type: APIReference
+  url: https://developer.domain.com.au/docs/latest/apis
+- type: SignUp
+  url: https://developer.domain.com.au/docs/latest/getting-started/creating-first-project
+- type: GettingStarted
+  url: https://developer.domain.com.au/docs/latest/getting-started
+- type: Authentication
+  url: https://developer.domain.com.au/docs/latest/authentication
+- type: OpenAPI
+  url: https://developer.domain.com.au/static/latest/media/latest/openapi.json
+- type: WellKnown
+  url: well-known/domain-group-openid-configuration.json
+- type: OpenIDConnect
+  url: https://auth.domain.com.au/v1/.well-known/openid-configuration
+- type: RateLimits
+  url: https://developer.domain.com.au/docs/latest/conventions/rate-limiting
+- type: Sandbox
+  url: https://developer.domain.com.au/docs/latest/conventions/sandbox
+- type: Conventions
+  url: https://developer.domain.com.au/docs/latest/conventions
+- type: Versioning
+  url: https://developer.domain.com.au/docs/latest/conventions/versioning
+- type: Libraries
+  url: https://developer.domain.com.au/docs/latest/libraries
+- type: SDKs
+  url: https://developer.domain.com.au/docs/latest/libraries
+- type: Support
+  url: https://developer.domain.com.au/docs/latest/support
+- type: SLA
+  url: https://developer.domain.com.au/docs/latest/support/sla
+- type: TermsOfService
+  url: https://www.domain.com.au/group/api-terms-and-conditions/
+- type: Policies
+  url: https://developer.domain.com.au/docs/latest/support/policies
+- type: Troubleshooting
+  url: https://developer.domain.com.au/docs/latest/troubleshooting
+- type: GitHubOrganization
+  url: https://github.com/domain-group
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
