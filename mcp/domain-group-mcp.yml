@@ -1,0 +1,860 @@
+generated: '2026-07-26'
+method: derived
+status: candidate
+source: openapi/domain-group-openapi-latest.json
+summary: 'Domain Group publishes no MCP server. Probes of https://developer.domain.com.au/mcp and /docs/latest/mcp
+  returned 404, and no Domain server appears in the public MCP registries. This is an API Evangelist derived
+  candidate tool surface: one tool per OpenAPI operation across the property, listing, agency, market-statistics,
+  portfolio and webhook capability areas. Each tool inherits its real input schema from the referenced
+  operation parameters and requestBody in the OpenAPI document.'
+server:
+  name: domain-group
+  transport: http
+  url: null
+  published: false
+  auth:
+    types:
+    - apiKey
+    - oauth2
+    api_key_header: x-api-key
+    token_url: https://auth.domain.com.au/v1/connect/token
+    scopes: scopes/domain-group-scopes.yml
+probes:
+- url: https://developer.domain.com.au/mcp
+  status: 404
+- url: https://developer.domain.com.au/docs/latest/mcp
+  status: 404
+tool_count: 82
+tools:
+- name: address_locators_get
+  description: Address Locator API
+  method: GET
+  path: /v1/addressLocators
+  tags:
+  - AddressLocators
+  scopes:
+  - api_addresslocators_read
+  source_operation: openapi/domain-group-openapi-latest.json#AddressLocators_Get
+  read_only: true
+- name: agencies_search
+  description: Retrieves summary of agencies matching the specified criteria.
+  method: GET
+  path: /v1/agencies
+  tags:
+  - Agencies
+  scopes:
+  - api_agencies_read
+  source_operation: openapi/domain-group-openapi-latest.json#Agencies_Search
+  read_only: true
+- name: agencies_head
+  description: Retrieves summary of agency search.
+  method: HEAD
+  path: /v1/agencies
+  tags:
+  - Agencies
+  scopes:
+  - api_agencies_read
+  source_operation: openapi/domain-group-openapi-latest.json#Agencies_Head
+  read_only: true
+- name: agencies_create_test_agency
+  description: Create a test agency for sandbox testing
+  method: POST
+  path: /v1/agencies/_testAgency
+  tags:
+  - Agencies
+  scopes:
+  - api_agencies_write
+  source_operation: openapi/domain-group-openapi-latest.json#Agencies_CreateTestAgency
+  read_only: false
+- name: agencies_get
+  description: Retrieves a specific agency details.
+  method: GET
+  path: /v1/agencies/{id}
+  tags:
+  - Agencies
+  scopes:
+  - api_agencies_read
+  source_operation: openapi/domain-group-openapi-latest.json#Agencies_Get
+  read_only: true
+- name: agencies_get_listings
+  description: Retrieves listings across all channels for a specific agency matching specified criteria.
+  method: GET
+  path: /v1/agencies/{id}/listings
+  tags:
+  - Agencies
+  scopes:
+  - api_listings_read
+  source_operation: openapi/domain-group-openapi-latest.json#Agencies_GetListings
+  read_only: true
+- name: agencies_get_statistics
+  description: Retrieves statistics for a specific agency.
+  method: GET
+  path: /v1/agencies/{id}/statistics
+  tags:
+  - Agencies
+  scopes:
+  - api_agencies_read
+  source_operation: openapi/domain-group-openapi-latest.json#Agencies_GetStatistics
+  read_only: true
+- name: agents_get
+  description: Retrieves a specific agent details, including contact information.
+  method: GET
+  path: /v1/agents/{id}
+  tags:
+  - Agents
+  scopes:
+  - api_agencies_read
+  source_operation: openapi/domain-group-openapi-latest.json#Agents_Get
+  read_only: true
+- name: agents_get_listings
+  description: Gets listing using the contact id
+  method: GET
+  path: /v1/agents/{id}/listings
+  tags:
+  - Agents
+  scopes:
+  - api_listings_read
+  source_operation: openapi/domain-group-openapi-latest.json#Agents_GetListings
+  read_only: true
+- name: agents_get_statistics
+  description: Retrieves stats for the listings of a given agent
+  method: GET
+  path: /v1/agents/{id}/statistics
+  tags:
+  - Agents
+  scopes:
+  - api_agencies_read
+  source_operation: openapi/domain-group-openapi-latest.json#Agents_GetStatistics
+  read_only: true
+- name: agents_search
+  description: Search for agents by name.
+  method: GET
+  path: /v1/agents/search
+  tags:
+  - Agents
+  scopes:
+  - api_agencies_read
+  source_operation: openapi/domain-group-openapi-latest.json#Agents_Search
+  read_only: true
+- name: demographics_get_by_named_suburb
+  description: Demographics API
+  method: GET
+  path: /v2/demographics/{state}/{suburb}/{postcode}
+  tags:
+  - Demographics
+  scopes:
+  - api_demographics_read
+  source_operation: openapi/domain-group-openapi-latest.json#Demographics_Get_ByNamedSuburb
+  read_only: true
+- name: enquiries_search
+  description: Searches enquiries based on agents or agencies.
+  method: GET
+  path: /v1/enquiries
+  tags:
+  - Enquiries
+  scopes:
+  - api_enquiries_read
+  - api_enquiries_write
+  source_operation: openapi/domain-group-openapi-latest.json#Enquiries_Search
+  read_only: true
+- name: enquiries_post
+  description: "Sends an enquiry for listing, agency, etc... (based on the enquiry type and referenceid).\r"
+  method: POST
+  path: /v1/enquiries
+  tags:
+  - Enquiries
+  scopes:
+  - api_enquiries_write
+  source_operation: openapi/domain-group-openapi-latest.json#Enquiries_Post
+  read_only: false
+- name: enquiries_get
+  description: Retrieve the details of a specific enquiry
+  method: GET
+  path: /v1/enquiries/{id}
+  tags:
+  - Enquiries
+  scopes:
+  - api_enquiries_read
+  - api_enquiries_write
+  source_operation: openapi/domain-group-openapi-latest.json#Enquiries_Get
+  read_only: true
+- name: listings_get
+  description: Retrieve details of listing using the listing id
+  method: GET
+  path: /v1/listings/{id}
+  tags:
+  - Listings
+  scopes:
+  - api_listings_read
+  - api_listings_write
+  source_operation: openapi/domain-group-openapi-latest.json#Listings_Get
+  read_only: true
+- name: listings_get_enquiries
+  description: Retrieve details of all enquiries received for a specific listing
+  method: GET
+  path: /v1/listings/{id}/enquiries
+  tags:
+  - Listings
+  scopes:
+  - api_enquiries_read
+  - api_enquiries_write
+  source_operation: openapi/domain-group-openapi-latest.json#Listings_GetEnquiries
+  read_only: true
+- name: listings_get_listing_statistics
+  description: Retrieve details of listing using the listing id
+  method: GET
+  path: /v1/listings/{id}/statistics
+  tags:
+  - Listings
+  scopes:
+  - api_listings_read
+  source_operation: openapi/domain-group-openapi-latest.json#Listings_GetListingStatistics
+  read_only: true
+- name: listings_upsert_business_listing
+  description: Creates or updates a business listing
+  method: PUT
+  path: /v1/listings/business
+  tags:
+  - Listings
+  scopes:
+  - api_listings_write
+  source_operation: openapi/domain-group-openapi-latest.json#Listings_UpsertBusinessListing
+  read_only: false
+- name: listings_detailed_business_search
+  description: Retrieves business listings matching the specified criteria.
+  method: POST
+  path: /v1/listings/business/_search
+  tags:
+  - Listings
+  scopes:
+  - api_listings_read
+  - api_listings_write
+  source_operation: openapi/domain-group-openapi-latest.json#Listings_DetailedBusinessSearch
+  read_only: false
+- name: listings_upsertbusinessoffmarket
+  description: Creates an externally sold business listing; or takes an existing business listing off
+    the market.
+  method: POST
+  path: /v2/listings/business/offmarket
+  tags:
+  - Listings
+  scopes:
+  - api_listings_write
+  source_operation: openapi/domain-group-openapi-latest.json#listings_upsertbusinessoffmarket
+  read_only: false
+- name: listings_upsertcommerciallisting
+  description: Creates a commercial listing.
+  method: PUT
+  path: /v2/listings/commercial
+  tags:
+  - Listings
+  scopes:
+  - api_listings_write
+  source_operation: openapi/domain-group-openapi-latest.json#listings_upsertcommerciallisting
+  read_only: false
+- name: listings_detailed_commercial_search
+  description: Retrieves commercial listings matching the specified criteria.
+  method: POST
+  path: /v1/listings/commercial/_search
+  tags:
+  - Listings
+  scopes:
+  - api_listings_read
+  - api_listings_write
+  source_operation: openapi/domain-group-openapi-latest.json#Listings_DetailedCommercialSearch
+  read_only: false
+- name: listings_upsertcommercialoffmarket
+  description: Creates an externally sold or leased commercial listing; or takes an existing commercial
+    listing off the market.
+  method: POST
+  path: /v2/listings/commercial/offmarket
+  tags:
+  - Listings
+  scopes:
+  - api_listings_write
+  source_operation: openapi/domain-group-openapi-latest.json#listings_upsertcommercialoffmarket
+  read_only: false
+- name: listing_locations_search
+  description: Suggests listing locations
+  method: GET
+  path: /v1/listings/locations
+  tags:
+  - Listings
+  scopes:
+  - api_listings_read
+  - api_listings_write
+  source_operation: openapi/domain-group-openapi-latest.json#ListingLocations_Search
+  read_only: true
+- name: listings_get_listing_report_by_reference
+  description: Searches processing reports
+  method: GET
+  path: /v1/listings/processingReports
+  tags:
+  - Listings
+  scopes:
+  - api_listings_read
+  source_operation: openapi/domain-group-openapi-latest.json#Listings_GetListingReportByReference
+  read_only: true
+- name: listings_get_listing_report
+  description: Gets the processing report
+  method: GET
+  path: /v1/listings/processingReports/{id}
+  tags:
+  - Listings
+  scopes:
+  - api_listings_read
+  source_operation: openapi/domain-group-openapi-latest.json#Listings_GetListingReport
+  read_only: true
+- name: listings_upsert_residential_listing
+  description: Creates or updates a residential listing
+  method: PUT
+  path: /v1/listings/residential
+  tags:
+  - Listings
+  scopes:
+  - api_listings_write
+  source_operation: openapi/domain-group-openapi-latest.json#Listings_UpsertResidentialListing
+  read_only: false
+- name: listings_detailed_residential_search
+  description: Retrieves residential listings matching the specified criteria.
+  method: POST
+  path: /v1/listings/residential/_search
+  tags:
+  - Listings
+  scopes:
+  - api_listings_read
+  - api_listings_write
+  source_operation: openapi/domain-group-openapi-latest.json#Listings_DetailedResidentialSearch
+  read_only: false
+- name: listings_upsertresidentialoffmarket
+  description: Creates an externally sold or leased residential listing; or takes an existing residential
+    listing off the market.
+  method: POST
+  path: /v2/listings/residential/offmarket
+  tags:
+  - Listings
+  scopes:
+  - api_listings_write
+  source_operation: openapi/domain-group-openapi-latest.json#listings_upsertresidentialoffmarket
+  read_only: false
+- name: listings_residential_search
+  description: Retrieves residential listings matching the specified criteria.
+  method: POST
+  path: /v1/listingSearch/residential/search
+  tags:
+  - ListingSearch
+  scopes:
+  - api_listings_read
+  source_operation: openapi/domain-group-openapi-latest.json#Listings_ResidentialSearch
+  read_only: false
+- name: listings_detailed_sold_residential_search
+  description: Retrieves sold residential listings matching the specified criteria.
+  method: POST
+  path: /v1/listingSearch/residential/searchSold
+  tags:
+  - ListingSearch
+  scopes:
+  - api_listings_read
+  source_operation: openapi/domain-group-openapi-latest.json#Listings_DetailedSoldResidentialSearch
+  read_only: false
+- name: location_profiles_get
+  description: Get location data based on the given domainLocationId
+  method: GET
+  path: /v1/locations/profiles/{domainLocationId}
+  tags:
+  - Locations
+  scopes:
+  - api_locations_read
+  source_operation: openapi/domain-group-openapi-latest.json#LocationProfiles_Get
+  read_only: true
+- name: me_profile
+  description: Retrieve information about the currently authorised request
+  method: GET
+  path: /v1/me
+  tags:
+  - Me
+  scopes: null
+  source_operation: openapi/domain-group-openapi-latest.json#Me_Profile
+  read_only: true
+- name: me_get_my_agencies
+  description: Retrieve list of agencies with which the current client is associated
+  method: GET
+  path: /v1/me/agencies
+  tags:
+  - Me
+  scopes:
+  - api_agencies_read
+  source_operation: openapi/domain-group-openapi-latest.json#Me_GetMyAgencies
+  read_only: true
+- name: me_get_my_providers
+  description: Retrieve list of provider Ids with which the current client is associated
+  method: GET
+  path: /v1/me/providers
+  tags:
+  - Me
+  scopes:
+  - api_listings_write
+  source_operation: openapi/domain-group-openapi-latest.json#Me_GetMyProviders
+  read_only: true
+- name: projects_search
+  description: Searches projects
+  method: GET
+  path: /v1/projects
+  tags:
+  - Projects
+  scopes:
+  - api_listings_read
+  source_operation: openapi/domain-group-openapi-latest.json#Projects_Search
+  read_only: true
+- name: projects_get
+  description: Details of project
+  method: GET
+  path: /v1/projects/{id}
+  tags:
+  - Projects
+  scopes:
+  - api_listings_read
+  source_operation: openapi/domain-group-openapi-latest.json#Projects_Get
+  read_only: true
+- name: projects_get_enquiries
+  description: Retrieve details of all enquiries received for a specific new development project
+  method: GET
+  path: /v1/projects/{id}/enquiries
+  tags:
+  - Projects
+  scopes:
+  - api_enquiries_read
+  - api_enquiries_write
+  source_operation: openapi/domain-group-openapi-latest.json#Projects_GetEnquiries
+  read_only: true
+- name: projects_get_child_listings
+  description: Project listings
+  method: GET
+  path: /v1/projects/{id}/listings
+  tags:
+  - Projects
+  scopes:
+  - api_listings_read
+  - api_listings_write
+  source_operation: openapi/domain-group-openapi-latest.json#Projects_GetChildListings
+  read_only: true
+- name: projects_get_child_listings_statistics
+  description: Retrieves statistics for a specific project with a breakdown for listings.
+  method: GET
+  path: /v1/projects/{id}/listings/statistics
+  tags:
+  - Projects
+  scopes:
+  - api_listings_read
+  source_operation: openapi/domain-group-openapi-latest.json#Projects_GetChildListingsStatistics
+  read_only: true
+- name: projects_get_statistics
+  description: Retrieves statistics for a specific project.
+  method: GET
+  path: /v1/projects/{id}/statistics
+  tags:
+  - Projects
+  scopes:
+  - api_listings_read
+  source_operation: openapi/domain-group-openapi-latest.json#Projects_GetStatistics
+  read_only: true
+- name: properties_suggest
+  description: Search for suggested addresses for the given terms
+  method: GET
+  path: /v1/properties/_suggest
+  tags:
+  - Properties
+  scopes:
+  - api_properties_read
+  source_operation: openapi/domain-group-openapi-latest.json#Properties_Suggest
+  read_only: true
+- name: properties_get
+  description: Property ID
+  method: GET
+  path: /v1/properties/{id}
+  tags:
+  - Properties
+  scopes:
+  - api_properties_read
+  source_operation: openapi/domain-group-openapi-latest.json#Properties_Get
+  read_only: true
+- name: listings_bypropertyid
+  description: Retrieve list of listings for the given property id
+  method: GET
+  path: /v2/properties/{propertyId}/listings
+  tags:
+  - Properties
+  scopes:
+  - api_listings_read
+  source_operation: openapi/domain-group-openapi-latest.json#listings_bypropertyid
+  read_only: true
+- name: properties_get_price_estimate
+  description: Price estimates based on propertyId
+  method: GET
+  path: /v1/properties/{propertyId}/priceEstimate
+  tags:
+  - Properties
+  scopes:
+  - api_properties_read
+  source_operation: openapi/domain-group-openapi-latest.json#Properties_GetPriceEstimate
+  read_only: true
+- name: properties_get_rental_estimate
+  description: Rental estimates based on propertyId
+  method: GET
+  path: /v1/properties/{propertyId}/rentalEstimate
+  tags:
+  - Properties
+  scopes:
+  - api_properties_read
+  source_operation: openapi/domain-group-openapi-latest.json#Properties_GetRentalEstimate
+  read_only: true
+- name: property_images_get
+  description: Property images
+  method: GET
+  path: /v1/properties/images
+  tags:
+  - Properties
+  scopes:
+  - api_properties_read
+  source_operation: openapi/domain-group-openapi-latest.json#property_images_get
+  read_only: true
+- name: property_listing_history_get
+  description: Property Listing History
+  method: GET
+  path: /v1/properties/listingHistory
+  tags:
+  - Properties
+  scopes:
+  - api_properties_read
+  source_operation: openapi/domain-group-openapi-latest.json#property_listing_history_get
+  read_only: true
+- name: property_sales_history_get
+  description: Sales Listing History
+  method: GET
+  path: /v1/properties/salesHistory
+  tags:
+  - Properties
+  scopes:
+  - api_properties_read
+  source_operation: openapi/domain-group-openapi-latest.json#property_sales_history_get
+  read_only: true
+- name: propertyenrichment_get
+  description: Property
+  method: GET
+  path: /v1/propertyenrichment
+  tags:
+  - Properties
+  scopes:
+  - api_properties_read
+  source_operation: openapi/domain-group-openapi-latest.json#propertyenrichment_get
+  read_only: true
+- name: property_reports_get
+  description: Retrieves a property report based on query parameters
+  method: GET
+  path: /v1/propertyReports
+  tags:
+  - Properties
+  scopes:
+  - api_propertyreports_read
+  source_operation: openapi/domain-group-openapi-latest.json#PropertyReports_Get
+  read_only: true
+- name: property_avm_get
+  description: "Creates a valuation for a given property id.\r"
+  method: GET
+  path: /v1/avm/{propertyId}
+  tags:
+  - PropertyAvm
+  scopes:
+  - api_avm_read
+  source_operation: openapi/domain-group-openapi-latest.json#PropertyAvm_Get
+  read_only: true
+- name: property_avm_report_get
+  description: "Creates a valuation PDF report for a given property id.\r"
+  method: GET
+  path: /v1/avmReport/{propertyId}
+  tags:
+  - PropertyAvm
+  scopes:
+  - api_avm_read
+  source_operation: openapi/domain-group-openapi-latest.json#PropertyAvm_ReportGet
+  read_only: true
+- name: property_features
+  description: Property features
+  method: GET
+  path: /v2/property/features
+  tags:
+  - PropertyFeatures
+  scopes:
+  - api_properties_read
+  source_operation: openapi/domain-group-openapi-latest.json#Property_Features
+  read_only: true
+- name: property_radar_create_portfolio
+  description: Create Portfolio
+  method: POST
+  path: /v1/propertyradar/portfolio
+  tags:
+  - PropertyRadar
+  scopes:
+  - api_propertyportfolio_write
+  source_operation: openapi/domain-group-openapi-latest.json#PropertyRadar_CreatePortfolio
+  read_only: false
+- name: property_radar_view_portfolio
+  description: View Properties in Portfolio
+  method: GET
+  path: /v1/propertyradar/portfolio/{PortfolioId}
+  tags:
+  - PropertyRadar
+  scopes:
+  - api_propertyportfolio_read
+  source_operation: openapi/domain-group-openapi-latest.json#PropertyRadar_ViewPortfolio
+  read_only: true
+- name: property_radar_add_to_portfolio
+  description: Add Properties to Portfolio
+  method: POST
+  path: /v1/propertyradar/portfolio/{PortfolioId}
+  tags:
+  - PropertyRadar
+  scopes:
+  - api_propertyportfolio_write
+  source_operation: openapi/domain-group-openapi-latest.json#PropertyRadar_AddToPortfolio
+  read_only: false
+- name: property_radar_delete_portfolio
+  description: Delete Portfolio
+  method: DELETE
+  path: /v1/propertyradar/portfolio/{PortfolioId}
+  tags:
+  - PropertyRadar
+  scopes:
+  - api_propertyportfolio_write
+  source_operation: openapi/domain-group-openapi-latest.json#PropertyRadar_DeletePortfolio
+  read_only: false
+- name: property_radar_view_portfolio_full
+  description: View Properties in Portfolio - Detailed
+  method: GET
+  path: /v1/propertyradar/portfolio/{PortfolioId}/properties
+  tags:
+  - PropertyRadar
+  scopes:
+  - api_propertyportfolio_read
+  source_operation: openapi/domain-group-openapi-latest.json#PropertyRadar_ViewPortfolioFull
+  read_only: true
+- name: property_radar_view_portfolio_full_single
+  description: View Single Property in Portfolio - Detailed
+  method: GET
+  path: /v1/propertyradar/portfolio/{PortfolioId}/properties/{PropertyId}
+  tags:
+  - PropertyRadar
+  scopes:
+  - api_propertyportfolio_read
+  source_operation: openapi/domain-group-openapi-latest.json#PropertyRadar_viewPortfolioFullSingle
+  read_only: true
+- name: property_radar_view_portfolio_full_single_by_gnaf_id
+  description: View Single Property in Portfolio - Detailed
+  method: GET
+  path: /v1/propertyradar/portfolio/{PortfolioId}/properties/gnaf/{GnafId}
+  tags:
+  - PropertyRadar
+  scopes:
+  - api_propertyportfolio_read
+  source_operation: openapi/domain-group-openapi-latest.json#PropertyRadar_viewPortfolioFullSingleByGnafId
+  read_only: true
+- name: property_radar_remove_from_portfolio
+  description: Remove Properties from Portfolio
+  method: POST
+  path: /v1/propertyradar/portfolio/{PortfolioId}/property/delete
+  tags:
+  - PropertyRadar
+  scopes:
+  - api_propertyportfolio_write
+  source_operation: openapi/domain-group-openapi-latest.json#PropertyRadar_RemoveFromPortfolio
+  read_only: false
+- name: property_radar_list_portfolios
+  description: List Portfolios
+  method: GET
+  path: /v1/propertyradar/portfoliosummary
+  tags:
+  - PropertyRadar
+  scopes:
+  - api_propertyportfolio_read
+  source_operation: openapi/domain-group-openapi-latest.json#PropertyRadar_ListPortfolios
+  read_only: true
+- name: property_search_by_radius
+  description: Point Radius Search
+  method: POST
+  path: /v2/properties/search/radius/{searchType}
+  tags:
+  - PropertySearch
+  scopes:
+  - api_properties_read
+  source_operation: openapi/domain-group-openapi-latest.json#PropertySearch_ByRadius
+  read_only: false
+- name: property_zoning_perils
+  description: Property perils
+  method: GET
+  path: /v2/property/zoning-perils
+  tags:
+  - PropertyZoningPerils
+  scopes:
+  - api_properties_read
+  source_operation: openapi/domain-group-openapi-latest.json#Property_Zoning_Perils
+  read_only: true
+- name: sales_results_head
+  description: Get weekly results info
+  method: GET
+  path: /v1/salesResults/_head
+  tags:
+  - SalesResults
+  scopes:
+  - api_salesresults_read
+  source_operation: openapi/domain-group-openapi-latest.json#SalesResults_Head
+  read_only: true
+- name: sales_results_get
+  description: Get weekly results summary
+  method: GET
+  path: /v1/salesResults/{city}
+  tags:
+  - SalesResults
+  scopes:
+  - api_salesresults_read
+  source_operation: openapi/domain-group-openapi-latest.json#SalesResults_Get
+  read_only: true
+- name: sales_results_listings
+  description: Get weekly results details
+  method: GET
+  path: /v1/salesResults/{city}/listings
+  tags:
+  - SalesResults
+  scopes:
+  - api_salesresults_read
+  source_operation: openapi/domain-group-openapi-latest.json#SalesResults_Listings
+  read_only: true
+- name: sales_results_saturday_report
+  description: Saturday report
+  method: GET
+  path: /v2/salesResults/saturday
+  tags:
+  - SalesResults
+  scopes:
+  - api_salesresults_read
+  source_operation: openapi/domain-group-openapi-latest.json#SalesResults_SaturdayReport
+  read_only: true
+- name: sales_results_weekly_media_report
+  description: Weekly media report
+  method: GET
+  path: /v2/salesResults/weeklyMedia
+  tags:
+  - SalesResults
+  scopes:
+  - api_salesresults_read
+  source_operation: openapi/domain-group-openapi-latest.json#SalesResults_WeeklyMediaReport
+  read_only: true
+- name: schools_get_by_id
+  description: Retrieve the details of a school by Id
+  method: GET
+  path: /v2/schools/{id}
+  tags:
+  - Schools
+  scopes:
+  - api_locations_read
+  source_operation: openapi/domain-group-openapi-latest.json#Schools_Get_ById
+  read_only: true
+- name: schools_search_by_location
+  description: Search for a school in a location
+  method: GET
+  path: /v2/schools/{latitude}/{longitude}
+  tags:
+  - Schools
+  scopes:
+  - api_locations_read
+  source_operation: openapi/domain-group-openapi-latest.json#Schools_Search_ByLocation
+  read_only: true
+- name: statistics_post
+  description: Record a statistic event along with its associated metadata (if applicable)
+  method: POST
+  path: /v1/statistics/{event}
+  tags:
+  - Statistics
+  scopes:
+  - api_statistics_write
+  source_operation: openapi/domain-group-openapi-latest.json#Statistics_Post
+  read_only: false
+- name: suburb_historical_get
+  description: Suburb Historical
+  method: GET
+  path: /v1/suburbHistorical/{state}/{suburb}/{postcode}
+  tags:
+  - Statistics
+  scopes:
+  - api_suburbhistorical_read
+  source_operation: openapi/domain-group-openapi-latest.json#SuburbHistorical_Get
+  read_only: true
+- name: suburb_performance_get_by_named_suburb_without_postcode
+  description: Suburb Performance by State/Suburb
+  method: GET
+  path: /v2/suburbPerformanceStatistics/{state}/{suburb}
+  tags:
+  - Statistics
+  scopes:
+  - api_suburbperformance_read
+  source_operation: openapi/domain-group-openapi-latest.json#SuburbPerformance_Get_ByNamedSuburb_WithoutPostcode
+  read_only: true
+- name: suburb_performance_get_by_named_suburb
+  description: Suburb Performance by State/Suburb/Postcode
+  method: GET
+  path: /v2/suburbPerformanceStatistics/{state}/{suburb}/{postcode}
+  tags:
+  - Statistics
+  scopes:
+  - api_suburbperformance_read
+  source_operation: openapi/domain-group-openapi-latest.json#SuburbPerformance_Get_ByNamedSuburb
+  read_only: true
+- name: suburb_summary_get
+  description: Suburb Summary
+  method: GET
+  path: /v1/suburbSummary/{state}/{suburb}/{postcode}
+  tags:
+  - Statistics
+  scopes:
+  - api_suburbsummary_read
+  source_operation: openapi/domain-group-openapi-latest.json#SuburbSummary_Get
+  read_only: true
+- name: webhooks_get_subscription
+  description: Retrieve the details of a single subscription
+  method: GET
+  path: /v1/subscriptions/{id}
+  tags:
+  - Webhooks
+  scopes:
+  - api_webhooks_write
+  source_operation: openapi/domain-group-openapi-latest.json#Webhooks_GetSubscription
+  read_only: true
+- name: webhooks_delete_subscription
+  description: Delete a single subscription
+  method: DELETE
+  path: /v1/subscriptions/{id}
+  tags:
+  - Webhooks
+  scopes:
+  - api_webhooks_write
+  source_operation: openapi/domain-group-openapi-latest.json#Webhooks_DeleteSubscription
+  read_only: false
+- name: webhooks_list_subscriptions
+  description: List all subscriptions to the specified webhook
+  method: GET
+  path: /v1/webhooks/{id}/subscriptions
+  tags:
+  - Webhooks
+  scopes:
+  - api_webhooks_write
+  source_operation: openapi/domain-group-openapi-latest.json#Webhooks_ListSubscriptions
+  read_only: true
+- name: webhooks_create_subscription
+  description: Create a subscription to notifications
+  method: PUT
+  path: /v1/webhooks/{id}/subscriptions
+  tags:
+  - Webhooks
+  scopes:
+  - api_webhooks_write
+  source_operation: openapi/domain-group-openapi-latest.json#Webhooks_CreateSubscription
+  read_only: false

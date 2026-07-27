@@ -1,0 +1,121 @@
+generated: '2026-07-26'
+method: searched
+source: https://developer.domain.com.au/docs/latest/conventions
+docs: https://developer.domain.com.au/docs/latest/conventions
+summary: >-
+  Domain publishes a dedicated Conventions section covering access hosts,
+  versioning, sandbox, wire format, schema casing, parameters, image resizing,
+  pagination and rate limiting. All API access is JSON over HTTPS. There is no
+  documented idempotency contract and no Idempotency-Key parameter appears in any
+  of the three OpenAPI documents, so write retries are not idempotent by contract.
+
+access:
+  docs: https://developer.domain.com.au/docs/latest/conventions/access
+  production_host: https://api.domain.com.au/
+  sandbox_host: https://api.domain.com.au/sandbox/
+  auth_host: https://auth.domain.com.au/
+  note: >-
+    No API endpoint is reachable until the required API package(s) have been added
+    to the developer's project in the portal.
+
+format:
+  docs: https://developer.domain.com.au/docs/latest/conventions/format
+  media_type: application/json
+  transport: HTTPS only
+  auth_style: bearer token (OAuth 2.0) or x-api-key header
+
+schema:
+  docs: https://developer.domain.com.au/docs/latest/conventions/schema
+  casing: camelCase
+  casing_exception: >-
+    Authorisation/authentication requests use snake_case, following the OAuth 2.0
+    and OpenID Connect specifications.
+  null_handling: Blank and null fields are omitted from requests.
+
+parameters:
+  docs: https://developer.domain.com.au/docs/latest/conventions/parameters
+  rules:
+  - GET optional parameters are query-string parameters; required parameters are URL path segments.
+  - >-
+    Read endpoints with a large number of optional parameters use POST instead of
+    GET to avoid URI length limits (e.g. Listings_ResidentialSearch).
+  - POST/PUT/DELETE parameters not in the URL are JSON encoded in the request body.
+
+pagination:
+  docs: https://developer.domain.com.au/docs/latest/conventions/pagination
+  style: page-number
+  params:
+    page_number: pageNumber
+    page_size: pageSize
+  first_page: 1
+  default_page_size: 20
+  max_page_size: 100
+  post_body_pagination: >-
+    POST-based search endpoints carry pageNumber and pageSize in the JSON request
+    body rather than the query string.
+  response_headers:
+  - name: X-Total-Count
+    description: >-
+      Total number of available items. Omitted when a reliable count is not
+      available; in that case pages past the last page return empty.
+  invalid_values: >-
+    pageNumber of 0, negative, or otherwise invalid values return the first page.
+
+rate_limiting:
+  docs: https://developer.domain.com.au/docs/latest/conventions/rate-limiting
+  authorisation_limit: up to 3000 token requests per hour
+  request_limit: 1000-3000 requests per minute depending on plan (applies even to Unlimited plans)
+  daily_quota: per-API-package daily quota by plan; resets at 10am AEST
+  response_headers:
+  - X-Quota-PerMinute-Limit
+  - X-Quota-PerMinute-Remaining
+  - X-Quota-PerDay-Limit
+  - X-Quota-PerDay-Remaining
+  exceeded:
+    status: 429
+    headers:
+    - name: Retry-After
+      description: Seconds the client should wait before retrying.
+    - name: X-Quota-Exceeded
+      description: Which limit was exceeded (e.g. Day).
+  token_caching: Access tokens should be cached and reused until their expiry.
+
+idempotency:
+  supported: false
+  evidence: >-
+    No idempotency key header or parameter is documented in the Conventions
+    section, and a case-insensitive search for "idempoten" across all three
+    harvested OpenAPI documents returns zero matches.
+
+versioning:
+  docs: https://developer.domain.com.au/docs/latest/conventions/versioning
+  scheme: uri-path
+  versions_live: [v1, v2]
+  see: lifecycle/domain-group-lifecycle.yml
+
+error_envelope:
+  media_types:
+  - application/json
+  - application/problem+json
+  schema: ProblemDetails (RFC 7807 style) on default and 429 responses
+  diagnostic_header:
+    name: X-Domain-Security-Reason
+    description: >-
+      Returned on 401/403 responses and usually identifies the cause (missing
+      scope, internal denial, expired token, project/environment restriction).
+    source: https://developer.domain.com.au/docs/latest/troubleshooting
+  see: errors/domain-group-problem-types.yml
+
+request_tracing:
+  documented: false
+  note: No request-id / correlation-id header is documented in the Conventions section.
+
+image_resizing:
+  docs: https://developer.domain.com.au/docs/latest/conventions/image-resizing
+
+cross_links:
+  authentication: authentication/domain-group-authentication.yml
+  scopes: scopes/domain-group-scopes.yml
+  errors: errors/domain-group-problem-types.yml
+  lifecycle: lifecycle/domain-group-lifecycle.yml
+  sandbox: sandbox/domain-group-sandbox.yml

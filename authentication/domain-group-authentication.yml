@@ -1,0 +1,92 @@
+generated: '2026-07-26'
+method: searched
+source: openapi/domain-group-openapi-latest.json, openapi/domain-group-openapi-v1.json, openapi/domain-group-openapi-v2.json,
+  https://developer.domain.com.au/docs/latest/authentication, well-known/domain-group-openid-configuration.json
+summary:
+  types:
+  - apiKey
+  - oauth2
+  api_key_in:
+  - header
+  oauth2_flows:
+  - authorizationCode
+  - clientCredentials
+schemes:
+- name: apikey
+  type: apiKey
+  in: header
+  parameter: x-api-key
+  description: API Key in Header
+  sources:
+  - openapi/domain-group-openapi-latest.json
+  - openapi/domain-group-openapi-v1.json
+  - openapi/domain-group-openapi-v2.json
+- name: oauth2
+  type: oauth2
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://auth.domain.com.au/v1/connect/token
+    scopes: 25
+  - flow: authorizationCode
+    authorizationUrl: https://auth.domain.com.au/v1/connect/authorize
+    tokenUrl: https://auth.domain.com.au/v1/connect/token
+    scopes: 25
+  description: OAuth 2
+  sources:
+  - openapi/domain-group-openapi-latest.json
+  - openapi/domain-group-openapi-v1.json
+  - openapi/domain-group-openapi-v2.json
+docs: https://developer.domain.com.au/docs/latest/authentication
+guidance: 'Domain documents exactly two authentication methods: API Key and OAuth 2.0. Domain recommends
+  OAuth 2.0 wherever the application can securely store a secret server-side. API Keys cannot reach user-specific
+  data at all - any call requiring user context (agency-scoped webhook subscriptions, GET /v1/me and its
+  sub-resources) must use an Authorization Code or Implicit token. No endpoint is reachable until the
+  required API package has been added to the project in the developer portal.'
+identity_provider:
+  issuer: https://auth.domain.com.au/v1
+  discovery: https://auth.domain.com.au/v1/.well-known/openid-configuration
+  jwks: https://auth.domain.com.au/v1/.well-known/jwks
+  local_discovery: well-known/domain-group-openid-configuration.json
+  id_token_signing:
+  - RS256
+  pkce:
+  - plain
+  - S256
+  dpop: true
+  par: true
+  ciba: true
+  device_code: true
+  token_endpoint_auth_methods:
+  - client_secret_basic
+  - client_secret_post
+  introspection_endpoint: https://auth.domain.com.au/v1/connect/introspect
+  revocation_endpoint: https://auth.domain.com.au/v1/connect/revocation
+token_handling:
+  cache: Access tokens must be cached and reused until expiry.
+  authorisation_rate_limit: up to 3000 token requests per hour
+  sla_condition: The 99% uptime / 900ms p95 SLA is conditional on following these authentication best
+    practices.
+  source: https://developer.domain.com.au/docs/latest/conventions/rate-limiting
+flow_selection:
+- flow: clientCredentials
+  use: 'Machine-to-machine reads: properties, listings, market statistics, schools, sales results. No
+    user context.'
+- flow: authorizationCode
+  use: Any call needing user context - agency-scoped webhook subscriptions, GET /v1/me, GET /v1/me/agencies,
+    GET /v1/me/providers.
+- flow: implicit
+  use: Documented by Domain as an alternative user-context grant; the OpenAPI documents declare clientCredentials
+    and authorizationCode only.
+failure_diagnostics:
+  header: X-Domain-Security-Reason
+  note: Returned on 401/403 and usually names the cause. See errors/domain-group-problem-types.yml.
+  source: https://developer.domain.com.au/docs/latest/troubleshooting
+environments:
+- name: Primary
+  api: https://api.domain.com.au/
+  auth: https://auth.domain.com.au/
+- name: Sandbox
+  api: https://api.domain.com.au/sandbox/
+  auth: https://auth.domain.com.au/
+  note: Auth host is shared; only the API base URL differs.
+scopes_artifact: scopes/domain-group-scopes.yml

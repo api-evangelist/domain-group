@@ -1,0 +1,268 @@
+generated: '2026-07-26'
+method: derived
+source: openapi/domain-group-openapi-latest.json, openapi/domain-group-openapi-v1.json, openapi/domain-group-openapi-v2.json
+docs: https://developer.domain.com.au/docs/latest/troubleshooting
+format: rfc7807
+format_note: 'A ProblemDetails schema (RFC 7807 shape: type/title/status/detail/instance) is referenced
+  on default and 429 responses, and application/problem+json appears on validation responses in the latest
+  and v1 documents. Most 4xx/5xx responses in the spec declare no response body schema, so the envelope
+  is not applied uniformly.'
+envelope:
+  schema: ProblemDetails
+  media_types:
+  - application/json
+  - application/problem+json
+  variants:
+  - CampaignAPI.v1.HttpValidationProblemDetails
+  - PreMarket.v1.ProblemDetails
+  - BookingV2Api.v1.ProblemDetails
+  - BookingV2Api.v1.ValidationProblemDetails
+  - DomainAvm.v1.ProblemDetails
+  - DomainAvm.PI.v1.ProblemDetails
+diagnostic_headers:
+- name: X-Domain-Security-Reason
+  'on': 401, 403
+  description: Names the authorisation failure cause. Documented values include a missing required scope,
+    "An internal system has denied access to this resource", an expired or invalid Authorization token
+    / API Key, and "Project restricted from access to this environment".
+  source: https://developer.domain.com.au/docs/latest/troubleshooting
+- name: Retry-After
+  'on': '429'
+  description: Seconds to wait before the next request - usually until the next minute or the next day
+    depending on which limit was exceeded.
+  source: https://developer.domain.com.au/docs/latest/conventions/rate-limiting
+- name: X-Quota-Exceeded
+  'on': '429'
+  description: Which quota window was exceeded (e.g. Day).
+  source: https://developer.domain.com.au/docs/latest/conventions/rate-limiting
+oauth_token_errors:
+  source: https://developer.domain.com.au/docs/latest/troubleshooting
+  errors:
+  - code: invalid_grant
+    causes:
+    - The authorization code has already been used
+    - The authorization code has expired
+    - The redirect_uri parameter is missing
+    - The redirect_uri parameter is incorrect
+  - code: unauthorized_client
+    causes:
+    - The credential is not set to Implicit or Authorization Code
+    - Callback URL updates can take up to 10 minutes to take effect
+webhook_subscription_errors:
+  source: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/guides/troubleshooting/
+  errors:
+  - message: Invalid resource type specified
+    cause: resourceType does not match a documented resource type.
+  - message: Authenticated without user context details. Unable to verify access to agency.
+    cause: Authentication did not use the Authorization Code flow.
+  - message: Authenticated user does not have access to specified agency.
+    cause: Verify with GET /v1/me/agencies.
+  - message: Authenticated client does not have access to specified provider id.
+    cause: Verify with GET /v1/me/providers.
+  - message: Invalid group name (ownerId) supplied.
+    cause: Only the "public" group is valid.
+problems:
+- status: 400
+  code: '400'
+  title: Bad Request
+  occurrences: 121
+  descriptions:
+  - Bad request
+  - Bad Request
+  - invalid input, object invalid
+  - Listing data is not valid
+  - Validation error
+  media_types:
+  - application/json
+  - application/problem+json
+  - text/json
+  - text/plain
+  schemas:
+  - BookingV2Api.v1.ProblemDetails
+  - BookingV2Api.v1.ValidationProblemDetails
+  - CampaignAPI.v1.HttpValidationProblemDetails
+  - DomainAvm.PI.v1.ProblemDetails
+  - DomainAvm.v1.ProblemDetails
+  - PreMarket.v1.ProblemDetails
+  - ProblemDetails
+  remediation: Validate request parameters and body against the OpenAPI schema before retrying; blank
+    and null fields are omitted from requests.
+  source_operations:
+  - openapi/domain-group-openapi-latest.json#AddressLocators_Get
+  - openapi/domain-group-openapi-latest.json#Authorities_Create
+  - openapi/domain-group-openapi-latest.json#Authorities_GetById
+- status: 401
+  code: '401'
+  title: Unauthorized
+  occurrences: 111
+  descriptions:
+  - Unauthorized
+  - Unauthorized access.
+  - Your request is unauthorised
+  - Request is Unauthorized
+  - Unauthorised
+  media_types:
+  - application/json
+  schemas:
+  - ProblemDetails
+  remediation: Obtain a fresh access token from https://auth.domain.com.au/v1/connect/token or check the
+    x-api-key header. Inspect the X-Domain-Security-Reason response header, which usually names the cause
+    (missing scope, expired/invalid token, project restricted from this environment).
+  source_operations:
+  - openapi/domain-group-openapi-latest.json#AddressLocators_Get
+  - openapi/domain-group-openapi-latest.json#Authorities_Create
+  - openapi/domain-group-openapi-latest.json#Authorities_GetById
+- status: 403
+  code: '403'
+  title: Forbidden
+  occurrences: 34
+  descriptions:
+  - Forbidden
+  - Your request is forbidden
+  media_types:
+  - application/json
+  schemas:
+  - ProblemDetails
+  remediation: 'Inspect X-Domain-Security-Reason. Common causes: the token lacks the required api_*_read
+    / api_*_write scope, the API package is not on the current project plan, or the call touches agency-specific
+    data without the required user context (use the Authorization Code flow and verify with GET /v1/me).'
+  source_operations:
+  - openapi/domain-group-openapi-latest.json#Campaign_GetListingPerformance_Report
+  - openapi/domain-group-openapi-latest.json#Campaign_GetProjectPerformance_Report
+  - openapi/domain-group-openapi-latest.json#Listings_ResidentialSearch
+- status: 404
+  code: '404'
+  title: Not Found
+  occurrences: 50
+  descriptions:
+  - Not Found
+  - A property with the specified ID was not found
+  - Authority does not exist.
+  - Authority/Vendor does not exist.
+  - Reservation not found.
+  media_types:
+  - application/json
+  - text/json
+  - text/plain
+  schemas:
+  - DomainAvm.PI.v1.ProblemDetails
+  - DomainAvm.v1.ProblemDetails
+  - PreMarket.v1.ProblemDetails
+  - ProblemDetails
+  remediation: The resource id does not exist or is not visible to the authenticated client.
+  source_operations:
+  - openapi/domain-group-openapi-latest.json#Authorities_GetById
+  - openapi/domain-group-openapi-latest.json#Authorities_UpdateById
+  - openapi/domain-group-openapi-latest.json#Authorities_DownloadAttachments
+- status: 409
+  code: '409'
+  title: Conflict
+  occurrences: 6
+  descriptions:
+  - an existing authority already exists
+  - Conflict
+  - Already cancelled.
+  media_types:
+  - application/json
+  - text/json
+  - text/plain
+  schemas:
+  - PreMarket.v1.ProblemDetails
+  remediation: The resource already exists (e.g. an existing authority). Fetch the existing resource instead
+    of recreating it.
+  source_operations:
+  - openapi/domain-group-openapi-latest.json#Authorities_Create
+  - openapi/domain-group-openapi-latest.json#PreMarket_Get
+  - openapi/domain-group-openapi-latest.json#LimitedInventory_Unreserve
+- status: 422
+  code: '422'
+  title: Unprocessable Entity
+  occurrences: 6
+  descriptions:
+  - Unable to get availability to all combination of Product Type and Listing Category
+  - Reservations processed without success
+  - Unreserve by batch processed without success
+  media_types:
+  - application/json
+  - text/json
+  - text/plain
+  schemas:
+  - BookingV2Api.v1.GetBatchLimitedInventoryAvailabilityResponse
+  - BookingV2Api.v1.ReserveInventoryByBatchResponse
+  - BookingV2Api.v1.UnreserveInventoryByBatchResponse
+  remediation: The request was well formed but could not be fulfilled for the supplied combination of
+    values.
+  source_operations:
+  - openapi/domain-group-openapi-latest.json#LimitedInventory_GetBatchAvailability
+  - openapi/domain-group-openapi-latest.json#LimitedInventory_ReserveByBatch
+  - openapi/domain-group-openapi-latest.json#LimitedInventory_UnreserveByBatch
+- status: 429
+  code: '429'
+  title: Too Many Requests
+  occurrences: 4
+  descriptions:
+  - Too Many Requests
+  media_types:
+  - application/json
+  schemas:
+  - ProblemDetails
+  remediation: Back off for the number of seconds in the Retry-After header. X-Quota-Exceeded names which
+    window was breached (e.g. Day). Cache access tokens and throttle to stay under the 1000-3000 requests-per-minute
+    ceiling and the plan daily quota.
+  source_operations:
+  - openapi/domain-group-openapi-latest.json#Listings_ResidentialSearch
+  - openapi/domain-group-openapi-latest.json#Listings_DetailedSoldResidentialSearch
+  - openapi/domain-group-openapi-v1.json#Listings_ResidentialSearch
+- status: 500
+  code: '500'
+  title: Internal Server Error
+  occurrences: 101
+  descriptions:
+  - Unexpected error
+  - Server Error
+  - Internal Server Error
+  - Internal server error.
+  - We have had an internal error
+  media_types:
+  - application/json
+  - text/json
+  - text/plain
+  schemas:
+  - BookingV2Api.v1.ProblemDetails
+  - DomainAvm.PI.v1.ProblemDetails
+  - DomainAvm.v1.ProblemDetails
+  - PreMarket.v1.ProblemDetails
+  remediation: Unexpected server error. Retry with backoff; escalate to api@domain.com.au per the SLA
+    severity table if persistent.
+  source_operations:
+  - openapi/domain-group-openapi-latest.json#AddressLocators_Get
+  - openapi/domain-group-openapi-latest.json#Campaign_GetListingPerformance_Report
+  - openapi/domain-group-openapi-latest.json#Campaign_GetProjectPerformance_Report
+- status: 504
+  code: '504'
+  title: Gateway Timeout
+  occurrences: 4
+  descriptions:
+  - Gateway Timeout
+  media_types: null
+  schemas: null
+  remediation: Upstream timeout. Retry with backoff; narrow search criteria on the large POST search endpoints.
+  source_operations:
+  - openapi/domain-group-openapi-latest.json#Listings_ResidentialSearch
+  - openapi/domain-group-openapi-latest.json#Listings_DetailedSoldResidentialSearch
+  - openapi/domain-group-openapi-v1.json#Listings_ResidentialSearch
+- status: null
+  code: default
+  title: Error
+  occurrences: 63
+  descriptions:
+  - Error
+  media_types:
+  - application/json
+  schemas:
+  - ProblemDetails
+  remediation: Generic error envelope. Parse the ProblemDetails body for type/title/status/detail.
+  source_operations:
+  - openapi/domain-group-openapi-latest.json#Agencies_Search
+  - openapi/domain-group-openapi-latest.json#Agencies_Head
+  - openapi/domain-group-openapi-latest.json#Agencies_CreateTestAgency

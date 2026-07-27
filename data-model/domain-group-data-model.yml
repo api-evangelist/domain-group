@@ -1,0 +1,909 @@
+generated: '2026-07-26'
+method: derived
+source: openapi/domain-group-openapi-latest.json
+docs: https://developer.domain.com.au/docs/latest/apis
+summary: Entity-relationship graph derived from the 409 component schemas in the Domain "latest" OpenAPI
+  document. Root entities are the schemas surfaced directly on 2xx responses or request bodies; relationships
+  come from $ref links (has_one / has_many) and from *Id reference fields (belongs_to).
+core_domains:
+- domain: Listings
+  description: Residential, commercial, business, project and off-market listings; search, detail, media,
+    statistics, processing reports.
+  tags:
+  - Listings
+  - ListingSearch
+  - PreMarket
+- domain: Agencies & Agents
+  description: Agencies, their agents, profiles and search.
+  tags:
+  - Agencies
+  - Agents
+- domain: Properties
+  description: Property records, features, zoning/perils, price and rental estimates, address locators.
+  tags:
+  - Properties
+  - PropertyFeatures
+  - PropertyZoningPerils
+  - PropertyAvm
+  - AddressLocators
+  - PropertySearch
+  - PropertyLike
+- domain: Locations & Market
+  description: Location profiles, suburb performance, demographics, sales/auction results, datasets.
+  tags:
+  - Locations
+  - Statistics
+  - Demographics
+  - SalesResults
+  - Dataset
+- domain: Portfolio
+  description: PropertyRadar watchlist portfolios and their property members, including G-NAF lookup.
+  tags:
+  - PropertyRadar
+- domain: Commercial
+  description: Enquiries, leads, products, authorities, campaign reporting.
+  tags:
+  - Enquiries
+  - Leadscope
+  - Products
+  - Authorities
+  - CampaignReporting
+- domain: Platform
+  description: Caller identity (/v1/me), disclaimers, webhook subscriptions.
+  tags:
+  - Me
+  - Disclaimers
+  - Webhooks
+identifiers:
+- entity: Property
+  format: Opaque Domain property id
+  example_source: GET /v1/properties/{id}
+  note: Domain-native identifier; no RESO Universal Property Identifier is used.
+- entity: Property (external)
+  format: G-NAF id
+  note: The Australian Geocoded National Address File identifier is accepted on GET /v1/propertyradar/portfolio/{PortfolioId}/properties/gnaf/{GnafId}.
+- entity: Webhook
+  format: whk_ prefix
+  source: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/guides/subscriptions/
+- entity: Subscription
+  format: subs_ prefix
+  source: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/guides/subscriptions/
+- entity: Webhook verification code
+  format: vfy_ prefix
+  source: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/guides/configuration/
+entity_count_total: 409
+entities:
+- name: ListingAdmin.v2.ListingResponse
+  surfaced_on_operations:
+  - listings_upsertbusinessoffmarket
+  - listings_upsertcommerciallisting
+  - listings_upsertcommercialoffmarket
+  - listings_upsertresidentialoffmarket
+  property_count: 6
+  relationships:
+  - target: agency
+    kind: belongs_to
+    via: agencyId
+    inferred_from: id-reference field
+  - target: provider
+    kind: belongs_to
+    via: providerId
+    inferred_from: id-reference field
+  - target: providerAd
+    kind: belongs_to
+    via: providerAdId
+    inferred_from: id-reference field
+  - target: version
+    kind: belongs_to
+    via: versionId
+    inferred_from: id-reference field
+- name: Authorities.v1.AuthorityResponse
+  surfaced_on_operations:
+  - Authorities_Create
+  - Authorities_GetById
+  - Authorities_UpdateById
+  property_count: 4
+  relationships:
+  - target: Authorities.v1.MarketingCampaignResponse
+    kind: has_many
+    via: marketingCampaigns
+  - target: Authorities.v1.VendorResponse
+    kind: has_many
+    via: vendors
+  - target: Authorities.v1.AgentResponse
+    kind: has_many
+    via: agents
+- name: Enquiries.V1.EnquiryReport
+  surfaced_on_operations:
+  - Enquiries_Get
+  - Enquiries_Search
+  - Listings_GetEnquiries
+  - Projects_GetEnquiries
+  property_count: 10
+  relationships:
+  - target: Enquiries.V1.RecipientDeliveryStatus
+    kind: has_many
+    via: recipientsDeliveryStatus
+  - target: reference
+    kind: belongs_to
+    via: referenceId
+    inferred_from: id-reference field
+  - target: Enquiries.V1.Sender
+    kind: has_one
+    via: sender
+  - target: agency
+    kind: belongs_to
+    via: agencyId
+    inferred_from: id-reference field
+- name: Domain.ListingAdminService.v1.Model.ListingResponse
+  surfaced_on_operations:
+  - Listings_UpsertBusinessListing
+  - Listings_UpsertResidentialListing
+  property_count: 6
+  relationships:
+  - target: agency
+    kind: belongs_to
+    via: agencyId
+    inferred_from: id-reference field
+  - target: provider
+    kind: belongs_to
+    via: providerId
+    inferred_from: id-reference field
+  - target: providerAd
+    kind: belongs_to
+    via: providerAdId
+    inferred_from: id-reference field
+  - target: version
+    kind: belongs_to
+    via: versionId
+    inferred_from: id-reference field
+- name: Webhooks.v1.WebhookSubscription
+  surfaced_on_operations:
+  - Webhooks_CreateSubscription
+  - Webhooks_GetSubscription
+  - Webhooks_ListSubscriptions
+  property_count: 12
+  relationships:
+  - target: subscription
+    kind: belongs_to
+    via: subscriptionId
+    inferred_from: id-reference field
+  - target: subscriber
+    kind: belongs_to
+    via: subscriberId
+    inferred_from: id-reference field
+  - target: owner
+    kind: belongs_to
+    via: ownerId
+    inferred_from: id-reference field
+- name: Listings.V1.Listing
+  surfaced_on_operations:
+  - Agencies_GetListings
+  - Agents_GetListings
+  - Listings_Get
+  property_count: 43
+  relationships:
+  - target: Listings.V1.AddressParts
+    kind: has_one
+    via: addressParts
+  - target: Listings.v1.AdvertiserIdentifiers
+    kind: has_one
+    via: advertiserIdentifiers
+  - target: Listings.V1.AustralianPropertyMonitorsIdentifiers
+    kind: has_one
+    via: apmIdentifiers
+  - target: devProject
+    kind: belongs_to
+    via: devProjectId
+    inferred_from: id-reference field
+  - target: Listings.v1.GeoLocation
+    kind: has_one
+    via: geoLocation
+  - target: Listings.v1.PropertyInspections
+    kind: has_one
+    via: inspectionDetails
+  - target: Listings.v1.ListingMedia
+    kind: has_many
+    via: media
+  - target: Listings.V1.PriceDetails
+    kind: has_one
+    via: priceDetails
+  - target: property
+    kind: belongs_to
+    via: propertyId
+    inferred_from: id-reference field
+  - target: Listings.v1.ProviderDetails
+    kind: has_one
+    via: providerDetails
+  - target: Listings.V1.RentalDetails
+    kind: has_one
+    via: rentalDetails
+  - target: Listings.V1.SaleDetails
+    kind: has_one
+    via: saleDetails
+  - target: Listings.v1.StatementOfInformation
+    kind: has_one
+    via: statementOfInformation
+- name: Authorities.v1.Attachments
+  surfaced_on_operations:
+  - Authorities_UploadAttachment
+  - Authorities_UploadVendorAttachment
+  property_count: 3
+  relationships: null
+- name: PropertyActivityAPI.v1.PortfolioDetails
+  surfaced_on_operations:
+  - PropertyRadar_AddToPortfolio
+  - PropertyRadar_CreatePortfolio
+  - PropertyRadar_RemoveFromPortfolio
+  property_count: 2
+  relationships:
+  - target: Property
+    kind: belongs_to
+    via: PropertyIds
+    inferred_from: id-reference field
+  - target: Gnaf
+    kind: belongs_to
+    via: GnafIds
+    inferred_from: id-reference field
+- name: Agencies.V2.Agency
+  surfaced_on_operations:
+  - Agencies_CreateTestAgency
+  - Agencies_Get
+  property_count: 16
+  relationships:
+  - target: Agencies.V2.AgencyProfile
+    kind: has_one
+    via: profile
+  - target: Agencies.V2.AgencyDetails
+    kind: has_one
+    via: details
+  - target: cre
+    kind: belongs_to
+    via: creId
+    inferred_from: id-reference field
+  - target: Agencies.V2.ContactInAgencyList
+    kind: has_many
+    via: agents
+  - target: Agencies.V2.AgencyContactDetails
+    kind: has_one
+    via: contactDetails
+  - target: Agencies.V2.AgencyOptions
+    kind: has_one
+    via: agencyOptions
+  - target: providerAgency
+    kind: belongs_to
+    via: providerAgencyId
+    inferred_from: id-reference field
+- name: ListingPerformance.v1.Statistics
+  surfaced_on_operations:
+  - Agencies_GetStatistics
+  - Agents_GetStatistics
+  property_count: 21
+  relationships:
+  - target: listing
+    kind: belongs_to
+    via: listingId
+    inferred_from: id-reference field
+- name: Domain.ListingAdminService.v1.Model.ListingReport
+  surfaced_on_operations:
+  - Listings_GetListingReport
+  - Listings_GetListingReportByReference
+  property_count: 8
+  relationships:
+  - target: agency
+    kind: belongs_to
+    via: agencyId
+    inferred_from: id-reference field
+  - target: provider
+    kind: belongs_to
+    via: providerId
+    inferred_from: id-reference field
+  - target: providerAd
+    kind: belongs_to
+    via: providerAdId
+    inferred_from: id-reference field
+  - target: ad
+    kind: belongs_to
+    via: adId
+    inferred_from: id-reference field
+  - target: Domain.ListingAdminService.v1.Model.ModelEvent
+    kind: has_many
+    via: events
+  - target: Domain.ListingAdminService.v1.Model.ReportVersion
+    kind: has_many
+    via: versions
+- name: SearchService.v2.DomainSearchContractsV2SearchResults
+  surfaced_on_operations:
+  - Listings_DetailedSoldResidentialSearch
+  - Listings_ResidentialSearch
+  property_count: 7
+  relationships:
+  - target: SearchService.v2.DomainSearchContractsV2SearchResult
+    kind: has_many
+    via: results
+  - target: SearchService.v2.DomainSearchContractsV2ResultMetadata
+    kind: has_one
+    via: metadata
+- name: PreMarket.v1.ListingRequest
+  surfaced_on_operations:
+  - PreMarket_Patch
+  - PreMarket_Post
+  property_count: 24
+  relationships:
+  - target: PreMarket.v1.PrePortalListingStatus
+    kind: has_one
+    via: listingStatus
+  - target: PreMarket.v1.Address
+    kind: has_one
+    via: address
+  - target: domainAgency
+    kind: belongs_to
+    via: domainAgencyId
+    inferred_from: id-reference field
+  - target: providerAd
+    kind: belongs_to
+    via: providerAdId
+    inferred_from: id-reference field
+  - target: PreMarket.v1.Contact
+    kind: has_many
+    via: contacts
+  - target: PreMarket.v1.Price
+    kind: has_one
+    via: estimatedSalePrice
+  - target: PreMarket.v1.PropertyType
+    kind: has_many
+    via: propertyTypes
+  - target: PreMarket.v1.AuthorityType
+    kind: has_one
+    via: authorityType
+  - target: PreMarket.v1.StatementOfInformation
+    kind: has_one
+    via: statementOfInformation
+  - target: PreMarket.v1.PropertyMedia
+    kind: has_many
+    via: images
+  - target: PreMarket.v1.SoldDetails
+    kind: has_one
+    via: soldDetails
+- name: BookingV2Api.v1.GetBatchLimitedInventoryAvailabilityResponse
+  surfaced_on_operations:
+  - LimitedInventory_GetBatchAvailability
+  property_count: 2
+  relationships:
+  - target: BookingV2Api.v1.ProductAvailabilityDetailsDto
+    kind: has_many
+    via: results
+  - target: BookingV2Api.v1.BatchSummaryResponse
+    kind: has_one
+    via: summary
+- name: BookingV2Api.v1.ReserveInventoryByBatchResponse
+  surfaced_on_operations:
+  - LimitedInventory_ReserveByBatch
+  property_count: 2
+  relationships:
+  - target: BookingV2Api.v1.ReservationResponse
+    kind: has_many
+    via: results
+  - target: BookingV2Api.v1.BatchSummaryResponse
+    kind: has_one
+    via: summary
+- name: BookingV2Api.v1.UnreserveInventoryByBatchResponse
+  surfaced_on_operations:
+  - LimitedInventory_UnreserveByBatch
+  property_count: 2
+  relationships:
+  - target: BookingV2Api.v1.UnreserveResponse
+    kind: has_many
+    via: results
+  - target: BookingV2Api.v1.BatchSummaryResponse
+    kind: has_one
+    via: summary
+- name: Listings.V2.Project
+  surfaced_on_operations:
+  - Projects_Get
+  - Projects_Search
+  property_count: 45
+  relationships:
+  - target: Listings.V2.ProjectAddressParts
+    kind: has_one
+    via: address
+  - target: Listings.V2.ProjectAddressParts
+    kind: has_one
+    via: viewingAddress
+  - target: Listings.V2.ProjectAddressParts
+    kind: has_one
+    via: displayableAddress
+  - target: Listings.V2.AdvertiserIdentifiers
+    kind: has_one
+    via: advertiserIdentifiers
+  - target: Listings.V2.ProviderDetails
+    kind: has_one
+    via: providerDetails
+  - target: Listings.v2.ProjectMedia
+    kind: has_many
+    via: media
+  - target: Listings.V2.PdfUpload
+    kind: has_many
+    via: pdfs
+  - target: Listings.V2.PropertyInspections
+    kind: has_one
+    via: inspectionDetails
+  - target: childListing
+    kind: belongs_to
+    via: childListingIds
+    inferred_from: id-reference field
+  - target: linkedProject
+    kind: belongs_to
+    via: linkedProjectIds
+    inferred_from: id-reference field
+- name: Listings.V2.Listing
+  surfaced_on_operations:
+  - Projects_GetChildListings
+  - listings_bypropertyid
+  property_count: 43
+  relationships:
+  - target: Listings.V2.AddressParts
+    kind: has_one
+    via: addressParts
+  - target: Listings.V2.AdvertiserIdentifiers
+    kind: has_one
+    via: advertiserIdentifiers
+  - target: Listings.V2.AustralianPropertyMonitorsIdentifiers
+    kind: has_one
+    via: apmIdentifiers
+  - target: devProject
+    kind: belongs_to
+    via: devProjectId
+    inferred_from: id-reference field
+  - target: Listings.V2.GeoLocation
+    kind: has_one
+    via: geoLocation
+  - target: Listings.V2.PropertyInspections
+    kind: has_one
+    via: inspectionDetails
+  - target: Listings.V2.ListingMedia
+    kind: has_many
+    via: media
+  - target: Listings.V2.PriceDetails
+    kind: has_one
+    via: priceDetails
+  - target: property
+    kind: belongs_to
+    via: propertyId
+    inferred_from: id-reference field
+  - target: Listings.V2.ProviderDetails
+    kind: has_one
+    via: providerDetails
+  - target: Listings.V2.RentalDetails
+    kind: has_one
+    via: rentalDetails
+  - target: Listings.V2.SaleDetails
+    kind: has_one
+    via: saleDetails
+  - target: Listings.V2.StatementOfInformation
+    kind: has_one
+    via: statementOfInformation
+- name: Property.Enrichment.v2.SearchItemOutput
+  surfaced_on_operations:
+  - PropertyLike_Comparables
+  - PropertySearch_ByRadius
+  property_count: 11
+  relationships:
+  - target: Property.Enrichment.v2.AddressBasic
+    kind: has_one
+    via: addresscomponents
+  - target: Property.Enrichment.v2.ImageTypes
+    kind: has_many
+    via: images
+- name: SuburbSummaryAndHistorical
+  surfaced_on_operations:
+  - SuburbHistorical_Get
+  - SuburbSummary_Get
+  property_count: 2
+  relationships: null
+- name: SuburbPerformance
+  surfaced_on_operations:
+  - SuburbPerformance_Get_ByNamedSuburb
+  - SuburbPerformance_Get_ByNamedSuburb_WithoutPostcode
+  property_count: 2
+  relationships: null
+- name: Agencies.V2.AgencySummary
+  surfaced_on_operations:
+  - Agencies_Search
+  property_count: 24
+  relationships: null
+- name: Agencies.V1.Agent
+  surfaced_on_operations:
+  - Agents_Get
+  property_count: 30
+  relationships:
+  - target: agency
+    kind: belongs_to
+    via: agencyId
+    inferred_from: id-reference field
+  - target: agent
+    kind: belongs_to
+    via: agentId
+    inferred_from: id-reference field
+- name: Domain.AgentSearch.v1.Model.AutoSuggestAgentResultDto
+  surfaced_on_operations:
+  - Agents_Search
+  property_count: 7
+  relationships:
+  - target: agent
+    kind: belongs_to
+    via: agentId
+    inferred_from: id-reference field
+- name: Authorities.v1.AuthorityRequest
+  surfaced_on_operations:
+  - Authorities_Create
+  property_count: 50
+  relationships:
+  - target: Authorities.v1.Address
+    kind: has_one
+    via: address
+  - target: Authorities.v1.MarketingCampaignRequest
+    kind: has_many
+    via: marketingCampaigns
+  - target: Authorities.v1.VendorRequest
+    kind: has_many
+    via: vendors
+  - target: Authorities.v1.AgentRequest
+    kind: has_many
+    via: agents
+  - target: Authorities.v1.CrmDetails
+    kind: has_one
+    via: crmDetails
+- name: Authorities.v1.VendorAttachments
+  surfaced_on_operations:
+  - Authorities_UploadVendorAttachment
+  property_count: 2
+  relationships: null
+- name: Authorities.v1.SubscriptionResponse
+  surfaced_on_operations:
+  - Authorities_Subscribe
+  property_count: 1
+  relationships:
+  - target: subscription
+    kind: belongs_to
+    via: subscriptionId
+    inferred_from: id-reference field
+- name: Authorities.v1.SubscriptionRequest
+  surfaced_on_operations:
+  - Authorities_Subscribe
+  property_count: 1
+  relationships:
+  - target: webhook
+    kind: belongs_to
+    via: webhookId
+    inferred_from: id-reference field
+- name: CampaignAPI.v1.ListingPerformanceDataResponse
+  surfaced_on_operations:
+  - Campaign_GetListingPerformance_Report
+  property_count: 1
+  relationships:
+  - target: CampaignAPI.v1.ListingPerformanceResponse
+    kind: has_many
+    via: data
+- name: CampaignAPI.v1.ProjectPerformanceDataResponse
+  surfaced_on_operations:
+  - Campaign_GetProjectPerformance_Report
+  property_count: 1
+  relationships:
+  - target: CampaignAPI.v1.ProjectPerformanceResponse
+    kind: has_many
+    via: data
+- name: DemographicsResponse
+  surfaced_on_operations:
+  - Demographics_Get_ByNamedSuburb
+  property_count: 1
+  relationships: null
+- name: Domain.EnquiryService.v1.Model.GroupEnquiryServiceModelsEnquiryResponse
+  surfaced_on_operations:
+  - Enquiries_Post
+  property_count: 4
+  relationships: null
+- name: Domain.Public.Adapter.Web.Api.Models.v1.Enquiries.Enquiry
+  surfaced_on_operations:
+  - Enquiries_Post
+  property_count: 8
+  relationships:
+  - target: reference
+    kind: belongs_to
+    via: referenceId
+    inferred_from: id-reference field
+  - target: Domain.Public.Adapter.Web.Api.Models.v1.Enquiries.Sender
+    kind: has_one
+    via: sender
+- name: ListingPerformance.v1.StatisticReport
+  surfaced_on_operations:
+  - Listings_GetListingStatistics
+  property_count: 2
+  relationships:
+  - target: ListingPerformance.v1.Statistics
+    kind: has_one
+    via: summary
+  - target: ListingPerformance.v1.DailyStatistics
+    kind: has_many
+    via: dailyBreakdown
+- name: Domain.ListingAdminService.v1.Model.BusinessListing
+  surfaced_on_operations:
+  - Listings_UpsertBusinessListing
+  property_count: 22
+  relationships:
+  - target: Domain.ListingAdminService.v1.Model.BusinessProperty
+    kind: has_one
+    via: propertyDetails
+  - target: Domain.ListingAdminService.v1.Model.LeaseHoldDetail
+    kind: has_one
+    via: leaseHoldDetails
+  - target: Domain.ListingAdminService.v1.Model.SaleInfo
+    kind: has_one
+    via: saleInfo
+  - target: freeholdCommercialAd
+    kind: belongs_to
+    via: freeholdCommercialAdId
+    inferred_from: id-reference field
+  - target: Domain.ListingAdminService.v1.Model.Price
+    kind: has_one
+    via: price
+  - target: domainAd
+    kind: belongs_to
+    via: domainAdId
+    inferred_from: id-reference field
+  - target: providerAd
+    kind: belongs_to
+    via: providerAdId
+    inferred_from: id-reference field
+  - target: Domain.ListingAdminService.v1.Model.InspectionDetails
+    kind: has_one
+    via: inspectionDetails
+  - target: Domain.ListingAdminService.v1.Model.PropertyMedia
+    kind: has_many
+    via: media
+  - target: Domain.ListingAdminService.v1.Model.Contact
+    kind: has_many
+    via: contacts
+  - target: Domain.ListingAdminService.v1.Model.ListingSupplementary
+    kind: has_many
+    via: supplementary
+- name: Domain.Public.Adapter.Web.Api.Models.v1.Listings.Business.Listing
+  surfaced_on_operations:
+  - Listings_DetailedBusinessSearch
+  property_count: 14
+  relationships:
+  - target: Domain.Public.Adapter.Web.Api.Models.v1.Listings.Business.Ad
+    kind: has_one
+    via: ad
+  - target: Domain.Public.Adapter.Web.Api.Models.v1.Listings.Business.Advertiser
+    kind: has_one
+    via: advertiser
+  - target: Domain.Public.Adapter.Web.Api.Models.v1.Listings.Business.GeoLocation
+    kind: has_one
+    via: geoLocation
+  - target: Domain.Public.Adapter.Web.Api.Models.v1.Listings.Business.Media
+    kind: has_many
+    via: media
+  - target: Domain.Public.Adapter.Web.Api.Models.v1.Listings.Business.Metadata
+    kind: has_one
+    via: metadata
+- name: Domain.Public.Adapter.Web.Api.Models.v1.Listings.Business.SearchRequest
+  surfaced_on_operations:
+  - Listings_DetailedBusinessSearch
+  property_count: 11
+  relationships:
+  - target: advertiser
+    kind: belongs_to
+    via: advertiserId
+    inferred_from: id-reference field
+  - target: brand
+    kind: belongs_to
+    via: brandId
+    inferred_from: id-reference field
+  - target: franchiseGroup
+    kind: belongs_to
+    via: franchiseGroupId
+    inferred_from: id-reference field
+  - target: Domain.Public.Adapter.Web.Api.Models.v1.Listings.Business.LocationSearch
+    kind: has_many
+    via: locations
+  - target: Domain.Public.Adapter.Web.Api.Models.v1.Listings.Business.PriceSearch
+    kind: has_one
+    via: price
+- name: ListingAdmin.v2.BusinessOffMarketListing
+  surfaced_on_operations:
+  - listings_upsertbusinessoffmarket
+  property_count: 10
+  relationships:
+  - target: ListingAdmin.v2.SaleInfo
+    kind: has_one
+    via: saleInfo
+  - target: providerAd
+    kind: belongs_to
+    via: providerAdId
+    inferred_from: id-reference field
+  - target: ListingAdmin.v2.Contact
+    kind: has_many
+    via: contacts
+  - target: ListingAdmin.v2.OffMarketDetailsBase
+    kind: has_one
+    via: offMarketDetails
+  - target: ListingAdmin.v2.BusinessOffMarketProperty
+    kind: has_one
+    via: propertyDetails
+- name: ListingAdmin.v2.CommercialListingV2
+  surfaced_on_operations:
+  - listings_upsertcommerciallisting
+  property_count: 33
+  relationships:
+  - target: ListingAdmin.v2.CommercialPrice
+    kind: has_one
+    via: salePrice
+  - target: ListingAdmin.v2.CommercialPrice
+    kind: has_one
+    via: leasePrice
+  - target: ListingAdmin.v2.Lease
+    kind: has_one
+    via: lease
+  - target: ListingAdmin.v2.EOI
+    kind: has_one
+    via: eoi
+  - target: ListingAdmin.v2.Tenant
+    kind: has_one
+    via: tenant
+  - target: ListingAdmin.v2.Tender
+    kind: has_one
+    via: tender
+  - target: ListingAdmin.v2.SpecificUnitDetail
+    kind: has_many
+    via: unitDetails
+  - target: ListingAdmin.v2.CommercialAuction
+    kind: has_one
+    via: auction
+  - target: ListingAdmin.v2.CommercialProperty
+    kind: has_one
+    via: propertyDetails
+  - target: ListingAdmin.v2.AgentContact
+    kind: has_many
+    via: conjunctionAgents
+  - target: domainAd
+    kind: belongs_to
+    via: domainAdId
+    inferred_from: id-reference field
+  - target: providerAd
+    kind: belongs_to
+    via: providerAdId
+    inferred_from: id-reference field
+  - target: ListingAdmin.v2.InspectionDetails
+    kind: has_one
+    via: inspectionDetails
+  - target: ListingAdmin.v2.PropertyMedia
+    kind: has_many
+    via: media
+  - target: ListingAdmin.v2.Contact
+    kind: has_many
+    via: contacts
+  - target: ListingAdmin.v2.ListingSupplementary
+    kind: has_many
+    via: supplementary
+- name: Domain.Public.Adapter.Web.Api.Models.v1.Listings.Commercial.Listing
+  surfaced_on_operations:
+  - Listings_DetailedCommercialSearch
+  property_count: 14
+  relationships:
+  - target: Domain.Public.Adapter.Web.Api.Models.v1.Listings.Commercial.Ad
+    kind: has_one
+    via: ad
+  - target: Domain.Public.Adapter.Web.Api.Models.v1.Listings.Commercial.Advertiser
+    kind: has_one
+    via: advertiser
+  - target: Domain.Public.Adapter.Web.Api.Models.v1.Listings.Commercial.GeoLocation
+    kind: has_one
+    via: geoLocation
+  - target: Domain.Public.Adapter.Web.Api.Models.v1.Listings.Commercial.Media
+    kind: has_many
+    via: media
+  - target: Domain.Public.Adapter.Web.Api.Models.v1.Listings.Commercial.Metadata
+    kind: has_one
+    via: metadata
+- name: Domain.Public.Adapter.Web.Api.Models.v1.Listings.Commercial.SearchRequest
+  surfaced_on_operations:
+  - Listings_DetailedCommercialSearch
+  property_count: 20
+  relationships:
+  - target: advertiser
+    kind: belongs_to
+    via: advertiserId
+    inferred_from: id-reference field
+  - target: Domain.Public.Adapter.Web.Api.Models.v1.Listings.Commercial.PriceSearch
+    kind: has_one
+    via: price
+  - target: Domain.Public.Adapter.Web.Api.Models.v1.Listings.Commercial.LocationSearch
+    kind: has_many
+    via: locations
+  - target: Domain.Public.Adapter.Web.Api.Models.v1.Listings.Commercial.GeoWindow
+    kind: has_one
+    via: geoWindow
+  - target: Domain.Public.Adapter.Web.Api.Models.v1.Listings.Commercial.ParkingSearch
+    kind: has_one
+    via: parking
+- name: ListingAdmin.v2.CommercialOffMarketListing
+  surfaced_on_operations:
+  - listings_upsertcommercialoffmarket
+  property_count: 14
+  relationships:
+  - target: ListingAdmin.v2.SpecificUnitDetail
+    kind: has_many
+    via: unitDetails
+  - target: providerAd
+    kind: belongs_to
+    via: providerAdId
+    inferred_from: id-reference field
+  - target: ListingAdmin.v2.Contact
+    kind: has_many
+    via: contacts
+  - target: ListingAdmin.v2.OffMarketDetailsBase
+    kind: has_one
+    via: offMarketDetails
+  - target: ListingAdmin.v2.CommercialOffMarketProperty
+    kind: has_one
+    via: propertyDetails
+- name: Domain.Public.Adapter.Web.Api.Models.v1.Listings.ListingLocation
+  surfaced_on_operations:
+  - ListingLocations_Search
+  property_count: 6
+  relationships: null
+- name: Domain.ListingAdminService.v1.Model.ResidentialListing
+  surfaced_on_operations:
+  - Listings_UpsertResidentialListing
+  property_count: 25
+  relationships:
+  - target: Domain.ListingAdminService.v1.Model.Auction
+    kind: has_one
+    via: auction
+  - target: Domain.ListingAdminService.v1.Model.ResidentialProperty
+    kind: has_one
+    via: propertyDetails
+  - target: Domain.ListingAdminService.v1.Model.StatementOfInformation
+    kind: has_one
+    via: statementOfInformation
+  - target: Domain.ListingAdminService.v1.Model.Price
+    kind: has_one
+    via: price
+  - target: Domain.ListingAdminService.v1.Model.ListingProject
+    kind: has_one
+    via: project
+  - target: domainAd
+    kind: belongs_to
+    via: domainAdId
+    inferred_from: id-reference field
+  - target: providerAd
+    kind: belongs_to
+    via: providerAdId
+    inferred_from: id-reference field
+  - target: Domain.ListingAdminService.v1.Model.InspectionDetails
+    kind: has_one
+    via: inspectionDetails
+  - target: Domain.ListingAdminService.v1.Model.PropertyMedia
+    kind: has_many
+    via: media
+  - target: Domain.ListingAdminService.v1.Model.Contact
+    kind: has_many
+    via: contacts
+  - target: Domain.ListingAdminService.v1.Model.ListingSupplementary
+    kind: has_many
+    via: supplementary
+- name: Domain.SearchService.v2.Model.DomainSearchContractsV2SearchResult
+  surfaced_on_operations:
+  - Listings_DetailedResidentialSearch
+  property_count: 4
+  relationships:
+  - target: Domain.SearchService.v2.Model.DomainSearchContractsV2PropertyListing
+    kind: has_one
+    via: listing
+  - target: Domain.SearchService.v2.Model.DomainSearchContractsV2PropertyListing
+    kind: has_many
+    via: listings
+  - target: Domain.SearchService.v2.Model.DomainSearchContractsV2Project
+    kind: has_one
+    via: project

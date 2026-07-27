@@ -1,0 +1,51 @@
+generated: '2026-07-26'
+method: searched
+source: https://developer.domain.com.au/docs/latest/libraries
+docs: https://developer.domain.com.au/docs/latest/libraries
+summary: >-
+  Domain ships NO first-party client libraries. The Libraries page states plainly
+  that "Prebuilt libraries are not currently available" and instead directs
+  developers to generate their own client from the published OpenAPI documents.
+  This is a deliberate generate-your-own-SDK posture, not an omission.
+
+official_sdks: []
+
+generation_path:
+  specs:
+  - name: Latest (combined V1 and V2)
+    url: https://developer.domain.com.au/static/latest/media/latest/openapi.json
+    local: openapi/domain-group-openapi-latest.json
+  - name: Version 2
+    url: https://developer.domain.com.au/static/latest/media/v2/openapi.json
+    local: openapi/domain-group-openapi-v2.json
+  - name: Version 1
+    url: https://developer.domain.com.au/static/latest/media/v1/openapi.json
+    local: openapi/domain-group-openapi-v1.json
+  recommended_spec: latest
+  recommended_spec_reason: contains all currently active endpoints - both V1 and V2
+  generators_recommended_by_domain:
+  - name: openapi-generator
+    url: https://github.com/OpenAPITools/openapi-generator
+    languages: [dotnet, php, python, ruby, javascript]
+  - name: Swagger-Codegen
+    url: https://swagger.io/tools/swagger-codegen/
+    languages: [csharp, ruby, php, python, typescript, javascript]
+  - name: NSwag
+    url: https://github.com/RSuter/NSwag
+    languages: [csharp, typescript]
+
+third_party_packages:
+- language: typescript
+  registry: npm
+  name: domain-ts
+  url: https://www.npmjs.com/package/domain-ts
+  install: npm install domain-ts
+  official: false
+  note: >-
+    Community-published TypeScript client for domain.com.au (publisher tmiguelt).
+    Not maintained or endorsed by Domain Group.
+
+registries_probed:
+- {registry: npm, query: 'domain.com.au', official_hits: 0}
+- {registry: pypi, queries: [domainapi, domain-com-au, domaingroup], official_hits: 0}
+- {registry: github, org: 'https://github.com/domain-group', public_repos: 0, official_hits: 0}

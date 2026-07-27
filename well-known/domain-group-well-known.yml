@@ -1,0 +1,72 @@
+generated: '2026-07-26'
+method: searched
+source: live probes of the Domain auth, API, developer-portal and marketing hosts
+summary: >-
+  Domain's only /.well-known/ surface is the OpenID Connect discovery document
+  and its JWKS on the auth host (auth.domain.com.au/v1). The API host, developer
+  portal, and marketing site publish nothing under /.well-known/ - no
+  security.txt, no api-catalog, no ai-plugin.json, no RFC 8414 OAuth
+  authorization-server document, and no RFC 9728 protected-resource document.
+
+hosts:
+- host: https://auth.domain.com.au/v1
+  documents:
+  - path: /.well-known/openid-configuration
+    status: 200
+    file: domain-group-openid-configuration.json
+    spec: OpenID Connect Discovery 1.0
+  - path: /.well-known/jwks
+    status: 200
+    file: domain-group-jwks.json
+    spec: RFC 7517 JSON Web Key Set
+    keys: 1
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    spec: RFC 8414
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+    spec: RFC 9728
+  - path: /.well-known/security.txt
+    status: 404
+    spec: RFC 9116
+- host: https://api.domain.com.au
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+- host: https://developer.domain.com.au
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /llms.txt, status: 404}
+- host: https://www.domain.com.au
+  documents:
+  - {path: /.well-known/security.txt, status: 403, note: 'Marketing host returns 403 to all non-browser clients (bot protection); no security.txt could be confirmed.'}
+
+oidc_highlights:
+  issuer: https://auth.domain.com.au/v1
+  authorization_endpoint: https://auth.domain.com.au/v1/connect/authorize
+  token_endpoint: https://auth.domain.com.au/v1/connect/token
+  userinfo_endpoint: https://auth.domain.com.au/v1/connect/userinfo
+  introspection_endpoint: https://auth.domain.com.au/v1/connect/introspect
+  revocation_endpoint: https://auth.domain.com.au/v1/connect/revocation
+  device_authorization_endpoint: https://auth.domain.com.au/v1/connect/deviceauthorization
+  pushed_authorization_request_endpoint: https://auth.domain.com.au/v1/connect/par
+  backchannel_authentication_endpoint: https://auth.domain.com.au/v1/connect/ciba
+  code_challenge_methods_supported: [plain, S256]
+  dpop_supported: true
+  grant_types_supported:
+  - authorization_code
+  - client_credentials
+  - refresh_token
+  - implicit
+  - password
+  - 'urn:ietf:params:oauth:grant-type:device_code'
+  - 'urn:openid:params:grant-type:ciba'
+  note: >-
+    The scopes_supported list in the discovery document is the Domain identity
+    platform's own scope set (roles, address, offline_access, plus internal
+    Domain product scopes) - it is NOT the public API scope set. The 25 public
+    API scopes (api_*_read / api_*_write) come from the OpenAPI oauth2 flows and
+    are captured in scopes/domain-group-scopes.yml.

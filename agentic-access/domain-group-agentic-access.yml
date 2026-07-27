@@ -1,0 +1,3149 @@
+generated: '2026-07-26'
+method: generated
+source: openapi/domain-group-openapi-latest.json, openapi/domain-group-openapi-v1.json, openapi/domain-group-openapi-v2.json
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 221
+  by_action_class:
+    connected: 145
+    acting: 76
+  by_consequence:
+    read: 145
+    write: 74
+    physical: 2
+  human_in_the_loop_required: 0
+operations:
+- path: /v1/addressLocators
+  method: get
+  operationId: AddressLocators_Get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_addresslocators_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/agencies
+  method: get
+  operationId: Agencies_Search
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_agencies_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/agencies
+  method: head
+  operationId: Agencies_Head
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_agencies_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/agencies/_testAgency
+  method: post
+  operationId: Agencies_CreateTestAgency
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_agencies_write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/agencies/{id}
+  method: get
+  operationId: Agencies_Get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_agencies_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/agencies/{id}/listings
+  method: get
+  operationId: Agencies_GetListings
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_listings_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/agencies/{id}/statistics
+  method: get
+  operationId: Agencies_GetStatistics
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_agencies_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/agents/{id}
+  method: get
+  operationId: Agents_Get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_agencies_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/agents/{id}/listings
+  method: get
+  operationId: Agents_GetListings
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_listings_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/agents/{id}/statistics
+  method: get
+  operationId: Agents_GetStatistics
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_agencies_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/agents/search
+  method: get
+  operationId: Agents_Search
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_agencies_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/authorities
+  method: post
+  operationId: Authorities_Create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_authorities_write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/authorities/{id}
+  method: get
+  operationId: Authorities_GetById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_authorities_write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/authorities/{id}
+  method: put
+  operationId: Authorities_UpdateById
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_authorities_write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/authorities/{id}/attachments
+  method: get
+  operationId: Authorities_DownloadAttachments
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_authorities_write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/authorities/{id}/attachments
+  method: post
+  operationId: Authorities_UploadAttachment
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_authorities_write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/authorities/{id}/vendors/{vendorId}/attachments
+  method: post
+  operationId: Authorities_UploadVendorAttachment
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_authorities_write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/authorities/webhooks/subscription
+  method: put
+  operationId: Authorities_Subscribe
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_webhooks_write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/authorities/webhooks/subscription/{subscriptionId}
+  method: delete
+  operationId: Authorities_Unsubscribe
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_webhooks_write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/campaign/listing-performance
+  method: get
+  operationId: Campaign_GetListingPerformance_Report
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_campaignperformance_read
+    - api_listingperformance_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/campaign/project-performance
+  method: get
+  operationId: Campaign_GetProjectPerformance_Report
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_campaignperformance_read
+    - api_projectperformance_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/dataset/{datasetName}/{key}
+  method: get
+  operationId: dataset_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_dataset_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/demographics/{state}/{suburb}/{postcode}
+  method: get
+  operationId: Demographics_Get_ByNamedSuburb
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_demographics_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/disclaimers
+  method: get
+  operationId: Disclaimers_Get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_properties_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/disclaimers/product/{product}
+  method: get
+  operationId: Disclaimers_GetByProduct
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_properties_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/enquiries
+  method: get
+  operationId: Enquiries_Search
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_enquiries_read
+    - api_enquiries_write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/enquiries
+  method: post
+  operationId: Enquiries_Post
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - api_enquiries_write
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/enquiries/{id}
+  method: get
+  operationId: Enquiries_Get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_enquiries_read
+    - api_enquiries_write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/leadscope/predictions/{participantId}
+  method: get
+  operationId: LeadScope_GetById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_agencies_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/listings/{id}
+  method: get
+  operationId: Listings_Get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_listings_read
+    - api_listings_write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/listings/{id}/enquiries
+  method: get
+  operationId: Listings_GetEnquiries
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_enquiries_read
+    - api_enquiries_write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/listings/{id}/statistics
+  method: get
+  operationId: Listings_GetListingStatistics
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_listings_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/listings/business
+  method: put
+  operationId: Listings_UpsertBusinessListing
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_listings_write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/listings/business/_search
+  method: post
+  operationId: Listings_DetailedBusinessSearch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_listings_read
+    - api_listings_write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/listings/business/offmarket
+  method: post
+  operationId: listings_upsertbusinessoffmarket
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_listings_write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/listings/commercial
+  method: put
+  operationId: listings_upsertcommerciallisting
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_listings_write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/listings/commercial/_search
+  method: post
+  operationId: Listings_DetailedCommercialSearch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_listings_read
+    - api_listings_write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/listings/commercial/offmarket
+  method: post
+  operationId: listings_upsertcommercialoffmarket
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_listings_write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/listings/locations
+  method: get
+  operationId: ListingLocations_Search
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_listings_read
+    - api_listings_write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/listings/processingReports
+  method: get
+  operationId: Listings_GetListingReportByReference
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_listings_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/listings/processingReports/{id}
+  method: get
+  operationId: Listings_GetListingReport
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_listings_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/listings/residential
+  method: put
+  operationId: Listings_UpsertResidentialListing
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_listings_write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/listings/residential/_search
+  method: post
+  operationId: Listings_DetailedResidentialSearch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_listings_read
+    - api_listings_write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/listings/residential/offmarket
+  method: post
+  operationId: listings_upsertresidentialoffmarket
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_listings_write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/listingSearch/residential/search
+  method: post
+  operationId: Listings_ResidentialSearch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_listings_read
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/listingSearch/residential/searchSold
+  method: post
+  operationId: Listings_DetailedSoldResidentialSearch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_listings_read
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/locations/profiles/{domainLocationId}
+  method: get
+  operationId: LocationProfiles_Get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_locations_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/me
+  method: get
+  operationId: Me_Profile
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/me/agencies
+  method: get
+  operationId: Me_GetMyAgencies
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_agencies_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/me/providers
+  method: get
+  operationId: Me_GetMyProviders
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_listings_write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/premarket/listings
+  method: post
+  operationId: PreMarket_Post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_listings_write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/premarket/listings/{id}
+  method: get
+  operationId: PreMarket_Get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_listings_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/premarket/listings/{id}
+  method: patch
+  operationId: PreMarket_Patch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_listings_write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/Products/LimitedInventory/{inventoryReservationId}/Unreserve
+  method: put
+  operationId: LimitedInventory_Unreserve
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_agencies_write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/Products/LimitedInventory/Availability
+  method: post
+  operationId: LimitedInventory_GetBatchAvailability
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_agencies_read
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/Products/LimitedInventory/ReserveByBatch
+  method: post
+  operationId: LimitedInventory_ReserveByBatch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_agencies_write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/Products/LimitedInventory/UnreserveByBatch
+  method: put
+  operationId: LimitedInventory_UnreserveByBatch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_agencies_write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/Products/Listings/QuoteByAgency
+  method: post
+  operationId: ListingPrice_QuoteByAgency
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_agencies_read
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/Products/Listings/QuoteBySuburbs
+  method: post
+  operationId: ListingPrice_QuoteBySuburbs
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_agencies_read
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/products/ratefornewlisting
+  method: post
+  operationId: Products_RateForNewListing
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_agencies_read
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/products/ratefornewsocialboost
+  method: post
+  operationId: SocialBoost_RateForNewSocialBoost
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_agencies_read
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/projects
+  method: get
+  operationId: Projects_Search
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_listings_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/projects/{id}
+  method: get
+  operationId: Projects_Get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_listings_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/projects/{id}/enquiries
+  method: get
+  operationId: Projects_GetEnquiries
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_enquiries_read
+    - api_enquiries_write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/projects/{id}/listings
+  method: get
+  operationId: Projects_GetChildListings
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_listings_read
+    - api_listings_write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/projects/{id}/listings/statistics
+  method: get
+  operationId: Projects_GetChildListingsStatistics
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_listings_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/projects/{id}/statistics
+  method: get
+  operationId: Projects_GetStatistics
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_listings_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/properties/_suggest
+  method: get
+  operationId: Properties_Suggest
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_properties_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/properties/{id}
+  method: get
+  operationId: Properties_Get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_properties_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/properties/{propertyId}/listings
+  method: get
+  operationId: listings_bypropertyid
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_listings_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/properties/{propertyId}/priceEstimate
+  method: get
+  operationId: Properties_GetPriceEstimate
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_properties_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/properties/{propertyId}/rentalEstimate
+  method: get
+  operationId: Properties_GetRentalEstimate
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_properties_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/properties/images
+  method: get
+  operationId: property_images_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_properties_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/properties/listingHistory
+  method: get
+  operationId: property_listing_history_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_properties_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/properties/salesHistory
+  method: get
+  operationId: property_sales_history_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_properties_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/propertyenrichment
+  method: get
+  operationId: propertyenrichment_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_properties_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/propertyReports
+  method: get
+  operationId: PropertyReports_Get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_propertyreports_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/avm/{propertyId}
+  method: get
+  operationId: PropertyAvm_Get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_avm_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/avmReport/{propertyId}
+  method: get
+  operationId: PropertyAvm_ReportGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_avm_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/property/features
+  method: get
+  operationId: Property_Features
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_properties_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/properties/search/like/{searchType}
+  method: get
+  operationId: PropertyLike_Comparables
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_properties_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/propertyradar/portfolio
+  method: post
+  operationId: PropertyRadar_CreatePortfolio
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_propertyportfolio_write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/propertyradar/portfolio/{PortfolioId}
+  method: get
+  operationId: PropertyRadar_ViewPortfolio
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_propertyportfolio_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/propertyradar/portfolio/{PortfolioId}
+  method: post
+  operationId: PropertyRadar_AddToPortfolio
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_propertyportfolio_write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/propertyradar/portfolio/{PortfolioId}
+  method: delete
+  operationId: PropertyRadar_DeletePortfolio
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_propertyportfolio_write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/propertyradar/portfolio/{PortfolioId}/properties
+  method: get
+  operationId: PropertyRadar_ViewPortfolioFull
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_propertyportfolio_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/propertyradar/portfolio/{PortfolioId}/properties/{PropertyId}
+  method: get
+  operationId: PropertyRadar_viewPortfolioFullSingle
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_propertyportfolio_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/propertyradar/portfolio/{PortfolioId}/properties/gnaf/{GnafId}
+  method: get
+  operationId: PropertyRadar_viewPortfolioFullSingleByGnafId
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_propertyportfolio_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/propertyradar/portfolio/{PortfolioId}/property/delete
+  method: post
+  operationId: PropertyRadar_RemoveFromPortfolio
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_propertyportfolio_write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/propertyradar/portfoliosummary
+  method: get
+  operationId: PropertyRadar_ListPortfolios
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_propertyportfolio_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/properties/search/radius/{searchType}
+  method: post
+  operationId: PropertySearch_ByRadius
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_properties_read
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/property/zoning-perils
+  method: get
+  operationId: Property_Zoning_Perils
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_properties_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/salesResults/_head
+  method: get
+  operationId: SalesResults_Head
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_salesresults_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/salesResults/{city}
+  method: get
+  operationId: SalesResults_Get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_salesresults_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/salesResults/{city}/listings
+  method: get
+  operationId: SalesResults_Listings
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_salesresults_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/salesResults/saturday
+  method: get
+  operationId: SalesResults_SaturdayReport
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_salesresults_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/salesResults/weeklyMedia
+  method: get
+  operationId: SalesResults_WeeklyMediaReport
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_salesresults_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/schools/{id}
+  method: get
+  operationId: Schools_Get_ById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_locations_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/schools/{latitude}/{longitude}
+  method: get
+  operationId: Schools_Search_ByLocation
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_locations_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/statistics/{event}
+  method: post
+  operationId: Statistics_Post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_statistics_write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/suburbHistorical/{state}/{suburb}/{postcode}
+  method: get
+  operationId: SuburbHistorical_Get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_suburbhistorical_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/suburbPerformanceStatistics/{state}/{suburb}
+  method: get
+  operationId: SuburbPerformance_Get_ByNamedSuburb_WithoutPostcode
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_suburbperformance_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/suburbPerformanceStatistics/{state}/{suburb}/{postcode}
+  method: get
+  operationId: SuburbPerformance_Get_ByNamedSuburb
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_suburbperformance_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/suburbSummary/{state}/{suburb}/{postcode}
+  method: get
+  operationId: SuburbSummary_Get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_suburbsummary_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/subscriptions/{id}
+  method: get
+  operationId: Webhooks_GetSubscription
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_webhooks_write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/subscriptions/{id}
+  method: delete
+  operationId: Webhooks_DeleteSubscription
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_webhooks_write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/webhooks/{id}/subscriptions
+  method: get
+  operationId: Webhooks_ListSubscriptions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_webhooks_write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/webhooks/{id}/subscriptions
+  method: put
+  operationId: Webhooks_CreateSubscription
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_webhooks_write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/addressLocators
+  method: get
+  operationId: AddressLocators_Get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_addresslocators_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/agencies
+  method: get
+  operationId: Agencies_Search
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_agencies_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/agencies
+  method: head
+  operationId: Agencies_Head
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_agencies_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/agencies/_testAgency
+  method: post
+  operationId: Agencies_CreateTestAgency
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_agencies_write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/agencies/{id}
+  method: get
+  operationId: Agencies_Get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_agencies_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/agencies/{id}/listings
+  method: get
+  operationId: Agencies_GetListings
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_listings_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/agencies/{id}/statistics
+  method: get
+  operationId: Agencies_GetStatistics
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_agencies_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/agents/{id}
+  method: get
+  operationId: Agents_Get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_agencies_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/agents/{id}/listings
+  method: get
+  operationId: Agents_GetListings
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_listings_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/agents/{id}/statistics
+  method: get
+  operationId: Agents_GetStatistics
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_agencies_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/agents/search
+  method: get
+  operationId: Agents_Search
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_agencies_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/authorities
+  method: post
+  operationId: Authorities_Create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_authorities_write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/authorities/{id}
+  method: get
+  operationId: Authorities_GetById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_authorities_write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/authorities/{id}
+  method: put
+  operationId: Authorities_UpdateById
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_authorities_write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/authorities/{id}/attachments
+  method: get
+  operationId: Authorities_DownloadAttachments
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_authorities_write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/authorities/{id}/attachments
+  method: post
+  operationId: Authorities_UploadAttachment
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_authorities_write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/authorities/{id}/vendors/{vendorId}/attachments
+  method: post
+  operationId: Authorities_UploadVendorAttachment
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_authorities_write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/authorities/webhooks/subscription
+  method: put
+  operationId: Authorities_Subscribe
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_webhooks_write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/authorities/webhooks/subscription/{subscriptionId}
+  method: delete
+  operationId: Authorities_Unsubscribe
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_webhooks_write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/campaign/listing-performance
+  method: get
+  operationId: Campaign_GetListingPerformance_Report
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_campaignperformance_read
+    - api_listingperformance_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/campaign/project-performance
+  method: get
+  operationId: Campaign_GetProjectPerformance_Report
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_campaignperformance_read
+    - api_projectperformance_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/disclaimers
+  method: get
+  operationId: Disclaimers_Get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_properties_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/disclaimers/product/{product}
+  method: get
+  operationId: Disclaimers_GetByProduct
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_properties_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/enquiries
+  method: get
+  operationId: Enquiries_Search
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_enquiries_read
+    - api_enquiries_write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/enquiries
+  method: post
+  operationId: Enquiries_Post
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - api_enquiries_write
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/enquiries/{id}
+  method: get
+  operationId: Enquiries_Get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_enquiries_read
+    - api_enquiries_write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/leadminer/predictions/{participantId}
+  method: get
+  operationId: LeadMiner_GetById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_agencies_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/leadscope/predictions/{participantId}
+  method: get
+  operationId: LeadScope_GetById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_agencies_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/listings/{id}
+  method: get
+  operationId: Listings_Get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_listings_read
+    - api_listings_write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/listings/{id}/enquiries
+  method: get
+  operationId: Listings_GetEnquiries
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_enquiries_read
+    - api_enquiries_write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/listings/{id}/offmarket
+  method: post
+  operationId: Listings_UpdateOffmarketDetails
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_listings_write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/listings/{id}/statistics
+  method: get
+  operationId: Listings_GetListingStatistics
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_listings_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/listings/business
+  method: put
+  operationId: Listings_UpsertBusinessListing
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_listings_write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/listings/business/_search
+  method: post
+  operationId: Listings_DetailedBusinessSearch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_listings_read
+    - api_listings_write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/listings/commercial
+  method: put
+  operationId: Listings_UpsertCommercialListing
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_listings_write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/listings/commercial/_search
+  method: post
+  operationId: Listings_DetailedCommercialSearch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_listings_read
+    - api_listings_write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/listings/locations
+  method: get
+  operationId: ListingLocations_Search
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_listings_read
+    - api_listings_write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/listings/processingReports
+  method: get
+  operationId: Listings_GetListingReportByReference
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_listings_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/listings/processingReports/{id}
+  method: get
+  operationId: Listings_GetListingReport
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_listings_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/listings/residential
+  method: put
+  operationId: Listings_UpsertResidentialListing
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_listings_write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/listings/residential/_search
+  method: post
+  operationId: Listings_DetailedResidentialSearch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_listings_read
+    - api_listings_write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/listings/statistics
+  method: get
+  operationId: Listings_GetListingStatisticsByAgentId
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_listings_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/listingSearch/residential/search
+  method: post
+  operationId: Listings_ResidentialSearch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_listings_read
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/listingSearch/residential/searchSold
+  method: post
+  operationId: Listings_DetailedSoldResidentialSearch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_listings_read
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/locations/profiles/{domainLocationId}
+  method: get
+  operationId: LocationProfiles_Get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_locations_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/me
+  method: get
+  operationId: Me_Profile
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/me/agencies
+  method: get
+  operationId: Me_GetMyAgencies
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_agencies_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/me/providers
+  method: get
+  operationId: Me_GetMyProviders
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_listings_write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/Products/LimitedInventory/{inventoryReservationId}/Unreserve
+  method: put
+  operationId: LimitedInventory_Unreserve
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_agencies_write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/Products/LimitedInventory/Availability
+  method: post
+  operationId: LimitedInventory_GetBatchAvailability
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_agencies_read
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/Products/LimitedInventory/ReserveByBatch
+  method: post
+  operationId: LimitedInventory_ReserveByBatch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_agencies_write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/Products/LimitedInventory/UnreserveByBatch
+  method: put
+  operationId: LimitedInventory_UnreserveByBatch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_agencies_write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/Products/Listings/QuoteByAgency
+  method: post
+  operationId: ListingPrice_QuoteByAgency
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_agencies_read
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/Products/Listings/QuoteBySuburbs
+  method: post
+  operationId: ListingPrice_QuoteBySuburbs
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_agencies_read
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/products/ratefornewlisting
+  method: post
+  operationId: Products_RateForNewListing
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_agencies_read
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/products/ratefornewsocialboost
+  method: post
+  operationId: SocialBoost_RateForNewSocialBoost
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_agencies_read
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/projects
+  method: get
+  operationId: Projects_Search
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_listings_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/projects/{id}
+  method: get
+  operationId: Projects_Get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_listings_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/projects/{id}/enquiries
+  method: get
+  operationId: Projects_GetEnquiries
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_enquiries_read
+    - api_enquiries_write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/projects/{id}/listings
+  method: get
+  operationId: Projects_GetChildListings
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_listings_read
+    - api_listings_write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/projects/{id}/listings/statistics
+  method: get
+  operationId: Projects_GetChildListingsStatistics
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_listings_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/projects/{id}/statistics
+  method: get
+  operationId: Projects_GetStatistics
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_listings_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/properties/_suggest
+  method: get
+  operationId: Properties_Suggest
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_properties_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/properties/{id}
+  method: get
+  operationId: Properties_Get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_properties_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/properties/{propertyId}/priceEstimate
+  method: get
+  operationId: Properties_GetPriceEstimate
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_properties_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/properties/{propertyId}/rentalEstimate
+  method: get
+  operationId: Properties_GetRentalEstimate
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_properties_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/properties/images
+  method: get
+  operationId: property_images_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_properties_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/properties/listingHistory
+  method: get
+  operationId: property_listing_history_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_properties_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/properties/salesHistory
+  method: get
+  operationId: property_sales_history_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_properties_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/propertyenrichment
+  method: get
+  operationId: propertyenrichment_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_properties_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/propertyReports
+  method: get
+  operationId: PropertyReports_Get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_propertyreports_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/avm/{propertyId}
+  method: get
+  operationId: PropertyAvm_Get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_avm_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/avmReport/{propertyId}
+  method: get
+  operationId: PropertyAvm_ReportGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_avm_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/propertyradar/portfolio
+  method: post
+  operationId: PropertyRadar_CreatePortfolio
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_propertyportfolio_write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/propertyradar/portfolio/{PortfolioId}
+  method: get
+  operationId: PropertyRadar_ViewPortfolio
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_propertyportfolio_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/propertyradar/portfolio/{PortfolioId}
+  method: post
+  operationId: PropertyRadar_AddToPortfolio
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_propertyportfolio_write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/propertyradar/portfolio/{PortfolioId}
+  method: delete
+  operationId: PropertyRadar_DeletePortfolio
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_propertyportfolio_write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/propertyradar/portfolio/{PortfolioId}/properties
+  method: get
+  operationId: PropertyRadar_ViewPortfolioFull
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_propertyportfolio_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/propertyradar/portfolio/{PortfolioId}/properties/{PropertyId}
+  method: get
+  operationId: PropertyRadar_viewPortfolioFullSingle
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_propertyportfolio_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/propertyradar/portfolio/{PortfolioId}/properties/gnaf/{GnafId}
+  method: get
+  operationId: PropertyRadar_viewPortfolioFullSingleByGnafId
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_propertyportfolio_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/propertyradar/portfolio/{PortfolioId}/property/delete
+  method: post
+  operationId: PropertyRadar_RemoveFromPortfolio
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_propertyportfolio_write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/propertyradar/portfoliosummary
+  method: get
+  operationId: PropertyRadar_ListPortfolios
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_propertyportfolio_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/salesResults/_head
+  method: get
+  operationId: SalesResults_Head
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_salesresults_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/salesResults/{city}
+  method: get
+  operationId: SalesResults_Get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_salesresults_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/salesResults/{city}/listings
+  method: get
+  operationId: SalesResults_Listings
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_salesresults_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/statistics/{event}
+  method: post
+  operationId: Statistics_Post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_statistics_write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/suburbHistorical/{state}/{suburb}/{postcode}
+  method: get
+  operationId: SuburbHistorical_Get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_suburbhistorical_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/suburbPerformanceStatistics
+  method: get
+  operationId: SuburbPerformanceStatistics_Get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_suburbperformance_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/suburbSummary/{state}/{suburb}/{postcode}
+  method: get
+  operationId: SuburbSummary_Get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_suburbsummary_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/subscriptions/{id}
+  method: get
+  operationId: Webhooks_GetSubscription
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_webhooks_write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/subscriptions/{id}
+  method: delete
+  operationId: Webhooks_DeleteSubscription
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_webhooks_write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/webhooks/{id}/subscriptions
+  method: get
+  operationId: Webhooks_ListSubscriptions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_webhooks_write
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/webhooks/{id}/subscriptions
+  method: put
+  operationId: Webhooks_CreateSubscription
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_webhooks_write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/dataset/{datasetName}/{key}
+  method: get
+  operationId: dataset_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_dataset_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/demographics/{state}/{suburb}/{postcode}
+  method: get
+  operationId: Demographics_Get_ByNamedSuburb
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_demographics_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/listings/business/offmarket
+  method: post
+  operationId: listings_upsertbusinessoffmarket
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_listings_write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/listings/commercial
+  method: put
+  operationId: listings_upsertcommerciallisting
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_listings_write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/listings/commercial/offmarket
+  method: post
+  operationId: listings_upsertcommercialoffmarket
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_listings_write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/listings/residential/offmarket
+  method: post
+  operationId: listings_upsertresidentialoffmarket
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_listings_write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/premarket/listings
+  method: post
+  operationId: PreMarket_Post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_listings_write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/premarket/listings/{id}
+  method: get
+  operationId: PreMarket_Get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_listings_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/premarket/listings/{id}
+  method: patch
+  operationId: PreMarket_Patch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_listings_write
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/properties/{propertyId}/listings
+  method: get
+  operationId: listings_bypropertyid
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_listings_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/property/features
+  method: get
+  operationId: Property_Features
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_properties_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/properties/search/like/{searchType}
+  method: get
+  operationId: PropertyLike_Comparables
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_properties_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/properties/search/radius/{searchType}
+  method: post
+  operationId: PropertySearch_ByRadius
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - api_properties_read
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/property/zoning-perils
+  method: get
+  operationId: Property_Zoning_Perils
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_properties_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/salesResults/saturday
+  method: get
+  operationId: SalesResults_SaturdayReport
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_salesresults_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/salesResults/weeklyMedia
+  method: get
+  operationId: SalesResults_WeeklyMediaReport
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_salesresults_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/schools/{id}
+  method: get
+  operationId: Schools_Get_ById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_locations_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/schools/{latitude}/{longitude}
+  method: get
+  operationId: Schools_Search_ByLocation
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_locations_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/suburbPerformanceStatistics/{state}/{suburb}
+  method: get
+  operationId: SuburbPerformance_Get_ByNamedSuburb_WithoutPostcode
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_suburbperformance_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/suburbPerformanceStatistics/{state}/{suburb}/{postcode}
+  method: get
+  operationId: SuburbPerformance_Get_ByNamedSuburb
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - api_suburbperformance_read
+    token:
+      max-ttl: 3600
+    audit: none

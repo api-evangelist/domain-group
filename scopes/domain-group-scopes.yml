@@ -1,0 +1,496 @@
+generated: '2026-07-26'
+method: searched
+source: openapi/domain-group-openapi-latest.json, openapi/domain-group-openapi-v1.json, openapi/domain-group-openapi-v2.json,
+  https://developer.domain.com.au/docs/latest/apis
+schemes:
+- name: oauth2
+  source: openapi/domain-group-openapi-latest.json
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://auth.domain.com.au/v1/connect/token
+  - flow: authorizationCode
+    authorizationUrl: https://auth.domain.com.au/v1/connect/authorize
+    tokenUrl: https://auth.domain.com.au/v1/connect/token
+  description: OAuth 2
+- name: oauth2
+  source: openapi/domain-group-openapi-v1.json
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://auth.domain.com.au/v1/connect/token
+  - flow: authorizationCode
+    authorizationUrl: https://auth.domain.com.au/v1/connect/authorize
+    tokenUrl: https://auth.domain.com.au/v1/connect/token
+  description: OAuth 2
+- name: oauth2
+  source: openapi/domain-group-openapi-v2.json
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://auth.domain.com.au/v1/connect/token
+  - flow: authorizationCode
+    authorizationUrl: https://auth.domain.com.au/v1/connect/authorize
+    tokenUrl: https://auth.domain.com.au/v1/connect/token
+  description: OAuth 2
+scopes:
+- scope: api_addresslocators_read
+  description: Read access to the Domain addresslocators surface.
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/domain-group-openapi-latest.json
+  - openapi/domain-group-openapi-v1.json
+  tags:
+  - AddressLocators
+  operation_count: 1
+  example_operations:
+  - AddressLocators_Get
+  access: read
+  api_package: Address Suggestions
+- scope: api_agencies_read
+  description: Read access to the Domain agencies surface.
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/domain-group-openapi-latest.json
+  - openapi/domain-group-openapi-v1.json
+  tags:
+  - Agencies
+  - Agents
+  - Leadscope
+  - Me
+  - Products
+  operation_count: 15
+  example_operations:
+  - Agencies_Get
+  - Agencies_GetStatistics
+  - Agencies_Head
+  - Agencies_Search
+  - Agents_Get
+  access: read
+  api_package: Agents & Listings
+- scope: api_agencies_write
+  description: Write access to the Domain agencies surface.
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/domain-group-openapi-latest.json
+  - openapi/domain-group-openapi-v1.json
+  tags:
+  - Agencies
+  - Products
+  operation_count: 4
+  example_operations:
+  - Agencies_CreateTestAgency
+  - LimitedInventory_ReserveByBatch
+  - LimitedInventory_Unreserve
+  - LimitedInventory_UnreserveByBatch
+  access: write
+  api_package: Listings Management
+- scope: api_authorities_write
+  description: Write access to the Domain authorities surface.
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/domain-group-openapi-latest.json
+  - openapi/domain-group-openapi-v1.json
+  tags:
+  - Authorities
+  operation_count: 6
+  example_operations:
+  - Authorities_Create
+  - Authorities_DownloadAttachments
+  - Authorities_GetById
+  - Authorities_UpdateById
+  - Authorities_UploadAttachment
+  access: write
+  api_package: Listings Management
+- scope: api_avm_read
+  description: Read access to the Domain avm surface.
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/domain-group-openapi-latest.json
+  - openapi/domain-group-openapi-v1.json
+  tags:
+  - PropertyAvm
+  operation_count: 2
+  example_operations:
+  - PropertyAvm_Get
+  - PropertyAvm_ReportGet
+  access: read
+  api_package: Rental AVM
+- scope: api_campaignperformance_read
+  description: Read access to the Domain campaignperformance surface.
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/domain-group-openapi-latest.json
+  - openapi/domain-group-openapi-v1.json
+  tags:
+  - CampaignReporting
+  operation_count: 2
+  example_operations:
+  - Campaign_GetListingPerformance_Report
+  - Campaign_GetProjectPerformance_Report
+  access: read
+  api_package: Campaign API
+- scope: api_dataset_read
+  description: Read access to the Domain dataset surface.
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/domain-group-openapi-latest.json
+  - openapi/domain-group-openapi-v2.json
+  tags:
+  - Dataset
+  operation_count: 1
+  example_operations:
+  - dataset_get
+  access: read
+  api_package: Properties & Locations
+- scope: api_demographics_read
+  description: Read access to the Domain demographics surface.
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/domain-group-openapi-latest.json
+  - openapi/domain-group-openapi-v2.json
+  tags:
+  - Demographics
+  operation_count: 1
+  example_operations:
+  - Demographics_Get_ByNamedSuburb
+  access: read
+  api_package: Properties & Locations
+- scope: api_enquiries_read
+  description: Read access to the Domain enquiries surface.
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/domain-group-openapi-latest.json
+  - openapi/domain-group-openapi-v1.json
+  tags:
+  - Enquiries
+  - Listings
+  - Projects
+  operation_count: 4
+  example_operations:
+  - Enquiries_Get
+  - Enquiries_Search
+  - Listings_GetEnquiries
+  - Projects_GetEnquiries
+  access: read
+  api_package: Agents & Listings
+- scope: api_enquiries_write
+  description: Write access to the Domain enquiries surface.
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/domain-group-openapi-latest.json
+  - openapi/domain-group-openapi-v1.json
+  tags:
+  - Enquiries
+  - Listings
+  - Projects
+  operation_count: 5
+  example_operations:
+  - Enquiries_Get
+  - Enquiries_Post
+  - Enquiries_Search
+  - Listings_GetEnquiries
+  - Projects_GetEnquiries
+  access: write
+  api_package: Agents & Listings
+- scope: api_listingperformance_read
+  description: Read access to the Domain listingperformance surface.
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/domain-group-openapi-latest.json
+  - openapi/domain-group-openapi-v1.json
+  tags:
+  - CampaignReporting
+  operation_count: 1
+  example_operations:
+  - Campaign_GetListingPerformance_Report
+  access: read
+  api_package: Listings Management
+- scope: api_listings_read
+  description: Read access to the Domain listings surface.
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/domain-group-openapi-latest.json
+  - openapi/domain-group-openapi-v1.json
+  - openapi/domain-group-openapi-v2.json
+  tags:
+  - Agencies
+  - Agents
+  - ListingSearch
+  - Listings
+  - PreMarket
+  - Projects
+  - Properties
+  operation_count: 20
+  example_operations:
+  - Agencies_GetListings
+  - Agents_GetListings
+  - ListingLocations_Search
+  - Listings_DetailedBusinessSearch
+  - Listings_DetailedCommercialSearch
+  access: read
+  api_package: Agents & Listings
+- scope: api_listings_write
+  description: Write access to the Domain listings surface.
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/domain-group-openapi-latest.json
+  - openapi/domain-group-openapi-v1.json
+  - openapi/domain-group-openapi-v2.json
+  tags:
+  - Listings
+  - Me
+  - PreMarket
+  - Projects
+  operation_count: 17
+  example_operations:
+  - ListingLocations_Search
+  - Listings_DetailedBusinessSearch
+  - Listings_DetailedCommercialSearch
+  - Listings_DetailedResidentialSearch
+  - Listings_Get
+  access: write
+  api_package: Listings Management
+- scope: api_locations_read
+  description: Read access to the Domain locations surface.
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/domain-group-openapi-latest.json
+  - openapi/domain-group-openapi-v1.json
+  - openapi/domain-group-openapi-v2.json
+  tags:
+  - Locations
+  - Schools
+  operation_count: 3
+  example_operations:
+  - LocationProfiles_Get
+  - Schools_Get_ById
+  - Schools_Search_ByLocation
+  access: read
+  api_package: Agents & Listings
+- scope: api_projectperformance_read
+  description: Read access to the Domain projectperformance surface.
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/domain-group-openapi-latest.json
+  - openapi/domain-group-openapi-v1.json
+  tags:
+  - CampaignReporting
+  operation_count: 1
+  example_operations:
+  - Campaign_GetProjectPerformance_Report
+  access: read
+  api_package: Campaign API
+- scope: api_properties_read
+  description: Read access to the Domain properties surface.
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/domain-group-openapi-latest.json
+  - openapi/domain-group-openapi-v1.json
+  - openapi/domain-group-openapi-v2.json
+  tags:
+  - Disclaimers
+  - Properties
+  - PropertyFeatures
+  - PropertyLike
+  - PropertySearch
+  - PropertyZoningPerils
+  operation_count: 14
+  example_operations:
+  - Disclaimers_Get
+  - Disclaimers_GetByProduct
+  - Properties_Get
+  - Properties_GetPriceEstimate
+  - Properties_GetRentalEstimate
+  access: read
+  api_package: Properties & Locations
+- scope: api_propertyportfolio_read
+  description: Read access to the Domain propertyportfolio surface.
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/domain-group-openapi-latest.json
+  - openapi/domain-group-openapi-v1.json
+  tags:
+  - PropertyRadar
+  operation_count: 5
+  example_operations:
+  - PropertyRadar_ListPortfolios
+  - PropertyRadar_ViewPortfolio
+  - PropertyRadar_ViewPortfolioFull
+  - PropertyRadar_viewPortfolioFullSingle
+  - PropertyRadar_viewPortfolioFullSingleByGnafId
+  access: read
+  api_package: PropertyRadar
+- scope: api_propertyportfolio_write
+  description: Write access to the Domain propertyportfolio surface.
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/domain-group-openapi-latest.json
+  - openapi/domain-group-openapi-v1.json
+  tags:
+  - PropertyRadar
+  operation_count: 4
+  example_operations:
+  - PropertyRadar_AddToPortfolio
+  - PropertyRadar_CreatePortfolio
+  - PropertyRadar_DeletePortfolio
+  - PropertyRadar_RemoveFromPortfolio
+  access: write
+  api_package: PropertyRadar
+- scope: api_propertyreports_read
+  description: Read access to the Domain propertyreports surface.
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/domain-group-openapi-latest.json
+  - openapi/domain-group-openapi-v1.json
+  tags:
+  - Properties
+  operation_count: 1
+  example_operations:
+  - PropertyReports_Get
+  access: read
+- scope: api_salesresults_read
+  description: Read access to the Domain salesresults surface.
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/domain-group-openapi-latest.json
+  - openapi/domain-group-openapi-v1.json
+  - openapi/domain-group-openapi-v2.json
+  tags:
+  - SalesResults
+  operation_count: 5
+  example_operations:
+  - SalesResults_Get
+  - SalesResults_Head
+  - SalesResults_Listings
+  - SalesResults_SaturdayReport
+  - SalesResults_WeeklyMediaReport
+  access: read
+  api_package: Properties & Locations
+- scope: api_statistics_write
+  description: Write access to the Domain statistics surface.
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/domain-group-openapi-latest.json
+  - openapi/domain-group-openapi-v1.json
+  tags:
+  - Statistics
+  operation_count: 1
+  example_operations:
+  - Statistics_Post
+  access: write
+- scope: api_suburbhistorical_read
+  description: Read access to the Domain suburbhistorical surface.
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/domain-group-openapi-latest.json
+  - openapi/domain-group-openapi-v1.json
+  tags:
+  - Statistics
+  operation_count: 1
+  example_operations:
+  - SuburbHistorical_Get
+  access: read
+- scope: api_suburbperformance_read
+  description: Read access to the Domain suburbperformance surface.
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/domain-group-openapi-latest.json
+  - openapi/domain-group-openapi-v1.json
+  - openapi/domain-group-openapi-v2.json
+  tags:
+  - Statistics
+  operation_count: 3
+  example_operations:
+  - SuburbPerformanceStatistics_Get
+  - SuburbPerformance_Get_ByNamedSuburb
+  - SuburbPerformance_Get_ByNamedSuburb_WithoutPostcode
+  access: read
+  api_package: Properties & Locations
+- scope: api_suburbsummary_read
+  description: Read access to the Domain suburbsummary surface.
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/domain-group-openapi-latest.json
+  - openapi/domain-group-openapi-v1.json
+  tags:
+  - Statistics
+  operation_count: 1
+  example_operations:
+  - SuburbSummary_Get
+  access: read
+- scope: api_webhooks_write
+  description: Write access to the Domain webhooks surface.
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/domain-group-openapi-latest.json
+  - openapi/domain-group-openapi-v1.json
+  tags:
+  - Authorities
+  - Webhooks
+  operation_count: 6
+  example_operations:
+  - Authorities_Subscribe
+  - Authorities_Unsubscribe
+  - Webhooks_CreateSubscription
+  - Webhooks_DeleteSubscription
+  - Webhooks_GetSubscription
+  access: write
+  api_package: Webhooks
+docs: https://developer.domain.com.au/docs/latest/apis
+note: Domain publishes no single scopes-reference page; each API package's documentation names the scope(s)
+  it requires. The 25 scopes below come from the oauth2 flows in the three OpenAPI documents and from
+  the per-operation security requirements; descriptions, api_package mapping and tag/operation usage were
+  reconciled against the package documentation at https://developer.domain.com.au/docs/latest/apis. The
+  scopes_supported array in the OIDC discovery document is the Domain identity platform's internal scope
+  set (roles, address, offline_access, Domain product scopes) and is NOT the public API scope set.
+token_url: https://auth.domain.com.au/v1/connect/token
+authorization_url: https://auth.domain.com.au/v1/connect/authorize
+scope_count: 25

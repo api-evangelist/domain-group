@@ -1,0 +1,159 @@
+generated: '2026-07-26'
+method: derived
+source: >-
+  openapi/domain-group-openapi-latest.json, openapi/domain-group-openapi-v1.json,
+  openapi/domain-group-openapi-v2.json, well-known/domain-group-openid-configuration.json,
+  https://developer.domain.com.au/docs/latest/conventions
+summary: >-
+  Domain conforms to the mainstream web-API standards stack - OpenAPI 3.0.4,
+  OAuth 2.0, OpenID Connect with PKCE/PAR/CIBA/DPoP advertised on the auth host,
+  and an RFC 7807 ProblemDetails error shape on some responses. It conforms to no
+  real-estate-industry data standard: there is no RESO Web API or Data Dictionary
+  certification, no OData $metadata, no MLS/IDX surface, and no Universal
+  Property Identifier - RESO is a North American NAR-driven programme with no
+  presence in the Australian portal duopoly.
+
+standards:
+- id: openapi-3.0
+  conforms: true
+  version: 3.0.4
+  evidence: >-
+    Three documents published at /static/latest/media/{latest,v1,v2}/openapi.json,
+    all declaring "openapi": "3.0.4" and parsing cleanly (108 / 93 / 20 operations).
+- id: oauth2
+  conforms: true
+  evidence: >-
+    components.securitySchemes.oauth2 with clientCredentials and authorizationCode
+    flows, tokenUrl https://auth.domain.com.au/v1/connect/token, 25 api_* scopes.
+- id: oauth2-pkce
+  conforms: true
+  evidence: 'code_challenge_methods_supported: [plain, S256] in the OIDC discovery document.'
+- id: oauth2-par
+  conforms: true
+  evidence: >-
+    pushed_authorization_request_endpoint present
+    (https://auth.domain.com.au/v1/connect/par); require_pushed_authorization_requests is false.
+- id: oauth2-device-grant
+  conforms: true
+  evidence: 'device_authorization_endpoint present; grant_types_supported includes urn:ietf:params:oauth:grant-type:device_code.'
+- id: oauth2-token-revocation
+  conforms: true
+  evidence: revocation_endpoint https://auth.domain.com.au/v1/connect/revocation (RFC 7009).
+- id: oauth2-token-introspection
+  conforms: true
+  evidence: introspection_endpoint https://auth.domain.com.au/v1/connect/introspect (RFC 7662).
+- id: oauth2-dpop
+  conforms: true
+  evidence: 'dpop_signing_alg_values_supported advertised (RS/PS/ES families) in the discovery document.'
+- id: oidc
+  conforms: true
+  evidence: >-
+    OpenID Connect Discovery 1.0 document at
+    https://auth.domain.com.au/v1/.well-known/openid-configuration with
+    authorization/token/userinfo/endsession endpoints and RS256 id_token signing.
+- id: oidc-ciba
+  conforms: true
+  evidence: 'backchannel_authentication_endpoint plus grant type urn:openid:params:grant-type:ciba, poll delivery mode.'
+- id: oidc-session-management
+  conforms: true
+  evidence: check_session_iframe, frontchannel and backchannel logout supported.
+- id: rfc7517-jwks
+  conforms: true
+  evidence: JWKS published at https://auth.domain.com.au/v1/.well-known/jwks (saved as well-known/domain-group-jwks.json).
+- id: rfc8414-oauth-authorization-server-metadata
+  conforms: false
+  evidence: /.well-known/oauth-authorization-server returns 404 on both auth.domain.com.au and api.domain.com.au; only the OIDC discovery document is published.
+- id: rfc9728-protected-resource-metadata
+  conforms: false
+  evidence: /.well-known/oauth-protected-resource returns 404.
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: /.well-known/security.txt returns 404 on api., developer. and auth. hosts.
+- id: rfc7807-problem-details
+  conforms: partial
+  evidence: >-
+    A ProblemDetails schema (plus six product-specific variants) is referenced on
+    default and 429 responses, and application/problem+json appears on validation
+    responses in the latest and v1 documents. Most declared 4xx/5xx responses
+    carry no body schema, so the envelope is not applied uniformly.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: No RFC 9457 registration or 9457-specific members are declared; the shape is the older RFC 7807 ProblemDetails.
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: >-
+    Deprecation is expressed only via the OpenAPI `deprecated: true` flag (4
+    operations in v1) and prose on the Versioning page; no Sunset or Deprecation
+    response headers are documented.
+- id: rfc6585-429
+  conforms: true
+  evidence: >-
+    429 Too Many Requests with a Retry-After header and X-Quota-Exceeded, documented at
+    https://developer.domain.com.au/docs/latest/conventions/rate-limiting.
+- id: webhooks-signed
+  conforms: true
+  evidence: >-
+    HMAC-SHA1 X-Domain-Signature header over the raw notification body keyed on
+    the webhook Verification Code, plus a two-request endpoint verification
+    challenge before any delivery.
+- id: asyncapi
+  conforms: false
+  evidence: >-
+    Domain publishes no AsyncAPI document. A real webhook event surface exists and
+    is captured in asyncapi/domain-group-webhooks.yml (catalog, searched) and
+    asyncapi/domain-group-webhooks-asyncapi.yml (AsyncAPI 3.0.0, generated by API Evangelist).
+- id: json-api
+  conforms: false
+  evidence: Plain JSON with camelCase members; no JSON:API document structure.
+- id: pagination
+  conforms: true
+  evidence: >-
+    Documented page-number pagination (pageNumber/pageSize, default 20, max 100)
+    with an X-Total-Count response header.
+- id: idempotency
+  conforms: false
+  evidence: >-
+    No idempotency key is documented and a case-insensitive search for "idempoten"
+    across all three OpenAPI documents returns zero matches.
+- id: odata
+  conforms: false
+  evidence: 'https://api.domain.com.au/$metadata, /v1/$metadata and /odata/$metadata all return 404.'
+- id: reso-web-api
+  conforms: false
+  evidence: >-
+    No RESO certification listing exists for Domain Group / Domain Holdings
+    Australia. Full-text search of all three OpenAPI documents for RESO, OData,
+    $metadata, "Data Dictionary", MLS, IDX and UPI returns zero matches.
+- id: reso-data-dictionary
+  conforms: false
+  evidence: Same as reso-web-api. Australia has no MLS system; listing distribution is portal-direct from agency CRMs.
+- id: graphql
+  conforms: false
+  evidence: No GraphQL surface is published or referenced.
+- id: grpc
+  conforms: false
+  evidence: No .proto definitions published; the GitHub org github.com/domain-group has 0 public repositories.
+- id: mcp
+  conforms: false
+  evidence: 'No MCP server published (developer.domain.com.au/mcp and /docs/latest/mcp both 404). A derived candidate tool surface is in mcp/domain-group-mcp.yml.'
+
+compliance_program:
+  published: false
+  note: >-
+    No trust centre, no named certification (SOC 2 / ISO 27001 / PCI DSS /
+    HIPAA / FedRAMP / IRAP), and no vulnerability-disclosure or bug-bounty
+    programme could be verified on any Domain host. probe-security-programs.py
+    returned vdp=none trust=none. Accordingly this repo emits no `Compliance` and
+    no `Security` pointer - the underlying programmes are not published.
+  probes:
+  - {url: 'https://trust.domain.com.au/', result: not found}
+  - {url: 'https://www.domain.com.au/security', result: 'not verifiable - marketing host returns 403 to non-browser clients'}
+
+data_licensing:
+  open_data: false
+  note: >-
+    All Domain API data is licensed under the Domain Group API Terms and
+    Conditions (https://www.domain.com.au/group/api-terms-and-conditions/) plus
+    the Attribution and Usage Policies
+    (https://www.domain.com.au/group/copyright-notices-3rdparty-terms/). There is
+    no open, unlicensed dataset.

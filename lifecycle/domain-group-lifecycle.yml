@@ -1,0 +1,96 @@
+generated: '2026-07-26'
+method: searched
+source: https://developer.domain.com.au/docs/latest/conventions/versioning
+versioning:
+  scheme: uri-path
+  current: latest (combined v1 + v2)
+  versions:
+  - v1
+  - v2
+  docs: https://developer.domain.com.au/docs/latest/conventions/versioning
+  policy: >-
+    All API endpoints carry a version number prefix in the URL
+    (https://api.domain.com.au/v1/listings/, https://api.domain.com.au/v2/demographics/).
+    Documentation can be browsed per version from the portal toolbar; the "latest"
+    channel documents all currently active endpoints across v1 and v2.
+
+deprecation:
+  policy_url: https://developer.domain.com.au/docs/latest/conventions/versioning
+  sunset_header: false
+  deprecation_header: false
+  policy: >-
+    As endpoints are enhanced and upgraded they become available under a new
+    version and the original endpoint is deprecated. A deprecation date may be
+    communicated when an endpoint is deprecated. Deprecated endpoints remain
+    usable until fully removed from the API. Deprecated endpoints are not
+    documented under the "latest" version documentation - developers must refer
+    back to the specific version documentation. Domain advises never planning a
+    new integration against an already-deprecated endpoint.
+  machine_readable: >-
+    Deprecation is expressed in the OpenAPI documents via the standard
+    `deprecated: true` operation flag, not via RFC 8594 Sunset/Deprecation
+    response headers.
+
+deprecated_operations:
+- openapi/domain-group-openapi-v1.json#LeadMiner_GetById
+- openapi/domain-group-openapi-v1.json#Listings_UpdateOffmarketDetails
+- openapi/domain-group-openapi-v1.json#Listings_GetListingStatisticsByAgentId
+- openapi/domain-group-openapi-v1.json#SuburbPerformanceStatistics_Get
+
+sla:
+  url: https://developer.domain.com.au/docs/latest/support/sla
+  uptime_target: '99%'
+  uptime_window: rolling one month period
+  latency_target: 95th percentile response time within 900ms across all calls
+  availability_schedule: 24x7 (00:00-24:00 AEST/AEDT, seven days)
+  escalation_contact: api@domain.com.au
+  severity_levels:
+  - level: 1 (Critical)
+    target_response: 30 minutes
+    target_resolution: within two hours
+  - level: 2 (High)
+    target_response: 30 minutes
+    target_resolution: within four hours
+  - level: 3 (Medium)
+    target_response: 2 hours
+    target_resolution: within next business day
+  - level: 4 (Low)
+    target_response: 1 business day
+    target_resolution: within 2 business days
+  caveat: >-
+    The uptime and latency guarantee is conditional on the client following
+    Domain's authentication best practices (token caching and reuse).
+
+status_page:
+  published: false
+  probed:
+  - url: https://domain.statuspage.io/
+    status: 200
+    note: >-
+      Atlassian Statuspage exists for "Domain Status" but the page is INACTIVE -
+      it renders "This page is currently inactive and can only be viewed by team
+      members" and the /api/v2/summary.json endpoint returns "Your page is
+      inactive." No public status data is available.
+  - url: https://status.domain.com.au/
+    status: 000
+    note: Does not resolve.
+  - url: https://status.developer.domain.com.au/
+    status: 000
+    note: Does not resolve.
+  note: >-
+    No public status page is published; operational incidents are handled through
+    the SLA escalation channel (api@domain.com.au) rather than a status feed.
+
+support:
+  url: https://developer.domain.com.au/docs/latest/support
+  email: api@domain.com.au
+  troubleshooting: https://developer.domain.com.au/docs/latest/troubleshooting
+
+changelog:
+  published: false
+  probed:
+  - {url: 'https://developer.domain.com.au/docs/latest/changelog', status: 404}
+  - {url: 'https://developer.domain.com.au/docs/latest/release-notes', status: 404}
+  note: >-
+    No dated changelog or release-notes page is published. Change is communicated
+    through the versioned documentation channels (v1 / v2 / latest) instead.

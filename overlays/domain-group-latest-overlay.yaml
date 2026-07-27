@@ -1,0 +1,63 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Domain Public API latest
+  version: 1.0.0
+extends: openapi/domain-group-openapi-latest.json
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: domain-group
+    x-apievangelist-provider-name: Domain Group
+    x-apievangelist-country: AU
+    x-apievangelist-industry: Real Estate
+    x-apievangelist-portal: https://developer.domain.com.au/
+    x-apievangelist-spec-source: https://developer.domain.com.au/static/latest/media/latest/openapi.json
+    x-apievangelist-artifacts:
+      authentication: authentication/domain-group-authentication.yml
+      scopes: scopes/domain-group-scopes.yml
+      conventions: conventions/domain-group-conventions.yml
+      errors: errors/domain-group-problem-types.yml
+      lifecycle: lifecycle/domain-group-lifecycle.yml
+      sandbox: sandbox/domain-group-sandbox.yml
+      webhooks: asyncapi/domain-group-webhooks.yml
+      data_model: data-model/domain-group-data-model.yml
+      agentic_access: agentic-access/domain-group-agentic-access.yml
+- target: $.servers
+  update:
+  - url: https://api.domain.com.au/
+    description: Primary
+    x-apievangelist-environment: production
+  - url: https://api.domain.com.au/sandbox/
+    description: Sandbox
+    x-apievangelist-environment: sandbox
+    x-apievangelist-sandbox-note: Write-testing only; data refreshed every Sunday. See sandbox/domain-group-sandbox.yml.
+- target: $.components.securitySchemes.apikey
+  update:
+    x-apievangelist-note: API keys cannot reach user-specific data. Domain recommends OAuth 2.0 wherever
+      a secret can be stored server-side.
+    x-apievangelist-docs: https://developer.domain.com.au/docs/latest/authentication
+- target: $.components.securitySchemes.oauth2
+  update:
+    x-apievangelist-note: The Authorization Code flow is required for any call that needs user context
+      (agency-scoped webhook subscriptions, /v1/me). Client Credentials covers machine-to-machine reads.
+    x-apievangelist-openid-configuration: https://auth.domain.com.au/v1/.well-known/openid-configuration
+    x-apievangelist-pkce: S256 supported
+- target: $.paths
+  update:
+    x-apievangelist-pagination:
+      style: page-number
+      params:
+      - pageNumber
+      - pageSize
+      default_page_size: 20
+      max_page_size: 100
+      total_header: X-Total-Count
+    x-apievangelist-rate-limit-headers:
+    - X-Quota-PerMinute-Limit
+    - X-Quota-PerMinute-Remaining
+    - X-Quota-PerDay-Limit
+    - X-Quota-PerDay-Remaining
+    - Retry-After
+    - X-Quota-Exceeded
+    x-apievangelist-error-diagnostic-header: X-Domain-Security-Reason
+    x-apievangelist-idempotency: not supported - Domain documents no idempotency key for write operations

@@ -1,0 +1,133 @@
+generated: '2026-07-26'
+method: searched
+source: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks
+spec_type: WebhookCatalog
+summary: >-
+  Domain runs a first-class webhook system: the developer registers an endpoint
+  URL on a portal project, proves control of it through a verification
+  challenge, then creates one subscription per (resourceType, ownerType, ownerId)
+  combination. Notifications are POSTed as a JSON array, signed with HMAC-SHA1,
+  and must be acknowledged with 204 No Content before processing.
+
+management_api:
+  package: Domain Webhooks API
+  docs: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks
+  scope: api_webhooks_write
+  operations:
+  - method: PUT
+    path: '/v1/webhooks/{id}/subscriptions'
+    description: Create a subscription to notifications
+  - method: GET
+    path: '/v1/webhooks/{id}/subscriptions'
+    description: List all subscriptions to the specified webhook
+  - method: GET
+    path: '/v1/subscriptions/{id}'
+    description: Retrieve the details of a single subscription
+  - method: DELETE
+    path: '/v1/subscriptions/{id}'
+    description: Delete a single subscription
+  id_prefixes:
+    webhook: whk_
+    subscription: subs_
+    verification_code: vfy_
+
+endpoint_verification:
+  docs: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/guides/configuration/
+  mechanism: >-
+    Domain issues two GET requests to the registered URL - one carrying the
+    correct ?verification= code, to which the endpoint must return 204 No
+    Content, and one carrying an invalid code, to which it must return 404 Not
+    Found. The endpoint must keep responding correctly at all times.
+  common_failures:
+  - Non-public URL (localhost / RFC1918 address)
+  - DNS not yet propagated (wait at least 24 hours after DNS changes)
+  - Invalid or self-signed TLS certificate
+
+delivery:
+  docs: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/guides/processing/
+  method: POST
+  body: JSON array of notification objects (batched - always an array, even for a single event)
+  expected_response: 204 No Content
+  response_deadline: respond as quickly as possible, ideally within 2 seconds
+  processing_rule: >-
+    Consumers MUST NOT process notification detail before acknowledging. Domain
+    monitors response time and disables webhooks that consistently respond slowly
+    or with errors.
+  signature:
+    header: X-Domain-Signature
+    algorithm: HMAC-SHA1
+    key: the webhook's Verification Code
+    body: hex-encoded lowercase HMAC of the raw notification body
+    on_failure: discard the message and return 404
+
+notification_payload:
+  fields:
+  - {name: resourceType, type: string, description: The subscribed resource type}
+  - {name: resourceId, type: string, description: Identifier of the changed resource, usable on the matching GET endpoint}
+  - {name: date, type: string, format: date-time, description: When the event occurred (ISO 8601 with offset)}
+  - {name: subscriptionId, type: string, description: The subscription that produced this notification}
+  - {name: ownerId, type: string, description: Identifier of the owner filter}
+  - {name: ownerType, type: string, description: 'One of: group, agency, provider'}
+  - {name: notificationId, type: string, format: uuid, description: Unique id for this notification}
+  - {name: isDeleted, type: boolean, description: Whether the resource was deleted}
+
+owner_types:
+- name: group
+  description: >-
+    Notifications relevant to more than one owner. The only valid group name is
+    "public"; access may need to be requested.
+  valid_owner_ids: [public]
+- name: agency
+  description: Notifications relevant to a particular agency.
+  owner_id_source: GET /v1/me/agencies
+  auth_requirement: authorization code flow (user context) required
+- name: provider
+  description: Notifications relevant to any agency linked to the given provider.
+  owner_id_source: GET /v1/me/providers
+
+events:
+- resource_type: agencies
+  resource_id: agencyId
+  read_operation: GET /v1/agencies/{id}/
+  owner_types: [agency, group, provider]
+  description: Notified when agency details are changed.
+- resource_type: agents
+  resource_id: agentId
+  read_operation: GET /v1/agents/{id}/
+  owner_types: [agency, group, provider]
+  description: Notified when agent details are changed.
+- resource_type: enquiries
+  resource_id: enquiryId
+  read_operation: GET /v1/enquiries/{id}/
+  owner_types: [agency, provider]
+  description: Enquiries submitted to agents from listings.
+- resource_type: listings
+  resource_id: listingId
+  read_operation: GET /v1/listings/{id}/
+  owner_types: [agency, group, provider]
+  description: Updates as listings are created, updated or deleted.
+- resource_type: projects
+  resource_id: projectId
+  read_operation: GET /v1/projects/{id}/
+  owner_types: [agency, group, provider]
+  description: Updates as projects are created, updated or deleted.
+- resource_type: listingProcessingReports
+  resource_id: reportId
+  read_operation: GET /v1/listings/processingReports/{id}/
+  owner_types: [agency, provider]
+  description: >-
+    Status of listings submitted through the CRM endpoints; sent whenever a new
+    listing processing report is available.
+- resource_type: heartbeat
+  resource_id: unique guid
+  owner_types: [group]
+  owner_ids: [public]
+  description: >-
+    Liveness signal for the webhook system - at least one heartbeat notification
+    every 5 minutes. Useful for troubleshooting.
+
+asyncapi_published: false
+asyncapi_note: >-
+  Domain publishes no AsyncAPI document. asyncapi/domain-group-webhooks-asyncapi.yml
+  in this repo is an API Evangelist generation of this catalog, not a provider
+  artifact.

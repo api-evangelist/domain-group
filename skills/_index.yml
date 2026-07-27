@@ -1,0 +1,47 @@
+generated: '2026-07-26'
+method: generated
+source: openapi/domain-group-openapi-latest.json + https://developer.domain.com.au/docs/latest
+note: >-
+  Domain Group publishes no AGENTS.md, skill files, or agent guidance of its own
+  (probed developer.domain.com.au/mcp, /docs/latest/mcp - both 404). These are
+  API Evangelist generated skills, one per marquee flow, with every step grounded
+  in an operationId verified to exist verbatim in the harvested OpenAPI document.
+skills:
+- file: domain-group-property-valuation.md
+  name: Value an Australian property with Domain
+  api: openapi/domain-group-openapi-latest.json
+  operations: [Properties_Suggest, AddressLocators_Get, Properties_Get, Properties_GetPriceEstimate,
+    Properties_GetRentalEstimate, property_sales_history_get, property_listing_history_get,
+    PropertyAvm_Get, PropertyAvm_ReportGet]
+  packages: [Address Suggestions, Price Estimation, Rental AVM, Properties & Locations]
+- file: domain-group-listing-search.md
+  name: Search Domain listings and enquire on one
+  api: openapi/domain-group-openapi-latest.json
+  operations: [Listings_ResidentialSearch, Listings_DetailedResidentialSearch, Listings_DetailedSoldResidentialSearch,
+    Listings_DetailedCommercialSearch, Listings_DetailedBusinessSearch, ListingLocations_Search,
+    Listings_Get, Agencies_Get, Agents_Get, Enquiries_Post, Enquiries_Get]
+  packages: [Agents & Listings]
+- file: domain-group-suburb-market-data.md
+  name: Pull Australian suburb market data from Domain
+  api: openapi/domain-group-openapi-latest.json
+  operations: [SuburbPerformance_Get_ByNamedSuburb, SuburbPerformance_Get_ByNamedSuburb_WithoutPostcode,
+    SuburbHistorical_Get, SuburbSummary_Get, Demographics_Get_ByNamedSuburb, LocationProfiles_Get,
+    SalesResults_Get, SalesResults_Listings, SalesResults_SaturdayReport, SalesResults_WeeklyMediaReport,
+    Schools_Search_ByLocation, Schools_Get_ById]
+  packages: [Properties & Locations, Schools Data]
+- file: domain-group-listing-management.md
+  name: Upload and manage listings on Domain from a CRM
+  api: openapi/domain-group-openapi-latest.json
+  operations: [Listings_UpsertResidentialListing, listings_upsertcommerciallisting,
+    Listings_UpsertBusinessListing, listings_upsertresidentialoffmarket, listings_upsertcommercialoffmarket,
+    listings_upsertbusinessoffmarket, Listings_GetListingReport, Listings_GetListingReportByReference,
+    Listings_Get, Listings_GetEnquiries, Listings_GetListingStatistics, Agencies_CreateTestAgency,
+    Me_GetMyAgencies]
+  packages: [Listings Management]
+  access: gated - sandbox sign-off plus written principal-agent authorisation
+- file: domain-group-webhook-subscriptions.md
+  name: Subscribe to Domain webhooks and process notifications
+  api: openapi/domain-group-openapi-latest.json
+  operations: [Webhooks_CreateSubscription, Webhooks_ListSubscriptions, Webhooks_GetSubscription,
+    Webhooks_DeleteSubscription, Me_GetMyAgencies, Me_GetMyProviders, Listings_GetListingReport]
+  packages: [Webhooks]

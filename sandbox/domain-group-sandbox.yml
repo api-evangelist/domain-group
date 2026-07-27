@@ -1,0 +1,73 @@
+generated: '2026-07-26'
+method: searched
+source: https://developer.domain.com.au/docs/latest/conventions/sandbox
+docs: https://developer.domain.com.au/docs/latest/conventions/sandbox
+summary: >-
+  Domain runs a real, separately-hosted Sandbox environment intended for testing
+  Listing Management and any other application that needs write access to the API.
+  It is explicitly NOT for testing read-only applications.
+
+environments:
+- name: Primary (Production)
+  base_url: https://api.domain.com.au/
+  auth_host: https://auth.domain.com.au/
+- name: Sandbox
+  base_url: https://api.domain.com.au/sandbox/
+  auth_host: https://auth.domain.com.au/
+  note: >-
+    Authorisation and token requests still go to the production auth host; only
+    the API base URL differs.
+
+separation_model: project-and-package
+separation_detail: >-
+  There are no test-vs-live key prefixes. Test and live are separated by the API
+  package version selected when adding a package to a portal project - each
+  package is available in a Sandbox and a Production variant. A project is
+  restricted to the environment its packages are configured for; calling the
+  wrong host returns 401/403 with an X-Domain-Security-Reason of
+  "Project restricted from access to this environment".
+
+data_quality: >-
+  Sandbox data is not production quality in terms of completeness or accuracy.
+
+data_refresh:
+  cadence: weekly
+  day: Sunday
+  effect: >-
+    Sandbox data is refreshed every Sunday; test agencies and listings must be
+    recreated each week.
+
+test_values:
+  published: false
+  note: >-
+    Domain publishes no magic test identifiers, test cards, or fixed fixture
+    records. Developers create their own test agencies and listings inside the
+    sandbox each week. Nothing has been invented here.
+
+promotion_to_production:
+  required: true
+  process: >-
+    A testing and sign-off process must be completed before an application moves
+    to production. Listing Management production access additionally requires
+    sandbox sign-off by email to api@domain.com.au and written permission from
+    the principal agent of each agency whose listings will be managed.
+  options:
+  - name: Create a new Production Project (recommended)
+    detail: >-
+      Create a new project and choose the Production version of each API package,
+      keeping the Sandbox project available for ongoing testing.
+  - name: Switch the Sandbox project to Production
+    detail: >-
+      Switch the Sandbox package on the testing project to the Production
+      package; this loses the separate test project until a new one is created.
+  docs:
+  - https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/production-access
+  - https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/agency-authorisation
+
+console:
+  name: Live API Browser
+  url: https://developer.domain.com.au/docs/latest
+  description: >-
+    An in-portal interactive request console that lets an authenticated developer
+    exercise each endpoint and see the real data format. It is the surface that
+    loads /static/latest/media/{version}/openapi.json.
