@@ -858,3 +858,9 @@ tools:
   - api_webhooks_write
   source_operation: openapi/domain-group-openapi-latest.json#Webhooks_CreateSubscription
   read_only: false
+deployment:
+  mode: none
+  verified: derived
+  tools: 82
+  checked: '2026-08-12'
+  source: catalog MCP census

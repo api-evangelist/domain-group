@@ -1,0 +1,849 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Domain Public API",
+    "version": "v2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Dataset",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a value of a given key for a dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v2/dataset/:datasetName/:key",
+            "params": [
+              {
+                "name": "datasetName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get a value of a given key for a dataset"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Demographics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Demographics API",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v2/demographics/:state/:suburb/:postcode",
+            "params": [
+              {
+                "name": "state",
+                "value": "NSW",
+                "type": "path",
+                "description": "The Australian state abbreviation\n"
+              },
+              {
+                "name": "suburb",
+                "value": "Pyrmont",
+                "type": "path",
+                "description": "Suburb name to retrieve data for\n"
+              },
+              {
+                "name": "postcode",
+                "value": "2009",
+                "type": "path",
+                "description": "Suburb Post Code for suburbs with official post codes.\n"
+              },
+              {
+                "name": "year",
+                "value": "",
+                "type": "query",
+                "description": "Census Year of data to return"
+              },
+              {
+                "name": "types",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of census topics to retrieve demographic data for e.g. \"Rent,TransportToWork\"\nPossible values include:\n- AgeGroupOfPopulation\n- CountryOfBirth\n- NatureOfOccupancy\n- Occupation\n- GeographicalPopulation\n- DwellingStructure\n- EducationAttendance\n- HousingLoanRepayment\n- MaritalStatus\n- Religion\n- TransportToWork\n- FamilyComposition\n- HouseholdIncome\n- Rent\n- LabourForceStatus\n"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Search for demographics in a given geographic level."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Listings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Creates an externally sold business listing; or takes an existing business listing off the market.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.domain.com.au/v2/listings/business/offmarket",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Creates an externally sold business listing; or takes an existing business listing off the market."
+        },
+        {
+          "info": {
+            "name": "Creates a commercial listing.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.domain.com.au/v2/listings/commercial",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Creates a commercial listing."
+        },
+        {
+          "info": {
+            "name": "Creates an externally sold or leased commercial listing; or takes an existing commercial listing off the market.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.domain.com.au/v2/listings/commercial/offmarket",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Creates an externally sold or leased commercial listing; or takes an existing commercial listing off the market."
+        },
+        {
+          "info": {
+            "name": "Creates an externally sold or leased residential listing; or takes an existing residential listing off the market.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.domain.com.au/v2/listings/residential/offmarket",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Creates an externally sold or leased residential listing; or takes an existing residential listing off the market."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "PreMarket",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Creates or updates a pre-portal listing.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.domain.com.au/v2/premarket/listings",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Creates or updates a pre-portal listing."
+        },
+        {
+          "info": {
+            "name": "Retrieves a pre-portal listing.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v2/premarket/listings/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Pre-portal listing ID."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieves a pre-portal listing."
+        },
+        {
+          "info": {
+            "name": "Patches a pre-portal listing.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.domain.com.au/v2/premarket/listings/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Pre-portal listing ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Patches a pre-portal listing."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Properties",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve list of listings for the given property id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v2/properties/:propertyId/listings",
+            "params": [
+              {
+                "name": "propertyId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "updatedSince",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "listedSince",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "saleMode",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve list of listings for the given property id"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "PropertyFeatures",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Property features",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v2/property/features",
+            "params": [
+              {
+                "name": "propertyId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "gnafId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "flatNumber",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "streetNumber",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "streetName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "streetType",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "postcode",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "suburb",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Request to find property's features by a PropertyID, a GnafID or Address. Only one of `propertyId`, `gnafId`, or `address` should be provided."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "PropertyLike",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Comparable properties search",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v2/properties/search/like/:searchType",
+            "params": [
+              {
+                "name": "searchType",
+                "value": "",
+                "type": "path",
+                "description": "Type of property search (sold, rent, or sale)."
+              },
+              {
+                "name": "radius",
+                "value": "",
+                "type": "query",
+                "description": "Radius of search in km."
+              },
+              {
+                "name": "period",
+                "value": "",
+                "type": "query",
+                "description": "Time period in months for searching SOLD comparables."
+              },
+              {
+                "name": "propertyId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "gnafId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "flatNumber",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "streetNumber",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "streetName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "streetType",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "postcode",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "suburb",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Return list of comparable properties within a radius of specified property by PropertyID, a GnafID or full address. Only one of `propertyId`, `gnafId` or `address` should be provided. The list sorted by bedrooms, bathrooms and car space comparability to specified property, and then by distance"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "PropertySearch",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Point Radius Search",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.domain.com.au/v2/properties/search/radius/:searchType",
+            "params": [
+              {
+                "name": "searchType",
+                "value": "",
+                "type": "path",
+                "description": "Type of property search (sold, rent, or sale)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Make a search request to find properties within a point radius of a PropertyID, a GnafID, an Address, or a set of lat-lon coordinates. Only one of `propertyId`, `gnafId`, or `latitude` & `longitude`, or `address` should be provided."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "PropertyZoningPerils",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Property perils",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v2/property/zoning-perils",
+            "params": [
+              {
+                "name": "propertyId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "gnafId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "flatNumber",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "streetNumber",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "streetName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "streetType",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "postcode",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "suburb",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Request to find property's perils by a PropertyID, a GnafID or Address. Only one of `propertyId`, `gnafId`, or `address` should be provided."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "SalesResults",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Saturday report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v2/salesResults/saturday",
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Saturday report"
+        },
+        {
+          "info": {
+            "name": "Weekly media report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v2/salesResults/weeklyMedia",
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Weekly media report"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Schools",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve the details of a school by Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v2/schools/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "1234",
+                "type": "path",
+                "description": "School id"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Domain School Ids can be obtained from the search by location endpoint."
+        },
+        {
+          "info": {
+            "name": "Search for a school in a location",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v2/schools/:latitude/:longitude",
+            "params": [
+              {
+                "name": "latitude",
+                "value": "-33.8",
+                "type": "path",
+                "description": "Latitude to search"
+              },
+              {
+                "name": "longitude",
+                "value": "150.9",
+                "type": "path",
+                "description": "Longitude to search"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Search for a school in a location"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Statistics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Suburb Performance by State/Suburb",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v2/suburbPerformanceStatistics/:state/:suburb",
+            "params": [
+              {
+                "name": "state",
+                "value": "NSW",
+                "type": "path",
+                "description": "The Australian state abbreviation\n"
+              },
+              {
+                "name": "suburb",
+                "value": "Pyrmont",
+                "type": "path",
+                "description": "Suburb name to retrieve data for\n"
+              },
+              {
+                "name": "propertyCategory",
+                "value": "",
+                "type": "query",
+                "description": "Category of sales results to show\nAvailable values : house, unit\nDefault value : house\n"
+              },
+              {
+                "name": "bedrooms",
+                "value": "3",
+                "type": "query",
+                "description": "Number of bedrooms to use in the sales search\n"
+              },
+              {
+                "name": "periodSize",
+                "value": "",
+                "type": "query",
+                "description": "Unit of the measurement period to use\nDefault value : quarters\n"
+              },
+              {
+                "name": "startingPeriodRelativeToCurrent",
+                "value": "",
+                "type": "query",
+                "description": "When to start stats from. 1 = current period, 2 = previous period, etc.\nDefault value : 1\n"
+              },
+              {
+                "name": "totalPeriods",
+                "value": "",
+                "type": "query",
+                "description": "Number of total periods to show statistics for. i.e. 4 Quarters would be 1 full year\nDefault value : 4\n"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve suburb performance data by state and suburb"
+        },
+        {
+          "info": {
+            "name": "Suburb Performance by State/Suburb/Postcode",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v2/suburbPerformanceStatistics/:state/:suburb/:postcode",
+            "params": [
+              {
+                "name": "state",
+                "value": "NSW",
+                "type": "path",
+                "description": "The Australian state abbreviation\n"
+              },
+              {
+                "name": "suburb",
+                "value": "Pyrmont",
+                "type": "path",
+                "description": "Suburb name to retrieve data for\n"
+              },
+              {
+                "name": "postcode",
+                "value": "2009",
+                "type": "path",
+                "description": "Suburb Post Code for suburbs with official post codes.\n"
+              },
+              {
+                "name": "propertyCategory",
+                "value": "",
+                "type": "query",
+                "description": "Category of sales results to show\nAvailable values : house, unit\nDefault value : house\n"
+              },
+              {
+                "name": "bedrooms",
+                "value": "3",
+                "type": "query",
+                "description": "Number of bedrooms to use in the sales search\n"
+              },
+              {
+                "name": "periodSize",
+                "value": "",
+                "type": "query",
+                "description": "Unit of the measurement period to use\nDefault value : quarters\n"
+              },
+              {
+                "name": "startingPeriodRelativeToCurrent",
+                "value": "",
+                "type": "query",
+                "description": "When to start stats from. 1 = current period, 2 = previous period, etc.\nDefault value : 1\n"
+              },
+              {
+                "name": "totalPeriods",
+                "value": "",
+                "type": "query",
+                "description": "Number of total periods to show statistics for. i.e. 4 Quarters would be 1 full year\nDefault value : 4\n"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve suburb performance data by state, suburb and postcode"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

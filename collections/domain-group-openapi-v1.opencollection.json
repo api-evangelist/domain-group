@@ -1,0 +1,3092 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Domain Public API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "AddressLocators",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Address Locator API",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v1/addressLocators",
+            "params": [
+              {
+                "name": "searchLevel",
+                "value": "",
+                "type": "query",
+                "description": "Requested search level. Valid values are: Address, and Suburb."
+              },
+              {
+                "name": "unitNumber",
+                "value": "",
+                "type": "query",
+                "description": "Unit number of the address."
+              },
+              {
+                "name": "streetNumber",
+                "value": "",
+                "type": "query",
+                "description": "Street number of the address."
+              },
+              {
+                "name": "streetName",
+                "value": "",
+                "type": "query",
+                "description": "Street name of the address."
+              },
+              {
+                "name": "streetType",
+                "value": "",
+                "type": "query",
+                "description": "Street type of the address. Can take long or short street type"
+              },
+              {
+                "name": "suburb",
+                "value": "",
+                "type": "query",
+                "description": "Suburb name of the address."
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "State abbreviation of the address."
+              },
+              {
+                "name": "postcode",
+                "value": "",
+                "type": "query",
+                "description": "Postcode of the address."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieves address matching ids for use in other services."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Agencies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieves summary of agencies matching the specified criteria.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v1/agencies",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Search phrase.  e.g. name:\"Agency XYZ\""
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query",
+                "description": "Page number for paginated results"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Page size for paginated results"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "\nThe ```q``` parameter supports:\r\n<ul>\r\n  <li>name: search by name eg. ```name:\"Agency XYZ\"```</li>\r\n  <li>providerId: search by providerId. eg. ```providerId:\"ABC Software\"```</li>\r\n  <li>domainUrl: search by domainUrl. eg. ```domainUrl:\"agency-xyz\"```</li>\r\n  <li>dateUpdated: search by dateUpdated. eg. ```dateUpdated:\"2016-12-25\"```</li>\r\n  <li>suburbId: search by suburbId. Lists supported.  eg. ```suburbId:1``` eg. ```suburbId:(1 OR 2 OR 3)```.  Can include related suburbs by adding ```in:rel"
+        },
+        {
+          "info": {
+            "name": "Retrieves summary of agency search.",
+            "type": "http"
+          },
+          "http": {
+            "method": "HEAD",
+            "url": "https://api.domain.com.au/v1/agencies",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Search phrase.  e.g. name:\"Agency XYZ\""
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query",
+                "description": "Page number for paginated results"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Page size for paginated results"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Given a specified agency search criteria, this endpoint can be used to ascertain the result count that can be expected.\r\n\r\nSee `X-Total-Count` header for result count."
+        },
+        {
+          "info": {
+            "name": "Create a test agency for sandbox testing",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.domain.com.au/v1/agencies/_testAgency",
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Enables automatic creation of a test agency in our sandbox environment."
+        },
+        {
+          "info": {
+            "name": "Retrieves a specific agency details.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v1/agencies/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Agency identifier"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieves a specific agency details."
+        },
+        {
+          "info": {
+            "name": "Retrieves listings across all channels for a specific agency matching specified criteria.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v1/agencies/:id/listings",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of the agency"
+              },
+              {
+                "name": "listingStatusFilter",
+                "value": "",
+                "type": "query",
+                "description": "Filter for listing status"
+              },
+              {
+                "name": "dateUpdatedSince",
+                "value": "",
+                "type": "query",
+                "description": "Filter to remove listings not updated since before the given date time"
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query",
+                "description": "Page number for paginated results"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Page size for paginated results"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Note that the result page size is clamped at 200. Requesting a page size greater than this will be treated as if only a page size of 200 were requested."
+        },
+        {
+          "info": {
+            "name": "Retrieves statistics for a specific agency.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v1/agencies/:id/statistics",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Agency identifier"
+              },
+              {
+                "name": "timePeriod",
+                "value": "",
+                "type": "query",
+                "description": "Period to report on, Valid values are: `last7Days`, `last90Days`, `wholeCampaign`. Default is `last7Days`."
+              },
+              {
+                "name": "statusFilter",
+                "value": "",
+                "type": "query",
+                "description": "Status to filter, Valid values are: `Live`, `LiveAndArchived`. Default is `LiveAndArchived`"
+              },
+              {
+                "name": "channel",
+                "value": "",
+                "type": "query",
+                "description": "Filter statistics for the given channel"
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query",
+                "description": "Page number"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Page size"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieves statistics for a specific agency."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Agents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieves a specific agent details, including contact information.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v1/agents/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Agent identifier"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieves a specific agent details, including contact information."
+        },
+        {
+          "info": {
+            "name": "Gets listing using the contact id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v1/agents/:id/listings",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of the agent (contact)"
+              },
+              {
+                "name": "dateUpdatedSince",
+                "value": "",
+                "type": "query",
+                "description": "Filter to remove listings not updated since before the given date time"
+              },
+              {
+                "name": "includedArchivedListings",
+                "value": "",
+                "type": "query",
+                "description": "Filter to remove listings that have been archived"
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query",
+                "description": "Page number for paginated results"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Page size for paginated results"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Gets listing using the contact id"
+        },
+        {
+          "info": {
+            "name": "Retrieves stats for the listings of a given agent",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v1/agents/:id/statistics",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Agent identifier"
+              },
+              {
+                "name": "timePeriod",
+                "value": "",
+                "type": "query",
+                "description": "The time period to show statistics for. Valid values are: `last7Days`, `last90Days`, `wholeCampaign`"
+              },
+              {
+                "name": "statusFilter",
+                "value": "",
+                "type": "query",
+                "description": "Listing filter"
+              },
+              {
+                "name": "channel",
+                "value": "",
+                "type": "query",
+                "description": "Filter statistics for the given channel"
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query",
+                "description": "Page number for paginated results"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Page size for paginated results"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieves stats for the listings of a given agent"
+        },
+        {
+          "info": {
+            "name": "Search for agents by name.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v1/agents/search",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "The name, or portion of name, to search for."
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query",
+                "description": "Page number for paginated results"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Page size for paginated results (maximum 20)"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "The returned Agent ID can be used to get an agent details by ID. See `GET /agents/{id}/`"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Authorities",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Creates a new authority into the system.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.domain.com.au/v1/authorities",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Creates a new authority into the system."
+        },
+        {
+          "info": {
+            "name": "Retrieve a single authority",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v1/authorities/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve authority details based on the given ID."
+        },
+        {
+          "info": {
+            "name": "full update an existing authority.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.domain.com.au/v1/authorities/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Executes a full update on an existing authority."
+        },
+        {
+          "info": {
+            "name": "Download a compressed file that contains all files attached to an authority.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v1/authorities/:id/attachments",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Download a compressed file(`.zip`) that contains all files attached to an authority based on the given authority `id`."
+        },
+        {
+          "info": {
+            "name": "Upload multiple files to an authority.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.domain.com.au/v1/authorities/:id/attachments",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Upload multiple files to be attached to an authority based on the given `id`."
+        },
+        {
+          "info": {
+            "name": "Upload multiple files to be attached to a specific vendor in an authority.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.domain.com.au/v1/authorities/:id/vendors/:vendorId/attachments",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "vendorId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Upload multiple files to be attached to a specific vendor in an authority."
+        },
+        {
+          "info": {
+            "name": "Subscribe to an agency for all its authorities",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.domain.com.au/v1/authorities/webhooks/subscription",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Subscribe to an agency to get notified on changes made to the authorities in that agencies scope."
+        },
+        {
+          "info": {
+            "name": "Delete a subscription using subscriptionId",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.domain.com.au/v1/authorities/webhooks/subscription/:subscriptionId",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Delete a subscription using subscriptionId."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "CampaignReporting",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieves listing performance metrics for the New Developer Listings (linked to New Developer Projects) managed by advertisers.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v1/campaign/listing-performance",
+            "params": [
+              {
+                "name": "listingId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieves listing performance metrics for the New Developer Listings (linked to New Developer Projects) managed by advertisers."
+        },
+        {
+          "info": {
+            "name": "Retrieves project performance metrics for the New Developer Projects managed by advertisers.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v1/campaign/project-performance",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieves project performance metrics for the New Developer Projects managed by advertisers."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Disclaimers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Disclaimers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v1/disclaimers",
+            "params": [
+              {
+                "name": "ids",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of IDs. Eg. \"APM,NSWVG, VICVG\""
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve disclaimers for given ids."
+        },
+        {
+          "info": {
+            "name": "Disclaimers by Product",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v1/disclaimers/product/:product",
+            "params": [
+              {
+                "name": "product",
+                "value": "",
+                "type": "path",
+                "description": "Product which disclaimers are to be retrieved. Possible values include:\n- PropertyData\n- AURIN\n- HomePriceGuide\n"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieves disclaimers for given product."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Enquiries",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Searches enquiries based on agents or agencies.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v1/enquiries",
+            "params": [
+              {
+                "name": "agencyId",
+                "value": "",
+                "type": "query",
+                "description": "Agency identifier"
+              },
+              {
+                "name": "agentId",
+                "value": "",
+                "type": "query",
+                "description": "Agent identifier"
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Enquiries received from"
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "Enquiries received up to"
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query",
+                "description": "Page number for paginated results (25 per page)"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Searches enquiries based on agents or agencies."
+        },
+        {
+          "info": {
+            "name": "Sends an enquiry for listing, agency, etc... (based on the enquiry type and referenceid).\r\nRecipients and template will be automatically selected.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.domain.com.au/v1/enquiries",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Sends an enquiry for listing, agency, etc... (based on the enquiry type and referenceid).\r\nRecipients and template will be automatically selected."
+        },
+        {
+          "info": {
+            "name": "Retrieve the details of a specific enquiry",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v1/enquiries/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of the enquiry"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve the details of a specific enquiry"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Leadscope",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "URL to download a list of agency predictions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v1/leadminer/predictions/:participantId",
+            "params": [
+              {
+                "name": "participantId",
+                "value": "",
+                "type": "path",
+                "description": "Participant ID"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "URL to download a list of agency predictions"
+        },
+        {
+          "info": {
+            "name": "URL to download a list of agency predictions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v1/leadscope/predictions/:participantId",
+            "params": [
+              {
+                "name": "participantId",
+                "value": "",
+                "type": "path",
+                "description": "Participant ID"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "URL to download a list of agency predictions"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Listings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve details of listing using the listing id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v1/listings/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of the listing"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve details of listing using the listing id"
+        },
+        {
+          "info": {
+            "name": "Retrieve details of all enquiries received for a specific listing",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v1/listings/:id/enquiries",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Listing Id"
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query",
+                "description": "Page number for paginated results (25 per page)"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve details of all enquiries received for a specific listing"
+        },
+        {
+          "info": {
+            "name": "Takes a listing offmarket",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.domain.com.au/v1/listings/:id/offmarket",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Listing identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Takes a listing offmarket"
+        },
+        {
+          "info": {
+            "name": "Retrieve details of listing using the listing id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v1/listings/:id/statistics",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of the listing"
+              },
+              {
+                "name": "timePeriod",
+                "value": "",
+                "type": "query",
+                "description": "The period of time to see the listing performance for (not including today). Defaults to Last7Days"
+              },
+              {
+                "name": "channel",
+                "value": "",
+                "type": "query",
+                "description": "Filter statistics for the given channel. Defaults to listing Channel."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve details of listing using the listing id"
+        },
+        {
+          "info": {
+            "name": "Creates or updates a business listing",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.domain.com.au/v1/listings/business",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Creates or updates a business listing"
+        },
+        {
+          "info": {
+            "name": "Retrieves business listings matching the specified criteria.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.domain.com.au/v1/listings/business/_search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieves business listings matching the specified criteria."
+        },
+        {
+          "info": {
+            "name": "Creates or updates a commercial listing",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.domain.com.au/v1/listings/commercial",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Creates or updates a commercial listing"
+        },
+        {
+          "info": {
+            "name": "Retrieves commercial listings matching the specified criteria.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.domain.com.au/v1/listings/commercial/_search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieves commercial listings matching the specified criteria."
+        },
+        {
+          "info": {
+            "name": "Suggests listing locations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v1/listings/locations",
+            "params": [
+              {
+                "name": "terms",
+                "value": "",
+                "type": "query",
+                "description": "Suburb / area / region prefix, or postcode"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "The resulting suggested location can be of type \"suburb\" / \"area\" / \"region\".\r\n\r\nThe `name` property corresponds to the type of location returned.\r\n\r\nThe area name / region name can be fed into the corresponding fields search fields.  See [`v1/listings/residential/_search`](/docs/v1/apis/pkg_agents_listings/references/listings_detailedresidentialsearch)"
+        },
+        {
+          "info": {
+            "name": "Searches processing reports",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v1/listings/processingReports",
+            "params": [
+              {
+                "name": "agencyId",
+                "value": "",
+                "type": "query",
+                "description": "Domain agency Id"
+              },
+              {
+                "name": "providerAdId",
+                "value": "",
+                "type": "query",
+                "description": "External provider advertisement identifier"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Searches processing reports"
+        },
+        {
+          "info": {
+            "name": "Gets the processing report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v1/listings/processingReports/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Report id"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Gets the processing report"
+        },
+        {
+          "info": {
+            "name": "Creates or updates a residential listing",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.domain.com.au/v1/listings/residential",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Creates or updates a residential listing"
+        },
+        {
+          "info": {
+            "name": "Retrieves residential listings matching the specified criteria.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.domain.com.au/v1/listings/residential/_search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Search results are limited to the first 1000 results.\r\n\r\nIf the number of results is greater, the intention is to refine the search by adding more restrictive parameters, to find a relevant set of results."
+        },
+        {
+          "info": {
+            "name": "Retrieves stats for the residential listings of a given agent.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v1/listings/statistics",
+            "params": [
+              {
+                "name": "agentId",
+                "value": "",
+                "type": "query",
+                "description": "Agent identifier"
+              },
+              {
+                "name": "timePeriod",
+                "value": "",
+                "type": "query",
+                "description": "The time period to show statistics for. Valid values are: `last7Days`, `last90Days`, `wholeCampaign`"
+              },
+              {
+                "name": "statusFilter",
+                "value": "",
+                "type": "query",
+                "description": "Listing filter"
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query",
+                "description": "Page number for paginated results"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Page size for paginated results"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieves stats for the residential listings of a given agent."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "ListingSearch",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieves residential listings matching the specified criteria.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.domain.com.au/v1/listingSearch/residential/search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Search results are limited to the first 1000 results.\r\n\r\nIf the number of results is greater, the intention is to refine the search by adding more restrictive parameters, to find a relevant set of results."
+        },
+        {
+          "info": {
+            "name": "Retrieves sold residential listings matching the specified criteria.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.domain.com.au/v1/listingSearch/residential/searchSold",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Search results are limited to the first 1000 results.\r\n\r\nIf the number of results is greater, the intention is to refine the search by adding more restrictive parameters, to find a relevant set of results."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Locations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get location data based on the given domainLocationId",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v1/locations/profiles/:domainLocationId",
+            "params": [
+              {
+                "name": "domainLocationId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get location data based on the given domainLocationId"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Me",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve information about the currently authorised request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v1/me",
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve information about the currently authorised request"
+        },
+        {
+          "info": {
+            "name": "Retrieve list of agencies with which the current client is associated",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v1/me/agencies",
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve list of agencies with which the current client is associated"
+        },
+        {
+          "info": {
+            "name": "Retrieve list of provider Ids with which the current client is associated",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v1/me/providers",
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve list of provider Ids with which the current client is associated"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Products",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Unreserves (cancels) an existing limited inventory reservation.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.domain.com.au/v1/Products/LimitedInventory/:inventoryReservationId/Unreserve",
+            "params": [
+              {
+                "name": "inventoryReservationId",
+                "value": "",
+                "type": "path",
+                "description": "The reservation identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Unreserves (cancels) an existing limited inventory reservation."
+        },
+        {
+          "info": {
+            "name": "Retrieves batch availability for limited inventory products.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.domain.com.au/v1/Products/LimitedInventory/Availability",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieves batch availability for limited inventory products."
+        },
+        {
+          "info": {
+            "name": "Reserves inventory for a batch of products based on the provided request.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.domain.com.au/v1/Products/LimitedInventory/ReserveByBatch",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Reserves inventory for a batch of products based on the provided request."
+        },
+        {
+          "info": {
+            "name": "Unreserve inventory items by batch.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.domain.com.au/v1/Products/LimitedInventory/UnreserveByBatch",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Unreserve inventory items by batch."
+        },
+        {
+          "info": {
+            "name": "Gets a listing price quote based on the agency, channel and location details",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.domain.com.au/v1/Products/Listings/QuoteByAgency",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Gets a listing price quote based on the agency, channel and location details"
+        },
+        {
+          "info": {
+            "name": "Gets a listing price quote based on the provided suburb details.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.domain.com.au/v1/Products/Listings/QuoteBySuburbs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Gets a listing price quote based on the provided suburb details."
+        },
+        {
+          "info": {
+            "name": "Get updated pricing information for a hypothetical listing",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.domain.com.au/v1/products/ratefornewlisting",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get updated pricing information for a hypothetical listing"
+        },
+        {
+          "info": {
+            "name": "Get updated pricing information for a hypothetical listing",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.domain.com.au/v1/products/ratefornewsocialboost",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get updated pricing information for a hypothetical listing"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Projects",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Searches projects",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v1/projects",
+            "params": [
+              {
+                "name": "agencyId",
+                "value": "",
+                "type": "query",
+                "description": "Restricts to the provided agency"
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query",
+                "description": "Page number for paginated results"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Page size for paginated results"
+              },
+              {
+                "name": "projectStatus",
+                "value": "",
+                "type": "query",
+                "description": "The set of projects to return, defaults to `live` only"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Note that the result page size is clamped at 100.  Requesting a page size greater than this will be treated as if only a page size of 100 were requested."
+        },
+        {
+          "info": {
+            "name": "Details of project",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v1/projects/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of the project"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Details of project"
+        },
+        {
+          "info": {
+            "name": "Retrieve details of all enquiries received for a specific new development project",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v1/projects/:id/enquiries",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "New Development Project Id"
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query",
+                "description": "Page number for paginated results (25 per page)"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve details of all enquiries received for a specific new development project"
+        },
+        {
+          "info": {
+            "name": "Project listings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v1/projects/:id/listings",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of the project"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Project listings"
+        },
+        {
+          "info": {
+            "name": "Retrieves statistics for a specific project with a breakdown for listings.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v1/projects/:id/listings/statistics",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "project identifier"
+              },
+              {
+                "name": "timePeriod",
+                "value": "",
+                "type": "query",
+                "description": "Period to report on, Valid values are: `last7Days`, `last90Days`, `wholeCampaign`. Default is `last7Days`."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieves statistics for a specific project with a breakdown for listings."
+        },
+        {
+          "info": {
+            "name": "Retrieves statistics for a specific project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v1/projects/:id/statistics",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "project identifier"
+              },
+              {
+                "name": "timePeriod",
+                "value": "",
+                "type": "query",
+                "description": "Period to report on, Valid values are: `last7Days`, `last90Days`, `wholeCampaign`. Default is `last7Days`."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieves statistics for a specific project."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Properties",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search for suggested addresses for the given terms",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v1/properties/_suggest",
+            "params": [
+              {
+                "name": "terms",
+                "value": "1 Smith Street, Smithfield, NSW",
+                "type": "query",
+                "description": "The address to search"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "channel",
+                "value": "",
+                "type": "query",
+                "description": "Restrict the suggestions to this type of property: `All` (default), `Residential`, `Commercial`"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Applicable [policies](/docs/latest/support/policies) apply here include APM attribution."
+        },
+        {
+          "info": {
+            "name": "Property ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v1/properties/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "A propertyId is a Domain specific ID of particular property, usually in the form of an alphanumeric code: RF-8884-AK."
+        },
+        {
+          "info": {
+            "name": "Price estimates based on propertyId",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v1/properties/:propertyId/priceEstimate",
+            "params": [
+              {
+                "name": "propertyId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Price estimates based on propertyId"
+        },
+        {
+          "info": {
+            "name": "Rental estimates based on propertyId",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v1/properties/:propertyId/rentalEstimate",
+            "params": [
+              {
+                "name": "propertyId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Rental estimates based on propertyId"
+        },
+        {
+          "info": {
+            "name": "Property images",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v1/properties/images",
+            "params": [
+              {
+                "name": "propertyId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "gnafId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "flatNumber",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "streetNumber",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "streetName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "streetType",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "postcode",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "suburbName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Search for a specific property and provide property images from latest sale/rental activity if found. Supply either propertyId, gnafId or all address fields (with flatNumber optional)"
+        },
+        {
+          "info": {
+            "name": "Property Listing History",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v1/properties/listingHistory",
+            "params": [
+              {
+                "name": "propertyId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "gnafId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "flatNumber",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "streetNumber",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "streetName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "streetType",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "postcode",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "suburbName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Search for a specific property and provide property with comprehensive list of all sale/rental  listing activity for this property. Supply either propertyId, gnafId or all address fields (with flatNumber optional)"
+        },
+        {
+          "info": {
+            "name": "Sales Listing History",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v1/properties/salesHistory",
+            "params": [
+              {
+                "name": "propertyId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "gnafId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "flatNumber",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "streetNumber",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "streetName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "streetType",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "postcode",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "suburbName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Search for a specific property's activities and provide sale/rental activity if found. Supply either propertyId, gnafId, or all address fields (with flatNumber optional)"
+        },
+        {
+          "info": {
+            "name": "Property",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v1/propertyenrichment",
+            "params": [
+              {
+                "name": "propertyId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "gnafId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "flatNumber",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "streetNumber",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "streetName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "streetType",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "postcode",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "suburbName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Search for a specific property and provide property information and latest sale/rental activity if found. Supply either propertyId, gnafId, latitude/longitude, or all address fields (with flatNumber optional)"
+        },
+        {
+          "info": {
+            "name": "Retrieves a property report based on query parameters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v1/propertyReports",
+            "params": [
+              {
+                "name": "propertyType",
+                "value": "",
+                "type": "query",
+                "description": "Type of property `House`, `Unit`"
+              },
+              {
+                "name": "streetNumber",
+                "value": "",
+                "type": "query",
+                "description": "Street number"
+              },
+              {
+                "name": "streetName",
+                "value": "",
+                "type": "query",
+                "description": "Street name"
+              },
+              {
+                "name": "suburb",
+                "value": "",
+                "type": "query",
+                "description": "Suburb e.g. `Pyrmont`"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "State e.g. `NSW`"
+              },
+              {
+                "name": "unitNumber",
+                "value": "",
+                "type": "query",
+                "description": "Unit number"
+              },
+              {
+                "name": "streetType",
+                "value": "",
+                "type": "query",
+                "description": "Street type e.g. `Pl`"
+              },
+              {
+                "name": "postcode",
+                "value": "",
+                "type": "query",
+                "description": "Postcode e.g. `2009`"
+              },
+              {
+                "name": "areaSize",
+                "value": "",
+                "type": "query",
+                "description": "Area size"
+              },
+              {
+                "name": "bedrooms",
+                "value": "",
+                "type": "query",
+                "description": "Number of bedrooms"
+              },
+              {
+                "name": "bathrooms",
+                "value": "",
+                "type": "query",
+                "description": "Number of bathrooms"
+              },
+              {
+                "name": "parking",
+                "value": "",
+                "type": "query",
+                "description": "Number of parking spots"
+              },
+              {
+                "name": "preparedFor",
+                "value": "",
+                "type": "query",
+                "description": "\"Prepared for\" information"
+              },
+              {
+                "name": "productCode",
+                "value": "",
+                "type": "query",
+                "description": "Report product code"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieves a property report based on query parameters"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "PropertyAvm",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Creates a valuation for a given property id.\r\nIt uses a combination of the cache valuation and Domain API calls to populate the report.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v1/avm/:propertyId",
+            "params": [
+              {
+                "name": "propertyId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Creates a valuation for a given property id.\r\nIt uses a combination of the cache valuation and Domain API calls to populate the report."
+        },
+        {
+          "info": {
+            "name": "Creates a valuation PDF report for a given property id.\r\nIt uses a combination of the cache valuation and Domain API calls to populate the report.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v1/avmReport/:propertyId",
+            "params": [
+              {
+                "name": "propertyId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "showEstimate",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Creates a valuation PDF report for a given property id.\r\nIt uses a combination of the cache valuation and Domain API calls to populate the report."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "PropertyRadar",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Portfolio",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.domain.com.au/v1/propertyradar/portfolio",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Creates a portfolio and returns portfolio id"
+        },
+        {
+          "info": {
+            "name": "View Properties in Portfolio",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v1/propertyradar/portfolio/:PortfolioId",
+            "params": [
+              {
+                "name": "PortfolioId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "List property and gnaf id's for an existing portfolio"
+        },
+        {
+          "info": {
+            "name": "Add Properties to Portfolio",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.domain.com.au/v1/propertyradar/portfolio/:PortfolioId",
+            "params": [
+              {
+                "name": "PortfolioId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Adds properties to a portfolio by property id's and/or gnaf id's"
+        },
+        {
+          "info": {
+            "name": "Delete Portfolio",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.domain.com.au/v1/propertyradar/portfolio/:PortfolioId",
+            "params": [
+              {
+                "name": "PortfolioId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Deletes a portfolio and all associated properties"
+        },
+        {
+          "info": {
+            "name": "View Properties in Portfolio - Detailed",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v1/propertyradar/portfolio/:PortfolioId/properties",
+            "params": [
+              {
+                "name": "PortfolioId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "Page",
+                "value": "",
+                "type": "query",
+                "description": "The page of data to return"
+              },
+              {
+                "name": "PageSize",
+                "value": "",
+                "type": "query",
+                "description": "The number of records per page"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "List property and gnaf id's with details for an existing portfolio, along with market status and last listed information. Results are returned one page at a time, with a default page size of 500000 records. Records are returned in alphabetical order, with Property ID's first followed by GNAF ID's.For PageSize greater than 10000, please don't use Domain Portal UI"
+        },
+        {
+          "info": {
+            "name": "View Single Property in Portfolio - Detailed",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v1/propertyradar/portfolio/:PortfolioId/properties/:PropertyId",
+            "params": [
+              {
+                "name": "PortfolioId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "PropertyId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Show market status and last listed information for a single property in a portfolio."
+        },
+        {
+          "info": {
+            "name": "View Single Property in Portfolio - Detailed",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v1/propertyradar/portfolio/:PortfolioId/properties/gnaf/:GnafId",
+            "params": [
+              {
+                "name": "PortfolioId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "GnafId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Show market status and last listed information for a single property in a portfolio."
+        },
+        {
+          "info": {
+            "name": "Remove Properties from Portfolio",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.domain.com.au/v1/propertyradar/portfolio/:PortfolioId/property/delete",
+            "params": [
+              {
+                "name": "PortfolioId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Removes properties from a portfolio by property id's and/or gnaf id's, returning any id's that did not exist within the portfolio"
+        },
+        {
+          "info": {
+            "name": "List Portfolios",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v1/propertyradar/portfoliosummary",
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "List all portfolios for the customer with a count of associated property and gnaf id's"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "SalesResults",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get weekly results info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v1/salesResults/_head",
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get weekly results info"
+        },
+        {
+          "info": {
+            "name": "Get weekly results summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v1/salesResults/:city",
+            "params": [
+              {
+                "name": "city",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get weekly results summary"
+        },
+        {
+          "info": {
+            "name": "Get weekly results details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v1/salesResults/:city/listings",
+            "params": [
+              {
+                "name": "city",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get weekly results details"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Statistics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Record a statistic event along with its associated metadata (if applicable)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.domain.com.au/v1/statistics/:event",
+            "params": [
+              {
+                "name": "event",
+                "value": "",
+                "type": "path",
+                "description": "The event type"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Record a statistic event along with its associated metadata (if applicable)"
+        },
+        {
+          "info": {
+            "name": "Suburb Historical",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v1/suburbHistorical/:state/:suburb/:postcode",
+            "params": [
+              {
+                "name": "state",
+                "value": "NSW",
+                "type": "path",
+                "description": "The Australian state abbreviation\n"
+              },
+              {
+                "name": "suburb",
+                "value": "Pyrmont",
+                "type": "path",
+                "description": "Suburb name to retrieve data for\n"
+              },
+              {
+                "name": "postcode",
+                "value": "2009",
+                "type": "path",
+                "description": "Suburb Post Code for suburbs with official post codes.\n"
+              },
+              {
+                "name": "propertyCategory",
+                "value": "",
+                "type": "query",
+                "description": "Category of sales results to show\nAvailable values : house, unit\nDefault value : house\n"
+              },
+              {
+                "name": "periodSize",
+                "value": "",
+                "type": "query",
+                "description": "Unit of the measurement period to use\nDefault value : quarters\n"
+              },
+              {
+                "name": "hasBedroomSplits",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include bedroom splits in summary data. When true or omitted, returns aggregated data plus splits by bedroom count. When false, returns only the total aggregated record. \nDefault value : true\n"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve suburb historical data (up to 5 years) by state, suburb and postcode"
+        },
+        {
+          "info": {
+            "name": "Suburb Performance by Suburb ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v1/suburbPerformanceStatistics",
+            "params": [
+              {
+                "name": "state",
+                "value": "NSW",
+                "type": "query",
+                "description": "The Australian state abbreviation\n"
+              },
+              {
+                "name": "suburbId",
+                "value": "123",
+                "type": "query",
+                "description": "The Suburb Identifier\n"
+              },
+              {
+                "name": "propertyCategory",
+                "value": "",
+                "type": "query",
+                "description": "Category of sales results to show\nAvailable values : house, unit\nDefault value : house\n"
+              },
+              {
+                "name": "chronologicalSpan",
+                "value": "",
+                "type": "query",
+                "description": "The size of each chunk of information we want in months\n"
+              },
+              {
+                "name": "tPlusFrom",
+                "value": "",
+                "type": "query",
+                "description": "Countdown number in chronological spans from the current (current chronological span is 1)\n"
+              },
+              {
+                "name": "tPlusTo",
+                "value": "",
+                "type": "query",
+                "description": "Countdown number in chronological spans from the current (current chronological span is 1, 2 chronological spans ago is 3)\n"
+              },
+              {
+                "name": "bedrooms",
+                "value": "3",
+                "type": "query",
+                "description": "Number of bedrooms to use in the sales search\n"
+              },
+              {
+                "name": "values",
+                "value": "",
+                "type": "query",
+                "description": "Values to be returned for the series. If the field is not provided, all available values for the SeriesInfo will be returned. You can specify multiple values using comma separated text. Valid values are:\nMedianSoldPrice, AuctionNumberAuctioned, AuctionNumberSold, AuctionNumberWithdrawn, NumberSold, LowestSoldPrice, HighestSoldPrice, 5thPercentileSoldPrice, 25thPercentileSoldPrice, 75thPercentileSoldPrice, 95thPercentileSoldPrice, DaysOnMarket, DiscountPercentage, MedianRentListingPrice, NumberRentListing, HighestRentListingPrice, LowestRentListingPrice, MedianSaleListingPrice, NumberSaleListing, HighestSaleListingPrice, LowestSaleListingPrice\n"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve suburb performance data by suburb id"
+        },
+        {
+          "info": {
+            "name": "Suburb Summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v1/suburbSummary/:state/:suburb/:postcode",
+            "params": [
+              {
+                "name": "state",
+                "value": "NSW",
+                "type": "path",
+                "description": "The Australian state abbreviation\n"
+              },
+              {
+                "name": "suburb",
+                "value": "Pyrmont",
+                "type": "path",
+                "description": "Suburb name to retrieve data for\n"
+              },
+              {
+                "name": "postcode",
+                "value": "2009",
+                "type": "path",
+                "description": "Suburb Post Code for suburbs with official post codes.\n"
+              },
+              {
+                "name": "propertyCategory",
+                "value": "",
+                "type": "query",
+                "description": "Category of sales results to show\nAvailable values : house, unit\nDefault value : house\n"
+              },
+              {
+                "name": "periodSize",
+                "value": "",
+                "type": "query",
+                "description": "Unit of the measurement period to use\nDefault value : quarters\n"
+              },
+              {
+                "name": "hasBedroomSplits",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include bedroom splits in summary data. When true or omitted, returns aggregated data plus splits by bedroom count. When false, returns only the total aggregated record. \nDefault value : true\n"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve suburb summary data (up to 12 months) by state, suburb and postcode"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Webhooks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve the details of a single subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v1/subscriptions/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Subscription identifier"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve the details of a single subscription"
+        },
+        {
+          "info": {
+            "name": "Delete a single subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.domain.com.au/v1/subscriptions/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Subscription identifier"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Delete a single subscription"
+        },
+        {
+          "info": {
+            "name": "List all subscriptions to the specified webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.domain.com.au/v1/webhooks/:id/subscriptions",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Subscriber (Webhook) ID"
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "List all subscriptions to the specified webhook"
+        },
+        {
+          "info": {
+            "name": "Create a subscription to notifications",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.domain.com.au/v1/webhooks/:id/subscriptions",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Subscriber (Webhook) Id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create a subscription to notifications"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
