@@ -25,6 +25,17 @@ description: 'Domain Group (Domain Holdings Australia Ltd, trading as domain.com
   Group API Terms and Conditions.'
 image: https://s.domainstatic.com.au/domain/144.png
 tags:
+- Real-Estate
+- Australia
+- Property Listings
+- Property Data
+- Valuation
+- AVM
+- Rentals
+- Listing Management
+- PropTech
+- Portal Marketplace
+tags_raw:
 - Real Estate
 - Australia
 - Property Listings
@@ -50,6 +61,10 @@ apis:
   tags:
   - Address
   - Geocoding
+  - Real-Estate
+  tags_raw:
+  - Address
+  - Geocoding
   - Real Estate
   properties:
   - type: OpenAPI
@@ -70,6 +85,11 @@ apis:
   baseURL: https://api.domain.com.au
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   tags:
+  - Property Listings
+  - Agents
+  - Agencies
+  - Real-Estate
+  tags_raw:
   - Property Listings
   - Agents
   - Agencies
@@ -97,6 +117,10 @@ apis:
   baseURL: https://api.domain.com.au
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   tags:
+  - Advertising
+  - Analytics
+  - Real-Estate
+  tags_raw:
   - Advertising
   - Analytics
   - Real Estate
@@ -139,6 +163,11 @@ apis:
   baseURL: https://api.domain.com.au
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   tags:
+  - Listing Management
+  - CRM
+  - Enquiries
+  - Real-Estate
+  tags_raw:
   - Listing Management
   - CRM
   - Enquiries
@@ -251,6 +280,10 @@ apis:
   tags:
   - Property Data
   - Bundle
+  - Real-Estate
+  tags_raw:
+  - Property Data
+  - Bundle
   - Real Estate
   properties:
   - type: OpenAPI
@@ -334,6 +367,10 @@ apis:
   baseURL: https://api.domain.com.au
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   tags:
+  - Webhook
+  - Event
+  - Real-Estate
+  tags_raw:
   - Webhooks
   - Events
   - Real Estate
