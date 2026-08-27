@@ -50,348 +50,2583 @@ created: '2026-07-26'
 modified: '2026-07-26'
 specificationVersion: '0.23'
 apis:
-- aid: domain-group:domain-address-suggestions-api
-  name: Domain Address Suggestions API
-  description: Search for valid Australian property addresses and resolve them to Domain property identifiers.
-    Backed by GET /v1/properties/_suggest and GET /v1/addressLocators. Requires the api_properties_read
-    or api_addresslocators_read scope.
+- aid: domain-group:domain-group-addresslocators-api
+  name: Domain Group Address Locators API
+  description: The AddressLocators API from Domain Group — 1 operation(s) for addresslocators.
   humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
   baseURL: https://api.domain.com.au
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   tags:
-  - Address
-  - Geocoding
-  - Real-Estate
-  tags_raw:
-  - Address
-  - Geocoding
-  - Real Estate
+  - AddressLocators
   properties:
   - type: OpenAPI
-    url: openapi/domain-group-openapi-latest.json
+    url: openapi/domain-group-addresslocators-api-openapi.yml
   - type: Documentation
     url: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
   - type: APIReference
-    url: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion/references/properties_suggest
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion/references/properties_suggest
   - type: DeveloperPortal
     url: https://developer.domain.com.au/
-- aid: domain-group:domain-agents-listings-api
-  name: Domain Agents & Listings API
-  description: Access data on agencies, agents, and for-sale, for-rent, commercial, business, and project
-    listings directly from Domain. Covers agency and agent search and profiles, residential/commercial/business
-    listing search, listing locations, project search, and enquiry submission. Granted automatically on
-    signup along with Properties & Locations.
-  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings
-  baseURL: https://api.domain.com.au
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  tags:
-  - Property Listings
-  - Agents
-  - Agencies
-  - Real-Estate
-  tags_raw:
-  - Property Listings
-  - Agents
-  - Agencies
-  - Real Estate
-  properties:
-  - type: OpenAPI
-    url: openapi/domain-group-openapi-latest.json
-  - type: OpenAPI
-    url: openapi/domain-group-openapi-v1.json
   - type: Documentation
     url: https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings
   - type: APIReference
-    url: https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings/references/listings_detailedresidentialsearch
-  - type: DeveloperPortal
-    url: https://developer.domain.com.au/
-  - type: AgentSkill
-    url: skills/domain-group-listing-search.md
-    name: Search Domain listings and enquire on one
-- aid: domain-group:domain-campaign-api
-  name: Domain Campaign API
-  description: Lets authenticated media agencies retrieve advertising campaign performance metrics for
-    Domain listings and developer projects, via GET /v1/campaign/listing-performance and GET /v1/campaign/project-performance.
-    Restricted to authorised media agency clients.
-  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api
-  baseURL: https://api.domain.com.au
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  tags:
-  - Advertising
-  - Analytics
-  - Real-Estate
-  tags_raw:
-  - Advertising
-  - Analytics
-  - Real Estate
-  properties:
-  - type: OpenAPI
-    url: openapi/domain-group-openapi-latest.json
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings/references/listings_detailedresidentialsearch
   - type: Documentation
     url: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api
   - type: APIReference
-    url: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api/references/campaign_getlistingperformance_report
-  - type: DeveloperPortal
-    url: https://developer.domain.com.au/
-- aid: domain-group:domain-campaign-api-preview
-  name: Domain Campaign API - Preview
-  description: Preview channel of the Campaign API, giving authorised media agencies early access to campaign
-    performance metrics ahead of general release. Documented as a separate API package on the Domain developer
-    portal.
-  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api_preview
-  baseURL: https://api.domain.com.au
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  tags:
-  - Advertising
-  - Analytics
-  - Preview
-  properties:
-  - type: OpenAPI
-    url: openapi/domain-group-openapi-latest.json
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api/references/campaign_getlistingperformance_report
   - type: Documentation
     url: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api_preview
-  - type: DeveloperPortal
-    url: https://developer.domain.com.au/
-- aid: domain-group:domain-listings-management-api
-  name: Domain Listings Management API
-  description: View, create, and update residential, commercial, business, project, and off-market listings
-    on domain.com.au, and manage the resulting enquiries, listing reports, and performance statistics.
-    This is the CRM upload surface used by Australian agency software; production access requires a sandbox
-    sign-off process by email to api@domain.com.au plus written authorisation from the principal agent
-    of each agency whose listings are being managed.
-  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_listing_management
-  baseURL: https://api.domain.com.au
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  tags:
-  - Listing Management
-  - CRM
-  - Enquiries
-  - Real-Estate
-  tags_raw:
-  - Listing Management
-  - CRM
-  - Enquiries
-  - Real Estate
-  properties:
-  - type: OpenAPI
-    url: openapi/domain-group-openapi-latest.json
-  - type: OpenAPI
-    url: openapi/domain-group-openapi-v2.json
   - type: Documentation
     url: https://developer.domain.com.au/docs/latest/apis/pkg_listing_management
   - type: Documentation
-    url: https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/upload-listings
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/upload-listings
   - type: Documentation
-    url: https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/agency-authorisation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/agency-authorisation
   - type: Documentation
-    url: https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/production-access
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/production-access
   - type: Documentation
-    url: https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/migrating-from-xml
-  - type: DeveloperPortal
-    url: https://developer.domain.com.au/
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/migrating-from-xml
   - type: Sandbox
     url: sandbox/domain-group-sandbox.yml
-  - type: AgentSkill
-    url: skills/domain-group-listing-management.md
-    name: Upload and manage listings on Domain from a CRM
-- aid: domain-group:domain-price-estimation-api
-  name: Domain Price Estimation API
-  description: Returns the current automated price estimate for a Domain property identifier via GET /v1/properties/{propertyId}/priceEstimate,
-    including lower, mid, and upper price, a confidence indicator, and estimate history. Requires the
-    api_properties_read scope.
-  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation
-  baseURL: https://api.domain.com.au
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  tags:
-  - Valuation
-  - AVM
-  - Property Data
-  properties:
-  - type: OpenAPI
-    url: openapi/domain-group-openapi-latest.json
   - type: Documentation
     url: https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation
   - type: APIReference
-    url: https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation/references/properties_getpriceestimate
-  - type: DeveloperPortal
-    url: https://developer.domain.com.au/
-  - type: AgentSkill
-    url: skills/domain-group-property-valuation.md
-    name: Value an Australian property with Domain
-- aid: domain-group:domain-properties-locations-api
-  name: Domain Properties & Locations API
-  description: Property records, address locators, location profiles, weekend auction and sales results,
-    suburb performance and historical statistics, and suburb demographics. Granted automatically on signup
-    along with Agents & Listings, and the package most commonly used by banks and fintechs for suburb
-    medians and market performance.
-  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations
-  baseURL: https://api.domain.com.au
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  tags:
-  - Property Data
-  - Market Statistics
-  - Demographics
-  - Auction Results
-  properties:
-  - type: OpenAPI
-    url: openapi/domain-group-openapi-latest.json
-  - type: OpenAPI
-    url: openapi/domain-group-openapi-v2.json
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation/references/properties_getpriceestimate
   - type: Documentation
     url: https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations
   - type: APIReference
-    url: https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations/references/suburbperformance_get_bynamedsuburb
-  - type: DeveloperPortal
-    url: https://developer.domain.com.au/
-  - type: AgentSkill
-    url: skills/domain-group-suburb-market-data.md
-    name: Pull Australian suburb market data from Domain
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations/references/suburbperformance_get_bynamedsuburb
   - type: DataModel
     url: data-model/domain-group-data-model.yml
-- aid: domain-group:domain-property-enrichment-api
-  name: Domain Property Enrichment API
-  description: Enhances a known property with additional Domain-held detail through GET /v1/propertyenrichment,
-    alongside the v2 property features and zoning/perils endpoints. Sold as a separate API package.
-  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment
-  baseURL: https://api.domain.com.au
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  tags:
-  - Property Data
-  - Enrichment
-  - Zoning
-  properties:
-  - type: OpenAPI
-    url: openapi/domain-group-openapi-latest.json
   - type: Documentation
     url: https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment
   - type: APIReference
-    url: https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment/references/propertyenrichment_get
-  - type: DeveloperPortal
-    url: https://developer.domain.com.au/
-- aid: domain-group:domain-property-package-api
-  name: Domain Property Package API
-  description: A bundled package giving comprehensive property coverage in one subscription - address
-    suggestion, property records, price estimates, residential listing search, location profiles, project
-    data, schools, suburb performance, and demographics - assembled from endpoints that also appear in
-    the narrower packages.
-  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_property
-  baseURL: https://api.domain.com.au
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  tags:
-  - Property Data
-  - Bundle
-  - Real-Estate
-  tags_raw:
-  - Property Data
-  - Bundle
-  - Real Estate
-  properties:
-  - type: OpenAPI
-    url: openapi/domain-group-openapi-latest.json
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment/references/propertyenrichment_get
   - type: Documentation
     url: https://developer.domain.com.au/docs/latest/apis/pkg_property
   - type: APIReference
     url: https://developer.domain.com.au/docs/latest/apis/pkg_property/references/properties_get
-  - type: DeveloperPortal
-    url: https://developer.domain.com.au/
-- aid: domain-group:domain-propertyradar-api
-  name: Domain PropertyRadar API
-  description: Create and manage watchlist portfolios of properties and read them back in summary or full
-    form, including lookup by G-NAF address identifier. Covers POST/GET/DELETE on /v1/propertyradar/portfolio
-    and its property members. Requires api_propertyportfolio_read and api_propertyportfolio_write scopes.
-  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar
-  baseURL: https://api.domain.com.au
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  tags:
-  - Property Portfolio
-  - Monitoring
-  - Property Data
-  properties:
-  - type: OpenAPI
-    url: openapi/domain-group-openapi-latest.json
   - type: Documentation
     url: https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar
   - type: APIReference
-    url: https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar/references/propertyradar_listportfolios
-  - type: DeveloperPortal
-    url: https://developer.domain.com.au/
-- aid: domain-group:domain-rental-avm-api
-  name: Domain Rental AVM API
-  description: Automated rental estimates for a Domain property identifier via GET /v1/properties/{propertyId}/rentalEstimate,
-    plus the /v1/avm and /v1/avmReport endpoints. Requires the api_avm_read scope.
-  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm
-  baseURL: https://api.domain.com.au
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  tags:
-  - Rentals
-  - AVM
-  - Valuation
-  properties:
-  - type: OpenAPI
-    url: openapi/domain-group-openapi-latest.json
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar/references/propertyradar_listportfolios
   - type: Documentation
     url: https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm
   - type: APIReference
-    url: https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm/references/properties_getrentalestimate
-  - type: DeveloperPortal
-    url: https://developer.domain.com.au/
-- aid: domain-group:domain-schools-data-api
-  name: Domain Schools Data API
-  description: Detailed information on Australian schools, retrievable by school identifier (GET /v2/schools/{id})
-    or by latitude and longitude (GET /v2/schools/{latitude}/{longitude}) for school-catchment style property
-    search experiences.
-  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_schools_data
-  baseURL: https://api.domain.com.au
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  tags:
-  - Schools
-  - Location Data
-  - Property Data
-  properties:
-  - type: OpenAPI
-    url: openapi/domain-group-openapi-latest.json
-  - type: OpenAPI
-    url: openapi/domain-group-openapi-v2.json
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm/references/properties_getrentalestimate
   - type: Documentation
     url: https://developer.domain.com.au/docs/latest/apis/pkg_schools_data
   - type: APIReference
-    url: https://developer.domain.com.au/docs/latest/apis/pkg_schools_data/references/schools_search_bylocation
-  - type: DeveloperPortal
-    url: https://developer.domain.com.au/
-- aid: domain-group:domain-webhooks-api
-  name: Domain Webhooks API
-  description: Subscription management for push notifications when data changes in the Domain system.
-    Create, read, list, and delete webhook subscriptions via /v1/webhooks/{id}/subscriptions and /v1/subscriptions/{id},
-    with configuration, processing, and troubleshooting guides. Requires the api_webhooks_write scope.
-  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks
-  baseURL: https://api.domain.com.au
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  tags:
-  - Webhook
-  - Event
-  - Real-Estate
-  tags_raw:
-  - Webhooks
-  - Events
-  - Real Estate
-  properties:
-  - type: OpenAPI
-    url: openapi/domain-group-openapi-latest.json
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_schools_data/references/schools_search_bylocation
   - type: Documentation
     url: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks
   - type: Documentation
     url: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/guides/subscriptions
   - type: APIReference
-    url: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/references/webhooks_createsubscription
-  - type: DeveloperPortal
-    url: https://developer.domain.com.au/
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/references/webhooks_createsubscription
   - type: Webhooks
     url: asyncapi/domain-group-webhooks.yml
   - type: AsyncAPI
     url: asyncapi/domain-group-webhooks-asyncapi.yml
-  - type: AgentSkill
-    url: skills/domain-group-webhook-subscriptions.md
-    name: Subscribe to Domain webhooks and process notifications
+- aid: domain-group:domain-group-agencies-api
+  name: Domain Group Agencies API
+  description: The Agencies API from Domain Group — 5 operation(s) for agencies.
+  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  baseURL: https://api.domain.com.au
+  tags:
+  - Agencies
+  properties:
+  - type: OpenAPI
+    url: openapi/domain-group-agencies-api-openapi.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion/references/properties_suggest
+  - type: DeveloperPortal
+    url: https://developer.domain.com.au/
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings/references/listings_detailedresidentialsearch
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api/references/campaign_getlistingperformance_report
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api_preview
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_listing_management
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/upload-listings
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/agency-authorisation
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/production-access
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/migrating-from-xml
+  - type: Sandbox
+    url: sandbox/domain-group-sandbox.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation/references/properties_getpriceestimate
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations/references/suburbperformance_get_bynamedsuburb
+  - type: DataModel
+    url: data-model/domain-group-data-model.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment/references/propertyenrichment_get
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property
+  - type: APIReference
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property/references/properties_get
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar/references/propertyradar_listportfolios
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm/references/properties_getrentalestimate
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_schools_data
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_schools_data/references/schools_search_bylocation
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/guides/subscriptions
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/references/webhooks_createsubscription
+  - type: Webhooks
+    url: asyncapi/domain-group-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/domain-group-webhooks-asyncapi.yml
+- aid: domain-group:domain-group-agents-api
+  name: Domain Group Agents API
+  description: The Agents API from Domain Group — 4 operation(s) for agents.
+  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  baseURL: https://api.domain.com.au
+  tags:
+  - Agents
+  properties:
+  - type: OpenAPI
+    url: openapi/domain-group-agents-api-openapi.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion/references/properties_suggest
+  - type: DeveloperPortal
+    url: https://developer.domain.com.au/
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings/references/listings_detailedresidentialsearch
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api/references/campaign_getlistingperformance_report
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api_preview
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_listing_management
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/upload-listings
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/agency-authorisation
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/production-access
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/migrating-from-xml
+  - type: Sandbox
+    url: sandbox/domain-group-sandbox.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation/references/properties_getpriceestimate
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations/references/suburbperformance_get_bynamedsuburb
+  - type: DataModel
+    url: data-model/domain-group-data-model.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment/references/propertyenrichment_get
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property
+  - type: APIReference
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property/references/properties_get
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar/references/propertyradar_listportfolios
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm/references/properties_getrentalestimate
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_schools_data
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_schools_data/references/schools_search_bylocation
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/guides/subscriptions
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/references/webhooks_createsubscription
+  - type: Webhooks
+    url: asyncapi/domain-group-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/domain-group-webhooks-asyncapi.yml
+- aid: domain-group:domain-group-authorities-api
+  name: Domain Group Authorities API
+  description: The Authorities API from Domain Group — 6 operation(s) for authorities.
+  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  baseURL: https://api.domain.com.au
+  tags:
+  - Authorities
+  properties:
+  - type: OpenAPI
+    url: openapi/domain-group-authorities-api-openapi.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion/references/properties_suggest
+  - type: DeveloperPortal
+    url: https://developer.domain.com.au/
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings/references/listings_detailedresidentialsearch
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api/references/campaign_getlistingperformance_report
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api_preview
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_listing_management
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/upload-listings
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/agency-authorisation
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/production-access
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/migrating-from-xml
+  - type: Sandbox
+    url: sandbox/domain-group-sandbox.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation/references/properties_getpriceestimate
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations/references/suburbperformance_get_bynamedsuburb
+  - type: DataModel
+    url: data-model/domain-group-data-model.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment/references/propertyenrichment_get
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property
+  - type: APIReference
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property/references/properties_get
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar/references/propertyradar_listportfolios
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm/references/properties_getrentalestimate
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_schools_data
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_schools_data/references/schools_search_bylocation
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/guides/subscriptions
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/references/webhooks_createsubscription
+  - type: Webhooks
+    url: asyncapi/domain-group-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/domain-group-webhooks-asyncapi.yml
+- aid: domain-group:domain-group-campaignreporting-api
+  name: Domain Group Campaign Reporting API
+  description: The CampaignReporting API from Domain Group — 2 operation(s) for campaignreporting.
+  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  baseURL: https://api.domain.com.au
+  tags:
+  - CampaignReporting
+  properties:
+  - type: OpenAPI
+    url: openapi/domain-group-campaignreporting-api-openapi.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion/references/properties_suggest
+  - type: DeveloperPortal
+    url: https://developer.domain.com.au/
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings/references/listings_detailedresidentialsearch
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api/references/campaign_getlistingperformance_report
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api_preview
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_listing_management
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/upload-listings
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/agency-authorisation
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/production-access
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/migrating-from-xml
+  - type: Sandbox
+    url: sandbox/domain-group-sandbox.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation/references/properties_getpriceestimate
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations/references/suburbperformance_get_bynamedsuburb
+  - type: DataModel
+    url: data-model/domain-group-data-model.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment/references/propertyenrichment_get
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property
+  - type: APIReference
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property/references/properties_get
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar/references/propertyradar_listportfolios
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm/references/properties_getrentalestimate
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_schools_data
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_schools_data/references/schools_search_bylocation
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/guides/subscriptions
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/references/webhooks_createsubscription
+  - type: Webhooks
+    url: asyncapi/domain-group-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/domain-group-webhooks-asyncapi.yml
+- aid: domain-group:domain-group-dataset-api
+  name: Domain Group Dataset API
+  description: The Dataset API from Domain Group — 1 operation(s) for dataset.
+  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  baseURL: https://api.domain.com.au
+  tags:
+  - Dataset
+  properties:
+  - type: OpenAPI
+    url: openapi/domain-group-dataset-api-openapi.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion/references/properties_suggest
+  - type: DeveloperPortal
+    url: https://developer.domain.com.au/
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings/references/listings_detailedresidentialsearch
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api/references/campaign_getlistingperformance_report
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api_preview
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_listing_management
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/upload-listings
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/agency-authorisation
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/production-access
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/migrating-from-xml
+  - type: Sandbox
+    url: sandbox/domain-group-sandbox.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation/references/properties_getpriceestimate
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations/references/suburbperformance_get_bynamedsuburb
+  - type: DataModel
+    url: data-model/domain-group-data-model.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment/references/propertyenrichment_get
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property
+  - type: APIReference
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property/references/properties_get
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar/references/propertyradar_listportfolios
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm/references/properties_getrentalestimate
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_schools_data
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_schools_data/references/schools_search_bylocation
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/guides/subscriptions
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/references/webhooks_createsubscription
+  - type: Webhooks
+    url: asyncapi/domain-group-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/domain-group-webhooks-asyncapi.yml
+- aid: domain-group:domain-group-demographics-api
+  name: Domain Group Demographics API
+  description: The Demographics API from Domain Group — 1 operation(s) for demographics.
+  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  baseURL: https://api.domain.com.au
+  tags:
+  - Demographics
+  properties:
+  - type: OpenAPI
+    url: openapi/domain-group-demographics-api-openapi.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion/references/properties_suggest
+  - type: DeveloperPortal
+    url: https://developer.domain.com.au/
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings/references/listings_detailedresidentialsearch
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api/references/campaign_getlistingperformance_report
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api_preview
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_listing_management
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/upload-listings
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/agency-authorisation
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/production-access
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/migrating-from-xml
+  - type: Sandbox
+    url: sandbox/domain-group-sandbox.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation/references/properties_getpriceestimate
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations/references/suburbperformance_get_bynamedsuburb
+  - type: DataModel
+    url: data-model/domain-group-data-model.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment/references/propertyenrichment_get
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property
+  - type: APIReference
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property/references/properties_get
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar/references/propertyradar_listportfolios
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm/references/properties_getrentalestimate
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_schools_data
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_schools_data/references/schools_search_bylocation
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/guides/subscriptions
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/references/webhooks_createsubscription
+  - type: Webhooks
+    url: asyncapi/domain-group-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/domain-group-webhooks-asyncapi.yml
+- aid: domain-group:domain-group-disclaimers-api
+  name: Domain Group Disclaimers API
+  description: The Disclaimers API from Domain Group — 2 operation(s) for disclaimers.
+  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  baseURL: https://api.domain.com.au
+  tags:
+  - Disclaimers
+  properties:
+  - type: OpenAPI
+    url: openapi/domain-group-disclaimers-api-openapi.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion/references/properties_suggest
+  - type: DeveloperPortal
+    url: https://developer.domain.com.au/
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings/references/listings_detailedresidentialsearch
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api/references/campaign_getlistingperformance_report
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api_preview
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_listing_management
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/upload-listings
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/agency-authorisation
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/production-access
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/migrating-from-xml
+  - type: Sandbox
+    url: sandbox/domain-group-sandbox.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation/references/properties_getpriceestimate
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations/references/suburbperformance_get_bynamedsuburb
+  - type: DataModel
+    url: data-model/domain-group-data-model.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment/references/propertyenrichment_get
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property
+  - type: APIReference
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property/references/properties_get
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar/references/propertyradar_listportfolios
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm/references/properties_getrentalestimate
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_schools_data
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_schools_data/references/schools_search_bylocation
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/guides/subscriptions
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/references/webhooks_createsubscription
+  - type: Webhooks
+    url: asyncapi/domain-group-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/domain-group-webhooks-asyncapi.yml
+- aid: domain-group:domain-group-enquiries-api
+  name: Domain Group Enquiries API
+  description: The Enquiries API from Domain Group — 2 operation(s) for enquiries.
+  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  baseURL: https://api.domain.com.au
+  tags:
+  - Enquiries
+  properties:
+  - type: OpenAPI
+    url: openapi/domain-group-enquiries-api-openapi.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion/references/properties_suggest
+  - type: DeveloperPortal
+    url: https://developer.domain.com.au/
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings/references/listings_detailedresidentialsearch
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api/references/campaign_getlistingperformance_report
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api_preview
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_listing_management
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/upload-listings
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/agency-authorisation
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/production-access
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/migrating-from-xml
+  - type: Sandbox
+    url: sandbox/domain-group-sandbox.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation/references/properties_getpriceestimate
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations/references/suburbperformance_get_bynamedsuburb
+  - type: DataModel
+    url: data-model/domain-group-data-model.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment/references/propertyenrichment_get
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property
+  - type: APIReference
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property/references/properties_get
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar/references/propertyradar_listportfolios
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm/references/properties_getrentalestimate
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_schools_data
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_schools_data/references/schools_search_bylocation
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/guides/subscriptions
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/references/webhooks_createsubscription
+  - type: Webhooks
+    url: asyncapi/domain-group-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/domain-group-webhooks-asyncapi.yml
+- aid: domain-group:domain-group-leadscope-api
+  name: Domain Group Leadscope API
+  description: The Leadscope API from Domain Group — 2 operation(s) for leadscope.
+  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  baseURL: https://api.domain.com.au
+  tags:
+  - Leadscope
+  properties:
+  - type: OpenAPI
+    url: openapi/domain-group-leadscope-api-openapi.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion/references/properties_suggest
+  - type: DeveloperPortal
+    url: https://developer.domain.com.au/
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings/references/listings_detailedresidentialsearch
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api/references/campaign_getlistingperformance_report
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api_preview
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_listing_management
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/upload-listings
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/agency-authorisation
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/production-access
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/migrating-from-xml
+  - type: Sandbox
+    url: sandbox/domain-group-sandbox.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation/references/properties_getpriceestimate
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations/references/suburbperformance_get_bynamedsuburb
+  - type: DataModel
+    url: data-model/domain-group-data-model.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment/references/propertyenrichment_get
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property
+  - type: APIReference
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property/references/properties_get
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar/references/propertyradar_listportfolios
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm/references/properties_getrentalestimate
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_schools_data
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_schools_data/references/schools_search_bylocation
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/guides/subscriptions
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/references/webhooks_createsubscription
+  - type: Webhooks
+    url: asyncapi/domain-group-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/domain-group-webhooks-asyncapi.yml
+- aid: domain-group:domain-group-listings-api
+  name: Domain Group Listings API
+  description: The Listings API from Domain Group — 18 operation(s) for listings.
+  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  baseURL: https://api.domain.com.au
+  tags:
+  - Listings
+  properties:
+  - type: OpenAPI
+    url: openapi/domain-group-listings-api-openapi.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion/references/properties_suggest
+  - type: DeveloperPortal
+    url: https://developer.domain.com.au/
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings/references/listings_detailedresidentialsearch
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api/references/campaign_getlistingperformance_report
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api_preview
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_listing_management
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/upload-listings
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/agency-authorisation
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/production-access
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/migrating-from-xml
+  - type: Sandbox
+    url: sandbox/domain-group-sandbox.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation/references/properties_getpriceestimate
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations/references/suburbperformance_get_bynamedsuburb
+  - type: DataModel
+    url: data-model/domain-group-data-model.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment/references/propertyenrichment_get
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property
+  - type: APIReference
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property/references/properties_get
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar/references/propertyradar_listportfolios
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm/references/properties_getrentalestimate
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_schools_data
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_schools_data/references/schools_search_bylocation
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/guides/subscriptions
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/references/webhooks_createsubscription
+  - type: Webhooks
+    url: asyncapi/domain-group-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/domain-group-webhooks-asyncapi.yml
+- aid: domain-group:domain-group-listingsearch-api
+  name: Domain Group Listing Search API
+  description: The ListingSearch API from Domain Group — 2 operation(s) for listingsearch.
+  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  baseURL: https://api.domain.com.au
+  tags:
+  - ListingSearch
+  properties:
+  - type: OpenAPI
+    url: openapi/domain-group-listingsearch-api-openapi.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion/references/properties_suggest
+  - type: DeveloperPortal
+    url: https://developer.domain.com.au/
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings/references/listings_detailedresidentialsearch
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api/references/campaign_getlistingperformance_report
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api_preview
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_listing_management
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/upload-listings
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/agency-authorisation
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/production-access
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/migrating-from-xml
+  - type: Sandbox
+    url: sandbox/domain-group-sandbox.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation/references/properties_getpriceestimate
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations/references/suburbperformance_get_bynamedsuburb
+  - type: DataModel
+    url: data-model/domain-group-data-model.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment/references/propertyenrichment_get
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property
+  - type: APIReference
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property/references/properties_get
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar/references/propertyradar_listportfolios
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm/references/properties_getrentalestimate
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_schools_data
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_schools_data/references/schools_search_bylocation
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/guides/subscriptions
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/references/webhooks_createsubscription
+  - type: Webhooks
+    url: asyncapi/domain-group-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/domain-group-webhooks-asyncapi.yml
+- aid: domain-group:domain-group-locations-api
+  name: Domain Group Locations API
+  description: The Locations API from Domain Group — 1 operation(s) for locations.
+  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  baseURL: https://api.domain.com.au
+  tags:
+  - Locations
+  properties:
+  - type: OpenAPI
+    url: openapi/domain-group-locations-api-openapi.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion/references/properties_suggest
+  - type: DeveloperPortal
+    url: https://developer.domain.com.au/
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings/references/listings_detailedresidentialsearch
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api/references/campaign_getlistingperformance_report
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api_preview
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_listing_management
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/upload-listings
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/agency-authorisation
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/production-access
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/migrating-from-xml
+  - type: Sandbox
+    url: sandbox/domain-group-sandbox.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation/references/properties_getpriceestimate
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations/references/suburbperformance_get_bynamedsuburb
+  - type: DataModel
+    url: data-model/domain-group-data-model.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment/references/propertyenrichment_get
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property
+  - type: APIReference
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property/references/properties_get
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar/references/propertyradar_listportfolios
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm/references/properties_getrentalestimate
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_schools_data
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_schools_data/references/schools_search_bylocation
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/guides/subscriptions
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/references/webhooks_createsubscription
+  - type: Webhooks
+    url: asyncapi/domain-group-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/domain-group-webhooks-asyncapi.yml
+- aid: domain-group:domain-group-me-api
+  name: Domain Group Me API
+  description: The Me API from Domain Group — 3 operation(s) for me.
+  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  baseURL: https://api.domain.com.au
+  tags:
+  - Me
+  properties:
+  - type: OpenAPI
+    url: openapi/domain-group-me-api-openapi.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion/references/properties_suggest
+  - type: DeveloperPortal
+    url: https://developer.domain.com.au/
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings/references/listings_detailedresidentialsearch
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api/references/campaign_getlistingperformance_report
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api_preview
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_listing_management
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/upload-listings
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/agency-authorisation
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/production-access
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/migrating-from-xml
+  - type: Sandbox
+    url: sandbox/domain-group-sandbox.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation/references/properties_getpriceestimate
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations/references/suburbperformance_get_bynamedsuburb
+  - type: DataModel
+    url: data-model/domain-group-data-model.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment/references/propertyenrichment_get
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property
+  - type: APIReference
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property/references/properties_get
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar/references/propertyradar_listportfolios
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm/references/properties_getrentalestimate
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_schools_data
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_schools_data/references/schools_search_bylocation
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/guides/subscriptions
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/references/webhooks_createsubscription
+  - type: Webhooks
+    url: asyncapi/domain-group-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/domain-group-webhooks-asyncapi.yml
+- aid: domain-group:domain-group-premarket-api
+  name: Domain Group Pre Market API
+  description: The PreMarket API from Domain Group — 2 operation(s) for premarket.
+  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  baseURL: https://api.domain.com.au
+  tags:
+  - PreMarket
+  properties:
+  - type: OpenAPI
+    url: openapi/domain-group-premarket-api-openapi.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion/references/properties_suggest
+  - type: DeveloperPortal
+    url: https://developer.domain.com.au/
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings/references/listings_detailedresidentialsearch
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api/references/campaign_getlistingperformance_report
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api_preview
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_listing_management
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/upload-listings
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/agency-authorisation
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/production-access
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/migrating-from-xml
+  - type: Sandbox
+    url: sandbox/domain-group-sandbox.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation/references/properties_getpriceestimate
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations/references/suburbperformance_get_bynamedsuburb
+  - type: DataModel
+    url: data-model/domain-group-data-model.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment/references/propertyenrichment_get
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property
+  - type: APIReference
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property/references/properties_get
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar/references/propertyradar_listportfolios
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm/references/properties_getrentalestimate
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_schools_data
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_schools_data/references/schools_search_bylocation
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/guides/subscriptions
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/references/webhooks_createsubscription
+  - type: Webhooks
+    url: asyncapi/domain-group-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/domain-group-webhooks-asyncapi.yml
+- aid: domain-group:domain-group-products-api
+  name: Domain Group Products API
+  description: The Products API from Domain Group — 8 operation(s) for products.
+  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  baseURL: https://api.domain.com.au
+  tags:
+  - Products
+  properties:
+  - type: OpenAPI
+    url: openapi/domain-group-products-api-openapi.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion/references/properties_suggest
+  - type: DeveloperPortal
+    url: https://developer.domain.com.au/
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings/references/listings_detailedresidentialsearch
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api/references/campaign_getlistingperformance_report
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api_preview
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_listing_management
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/upload-listings
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/agency-authorisation
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/production-access
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/migrating-from-xml
+  - type: Sandbox
+    url: sandbox/domain-group-sandbox.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation/references/properties_getpriceestimate
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations/references/suburbperformance_get_bynamedsuburb
+  - type: DataModel
+    url: data-model/domain-group-data-model.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment/references/propertyenrichment_get
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property
+  - type: APIReference
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property/references/properties_get
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar/references/propertyradar_listportfolios
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm/references/properties_getrentalestimate
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_schools_data
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_schools_data/references/schools_search_bylocation
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/guides/subscriptions
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/references/webhooks_createsubscription
+  - type: Webhooks
+    url: asyncapi/domain-group-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/domain-group-webhooks-asyncapi.yml
+- aid: domain-group:domain-group-projects-api
+  name: Domain Group Projects API
+  description: The Projects API from Domain Group — 6 operation(s) for projects.
+  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  baseURL: https://api.domain.com.au
+  tags:
+  - Projects
+  properties:
+  - type: OpenAPI
+    url: openapi/domain-group-projects-api-openapi.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion/references/properties_suggest
+  - type: DeveloperPortal
+    url: https://developer.domain.com.au/
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings/references/listings_detailedresidentialsearch
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api/references/campaign_getlistingperformance_report
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api_preview
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_listing_management
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/upload-listings
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/agency-authorisation
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/production-access
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/migrating-from-xml
+  - type: Sandbox
+    url: sandbox/domain-group-sandbox.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation/references/properties_getpriceestimate
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations/references/suburbperformance_get_bynamedsuburb
+  - type: DataModel
+    url: data-model/domain-group-data-model.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment/references/propertyenrichment_get
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property
+  - type: APIReference
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property/references/properties_get
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar/references/propertyradar_listportfolios
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm/references/properties_getrentalestimate
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_schools_data
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_schools_data/references/schools_search_bylocation
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/guides/subscriptions
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/references/webhooks_createsubscription
+  - type: Webhooks
+    url: asyncapi/domain-group-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/domain-group-webhooks-asyncapi.yml
+- aid: domain-group:domain-group-properties-api
+  name: Domain Group Properties API
+  description: The Properties API from Domain Group — 10 operation(s) for properties.
+  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  baseURL: https://api.domain.com.au
+  tags:
+  - Properties
+  properties:
+  - type: OpenAPI
+    url: openapi/domain-group-properties-api-openapi.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion/references/properties_suggest
+  - type: DeveloperPortal
+    url: https://developer.domain.com.au/
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings/references/listings_detailedresidentialsearch
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api/references/campaign_getlistingperformance_report
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api_preview
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_listing_management
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/upload-listings
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/agency-authorisation
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/production-access
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/migrating-from-xml
+  - type: Sandbox
+    url: sandbox/domain-group-sandbox.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation/references/properties_getpriceestimate
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations/references/suburbperformance_get_bynamedsuburb
+  - type: DataModel
+    url: data-model/domain-group-data-model.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment/references/propertyenrichment_get
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property
+  - type: APIReference
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property/references/properties_get
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar/references/propertyradar_listportfolios
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm/references/properties_getrentalestimate
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_schools_data
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_schools_data/references/schools_search_bylocation
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/guides/subscriptions
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/references/webhooks_createsubscription
+  - type: Webhooks
+    url: asyncapi/domain-group-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/domain-group-webhooks-asyncapi.yml
+- aid: domain-group:domain-group-propertyavm-api
+  name: Domain Group Property Avm API
+  description: The PropertyAvm API from Domain Group — 2 operation(s) for propertyavm.
+  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  baseURL: https://api.domain.com.au
+  tags:
+  - PropertyAvm
+  properties:
+  - type: OpenAPI
+    url: openapi/domain-group-propertyavm-api-openapi.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion/references/properties_suggest
+  - type: DeveloperPortal
+    url: https://developer.domain.com.au/
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings/references/listings_detailedresidentialsearch
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api/references/campaign_getlistingperformance_report
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api_preview
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_listing_management
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/upload-listings
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/agency-authorisation
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/production-access
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/migrating-from-xml
+  - type: Sandbox
+    url: sandbox/domain-group-sandbox.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation/references/properties_getpriceestimate
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations/references/suburbperformance_get_bynamedsuburb
+  - type: DataModel
+    url: data-model/domain-group-data-model.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment/references/propertyenrichment_get
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property
+  - type: APIReference
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property/references/properties_get
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar/references/propertyradar_listportfolios
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm/references/properties_getrentalestimate
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_schools_data
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_schools_data/references/schools_search_bylocation
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/guides/subscriptions
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/references/webhooks_createsubscription
+  - type: Webhooks
+    url: asyncapi/domain-group-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/domain-group-webhooks-asyncapi.yml
+- aid: domain-group:domain-group-propertyfeatures-api
+  name: Domain Group Property Features API
+  description: The PropertyFeatures API from Domain Group — 1 operation(s) for propertyfeatures.
+  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  baseURL: https://api.domain.com.au
+  tags:
+  - PropertyFeatures
+  properties:
+  - type: OpenAPI
+    url: openapi/domain-group-propertyfeatures-api-openapi.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion/references/properties_suggest
+  - type: DeveloperPortal
+    url: https://developer.domain.com.au/
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings/references/listings_detailedresidentialsearch
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api/references/campaign_getlistingperformance_report
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api_preview
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_listing_management
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/upload-listings
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/agency-authorisation
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/production-access
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/migrating-from-xml
+  - type: Sandbox
+    url: sandbox/domain-group-sandbox.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation/references/properties_getpriceestimate
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations/references/suburbperformance_get_bynamedsuburb
+  - type: DataModel
+    url: data-model/domain-group-data-model.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment/references/propertyenrichment_get
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property
+  - type: APIReference
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property/references/properties_get
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar/references/propertyradar_listportfolios
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm/references/properties_getrentalestimate
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_schools_data
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_schools_data/references/schools_search_bylocation
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/guides/subscriptions
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/references/webhooks_createsubscription
+  - type: Webhooks
+    url: asyncapi/domain-group-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/domain-group-webhooks-asyncapi.yml
+- aid: domain-group:domain-group-propertylike-api
+  name: Domain Group Property Like API
+  description: The PropertyLike API from Domain Group — 1 operation(s) for propertylike.
+  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  baseURL: https://api.domain.com.au
+  tags:
+  - PropertyLike
+  properties:
+  - type: OpenAPI
+    url: openapi/domain-group-propertylike-api-openapi.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion/references/properties_suggest
+  - type: DeveloperPortal
+    url: https://developer.domain.com.au/
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings/references/listings_detailedresidentialsearch
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api/references/campaign_getlistingperformance_report
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api_preview
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_listing_management
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/upload-listings
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/agency-authorisation
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/production-access
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/migrating-from-xml
+  - type: Sandbox
+    url: sandbox/domain-group-sandbox.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation/references/properties_getpriceestimate
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations/references/suburbperformance_get_bynamedsuburb
+  - type: DataModel
+    url: data-model/domain-group-data-model.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment/references/propertyenrichment_get
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property
+  - type: APIReference
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property/references/properties_get
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar/references/propertyradar_listportfolios
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm/references/properties_getrentalestimate
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_schools_data
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_schools_data/references/schools_search_bylocation
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/guides/subscriptions
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/references/webhooks_createsubscription
+  - type: Webhooks
+    url: asyncapi/domain-group-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/domain-group-webhooks-asyncapi.yml
+- aid: domain-group:domain-group-propertyradar-api
+  name: Domain Group Property Radar API
+  description: The PropertyRadar API from Domain Group — 7 operation(s) for propertyradar.
+  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  baseURL: https://api.domain.com.au
+  tags:
+  - PropertyRadar
+  properties:
+  - type: OpenAPI
+    url: openapi/domain-group-propertyradar-api-openapi.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion/references/properties_suggest
+  - type: DeveloperPortal
+    url: https://developer.domain.com.au/
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings/references/listings_detailedresidentialsearch
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api/references/campaign_getlistingperformance_report
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api_preview
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_listing_management
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/upload-listings
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/agency-authorisation
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/production-access
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/migrating-from-xml
+  - type: Sandbox
+    url: sandbox/domain-group-sandbox.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation/references/properties_getpriceestimate
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations/references/suburbperformance_get_bynamedsuburb
+  - type: DataModel
+    url: data-model/domain-group-data-model.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment/references/propertyenrichment_get
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property
+  - type: APIReference
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property/references/properties_get
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar/references/propertyradar_listportfolios
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm/references/properties_getrentalestimate
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_schools_data
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_schools_data/references/schools_search_bylocation
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/guides/subscriptions
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/references/webhooks_createsubscription
+  - type: Webhooks
+    url: asyncapi/domain-group-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/domain-group-webhooks-asyncapi.yml
+- aid: domain-group:domain-group-propertysearch-api
+  name: Domain Group Property Search API
+  description: The PropertySearch API from Domain Group — 1 operation(s) for propertysearch.
+  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  baseURL: https://api.domain.com.au
+  tags:
+  - PropertySearch
+  properties:
+  - type: OpenAPI
+    url: openapi/domain-group-propertysearch-api-openapi.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion/references/properties_suggest
+  - type: DeveloperPortal
+    url: https://developer.domain.com.au/
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings/references/listings_detailedresidentialsearch
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api/references/campaign_getlistingperformance_report
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api_preview
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_listing_management
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/upload-listings
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/agency-authorisation
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/production-access
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/migrating-from-xml
+  - type: Sandbox
+    url: sandbox/domain-group-sandbox.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation/references/properties_getpriceestimate
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations/references/suburbperformance_get_bynamedsuburb
+  - type: DataModel
+    url: data-model/domain-group-data-model.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment/references/propertyenrichment_get
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property
+  - type: APIReference
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property/references/properties_get
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar/references/propertyradar_listportfolios
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm/references/properties_getrentalestimate
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_schools_data
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_schools_data/references/schools_search_bylocation
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/guides/subscriptions
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/references/webhooks_createsubscription
+  - type: Webhooks
+    url: asyncapi/domain-group-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/domain-group-webhooks-asyncapi.yml
+- aid: domain-group:domain-group-propertyzoningperils-api
+  name: Domain Group Property Zoning Perils API
+  description: >-
+    The PropertyZoningPerils API from Domain Group — 1 operation(s) for propertyzoningperils.
+  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  baseURL: https://api.domain.com.au
+  tags:
+  - PropertyZoningPerils
+  properties:
+  - type: OpenAPI
+    url: openapi/domain-group-propertyzoningperils-api-openapi.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion/references/properties_suggest
+  - type: DeveloperPortal
+    url: https://developer.domain.com.au/
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings/references/listings_detailedresidentialsearch
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api/references/campaign_getlistingperformance_report
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api_preview
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_listing_management
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/upload-listings
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/agency-authorisation
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/production-access
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/migrating-from-xml
+  - type: Sandbox
+    url: sandbox/domain-group-sandbox.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation/references/properties_getpriceestimate
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations/references/suburbperformance_get_bynamedsuburb
+  - type: DataModel
+    url: data-model/domain-group-data-model.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment/references/propertyenrichment_get
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property
+  - type: APIReference
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property/references/properties_get
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar/references/propertyradar_listportfolios
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm/references/properties_getrentalestimate
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_schools_data
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_schools_data/references/schools_search_bylocation
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/guides/subscriptions
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/references/webhooks_createsubscription
+  - type: Webhooks
+    url: asyncapi/domain-group-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/domain-group-webhooks-asyncapi.yml
+- aid: domain-group:domain-group-salesresults-api
+  name: Domain Group Sales Results API
+  description: The SalesResults API from Domain Group — 5 operation(s) for salesresults.
+  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  baseURL: https://api.domain.com.au
+  tags:
+  - SalesResults
+  properties:
+  - type: OpenAPI
+    url: openapi/domain-group-salesresults-api-openapi.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion/references/properties_suggest
+  - type: DeveloperPortal
+    url: https://developer.domain.com.au/
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings/references/listings_detailedresidentialsearch
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api/references/campaign_getlistingperformance_report
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api_preview
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_listing_management
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/upload-listings
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/agency-authorisation
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/production-access
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/migrating-from-xml
+  - type: Sandbox
+    url: sandbox/domain-group-sandbox.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation/references/properties_getpriceestimate
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations/references/suburbperformance_get_bynamedsuburb
+  - type: DataModel
+    url: data-model/domain-group-data-model.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment/references/propertyenrichment_get
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property
+  - type: APIReference
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property/references/properties_get
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar/references/propertyradar_listportfolios
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm/references/properties_getrentalestimate
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_schools_data
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_schools_data/references/schools_search_bylocation
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/guides/subscriptions
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/references/webhooks_createsubscription
+  - type: Webhooks
+    url: asyncapi/domain-group-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/domain-group-webhooks-asyncapi.yml
+- aid: domain-group:domain-group-schools-api
+  name: Domain Group Schools API
+  description: The Schools API from Domain Group — 2 operation(s) for schools.
+  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  baseURL: https://api.domain.com.au
+  tags:
+  - Schools
+  properties:
+  - type: OpenAPI
+    url: openapi/domain-group-schools-api-openapi.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion/references/properties_suggest
+  - type: DeveloperPortal
+    url: https://developer.domain.com.au/
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings/references/listings_detailedresidentialsearch
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api/references/campaign_getlistingperformance_report
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api_preview
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_listing_management
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/upload-listings
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/agency-authorisation
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/production-access
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/migrating-from-xml
+  - type: Sandbox
+    url: sandbox/domain-group-sandbox.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation/references/properties_getpriceestimate
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations/references/suburbperformance_get_bynamedsuburb
+  - type: DataModel
+    url: data-model/domain-group-data-model.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment/references/propertyenrichment_get
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property
+  - type: APIReference
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property/references/properties_get
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar/references/propertyradar_listportfolios
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm/references/properties_getrentalestimate
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_schools_data
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_schools_data/references/schools_search_bylocation
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/guides/subscriptions
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/references/webhooks_createsubscription
+  - type: Webhooks
+    url: asyncapi/domain-group-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/domain-group-webhooks-asyncapi.yml
+- aid: domain-group:domain-group-statistics-api
+  name: Domain Group Statistics API
+  description: The Statistics API from Domain Group — 6 operation(s) for statistics.
+  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  baseURL: https://api.domain.com.au
+  tags:
+  - Statistics
+  properties:
+  - type: OpenAPI
+    url: openapi/domain-group-statistics-api-openapi.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion/references/properties_suggest
+  - type: DeveloperPortal
+    url: https://developer.domain.com.au/
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings/references/listings_detailedresidentialsearch
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api/references/campaign_getlistingperformance_report
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api_preview
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_listing_management
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/upload-listings
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/agency-authorisation
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/production-access
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/migrating-from-xml
+  - type: Sandbox
+    url: sandbox/domain-group-sandbox.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation/references/properties_getpriceestimate
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations/references/suburbperformance_get_bynamedsuburb
+  - type: DataModel
+    url: data-model/domain-group-data-model.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment/references/propertyenrichment_get
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property
+  - type: APIReference
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property/references/properties_get
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar/references/propertyradar_listportfolios
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm/references/properties_getrentalestimate
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_schools_data
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_schools_data/references/schools_search_bylocation
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/guides/subscriptions
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/references/webhooks_createsubscription
+  - type: Webhooks
+    url: asyncapi/domain-group-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/domain-group-webhooks-asyncapi.yml
+- aid: domain-group:domain-group-webhooks-api
+  name: Domain Group Webhooks API
+  description: The Webhooks API from Domain Group — 2 operation(s) for webhooks.
+  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  baseURL: https://api.domain.com.au
+  tags:
+  - Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/domain-group-webhooks-api-openapi.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion/references/properties_suggest
+  - type: DeveloperPortal
+    url: https://developer.domain.com.au/
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings/references/listings_detailedresidentialsearch
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api/references/campaign_getlistingperformance_report
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api_preview
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_listing_management
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/upload-listings
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/agency-authorisation
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/production-access
+  - type: Documentation
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/migrating-from-xml
+  - type: Sandbox
+    url: sandbox/domain-group-sandbox.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation/references/properties_getpriceestimate
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations/references/suburbperformance_get_bynamedsuburb
+  - type: DataModel
+    url: data-model/domain-group-data-model.yml
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment/references/propertyenrichment_get
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property
+  - type: APIReference
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_property/references/properties_get
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar/references/propertyradar_listportfolios
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm/references/properties_getrentalestimate
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_schools_data
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_schools_data/references/schools_search_bylocation
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks
+  - type: Documentation
+    url: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/guides/subscriptions
+  - type: APIReference
+    url: >-
+      https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/references/webhooks_createsubscription
+  - type: Webhooks
+    url: asyncapi/domain-group-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/domain-group-webhooks-asyncapi.yml
 common:
 - type: AgenticAccess
   url: agentic-access/domain-group-agentic-access.yml
