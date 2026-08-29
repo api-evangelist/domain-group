@@ -23,6 +23,18 @@ description: 'Domain Group (Domain Holdings Australia Ltd, trading as domain.com
   Property Identifier - RESO is a North American NAR-driven standard with no presence in the Australian
   portal duopoly - and it publishes no open, unlicensed dataset; all data is licensed under the Domain
   Group API Terms and Conditions.'
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://s.domainstatic.com.au/domain/144.png
 tags:
 - Real-Estate
