@@ -1,0 +1,70 @@
+slug: domain-group
+provider: Domain Group
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Real Estate
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 5
+edges:
+- tag: Webhooks
+  spec_file: domain-group-webhooks-api-openapi.yml
+  capability_id: BC-4270.80
+  capability_id_l1: BC-4270
+  capability_name: Webhook & Event Subscription Management
+  confidence: 0.85
+  evidence: PUT /v1/webhooks/{id}/subscriptions  Webhooks_CreateSubscription  Create a subscription to
+    notifications; schema Webhooks.v1.WebhookSubscription
+  reason: Lifecycle management of outbound webhook notification subscriptions exposed to API consumers
+    — exactly Webhook & Event Subscription Management in the developer-platform capability.
+- tag: Listings
+  spec_file: domain-group-listings-api-openapi.yml
+  capability_id: BC-4960.30
+  capability_id_l1: BC-4960
+  capability_name: Listing Data & MLS Management
+  confidence: 0.8
+  evidence: PUT /v1/listings/business — "Creates or updates a business listing"; PUT /v2/listings/commercial
+    — "Creates a commercial listing"; POST /v2/listings/commercial/offmarket — "takes an existing commercial
+    listing off the market"
+  reason: Full CRUD/upsert plus media, statistics and processing reports over portal listings for commercial
+    and business property — capture, publication and lifecycle of listing data on a property marketplace,
+    matching listing data / portal data management.
+- tag: PropertyAvm
+  spec_file: domain-group-propertyavm-api-openapi.yml
+  capability_id: BC-4970
+  capability_id_l1: BC-4970
+  capability_name: Real Estate Valuation & Appraisal Management
+  confidence: 0.8
+  evidence: GET /v1/avm/{propertyId}  "Creates a valuation for a given property id"; GET /v1/avmReport/{propertyId}  "Creates
+    a valuation PDF report for a given property id"; schemas DomainAvm.v1.SaleAvm, DomainAvm.v1.RentalAvm
+  reason: Automated valuation model producing property valuations and valuation reports — plainly real-estate
+    valuation. Left at L1 because it spans approach application and report production without matching
+    either sub-capability's professional-appraisal workflow.
+- tag: Authorities
+  spec_file: domain-group-authorities-api-openapi.yml
+  capability_id: BC-4960.10
+  capability_id_l1: BC-4960
+  capability_name: Listing Acquisition & Representation
+  confidence: 0.75
+  evidence: POST /v1/authorities  Authorities_Create  Creates a new authority into the system; Authorities.v1.VendorRequest,
+    Authorities.v1.MarketingCampaignRequest
+  reason: An 'authority' in Australian practice is the seller (vendor) agency agreement appointing the
+    agent to sell, here created and updated with vendor parties, marketing campaign items and signed attachments
+    — i.e. capture of listing mandates and the committed marketing plan.
+- tag: ListingSearch
+  spec_file: domain-group-listingsearch-api-openapi.yml
+  capability_id: BC-4960.30
+  capability_id_l1: BC-4960
+  capability_name: Listing Data & MLS Management
+  confidence: 0.7
+  evidence: POST /v1/listingSearch/residential/search — "Retrieves residential listings matching the specified
+    criteria"; POST /v1/listingSearch/residential/searchSold — "Retrieves sold residential listings"
+  reason: Query surface over the portal's residential and sold listing corpus (PropertyListing, PriceDetails,
+    Media, Inspection schemas), which is portal/MLS-equivalent listing data management and distribution.
+    Sold-listing search also feeds comparables, hence not full confidence on the sub-capability.

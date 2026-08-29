@@ -2640,6 +2640,9 @@ apis:
   - type: AsyncAPI
     url: asyncapi/domain-group-webhooks-asyncapi.yml
 common:
+- type: CapabilityMap
+  url: capabilities/domain-group-capability-edges.yml
+  name: Domain Group Business Capability Map
 - type: AgenticAccess
   url: agentic-access/domain-group-agentic-access.yml
 - type: DomainSecurity
