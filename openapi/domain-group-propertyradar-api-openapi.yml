@@ -1,0 +1,725 @@
+openapi: 3.2.0
+info:
+  title: Domain Group Property Radar API
+  contact:
+    name: Domain Developer Support
+    email: api@domain.com.au
+  termsOfService: https://developer.domain.com.au/docs/latest/support/terms
+  version: '1.0'
+  description: 'Operations tagged PropertyRadar across 2 of this provider''s published API definitions: domain-group-openapi-latest.json, domain-group-openapi-v1.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.domain.com.au/
+  description: Primary
+- url: https://api.domain.com.au/sandbox/
+  description: Sandbox
+tags:
+- name: PropertyRadar
+paths:
+  /v1/propertyradar/portfolio:
+    post:
+      tags:
+      - PropertyRadar
+      summary: Create Portfolio
+      description: Creates a portfolio and returns portfolio id
+      operationId: PropertyRadar_CreatePortfolio
+      requestBody:
+        content:
+          application/json:
+            schema:
+              anyOf:
+              - $ref: '#/components/schemas/PropertyActivityAPI.v1.PortfolioDetails'
+              - type: object
+                properties:
+                  empty:
+                    maxProperties: 0
+                    type: object
+                    description: Create an empty portfolio
+                additionalProperties: false
+        required: true
+      responses:
+        '200':
+          description: Portfolio created successfully - Portfolio ID returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PropertyActivityAPI.v1.PortfolioCreated'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Unexpected error
+      security:
+      - apikey: []
+      - oauth2:
+        - api_propertyportfolio_write
+      x-domain-endpointcost: 1
+      x-domain-usercontextrequired: false
+      x-domain-environment: Any
+    servers:
+    - url: https://api.domain.com.au/
+      description: Primary
+    - url: https://api.domain.com.au/sandbox/
+      description: Sandbox
+  /v1/propertyradar/portfolio/{PortfolioId}:
+    get:
+      tags:
+      - PropertyRadar
+      summary: View Properties in Portfolio
+      description: List property and gnaf id's for an existing portfolio
+      operationId: PropertyRadar_ViewPortfolio
+      parameters:
+      - name: PortfolioId
+        in: path
+        required: true
+        schema:
+          pattern: ^PORTFOLIO_[0-9A-Fa-f]{32}$
+          type: string
+      responses:
+        '200':
+          description: List of property and gnaf id's
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  PortfolioId:
+                    pattern: ^PORTFOLIO_[0-9A-Fa-f]{32}$
+                    type: string
+                    example: PORTFOLIO_7eedc8e01b2942eaaa396de4b512f6a1
+                  Properties:
+                    type: object
+                    properties:
+                      PropertyIds:
+                        type: array
+                        items:
+                          type: string
+                        example:
+                        - AB-2872-NY
+                        - RF-8884-AK
+                      GnafIds:
+                        type: array
+                        items:
+                          type: string
+                        example:
+                        - GAVIC419677979
+                        - GANSW710292212
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Unexpected error
+      security:
+      - apikey: []
+      - oauth2:
+        - api_propertyportfolio_read
+      x-domain-endpointcost: 1
+      x-domain-usercontextrequired: false
+      x-domain-environment: Any
+    post:
+      tags:
+      - PropertyRadar
+      summary: Add Properties to Portfolio
+      description: Adds properties to a portfolio by property id's and/or gnaf id's
+      operationId: PropertyRadar_AddToPortfolio
+      parameters:
+      - name: PortfolioId
+        in: path
+        required: true
+        schema:
+          pattern: ^PORTFOLIO_[0-9A-Fa-f]{32}$
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PropertyActivityAPI.v1.PortfolioDetails'
+        required: true
+      responses:
+        '204':
+          description: Properties added successfully
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Unexpected error
+      security:
+      - apikey: []
+      - oauth2:
+        - api_propertyportfolio_write
+      x-domain-endpointcost: 1
+      x-domain-usercontextrequired: false
+      x-domain-environment: Any
+    delete:
+      tags:
+      - PropertyRadar
+      summary: Delete Portfolio
+      description: Deletes a portfolio and all associated properties
+      operationId: PropertyRadar_DeletePortfolio
+      parameters:
+      - name: PortfolioId
+        in: path
+        required: true
+        schema:
+          pattern: ^PORTFOLIO_[0-9A-Fa-f]{32}$
+          type: string
+      responses:
+        '204':
+          description: Portfolio deleted successfully
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Unexpected error
+      security:
+      - apikey: []
+      - oauth2:
+        - api_propertyportfolio_write
+      x-domain-endpointcost: 1
+      x-domain-usercontextrequired: false
+      x-domain-environment: Any
+    servers:
+    - url: https://api.domain.com.au/
+      description: Primary
+    - url: https://api.domain.com.au/sandbox/
+      description: Sandbox
+  /v1/propertyradar/portfolio/{PortfolioId}/properties:
+    get:
+      tags:
+      - PropertyRadar
+      summary: View Properties in Portfolio - Detailed
+      description: List property and gnaf id's with details for an existing portfolio, along with market status and last listed information. Results are returned one page at a time, with a default page size of 500000 records. Records are returned in alphabetical order, with Property ID's first followed by GNAF ID's.For PageSize greater than 10000, please don't use Domain Portal UI
+      operationId: PropertyRadar_ViewPortfolioFull
+      parameters:
+      - name: PortfolioId
+        in: path
+        required: true
+        schema:
+          pattern: ^PORTFOLIO_[0-9A-Fa-f]{32}$
+          type: string
+      - name: Page
+        in: query
+        description: The page of data to return
+        schema:
+          minimum: 1
+          type: integer
+          default: 1
+      - name: PageSize
+        in: query
+        description: The number of records per page
+        schema:
+          maximum: 1000000
+          minimum: 1
+          type: integer
+          default: 500000
+      responses:
+        '200':
+          description: List of property and gnaf id's
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Data:
+                    type: object
+                    properties:
+                      PortfolioId:
+                        pattern: ^PORTFOLIO_[0-9A-Fa-f]{32}$
+                        type: string
+                        example: PORTFOLIO_7eedc8e01b2942eaaa396de4b512f6a1
+                      Properties:
+                        type: object
+                        properties:
+                          PropertyIds:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                PropertyId:
+                                  type: string
+                                  example: AB-2872-NY
+                                MarketStatus:
+                                  enum:
+                                  - on-market
+                                  - off-market
+                                  - null
+                                  type:
+                                  - string
+                                  - 'null'
+                                  description: Whether the property is currently on the market. "null" = unknown
+                                  example: on-market
+                                SaleRentFlag:
+                                  enum:
+                                  - sale
+                                  - rent
+                                  - null
+                                  type:
+                                  - string
+                                  - 'null'
+                                  description: if MarketStatus = "on-market", then whether the property is for sale or rent, otherwise "null"
+                                  example: sale
+                                LastListedDate:
+                                  type:
+                                  - string
+                                  - 'null'
+                                  description: if MarketStatus = "on-market", then the date when the property was listed for sale or rent, otherwise "null"
+                                  format: date
+                                  example: '2024-04-20'
+                          GnafIds:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                GnafId:
+                                  type: string
+                                  example: GAVIC419677979
+                                MarketStatus:
+                                  enum:
+                                  - on-market
+                                  - off-market
+                                  - null
+                                  type:
+                                  - string
+                                  - 'null'
+                                  description: Whether the property is currently on the market. null = unknown
+                                  example: off-market
+                                SaleRentFlag:
+                                  enum:
+                                  - sale
+                                  - rent
+                                  - null
+                                  type:
+                                  - string
+                                  - 'null'
+                                  description: if MarketStatus = "on-market", then whether the property is for sale or rent, otherwise "null"
+                                  example: null
+                                LastListedDate:
+                                  type:
+                                  - string
+                                  - 'null'
+                                  description: if MarketStatus = "on-market", then the date when the property was listed for sale or rent, otherwise "null"
+                                  format: date
+                                  example: null
+                  Pagination:
+                    type: object
+                    properties:
+                      Total:
+                        type: integer
+                        description: The total number of property and gnaf id's in the portfolio
+                        example: 560000
+                      Page:
+                        type: integer
+                        description: Current page being returned
+                        example: 1
+                      PageSize:
+                        type: integer
+                        description: The maximum number of property + gnaf id's per page
+                        example: 100000
+                      TotalPages:
+                        type: integer
+                        description: The total number of available pages of data
+                        example: 6
+                      PrevPage:
+                        type:
+                        - string
+                        - 'null'
+                        description: A link to the previous page of data (if applicable)
+                      NextPage:
+                        type:
+                        - string
+                        - 'null'
+                        description: A link to the next page of data (if applicable)
+                        example: /portfolio/PORTFOLIO_7eedc8e01b2942eaaa396de4b512f6a1/properties?page=2
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Unexpected error
+      security:
+      - apikey: []
+      - oauth2:
+        - api_propertyportfolio_read
+      x-domain-endpointcost: 1
+      x-domain-usercontextrequired: false
+      x-domain-environment: Any
+    servers:
+    - url: https://api.domain.com.au/
+      description: Primary
+    - url: https://api.domain.com.au/sandbox/
+      description: Sandbox
+  /v1/propertyradar/portfolio/{PortfolioId}/properties/{PropertyId}:
+    get:
+      tags:
+      - PropertyRadar
+      summary: View Single Property in Portfolio - Detailed
+      description: Show market status and last listed information for a single property in a portfolio.
+      operationId: PropertyRadar_viewPortfolioFullSingle
+      parameters:
+      - name: PortfolioId
+        in: path
+        required: true
+        schema:
+          pattern: ^PORTFOLIO_[0-9A-Fa-f]{32}$
+          type: string
+      - name: PropertyId
+        in: path
+        required: true
+        schema:
+          pattern: ^[A-Z]{2}-\d{4}-[A-Z]{2}$
+          type: string
+      responses:
+        '200':
+          description: Property market status details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  PropertyId:
+                    type: string
+                    example: AB-2872-NY
+                  MarketStatus:
+                    enum:
+                    - on-market
+                    - off-market
+                    - null
+                    type:
+                    - string
+                    - 'null'
+                    description: Whether the property is currently on the market. "null" = unknown
+                    example: on-market
+                  SaleRentFlag:
+                    enum:
+                    - sale
+                    - rent
+                    - null
+                    type:
+                    - string
+                    - 'null'
+                    description: if MarketStatus = "on-market", then whether the property is for sale or rent, otherwise "null"
+                    example: sale
+                  LastListedDate:
+                    type:
+                    - string
+                    - 'null'
+                    description: if MarketStatus = "on-market", then the date when the property was listed for sale or rent, otherwise "null"
+                    format: date
+                    example: '2024-04-20'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Unexpected error
+      security:
+      - apikey: []
+      - oauth2:
+        - api_propertyportfolio_read
+      x-domain-endpointcost: 1
+      x-domain-usercontextrequired: false
+      x-domain-environment: Any
+    servers:
+    - url: https://api.domain.com.au/
+      description: Primary
+    - url: https://api.domain.com.au/sandbox/
+      description: Sandbox
+  /v1/propertyradar/portfolio/{PortfolioId}/properties/gnaf/{GnafId}:
+    get:
+      tags:
+      - PropertyRadar
+      summary: View Single Property in Portfolio - Detailed
+      description: Show market status and last listed information for a single property in a portfolio.
+      operationId: PropertyRadar_viewPortfolioFullSingleByGnafId
+      parameters:
+      - name: PortfolioId
+        in: path
+        required: true
+        schema:
+          pattern: ^PORTFOLIO_[0-9A-Fa-f]{32}$
+          type: string
+      - name: GnafId
+        in: path
+        required: true
+        schema:
+          pattern: ^GA[A-Z]{3}\d{9}$
+          type: string
+      responses:
+        '200':
+          description: Property market status details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  PropertyId:
+                    type: string
+                    example: AB-2872-NY
+                  GnafId:
+                    type: string
+                    example: GANSW110266652
+                  MarketStatus:
+                    enum:
+                    - on-market
+                    - off-market
+                    - null
+                    type:
+                    - string
+                    - 'null'
+                    description: Whether the property is currently on the market. "null" = unknown
+                    example: on-market
+                  SaleRentFlag:
+                    enum:
+                    - sale
+                    - rent
+                    - null
+                    type:
+                    - string
+                    - 'null'
+                    description: if MarketStatus = "on-market", then whether the property is for sale or rent, otherwise "null"
+                    example: sale
+                  LastListedDate:
+                    type:
+                    - string
+                    - 'null'
+                    description: if MarketStatus = "on-market", then the date when the property was listed for sale or rent, otherwise "null"
+                    format: date
+                    example: '2024-04-20'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Unexpected error
+      security:
+      - apikey: []
+      - oauth2:
+        - api_propertyportfolio_read
+      x-domain-endpointcost: 1
+      x-domain-usercontextrequired: false
+      x-domain-environment: Any
+    servers:
+    - url: https://api.domain.com.au/
+      description: Primary
+    - url: https://api.domain.com.au/sandbox/
+      description: Sandbox
+  /v1/propertyradar/portfolio/{PortfolioId}/property/delete:
+    post:
+      tags:
+      - PropertyRadar
+      summary: Remove Properties from Portfolio
+      description: Removes properties from a portfolio by property id's and/or gnaf id's, returning any id's that did not exist within the portfolio
+      operationId: PropertyRadar_RemoveFromPortfolio
+      parameters:
+      - name: PortfolioId
+        in: path
+        required: true
+        schema:
+          pattern: ^PORTFOLIO_[0-9A-Fa-f]{32}$
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PropertyActivityAPI.v1.PortfolioDetails'
+        required: true
+      responses:
+        '200':
+          description: Existing properties removed successfully, properties not in portfolio returned in response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  MissingPropertyIds:
+                    type: array
+                    items:
+                      type: string
+                    example:
+                    - AA-0000-AA
+                    - BB-000-BB
+                  MissingGnafIds:
+                    type: array
+                    items:
+                      type: string
+                    example:
+                    - AAAA000000000
+                    - BBBB000000000
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Unexpected error
+      security:
+      - apikey: []
+      - oauth2:
+        - api_propertyportfolio_write
+      x-domain-endpointcost: 1
+      x-domain-usercontextrequired: false
+      x-domain-environment: Any
+    servers:
+    - url: https://api.domain.com.au/
+      description: Primary
+    - url: https://api.domain.com.au/sandbox/
+      description: Sandbox
+  /v1/propertyradar/portfoliosummary:
+    get:
+      tags:
+      - PropertyRadar
+      summary: List Portfolios
+      description: List all portfolios for the customer with a count of associated property and gnaf id's
+      operationId: PropertyRadar_ListPortfolios
+      responses:
+        '200':
+          description: List of portfolios
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PropertyActivityAPI.v1.PortfolioList'
+        '400':
+          description: Bad request
+        '500':
+          description: Unexpected error
+      security:
+      - apikey: []
+      - oauth2:
+        - api_propertyportfolio_read
+      x-domain-endpointcost: 1
+      x-domain-usercontextrequired: false
+      x-domain-environment: Any
+    servers:
+    - url: https://api.domain.com.au/
+      description: Primary
+    - url: https://api.domain.com.au/sandbox/
+      description: Sandbox
+components:
+  schemas:
+    PropertyActivityAPI.v1.PortfolioCreated:
+      type: object
+      properties:
+        PortfolioId:
+          type: string
+          description: Unique ID for the portfolio
+          example: PORTFOLIO_7eedc8e01b2942eaaa396de4b512f6a1
+    PropertyActivityAPI.v1.PortfolioList:
+      type: object
+      properties:
+        Portfolios:
+          type: array
+          items:
+            type: object
+            properties:
+              PortfolioId:
+                type: string
+                example: PORTFOLIO_7eedc8e01b2942eaaa396de4b512f6a1
+              PropertyIdCount:
+                type: integer
+                description: Total number of property ids defined
+              GnafIdCount:
+                type: integer
+                description: Total number of gnaf ids defined
+    PropertyActivityAPI.v1.PortfolioDetails:
+      type: object
+      anyOf:
+      - required:
+        - PropertyIds
+      - required:
+        - GnafIds
+      properties:
+        PropertyIds:
+          maxItems: 5000
+          type: array
+          items:
+            pattern: ^[A-Z]{2}-\d{4}-[A-Z]{2}$
+            type: string
+          description: Array of property id's in format XX-9999-XX
+          example:
+          - AB-2872-NY
+          - RF-8884-AK
+        GnafIds:
+          maxItems: 5000
+          type: array
+          items:
+            pattern: ^\S+$
+            type: string
+          description: Array of gnaf id's
+          example:
+          - GAVIC419677979
+          - GANSW710292212
+      additionalProperties: false
+      description: Portfolio Details
+  securitySchemes:
+    apikey:
+      type: apiKey
+      description: API Key in Header
+      name: x-api-key
+      in: header
+    oauth2:
+      type: oauth2
+      description: OAuth 2
+      flows:
+        clientCredentials:
+          tokenUrl: https://auth.domain.com.au/v1/connect/token
+          scopes:
+            api_addresslocators_read: api_addresslocators_read
+            api_agencies_read: api_agencies_read
+            api_agencies_write: api_agencies_write
+            api_authorities_write: api_authorities_write
+            api_avm_read: api_avm_read
+            api_campaignperformance_read: api_campaignperformance_read
+            api_dataset_read: api_dataset_read
+            api_demographics_read: api_demographics_read
+            api_enquiries_read: api_enquiries_read
+            api_enquiries_write: api_enquiries_write
+            api_listingperformance_read: api_listingperformance_read
+            api_listings_read: api_listings_read
+            api_listings_write: api_listings_write
+            api_locations_read: api_locations_read
+            api_projectperformance_read: api_projectperformance_read
+            api_properties_read: api_properties_read
+            api_propertyportfolio_read: api_propertyportfolio_read
+            api_propertyportfolio_write: api_propertyportfolio_write
+            api_propertyreports_read: api_propertyreports_read
+            api_salesresults_read: api_salesresults_read
+            api_statistics_write: api_statistics_write
+            api_suburbhistorical_read: api_suburbhistorical_read
+            api_suburbperformance_read: api_suburbperformance_read
+            api_suburbsummary_read: api_suburbsummary_read
+            api_webhooks_write: api_webhooks_write
+        authorizationCode:
+          authorizationUrl: https://auth.domain.com.au/v1/connect/authorize
+          tokenUrl: https://auth.domain.com.au/v1/connect/token
+          refreshUrl: https://auth.domain.com.au/v1/connect/token
+          scopes:
+            api_addresslocators_read: api_addresslocators_read
+            api_agencies_read: api_agencies_read
+            api_agencies_write: api_agencies_write
+            api_authorities_write: api_authorities_write
+            api_avm_read: api_avm_read
+            api_campaignperformance_read: api_campaignperformance_read
+            api_dataset_read: api_dataset_read
+            api_demographics_read: api_demographics_read
+            api_enquiries_read: api_enquiries_read
+            api_enquiries_write: api_enquiries_write
+            api_listingperformance_read: api_listingperformance_read
+            api_listings_read: api_listings_read
+            api_listings_write: api_listings_write
+            api_locations_read: api_locations_read
+            api_projectperformance_read: api_projectperformance_read
+            api_properties_read: api_properties_read
+            api_propertyportfolio_read: api_propertyportfolio_read
+            api_propertyportfolio_write: api_propertyportfolio_write
+            api_propertyreports_read: api_propertyreports_read
+            api_salesresults_read: api_salesresults_read
+            api_statistics_write: api_statistics_write
+            api_suburbhistorical_read: api_suburbhistorical_read
+            api_suburbperformance_read: api_suburbperformance_read
+            api_suburbsummary_read: api_suburbsummary_read
+            api_webhooks_write: api_webhooks_write
+x-refined-from:
+- domain-group-openapi-latest.json
+- domain-group-openapi-v1.json

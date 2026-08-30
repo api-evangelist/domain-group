@@ -1,0 +1,411 @@
+openapi: 3.2.0
+info:
+  title: Domain Group Campaign Reporting API
+  contact:
+    name: Domain Developer Support
+    email: api@domain.com.au
+  termsOfService: https://developer.domain.com.au/docs/latest/support/terms
+  version: '1.0'
+  description: 'Operations tagged CampaignReporting across 2 of this provider''s published API definitions: domain-group-openapi-latest.json, domain-group-openapi-v1.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.domain.com.au/
+  description: Primary
+- url: https://api.domain.com.au/sandbox/
+  description: Sandbox
+tags:
+- name: CampaignReporting
+paths:
+  /v1/campaign/listing-performance:
+    get:
+      tags:
+      - CampaignReporting
+      summary: Retrieves listing performance metrics for the New Developer Listings (linked to New Developer Projects) managed by advertisers.
+      operationId: Campaign_GetListingPerformance_Report
+      parameters:
+      - name: listingId
+        in: query
+        schema:
+          type: string
+      - name: projectId
+        in: query
+        schema:
+          type: string
+      - name: startDate
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: endDate
+        in: query
+        schema:
+          type: string
+          format: date
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CampaignAPI.v1.ListingPerformanceDataResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/CampaignAPI.v1.HttpValidationProblemDetails'
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      security:
+      - apikey: []
+      - oauth2:
+        - api_campaignperformance_read
+        - api_listingperformance_read
+      x-domain-endpointcost: 1
+      x-domain-usercontextrequired: false
+      x-domain-environment: Any
+    servers:
+    - url: https://api.domain.com.au/
+      description: Primary
+    - url: https://api.domain.com.au/sandbox/
+      description: Sandbox
+  /v1/campaign/project-performance:
+    get:
+      tags:
+      - CampaignReporting
+      summary: Retrieves project performance metrics for the New Developer Projects managed by advertisers.
+      operationId: Campaign_GetProjectPerformance_Report
+      parameters:
+      - name: projectId
+        in: query
+        schema:
+          type: string
+      - name: startDate
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: endDate
+        in: query
+        schema:
+          type: string
+          format: date
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CampaignAPI.v1.ProjectPerformanceDataResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/CampaignAPI.v1.HttpValidationProblemDetails'
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      security:
+      - apikey: []
+      - oauth2:
+        - api_campaignperformance_read
+        - api_projectperformance_read
+      x-domain-endpointcost: 1
+      x-domain-usercontextrequired: false
+      x-domain-environment: Any
+    servers:
+    - url: https://api.domain.com.au/
+      description: Primary
+    - url: https://api.domain.com.au/sandbox/
+      description: Sandbox
+components:
+  schemas:
+    CampaignAPI.v1.HttpValidationProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+        errors:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: array
+            items:
+              type: string
+      additionalProperties: {}
+    CampaignAPI.v1.ListingPerformanceDataResponse:
+      required:
+      - data
+      type: object
+      properties:
+        data:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/CampaignAPI.v1.ListingPerformanceResponse'
+      additionalProperties: false
+    CampaignAPI.v1.Shares:
+      type: object
+      properties:
+        total:
+          type: integer
+          format: int32
+        listingLinkCopied:
+          type: integer
+          format: int32
+        sharedViaSocial:
+          type: integer
+          format: int32
+        sharedViaEmail:
+          type: integer
+          format: int32
+      additionalProperties: false
+    CampaignAPI.v1.ListingPerformanceResponse:
+      required:
+      - agencyName
+      - domainAgencyId
+      - ioNumber
+      - leads
+      - listingId
+      - projectId
+      - projectName
+      - shares
+      type: object
+      properties:
+        listingId:
+          type:
+          - string
+          - 'null'
+        projectId:
+          type:
+          - string
+          - 'null'
+        projectName:
+          type:
+          - string
+          - 'null'
+        domainAgencyId:
+          type:
+          - string
+          - 'null'
+        agencyName:
+          type:
+          - string
+          - 'null'
+        ioNumber:
+          type:
+          - string
+          - 'null'
+        date:
+          type: string
+          format: date
+        leads:
+          $ref: '#/components/schemas/CampaignAPI.v1.Leads'
+        photoViews:
+          type: integer
+          format: int32
+        mapViews:
+          type: integer
+          format: int32
+        pageViews:
+          type: integer
+          format: int32
+        floorPlanViews:
+          type: integer
+          format: int32
+        shares:
+          $ref: '#/components/schemas/CampaignAPI.v1.Shares'
+        shortlisted:
+          type: integer
+          format: int32
+      additionalProperties: false
+    CampaignAPI.v1.ProjectPerformanceResponse:
+      required:
+      - domainAgencyId
+      - ioNumber
+      - projectId
+      type: object
+      properties:
+        date:
+          type: string
+          format: date
+        domainAgencyId:
+          type:
+          - string
+          - 'null'
+        ioNumber:
+          type:
+          - string
+          - 'null'
+        projectId:
+          type:
+          - string
+          - 'null'
+        projectName:
+          type:
+          - string
+          - 'null'
+        pageViews:
+          type: integer
+          format: int32
+        saveAndShares:
+          type: integer
+          format: int32
+        totalLeads:
+          type: integer
+          format: int32
+        emailEnquiries:
+          type: integer
+          format: int32
+        phoneLeads:
+          type: integer
+          format: int32
+        phoneReveals:
+          type: integer
+          format: int32
+        agentDetailsViews:
+          type: integer
+          format: int32
+        photoViews:
+          type: integer
+          format: int32
+        videoViews:
+          type: integer
+          format: int32
+        mapViews:
+          type: integer
+          format: int32
+        spend:
+          type:
+          - number
+          - 'null'
+          format: double
+        cpe:
+          type:
+          - number
+          - 'null'
+          format: double
+      additionalProperties: false
+    CampaignAPI.v1.ProjectPerformanceDataResponse:
+      required:
+      - data
+      type: object
+      properties:
+        data:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/CampaignAPI.v1.ProjectPerformanceResponse'
+      additionalProperties: false
+    CampaignAPI.v1.Leads:
+      type: object
+      properties:
+        total:
+          type: integer
+          format: int32
+        emailEnquiries:
+          type: integer
+          format: int32
+        phoneLeads:
+          type: integer
+          format: int32
+        phoneReveals:
+          type: integer
+          format: int32
+      additionalProperties: false
+  securitySchemes:
+    apikey:
+      type: apiKey
+      description: API Key in Header
+      name: x-api-key
+      in: header
+    oauth2:
+      type: oauth2
+      description: OAuth 2
+      flows:
+        clientCredentials:
+          tokenUrl: https://auth.domain.com.au/v1/connect/token
+          scopes:
+            api_addresslocators_read: api_addresslocators_read
+            api_agencies_read: api_agencies_read
+            api_agencies_write: api_agencies_write
+            api_authorities_write: api_authorities_write
+            api_avm_read: api_avm_read
+            api_campaignperformance_read: api_campaignperformance_read
+            api_dataset_read: api_dataset_read
+            api_demographics_read: api_demographics_read
+            api_enquiries_read: api_enquiries_read
+            api_enquiries_write: api_enquiries_write
+            api_listingperformance_read: api_listingperformance_read
+            api_listings_read: api_listings_read
+            api_listings_write: api_listings_write
+            api_locations_read: api_locations_read
+            api_projectperformance_read: api_projectperformance_read
+            api_properties_read: api_properties_read
+            api_propertyportfolio_read: api_propertyportfolio_read
+            api_propertyportfolio_write: api_propertyportfolio_write
+            api_propertyreports_read: api_propertyreports_read
+            api_salesresults_read: api_salesresults_read
+            api_statistics_write: api_statistics_write
+            api_suburbhistorical_read: api_suburbhistorical_read
+            api_suburbperformance_read: api_suburbperformance_read
+            api_suburbsummary_read: api_suburbsummary_read
+            api_webhooks_write: api_webhooks_write
+        authorizationCode:
+          authorizationUrl: https://auth.domain.com.au/v1/connect/authorize
+          tokenUrl: https://auth.domain.com.au/v1/connect/token
+          refreshUrl: https://auth.domain.com.au/v1/connect/token
+          scopes:
+            api_addresslocators_read: api_addresslocators_read
+            api_agencies_read: api_agencies_read
+            api_agencies_write: api_agencies_write
+            api_authorities_write: api_authorities_write
+            api_avm_read: api_avm_read
+            api_campaignperformance_read: api_campaignperformance_read
+            api_dataset_read: api_dataset_read
+            api_demographics_read: api_demographics_read
+            api_enquiries_read: api_enquiries_read
+            api_enquiries_write: api_enquiries_write
+            api_listingperformance_read: api_listingperformance_read
+            api_listings_read: api_listings_read
+            api_listings_write: api_listings_write
+            api_locations_read: api_locations_read
+            api_projectperformance_read: api_projectperformance_read
+            api_properties_read: api_properties_read
+            api_propertyportfolio_read: api_propertyportfolio_read
+            api_propertyportfolio_write: api_propertyportfolio_write
+            api_propertyreports_read: api_propertyreports_read
+            api_salesresults_read: api_salesresults_read
+            api_statistics_write: api_statistics_write
+            api_suburbhistorical_read: api_suburbhistorical_read
+            api_suburbperformance_read: api_suburbperformance_read
+            api_suburbsummary_read: api_suburbsummary_read
+            api_webhooks_write: api_webhooks_write
+x-refined-from:
+- domain-group-openapi-latest.json
+- domain-group-openapi-v1.json

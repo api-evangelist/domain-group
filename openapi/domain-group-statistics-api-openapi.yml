@@ -1,0 +1,878 @@
+openapi: 3.2.0
+info:
+  title: Domain Group Statistics API
+  contact:
+    name: Domain Developer Support
+    email: api@domain.com.au
+  termsOfService: https://developer.domain.com.au/docs/latest/support/terms
+  version: '1.0'
+  description: 'Operations tagged Statistics across 3 of this provider''s published API definitions: domain-group-openapi-latest.json, domain-group-openapi-v1.json, domain-group-openapi-v2.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.domain.com.au/
+  description: Primary
+- url: https://api.domain.com.au/sandbox/
+  description: Sandbox
+tags:
+- name: Statistics
+paths:
+  /v1/statistics/{event}:
+    post:
+      tags:
+      - Statistics
+      summary: Record a statistic event along with its associated metadata (if applicable)
+      operationId: Statistics_Post
+      parameters:
+      - name: event
+        in: path
+        description: The event type
+        required: true
+        schema:
+          enum:
+          - listingViewed
+          - listingImageGalleryViewed
+          - listingImageViewed
+          - listingMapViewed
+          - listingVideoViewed
+          - listingFloorPlanViewed
+          - listingAddedToShortlist
+          - listingAgentCalled
+          - listingAgentPhoneRevealed
+          - listingNotesAdded
+          - listingEmailedToAFriend
+          - listingEnquirySent
+          - loanEventRaised
+          type: string
+      requestBody:
+        description: A JSON object dictionary of the metadata associated with the event.
+        content:
+          application/json:
+            schema:
+              type: object
+          text/json:
+            schema:
+              type: object
+          text/html:
+            schema:
+              type: object
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+        required: true
+        x-bodyName: eventMetaData
+      responses:
+        '202':
+          description: The statistic event has been queued for reporting.
+        '400':
+          description: There was a validation error with the supplied data. Check the error message for details
+      security:
+      - apikey: []
+      - oauth2:
+        - api_statistics_write
+      x-domain-usercontextrequired: false
+      x-domain-endpointcost: 1
+      x-domain-environment: Any
+    servers:
+    - url: https://api.domain.com.au/
+      description: Primary
+    - url: https://api.domain.com.au/sandbox/
+      description: Sandbox
+  /v1/suburbHistorical/{state}/{suburb}/{postcode}:
+    get:
+      tags:
+      - Statistics
+      summary: Suburb Historical
+      description: Retrieve suburb historical data (up to 5 years) by state, suburb and postcode
+      operationId: SuburbHistorical_Get
+      parameters:
+      - name: state
+        in: path
+        description: 'The Australian state abbreviation
+
+          '
+        required: true
+        style: simple
+        schema:
+          enum:
+          - NSW
+          - VIC
+          - QLD
+          - SA
+          - WA
+          - TAS
+          - NT
+          - ACT
+          type: string
+        example: NSW
+      - name: suburb
+        in: path
+        description: 'Suburb name to retrieve data for
+
+          '
+        required: true
+        style: simple
+        schema:
+          type: string
+        example: Pyrmont
+      - name: postcode
+        in: path
+        description: 'Suburb Post Code for suburbs with official post codes.
+
+          '
+        required: true
+        style: simple
+        schema:
+          pattern: ^\d{4}$
+          type: string
+        example: '2009'
+      - name: propertyCategory
+        in: query
+        description: 'Category of sales results to show
+
+          Available values : house, unit
+
+          Default value : house
+
+          '
+        style: form
+        schema:
+          enum:
+          - House
+          - Unit
+          type: string
+      - name: periodSize
+        in: query
+        description: 'Unit of the measurement period to use
+
+          Default value : quarters
+
+          '
+        style: form
+        schema:
+          enum:
+          - months
+          - quarters
+          - years
+          type: string
+      - name: hasBedroomSplits
+        in: query
+        description: "Whether to include bedroom splits in summary data. When true or omitted, returns aggregated data plus splits by bedroom count. When false, returns only the total aggregated record. \nDefault value : true\n"
+        style: form
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Historical data returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuburbSummaryAndHistorical'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Unexpected error
+      security:
+      - apikey: []
+      - oauth2:
+        - api_suburbhistorical_read
+      x-domain-endpointcost: 1
+      x-domain-usercontextrequired: false
+      x-domain-environment: Any
+    servers:
+    - url: https://api.domain.com.au/
+      description: Primary
+    - url: https://api.domain.com.au/sandbox/
+      description: Sandbox
+  /v2/suburbPerformanceStatistics/{state}/{suburb}:
+    get:
+      tags:
+      - Statistics
+      summary: Suburb Performance by State/Suburb
+      description: Retrieve suburb performance data by state and suburb
+      operationId: SuburbPerformance_Get_ByNamedSuburb_WithoutPostcode
+      parameters:
+      - name: state
+        in: path
+        description: 'The Australian state abbreviation
+
+          '
+        required: true
+        style: simple
+        schema:
+          enum:
+          - NSW
+          - VIC
+          - QLD
+          - SA
+          - WA
+          - TAS
+          - NT
+          - ACT
+          type: string
+        example: NSW
+      - name: suburb
+        in: path
+        description: 'Suburb name to retrieve data for
+
+          '
+        required: true
+        style: simple
+        schema:
+          type: string
+        example: Pyrmont
+      - name: propertyCategory
+        in: query
+        description: 'Category of sales results to show
+
+          Available values : house, unit
+
+          Default value : house
+
+          '
+        style: form
+        schema:
+          enum:
+          - House
+          - Unit
+          type: string
+      - name: bedrooms
+        in: query
+        description: 'Number of bedrooms to use in the sales search
+
+          '
+        style: form
+        schema:
+          type: integer
+        example: 3
+      - name: periodSize
+        in: query
+        description: 'Unit of the measurement period to use
+
+          Default value : quarters
+
+          '
+        style: form
+        schema:
+          enum:
+          - quarters
+          - halfYears
+          - years
+          type: string
+      - name: startingPeriodRelativeToCurrent
+        in: query
+        description: 'When to start stats from. 1 = current period, 2 = previous period, etc.
+
+          Default value : 1
+
+          '
+        style: form
+        schema:
+          type: integer
+      - name: totalPeriods
+        in: query
+        description: 'Number of total periods to show statistics for. i.e. 4 Quarters would be 1 full year
+
+          Default value : 4
+
+          '
+        style: form
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Statistics data returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuburbPerformance'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Unexpected error
+      security:
+      - apikey: []
+      - oauth2:
+        - api_suburbperformance_read
+      x-domain-endpointcost: 1
+      x-domain-usercontextrequired: false
+      x-domain-environment: Any
+    servers:
+    - url: https://api.domain.com.au/
+      description: Primary
+    - url: https://api.domain.com.au/sandbox/
+      description: Sandbox
+  /v2/suburbPerformanceStatistics/{state}/{suburb}/{postcode}:
+    get:
+      tags:
+      - Statistics
+      summary: Suburb Performance by State/Suburb/Postcode
+      description: Retrieve suburb performance data by state, suburb and postcode
+      operationId: SuburbPerformance_Get_ByNamedSuburb
+      parameters:
+      - name: state
+        in: path
+        description: 'The Australian state abbreviation
+
+          '
+        required: true
+        style: simple
+        schema:
+          enum:
+          - NSW
+          - VIC
+          - QLD
+          - SA
+          - WA
+          - TAS
+          - NT
+          - ACT
+          type: string
+        example: NSW
+      - name: suburb
+        in: path
+        description: 'Suburb name to retrieve data for
+
+          '
+        required: true
+        style: simple
+        schema:
+          type: string
+        example: Pyrmont
+      - name: postcode
+        in: path
+        description: 'Suburb Post Code for suburbs with official post codes.
+
+          '
+        required: true
+        style: simple
+        schema:
+          pattern: ^\d{4}$
+          type: string
+        example: '2009'
+      - name: propertyCategory
+        in: query
+        description: 'Category of sales results to show
+
+          Available values : house, unit
+
+          Default value : house
+
+          '
+        style: form
+        schema:
+          enum:
+          - House
+          - Unit
+          type: string
+      - name: bedrooms
+        in: query
+        description: 'Number of bedrooms to use in the sales search
+
+          '
+        style: form
+        schema:
+          type: integer
+        example: 3
+      - name: periodSize
+        in: query
+        description: 'Unit of the measurement period to use
+
+          Default value : quarters
+
+          '
+        style: form
+        schema:
+          enum:
+          - quarters
+          - halfYears
+          - years
+          type: string
+      - name: startingPeriodRelativeToCurrent
+        in: query
+        description: 'When to start stats from. 1 = current period, 2 = previous period, etc.
+
+          Default value : 1
+
+          '
+        style: form
+        schema:
+          type: integer
+      - name: totalPeriods
+        in: query
+        description: 'Number of total periods to show statistics for. i.e. 4 Quarters would be 1 full year
+
+          Default value : 4
+
+          '
+        style: form
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Statistics data returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuburbPerformance'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Unexpected error
+      security:
+      - apikey: []
+      - oauth2:
+        - api_suburbperformance_read
+      x-domain-endpointcost: 1
+      x-domain-usercontextrequired: false
+      x-domain-environment: Any
+    servers:
+    - url: https://api.domain.com.au/
+      description: Primary
+    - url: https://api.domain.com.au/sandbox/
+      description: Sandbox
+  /v1/suburbSummary/{state}/{suburb}/{postcode}:
+    get:
+      tags:
+      - Statistics
+      summary: Suburb Summary
+      description: Retrieve suburb summary data (up to 12 months) by state, suburb and postcode
+      operationId: SuburbSummary_Get
+      parameters:
+      - name: state
+        in: path
+        description: 'The Australian state abbreviation
+
+          '
+        required: true
+        style: simple
+        schema:
+          enum:
+          - NSW
+          - VIC
+          - QLD
+          - SA
+          - WA
+          - TAS
+          - NT
+          - ACT
+          type: string
+        example: NSW
+      - name: suburb
+        in: path
+        description: 'Suburb name to retrieve data for
+
+          '
+        required: true
+        style: simple
+        schema:
+          type: string
+        example: Pyrmont
+      - name: postcode
+        in: path
+        description: 'Suburb Post Code for suburbs with official post codes.
+
+          '
+        required: true
+        style: simple
+        schema:
+          pattern: ^\d{4}$
+          type: string
+        example: '2009'
+      - name: propertyCategory
+        in: query
+        description: 'Category of sales results to show
+
+          Available values : house, unit
+
+          Default value : house
+
+          '
+        style: form
+        schema:
+          enum:
+          - House
+          - Unit
+          type: string
+      - name: periodSize
+        in: query
+        description: 'Unit of the measurement period to use
+
+          Default value : quarters
+
+          '
+        style: form
+        schema:
+          enum:
+          - months
+          - quarters
+          - years
+          type: string
+      - name: hasBedroomSplits
+        in: query
+        description: "Whether to include bedroom splits in summary data. When true or omitted, returns aggregated data plus splits by bedroom count. When false, returns only the total aggregated record. \nDefault value : true\n"
+        style: form
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Summary data returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuburbSummaryAndHistorical'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Unexpected error
+      security:
+      - apikey: []
+      - oauth2:
+        - api_suburbsummary_read
+      x-domain-endpointcost: 1
+      x-domain-usercontextrequired: false
+      x-domain-environment: Any
+    servers:
+    - url: https://api.domain.com.au/
+      description: Primary
+    - url: https://api.domain.com.au/sandbox/
+      description: Sandbox
+  /v1/suburbPerformanceStatistics:
+    get:
+      tags:
+      - Statistics
+      summary: Suburb Performance by Suburb ID
+      description: Retrieve suburb performance data by suburb id
+      operationId: SuburbPerformanceStatistics_Get
+      parameters:
+      - name: state
+        in: query
+        description: 'The Australian state abbreviation
+
+          '
+        required: true
+        style: form
+        schema:
+          type: string
+        example: NSW
+      - name: suburbId
+        in: query
+        description: 'The Suburb Identifier
+
+          '
+        required: true
+        style: form
+        schema:
+          type: integer
+        example: 123
+      - name: propertyCategory
+        in: query
+        description: 'Category of sales results to show
+
+          Available values : house, unit
+
+          Default value : house
+
+          '
+        required: true
+        style: form
+        schema:
+          type: string
+      - name: chronologicalSpan
+        in: query
+        description: 'The size of each chunk of information we want in months
+
+          '
+        required: true
+        style: form
+        schema:
+          enum:
+          - 3
+          - 6
+          - 12
+          type: integer
+      - name: tPlusFrom
+        in: query
+        description: 'Countdown number in chronological spans from the current (current chronological span is 1)
+
+          '
+        required: true
+        style: form
+        schema:
+          type: integer
+      - name: tPlusTo
+        in: query
+        description: 'Countdown number in chronological spans from the current (current chronological span is 1, 2 chronological spans ago is 3)
+
+          '
+        required: true
+        style: form
+        schema:
+          type: integer
+      - name: bedrooms
+        in: query
+        description: 'Number of bedrooms to use in the sales search
+
+          '
+        style: form
+        schema:
+          type: integer
+        example: 3
+      - name: values
+        in: query
+        description: 'Values to be returned for the series. If the field is not provided, all available values for the SeriesInfo will be returned. You can specify multiple values using comma separated text. Valid values are:
+
+          MedianSoldPrice, AuctionNumberAuctioned, AuctionNumberSold, AuctionNumberWithdrawn, NumberSold, LowestSoldPrice, HighestSoldPrice, 5thPercentileSoldPrice, 25thPercentileSoldPrice, 75thPercentileSoldPrice, 95thPercentileSoldPrice, DaysOnMarket, DiscountPercentage, MedianRentListingPrice, NumberRentListing, HighestRentListingPrice, LowestRentListingPrice, MedianSaleListingPrice, NumberSaleListing, HighestSaleListingPrice, LowestSaleListingPrice
+
+          '
+        style: form
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Statistics data returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuburbPerformance'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Unexpected error
+      deprecated: true
+      security:
+      - apikey: []
+      - oauth2:
+        - api_suburbperformance_read
+      x-domain-endpointcost: 1
+      x-domain-usercontextrequired: false
+      x-domain-environment: Any
+    servers:
+    - url: https://api.domain.com.au/
+      description: Primary
+    - url: https://api.domain.com.au/sandbox/
+      description: Sandbox
+components:
+  schemas:
+    SuburbPerformance:
+      type: object
+      properties:
+        header:
+          type: object
+          properties:
+            suburb:
+              type: string
+            state:
+              type: string
+            propertyCategory:
+              type: string
+        series:
+          type: object
+          properties:
+            seriesInfo:
+              type: array
+              items:
+                type: object
+                properties:
+                  year:
+                    type: integer
+                  month:
+                    type: integer
+                  values:
+                    type: object
+                    properties:
+                      medianSoldPrice:
+                        type: integer
+                      numberSold:
+                        type: integer
+                      highestSoldPrice:
+                        type: integer
+                      lowestSoldPrice:
+                        type: integer
+                      5thPercentileSoldPrice:
+                        type: integer
+                      25thPercentileSoldPrice:
+                        type: integer
+                      75thPercentileSoldPrice:
+                        type: integer
+                      95thPercentileSoldPrice:
+                        type: integer
+                      medianSaleListingPrice:
+                        type: integer
+                      numberSaleListing:
+                        type: integer
+                      highestSaleListingPrice:
+                        type: integer
+                      lowestSaleListingPrice:
+                        type: integer
+                      auctionNumberAuctioned:
+                        type: integer
+                      auctionNumberSold:
+                        type: integer
+                      auctionNumberWithdrawn:
+                        type: integer
+                      daysOnMarket:
+                        type: integer
+                      discountPercentage:
+                        type: number
+                        format: float
+                      medianRentListingPrice:
+                        type: integer
+                      numberRentListing:
+                        type: integer
+                      highestRentListingPrice:
+                        type: integer
+                      lowestRentListingPrice:
+                        type: integer
+                      meanRentYield:
+                        type: number
+                        format: float
+    SuburbSummaryAndHistorical:
+      type: object
+      properties:
+        header:
+          type: object
+          properties:
+            suburb:
+              type: string
+            state:
+              type: string
+            postcode:
+              type: string
+            propertyCategory:
+              type: string
+        series:
+          type: object
+          properties:
+            seriesInfo:
+              type: array
+              items:
+                type: object
+                properties:
+                  bedrooms:
+                    type: integer
+                  year:
+                    type: integer
+                  month:
+                    type: integer
+                  values:
+                    type: object
+                    properties:
+                      numberSold:
+                        type: integer
+                      medianSoldPrice:
+                        type: integer
+                      highestSoldPrice:
+                        type: integer
+                      lowestSoldPrice:
+                        type: integer
+                      numberSaleListing:
+                        type: integer
+                      medianSaleListingPrice:
+                        type: integer
+                      highestSaleListingPrice:
+                        type: integer
+                      lowestSaleListingPrice:
+                        type: integer
+                      daysOnMarket:
+                        type: integer
+                      meanRentYield:
+                        type: number
+                        format: float
+                      numberRentListing:
+                        type: integer
+                      medianRentListingPrice:
+                        type: integer
+                      highestRentListingPrice:
+                        type: integer
+                      lowestRentListingPrice:
+                        type: integer
+                      lowestDiscount:
+                        type: number
+                        format: float
+                      medianDiscount:
+                        type: number
+                        format: float
+                      highestDiscount:
+                        type: number
+                        format: float
+  securitySchemes:
+    apikey:
+      type: apiKey
+      description: API Key in Header
+      name: x-api-key
+      in: header
+    oauth2:
+      type: oauth2
+      description: OAuth 2
+      flows:
+        clientCredentials:
+          tokenUrl: https://auth.domain.com.au/v1/connect/token
+          scopes:
+            api_addresslocators_read: api_addresslocators_read
+            api_agencies_read: api_agencies_read
+            api_agencies_write: api_agencies_write
+            api_authorities_write: api_authorities_write
+            api_avm_read: api_avm_read
+            api_campaignperformance_read: api_campaignperformance_read
+            api_dataset_read: api_dataset_read
+            api_demographics_read: api_demographics_read
+            api_enquiries_read: api_enquiries_read
+            api_enquiries_write: api_enquiries_write
+            api_listingperformance_read: api_listingperformance_read
+            api_listings_read: api_listings_read
+            api_listings_write: api_listings_write
+            api_locations_read: api_locations_read
+            api_projectperformance_read: api_projectperformance_read
+            api_properties_read: api_properties_read
+            api_propertyportfolio_read: api_propertyportfolio_read
+            api_propertyportfolio_write: api_propertyportfolio_write
+            api_propertyreports_read: api_propertyreports_read
+            api_salesresults_read: api_salesresults_read
+            api_statistics_write: api_statistics_write
+            api_suburbhistorical_read: api_suburbhistorical_read
+            api_suburbperformance_read: api_suburbperformance_read
+            api_suburbsummary_read: api_suburbsummary_read
+            api_webhooks_write: api_webhooks_write
+        authorizationCode:
+          authorizationUrl: https://auth.domain.com.au/v1/connect/authorize
+          tokenUrl: https://auth.domain.com.au/v1/connect/token
+          refreshUrl: https://auth.domain.com.au/v1/connect/token
+          scopes:
+            api_addresslocators_read: api_addresslocators_read
+            api_agencies_read: api_agencies_read
+            api_agencies_write: api_agencies_write
+            api_authorities_write: api_authorities_write
+            api_avm_read: api_avm_read
+            api_campaignperformance_read: api_campaignperformance_read
+            api_dataset_read: api_dataset_read
+            api_demographics_read: api_demographics_read
+            api_enquiries_read: api_enquiries_read
+            api_enquiries_write: api_enquiries_write
+            api_listingperformance_read: api_listingperformance_read
+            api_listings_read: api_listings_read
+            api_listings_write: api_listings_write
+            api_locations_read: api_locations_read
+            api_projectperformance_read: api_projectperformance_read
+            api_properties_read: api_properties_read
+            api_propertyportfolio_read: api_propertyportfolio_read
+            api_propertyportfolio_write: api_propertyportfolio_write
+            api_propertyreports_read: api_propertyreports_read
+            api_salesresults_read: api_salesresults_read
+            api_statistics_write: api_statistics_write
+            api_suburbhistorical_read: api_suburbhistorical_read
+            api_suburbperformance_read: api_suburbperformance_read
+            api_suburbsummary_read: api_suburbsummary_read
+            api_webhooks_write: api_webhooks_write
+x-refined-from:
+- domain-group-openapi-latest.json
+- domain-group-openapi-v1.json
+- domain-group-openapi-v2.json

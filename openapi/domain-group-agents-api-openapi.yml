@@ -1,0 +1,2377 @@
+openapi: 3.2.0
+info:
+  title: Domain Group Agents API
+  contact:
+    name: Domain Developer Support
+    email: api@domain.com.au
+  termsOfService: https://developer.domain.com.au/docs/latest/support/terms
+  version: '1.0'
+  description: 'Operations tagged Agents across 2 of this provider''s published API definitions: domain-group-openapi-latest.json, domain-group-openapi-v1.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.domain.com.au/
+  description: Primary
+- url: https://api.domain.com.au/sandbox/
+  description: Sandbox
+tags:
+- name: Agents
+paths:
+  /v1/agents/{id}:
+    get:
+      tags:
+      - Agents
+      summary: Retrieves a specific agent details, including contact information.
+      operationId: Agents_Get
+      parameters:
+      - name: id
+        in: path
+        description: Agent identifier
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Agencies.V1.Agent'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+      security:
+      - apikey: []
+      - oauth2:
+        - api_agencies_read
+      x-domain-endpointcost: 1
+      x-domain-usercontextrequired: false
+      x-domain-environment: Any
+    servers:
+    - url: https://api.domain.com.au/
+      description: Primary
+    - url: https://api.domain.com.au/sandbox/
+      description: Sandbox
+  /v1/agents/{id}/listings:
+    get:
+      tags:
+      - Agents
+      summary: Gets listing using the contact id
+      operationId: Agents_GetListings
+      parameters:
+      - name: id
+        in: path
+        description: Id of the agent (contact)
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: dateUpdatedSince
+        in: query
+        description: Filter to remove listings not updated since before the given date time
+        schema:
+          type: string
+          format: date-time
+      - name: includedArchivedListings
+        in: query
+        description: Filter to remove listings that have been archived
+        schema:
+          type: boolean
+          default: false
+      - name: pageNumber
+        in: query
+        description: Page number for paginated results
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: pageSize
+        in: query
+        description: Page size for paginated results
+        schema:
+          type: integer
+          format: int32
+          default: 20
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Listings.V1.Listing'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+      security:
+      - apikey: []
+      - oauth2:
+        - api_listings_read
+      x-domain-endpointcost: 1
+      x-domain-usercontextrequired: false
+      x-domain-environment: Any
+    servers:
+    - url: https://api.domain.com.au/
+      description: Primary
+    - url: https://api.domain.com.au/sandbox/
+      description: Sandbox
+  /v1/agents/{id}/statistics:
+    get:
+      tags:
+      - Agents
+      summary: Retrieves stats for the listings of a given agent
+      operationId: Agents_GetStatistics
+      parameters:
+      - name: id
+        in: path
+        description: Agent identifier
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: timePeriod
+        in: query
+        description: 'The time period to show statistics for. Valid values are: `last7Days`, `last90Days`, `wholeCampaign`'
+        schema:
+          enum:
+          - last7Days
+          - last90Days
+          - wholeCampaign
+          type: string
+          description: Defines StatisticsTimePeriod
+          default: last7Days
+      - name: statusFilter
+        in: query
+        description: Listing filter
+        schema:
+          enum:
+          - live
+          - liveAndArchived
+          type: string
+          description: Which listings to filter based on status in lifecycle
+          default: liveAndArchived
+      - name: channel
+        in: query
+        description: Filter statistics for the given channel
+        schema:
+          enum:
+          - residential
+          - commercial
+          - business
+          type: string
+          description: Channel of the listing
+          default: residential
+      - name: pageNumber
+        in: query
+        description: Page number for paginated results
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: pageSize
+        in: query
+        description: Page size for paginated results
+        schema:
+          type: integer
+          format: int32
+          default: 20
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ListingPerformance.v1.Statistics'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+      security:
+      - apikey: []
+      - oauth2:
+        - api_agencies_read
+      x-domain-endpointcost: 1
+      x-domain-usercontextrequired: true
+      x-domain-environment: Primary
+    servers:
+    - url: https://api.domain.com.au/
+      description: Primary
+    - url: https://api.domain.com.au/sandbox/
+      description: Sandbox
+  /v1/agents/search:
+    get:
+      tags:
+      - Agents
+      summary: Search for agents by name.
+      description: The returned Agent ID can be used to get an agent details by ID. See `GET /agents/{id}/`
+      operationId: Agents_Search
+      parameters:
+      - name: query
+        in: query
+        description: The name, or portion of name, to search for.
+        required: true
+        schema:
+          type: string
+      - name: pageNumber
+        in: query
+        description: Page number for paginated results
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        description: Page size for paginated results (maximum 20)
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Domain.AgentSearch.v1.Model.AutoSuggestAgentResultDto'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Domain.AgentSearch.v1.Model.AutoSuggestAgentResultDto'
+            text/html:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Domain.AgentSearch.v1.Model.AutoSuggestAgentResultDto'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Domain.AgentSearch.v1.Model.AutoSuggestAgentResultDto'
+            text/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Domain.AgentSearch.v1.Model.AutoSuggestAgentResultDto'
+      security:
+      - apikey: []
+      - oauth2:
+        - api_agencies_read
+      x-domain-usercontextrequired: false
+      x-domain-endpointcost: 1
+      x-domain-environment: Primary
+    servers:
+    - url: https://api.domain.com.au/
+      description: Primary
+    - url: https://api.domain.com.au/sandbox/
+      description: Sandbox
+components:
+  schemas:
+    Listings.v1.ComparableData:
+      type: object
+      properties:
+        comparableProperty:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Listings.v1.PastSaleData'
+          description: Comparable properties that are of a similar standard or condition to the property for sale
+        declarationText:
+          type:
+          - string
+          - 'null'
+          description: Text description if there are less than three comparable sales available
+      additionalProperties: false
+      description: Information regarding the past comparable property sales that influenced the setting of the estimation price
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    Listings.V1.Listing:
+      required:
+      - advertiserIdentifiers
+      - id
+      - propertyTypes
+      type: object
+      properties:
+        objective:
+          enum:
+          - sale
+          - rent
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets Objective
+        status:
+          enum:
+          - unknown
+          - archived
+          - underOffer
+          - sold
+          - leased
+          - newDevelopment
+          - recentlyUpdated
+          - new
+          - live
+          - pending
+          - depositTaken
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets Status
+        saleMode:
+          enum:
+          - buy
+          - rent
+          - share
+          - sold
+          - leased
+          - archived
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets SaleMode
+        channel:
+          enum:
+          - residential
+          - commercial
+          - business
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets Channel
+        id:
+          type: integer
+          description: The identifier which uniquely identifies the listing.
+          format: int32
+        addressParts:
+          $ref: '#/components/schemas/Listings.V1.AddressParts'
+        advertiserIdentifiers:
+          $ref: '#/components/schemas/Listings.v1.AdvertiserIdentifiers'
+        apmIdentifiers:
+          $ref: '#/components/schemas/Listings.V1.AustralianPropertyMonitorsIdentifiers'
+        bathrooms:
+          type:
+          - number
+          - 'null'
+          description: Total number of bathrooms in the property
+          format: float
+        bedrooms:
+          type:
+          - number
+          - 'null'
+          description: Total number of bedrooms in the property; Studio apartments have a value of \"0\"
+          format: float
+        buildingArea:
+          type:
+          - string
+          - 'null'
+          description: The building area display value of the property e.g. 160 ha
+        buildingAreaSqm:
+          type:
+          - number
+          - 'null'
+          description: The properties building area in square meters
+          format: double
+        carspaces:
+          type:
+          - number
+          - 'null'
+          description: Total number of car spaces in the property.
+          format: float
+        dateAvailable:
+          type:
+          - string
+          - 'null'
+          description: The date the property is available. DateTime is in a local timezone.
+          format: date-time
+        dateCreated:
+          type:
+          - string
+          - 'null'
+          description: The date/time the listing was created. DateTime is in AEST (Australian Eastern Standard Time) or AEDT (Australian Eastern Daylight Time) timezone.
+          format: date-time
+        dateUpdated:
+          type:
+          - string
+          - 'null'
+          description: The date/time the listing had major update. DateTime is in AEST (Australian Eastern Standard Time) or AEDT (Australian Eastern Daylight Time) timezone.
+          format: date-time
+        dateMinorUpdated:
+          type:
+          - string
+          - 'null'
+          description: When minor update applied to the listing. DateTime is in AEST (Australian Eastern Standard Time) or AEDT (Australian Eastern Daylight Time) timezone.
+          format: date-time
+        datePurged:
+          type:
+          - string
+          - 'null'
+          description: The date/time the listing was purged. It's only returned for archived listings. DateTime is in AEST (Australian Eastern Standard Time) or AEDT (Australian Eastern Daylight Time) timezone.
+          format: date-time
+        dateListed:
+          type:
+          - string
+          - 'null'
+          description: The date/time last listed. DateTime is in AEST (Australian Eastern Standard Time) or AEDT (Australian Eastern Daylight Time) timezone.
+          format: date-time
+        description:
+          type:
+          - string
+          - 'null'
+          description: The long description of the property provided by the advertiser.
+        devProjectId:
+          type:
+          - integer
+          - 'null'
+          description: The ID of the development project - null if no associated project
+          format: int32
+        energyEfficiencyRating:
+          type:
+          - integer
+          - 'null'
+          description: Energy Efficiency Rating value for ACT properties
+          format: int32
+        features:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: The property features specified by the advertiser
+        geoLocation:
+          $ref: '#/components/schemas/Listings.v1.GeoLocation'
+        headline:
+          type:
+          - string
+          - 'null'
+          description: The short description of the property provided by the advertiser.
+        inspectionDetails:
+          $ref: '#/components/schemas/Listings.v1.PropertyInspections'
+        isNewDevelopment:
+          type:
+          - boolean
+          - 'null'
+          description: Indicates whether the property is a new development
+        landArea:
+          type:
+          - string
+          - 'null'
+          description: The land area display string for the property e.g. 160 sqm
+        landAreaSqm:
+          type:
+          - number
+          - 'null'
+          description: The properties land area in square meters
+          format: double
+        media:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Listings.v1.ListingMedia'
+          description: The media associated with the property provided by the advertiser
+        priceDetails:
+          $ref: '#/components/schemas/Listings.V1.PriceDetails'
+        propertyId:
+          type:
+          - string
+          - 'null'
+          description: The identifier which uniquely identifies the property being advertised.  This may be empty if the Address of property is poorly described
+        propertyTypes:
+          type: array
+          items:
+            enum:
+            - unknown
+            - accessoriesParts
+            - accommodationTourism
+            - accounting
+            - acreageSemiRural
+            - adult
+            - advertisingMarketing
+            - aerial
+            - aeronautical
+            - agedCare
+            - agricultural
+            - air
+            - aircraft
+            - alarms
+            - alcoholLiquor
+            - amusements
+            - animalRelated
+            - apartmentUnitFlat
+            - aquaculture
+            - aquaticMarineMarinaBerth
+            - artsCrafts
+            - autoElectrical
+            - automotive
+            - backpackerHostel
+            - bakery
+            - barsNightclubs
+            - beautyHealth
+            - beautyProducts
+            - beautySalon
+            - bikeAndMotorcycle
+            - blockOfUnits
+            - boardingKennels
+            - boatsMarineMarinaBerth
+            - bookkeeping
+            - brokerage
+            - builder
+            - buildingAndConstruction
+            - bus
+            - butcher
+            - cafeCoffeeShop
+            - car
+            - carBusTruck
+            - carDealership
+            - carRental
+            - carSpace
+            - carWash
+            - caravanPark
+            - carpenter
+            - catering
+            - childCare
+            - civil
+            - cleaning
+            - cleaningAndMaintenance
+            - clinicalPractice
+            - clothingAccessories
+            - clothingFootwear
+            - communication
+            - communications
+            - computerIT
+            - computerAndInternet
+            - construction
+            - convenienceStore
+            - copyLaminate
+            - courier
+            - cropHarvesting
+            - customs
+            - dairyFarming
+            - deli
+            - dental
+            - detailing
+            - developmentLand
+            - developmentSite
+            - distributors
+            - drivingSchools
+            - duplex
+            - educationTraining
+            - educational
+            - electrical
+            - employmentRecruitment
+            - entertainment
+            - entertainmentTechnology
+            - export
+            - farm
+            - farming
+            - fertiliser
+            - finance
+            - financialServices
+            - fishingForestry
+            - floristNursery
+            - foodBeverage
+            - foodBeverageHospitality
+            - franchiseBusinessOpportunities
+            - freight
+            - fruitVegFreshProduce
+            - fruitPicking
+            - functionCentre
+            - furnitureTimber
+            - gambling
+            - gardenHousehold
+            - gardenNurseries
+            - gardening
+            - glassCeramic
+            - guestHouseBB
+            - hairdresser
+            - healthBeauty
+            - healthSpa
+            - hire
+            - homeGarden
+            - homeBased
+            - newHomeDesigns
+            - homewareHardware
+            - hospital
+            - hotel
+            - hotelLeisure
+            - house
+            - newHouseLand
+            - huntingTrap
+            - import
+            - importExportWholesale
+            - industrialManufacturing
+            - industrialWarehouse
+            - insemination
+            - insurance
+            - internet
+            - irrigationServices
+            - juiceBar
+            - landClearing
+            - newLand
+            - landscaping
+            - laundryDryCleaning
+            - legal
+            - leisureEntertainment
+            - limousineTaxi
+            - livestock
+            - internationalCommercial
+            - machinery
+            - machineryMetal
+            - managementRights
+            - manufacturers
+            - manufacturingEngineering
+            - marine
+            - massage
+            - mechanicalRepair
+            - media
+            - medical
+            - medicalConsulting
+            - medicalPractice
+            - miningEarthMoving
+            - mobileServices
+            - motel
+            - motorcycle
+            - musicRelated
+            - mustering
+            - nails
+            - naturalTherapies
+            - newApartments
+            - newsagency
+            - nursery
+            - nursingHome
+            - offices
+            - officeSupplies
+            - oilGas
+            - panelBeating
+            - paperPrinting
+            - parkingCarSpace
+            - penthouse
+            - pestRelated
+            - pharmacies
+            - plastic
+            - plumbing
+            - poolWater
+            - postOffices
+            - printPhoto
+            - professional
+            - propertyRealEstate
+            - rail
+            - recreationSport
+            - recruitment
+            - repair
+            - resort
+            - restaurant
+            - retail
+            - retailer
+            - retirement
+            - retirementVillage
+            - road
+            - rural
+            - ruralCommercialFarming
+            - scientific
+            - sea
+            - security
+            - semiDetached
+            - serviceStation
+            - services
+            - shearing
+            - showroomsBulkyGoods
+            - specialistFarm
+            - sportsComplexGym
+            - studio
+            - supermarket
+            - takeawayFood
+            - taxi
+            - terrace
+            - themePark
+            - tours
+            - townhouse
+            - training
+            - transportDistribution
+            - travel
+            - truck
+            - vacantLand
+            - vending
+            - villa
+            - water
+            - welding
+            - wholesale
+            - wholesalers
+            - woolClassing
+            - wreckers
+            - servicedOffices
+            - other
+            - alcoholGrocery
+            - cafeRestaurants
+            - discountStore
+            - ecoFriendly
+            - green
+            - grocery
+            - specialityRetail
+            - storage
+            - travelAgency
+            - varietyStore
+            - chickenShop
+            - seafoodShop
+            - deliCafe
+            - cropping
+            - viticulture
+            - mixedFarming
+            - grazing
+            - horticulture
+            - equine
+            - farmlet
+            - orchard
+            - ruralLifestyle
+            - onlineBusiness
+            type: string
+            description: Available types of Properties  * `Unknown` - Unknown * `AccessoriesParts` - Accessories & Parts * `AccommodationTourism` - Accommodation & Tourism * `Accounting` - Accounting * `AcreageSemiRural` - Acreage/Semi-Rural * `Adult` - Adult * `AdvertisingMarketing` - Advertising / Marketing * `Aerial` - Aerial * `Aeronautical` - Aeronautical * `AgedCare` - Aged Care * `Agricultural` - Agricultural * `Air` - Air * `Aircraft` - Aircraft * `Alarms` - Alarms * `AlcoholLiquor` - Alcohol / Liquor * `Amusements` - Amusements * `AnimalRelated` - Animal Related * `ApartmentUnitFlat` - Apartment/Unit/Flat * `Aquaculture` - Aquaculture             commercial/rural type * `AquaticMarineMarinaBerth` - Aquatic / Marine / Marina Berth * `ArtsCrafts` - Arts / Crafts * `AutoElectrical` - Auto Electrical * `Automotive` - Automotive & Marine * `BackpackerHostel` - Backpacker / Hostel * `Bakery` - Bakery * `BarsNightclubs` - Bars / Nightclubs * `BeautyHealth` - Beauty & Health * `BeautyProducts` - Beauty Products * `BeautySalon` - Beauty Salon * `BikeAndMotorcycle` - Bike & Motorcycle * `BlockOfUnits` - Block of Units * `BoardingKennels` - Boarding Kennels * `BoatsMarineMarinaBerth` - Boats / Marine / Marina Berth * `Bookkeeping` - Bookkeeping * `Brokerage` - Brokerage * `Builder` - Builder * `BuildingAndConstruction` - Building & Construction * `Bus` - Bus * `Butcher` - Butcher * `CafeCoffeeShop` - Caf� * `Car` - Car * `CarBusTruck` - Car / Bus / Truck * `CarDealership` - Car Dealership * `CarRental` - Car Rental * `CarSpace` - Car Space * `CarWash` - Car Wash * `CaravanPark` - Caravan Park * `Carpenter` - Carpenter * `Catering` - Catering * `ChildCare` - Child Care * `Civil` - Civil * `Cleaning` - Cleaning Services * `CleaningAndMaintenance` - Cleaning & Maintenance * `ClinicalPractice` - Clinical Practice * `ClothingAccessories` - Clothing & Accessories * `ClothingFootwear` - Clothing / Footwear * `Communication` - Communication * `Communications` - Communications * `ComputerIT` - Computer & IT * `ComputerAndInternet` - Computer & Internet * `Construction` - Construction * `ConvenienceStore` - Convenience Store * `CopyLaminate` - Copy / Laminate * `Courier` - Courier * `CropHarvesting` - Crop Harvesting * `Customs` - Customs * `DairyFarming` - Dairy Farming             commercial/rural type * `Deli` - Deli * `Dental` - Dental * `Detailing` - Detailing * `DevelopmentLand` - Development Land * `DevelopmentSite` - Development Site * `Distributors` - Distributors * `DrivingSchools` - Driving Schools * `Duplex` - Duplex * `EducationTraining` - Education & Training * `Educational` - Educational * `Electrical` - Electrical * `EmploymentRecruitment` - Employment / Recruitment * `Entertainment` - Entertainment * `EntertainmentTechnology` - Entertainment / Technology * `Export` - Export * `Farm` - Farm * `Farming` - Farming * `Fertiliser` - Fertiliser * `Finance` - Finance * `FinancialServices` - Financial Services * `FishingForestry` - Fishing / Forestry             commercial/rural type * `FloristNursery` - Florist / Nursery * `FoodBeverage` - Food / Beverage * `FoodBeverageHospitality` - Food / Beverage / Hospitality * `FranchiseBusinessOpportunities` - Franchise & Business * `Freight` - Freight * `FruitVegFreshProduce` - Fruit & Veg / Fresh Produce * `FruitPicking` - Fruit Picking * `FunctionCentre` - Function Centre * `FurnitureTimber` - Furniture / Timber * `Gambling` - Gambling * `GardenHousehold` - Garden / Household * `GardenNurseries` - Garden / Nurseries * `Gardening` - Gardening * `GlassCeramic` - Glass / Ceramic * `GuestHouseBB` - Guest House / B&B * `Hairdresser` - Hair Dresser * `HealthBeauty` - Health / Beauty * `HealthSpa` - Health Spa * `Hire` - Hire * `HomeGarden` - Home & Garden * `HomeBased` - Home Based * `NewHomeDesigns` - New Home Designs * `HomewareHardware` - Homeware / Hardware * `Hospital` - Hospital * `Hotel` - Hotel * `HotelLeisure` - Hotel / Leisure             commercial type * `House` - House * `NewHouseLand` - New House Land * `HuntingTrap` - Hunting / Trap * `Import` - Import * `ImportExportWholesale` - Import / Export / Wholesale * `IndustrialManufacturing` - Industrial & Manufacturing * `IndustrialWarehouse` - Industrial Warehouse             /// commercial type * `Insemination` - Insemination * `Insurance` - Insurance * `Internet` - Internet * `IrrigationServices` - Irrigation Services             commercial/rural type * `JuiceBar` - Juice Bar * `LandClearing` - Land Clearing * `NewLand` - New Land * `Landscaping` - Landscaping * `LaundryDryCleaning` - Laundry / Dry Cleaning * `Legal` - Legal * `LeisureEntertainment` - Leisure & Entertainment * `LimousineTaxi` - Limousine / Taxi * `Livestock` - Livestock             commercial/rural type * `InternationalCommercial` - International Commercial             commercial type * `Machinery` - Machinery * `MachineryMetal` - Machinery & Metal * `ManagementRights` - Management Rights * `Manufacturers` - Manufacturers * `ManufacturingEngineering` - Manufacturing / Engineering * `Marine` - Marine * `Massage` - Massage * `MechanicalRepair` - Mechanical Repair * `Media` - Media * `Medical` - Medical / Hospital * `MedicalConsulting` - Medical Consulting             commercial type * `MedicalPractice` - Medical Practice * `MiningEarthMoving` - Mining / Earth Moving * `MobileServices` - Mobile Services * `Motel` - Motel * `Motorcycle` - Motorcycle * `MusicRelated` - Music Related * `Mustering` - Mustering * `Nails` - Nails * `NaturalTherapies` - Natural Therapies * `NewApartments` - New Apartments * `Newsagency` - Newsagency * `Nursery` - Nursery * `NursingHome` - Nursing Home * `Offices` - Offices             commercial type * `OfficeSupplies` - Office Supplies * `OilGas` - Oil / Gas * `PanelBeating` - Panel Beating * `PaperPrinting` - Paper / Printing * `ParkingCarSpace` - Parking / Car Space             commercial type * `Penthouse` - Penthouse * `PestRelated` - Pest Related * `Pharmacies` - Pharmacies * `Plastic` - Plastic * `Plumbing` - Plumbing * `PoolWater` - Pool / Water * `PostOffices` - Post Office * `PrintPhoto` - Print Photo * `Professional` - Professional * `PropertyRealEstate` - Real Estate * `Rail` - Rail * `RecreationSport` - Recreation / Sport * `Recruitment` - Recruitment * `Repair` - Repair * `Resort` - Resort * `Restaurant` - Restaurant * `Retail` - Retail             commercial type * `Retailer` - Retailer * `Retirement` - Retirement * `RetirementVillage` - Retirement Village * `Road` - Road * `Rural` - Rural & Farming * `RuralCommercialFarming` - Rural Commercial Farming * `Scientific` - Scientific * `Sea` - Sea * `Security` - Security * `SemiDetached` - Semi-Detached * `ServiceStation` - Service Station * `Services` - Services * `Shearing` - Shearing * `ShowroomsBulkyGoods` - Showrooms/Bulky Goods             commercial type * `SpecialistFarm` - Specialist Farm * `SportsComplexGym` - Gym / Sports Complex * `Studio` - Studio * `Supermarket` - Supermarket * `TakeawayFood` - Takeaway Food * `Taxi` - Taxi * `Terrace` - Terrace * `ThemePark` - Theme Park * `Tours` - Tours * `Townhouse` - Townhouse * `Training` - Training * `TransportDistribution` - Transport & Distribution * `Travel` - Travel * `Truck` - Truck * `VacantLand` - Vacant Land * `Vending` - Vending * `Villa` - Villa * `Water` - Water * `Welding` - Welding * `Wholesale` - Wholesale * `Wholesalers` - Wholesalers * `WoolClassing` - Wool Classing * `Wreckers` - Wreckers * `ServicedOffices` - Serviced Offices             commercial type * `Other` - Other             commercial type * `AlcoholGrocery` - Grocery & Alcohol * `CafeRestaurants` - Cafe / Restaurants * `DiscountStore` - Discount Store * `EcoFriendly` - Eco Friendly * `Green` - Green * `Grocery` - Grocery * `SpecialityRetail` - Speciality / Retail * `Storage` - Storage * `TravelAgency` - Travel Agency * `VarietyStore` - Variety Store * `ChickenShop` - Chicken Shop             commercial type * `SeafoodShop` - Seafood Shop             commercial type * `DeliCafe` - Deli Cafe             commercial type * `Cropping` - Cropping             commercial/rural type * `Viticulture` - Viticulture             commercial/rural type * `MixedFarming` - Mixed Farming             commercial type * `Grazing` - Grazing             commercial/rural type * `Horticulture` - Horticulture             commercial/rural type * `Equine` - Equine             commercial/rural type * `Farmlet` - Farmlet             commercial/rural type * `Orchard` - Orchard             commercial/rural type * `RuralLifestyle` - Rural Lifestyle             commercial/rural type * `OnlineBusiness` - Online Business
+          description: Types of the property
+        providerDetails:
+          $ref: '#/components/schemas/Listings.v1.ProviderDetails'
+        rentalDetails:
+          $ref: '#/components/schemas/Listings.V1.RentalDetails'
+        saleDetails:
+          $ref: '#/components/schemas/Listings.V1.SaleDetails'
+        isWithdrawn:
+          type:
+          - boolean
+          - 'null'
+          description: Indicates if the property has been withdrawn from the market  The value will be 'true' When a listing is taken off market without being sold or leased.
+        seoUrl:
+          type:
+          - string
+          - 'null'
+          description: Listing SEO URL
+        virtualTourUrl:
+          type:
+          - string
+          - 'null'
+          description: The Listing's Virtual Tour URL.
+        homepassEnabled:
+          type:
+          - boolean
+          - 'null'
+          description: If Homepass is enabled for the listing (agency)
+        statementOfInformation:
+          $ref: '#/components/schemas/Listings.v1.StatementOfInformation'
+        numberOfDwellings:
+          type:
+          - integer
+          - 'null'
+          description: Number of dwellings for current listing
+          format: int32
+        highlights:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Highlight items for the listing
+      additionalProperties: false
+      description: Listing
+      x-data-access-level-info:
+        Basic:
+        - Id
+        - Status
+        Detailed:
+        - Id
+        - Status
+        - ApmIdentifiers
+        - NumberOfDwellings
+        - PropertyId
+        - RentalDetails
+        - AddressParts
+        - AdvertiserIdentifiers
+        - Bathrooms
+        - Bedrooms
+        - BuildingAreaSqm
+        - Carspaces
+        - Channel
+        - DateAvailable
+        - DateListed
+        - DateUpdated
+        - Description
+        - DevProjectId
+        - EnergyEfficiencyRating
+        - Features
+        - GeoLocation
+        - Headline
+        - Highlights
+        - InspectionDetails
+        - IsNewDevelopment
+        - LandAreaSqm
+        - Media
+        - Objective
+        - PriceDetails
+        - PropertyTypes
+        - SaleDetails
+        - SaleMode
+        - SeoUrl
+        - StatementOfInformation
+        - VirtualTourUrl
+        Full:
+        - Id
+        - Status
+        - ApmIdentifiers
+        - NumberOfDwellings
+        - PropertyId
+        - RentalDetails
+        - AddressParts
+        - AdvertiserIdentifiers
+        - Bathrooms
+        - Bedrooms
+        - BuildingAreaSqm
+        - Carspaces
+        - Channel
+        - DateAvailable
+        - DateListed
+        - DateUpdated
+        - Description
+        - DevProjectId
+        - EnergyEfficiencyRating
+        - Features
+        - GeoLocation
+        - Headline
+        - Highlights
+        - InspectionDetails
+        - IsNewDevelopment
+        - LandAreaSqm
+        - Media
+        - Objective
+        - PriceDetails
+        - PropertyTypes
+        - SaleDetails
+        - SaleMode
+        - SeoUrl
+        - StatementOfInformation
+        - VirtualTourUrl
+        - BuildingArea
+        - LandArea
+        - DateCreated
+        - DateMinorUpdated
+        - DatePurged
+        - ProviderDetails
+        - HomepassEnabled
+        - IsWithdrawn
+    Listings.v1.AuctionDetails:
+      type: object
+      properties:
+        auctionSchedule:
+          $ref: '#/components/schemas/Listings.v1.AuctionSchedule'
+        auctionedPrice:
+          type:
+          - integer
+          - 'null'
+          description: The auctioned price entered by the Advertiser.  This price will only be visible if allowed by the Advertiser  and the listing as been auctioned
+          format: int32
+        auctionedDate:
+          type:
+          - string
+          - 'null'
+          description: The listing's last auctioned date and time specified by the Advertiser.  This will only be visible if the listing has been auctioned.  DateTime is in a local timezone.
+          format: date-time
+      additionalProperties: false
+      description: The detail's of the auction in case of a listing for sale being auctioned or sold by auction
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    Listings.v1.Inspection:
+      type: object
+      properties:
+        recurrence:
+          enum:
+          - none
+          - weekly
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets Recurrence
+        openingDateTime:
+          type:
+          - string
+          - 'null'
+          description: Opening date and time of the inspection. e.g. 2015-01-01T12:00:00.  Not provided by bulk uploaded listings, in these cases refer to the  inspection description field. DateTime is in a local timezone.
+          format: date-time
+        closingDateTime:
+          type:
+          - string
+          - 'null'
+          description: Closing date and time of the inspection. e.g. 2015-01-01T12:00:00  Not provided by bulk uploaded listings, in these cases refer to the  inspection description field. DateTime is in a local timezone.
+          format: date-time
+        description:
+          type:
+          - string
+          - 'null'
+          description: Description of the inspection provided by the Advertiser.  When listings are bulk uploaded, inspection times are provided as a string.  Other inspection details will not be provided
+      additionalProperties: false
+      description: Encapsulates the details of a Listing's Inspection
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    Listings.V1.AddressParts:
+      type: object
+      properties:
+        stateAbbreviation:
+          enum:
+          - nsw
+          - vic
+          - sa
+          - nt
+          - tas
+          - act
+          - qld
+          - wa
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets StateAbbreviation
+        displayType:
+          enum:
+          - fullAddress
+          - streetAndSuburb
+          - suburbOnly
+          - regionOnly
+          - areaOnly
+          - stateOnly
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets DisplayType
+        streetNumber:
+          type:
+          - string
+          - 'null'
+          description: Street number
+        unitNumber:
+          type:
+          - string
+          - 'null'
+          description: Unit number.
+        street:
+          type:
+          - string
+          - 'null'
+          description: Street address
+        suburb:
+          type:
+          - string
+          - 'null'
+          description: Suburb of the address
+        suburbId:
+          type:
+          - integer
+          - 'null'
+          description: Domain suburb identifier for address lookup via the domain location api
+          format: int32
+        postcode:
+          type:
+          - string
+          - 'null'
+          description: Postcode of the address
+        displayAddress:
+          type:
+          - string
+          - 'null'
+          description: Advertiser's preference in displaying their listing's address
+      additionalProperties: false
+      description: Encapsulates the parts that make up an Address
+      x-data-access-level-info:
+        Basic:
+        - DisplayAddress
+        - DisplayType
+        - StateAbbreviation
+        - Postcode
+        - Suburb
+        - SuburbId
+        - UnitNumber
+        - StreetNumber
+        - Street
+        Detailed:
+        - DisplayAddress
+        - DisplayType
+        - StateAbbreviation
+        - Postcode
+        - Suburb
+        - SuburbId
+        - UnitNumber
+        - StreetNumber
+        - Street
+        Full:
+        - DisplayAddress
+        - DisplayType
+        - StateAbbreviation
+        - Postcode
+        - Suburb
+        - SuburbId
+        - UnitNumber
+        - StreetNumber
+        - Street
+    Listings.V1.AustralianPropertyMonitorsIdentifiers:
+      type: object
+      properties:
+        addressId:
+          type:
+          - integer
+          - 'null'
+          description: APM address identifier
+          format: int32
+        streetId:
+          type:
+          - integer
+          - 'null'
+          description: APM street identifier
+          format: int32
+        suburbId:
+          type:
+          - integer
+          - 'null'
+          description: APM suburb identifier
+          format: int32
+        cadastreId:
+          type:
+          - integer
+          - 'null'
+          description: APM cadastre identifier
+          format: int64
+        postcodeId:
+          type:
+          - integer
+          - 'null'
+          description: APM postcode identifier
+          format: int32
+        stateId:
+          type:
+          - integer
+          - 'null'
+          description: State identifier
+          format: int32
+        state:
+          type:
+          - string
+          - 'null'
+          description: APM State
+        propertyTypeId:
+          type:
+          - integer
+          - 'null'
+          description: APM property type identifier
+          format: int32
+        propertyTypeCategoryId:
+          type:
+          - integer
+          - 'null'
+          description: APM property category type identifier
+          format: int32
+        streetNumber:
+          type:
+          - string
+          - 'null'
+          description: APM washed and standardized address component for the street number,   (including any prefixes, suffixed and composite numbers e.g. \"2-4a\")
+      additionalProperties: false
+      description: APM Identifiers
+      x-data-access-level-info:
+        Basic: []
+        Detailed:
+        - SuburbId
+        Full:
+        - SuburbId
+        - AddressId
+        - CadastreId
+        - PostcodeId
+        - PropertyTypeCategoryId
+        - PropertyTypeId
+        - State
+        - StateId
+        - StreetId
+        - StreetNumber
+    Listings.V1.SoldDetails:
+      type: object
+      properties:
+        soldAction:
+          enum:
+          - notStated
+          - auction
+          - privateTreaty
+          - withdrawn
+          - soldPriorToAuction
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets SoldAction
+        source:
+          enum:
+          - internal
+          - external
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets Source
+        soldPrice:
+          type:
+          - integer
+          - 'null'
+          description: The last sold price entered by the Advertiser.  This price will only be visible if allowed by the Advertiser  and the listing as been sold
+          format: int32
+        governmentRecordedSoldPrice:
+          type:
+          - integer
+          - 'null'
+          description: The government recorded sold price sourced from APM
+          format: int32
+        soldDate:
+          type:
+          - string
+          - 'null'
+          description: The Date the listing was sold. DateTime is in a local timezone.
+          format: date-time
+        canDisplayPrice:
+          type:
+          - boolean
+          - 'null'
+          description: Indicates whether this instance can display price
+      additionalProperties: false
+      description: Sold details in the case of the listing being sold.
+      x-data-access-level-info:
+        Basic:
+        - CanDisplayPrice
+        - SoldAction
+        - SoldDate
+        - SoldPrice
+        - Source
+        Detailed:
+        - CanDisplayPrice
+        - SoldAction
+        - SoldDate
+        - SoldPrice
+        - Source
+        Full:
+        - CanDisplayPrice
+        - SoldAction
+        - SoldDate
+        - SoldPrice
+        - Source
+        - GovernmentRecordedSoldPrice
+    Listings.V1.RentalDetails:
+      type: object
+      properties:
+        rentalMethod:
+          enum:
+          - notStated
+          - rent
+          - share
+          - holiday
+          - lease
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets RentalMethod
+        source:
+          enum:
+          - internal
+          - external
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets Source
+        leasedDate:
+          type:
+          - string
+          - 'null'
+          description: The Date the listing was leased. DateTime is in a local timezone.
+          format: date-time
+        leasedPrice:
+          type:
+          - integer
+          - 'null'
+          description: The last leased price entered by the Advertiser  This price will only be visible if allowed by the Advertiser  and the listing as been leased
+          format: int32
+        canDisplayPrice:
+          type:
+          - boolean
+          - 'null'
+          description: Indicates whether this instance can display price
+        leasedMonths:
+          type:
+          - integer
+          - 'null'
+          description: The number of months the property was last leased for  This will only be visible if the property has been leased
+          format: int32
+        termOfLeaseFrom:
+          type:
+          - integer
+          - 'null'
+          description: Lease term range from
+          format: int32
+        termOfLeaseTo:
+          type:
+          - integer
+          - 'null'
+          description: Lease term range to
+          format: int32
+        leaseOutgoings:
+          type:
+          - integer
+          - 'null'
+          description: Outgoing cost of current lease
+          format: int32
+      additionalProperties: false
+      description: The rental detail's of the listing in case of it being for rent or leased
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    Listings.v1.MedianPriceData:
+      type: object
+      properties:
+        priceType:
+          enum:
+          - house
+          - apartmentUnitFlat
+          - vacantLand
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets PriceType
+        suburb:
+          type:
+          - string
+          - 'null'
+          description: Name of the suburb median price is based on.
+        postcode:
+          type:
+          - string
+          - 'null'
+          description: Postcode of the suburb
+        medianPrice:
+          type:
+          - integer
+          - 'null'
+          description: Median price for the suburb.
+          format: int32
+        source:
+          type:
+          - string
+          - 'null'
+          description: Where median price data comes from
+        sourceDateFrom:
+          type:
+          - string
+          - 'null'
+          description: Start date of the median price source time period
+        sourceDateTo:
+          type:
+          - string
+          - 'null'
+          description: End date of the median price source time period
+        sourceCollectionDate:
+          type:
+          - string
+          - 'null'
+          description: The collection date of the median price source
+      additionalProperties: false
+      description: Information regarding median house/unit price   for the suburb
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    Listings.v1.AdvertiserIdentifiers:
+      type: object
+      properties:
+        advertiserType:
+          enum:
+          - agency
+          - private
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets AdvertiserType
+        advertiserId:
+          type:
+          - integer
+          - 'null'
+          description: Advertiser's identifier
+          format: int32
+        contactIds:
+          type:
+          - array
+          - 'null'
+          items:
+            type: integer
+            format: int32
+          description: Identifier of each contact the advertiser has associated with the listing
+        agentIds:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Identifier of each agent the advertiser has associated with the listing
+        conjunctionContactIds:
+          type:
+          - array
+          - 'null'
+          items:
+            type: integer
+            format: int32
+          description: Identifier of each conjunctional contact associated with the listing
+        conjunctionAgentIds:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Identifier of each conjunctional agent associated with the listing
+      additionalProperties: false
+      description: Encapsulates the listing's advertiser identifiers
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    Listings.v1.ProviderDetails:
+      type: object
+      properties:
+        providerSystem:
+          type:
+          - string
+          - 'null'
+          description: Feed provider ID
+        providerAdID:
+          type:
+          - string
+          - 'null'
+          description: Unique ID within provider system
+      additionalProperties: false
+      description: Information for the listing provider. e.g. bulkuploader information
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    Listings.v1.TenantDetails:
+      type: object
+      properties:
+        leaseDateVariable:
+          type:
+          - boolean
+          - 'null'
+          description: Is tenant lease date variable
+        leaseOptions:
+          type:
+          - string
+          - 'null'
+          description: Leasing options available to a prospective tenant
+        tenantInfoTermOfLeaseFrom:
+          type:
+          - integer
+          - 'null'
+          description: The from range of the tenant's current lease
+          format: int32
+        tenantInfoTermOfLeaseTo:
+          type:
+          - integer
+          - 'null'
+          description: The to range of the tenant's current lease
+          format: int32
+        tenantName:
+          type:
+          - string
+          - 'null'
+          description: Name of the current tenant of the property
+        tenantRentDetails:
+          type:
+          - string
+          - 'null'
+          description: Information regarding current rental
+        leaseStartDate:
+          type:
+          - string
+          - 'null'
+          description: The date on which the tenants lease began, or is due to begin. DateTime is in a local timezone.
+          format: date-time
+        leaseEndDate:
+          type:
+          - string
+          - 'null'
+          description: The date on which the tenants lease is due to end. DateTime is in a local timezone.
+          format: date-time
+      additionalProperties: false
+      description: Tenant Details
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    Listings.v1.PastSaleData:
+      type: object
+      properties:
+        unitNumber:
+          type:
+          - string
+          - 'null'
+          description: Property unit number
+        streetNumber:
+          type:
+          - string
+          - 'null'
+          description: Property street number
+        street:
+          type:
+          - string
+          - 'null'
+          description: Property Street name
+        suburb:
+          type:
+          - string
+          - 'null'
+          description: Property suburb name
+        postcode:
+          type:
+          - string
+          - 'null'
+          description: Property postcode
+        state:
+          type:
+          - string
+          - 'null'
+          description: Property state
+        displayAddress:
+          type:
+          - string
+          - 'null'
+          description: display formatted address
+          readOnly: true
+        dateOfSale:
+          type:
+          - string
+          - 'null'
+          description: Registered date of the sale
+        soldPrice:
+          type:
+          - integer
+          - 'null'
+          description: Property sold price
+          format: int64
+      additionalProperties: false
+      description: Information for past property sales
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    Listings.V1.PriceDetails:
+      type: object
+      properties:
+        gstOption:
+          enum:
+          - na
+          - inc
+          - ex
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets GstOption
+        priceType:
+          enum:
+          - gross
+          - net
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets PriceType
+        priceUnit:
+          enum:
+          - totalAmount
+          - perSqm
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets PriceUnit
+        price:
+          type:
+          - number
+          - 'null'
+          description: Price of the property
+          format: double
+        priceFrom:
+          type:
+          - integer
+          - 'null'
+          description: Price starting range of the property
+          format: int32
+        priceTo:
+          type:
+          - integer
+          - 'null'
+          description: Upper price range of the property
+          format: int32
+        pricePrefix:
+          type:
+          - string
+          - 'null'
+          description: Display price for the advertisement
+        canDisplayPrice:
+          type:
+          - boolean
+          - 'null'
+          description: Flag indicating whether the advertiser has chosen to display the property price
+        hiddenReasons:
+          type:
+          - array
+          - 'null'
+          items:
+            enum:
+            - byAgency
+            - qldRestriction
+            type: string
+            description: Reason for price hidden  * `ByAgency` - Agency doesn't want to show prcie * `QLDRestriction` - Price can not be shown due to QLD restrictions
+          description: Reasons when price need to be hidden
+        displayPrice:
+          type:
+          - string
+          - 'null'
+          description: A string provided by the Advertiser representing the ByIdListingPriceQueryResult of the Listing e.g. Over $1,000,000   This should be the default price field for client to use
+        bond:
+          type:
+          - number
+          - 'null'
+          description: Rental bond
+          format: double
+        priceReduction:
+          type:
+          - boolean
+          - 'null'
+          description: Indicates if this property is under price reduction
+      additionalProperties: false
+      description: Encapsulates a listing's price information
+      x-data-access-level-info:
+        Basic:
+        - DisplayPrice
+        - Bond
+        - CanDisplayPrice
+        - Price
+        - PriceFrom
+        - PriceTo
+        - PricePrefix
+        Detailed:
+        - DisplayPrice
+        - Bond
+        - CanDisplayPrice
+        - Price
+        - PriceFrom
+        - PriceTo
+        - PricePrefix
+        Full:
+        - DisplayPrice
+        - Bond
+        - CanDisplayPrice
+        - Price
+        - PriceFrom
+        - PriceTo
+        - PricePrefix
+        - HiddenReasons
+        - GstOption
+        - PriceUnit
+        - PriceType
+        - PriceReduction
+    Listings.v1.PropertyInspections:
+      type: object
+      properties:
+        inspections:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Listings.v1.Inspection'
+          description: Inspection details for the property. e.g. opening and closing times
+        pastInspections:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Listings.v1.Inspection'
+          description: Inspection details for the property. e.g. opening and closing times
+        isByAppointmentOnly:
+          type:
+          - boolean
+          - 'null'
+          description: True or False indicating whether the inspection is by appointment only
+      additionalProperties: false
+      description: Property Inspection(s) details
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    Domain.AgentSearch.v1.Model.AutoSuggestAgentResultDto:
+      type: object
+      properties:
+        agentId:
+          type: integer
+          format: int32
+        name:
+          type: string
+        agencyName:
+          type: string
+        suburb:
+          type: string
+        state:
+          type: string
+        profileUrl:
+          type: string
+        thumbnail:
+          type: string
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    Listings.v1.GeoLocation:
+      type: object
+      properties:
+        latitude:
+          type:
+          - number
+          - 'null'
+          description: Latitude of the property
+          format: double
+        longitude:
+          type:
+          - number
+          - 'null'
+          description: Longitude of the property
+          format: double
+      additionalProperties: false
+      description: Encapsulates the details of a geo location, long/lat
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    Listings.v1.AuctionSchedule:
+      type: object
+      properties:
+        locationDescription:
+          type:
+          - string
+          - 'null'
+          description: Description and location of the auction provided by advertiser
+        openingDateTime:
+          type:
+          - string
+          - 'null'
+          description: Opening date and time of the auction. e.g. 2015-01-01T12:00:00  DateTime is in a local timezone.
+          format: date-time
+        terms:
+          type:
+          - string
+          - 'null'
+          description: Terms of the auction
+        url:
+          maxLength: 255
+          type:
+          - string
+          - 'null'
+          description: On-line URL of the auction
+      additionalProperties: false
+      description: Encapsulates the details of a Property being Auctioned.
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    Listings.V1.SaleDetails:
+      type: object
+      properties:
+        saleMethod:
+          enum:
+          - notStated
+          - auction
+          - privateTreaty
+          - tender
+          - expressionOfInterest
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets SaleMethod
+        soldDetails:
+          $ref: '#/components/schemas/Listings.V1.SoldDetails'
+        auctionDetails:
+          $ref: '#/components/schemas/Listings.v1.AuctionDetails'
+        tenderDetails:
+          $ref: '#/components/schemas/Listings.v1.TenderDetails'
+        tenantDetails:
+          $ref: '#/components/schemas/Listings.v1.TenantDetails'
+        annualReturn:
+          type:
+          - integer
+          - 'null'
+          description: Integer value of percentage return on this property or business
+          format: int32
+        saleTerms:
+          type:
+          - string
+          - 'null'
+          description: Information relating to aspects of the sale, such as required deposit, settlement time
+      additionalProperties: false
+      description: The sale detail's of the listing in case of it being for sale or sold
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    Agencies.V1.Agent:
+      type: object
+      properties:
+        dateUpdated:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets DateUpdated
+          format: date-time
+        agencyId:
+          type:
+          - integer
+          - 'null'
+          description: Gets or Sets AgencyId
+          format: int32
+        agentId:
+          type:
+          - integer
+          - 'null'
+          description: Gets or Sets AgentId
+          format: int32
+        email:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets Email
+        firstName:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets FirstName
+        mobile:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets Mobile
+        photo:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets Photo
+        lastName:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets LastName
+        isActiveProfilePage:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets IsActiveProfilePage
+        phone:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets Phone
+        saleActive:
+          type:
+          - boolean
+          - 'null'
+          description: Gets or Sets SaleActive
+        rentalActive:
+          type:
+          - boolean
+          - 'null'
+          description: Gets or Sets RentalActive
+        secondaryEmail:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets SecondaryEmail
+        facebookUrl:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets FacebookUrl
+        twitterUrl:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets TwitterUrl
+        agentVideo:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets AgentVideo
+        profileText:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets ProfileText
+        isHideSoldLeasedListings:
+          type:
+          - boolean
+          - 'null'
+          description: Gets or Sets IsHideSoldLeasedListings
+        googlePlusUrl:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets GooglePlusUrl
+        personalWebsiteUrl:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets PersonalWebsiteUrl
+        linkedInUrl:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets LinkedInUrl
+        fax:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets Fax
+        mugShotURL:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets MugShotURL
+        mugShotNew:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets MugShotNew
+        contactTypeCode:
+          type:
+          - integer
+          - 'null'
+          description: Gets or Sets ContactTypeCode
+          format: int32
+        receivesRequests:
+          type:
+          - boolean
+          - 'null'
+          description: Gets or Sets ReceivesRequests
+        creAgentVideoURL:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets CreAgentVideoURL
+        receiveScheduledReportEmail:
+          type:
+          - boolean
+          - 'null'
+          description: Gets or Sets ReceiveScheduledReportEmail
+        profileUrl:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets ProfileUrl
+        jobPosition:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets JobPosition
+      additionalProperties: false
+      description: AgentDto
+      x-data-access-level-info:
+        Basic:
+        - AgencyId
+        - AgentId
+        - ContactTypeCode
+        - FacebookUrl
+        - FirstName
+        - GooglePlusUrl
+        - JobPosition
+        - LastName
+        - MugShotNew
+        - MugShotURL
+        - Phone
+        - Photo
+        - ProfileText
+        - ProfileUrl
+        - TwitterUrl
+        Detailed:
+        - AgencyId
+        - AgentId
+        - ContactTypeCode
+        - FacebookUrl
+        - FirstName
+        - GooglePlusUrl
+        - JobPosition
+        - LastName
+        - MugShotNew
+        - MugShotURL
+        - Phone
+        - Photo
+        - ProfileText
+        - ProfileUrl
+        - TwitterUrl
+        - AgentVideo
+        - CreAgentVideoURL
+        - Email
+        - LinkedInUrl
+        - Mobile
+        - PersonalWebsiteUrl
+        - SecondaryEmail
+        Full:
+        - AgencyId
+        - AgentId
+        - ContactTypeCode
+        - FacebookUrl
+        - FirstName
+        - GooglePlusUrl
+        - JobPosition
+        - LastName
+        - MugShotNew
+        - MugShotURL
+        - Phone
+        - Photo
+        - ProfileText
+        - ProfileUrl
+        - TwitterUrl
+        - AgentVideo
+        - CreAgentVideoURL
+        - Email
+        - LinkedInUrl
+        - Mobile
+        - PersonalWebsiteUrl
+        - SecondaryEmail
+        - DateUpdated
+        - Fax
+        - IsActiveProfilePage
+        - IsHideSoldLeasedListings
+        - ReceiveScheduledReportEmail
+        - ReceivesRequests
+        - RentalActive
+        - SaleActive
+    Listings.v1.ListingMedia:
+      required:
+      - url
+      type: object
+      properties:
+        category:
+          enum:
+          - image
+          - video
+          - others
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets Category
+        type:
+          enum:
+          - photo
+          - mp4
+          - youtube
+          - floorplan
+          - vimeo
+          - notSpecified
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets Type
+        url:
+          minLength: 1
+          type: string
+          description: The URL to the property media
+      additionalProperties: false
+      description: Encapsulates media associated with a Listing
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    ListingPerformance.v1.Statistics:
+      type: object
+      properties:
+        listingId:
+          type:
+          - integer
+          - 'null'
+          description: Domain Advertisement Id
+          format: int64
+          readOnly: true
+        totalListingViews:
+          type:
+          - integer
+          - 'null'
+          description: Total number of views for the listing details
+          format: int32
+          readOnly: true
+        totalPhotoViews:
+          type:
+          - integer
+          - 'null'
+          description: Total number of listing photo views
+          format: int32
+          readOnly: true
+        totalPhotoGalleryViews:
+          type:
+          - integer
+          - 'null'
+          description: Total number of listing photo gallery views
+          format: int32
+          readOnly: true
+        totalFloorplanViews:
+          type:
+          - integer
+          - 'null'
+          description: Total number of floorplan views
+          format: int32
+          readOnly: true
+        totalMapViews:
+          type:
+          - integer
+          - 'null'
+          description: Total number of address map views
+          format: int32
+          readOnly: true
+        totalVideoViews:
+          type:
+          - integer
+          - 'null'
+          description: Total number of vedio views
+          format: int32
+          readOnly: true
+        totalEbrochureViews:
+          type:
+          - integer
+          - 'null'
+          description: Total number of Ebrochure views
+          format: int32
+          readOnly: true
+        totalAgentDetailViews:
+          type:
+          - integer
+          - 'null'
+          description: Total number of agent detail views
+          format: int32
+          readOnly: true
+        totalShortlisted:
+          type:
+          - integer
+          - 'null'
+          description: Total number of times the listing was shortlisted
+          format: int32
+          readOnly: true
+        totalPrinted:
+          type:
+          - integer
+          - 'null'
+          description: Total number of time the listing detail was printed
+          format: int32
+          readOnly: true
+        totalAgentPhoneNumberReveals:
+          type:
+          - integer
+          - 'null'
+          description: Total number of times the agent phone number was revealed for contact
+          format: int32
+          readOnly: true
+        totalEnquiries:
+          type:
+          - integer
+          - 'null'
+          description: Total number of enquiries
+          format: int32
+          readOnly: true
+        totalEmailToFriend:
+          type:
+          - integer
+          - 'null'
+          description: Total number of times the listing link was emailed
+          format: int32
+          readOnly: true
+        totalSharedViaSocialMedia:
+          type:
+          - integer
+          - 'null'
+          description: Total number of shares via social media
+          format: int32
+          readOnly: true
+        totalInspectionTimeSaving:
+          type:
+          - integer
+          - 'null'
+          description: Total numnber of times when the inspection was saved to calendar
+          format: int32
+          readOnly: true
+        totalCallToAgentFromMobile:
+          type:
+          - integer
+          - 'null'
+          description: Total number of calls made to agent from inside the listing
+          format: int32
+          readOnly: true
+        percentageWebsiteViews:
+          type:
+          - number
+          - 'null'
+          description: Percentage of total views from website
+          format: double
+          readOnly: true
+        percentageMobileSiteViews:
+          type:
+          - number
+          - 'null'
+          description: Percentage of total views from mobile site
+          format: double
+          readOnly: true
+        percentageSmartPhoneViews:
+          type:
+          - number
+          - 'null'
+          description: Percentage of total views from smart phone apps
+          format: double
+          readOnly: true
+        percentageTabletViews:
+          type:
+          - number
+          - 'null'
+          description: Percentage of total views from tablets
+          format: double
+          readOnly: true
+      additionalProperties: false
+      description: Listing statistics
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    Listings.v1.StatementOfInformation:
+      type: object
+      properties:
+        estimatedPrice:
+          $ref: '#/components/schemas/Listings.v1.BasicPrice'
+        comparableData:
+          $ref: '#/components/schemas/Listings.v1.ComparableData'
+        suburbMedianPrice:
+          $ref: '#/components/schemas/Listings.v1.MedianPriceData'
+        documentationUrl:
+          type:
+          - string
+          - 'null'
+          description: Link to the statement of information documentation file
+      additionalProperties: false
+      description: Statement of Information  Regarding sale listing
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    Listings.v1.TenderDetails:
+      type: object
+      properties:
+        tenderRecipientName:
+          type:
+          - string
+          - 'null'
+          description: Tender recipient name
+        tenderAddress:
+          type:
+          - string
+          - 'null'
+          description: Tender address
+        tenderEndDate:
+          type:
+          - string
+          - 'null'
+          description: Tender closing date. DateTime is in a local timezone.
+          format: date-time
+      additionalProperties: false
+      description: Tender details
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    Listings.v1.BasicPrice:
+      type: object
+      properties:
+        from:
+          type:
+          - integer
+          - 'null'
+          description: Lowest price the property is expected to sell/rent for to set search price.
+          format: int32
+        to:
+          type:
+          - integer
+          - 'null'
+          description: Highest price the property is expected to sell/rent for to set search price.
+          format: int32
+      additionalProperties: false
+      description: Basic price information
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+  securitySchemes:
+    apikey:
+      type: apiKey
+      description: API Key in Header
+      name: x-api-key
+      in: header
+    oauth2:
+      type: oauth2
+      description: OAuth 2
+      flows:
+        clientCredentials:
+          tokenUrl: https://auth.domain.com.au/v1/connect/token
+          scopes:
+            api_addresslocators_read: api_addresslocators_read
+            api_agencies_read: api_agencies_read
+            api_agencies_write: api_agencies_write
+            api_authorities_write: api_authorities_write
+            api_avm_read: api_avm_read
+            api_campaignperformance_read: api_campaignperformance_read
+            api_dataset_read: api_dataset_read
+            api_demographics_read: api_demographics_read
+            api_enquiries_read: api_enquiries_read
+            api_enquiries_write: api_enquiries_write
+            api_listingperformance_read: api_listingperformance_read
+            api_listings_read: api_listings_read
+            api_listings_write: api_listings_write
+            api_locations_read: api_locations_read
+            api_projectperformance_read: api_projectperformance_read
+            api_properties_read: api_properties_read
+            api_propertyportfolio_read: api_propertyportfolio_read
+            api_propertyportfolio_write: api_propertyportfolio_write
+            api_propertyreports_read: api_propertyreports_read
+            api_salesresults_read: api_salesresults_read
+            api_statistics_write: api_statistics_write
+            api_suburbhistorical_read: api_suburbhistorical_read
+            api_suburbperformance_read: api_suburbperformance_read
+            api_suburbsummary_read: api_suburbsummary_read
+            api_webhooks_write: api_webhooks_write
+        authorizationCode:
+          authorizationUrl: https://auth.domain.com.au/v1/connect/authorize
+          tokenUrl: https://auth.domain.com.au/v1/connect/token
+          refreshUrl: https://auth.domain.com.au/v1/connect/token
+          scopes:
+            api_addresslocators_read: api_addresslocators_read
+            api_agencies_read: api_agencies_read
+            api_agencies_write: api_agencies_write
+            api_authorities_write: api_authorities_write
+            api_avm_read: api_avm_read
+            api_campaignperformance_read: api_campaignperformance_read
+            api_dataset_read: api_dataset_read
+            api_demographics_read: api_demographics_read
+            api_enquiries_read: api_enquiries_read
+            api_enquiries_write: api_enquiries_write
+            api_listingperformance_read: api_listingperformance_read
+            api_listings_read: api_listings_read
+            api_listings_write: api_listings_write
+            api_locations_read: api_locations_read
+            api_projectperformance_read: api_projectperformance_read
+            api_properties_read: api_properties_read
+            api_propertyportfolio_read: api_propertyportfolio_read
+            api_propertyportfolio_write: api_propertyportfolio_write
+            api_propertyreports_read: api_propertyreports_read
+            api_salesresults_read: api_salesresults_read
+            api_statistics_write: api_statistics_write
+            api_suburbhistorical_read: api_suburbhistorical_read
+            api_suburbperformance_read: api_suburbperformance_read
+            api_suburbsummary_read: api_suburbsummary_read
+            api_webhooks_write: api_webhooks_write
+x-refined-from:
+- domain-group-openapi-latest.json
+- domain-group-openapi-v1.json

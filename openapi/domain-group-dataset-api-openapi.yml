@@ -1,0 +1,139 @@
+openapi: 3.2.0
+info:
+  title: Domain Group Dataset API
+  contact:
+    name: Domain Developer Support
+    email: api@domain.com.au
+  termsOfService: https://developer.domain.com.au/docs/latest/support/terms
+  version: '1.0'
+  description: 'Operations tagged Dataset across 2 of this provider''s published API definitions: domain-group-openapi-latest.json, domain-group-openapi-v2.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.domain.com.au/
+  description: Primary
+- url: https://api.domain.com.au/sandbox/
+  description: Sandbox
+tags:
+- name: Dataset
+paths:
+  /v2/dataset/{datasetName}/{key}:
+    get:
+      tags:
+      - Dataset
+      summary: Get a value of a given key for a dataset
+      operationId: dataset_get
+      parameters:
+      - name: datasetName
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: string
+      - name: key
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: string
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Request successfull. Responds with the value of the key of the dataset from the latest uploaded data
+        '400':
+          description: Dataset/Uploads/backing resources not found
+        '401':
+          description: Request is Unauthorized
+        '500':
+          description: Internal server error
+      security:
+      - apikey: []
+      - oauth2:
+        - api_dataset_read
+      x-domain-endpointcost: 1
+      x-domain-usercontextrequired: false
+      x-domain-environment: Any
+    servers:
+    - url: https://api.domain.com.au/
+      description: Primary
+    - url: https://api.domain.com.au/sandbox/
+      description: Sandbox
+components:
+  securitySchemes:
+    apikey:
+      type: apiKey
+      description: API Key in Header
+      name: x-api-key
+      in: header
+    oauth2:
+      type: oauth2
+      description: OAuth 2
+      flows:
+        clientCredentials:
+          tokenUrl: https://auth.domain.com.au/v1/connect/token
+          scopes:
+            api_addresslocators_read: api_addresslocators_read
+            api_agencies_read: api_agencies_read
+            api_agencies_write: api_agencies_write
+            api_authorities_write: api_authorities_write
+            api_avm_read: api_avm_read
+            api_campaignperformance_read: api_campaignperformance_read
+            api_dataset_read: api_dataset_read
+            api_demographics_read: api_demographics_read
+            api_enquiries_read: api_enquiries_read
+            api_enquiries_write: api_enquiries_write
+            api_listingperformance_read: api_listingperformance_read
+            api_listings_read: api_listings_read
+            api_listings_write: api_listings_write
+            api_locations_read: api_locations_read
+            api_projectperformance_read: api_projectperformance_read
+            api_properties_read: api_properties_read
+            api_propertyportfolio_read: api_propertyportfolio_read
+            api_propertyportfolio_write: api_propertyportfolio_write
+            api_propertyreports_read: api_propertyreports_read
+            api_salesresults_read: api_salesresults_read
+            api_statistics_write: api_statistics_write
+            api_suburbhistorical_read: api_suburbhistorical_read
+            api_suburbperformance_read: api_suburbperformance_read
+            api_suburbsummary_read: api_suburbsummary_read
+            api_webhooks_write: api_webhooks_write
+        authorizationCode:
+          authorizationUrl: https://auth.domain.com.au/v1/connect/authorize
+          tokenUrl: https://auth.domain.com.au/v1/connect/token
+          refreshUrl: https://auth.domain.com.au/v1/connect/token
+          scopes:
+            api_addresslocators_read: api_addresslocators_read
+            api_agencies_read: api_agencies_read
+            api_agencies_write: api_agencies_write
+            api_authorities_write: api_authorities_write
+            api_avm_read: api_avm_read
+            api_campaignperformance_read: api_campaignperformance_read
+            api_dataset_read: api_dataset_read
+            api_demographics_read: api_demographics_read
+            api_enquiries_read: api_enquiries_read
+            api_enquiries_write: api_enquiries_write
+            api_listingperformance_read: api_listingperformance_read
+            api_listings_read: api_listings_read
+            api_listings_write: api_listings_write
+            api_locations_read: api_locations_read
+            api_projectperformance_read: api_projectperformance_read
+            api_properties_read: api_properties_read
+            api_propertyportfolio_read: api_propertyportfolio_read
+            api_propertyportfolio_write: api_propertyportfolio_write
+            api_propertyreports_read: api_propertyreports_read
+            api_salesresults_read: api_salesresults_read
+            api_statistics_write: api_statistics_write
+            api_suburbhistorical_read: api_suburbhistorical_read
+            api_suburbperformance_read: api_suburbperformance_read
+            api_suburbsummary_read: api_suburbsummary_read
+            api_webhooks_write: api_webhooks_write
+x-refined-from:
+- domain-group-openapi-latest.json
+- domain-group-openapi-v2.json

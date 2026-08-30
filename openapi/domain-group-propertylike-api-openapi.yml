@@ -1,0 +1,290 @@
+openapi: 3.2.0
+info:
+  title: Domain Group Property Like API
+  contact:
+    name: Domain Developer Support
+    email: api@domain.com.au
+  termsOfService: https://developer.domain.com.au/docs/latest/support/terms
+  version: '1.0'
+  description: 'Operations tagged PropertyLike across 2 of this provider''s published API definitions: domain-group-openapi-latest.json, domain-group-openapi-v2.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.domain.com.au/
+  description: Primary
+- url: https://api.domain.com.au/sandbox/
+  description: Sandbox
+tags:
+- name: PropertyLike
+paths:
+  /v2/properties/search/like/{searchType}:
+    get:
+      tags:
+      - PropertyLike
+      summary: Comparable properties search
+      description: Return list of comparable properties within a radius of specified property by PropertyID, a GnafID or full address. Only one of `propertyId`, `gnafId` or `address` should be provided. The list sorted by bedrooms, bathrooms and car space comparability to specified property, and then by distance
+      operationId: PropertyLike_Comparables
+      parameters:
+      - name: searchType
+        in: path
+        description: Type of property search (sold, rent, or sale).
+        required: true
+        schema:
+          enum:
+          - sale
+          - rent
+          - sold
+          type: string
+      - name: radius
+        in: query
+        description: Radius of search in km.
+        schema:
+          maximum: 50
+          type: integer
+          default: 5
+      - name: period
+        in: query
+        description: Time period in months for searching SOLD comparables.
+        schema:
+          maximum: 36
+          type: integer
+          default: 12
+      - name: propertyId
+        in: query
+        schema:
+          type: string
+      - name: gnafId
+        in: query
+        schema:
+          type: string
+      - name: flatNumber
+        in: query
+        schema:
+          type: string
+      - name: streetNumber
+        in: query
+        schema:
+          type: string
+      - name: streetName
+        in: query
+        schema:
+          type: string
+      - name: streetType
+        in: query
+        schema:
+          type: string
+      - name: postcode
+        in: query
+        schema:
+          type: string
+      - name: suburb
+        in: query
+        schema:
+          type: string
+      - name: state
+        in: query
+        schema:
+          enum:
+          - ACT
+          - NSW
+          - NT
+          - QLD
+          - SA
+          - TAS
+          - VIC
+          - WA
+          - OT
+          type: string
+      responses:
+        '200':
+          description: Successfully found compatable properties
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Property.Enrichment.v2.SearchItemOutput'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+        '500':
+          description: Unexpected error
+      security:
+      - apikey: []
+      - oauth2:
+        - api_properties_read
+      x-domain-endpointcost: 1
+      x-domain-usercontextrequired: false
+      x-domain-environment: Any
+    servers:
+    - url: https://api.domain.com.au/
+      description: Primary
+    - url: https://api.domain.com.au/sandbox/
+      description: Sandbox
+components:
+  schemas:
+    Property.Enrichment.v2.AddressBasic:
+      type: object
+      properties:
+        flatNumber:
+          type:
+          - string
+          - 'null'
+        streetNumber:
+          type: string
+        streetName:
+          type: string
+        streetType:
+          type:
+          - string
+          - 'null'
+        streetTypeLong:
+          type:
+          - string
+          - 'null'
+        suburb:
+          type: string
+        postcode:
+          type: string
+        state:
+          type: string
+      additionalProperties: false
+      description: Address of property
+    Property.Enrichment.v2.SearchItemOutput:
+      type: object
+      properties:
+        propertyid:
+          type: string
+        listingid:
+          type:
+          - integer
+          - 'null'
+        addresscomponents:
+          $ref: '#/components/schemas/Property.Enrichment.v2.AddressBasic'
+        bedrooms:
+          type:
+          - integer
+          - 'null'
+        bathrooms:
+          type:
+          - integer
+          - 'null'
+        carspaces:
+          type:
+          - integer
+          - 'null'
+        landarea:
+          type:
+          - integer
+          - 'null'
+        images:
+          type: array
+          items:
+            type: object
+            properties:
+              image_url:
+                type: string
+                description: URL of image source
+              image_type:
+                $ref: '#/components/schemas/Property.Enrichment.v2.ImageTypes'
+        eventdate:
+          type:
+          - string
+          - 'null'
+          description: date of the event in YYYY-MM-DD format.
+          format: date
+          example: '2024-08-22'
+        eventprice:
+          type:
+          - number
+          - 'null'
+        distance:
+          type: number
+    Property.Enrichment.v2.ImageTypes:
+      enum:
+      - ListingPhoto
+      - OldFloorPlanPhoto
+      - NewFloorPlanPhoto
+      - BuildingPhoto
+      - NewDevelopmentLandPhoto
+      - NewDevelopmentLumierePhoto
+      - NewDevelopmentFeaturedPhoto
+      - ConjunctionAgentLogo
+      - NewDevelopmentRegionalPhoto
+      - AdvertiserImage
+      - YouWishClip
+      - AgentCarousel
+      - DevelopmentProjectGalleryPhoto
+      - DevelopmentProjectAdvertisementPhoto
+  securitySchemes:
+    apikey:
+      type: apiKey
+      description: API Key in Header
+      name: x-api-key
+      in: header
+    oauth2:
+      type: oauth2
+      description: OAuth 2
+      flows:
+        clientCredentials:
+          tokenUrl: https://auth.domain.com.au/v1/connect/token
+          scopes:
+            api_addresslocators_read: api_addresslocators_read
+            api_agencies_read: api_agencies_read
+            api_agencies_write: api_agencies_write
+            api_authorities_write: api_authorities_write
+            api_avm_read: api_avm_read
+            api_campaignperformance_read: api_campaignperformance_read
+            api_dataset_read: api_dataset_read
+            api_demographics_read: api_demographics_read
+            api_enquiries_read: api_enquiries_read
+            api_enquiries_write: api_enquiries_write
+            api_listingperformance_read: api_listingperformance_read
+            api_listings_read: api_listings_read
+            api_listings_write: api_listings_write
+            api_locations_read: api_locations_read
+            api_projectperformance_read: api_projectperformance_read
+            api_properties_read: api_properties_read
+            api_propertyportfolio_read: api_propertyportfolio_read
+            api_propertyportfolio_write: api_propertyportfolio_write
+            api_propertyreports_read: api_propertyreports_read
+            api_salesresults_read: api_salesresults_read
+            api_statistics_write: api_statistics_write
+            api_suburbhistorical_read: api_suburbhistorical_read
+            api_suburbperformance_read: api_suburbperformance_read
+            api_suburbsummary_read: api_suburbsummary_read
+            api_webhooks_write: api_webhooks_write
+        authorizationCode:
+          authorizationUrl: https://auth.domain.com.au/v1/connect/authorize
+          tokenUrl: https://auth.domain.com.au/v1/connect/token
+          refreshUrl: https://auth.domain.com.au/v1/connect/token
+          scopes:
+            api_addresslocators_read: api_addresslocators_read
+            api_agencies_read: api_agencies_read
+            api_agencies_write: api_agencies_write
+            api_authorities_write: api_authorities_write
+            api_avm_read: api_avm_read
+            api_campaignperformance_read: api_campaignperformance_read
+            api_dataset_read: api_dataset_read
+            api_demographics_read: api_demographics_read
+            api_enquiries_read: api_enquiries_read
+            api_enquiries_write: api_enquiries_write
+            api_listingperformance_read: api_listingperformance_read
+            api_listings_read: api_listings_read
+            api_listings_write: api_listings_write
+            api_locations_read: api_locations_read
+            api_projectperformance_read: api_projectperformance_read
+            api_properties_read: api_properties_read
+            api_propertyportfolio_read: api_propertyportfolio_read
+            api_propertyportfolio_write: api_propertyportfolio_write
+            api_propertyreports_read: api_propertyreports_read
+            api_salesresults_read: api_salesresults_read
+            api_statistics_write: api_statistics_write
+            api_suburbhistorical_read: api_suburbhistorical_read
+            api_suburbperformance_read: api_suburbperformance_read
+            api_suburbsummary_read: api_suburbsummary_read
+            api_webhooks_write: api_webhooks_write
+x-refined-from:
+- domain-group-openapi-latest.json
+- domain-group-openapi-v2.json

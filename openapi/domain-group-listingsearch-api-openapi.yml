@@ -1,0 +1,2369 @@
+openapi: 3.2.0
+info:
+  title: Domain Group Listing Search API
+  contact:
+    name: Domain Developer Support
+    email: api@domain.com.au
+  termsOfService: https://developer.domain.com.au/docs/latest/support/terms
+  version: '1.0'
+  description: 'Operations tagged ListingSearch across 2 of this provider''s published API definitions: domain-group-openapi-latest.json, domain-group-openapi-v1.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.domain.com.au/
+  description: Primary
+- url: https://api.domain.com.au/sandbox/
+  description: Sandbox
+tags:
+- name: ListingSearch
+paths:
+  /v1/listingSearch/residential/search:
+    post:
+      tags:
+      - ListingSearch
+      summary: Retrieves residential listings matching the specified criteria.
+      description: 'Search results are limited to the first 1000 results.
+
+
+        If the number of results is greater, the intention is to refine the search by adding more restrictive parameters, to find a relevant set of results.'
+      operationId: Listings_ResidentialSearch
+      requestBody:
+        description: Search parameters
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchService.v2.DomainSearchWebApiV2ModelsSearchParameters'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/SearchService.v2.DomainSearchWebApiV2ModelsSearchParameters'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/SearchService.v2.DomainSearchWebApiV2ModelsSearchParameters'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchService.v2.DomainSearchContractsV2SearchResults'
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Internal Server Error
+        '504':
+          description: Gateway Timeout
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+      security:
+      - apikey: []
+      - oauth2:
+        - api_listings_read
+      x-domain-endpointcost: 1
+      x-domain-usercontextrequired: false
+      x-domain-environment: Primary
+    servers:
+    - url: https://api.domain.com.au/
+      description: Primary
+    - url: https://api.domain.com.au/sandbox/
+      description: Sandbox
+  /v1/listingSearch/residential/searchSold:
+    post:
+      tags:
+      - ListingSearch
+      summary: Retrieves sold residential listings matching the specified criteria.
+      description: 'Search results are limited to the first 1000 results.
+
+
+        If the number of results is greater, the intention is to refine the search by adding more restrictive parameters, to find a relevant set of results.'
+      operationId: Listings_DetailedSoldResidentialSearch
+      requestBody:
+        description: Search parameters
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchService.v2.DomainSearchWebApiV2ModelsSoldSearchParameters'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/SearchService.v2.DomainSearchWebApiV2ModelsSoldSearchParameters'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/SearchService.v2.DomainSearchWebApiV2ModelsSoldSearchParameters'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchService.v2.DomainSearchContractsV2SearchResults'
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Internal Server Error
+        '504':
+          description: Gateway Timeout
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+      security:
+      - apikey: []
+      - oauth2:
+        - api_listings_read
+      x-domain-endpointcost: 1
+      x-domain-usercontextrequired: false
+      x-domain-environment: Primary
+    servers:
+    - url: https://api.domain.com.au/
+      description: Primary
+    - url: https://api.domain.com.au/sandbox/
+      description: Sandbox
+components:
+  schemas:
+    SearchService.v2.DomainSearchContractsV2ResultMetadata:
+      type: object
+      properties:
+        aggregations:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - object
+            - 'null'
+            additionalProperties:
+              type: integer
+              format: int64
+            x-data-access-level-info:
+              Basic:
+              - '*'
+              Detailed:
+              - '*'
+              Full:
+              - '*'
+          description: Gets or Sets Aggregations
+          x-data-access-level-info:
+            Basic:
+            - '*'
+            Detailed:
+            - '*'
+            Full:
+            - '*'
+        surroundingSuburbsListingsCount:
+          type:
+          - integer
+          - 'null'
+          description: Gets or Sets SurroundingSuburbsListingsCount
+          format: int64
+        newHomesCount:
+          type:
+          - integer
+          - 'null'
+          description: Gets or Sets NewHomesCount
+          format: int64
+        ruralListingsCount:
+          type:
+          - integer
+          - 'null'
+          description: Gets or Sets RuralListingsCount
+          format: int64
+        medianPrice:
+          type:
+          - integer
+          - 'null'
+          description: Gets or Sets MedianPrice
+          format: int32
+        totalListingsExcludingChildren:
+          type:
+          - integer
+          - 'null'
+          description: Gets or Sets TotalListingsExcludingChildren
+          format: int64
+        surroundingSuburbsListingsExcludingChildren:
+          type:
+          - integer
+          - 'null'
+          description: Gets or Sets SurroundingSuburbsListingsExcludingChildren
+          format: int64
+      additionalProperties: false
+      description: DomainSearchContractsV2ResultMetadata
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    SearchService.v2.DomainSearchWebApiV2ModelsCustomSort:
+      type: object
+      properties:
+        elements:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SearchService.v2.DomainSearchWebApiV2ModelsCustomSortElement'
+          description: The elements (field + direction) that comprise the custom sort. Order is significant, so each sort  element will be applied in the order that it appears in the array. If this array is `null` or  empty, no sort order will be applied, other than potentially surrounding suburbs boost.
+        boostPrimarySuburbs:
+          type:
+          - boolean
+          - 'null'
+          description: Gets or Sets BoostPrimarySuburbs
+      additionalProperties: false
+      description: Defines a sort order comprised of 0 or more elements (Domain.Search.Web.Api.v2.Models.CustomSortElement).  <br />  Each element is applied in the  order specified. An element is a combination of field (Domain.Search.Web.Api.v2.Models.CustomSortField) and direction (Domain.Search.Web.Api.v2.Models.SortDirection).
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    SearchService.v2.DomainSearchWebApiV2ModelsSearchLocation:
+      type: object
+      properties:
+        state:
+          enum:
+          - ACT
+          - NSW
+          - QLD
+          - VIC
+          - SA
+          - WA
+          - NT
+          - TAS
+          type: string
+          description: Gets or Sets State
+        region:
+          type:
+          - string
+          - 'null'
+          description: See http://location-api.domain.com.au/locations/regions
+        area:
+          type:
+          - string
+          - 'null'
+          description: See http://location-api.domain.com.au/locations/areas
+        suburb:
+          type:
+          - string
+          - 'null'
+          description: The name of the suburb i.e Sydney
+        postCode:
+          type:
+          - string
+          - 'null'
+          description: The post code for the suburb i.e 2000
+        includeSurroundingSuburbs:
+          type:
+          - boolean
+          - 'null'
+          description: Return listing in surrounding suburbs  <br />  This works only if a location is a complete suburb match (State, Suburb, Postcode)
+        surroundingRadiusInMeters:
+          maximum: 200000
+          minimum: 1
+          type:
+          - integer
+          - 'null'
+          description: 'RadiusInMeters to add to the search area  <br />  It will be used to construct a circular search area based on suburb mid point.  <br />  This area will be searched in additional to the provided suburb (i.e. the results will belong to either suburb Or Circular area)  Radius Search works only for Suburb and will limit the results on selected suburb''s state. i.e. If calculated circular area  overlapes with a different state, overlapping area will be ignored.  <br />  Minimum Value: 1  <br />  Maximum Value: 200000'
+          format: int32
+        definesPostcodeOnly:
+          type:
+          - boolean
+          - 'null'
+          description: If `true`, this instance has a postcode and nothing more.
+          readOnly: true
+      additionalProperties: false
+      description: DomainSearchWebApiV2ModelsSearchLocation
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    SearchService.v2.DomainSearchContractsV2Project:
+      type: object
+      properties:
+        id:
+          type:
+          - integer
+          - 'null'
+          description: Gets or Sets Id
+          format: int32
+        name:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets Name
+        promoLevel:
+          enum:
+          - Standard
+          - Premium
+          type: string
+          description: Gets or Sets PromoLevel
+        bannerUrl:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets BannerUrl
+        preferredColorHex:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets PreferredColorHex
+        logoUrl:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets LogoUrl
+        labels:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Gets or Sets Labels
+        displayableAddress:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets DisplayableAddress
+        suburb:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets Suburb
+        suburbId:
+          type:
+          - integer
+          - 'null'
+          description: Gets or Sets SuburbId
+          format: int32
+        state:
+          enum:
+          - ACT
+          - NSW
+          - QLD
+          - VIC
+          - SA
+          - WA
+          - NT
+          - TAS
+          type: string
+          description: Gets or Sets State
+        features:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Gets or Sets Features
+        media:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SearchService.v2.DomainSearchContractsV2Media'
+          description: Gets or Sets Media
+        projectSlug:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets ProjectSlug
+        priceFrom:
+          type:
+          - integer
+          - 'null'
+          description: Gets or Sets PriceFrom
+          format: int32
+      additionalProperties: false
+      description: DomainSearchContractsV2Project
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    SearchService.v2.DomainSearchContractsV2AuctionSchedule:
+      type: object
+      properties:
+        time:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets Time
+          format: date-time
+        auctionLocation:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets AuctionLocation
+      additionalProperties: false
+      description: DomainSearchContractsV2AuctionSchedule
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    SearchService.v2.DomainSearchContractsV2SearchResults:
+      type: object
+      properties:
+        results:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SearchService.v2.DomainSearchContractsV2SearchResult'
+          description: Gets or Sets Results
+        totalResults:
+          type:
+          - integer
+          - 'null'
+          description: Gets or Sets TotalResults
+          format: int64
+        totalPages:
+          type:
+          - integer
+          - 'null'
+          description: Gets or Sets TotalPages
+          format: int64
+        page:
+          type:
+          - integer
+          - 'null'
+          description: Gets or Sets Page
+          format: int32
+        metadata:
+          $ref: '#/components/schemas/SearchService.v2.DomainSearchContractsV2ResultMetadata'
+        actualTotalResults:
+          type:
+          - integer
+          - 'null'
+          description: Gets or Sets ActualTotalResults
+          format: int64
+        actualTotalResultsExceedsMaximum:
+          type:
+          - boolean
+          - 'null'
+          description: Gets or Sets ActualTotalResultsExceedsMaximum
+      additionalProperties: false
+      description: DomainSearchContractsV2SearchResults
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    SearchService.v2.DomainSearchContractsV2PropertyDetails:
+      type: object
+      properties:
+        bathrooms:
+          type:
+          - number
+          - 'null'
+          description: Gets or Sets Bathrooms
+          format: float
+        bedrooms:
+          type:
+          - number
+          - 'null'
+          description: Gets or Sets Bedrooms
+          format: float
+        carspaces:
+          type:
+          - integer
+          - 'null'
+          description: Gets or Sets Carspaces
+          format: int32
+        unitNumber:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets UnitNumber
+        streetNumber:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets StreetNumber
+        street:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets Street
+        area:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets Area
+        region:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets Region
+        suburb:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets Suburb
+        suburbId:
+          type:
+          - integer
+          - 'null'
+          description: Gets or Sets SuburbId
+          format: int32
+        postcode:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets Postcode
+        state:
+          enum:
+          - ACT
+          - NSW
+          - QLD
+          - VIC
+          - SA
+          - WA
+          - NT
+          - TAS
+          type: string
+          description: Gets or Sets State
+        displayableAddress:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets DisplayableAddress
+        features:
+          type:
+          - array
+          - 'null'
+          items:
+            enum:
+            - Unrecognised
+            - AirConditioning
+            - BuiltInWardrobes
+            - CableOrSatellite
+            - Ensuite
+            - Floorboards
+            - Gas
+            - InternalLaundry
+            - PetsAllowed
+            - SecureParking
+            - SwimmingPool
+            - Furnished
+            - GroundFloor
+            - WaterViews
+            - NorthFacing
+            - CityViews
+            - IndoorSpa
+            - Gym
+            - AlarmSystem
+            - Intercom
+            - BroadbandInternetAccess
+            - Bath
+            - Fireplace
+            - SeparateDiningRoom
+            - Heating
+            - Dishwasher
+            - Study
+            - TennisCourt
+            - Shed
+            - FullyFenced
+            - BalconyDeck
+            - GardenCourtyard
+            - OutdoorSpa
+            - DoubleGlazedWindows
+            - EnergyEfficientAppliances
+            - WaterEfficientAppliances
+            - WallCeilingInsulation
+            - RainwaterStorageTank
+            - GreywaterSystem
+            - WaterEfficientFixtures
+            - SolarHotWater
+            - SolarPanels
+            type: string
+            description: Defines Domain.Search.Contracts.v2.PropertyFeature
+          description: Gets or Sets Features
+        latitude:
+          type:
+          - number
+          - 'null'
+          description: Gets or Sets Latitude
+          format: float
+        longitude:
+          type:
+          - number
+          - 'null'
+          description: Gets or Sets Longitude
+          format: float
+        mapCertainty:
+          type:
+          - integer
+          - 'null'
+          description: Gets or Sets MapCertainty
+          format: int32
+        propertyType:
+          enum:
+          - Unknown
+          - AcreageSemiRural
+          - ApartmentUnitFlat
+          - Aquaculture
+          - BlockOfUnits
+          - CarSpace
+          - DairyFarming
+          - DevelopmentSite
+          - Duplex
+          - Farm
+          - FishingForestry
+          - NewHomeDesigns
+          - House
+          - NewHouseLand
+          - IrrigationServices
+          - NewLand
+          - Livestock
+          - NewApartments
+          - Penthouse
+          - RetirementVillage
+          - Rural
+          - SemiDetached
+          - SpecialistFarm
+          - Studio
+          - Terrace
+          - Townhouse
+          - VacantLand
+          - Villa
+          - Cropping
+          - Viticulture
+          - MixedFarming
+          - Grazing
+          - Horticulture
+          - Equine
+          - Farmlet
+          - Orchard
+          - RuralLifestyle
+          type: string
+          description: Gets or Sets PropertyType
+        allPropertyTypes:
+          type:
+          - array
+          - 'null'
+          items:
+            enum:
+            - Unknown
+            - AcreageSemiRural
+            - ApartmentUnitFlat
+            - Aquaculture
+            - BlockOfUnits
+            - CarSpace
+            - DairyFarming
+            - DevelopmentSite
+            - Duplex
+            - Farm
+            - FishingForestry
+            - NewHomeDesigns
+            - House
+            - NewHouseLand
+            - IrrigationServices
+            - NewLand
+            - Livestock
+            - NewApartments
+            - Penthouse
+            - RetirementVillage
+            - Rural
+            - SemiDetached
+            - SpecialistFarm
+            - Studio
+            - Terrace
+            - Townhouse
+            - VacantLand
+            - Villa
+            - Cropping
+            - Viticulture
+            - MixedFarming
+            - Grazing
+            - Horticulture
+            - Equine
+            - Farmlet
+            - Orchard
+            - RuralLifestyle
+            type: string
+            description: Defines Domain.Search.Contracts.v2.PropertyType
+          description: Gets or Sets AllPropertyTypes
+        landArea:
+          type:
+          - number
+          - 'null'
+          description: Gets or Sets LandArea
+          format: double
+        buildingArea:
+          type:
+          - number
+          - 'null'
+          description: Gets or Sets BuildingArea
+          format: double
+        onlyShowProperties:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Gets or Sets OnlyShowProperties
+        displayAddressType:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets DisplayAddressType
+        isRural:
+          type:
+          - boolean
+          - 'null'
+          description: Gets or Sets IsRural
+        topSpotKeywords:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Gets or Sets TopSpotKeywords
+        isNew:
+          type:
+          - boolean
+          - 'null'
+          description: Gets or Sets IsNew
+        tags:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Gets or Sets Tags
+      additionalProperties: false
+      description: DomainSearchContractsV2PropertyDetails
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    SearchService.v2.DomainSearchWebApiV2ModelsGeoWindow:
+      type: object
+      properties:
+        box:
+          $ref: '#/components/schemas/SearchService.v2.DomainSearchWebApiV2ModelsBox'
+        circle:
+          $ref: '#/components/schemas/SearchService.v2.DomainSearchWebApiV2ModelsCircle'
+        polygon:
+          $ref: '#/components/schemas/SearchService.v2.DomainSearchWebApiV2ModelsPolygon'
+      additionalProperties: false
+      description: Define different geo filter shapes
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    SearchService.v2.DomainSearchContractsV2Media:
+      type: object
+      properties:
+        category:
+          enum:
+          - Image
+          type: string
+          description: Gets or Sets Category
+        type:
+          enum:
+          - Photo
+          - Floorplan
+          type: string
+          description: Gets or Sets Type
+        url:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets Url
+      additionalProperties: false
+      description: DomainSearchContractsV2Media
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    SearchService.v2.DomainSearchContractsV2Contact:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets Name
+        photoUrl:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets PhotoUrl
+      additionalProperties: false
+      description: DomainSearchContractsV2Contact
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    SearchService.v2.DomainSearchWebApiV2ModelsTagQuery:
+      type: object
+      properties:
+        tag:
+          type:
+          - string
+          - 'null'
+          description: The tag value.
+        criteria:
+          enum:
+          - Include
+          - Exclude
+          type: string
+          description: Gets or Sets Criteria
+      additionalProperties: false
+      description: Used to indicate whether listings with a given Domain.Search.Web.Api.v2.Models.TagQuery.Tag should be included  or excluded, based on the Domain.Search.Web.Api.v2.Models.TagCriteria.
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    SearchService.v2.DomainSearchWebApiV2ModelsSortBy:
+      type: object
+      properties:
+        sortKey:
+          enum:
+          - Default
+          - Suburb
+          - Price
+          - DateUpdated
+          - InspectionTime
+          - AuctionTime
+          - SoldDate
+          - DefaultThenDateUpdated
+          - DateAvailable
+          - DateListed
+          type: string
+          description: Gets or Sets SortKey
+        direction:
+          enum:
+          - Ascending
+          - Descending
+          type: string
+          description: Gets or Sets Direction
+      additionalProperties: false
+      description: DomainSearchWebApiV2ModelsSortBy
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    SearchService.v2.DomainSearchContractsV2PropertyListing:
+      type: object
+      properties:
+        id:
+          type:
+          - integer
+          - 'null'
+          description: Gets or Sets Id
+          format: int32
+        projectId:
+          type:
+          - integer
+          - 'null'
+          description: Gets or Sets ProjectId
+          format: int32
+        promoLevel:
+          enum:
+          - Standard
+          - StandardPP
+          - Elite
+          - ElitePP
+          - PremiumPlus
+          type: string
+          description: Gets or Sets PromoLevel
+        listingType:
+          enum:
+          - Sale
+          - Rent
+          - Share
+          - Sold
+          - NewHomes
+          type: string
+          description: Gets or Sets ListingType
+        advertiser:
+          $ref: '#/components/schemas/SearchService.v2.DomainSearchContractsV2Advertiser'
+        priceDetails:
+          $ref: '#/components/schemas/SearchService.v2.DomainSearchContractsV2PriceDetails'
+        media:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SearchService.v2.DomainSearchContractsV2Media'
+          description: Gets or Sets Media
+        propertyDetails:
+          $ref: '#/components/schemas/SearchService.v2.DomainSearchContractsV2PropertyDetails'
+        headline:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets Headline
+        summaryDescription:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets SummaryDescription
+        hasFloorplan:
+          type:
+          - boolean
+          - 'null'
+          description: Gets or Sets HasFloorplan
+        hasVideo:
+          type:
+          - boolean
+          - 'null'
+          description: Gets or Sets HasVideo
+        matterport:
+          $ref: '#/components/schemas/SearchService.v2.DomainSearchContractsV2Matterport'
+        labels:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Gets or Sets Labels
+        auctionSchedule:
+          $ref: '#/components/schemas/SearchService.v2.DomainSearchContractsV2AuctionSchedule'
+        dateAvailable:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets DateAvailable
+          format: date-time
+        dateListed:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets DateListed
+          format: date-time
+        inspectionSchedule:
+          $ref: '#/components/schemas/SearchService.v2.DomainSearchContractsV2InspectionSchedule'
+        soldData:
+          $ref: '#/components/schemas/SearchService.v2.DomainSearchContractsV2SoldData'
+        listingSlug:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets ListingSlug
+      additionalProperties: false
+      description: DomainSearchContractsV2PropertyListing
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    SearchService.v2.DomainSearchWebApiV2ModelsCircle:
+      required:
+      - radiusInMeters
+      type: object
+      properties:
+        center:
+          $ref: '#/components/schemas/SearchService.v2.DomainSearchWebApiV2ModelsGeoPoint'
+        radiusInMeters:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+          description: Gets or Sets RadiusInMeters
+          format: int32
+      additionalProperties: false
+      description: DomainSearchWebApiV2ModelsCircle
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    SearchService.v2.DomainSearchContractsV2MatterportInterior:
+      type: object
+      properties:
+        matterportKey:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets MatterportKey
+        matterportThumbnailUri:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets MatterportThumbnailUri
+      additionalProperties: false
+      description: DomainSearchContractsV2MatterportInterior
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    SearchService.v2.DomainSearchWebApiV2ModelsPolygon:
+      type: object
+      properties:
+        points:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SearchService.v2.DomainSearchWebApiV2ModelsGeoPoint'
+          description: You must provide at least three points to form a polygon
+      additionalProperties: false
+      description: DomainSearchWebApiV2ModelsPolygon
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    SearchService.v2.DomainSearchContractsV2Inspection:
+      type: object
+      properties:
+        openingTime:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets OpeningTime
+          format: date-time
+        closingTime:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets ClosingTime
+          format: date-time
+      additionalProperties: false
+      description: DomainSearchContractsV2Inspection
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    SearchService.v2.DomainSearchContractsV2SearchResult:
+      type: object
+      properties:
+        type:
+          enum:
+          - PropertyListing
+          - Project
+          type: string
+          description: Gets or Sets Type
+        listing:
+          $ref: '#/components/schemas/SearchService.v2.DomainSearchContractsV2PropertyListing'
+        listings:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SearchService.v2.DomainSearchContractsV2PropertyListing'
+          description: Gets or Sets Listings
+        project:
+          $ref: '#/components/schemas/SearchService.v2.DomainSearchContractsV2Project'
+      additionalProperties: false
+      description: DomainSearchContractsV2SearchResult
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    SearchService.v2.DomainSearchContractsV2PriceDetails:
+      type: object
+      properties:
+        price:
+          type:
+          - integer
+          - 'null'
+          description: Gets or Sets Price
+          format: int32
+        priceFrom:
+          type:
+          - integer
+          - 'null'
+          description: Gets or Sets PriceFrom
+          format: int32
+        priceTo:
+          type:
+          - integer
+          - 'null'
+          description: Gets or Sets PriceTo
+          format: int32
+        displayPrice:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets DisplayPrice
+        canDisplayPrice:
+          type:
+          - boolean
+          - 'null'
+          description: Gets or Sets CanDisplayPrice
+        depositTaken:
+          type:
+          - boolean
+          - 'null'
+          description: Gets or Sets DepositTaken
+        saleMethod:
+          enum:
+          - NotStated
+          - Auction
+          - PrivateTreaty
+          - Tender
+          - ExpressionOfInterest
+          type: string
+          description: Gets or Sets SaleMethod
+      additionalProperties: false
+      description: DomainSearchContractsV2PriceDetails
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    SearchService.v2.DomainSearchContractsV2Matterport:
+      type: object
+      properties:
+        interior:
+          $ref: '#/components/schemas/SearchService.v2.DomainSearchContractsV2MatterportInterior'
+        exterior:
+          $ref: '#/components/schemas/SearchService.v2.DomainSearchContractsV2MatterportExterior'
+      additionalProperties: false
+      description: DomainSearchContractsV2Matterport
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    SearchService.v2.DomainSearchWebApiV2ModelsSoldSearchParameters:
+      type: object
+      properties:
+        listingType:
+          enum:
+          - Sale
+          - Rent
+          - Share
+          - Sold
+          - NewHomes
+          type: string
+          description: Gets or Sets ListingType
+        saleMethods:
+          type:
+          - array
+          - 'null'
+          items:
+            enum:
+            - NotStated
+            - Auction
+            - PrivateTreaty
+            - Tender
+            - ExpressionOfInterest
+            type: string
+            description: Defines Domain.Search.Web.Api.V2.Models.SaleMethod
+          description: Gets or Sets SaleMethods
+        minBedrooms:
+          type:
+          - number
+          - 'null'
+          description: Filter listing by minimum number of bedrooms
+          format: float
+        maxBedrooms:
+          type:
+          - number
+          - 'null'
+          description: Filter listing by maximum number of bedrooms
+          format: float
+        minBathrooms:
+          type:
+          - number
+          - 'null'
+          description: Filter listing by minimum number of bathrooms
+          format: float
+        maxBathrooms:
+          type:
+          - number
+          - 'null'
+          description: Filter listing by maximum number of bathrooms  0.5 means no shower
+          format: float
+        minCarspaces:
+          maximum: 2147483647
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+          description: Filter listing by minimum number of car spaces
+          format: int32
+        maxCarspaces:
+          maximum: 2147483647
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+          description: Filter listing by maximum number of car spaces
+          format: int32
+        minPrice:
+          maximum: 2147483647
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+          description: Filter listing at or above a minimum price
+          format: int32
+        maxPrice:
+          maximum: 2147483647
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+          description: Filter listing at or below a maximum price
+          format: int32
+        minLandArea:
+          maximum: 2147483647
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+          description: Min Land Area in square meters
+          format: int32
+        maxLandArea:
+          maximum: 2147483647
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+          description: Max Land Area in square meters
+          format: int32
+        advertiserIds:
+          type:
+          - array
+          - 'null'
+          items:
+            type: integer
+            format: int32
+          description: Return listings only created by these agencies.
+        adIds:
+          type:
+          - array
+          - 'null'
+          items:
+            type: integer
+            format: int32
+          description: Filter based on Ad Ids (Include in search result if AdID is in this list)
+        excludeAdIds:
+          type:
+          - array
+          - 'null'
+          items:
+            type: integer
+            format: int32
+          description: Filter out listings with Ad Ids (Exclude listings from search result if AdID is in this list)
+        propertyTypes:
+          type:
+          - array
+          - 'null'
+          items:
+            enum:
+            - AcreageSemiRural
+            - ApartmentUnitFlat
+            - Aquaculture
+            - BlockOfUnits
+            - CarSpace
+            - DairyFarming
+            - DevelopmentSite
+            - Duplex
+            - Farm
+            - FishingForestry
+            - NewHomeDesigns
+            - House
+            - NewHouseLand
+            - IrrigationServices
+            - NewLand
+            - Livestock
+            - NewApartments
+            - Penthouse
+            - RetirementVillage
+            - Rural
+            - SemiDetached
+            - SpecialistFarm
+            - Studio
+            - Terrace
+            - Townhouse
+            - VacantLand
+            - Villa
+            - Cropping
+            - Viticulture
+            - MixedFarming
+            - Grazing
+            - Horticulture
+            - Equine
+            - Farmlet
+            - Orchard
+            - RuralLifestyle
+            type: string
+            description: Defines Domain.Search.Web.Api.v2.Models.PropertyType
+          description: Filter by one or more types of properties
+        propertyFeatures:
+          type:
+          - array
+          - 'null'
+          items:
+            enum:
+            - AirConditioning
+            - BuiltInWardrobes
+            - CableOrSatellite
+            - Ensuite
+            - Floorboards
+            - Gas
+            - InternalLaundry
+            - PetsAllowed
+            - SecureParking
+            - SwimmingPool
+            - Furnished
+            - GroundFloor
+            - WaterViews
+            - NorthFacing
+            - CityViews
+            - IndoorSpa
+            - Gym
+            - AlarmSystem
+            - Intercom
+            - BroadbandInternetAccess
+            - Bath
+            - Fireplace
+            - SeparateDiningRoom
+            - Heating
+            - Dishwasher
+            - Study
+            - TennisCourt
+            - Shed
+            - FullyFenced
+            - BalconyDeck
+            - GardenCourtyard
+            - OutdoorSpa
+            - DoubleGlazedWindows
+            - EnergyEfficientAppliances
+            - WaterEfficientAppliances
+            - WallCeilingInsulation
+            - RainwaterStorageTank
+            - GreywaterSystem
+            - WaterEfficientFixtures
+            - SolarHotWater
+            - SolarPanels
+            type: string
+            description: Defines Domain.Search.Web.Api.v2.Models.SearchPropertyFeature
+          description: Filter by one or more property features such as Gas or AC
+        locations:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SearchService.v2.DomainSearchWebApiV2ModelsSearchLocation'
+          description: Filter by the locations either suburb, area, region or state  <br />  Can also be used to search suburb and some area around it if radius is provided.   <br />  Invalid locations will return no results.  <br />  If Domain.Search.Web.Api.v2.Models.SearchLocation.IncludeSurroundingSuburbs is set to `true`, surrounding suburbs will also be searched for.
+        schoolCatchments:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SearchService.v2.DomainSearchWebApiV2ModelsSchoolCatchment'
+          description: one or more school identifiers to find the listings in their catchment area
+        locationTerms:
+          type:
+          - string
+          - 'null'
+          description: Filter by location terms. This can be used in conjunction with Locations
+        keywords:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Filter by one or more keywords that a listing should contain
+        listingAttributes:
+          type:
+          - array
+          - 'null'
+          items:
+            enum:
+            - HasPhotos
+            - HasPrice
+            - NotUpForAuction
+            - NotUnderContract
+            - MarkedAsNew
+            - HasMatterport
+            type: string
+            description: Defines Domain.Search.Web.Api.v2.Models.ListingAttribute
+          description: Limit the results to listing with specific attributes
+        newDevOnly:
+          type:
+          - boolean
+          - 'null'
+          description: Gets or Sets NewDevOnly
+        inspectionFrom:
+          type:
+          - string
+          - 'null'
+          description: 'Filter listings with inspection time on or from the date specified.  Strings of the format: yyyy-MM-dd are acceptable.'
+          format: date-time
+        inspectionTo:
+          type:
+          - string
+          - 'null'
+          description: 'Filter listings with inspection time on or before date specified.  Strings of the format: yyyy-MM-dd are acceptable.'
+          format: date-time
+        auctionFrom:
+          type:
+          - string
+          - 'null'
+          description: 'Filter listings with auction time on or from the date specified.  Strings of the format: yyyy-MM-dd are acceptable.'
+          format: date-time
+        auctionTo:
+          type:
+          - string
+          - 'null'
+          description: 'Filter listings with auction on or before from the date specified.  Strings of the format: yyyy-MM-dd are acceptable.'
+          format: date-time
+        dateAvailableFrom:
+          type:
+          - string
+          - 'null'
+          description: 'Return only those listings whose DateAvailable is null, or is at or after the specified time.  Strings of the format: yyyy-MM-dd are acceptable.'
+          format: date-time
+        dateAvailableTo:
+          type:
+          - string
+          - 'null'
+          description: 'Return only those listings whose DateAvailable is null, or is at or before the specified time.  Strings of the format: yyyy-MM-dd are acceptable.'
+          format: date-time
+        ruralOnly:
+          type:
+          - boolean
+          - 'null'
+          description: if true, the response will include only listings flagged with IsRural
+        excludePriceWithheld:
+          type:
+          - boolean
+          - 'null'
+          description: If `true`, exclude listings whose price has been withheld.
+        excludeDepositTaken:
+          type:
+          - boolean
+          - 'null'
+          description: If `true`c>, exclude listings (rental) has deposit taken
+        topspotKeywords:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Search by topspot keywords
+        customSort:
+          $ref: '#/components/schemas/SearchService.v2.DomainSearchWebApiV2ModelsCustomSort'
+        sort:
+          $ref: '#/components/schemas/SearchService.v2.DomainSearchWebApiV2ModelsSortBy'
+        page:
+          type:
+          - integer
+          - 'null'
+          description: The specific result page to return. Defaults to 1 when omitted or less than zero.
+          format: int32
+        geoWindow:
+          $ref: '#/components/schemas/SearchService.v2.DomainSearchWebApiV2ModelsGeoWindow'
+        updatedSince:
+          type:
+          - string
+          - 'null'
+          description: 'Only return listings that have been updated since the specified date.  Strings of the format: yyyy-MM-dd are acceptable.'
+          format: date-time
+        listedSince:
+          type:
+          - string
+          - 'null'
+          description: 'Only return listings that have been listed since the specified date.  Strings of the format: yyyy-MM-dd are acceptable.'
+          format: date-time
+        propertyEstablishedType:
+          enum:
+          - Any
+          - New
+          - Established
+          type: string
+          description: Gets or Sets PropertyEstablishedType
+        includeInspectionAggregations:
+          type:
+          - boolean
+          - 'null'
+          description: Gets or Sets IncludeInspectionAggregations
+        tags:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SearchService.v2.DomainSearchWebApiV2ModelsTagQuery'
+          description: '<br>              Filter listings based on a combination of tag value and inclusion/exclusion criteria.              For all of the tags whose criteria is \"include\": include only those listings in the search results              that have one or more of these tags.              For all of the tags whose criteria is \"exclude\": exclude listings that have one or more of these              tags from the search results.                <br>              Example: return only those listings that have the \"red\" or \"blue\" tags, but exclude              any that also have a \"green\" tag.                <example>              \"tags\":  [                  {                      \"criteria\":  \"include\",                      \"Tag\":  \"red\"                  },                  {                      \"criteria\":  \"include\",                      \"tag\":  \"blue\"                  },                  {                      \"criteria\":  \"exclude\",                      \"tag\":  \"green\"                  }              ]              </example>  <br>              Summary of the available tags and their meanings.                <list type=\"table\">    <item>      <term>retirement</term>      <description>Property is suitable for retirement.</description>    </item>    <item>      <term>rural</term>      <description>Rural listing.</description>    </item>    <item>      <term>newdevelopment</term>      <description>A newly-developed property.</description>    </item>  </list>'
+        aggregations:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Gets or Sets Aggregations
+        soldFrom:
+          type:
+          - string
+          - 'null'
+          description: Filter listings with sold date on or from the date specified
+          format: date-time
+        soldTo:
+          type:
+          - string
+          - 'null'
+          description: Filter listings with sold date on or before from the date specified
+          format: date-time
+        pageSize:
+          type:
+          - integer
+          - 'null'
+          description: Gets or Sets PageSize
+          format: int32
+      additionalProperties: false
+      description: DomainSearchWebApiV2ModelsSoldSearchParameters
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    SearchService.v2.DomainSearchContractsV2SoldData:
+      type: object
+      properties:
+        source:
+          enum:
+          - Agency
+          - Apm
+          type: string
+          description: Gets or Sets Source
+        soldDate:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets SoldDate
+          format: date-time
+        soldPrice:
+          type:
+          - integer
+          - 'null'
+          description: Gets or Sets SoldPrice
+          format: int32
+        saleMethod:
+          enum:
+          - NotStated
+          - SoldByAuction
+          - SoldByPrivateTreaty
+          - Withdrawn
+          - SoldPriorToAuction
+          type: string
+          description: Gets or Sets SaleMethod
+      additionalProperties: false
+      description: DomainSearchContractsV2SoldData
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    SearchService.v2.DomainSearchWebApiV2ModelsBox:
+      type: object
+      properties:
+        topLeft:
+          $ref: '#/components/schemas/SearchService.v2.DomainSearchWebApiV2ModelsGeoPoint'
+        bottomRight:
+          $ref: '#/components/schemas/SearchService.v2.DomainSearchWebApiV2ModelsGeoPoint'
+      additionalProperties: false
+      description: DomainSearchWebApiV2ModelsBox
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    SearchService.v2.DomainSearchWebApiV2ModelsGeoPoint:
+      type: object
+      properties:
+        lat:
+          type:
+          - number
+          - 'null'
+          description: Latitude coordinate
+          format: double
+        lon:
+          type:
+          - number
+          - 'null'
+          description: Longitude coordinate
+          format: double
+      additionalProperties: false
+      description: DomainSearchWebApiV2ModelsGeoPoint
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    SearchService.v2.DomainSearchWebApiV2ModelsCustomSortElement:
+      type: object
+      properties:
+        field:
+          enum:
+          - AdId
+          - PromoLevelScore
+          - FreshnessLevel
+          - ProductBoost
+          - DateUpdated
+          - DateListed
+          - SuburbName
+          - PriceDisplayOption
+          - SoldDate
+          - Price
+          - EarliestInspectionOpenTime
+          - EarliestAuctionTime
+          - DateAvailable
+          type: string
+          description: Gets or Sets Field
+        direction:
+          enum:
+          - Ascending
+          - Descending
+          type: string
+          description: Gets or Sets Direction
+      additionalProperties: false
+      description: DomainSearchWebApiV2ModelsCustomSortElement
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    SearchService.v2.DomainSearchContractsV2InspectionSchedule:
+      type: object
+      properties:
+        byAppointment:
+          type:
+          - boolean
+          - 'null'
+          description: Gets or Sets ByAppointment
+        recurring:
+          type:
+          - boolean
+          - 'null'
+          description: Gets or Sets Recurring
+        times:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SearchService.v2.DomainSearchContractsV2Inspection'
+          description: Gets or Sets Times
+      additionalProperties: false
+      description: DomainSearchContractsV2InspectionSchedule
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    SearchService.v2.DomainSearchContractsV2Advertiser:
+      type: object
+      properties:
+        id:
+          type:
+          - integer
+          - 'null'
+          description: Gets or Sets Id
+          format: int32
+        type:
+          enum:
+          - Agency
+          - Private
+          type: string
+          description: Gets or Sets Type
+        name:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets Name
+        logoUrl:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets LogoUrl
+        preferredColourHex:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets PreferredColourHex
+        bannerUrl:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets BannerUrl
+        contacts:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SearchService.v2.DomainSearchContractsV2Contact'
+          description: Gets or Sets Contacts
+      additionalProperties: false
+      description: DomainSearchContractsV2Advertiser
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    SearchService.v2.DomainSearchWebApiV2ModelsSearchParameters:
+      type: object
+      properties:
+        listingType:
+          enum:
+          - Sale
+          - Rent
+          - Share
+          - Sold
+          - NewHomes
+          type: string
+          description: Gets or Sets ListingType
+        saleMethods:
+          type:
+          - array
+          - 'null'
+          items:
+            enum:
+            - NotStated
+            - Auction
+            - PrivateTreaty
+            - Tender
+            - ExpressionOfInterest
+            type: string
+            description: Defines Domain.Search.Web.Api.V2.Models.SaleMethod
+          description: Gets or Sets SaleMethods
+        minBedrooms:
+          type:
+          - number
+          - 'null'
+          description: Filter listing by minimum number of bedrooms
+          format: float
+        maxBedrooms:
+          type:
+          - number
+          - 'null'
+          description: Filter listing by maximum number of bedrooms
+          format: float
+        minBathrooms:
+          type:
+          - number
+          - 'null'
+          description: Filter listing by minimum number of bathrooms
+          format: float
+        maxBathrooms:
+          type:
+          - number
+          - 'null'
+          description: Filter listing by maximum number of bathrooms  0.5 means no shower
+          format: float
+        minCarspaces:
+          maximum: 2147483647
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+          description: Filter listing by minimum number of car spaces
+          format: int32
+        maxCarspaces:
+          maximum: 2147483647
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+          description: Filter listing by maximum number of car spaces
+          format: int32
+        minPrice:
+          maximum: 2147483647
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+          description: Filter listing at or above a minimum price
+          format: int32
+        maxPrice:
+          maximum: 2147483647
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+          description: Filter listing at or below a maximum price
+          format: int32
+        minLandArea:
+          maximum: 2147483647
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+          description: Min Land Area in square meters
+          format: int32
+        maxLandArea:
+          maximum: 2147483647
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+          description: Max Land Area in square meters
+          format: int32
+        advertiserIds:
+          type:
+          - array
+          - 'null'
+          items:
+            type: integer
+            format: int32
+          description: Return listings only created by these agencies.
+        adIds:
+          type:
+          - array
+          - 'null'
+          items:
+            type: integer
+            format: int32
+          description: Filter based on Ad Ids (Include in search result if AdID is in this list)
+        excludeAdIds:
+          type:
+          - array
+          - 'null'
+          items:
+            type: integer
+            format: int32
+          description: Filter out listings with Ad Ids (Exclude listings from search result if AdID is in this list)
+        propertyTypes:
+          type:
+          - array
+          - 'null'
+          items:
+            enum:
+            - AcreageSemiRural
+            - ApartmentUnitFlat
+            - Aquaculture
+            - BlockOfUnits
+            - CarSpace
+            - DairyFarming
+            - DevelopmentSite
+            - Duplex
+            - Farm
+            - FishingForestry
+            - NewHomeDesigns
+            - House
+            - NewHouseLand
+            - IrrigationServices
+            - NewLand
+            - Livestock
+            - NewApartments
+            - Penthouse
+            - RetirementVillage
+            - Rural
+            - SemiDetached
+            - SpecialistFarm
+            - Studio
+            - Terrace
+            - Townhouse
+            - VacantLand
+            - Villa
+            - Cropping
+            - Viticulture
+            - MixedFarming
+            - Grazing
+            - Horticulture
+            - Equine
+            - Farmlet
+            - Orchard
+            - RuralLifestyle
+            type: string
+            description: Defines Domain.Search.Web.Api.v2.Models.PropertyType
+          description: Filter by one or more types of properties
+        propertyFeatures:
+          type:
+          - array
+          - 'null'
+          items:
+            enum:
+            - AirConditioning
+            - BuiltInWardrobes
+            - CableOrSatellite
+            - Ensuite
+            - Floorboards
+            - Gas
+            - InternalLaundry
+            - PetsAllowed
+            - SecureParking
+            - SwimmingPool
+            - Furnished
+            - GroundFloor
+            - WaterViews
+            - NorthFacing
+            - CityViews
+            - IndoorSpa
+            - Gym
+            - AlarmSystem
+            - Intercom
+            - BroadbandInternetAccess
+            - Bath
+            - Fireplace
+            - SeparateDiningRoom
+            - Heating
+            - Dishwasher
+            - Study
+            - TennisCourt
+            - Shed
+            - FullyFenced
+            - BalconyDeck
+            - GardenCourtyard
+            - OutdoorSpa
+            - DoubleGlazedWindows
+            - EnergyEfficientAppliances
+            - WaterEfficientAppliances
+            - WallCeilingInsulation
+            - RainwaterStorageTank
+            - GreywaterSystem
+            - WaterEfficientFixtures
+            - SolarHotWater
+            - SolarPanels
+            type: string
+            description: Defines Domain.Search.Web.Api.v2.Models.SearchPropertyFeature
+          description: Filter by one or more property features such as Gas or AC
+        locations:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SearchService.v2.DomainSearchWebApiV2ModelsSearchLocation'
+          description: Filter by the locations either suburb, area, region or state  <br />  Can also be used to search suburb and some area around it if radius is provided.   <br />  Invalid locations will return no results.  <br />  If Domain.Search.Web.Api.v2.Models.SearchLocation.IncludeSurroundingSuburbs is set to `true`, surrounding suburbs will also be searched for.
+        schoolCatchments:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SearchService.v2.DomainSearchWebApiV2ModelsSchoolCatchment'
+          description: one or more school identifiers to find the listings in their catchment area
+        locationTerms:
+          type:
+          - string
+          - 'null'
+          description: Filter by location terms. This can be used in conjunction with Locations
+        keywords:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Filter by one or more keywords that a listing should contain
+        listingAttributes:
+          type:
+          - array
+          - 'null'
+          items:
+            enum:
+            - HasPhotos
+            - HasPrice
+            - NotUpForAuction
+            - NotUnderContract
+            - MarkedAsNew
+            - HasMatterport
+            type: string
+            description: Defines Domain.Search.Web.Api.v2.Models.ListingAttribute
+          description: Limit the results to listing with specific attributes
+        newDevOnly:
+          type:
+          - boolean
+          - 'null'
+          description: Gets or Sets NewDevOnly
+        inspectionFrom:
+          type:
+          - string
+          - 'null'
+          description: 'Filter listings with inspection time on or from the date specified.  Strings of the format: yyyy-MM-dd are acceptable.'
+          format: date-time
+        inspectionTo:
+          type:
+          - string
+          - 'null'
+          description: 'Filter listings with inspection time on or before date specified.  Strings of the format: yyyy-MM-dd are acceptable.'
+          format: date-time
+        auctionFrom:
+          type:
+          - string
+          - 'null'
+          description: 'Filter listings with auction time on or from the date specified.  Strings of the format: yyyy-MM-dd are acceptable.'
+          format: date-time
+        auctionTo:
+          type:
+          - string
+          - 'null'
+          description: 'Filter listings with auction on or before from the date specified.  Strings of the format: yyyy-MM-dd are acceptable.'
+          format: date-time
+        dateAvailableFrom:
+          type:
+          - string
+          - 'null'
+          description: 'Return only those listings whose DateAvailable is null, or is at or after the specified time.  Strings of the format: yyyy-MM-dd are acceptable.'
+          format: date-time
+        dateAvailableTo:
+          type:
+          - string
+          - 'null'
+          description: 'Return only those listings whose DateAvailable is null, or is at or before the specified time.  Strings of the format: yyyy-MM-dd are acceptable.'
+          format: date-time
+        ruralOnly:
+          type:
+          - boolean
+          - 'null'
+          description: if true, the response will include only listings flagged with IsRural
+        excludePriceWithheld:
+          type:
+          - boolean
+          - 'null'
+          description: If `true`, exclude listings whose price has been withheld.
+        excludeDepositTaken:
+          type:
+          - boolean
+          - 'null'
+          description: If `true`c>, exclude listings (rental) has deposit taken
+        topspotKeywords:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Search by topspot keywords
+        customSort:
+          $ref: '#/components/schemas/SearchService.v2.DomainSearchWebApiV2ModelsCustomSort'
+        sort:
+          $ref: '#/components/schemas/SearchService.v2.DomainSearchWebApiV2ModelsSortBy'
+        page:
+          type:
+          - integer
+          - 'null'
+          description: The specific result page to return. Defaults to 1 when omitted or less than zero.
+          format: int32
+        pageSize:
+          maximum: 200
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+          description: Specify the number of result items in a page
+          format: int32
+        geoWindow:
+          $ref: '#/components/schemas/SearchService.v2.DomainSearchWebApiV2ModelsGeoWindow'
+        updatedSince:
+          type:
+          - string
+          - 'null'
+          description: 'Only return listings that have been updated since the specified date.  Strings of the format: yyyy-MM-dd are acceptable.'
+          format: date-time
+        listedSince:
+          type:
+          - string
+          - 'null'
+          description: 'Only return listings that have been listed since the specified date.  Strings of the format: yyyy-MM-dd are acceptable.'
+          format: date-time
+        propertyEstablishedType:
+          enum:
+          - Any
+          - New
+          - Established
+          type: string
+          description: Gets or Sets PropertyEstablishedType
+        includeInspectionAggregations:
+          type:
+          - boolean
+          - 'null'
+          description: Gets or Sets IncludeInspectionAggregations
+        tags:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SearchService.v2.DomainSearchWebApiV2ModelsTagQuery'
+          description: '<br>              Filter listings based on a combination of tag value and inclusion/exclusion criteria.              For all of the tags whose criteria is \"include\": include only those listings in the search results              that have one or more of these tags.              For all of the tags whose criteria is \"exclude\": exclude listings that have one or more of these              tags from the search results.                <br>              Example: return only those listings that have the \"red\" or \"blue\" tags, but exclude              any that also have a \"green\" tag.                <example>              \"tags\":  [                  {                      \"criteria\":  \"include\",                      \"Tag\":  \"red\"                  },                  {                      \"criteria\":  \"include\",                      \"tag\":  \"blue\"                  },                  {                      \"criteria\":  \"exclude\",                      \"tag\":  \"green\"                  }              ]              </example>  <br>              Summary of the available tags and their meanings.                <list type=\"table\">    <item>      <term>retirement</term>      <description>Property is suitable for retirement.</description>    </item>    <item>      <term>rural</term>      <description>Rural listing.</description>    </item>    <item>      <term>newdevelopment</term>      <description>A newly-developed property.</description>    </item>  </list>'
+        aggregations:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Gets or Sets Aggregations
+      additionalProperties: false
+      description: Represents a v2 search request. Top-level parameters are combined as a logical conjunction (i.e. like a SQL 'AND').  Responses will contain both standalone listings and development Domain.Search.Contracts.v2.Projects. Projects contain up to 4  matching child listings. Note that it's currently not possible to exclude projects from search results.  Both standalone and child listings are modelled using the Domain.Search.Contracts.v2.PropertyListing class.    Please do not make properties on this DTO nullable if you would like to enforce validation failures when they are explicitly provided a null value
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    SearchService.v2.DomainSearchWebApiV2ModelsSchoolCatchment:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets Name
+        state:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets State
+        postcode:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets Postcode
+      additionalProperties: false
+      description: DomainSearchWebApiV2ModelsSchoolCatchment
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    SearchService.v2.DomainSearchContractsV2MatterportExterior:
+      type: object
+      properties:
+        attachmentId:
+          type:
+          - integer
+          - 'null'
+          description: Gets or Sets AttachmentId
+          format: int64
+        gaussianSplatKey:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets GaussianSplatKey
+        gaussianThumbnailUri:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets GaussianThumbnailUri
+      additionalProperties: false
+      description: DomainSearchContractsV2MatterportExterior
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+  securitySchemes:
+    apikey:
+      type: apiKey
+      description: API Key in Header
+      name: x-api-key
+      in: header
+    oauth2:
+      type: oauth2
+      description: OAuth 2
+      flows:
+        clientCredentials:
+          tokenUrl: https://auth.domain.com.au/v1/connect/token
+          scopes:
+            api_addresslocators_read: api_addresslocators_read
+            api_agencies_read: api_agencies_read
+            api_agencies_write: api_agencies_write
+            api_authorities_write: api_authorities_write
+            api_avm_read: api_avm_read
+            api_campaignperformance_read: api_campaignperformance_read
+            api_dataset_read: api_dataset_read
+            api_demographics_read: api_demographics_read
+            api_enquiries_read: api_enquiries_read
+            api_enquiries_write: api_enquiries_write
+            api_listingperformance_read: api_listingperformance_read
+            api_listings_read: api_listings_read
+            api_listings_write: api_listings_write
+            api_locations_read: api_locations_read
+            api_projectperformance_read: api_projectperformance_read
+            api_properties_read: api_properties_read
+            api_propertyportfolio_read: api_propertyportfolio_read
+            api_propertyportfolio_write: api_propertyportfolio_write
+            api_propertyreports_read: api_propertyreports_read
+            api_salesresults_read: api_salesresults_read
+            api_statistics_write: api_statistics_write
+            api_suburbhistorical_read: api_suburbhistorical_read
+            api_suburbperformance_read: api_suburbperformance_read
+            api_suburbsummary_read: api_suburbsummary_read
+            api_webhooks_write: api_webhooks_write
+        authorizationCode:
+          authorizationUrl: https://auth.domain.com.au/v1/connect/authorize
+          tokenUrl: https://auth.domain.com.au/v1/connect/token
+          refreshUrl: https://auth.domain.com.au/v1/connect/token
+          scopes:
+            api_addresslocators_read: api_addresslocators_read
+            api_agencies_read: api_agencies_read
+            api_agencies_write: api_agencies_write
+            api_authorities_write: api_authorities_write
+            api_avm_read: api_avm_read
+            api_campaignperformance_read: api_campaignperformance_read
+            api_dataset_read: api_dataset_read
+            api_demographics_read: api_demographics_read
+            api_enquiries_read: api_enquiries_read
+            api_enquiries_write: api_enquiries_write
+            api_listingperformance_read: api_listingperformance_read
+            api_listings_read: api_listings_read
+            api_listings_write: api_listings_write
+            api_locations_read: api_locations_read
+            api_projectperformance_read: api_projectperformance_read
+            api_properties_read: api_properties_read
+            api_propertyportfolio_read: api_propertyportfolio_read
+            api_propertyportfolio_write: api_propertyportfolio_write
+            api_propertyreports_read: api_propertyreports_read
+            api_salesresults_read: api_salesresults_read
+            api_statistics_write: api_statistics_write
+            api_suburbhistorical_read: api_suburbhistorical_read
+            api_suburbperformance_read: api_suburbperformance_read
+            api_suburbsummary_read: api_suburbsummary_read
+            api_webhooks_write: api_webhooks_write
+x-refined-from:
+- domain-group-openapi-latest.json
+- domain-group-openapi-v1.json

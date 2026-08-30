@@ -1,0 +1,393 @@
+openapi: 3.2.0
+info:
+  title: Domain Group Webhooks API
+  contact:
+    name: Domain Developer Support
+    email: api@domain.com.au
+  termsOfService: https://developer.domain.com.au/docs/latest/support/terms
+  version: '1.0'
+  description: 'Operations tagged Webhooks across 2 of this provider''s published API definitions: domain-group-openapi-latest.json, domain-group-openapi-v1.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.domain.com.au/
+  description: Primary
+- url: https://api.domain.com.au/sandbox/
+  description: Sandbox
+tags:
+- name: Webhooks
+paths:
+  /v1/subscriptions/{id}:
+    get:
+      tags:
+      - Webhooks
+      summary: Retrieve the details of a single subscription
+      operationId: Webhooks_GetSubscription
+      parameters:
+      - name: id
+        in: path
+        description: Subscription identifier
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhooks.v1.WebhookSubscription'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+      security:
+      - apikey: []
+      - oauth2:
+        - api_webhooks_write
+      x-domain-endpointcost: 1
+      x-domain-usercontextrequired: false
+      x-domain-environment: Any
+    delete:
+      tags:
+      - Webhooks
+      summary: Delete a single subscription
+      operationId: Webhooks_DeleteSubscription
+      parameters:
+      - name: id
+        in: path
+        description: Subscription identifier
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+      security:
+      - apikey: []
+      - oauth2:
+        - api_webhooks_write
+      x-domain-endpointcost: 1
+      x-domain-usercontextrequired: false
+      x-domain-environment: Any
+    servers:
+    - url: https://api.domain.com.au/
+      description: Primary
+    - url: https://api.domain.com.au/sandbox/
+      description: Sandbox
+  /v1/webhooks/{id}/subscriptions:
+    get:
+      tags:
+      - Webhooks
+      summary: List all subscriptions to the specified webhook
+      operationId: Webhooks_ListSubscriptions
+      parameters:
+      - name: id
+        in: path
+        description: Subscriber (Webhook) ID
+        required: true
+        schema:
+          type: string
+      - name: pageNumber
+        in: query
+        description: ''
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: pageSize
+        in: query
+        description: ''
+        schema:
+          type: integer
+          format: int32
+          default: 20
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Webhooks.v1.WebhookSubscription'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+      security:
+      - apikey: []
+      - oauth2:
+        - api_webhooks_write
+      x-domain-endpointcost: 1
+      x-domain-usercontextrequired: false
+      x-domain-environment: Any
+    put:
+      tags:
+      - Webhooks
+      summary: Create a subscription to notifications
+      operationId: Webhooks_CreateSubscription
+      parameters:
+      - name: id
+        in: path
+        description: Subscriber (Webhook) Id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: New Subscription Details
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Webhooks.v1.AddSubscriptionRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/Webhooks.v1.AddSubscriptionRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/Webhooks.v1.AddSubscriptionRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhooks.v1.WebhookSubscription'
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhooks.v1.WebhookSubscription'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+      security:
+      - apikey: []
+      - oauth2:
+        - api_webhooks_write
+      x-domain-endpointcost: 1
+      x-domain-usercontextrequired: true
+      x-domain-environment: Any
+    servers:
+    - url: https://api.domain.com.au/
+      description: Primary
+    - url: https://api.domain.com.au/sandbox/
+      description: Sandbox
+components:
+  schemas:
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    Webhooks.v1.AddSubscriptionRequest:
+      required:
+      - ownerId
+      - ownerType
+      - resourceType
+      type: object
+      properties:
+        resourceType:
+          minLength: 1
+          type: string
+          description: Gets or Sets ResourceType
+        ownerType:
+          minLength: 1
+          type: string
+          description: Gets or Sets OwnerType
+        ownerId:
+          minLength: 1
+          type: string
+          description: Gets or Sets OwnerId
+      additionalProperties: false
+      description: AddSubscriptionRequest
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    Webhooks.v1.WebhookSubscription:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        createdBy:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets CreatedBy
+        created:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets Created
+          format: date-time
+        updatedBy:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets UpdatedBy
+        updated:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets Updated
+          format: date-time
+        deletedBy:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets DeletedBy
+        deleted:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets Deleted
+          format: date-time
+        subscriptionId:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets SubscriptionId
+        subscriberId:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets SubscriberId
+        ownerType:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets OwnerType
+        ownerId:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets OwnerId
+        resourceType:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets ResourceType
+      additionalProperties: false
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+  securitySchemes:
+    apikey:
+      type: apiKey
+      description: API Key in Header
+      name: x-api-key
+      in: header
+    oauth2:
+      type: oauth2
+      description: OAuth 2
+      flows:
+        clientCredentials:
+          tokenUrl: https://auth.domain.com.au/v1/connect/token
+          scopes:
+            api_addresslocators_read: api_addresslocators_read
+            api_agencies_read: api_agencies_read
+            api_agencies_write: api_agencies_write
+            api_authorities_write: api_authorities_write
+            api_avm_read: api_avm_read
+            api_campaignperformance_read: api_campaignperformance_read
+            api_dataset_read: api_dataset_read
+            api_demographics_read: api_demographics_read
+            api_enquiries_read: api_enquiries_read
+            api_enquiries_write: api_enquiries_write
+            api_listingperformance_read: api_listingperformance_read
+            api_listings_read: api_listings_read
+            api_listings_write: api_listings_write
+            api_locations_read: api_locations_read
+            api_projectperformance_read: api_projectperformance_read
+            api_properties_read: api_properties_read
+            api_propertyportfolio_read: api_propertyportfolio_read
+            api_propertyportfolio_write: api_propertyportfolio_write
+            api_propertyreports_read: api_propertyreports_read
+            api_salesresults_read: api_salesresults_read
+            api_statistics_write: api_statistics_write
+            api_suburbhistorical_read: api_suburbhistorical_read
+            api_suburbperformance_read: api_suburbperformance_read
+            api_suburbsummary_read: api_suburbsummary_read
+            api_webhooks_write: api_webhooks_write
+        authorizationCode:
+          authorizationUrl: https://auth.domain.com.au/v1/connect/authorize
+          tokenUrl: https://auth.domain.com.au/v1/connect/token
+          refreshUrl: https://auth.domain.com.au/v1/connect/token
+          scopes:
+            api_addresslocators_read: api_addresslocators_read
+            api_agencies_read: api_agencies_read
+            api_agencies_write: api_agencies_write
+            api_authorities_write: api_authorities_write
+            api_avm_read: api_avm_read
+            api_campaignperformance_read: api_campaignperformance_read
+            api_dataset_read: api_dataset_read
+            api_demographics_read: api_demographics_read
+            api_enquiries_read: api_enquiries_read
+            api_enquiries_write: api_enquiries_write
+            api_listingperformance_read: api_listingperformance_read
+            api_listings_read: api_listings_read
+            api_listings_write: api_listings_write
+            api_locations_read: api_locations_read
+            api_projectperformance_read: api_projectperformance_read
+            api_properties_read: api_properties_read
+            api_propertyportfolio_read: api_propertyportfolio_read
+            api_propertyportfolio_write: api_propertyportfolio_write
+            api_propertyreports_read: api_propertyreports_read
+            api_salesresults_read: api_salesresults_read
+            api_statistics_write: api_statistics_write
+            api_suburbhistorical_read: api_suburbhistorical_read
+            api_suburbperformance_read: api_suburbperformance_read
+            api_suburbsummary_read: api_suburbsummary_read
+            api_webhooks_write: api_webhooks_write
+x-refined-from:
+- domain-group-openapi-latest.json
+- domain-group-openapi-v1.json

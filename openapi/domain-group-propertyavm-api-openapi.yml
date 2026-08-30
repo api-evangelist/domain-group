@@ -1,0 +1,817 @@
+openapi: 3.2.0
+info:
+  title: Domain Group Property Avm API
+  contact:
+    name: Domain Developer Support
+    email: api@domain.com.au
+  termsOfService: https://developer.domain.com.au/docs/latest/support/terms
+  version: '1.0'
+  description: 'Operations tagged PropertyAvm across 2 of this provider''s published API definitions: domain-group-openapi-latest.json, domain-group-openapi-v1.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.domain.com.au/
+  description: Primary
+- url: https://api.domain.com.au/sandbox/
+  description: Sandbox
+tags:
+- name: PropertyAvm
+paths:
+  /v1/avm/{propertyId}:
+    get:
+      tags:
+      - PropertyAvm
+      summary: 'Creates a valuation for a given property id.
+
+        It uses a combination of the cache valuation and Domain API calls to populate the report.'
+      operationId: PropertyAvm_Get
+      parameters:
+      - name: propertyId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A Valuation for a given property id
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/DomainAvm.v1.AvmResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DomainAvm.v1.AvmResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/DomainAvm.v1.AvmResponse'
+        '400':
+          description: Your request is bad
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/DomainAvm.v1.ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DomainAvm.v1.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/DomainAvm.v1.ProblemDetails'
+        '401':
+          description: Your request is unauthorised
+        '403':
+          description: Your request is forbidden
+        '404':
+          description: Not Found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/DomainAvm.v1.ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DomainAvm.v1.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/DomainAvm.v1.ProblemDetails'
+        '500':
+          description: We have had an internal error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/DomainAvm.v1.ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DomainAvm.v1.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/DomainAvm.v1.ProblemDetails'
+      security:
+      - apikey: []
+      - oauth2:
+        - api_avm_read
+      x-domain-endpointcost: 1
+      x-domain-usercontextrequired: false
+      x-domain-environment: Any
+    servers:
+    - url: https://api.domain.com.au/
+      description: Primary
+    - url: https://api.domain.com.au/sandbox/
+      description: Sandbox
+  /v1/avmReport/{propertyId}:
+    get:
+      tags:
+      - PropertyAvm
+      summary: 'Creates a valuation PDF report for a given property id.
+
+        It uses a combination of the cache valuation and Domain API calls to populate the report.'
+      operationId: PropertyAvm_ReportGet
+      parameters:
+      - name: propertyId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: showEstimate
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: A Valuation for a given property id
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/DomainAvm.v1.AvmReportResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DomainAvm.v1.AvmReportResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/DomainAvm.v1.AvmReportResponse'
+        '400':
+          description: Your request is bad
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/DomainAvm.v1.ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DomainAvm.v1.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/DomainAvm.v1.ProblemDetails'
+        '401':
+          description: Your request is unauthorised
+        '403':
+          description: Your request is forbidden
+        '404':
+          description: Not Found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/DomainAvm.v1.ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DomainAvm.v1.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/DomainAvm.v1.ProblemDetails'
+        '500':
+          description: We have had an internal error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/DomainAvm.v1.ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DomainAvm.v1.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/DomainAvm.v1.ProblemDetails'
+      security:
+      - apikey: []
+      - oauth2:
+        - api_avm_read
+      x-domain-endpointcost: 1
+      x-domain-usercontextrequired: false
+      x-domain-environment: Any
+    servers:
+    - url: https://api.domain.com.au/
+      description: Primary
+    - url: https://api.domain.com.au/sandbox/
+      description: Sandbox
+components:
+  schemas:
+    DomainAvm.v1.Photo:
+      type: object
+      properties:
+        fullUrl:
+          type:
+          - string
+          - 'null'
+          description: Full Url of the image.
+        rank:
+          type:
+          - integer
+          - 'null'
+          description: The viewing order.
+          format: int32
+      additionalProperties: false
+      description: A model used to return photo url and rank.
+    DomainAvm.v1.RentalActivity:
+      type: object
+      properties:
+        first:
+          $ref: '#/components/schemas/DomainAvm.v1.ActivityBoundary'
+        last:
+          $ref: '#/components/schemas/DomainAvm.v1.ActivityBoundary'
+        rentedPrice:
+          type:
+          - integer
+          - 'null'
+          description: The rental price.
+          format: int32
+        status:
+          type:
+          - string
+          - 'null'
+          description: The rental status.
+      additionalProperties: false
+      description: A model used to return property rental activity.
+    DomainAvm.v1.SaleActivity:
+      type: object
+      properties:
+        date:
+          type:
+          - string
+          - 'null'
+          description: The sale date.
+        price:
+          type:
+          - integer
+          - 'null'
+          description: The sale price.
+          format: int32
+        type:
+          type:
+          - string
+          - 'null'
+          description: The sale type.
+      additionalProperties: false
+      description: 'A model used to return property sale activity.
+
+        ///'
+    DomainAvm.v1.Item:
+      type: object
+      properties:
+        address:
+          type:
+          - string
+          - 'null'
+          description: The address of the property.
+        addressCoordinate:
+          $ref: '#/components/schemas/DomainAvm.v1.AddressCoordinate'
+        adverts:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DomainAvm.v1.Advert'
+          description: Property listing data (advertisement).
+        areaSize:
+          type:
+          - number
+          - 'null'
+          description: Land area in square meters to be used when estimating value of property, for houses only not units.
+          format: double
+        bathrooms:
+          type:
+          - integer
+          - 'null'
+          description: The amount of bathrooms.
+          format: int32
+        bedrooms:
+          type:
+          - integer
+          - 'null'
+          description: The amount of bedrooms.
+          format: int32
+        buildingArea:
+          type:
+          - number
+          - 'null'
+          description: Building area in square meters to be used when estimating value of property, for houses only not units.
+          format: double
+        carSpaces:
+          type:
+          - integer
+          - 'null'
+          description: The amount of carparks.
+          format: int32
+        lastSaleActivity:
+          $ref: '#/components/schemas/DomainAvm.v1.Sale'
+        id:
+          type:
+          - string
+          - 'null'
+          description: The Unique Domain Property Id of the property.
+        photos:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DomainAvm.v1.Photo'
+          description: An list of ranked property photos.
+        priceHeading:
+          type:
+          - string
+          - 'null'
+          description: The price heading.
+      additionalProperties: false
+      description: A model used for property data.
+    DomainAvm.v1.AvmResponse:
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/DomainAvm.v1.Address'
+        addressCoordinate:
+          $ref: '#/components/schemas/DomainAvm.v1.AddressCoordinate'
+        areaSize:
+          type:
+          - number
+          - 'null'
+          description: Land area in square meters to be used when estimating value of property, for houses only not units.
+          format: double
+        bathrooms:
+          type:
+          - integer
+          - 'null'
+          description: The amount of bathrooms.
+          format: int32
+        bedrooms:
+          type:
+          - integer
+          - 'null'
+          description: The amount of bedrooms.
+          format: int32
+        buildingArea:
+          type:
+          - number
+          - 'null'
+          description: Building area in square meters to be used when estimating value of property, for houses only not units.
+          format: double
+        carSpaces:
+          type:
+          - integer
+          - 'null'
+          description: The amount of carparks.
+          format: int32
+        history:
+          $ref: '#/components/schemas/DomainAvm.v1.History'
+        legalParcel:
+          type:
+          - string
+          - 'null'
+          description: Legal parcel for detailed and full packages.
+        photos:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DomainAvm.v1.Photo'
+          description: An array of ranked property photographs provided for full packages.
+        propertyId:
+          type:
+          - string
+          - 'null'
+          description: The Unique Property Id of the target property
+        propertyType:
+          type:
+          - string
+          - 'null'
+          description: 'Property type used when estimating the value of property. Valid values: [House, Unit].'
+        rentalAvm:
+          $ref: '#/components/schemas/DomainAvm.v1.RentalAvm'
+        saleAvm:
+          $ref: '#/components/schemas/DomainAvm.v1.SaleAvm'
+        similarListings:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DomainAvm.v1.Item'
+          description: Similar listings properties provided for detailed and full packages.
+        similarRentals:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DomainAvm.v1.Item'
+          description: Similar rental properties provided for detailed and full packages.
+        similarSolds:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DomainAvm.v1.Item'
+          description: Similar sold properties provided for detailed and full packages
+        suburbPerformance:
+          $ref: '#/components/schemas/DomainAvm.v1.PropertyCategory'
+        yearBuilt:
+          type:
+          - integer
+          - 'null'
+          description: The year of construction.
+          format: int32
+      additionalProperties: false
+      description: The response model used to provide the detailed bank grade valuation data.
+    DomainAvm.v1.ActivityBoundary:
+      type: object
+      properties:
+        advertisedDate:
+          type:
+          - string
+          - 'null'
+          description: The date.
+        advertisedPrice:
+          type:
+          - integer
+          - 'null'
+          description: The price.
+          format: int32
+        agency:
+          type:
+          - string
+          - 'null'
+          description: The agency.
+        suppressPrice:
+          type:
+          - boolean
+          - 'null'
+          description: Flag to suppress price.
+      additionalProperties: false
+      description: A model used to return property rental and sale history.
+    DomainAvm.v1.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    DomainAvm.v1.RentalAvm:
+      type: object
+      properties:
+        estimateDate:
+          type:
+          - string
+          - 'null'
+          description: The date the estimate was generated.
+        percentYieldRentEstimate:
+          type:
+          - number
+          - 'null'
+          description: The yield rent estimate as a percentage.
+          format: double
+        rentalFsd:
+          type:
+          - number
+          - 'null'
+          description: The forecast standard deviation of the rent.
+          format: double
+        weeklyRentEstimate:
+          type:
+          - integer
+          - 'null'
+          description: The weekly estimated rent.
+          format: int32
+      additionalProperties: false
+      description: A model used to return rental valuation.
+    DomainAvm.v1.AddressCoordinate:
+      type: object
+      properties:
+        lat:
+          type:
+          - number
+          - 'null'
+          description: The angular distance of a place north or south of the Equator.
+          format: double
+        lon:
+          type:
+          - number
+          - 'null'
+          description: Te angular distance of a place east or west of the Greenwich meridian.
+          format: double
+      additionalProperties: false
+      description: A model used for coordinate data.
+    DomainAvm.v1.Address:
+      type: object
+      properties:
+        unitNumber:
+          type:
+          - string
+          - 'null'
+          description: The unit number of the address.
+        streetNumber:
+          type:
+          - string
+          - 'null'
+          description: The street number of the address.
+        streetName:
+          type:
+          - string
+          - 'null'
+          description: The street name of the address.
+        streetType:
+          type:
+          - string
+          - 'null'
+          description: The street type of the address.
+        locality:
+          type:
+          - string
+          - 'null'
+          description: The suburb/locality of the address.
+        postcode:
+          pattern: ^[0-9]{3,4}$
+          type:
+          - string
+          - 'null'
+          description: The postcode of the address.
+        state:
+          pattern: ^[A-Za-z]{2,3}$
+          type:
+          - string
+          - 'null'
+          description: The defined State or Territory in Australia (in abbreviated format) where the specific address is located.
+      additionalProperties: false
+      description: The Address model used.
+    DomainAvm.v1.PropertyCategory:
+      type: object
+      properties:
+        auctionClearanceRate:
+          type:
+          - number
+          - 'null'
+          description: Auction clearances rate.
+          format: double
+        bedrooms:
+          type:
+          - integer
+          - 'null'
+          description: Number of bedrooms in the dwelling.
+          format: int32
+        daysOnMarket:
+          type:
+          - integer
+          - 'null'
+          description: Average days on market.
+          format: int32
+        entryLevelPrice:
+          type:
+          - integer
+          - 'null'
+          description: The entry level price.
+          format: int32
+        luxuryLevelPrice:
+          type:
+          - integer
+          - 'null'
+          description: The luxury level price.
+          format: int32
+        medianRentPrice:
+          type:
+          - integer
+          - 'null'
+          description: The median rental price.
+          format: int32
+        medianSoldPrice:
+          type:
+          - integer
+          - 'null'
+          description: The median sold price
+          format: int32
+        numberSold:
+          type:
+          - integer
+          - 'null'
+          description: Number of sales.
+          format: int32
+        propertyCategory:
+          type:
+          - string
+          - 'null'
+          description: The property category.
+        salesGrowthList:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DomainAvm.v1.SalesGrowth'
+          description: The sales growth for last 6 years.
+      additionalProperties: false
+      description: A model used to group sales growth for a property category
+    DomainAvm.v1.Sale:
+      type: object
+      properties:
+        date:
+          type:
+          - string
+          - 'null'
+          description: The date of sale
+        price:
+          type:
+          - integer
+          - 'null'
+          description: The price of sale
+          format: int32
+        type:
+          type:
+          - string
+          - 'null'
+          description: The type of sale
+      additionalProperties: false
+      description: A model used to return sale history.
+    DomainAvm.v1.Advert:
+      type: object
+      properties:
+        displayPrice:
+          type:
+          - string
+          - 'null'
+          description: The property price that appears in advertisements.
+        status:
+          type:
+          - string
+          - 'null'
+          description: 'The status of the property listing. Valid values: [Live, UnderOffer].'
+      additionalProperties: false
+      description: A model used to return advertisement/listing data
+    DomainAvm.v1.SaleAvm:
+      type: object
+      properties:
+        confidenceLevel:
+          type:
+          - string
+          - 'null'
+          description: Level of certainty of a property valuation. Valid values [High, Medium, Low].
+        estimate:
+          type:
+          - integer
+          - 'null'
+          description: The estimate.
+          format: int32
+        estimateDate:
+          type:
+          - string
+          - 'null'
+          description: The date the estimates were generated.
+        estimateHigh:
+          type:
+          - integer
+          - 'null'
+          description: The estimate high range.
+          format: int32
+        estimateLow:
+          type:
+          - integer
+          - 'null'
+          description: The estimate low range.
+          format: int32
+        percentFsd:
+          type:
+          - number
+          - 'null'
+          description: The forecast standard deviation of the property.
+          format: double
+      additionalProperties: false
+      description: A model used to return sale valuation.
+    DomainAvm.v1.AvmReportResponse:
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/DomainAvm.v1.Address'
+        propertyId:
+          type:
+          - string
+          - 'null'
+          description: The Unique Property Id of the target property
+        report:
+          type:
+          - string
+          - 'null'
+          description: The B64 encoded pdf of the valuation report.
+      additionalProperties: false
+      description: The response model used to provide the valuation report.
+    DomainAvm.v1.History:
+      type: object
+      properties:
+        rentals:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DomainAvm.v1.RentalActivity'
+          description: The list of rental activity.
+        sales:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DomainAvm.v1.SaleActivity'
+          description: The list of sale activity.
+      additionalProperties: false
+      description: A model used to return property rental and sale history.
+    DomainAvm.v1.SalesGrowth:
+      type: object
+      properties:
+        annualGrowth:
+          type:
+          - number
+          - 'null'
+          description: The annual growth
+          format: double
+        medianSoldPrice:
+          type:
+          - integer
+          - 'null'
+          description: The median sold price
+          format: int32
+        numberSold:
+          type:
+          - integer
+          - 'null'
+          description: Number of sales.
+          format: int32
+        year:
+          type:
+          - string
+          - 'null'
+          description: Year.
+      additionalProperties: false
+      description: A model used to group sales growth
+  securitySchemes:
+    apikey:
+      type: apiKey
+      description: API Key in Header
+      name: x-api-key
+      in: header
+    oauth2:
+      type: oauth2
+      description: OAuth 2
+      flows:
+        clientCredentials:
+          tokenUrl: https://auth.domain.com.au/v1/connect/token
+          scopes:
+            api_addresslocators_read: api_addresslocators_read
+            api_agencies_read: api_agencies_read
+            api_agencies_write: api_agencies_write
+            api_authorities_write: api_authorities_write
+            api_avm_read: api_avm_read
+            api_campaignperformance_read: api_campaignperformance_read
+            api_dataset_read: api_dataset_read
+            api_demographics_read: api_demographics_read
+            api_enquiries_read: api_enquiries_read
+            api_enquiries_write: api_enquiries_write
+            api_listingperformance_read: api_listingperformance_read
+            api_listings_read: api_listings_read
+            api_listings_write: api_listings_write
+            api_locations_read: api_locations_read
+            api_projectperformance_read: api_projectperformance_read
+            api_properties_read: api_properties_read
+            api_propertyportfolio_read: api_propertyportfolio_read
+            api_propertyportfolio_write: api_propertyportfolio_write
+            api_propertyreports_read: api_propertyreports_read
+            api_salesresults_read: api_salesresults_read
+            api_statistics_write: api_statistics_write
+            api_suburbhistorical_read: api_suburbhistorical_read
+            api_suburbperformance_read: api_suburbperformance_read
+            api_suburbsummary_read: api_suburbsummary_read
+            api_webhooks_write: api_webhooks_write
+        authorizationCode:
+          authorizationUrl: https://auth.domain.com.au/v1/connect/authorize
+          tokenUrl: https://auth.domain.com.au/v1/connect/token
+          refreshUrl: https://auth.domain.com.au/v1/connect/token
+          scopes:
+            api_addresslocators_read: api_addresslocators_read
+            api_agencies_read: api_agencies_read
+            api_agencies_write: api_agencies_write
+            api_authorities_write: api_authorities_write
+            api_avm_read: api_avm_read
+            api_campaignperformance_read: api_campaignperformance_read
+            api_dataset_read: api_dataset_read
+            api_demographics_read: api_demographics_read
+            api_enquiries_read: api_enquiries_read
+            api_enquiries_write: api_enquiries_write
+            api_listingperformance_read: api_listingperformance_read
+            api_listings_read: api_listings_read
+            api_listings_write: api_listings_write
+            api_locations_read: api_locations_read
+            api_projectperformance_read: api_projectperformance_read
+            api_properties_read: api_properties_read
+            api_propertyportfolio_read: api_propertyportfolio_read
+            api_propertyportfolio_write: api_propertyportfolio_write
+            api_propertyreports_read: api_propertyreports_read
+            api_salesresults_read: api_salesresults_read
+            api_statistics_write: api_statistics_write
+            api_suburbhistorical_read: api_suburbhistorical_read
+            api_suburbperformance_read: api_suburbperformance_read
+            api_suburbsummary_read: api_suburbsummary_read
+            api_webhooks_write: api_webhooks_write
+x-refined-from:
+- domain-group-openapi-latest.json
+- domain-group-openapi-v1.json

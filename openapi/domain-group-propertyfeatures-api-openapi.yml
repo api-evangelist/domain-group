@@ -1,0 +1,313 @@
+openapi: 3.2.0
+info:
+  title: Domain Group Property Features API
+  contact:
+    name: Domain Developer Support
+    email: api@domain.com.au
+  termsOfService: https://developer.domain.com.au/docs/latest/support/terms
+  version: '1.0'
+  description: 'Operations tagged PropertyFeatures across 2 of this provider''s published API definitions: domain-group-openapi-latest.json, domain-group-openapi-v2.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.domain.com.au/
+  description: Primary
+- url: https://api.domain.com.au/sandbox/
+  description: Sandbox
+tags:
+- name: PropertyFeatures
+paths:
+  /v2/property/features:
+    get:
+      tags:
+      - PropertyFeatures
+      summary: Property features
+      description: Request to find property's features by a PropertyID, a GnafID or Address. Only one of `propertyId`, `gnafId`, or `address` should be provided.
+      operationId: Property_Features
+      parameters:
+      - name: propertyId
+        in: query
+        schema:
+          type: string
+      - name: gnafId
+        in: query
+        schema:
+          type: string
+      - name: flatNumber
+        in: query
+        schema:
+          type: string
+      - name: streetNumber
+        in: query
+        schema:
+          type: string
+      - name: streetName
+        in: query
+        schema:
+          type: string
+      - name: streetType
+        in: query
+        schema:
+          type: string
+      - name: postcode
+        in: query
+        schema:
+          type: string
+      - name: suburb
+        in: query
+        schema:
+          type: string
+      - name: state
+        in: query
+        schema:
+          enum:
+          - ACT
+          - NSW
+          - NT
+          - QLD
+          - SA
+          - TAS
+          - VIC
+          - WA
+          - OT
+          type: string
+      responses:
+        '200':
+          description: Successfully found compatable property
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Property.Enrichment.v2.PropertyFeatures'
+        '300':
+          description: Successfully found multiple compatable properties
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  properties:
+                    $ref: '#/components/schemas/Property.Enrichment.v2.MultipleAddressBasic'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+        '500':
+          description: Unexpected error
+      security:
+      - apikey: []
+      - oauth2:
+        - api_properties_read
+      x-domain-endpointcost: 1
+      x-domain-usercontextrequired: false
+      x-domain-environment: Any
+    servers:
+    - url: https://api.domain.com.au/
+      description: Primary
+    - url: https://api.domain.com.au/sandbox/
+      description: Sandbox
+components:
+  schemas:
+    Property.Enrichment.v2.AddressBasic:
+      type: object
+      properties:
+        flatNumber:
+          type:
+          - string
+          - 'null'
+        streetNumber:
+          type: string
+        streetName:
+          type: string
+        streetType:
+          type:
+          - string
+          - 'null'
+        streetTypeLong:
+          type:
+          - string
+          - 'null'
+        suburb:
+          type: string
+        postcode:
+          type: string
+        state:
+          type: string
+      additionalProperties: false
+      description: Address of property
+    Property.Enrichment.v2.PropertyFeatures:
+      type: object
+      properties:
+        propertyId:
+          type: string
+        addressComponents:
+          $ref: '#/components/schemas/Property.Enrichment.v2.AddressBasic'
+        features:
+          type: object
+          properties:
+            solarPvSystem:
+              type: boolean
+            solarHotWater:
+              type: boolean
+            pool:
+              type: boolean
+            tennisCourt:
+              type: boolean
+            heating:
+              type: boolean
+            heatingGas:
+              type: boolean
+            airConditioning:
+              type: boolean
+            airConditioningDucted:
+              type: boolean
+            alarmSystem:
+              type: boolean
+            vacuumSystem:
+              type: boolean
+            intercom:
+              type: boolean
+            spa:
+              type: boolean
+            waterTank:
+              type: boolean
+            greyWaterSystem:
+              type: boolean
+            builtInRobes:
+              type: boolean
+            deck:
+              type: boolean
+            courtyard:
+              type: boolean
+            shed:
+              type: boolean
+            fullyFenced:
+              type: boolean
+            openFirePlace:
+              type: boolean
+            floorboards:
+              type: boolean
+            gym:
+              type: boolean
+            openPlanLiving:
+              type: boolean
+            study:
+              type: boolean
+            balcony:
+              type: boolean
+            rumpusRoom:
+              type: boolean
+            workshop:
+              type: boolean
+            remoteGarage:
+              type: boolean
+            primaryRoofMaterial:
+              type:
+              - string
+              - 'null'
+      additionalProperties: false
+    Property.Enrichment.v2.MultipleAddressBasic:
+      type: array
+      items:
+        type: object
+        properties:
+          propertyId:
+            type: string
+          addressComponents:
+            type: object
+            properties:
+              flatNumber:
+                type:
+                - string
+                - 'null'
+              streetNumber:
+                type: string
+              streetName:
+                type: string
+              streetType:
+                type:
+                - string
+                - 'null'
+              streetTypeLong:
+                type:
+                - string
+                - 'null'
+              suburb:
+                type: string
+              postcode:
+                type: string
+              state:
+                type: string
+            additionalProperties: false
+            description: Address of property
+        additionalProperties: false
+  securitySchemes:
+    apikey:
+      type: apiKey
+      description: API Key in Header
+      name: x-api-key
+      in: header
+    oauth2:
+      type: oauth2
+      description: OAuth 2
+      flows:
+        clientCredentials:
+          tokenUrl: https://auth.domain.com.au/v1/connect/token
+          scopes:
+            api_addresslocators_read: api_addresslocators_read
+            api_agencies_read: api_agencies_read
+            api_agencies_write: api_agencies_write
+            api_authorities_write: api_authorities_write
+            api_avm_read: api_avm_read
+            api_campaignperformance_read: api_campaignperformance_read
+            api_dataset_read: api_dataset_read
+            api_demographics_read: api_demographics_read
+            api_enquiries_read: api_enquiries_read
+            api_enquiries_write: api_enquiries_write
+            api_listingperformance_read: api_listingperformance_read
+            api_listings_read: api_listings_read
+            api_listings_write: api_listings_write
+            api_locations_read: api_locations_read
+            api_projectperformance_read: api_projectperformance_read
+            api_properties_read: api_properties_read
+            api_propertyportfolio_read: api_propertyportfolio_read
+            api_propertyportfolio_write: api_propertyportfolio_write
+            api_propertyreports_read: api_propertyreports_read
+            api_salesresults_read: api_salesresults_read
+            api_statistics_write: api_statistics_write
+            api_suburbhistorical_read: api_suburbhistorical_read
+            api_suburbperformance_read: api_suburbperformance_read
+            api_suburbsummary_read: api_suburbsummary_read
+            api_webhooks_write: api_webhooks_write
+        authorizationCode:
+          authorizationUrl: https://auth.domain.com.au/v1/connect/authorize
+          tokenUrl: https://auth.domain.com.au/v1/connect/token
+          refreshUrl: https://auth.domain.com.au/v1/connect/token
+          scopes:
+            api_addresslocators_read: api_addresslocators_read
+            api_agencies_read: api_agencies_read
+            api_agencies_write: api_agencies_write
+            api_authorities_write: api_authorities_write
+            api_avm_read: api_avm_read
+            api_campaignperformance_read: api_campaignperformance_read
+            api_dataset_read: api_dataset_read
+            api_demographics_read: api_demographics_read
+            api_enquiries_read: api_enquiries_read
+            api_enquiries_write: api_enquiries_write
+            api_listingperformance_read: api_listingperformance_read
+            api_listings_read: api_listings_read
+            api_listings_write: api_listings_write
+            api_locations_read: api_locations_read
+            api_projectperformance_read: api_projectperformance_read
+            api_properties_read: api_properties_read
+            api_propertyportfolio_read: api_propertyportfolio_read
+            api_propertyportfolio_write: api_propertyportfolio_write
+            api_propertyreports_read: api_propertyreports_read
+            api_salesresults_read: api_salesresults_read
+            api_statistics_write: api_statistics_write
+            api_suburbhistorical_read: api_suburbhistorical_read
+            api_suburbperformance_read: api_suburbperformance_read
+            api_suburbsummary_read: api_suburbsummary_read
+            api_webhooks_write: api_webhooks_write
+x-refined-from:
+- domain-group-openapi-latest.json
+- domain-group-openapi-v2.json

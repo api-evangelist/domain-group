@@ -1,0 +1,2219 @@
+openapi: 3.2.0
+info:
+  title: Domain Group Products API
+  contact:
+    name: Domain Developer Support
+    email: api@domain.com.au
+  termsOfService: https://developer.domain.com.au/docs/latest/support/terms
+  version: '1.0'
+  description: 'Operations tagged Products across 2 of this provider''s published API definitions: domain-group-openapi-latest.json, domain-group-openapi-v1.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.domain.com.au/
+  description: Primary
+- url: https://api.domain.com.au/sandbox/
+  description: Sandbox
+tags:
+- name: Products
+paths:
+  /v1/Products/LimitedInventory/{inventoryReservationId}/Unreserve:
+    put:
+      tags:
+      - Products
+      summary: Unreserves (cancels) an existing limited inventory reservation.
+      operationId: LimitedInventory_Unreserve
+      parameters:
+      - name: inventoryReservationId
+        in: path
+        description: The reservation identifier.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        description: Cancellation details including AgencyId.
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/BookingV2Api.v1.UnreserveInventoryRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookingV2Api.v1.UnreserveInventoryRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/BookingV2Api.v1.UnreserveInventoryRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/BookingV2Api.v1.UnreserveInventoryRequest'
+      responses:
+        '200':
+          description: Successfully unreserved.
+        '400':
+          description: Validation or business logic failure.
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.ProblemDetails'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Reservation not found.
+        '409':
+          description: Already cancelled.
+        '500':
+          description: Unexpected server error.
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.ProblemDetails'
+      security:
+      - apikey: []
+      - oauth2:
+        - api_agencies_write
+      x-domain-endpointcost: 1
+      x-domain-usercontextrequired: false
+      x-domain-environment: Any
+    servers:
+    - url: https://api.domain.com.au/
+      description: Primary
+    - url: https://api.domain.com.au/sandbox/
+      description: Sandbox
+  /v1/Products/LimitedInventory/Availability:
+    post:
+      tags:
+      - Products
+      summary: Retrieves batch availability for limited inventory products.
+      operationId: LimitedInventory_GetBatchAvailability
+      requestBody:
+        description: The request containing the batch availability parameters.
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/BookingV2Api.v1.GetBatchLimitedInventoryAvailabilityRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookingV2Api.v1.GetBatchLimitedInventoryAvailabilityRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/BookingV2Api.v1.GetBatchLimitedInventoryAvailabilityRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/BookingV2Api.v1.GetBatchLimitedInventoryAvailabilityRequest'
+      responses:
+        '200':
+          description: Successfully get all availability.
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.GetBatchLimitedInventoryAvailabilityResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.GetBatchLimitedInventoryAvailabilityResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.GetBatchLimitedInventoryAvailabilityResponse'
+        '207':
+          description: Unable to get availability to some combination of Product Type and Listing Category.
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.GetBatchLimitedInventoryAvailabilityResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.GetBatchLimitedInventoryAvailabilityResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.GetBatchLimitedInventoryAvailabilityResponse'
+        '400':
+          description: Returns any validation or business logic error.
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.ProblemDetails'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '422':
+          description: Unable to get availability to all combination of Product Type and Listing Category
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.GetBatchLimitedInventoryAvailabilityResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.GetBatchLimitedInventoryAvailabilityResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.GetBatchLimitedInventoryAvailabilityResponse'
+        '500':
+          description: If an internal server error occurs.
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.ProblemDetails'
+      security:
+      - apikey: []
+      - oauth2:
+        - api_agencies_read
+      x-domain-endpointcost: 1
+      x-domain-usercontextrequired: false
+      x-domain-environment: Any
+    servers:
+    - url: https://api.domain.com.au/
+      description: Primary
+    - url: https://api.domain.com.au/sandbox/
+      description: Sandbox
+  /v1/Products/LimitedInventory/ReserveByBatch:
+    post:
+      tags:
+      - Products
+      summary: Reserves inventory for a batch of products based on the provided request.
+      operationId: LimitedInventory_ReserveByBatch
+      requestBody:
+        description: The Domain.Booking.v2.Common.Models.RequestDto.ReserveInventoryByBatchRequest containing the batch reservation details, including product identifiers and quantities.
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/BookingV2Api.v1.ReserveInventoryByBatchRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookingV2Api.v1.ReserveInventoryByBatchRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/BookingV2Api.v1.ReserveInventoryByBatchRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/BookingV2Api.v1.ReserveInventoryByBatchRequest'
+      responses:
+        '200':
+          description: All reservations successful
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.ReserveInventoryByBatchResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.ReserveInventoryByBatchResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.ReserveInventoryByBatchResponse'
+        '207':
+          description: Some reservations failed
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.ReserveInventoryByBatchResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.ReserveInventoryByBatchResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.ReserveInventoryByBatchResponse'
+        '400':
+          description: Validation error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.ProblemDetails'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '422':
+          description: Reservations processed without success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.ReserveInventoryByBatchResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.ReserveInventoryByBatchResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.ReserveInventoryByBatchResponse'
+        '500':
+          description: All reservations failed or internal server error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.ProblemDetails'
+      security:
+      - apikey: []
+      - oauth2:
+        - api_agencies_write
+      x-domain-endpointcost: 1
+      x-domain-usercontextrequired: false
+      x-domain-environment: Any
+    servers:
+    - url: https://api.domain.com.au/
+      description: Primary
+    - url: https://api.domain.com.au/sandbox/
+      description: Sandbox
+  /v1/Products/LimitedInventory/UnreserveByBatch:
+    put:
+      tags:
+      - Products
+      summary: Unreserve inventory items by batch.
+      operationId: LimitedInventory_UnreserveByBatch
+      requestBody:
+        description: The request containing the batch reservation details to be unreserved.
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/BookingV2Api.v1.UnreserveInventoryByBatchRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookingV2Api.v1.UnreserveInventoryByBatchRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/BookingV2Api.v1.UnreserveInventoryByBatchRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/BookingV2Api.v1.UnreserveInventoryByBatchRequest'
+      responses:
+        '200':
+          description: All batch unreservation successful
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.UnreserveInventoryByBatchResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.UnreserveInventoryByBatchResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.UnreserveInventoryByBatchResponse'
+        '207':
+          description: Some unreservation failed
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.UnreserveInventoryByBatchResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.UnreserveInventoryByBatchResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.UnreserveInventoryByBatchResponse'
+        '400':
+          description: Validation error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.ProblemDetails'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '422':
+          description: Unreserve by batch processed without success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.UnreserveInventoryByBatchResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.UnreserveInventoryByBatchResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.UnreserveInventoryByBatchResponse'
+        '500':
+          description: All batch unreservation failed or internal server error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.ProblemDetails'
+      security:
+      - apikey: []
+      - oauth2:
+        - api_agencies_write
+      x-domain-endpointcost: 1
+      x-domain-usercontextrequired: false
+      x-domain-environment: Any
+    servers:
+    - url: https://api.domain.com.au/
+      description: Primary
+    - url: https://api.domain.com.au/sandbox/
+      description: Sandbox
+  /v1/Products/Listings/QuoteByAgency:
+    post:
+      tags:
+      - Products
+      summary: Gets a listing price quote based on the agency, channel and location details
+      operationId: ListingPrice_QuoteByAgency
+      requestBody:
+        description: ''
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/BookingV2Api.v1.GetListingPriceQuoteByAgencyRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookingV2Api.v1.GetListingPriceQuoteByAgencyRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/BookingV2Api.v1.GetListingPriceQuoteByAgencyRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/BookingV2Api.v1.GetListingPriceQuoteByAgencyRequest'
+      responses:
+        '200':
+          description: Successfully retrieved quote.
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.GetListingPriceQuoteByAgencyResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.GetListingPriceQuoteByAgencyResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.GetListingPriceQuoteByAgencyResponse'
+        '400':
+          description: Invalid request.
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.ValidationProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.ValidationProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.ValidationProblemDetails'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal server error.
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.ProblemDetails'
+      security:
+      - apikey: []
+      - oauth2:
+        - api_agencies_read
+      x-domain-endpointcost: 1
+      x-domain-usercontextrequired: false
+      x-domain-environment: Any
+    servers:
+    - url: https://api.domain.com.au/
+      description: Primary
+    - url: https://api.domain.com.au/sandbox/
+      description: Sandbox
+  /v1/Products/Listings/QuoteBySuburbs:
+    post:
+      tags:
+      - Products
+      summary: Gets a listing price quote based on the provided suburb details.
+      operationId: ListingPrice_QuoteBySuburbs
+      requestBody:
+        description: The request containing suburb details.
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/BookingV2Api.v1.GetQuoteListingPriceBySuburbsRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookingV2Api.v1.GetQuoteListingPriceBySuburbsRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/BookingV2Api.v1.GetQuoteListingPriceBySuburbsRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/BookingV2Api.v1.GetQuoteListingPriceBySuburbsRequest'
+      responses:
+        '200':
+          description: Successfully retrieved quote.
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.GetQuoteListingPriceBySuburbsResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.GetQuoteListingPriceBySuburbsResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.GetQuoteListingPriceBySuburbsResponse'
+        '400':
+          description: Invalid request.
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.ValidationProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.ValidationProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.ValidationProblemDetails'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal server error.
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/BookingV2Api.v1.ProblemDetails'
+      security:
+      - apikey: []
+      - oauth2:
+        - api_agencies_read
+      x-domain-endpointcost: 1
+      x-domain-usercontextrequired: false
+      x-domain-environment: Any
+    servers:
+    - url: https://api.domain.com.au/
+      description: Primary
+    - url: https://api.domain.com.au/sandbox/
+      description: Sandbox
+  /v1/products/ratefornewlisting:
+    post:
+      tags:
+      - Products
+      summary: Get updated pricing information for a hypothetical listing
+      operationId: Products_RateForNewListing
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Bookings.V2.RateForNewListingRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/Bookings.V2.RateForNewListingRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/Bookings.V2.RateForNewListingRequest'
+      responses:
+        '200':
+          description: Pricing information for the given listing details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Bookings.V2.RateForNewListing'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+      security:
+      - apikey: []
+      - oauth2:
+        - api_agencies_read
+      x-domain-endpointcost: 1
+      x-domain-usercontextrequired: true
+      x-domain-environment: Primary
+    servers:
+    - url: https://api.domain.com.au/
+      description: Primary
+    - url: https://api.domain.com.au/sandbox/
+      description: Sandbox
+  /v1/products/ratefornewsocialboost:
+    post:
+      tags:
+      - Products
+      summary: Get updated pricing information for a hypothetical listing
+      operationId: SocialBoost_RateForNewSocialBoost
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SocialBoost.v1.RateForNewSocialBoostRequestModel'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/SocialBoost.v1.RateForNewSocialBoostRequestModel'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/SocialBoost.v1.RateForNewSocialBoostRequestModel'
+      responses:
+        '200':
+          description: Pricing information for the given listing details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SocialBoost.v1.RateForNewSocialBoost'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+      security:
+      - apikey: []
+      - oauth2:
+        - api_agencies_read
+      x-domain-endpointcost: 1
+      x-domain-usercontextrequired: true
+      x-domain-environment: Primary
+    servers:
+    - url: https://api.domain.com.au/
+      description: Primary
+    - url: https://api.domain.com.au/sandbox/
+      description: Sandbox
+components:
+  schemas:
+    Bookings.V2.RateForNewListingRequest:
+      required:
+      - agencyId
+      - agentEmail
+      - agentFirstName
+      - agentLastName
+      - channel
+      - isNewDevelopment
+      - listingType
+      - postcode
+      - price
+      - propertyType
+      - state
+      - suburb
+      type: object
+      properties:
+        agencyId:
+          type: integer
+          description: Id of the agency for whom rates are to be calculated.
+          format: int32
+        agentFirstName:
+          minLength: 1
+          type: string
+          description: The first name of the primary agent associated with the listing.
+        agentLastName:
+          minLength: 1
+          type: string
+          description: The last name of the primary agent associated with the listing
+        agentEmail:
+          minLength: 1
+          type: string
+          description: The email of the primary agent associated with the listing.
+        suburb:
+          minLength: 1
+          type: string
+          description: Suburb for which rates are to be calculated.
+        postcode:
+          minLength: 1
+          type: string
+          description: Postcode for which rates are to be calculated.
+        state:
+          minLength: 1
+          type: string
+          description: State for which rates are to be calculated
+        propertyType:
+          enum:
+          - unknown
+          - accessoriesParts
+          - accommodationTourism
+          - accounting
+          - acreageSemiRural
+          - adult
+          - advertisingMarketing
+          - aerial
+          - aeronautical
+          - agedCare
+          - agricultural
+          - air
+          - aircraft
+          - alarms
+          - alcoholLiquor
+          - amusements
+          - animalRelated
+          - apartmentUnitFlat
+          - aquaculture
+          - aquaticMarineMarinaBerth
+          - artsCrafts
+          - autoElectrical
+          - automotive
+          - backpackerHostel
+          - bakery
+          - barsNightclubs
+          - beautyHealth
+          - beautyProducts
+          - beautySalon
+          - bikeAndMotorcycle
+          - blockOfUnits
+          - boardingKennels
+          - boatsMarineMarinaBerth
+          - bookkeeping
+          - brokerage
+          - builder
+          - buildingAndConstruction
+          - bus
+          - butcher
+          - cafeCoffeeShop
+          - car
+          - carBusTruck
+          - carDealership
+          - carRental
+          - carSpace
+          - carWash
+          - caravanPark
+          - carpenter
+          - catering
+          - childCare
+          - civil
+          - cleaning
+          - cleaningAndMaintenance
+          - clinicalPractice
+          - clothingAccessories
+          - clothingFootwear
+          - communication
+          - communications
+          - computerIT
+          - computerAndInternet
+          - construction
+          - convenienceStore
+          - copyLaminate
+          - courier
+          - cropHarvesting
+          - customs
+          - dairyFarming
+          - deli
+          - dental
+          - detailing
+          - developmentLand
+          - developmentSite
+          - distributors
+          - drivingSchools
+          - duplex
+          - educationTraining
+          - educational
+          - electrical
+          - employmentRecruitment
+          - entertainment
+          - entertainmentTechnology
+          - export
+          - farm
+          - farming
+          - fertiliser
+          - finance
+          - financialServices
+          - fishingForestry
+          - floristNursery
+          - foodBeverage
+          - foodBeverageHospitality
+          - franchiseBusinessOpportunities
+          - freight
+          - fruitVegFreshProduce
+          - fruitPicking
+          - functionCentre
+          - furnitureTimber
+          - gambling
+          - gardenHousehold
+          - gardenNurseries
+          - gardening
+          - glassCeramic
+          - guestHouseBB
+          - hairdresser
+          - healthBeauty
+          - healthSpa
+          - hire
+          - homeGarden
+          - homeBased
+          - newHomeDesigns
+          - homewareHardware
+          - hospital
+          - hotel
+          - hotelLeisure
+          - house
+          - newHouseLand
+          - huntingTrap
+          - import
+          - importExportWholesale
+          - industrialManufacturing
+          - industrialWarehouse
+          - insemination
+          - insurance
+          - internet
+          - irrigationServices
+          - juiceBar
+          - landClearing
+          - newLand
+          - landscaping
+          - laundryDryCleaning
+          - legal
+          - leisureEntertainment
+          - limousineTaxi
+          - livestock
+          - internationalCommercial
+          - machinery
+          - machineryMetal
+          - managementRights
+          - manufacturers
+          - manufacturingEngineering
+          - marine
+          - massage
+          - mechanicalRepair
+          - media
+          - medical
+          - medicalConsulting
+          - medicalPractice
+          - miningEarthMoving
+          - mobileServices
+          - motel
+          - motorcycle
+          - musicRelated
+          - mustering
+          - nails
+          - naturalTherapies
+          - newApartments
+          - newsagency
+          - nursery
+          - nursingHome
+          - offices
+          - officeSupplies
+          - oilGas
+          - panelBeating
+          - paperPrinting
+          - parkingCarSpace
+          - penthouse
+          - pestRelated
+          - pharmacies
+          - plastic
+          - plumbing
+          - poolWater
+          - postOffices
+          - printPhoto
+          - professional
+          - propertyRealEstate
+          - rail
+          - recreationSport
+          - recruitment
+          - repair
+          - resort
+          - restaurant
+          - retail
+          - retailer
+          - retirement
+          - retirementVillage
+          - road
+          - rural
+          - ruralCommercialFarming
+          - scientific
+          - sea
+          - security
+          - semiDetached
+          - serviceStation
+          - services
+          - shearing
+          - showroomsBulkyGoods
+          - specialistFarm
+          - sportsComplexGym
+          - studio
+          - supermarket
+          - takeawayFood
+          - taxi
+          - terrace
+          - themePark
+          - tours
+          - townhouse
+          - training
+          - transportDistribution
+          - travel
+          - truck
+          - vacantLand
+          - vending
+          - villa
+          - water
+          - welding
+          - wholesale
+          - wholesalers
+          - woolClassing
+          - wreckers
+          - servicedOffices
+          - other
+          - alcoholGrocery
+          - cafeRestaurants
+          - discountStore
+          - ecoFriendly
+          - green
+          - grocery
+          - specialityRetail
+          - storage
+          - travelAgency
+          - varietyStore
+          - chickenShop
+          - seafoodShop
+          - deliCafe
+          - cropping
+          - viticulture
+          - mixedFarming
+          - grazing
+          - horticulture
+          - equine
+          - farmlet
+          - orchard
+          - ruralLifestyle
+          - onlineBusiness
+          type: string
+          description: The property type of the listing e.g. House
+        isNewDevelopment:
+          type: boolean
+          description: Whether to return the normal or new development rates
+        listingType:
+          enum:
+          - sale
+          - rent
+          type: string
+          description: Type of the listing whether sale or rent
+        price:
+          type: number
+          description: The value of the listing
+          format: double
+        channel:
+          enum:
+          - residential
+          - commercial
+          - business
+          type: string
+          description: The intended channel of the listing.
+        bookingStartDate:
+          type:
+          - string
+          - 'null'
+          description: Date at which the booking will start. Defaults to today. Allows for returning future contracts/price changes.
+          format: date-time
+      additionalProperties: false
+      description: Provide a summary of the intended listing for which to calculate a rate.
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    BookingV2Api.v1.UnreserveResponse:
+      type: object
+      properties:
+        error:
+          type:
+          - string
+          - 'null'
+        reservationId:
+          type: integer
+          format: int32
+        agencyId:
+          type: integer
+          format: int32
+      additionalProperties: false
+    BookingV2Api.v1.ValidationProblemDetails:
+      type: object
+      properties:
+        errors:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    BookingV2Api.v1.AgencyAvailabilityDetailsDto:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        agencyId:
+          type: integer
+          format: int32
+        agencyName:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - string
+          - 'null'
+        reference:
+          type:
+          - string
+          - 'null'
+        internalContractId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        reservationId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        assetReferenceId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+      additionalProperties: false
+    BookingV2Api.v1.GetBatchLimitedInventoryAvailabilityRequest:
+      required:
+      - suburbSlug
+      type: object
+      properties:
+        suburbSlug:
+          minLength: 1
+          type: string
+        products:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/BookingV2Api.v1.ProductTypeAndCategoryDto'
+        channel:
+          $ref: '#/components/schemas/BookingV2Api.v1.Channel'
+        dateStart:
+          type: string
+          format: date-time
+        numOfDurations:
+          maximum: 60
+          minimum: 1
+          type: integer
+          format: int32
+        durationLimit:
+          maximum: 60
+          minimum: 1
+          type: integer
+          format: int32
+      additionalProperties: false
+    Bookings.V2.RateForNewListing:
+      type: object
+      properties:
+        costExGst:
+          type:
+          - number
+          - 'null'
+          description: Gets or Sets CostExGst
+          format: double
+        costIncGst:
+          type:
+          - number
+          - 'null'
+          description: Gets or Sets CostIncGst
+          format: double
+        contractEndDate:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets ContractEndDate
+          format: date-time
+        message:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets Message
+        priceMatrixId:
+          type:
+          - integer
+          - 'null'
+          description: Gets or Sets PriceMatrixId
+          format: int32
+        productName:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets ProductName
+      additionalProperties: false
+      description: NewListingRateResponse
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    BookingV2Api.v1.BookingRule:
+      enum:
+      - All
+      - Casual
+      - Agent
+      - None
+      - RestrictedAll
+      type: string
+    BookingV2Api.v1.RateBand:
+      type: object
+      properties:
+        priceFrom:
+          type:
+          - number
+          - 'null'
+          format: double
+        priceTo:
+          type:
+          - number
+          - 'null'
+          format: double
+        costIncGst:
+          type: number
+          format: double
+        costExGst:
+          type: number
+          format: double
+        isBaseRate:
+          type: boolean
+      additionalProperties: false
+    BookingV2Api.v1.ReservationResponse:
+      type: object
+      properties:
+        error:
+          type:
+          - string
+          - 'null'
+        reservationId:
+          type: integer
+          format: int32
+        agencyId:
+          type: integer
+          format: int32
+        suburbSlug:
+          type:
+          - string
+          - 'null'
+        productType:
+          $ref: '#/components/schemas/BookingV2Api.v1.LimitedInventoryProductType'
+        listingCategory:
+          $ref: '#/components/schemas/BookingV2Api.v1.LimitedInventoryListingCategory'
+        dateStart:
+          type: string
+          format: date-time
+        dateEnd:
+          type: string
+          format: date-time
+        noOfDurations:
+          type: integer
+          format: int32
+        assetReferenceId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+      additionalProperties: false
+    BookingV2Api.v1.Channel:
+      enum:
+      - Residential
+      - Commercial
+      - Business
+      type: string
+    BookingV2Api.v1.ReserveInventoryByBatchRequest:
+      required:
+      - requestedBy
+      type: object
+      properties:
+        agencyId:
+          type: integer
+          format: int32
+        requestedBy:
+          maxLength: 50
+          minLength: 1
+          type: string
+        reservations:
+          maxItems: 10
+          minItems: 1
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/BookingV2Api.v1.ReserveInventoryRequest'
+      additionalProperties: false
+    BookingV2Api.v1.UnreserveInventoryByBatchResponse:
+      type: object
+      properties:
+        results:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/BookingV2Api.v1.UnreserveResponse'
+        summary:
+          $ref: '#/components/schemas/BookingV2Api.v1.BatchSummaryResponse'
+      additionalProperties: false
+    SocialBoost.v1.ContractInfo:
+      type: object
+      properties:
+        id:
+          type:
+          - integer
+          - 'null'
+          description: Gets or Sets Id
+          format: int32
+        bookingProductId:
+          type:
+          - integer
+          - 'null'
+          description: Gets or Sets BookingProductId
+          format: int32
+        agencyId:
+          type:
+          - integer
+          - 'null'
+          description: Gets or Sets AgencyId
+          format: int32
+        startDate:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets StartDate
+          format: date-time
+        endDate:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets EndDate
+          format: date-time
+        finishedDate:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets FinishedDate
+          format: date-time
+        attributes:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets Attributes
+        agentId:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets AgentId
+        isAgentContract:
+          type:
+          - boolean
+          - 'null'
+          description: Gets or Sets IsAgentContract
+          readOnly: true
+      additionalProperties: false
+      description: ContractInfo
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    BookingV2Api.v1.LimitedInventoryProductType:
+      enum:
+      - TopSpot
+      - TopSpotRural
+      - ListingShowcase
+      - DreamHomes
+      type: string
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    BookingV2Api.v1.GetQuoteListingPriceBySuburbsResponse:
+      type: object
+      properties:
+        zoneMappings:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/BookingV2Api.v1.ZoneMapping'
+        bookingRates:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/BookingV2Api.v1.BookingRate'
+        isSuccess:
+          type: boolean
+          description: 'Gets a value indicating whether the response was successful.
+
+            The response is considered successful if there are no errors.'
+          readOnly: true
+        errors:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Gets or sets a list of errors. If the list is empty, the response is considered successful.
+        error:
+          type:
+          - string
+          - 'null'
+          description: Gets the first error message from the list of errors.
+          readOnly: true
+      additionalProperties: false
+    BookingV2Api.v1.ReserveInventoryRequest:
+      required:
+      - assetReferenceId
+      type: object
+      properties:
+        productType:
+          $ref: '#/components/schemas/BookingV2Api.v1.LimitedInventoryProductType'
+        listingCategory:
+          $ref: '#/components/schemas/BookingV2Api.v1.LimitedInventoryListingCategory'
+        listingFilterType:
+          $ref: '#/components/schemas/BookingV2Api.v1.ListingFilterType'
+        channel:
+          $ref: '#/components/schemas/BookingV2Api.v1.Channel'
+        suburbSlug:
+          type:
+          - string
+          - 'null'
+        requestedBy:
+          type:
+          - string
+          - 'null'
+        durations:
+          maxItems: 60
+          minItems: 1
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/BookingV2Api.v1.DurationDto'
+        ipAddress:
+          type:
+          - string
+          - 'null'
+        legacyContractId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        assetReferenceId:
+          type: string
+          format: uuid
+        isExclusive:
+          type: boolean
+      additionalProperties: false
+    BookingV2Api.v1.ListingType:
+      enum:
+      - Sale
+      - Rent
+      - None
+      type: string
+      description: Sale=0 and Rent=1 to match the Objective and PropertyListingType enums
+    BookingV2Api.v1.GetListingPriceQuoteByAgencyRequest:
+      required:
+      - agencyId
+      - listingPrice
+      - postcode
+      - state
+      - suburb
+      type: object
+      properties:
+        channel:
+          $ref: '#/components/schemas/BookingV2Api.v1.Channel'
+        listingType:
+          $ref: '#/components/schemas/BookingV2Api.v1.ListingType'
+        agencyId:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+          format: int32
+        suburb:
+          minLength: 1
+          type: string
+        state:
+          minLength: 1
+          type: string
+        postcode:
+          minLength: 1
+          type: string
+        asAtDate:
+          type: string
+          format: date-time
+        listingPrice:
+          maximum: 2147483647
+          minimum: 1
+          type: number
+          format: double
+        agentId:
+          type:
+          - string
+          - 'null'
+        isNewDevelopment:
+          type: boolean
+        isRural:
+          type: boolean
+      additionalProperties: false
+    BookingV2Api.v1.ZoneMapping:
+      type: object
+      properties:
+        zoneId:
+          type: integer
+          format: int32
+        channel:
+          $ref: '#/components/schemas/BookingV2Api.v1.Channel'
+        state:
+          type:
+          - string
+          - 'null'
+        zone:
+          type:
+          - string
+          - 'null'
+        zoneCode:
+          type:
+          - string
+          - 'null'
+        fullName:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    SocialBoost.v1.RateForNewSocialBoost:
+      type: object
+      properties:
+        reason:
+          enum:
+          - BasedOnContract
+          - NoContractFound
+          - NoRateFound
+          - PropertyTypeExcluded
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets Reason
+        contract:
+          $ref: '#/components/schemas/SocialBoost.v1.ContractInfo'
+        rate:
+          $ref: '#/components/schemas/SocialBoost.v1.ListingRateInfo'
+      additionalProperties: false
+      description: GetRatesForNewSocialBoostResponse
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    BookingV2Api.v1.ListingQuote:
+      type: object
+      properties:
+        listingType:
+          type:
+          - string
+          - 'null'
+        durationInDays:
+          type: integer
+          format: int32
+        costExGst:
+          type: number
+          format: double
+        costIncGst:
+          type: number
+          format: double
+        originalCostExGst:
+          type: number
+          format: double
+        originalCostIncGst:
+          type: number
+          format: double
+        appliedAdjustment:
+          type: number
+          format: double
+        isDefault:
+          type: boolean
+        isDowngrade:
+          type: boolean
+        isUpgrade:
+          type: boolean
+        name:
+          type:
+          - string
+          - 'null'
+        tier:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    BookingV2Api.v1.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    BookingV2Api.v1.DurationType:
+      enum:
+      - Weekly
+      - Monthly
+      type: string
+    BookingV2Api.v1.LimitedInventoryListingCategory:
+      enum:
+      - Sale
+      - Lease
+      type: string
+    BookingV2Api.v1.GetListingPriceQuoteByAgencyResponse:
+      type: object
+      properties:
+        channel:
+          $ref: '#/components/schemas/BookingV2Api.v1.Channel'
+        adType:
+          type:
+          - string
+          - 'null'
+          description: Sale | Rent
+        listings:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/BookingV2Api.v1.ListingQuote'
+        addons:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/BookingV2Api.v1.AddonQuote'
+        isSuccess:
+          type: boolean
+          description: 'Gets a value indicating whether the response was successful.
+
+            The response is considered successful if there are no errors.'
+          readOnly: true
+        errors:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Gets or sets a list of errors. If the list is empty, the response is considered successful.
+        error:
+          type:
+          - string
+          - 'null'
+          description: Gets the first error message from the list of errors.
+          readOnly: true
+      additionalProperties: false
+    BookingV2Api.v1.UnreserveInventoryRequest:
+      required:
+      - cancelledBy
+      type: object
+      properties:
+        agencyId:
+          type: integer
+          format: int32
+        cancelledBy:
+          maxLength: 50
+          minLength: 1
+          type: string
+      additionalProperties: false
+    BookingV2Api.v1.ProductAvailabilityDetailsDto:
+      type: object
+      properties:
+        productType:
+          $ref: '#/components/schemas/BookingV2Api.v1.LimitedInventoryProductType'
+        suburb:
+          type:
+          - string
+          - 'null'
+        state:
+          type:
+          - string
+          - 'null'
+        postcode:
+          type:
+          - string
+          - 'null'
+        listingCategory:
+          $ref: '#/components/schemas/BookingV2Api.v1.LimitedInventoryListingCategory'
+        durationType:
+          $ref: '#/components/schemas/BookingV2Api.v1.DurationType'
+        durations:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/BookingV2Api.v1.ProductAvailabilityByDurationDto'
+          description: Availability details grouped by the specified duration type.
+        inventoryId:
+          type:
+          - integer
+          - 'null'
+          description: 'Standard inventory service will use this
+
+            Legacy doesn''t have this'
+          format: int32
+        error:
+          type:
+          - string
+          - 'null'
+          description: 'Populated when an error occurs during availability retrieval or processing.
+
+            Provides details about the error encountered, allowing consumers to handle error scenarios appropriately.'
+      additionalProperties: false
+    BookingV2Api.v1.BatchSummaryResponse:
+      type: object
+      properties:
+        requested:
+          type: integer
+          format: int32
+        succeeded:
+          type: integer
+          format: int32
+        failed:
+          type: integer
+          format: int32
+      additionalProperties: false
+    BookingV2Api.v1.AreaFilter:
+      required:
+      - state
+      - zone
+      type: object
+      properties:
+        state:
+          minLength: 1
+          type: string
+        zone:
+          minLength: 1
+          type: string
+      additionalProperties: false
+    BookingV2Api.v1.ReserveInventoryByBatchResponse:
+      type: object
+      properties:
+        results:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/BookingV2Api.v1.ReservationResponse'
+        summary:
+          $ref: '#/components/schemas/BookingV2Api.v1.BatchSummaryResponse'
+      additionalProperties: false
+    BookingV2Api.v1.GetBatchLimitedInventoryAvailabilityResponse:
+      type: object
+      properties:
+        results:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/BookingV2Api.v1.ProductAvailabilityDetailsDto'
+        summary:
+          $ref: '#/components/schemas/BookingV2Api.v1.BatchSummaryResponse'
+      additionalProperties: false
+    BookingV2Api.v1.AddonQuote:
+      type: object
+      properties:
+        addonType:
+          type:
+          - string
+          - 'null'
+        costExGst:
+          type: number
+          format: double
+        costIncGst:
+          type: number
+          format: double
+        originalCostExGst:
+          type: number
+          format: double
+        originalCostIncGst:
+          type: number
+          format: double
+        appliedAdjustment:
+          type: number
+          format: double
+        durationInDays:
+          type: integer
+          format: int32
+        name:
+          type:
+          - string
+          - 'null'
+        tier:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    BookingV2Api.v1.ProductAvailabilityByDurationDto:
+      type: object
+      properties:
+        durationNo:
+          type: integer
+          format: int32
+        startDate:
+          type: string
+          format: date-time
+        sovAvailable:
+          type: number
+          format: double
+        status:
+          $ref: '#/components/schemas/BookingV2Api.v1.ProductAvailabilityStatus'
+        maxExclusiveAvailable:
+          type: integer
+          format: int32
+        legacyId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        agencies:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/BookingV2Api.v1.AgencyAvailabilityDetailsDto'
+      additionalProperties: false
+    BookingV2Api.v1.GetQuoteListingPriceBySuburbsRequest:
+      required:
+      - areas
+      - duration
+      - tier
+      type: object
+      properties:
+        areas:
+          maxItems: 20
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/BookingV2Api.v1.AreaFilter'
+          description: State and Zones selected
+        tier:
+          minLength: 1
+          type: string
+          description: Product tier e.g. Gold, Silver, Platinum
+        duration:
+          type: integer
+          description: Duration in days of product
+          format: int32
+        asAtDate:
+          type: string
+          description: Date of the quote. Can simulate past or future date but relying on data TP currently has (e.g. quote of a product before recorded expiry)
+          format: date-time
+        contractType:
+          $ref: '#/components/schemas/BookingV2Api.v1.BookingRule'
+        channel:
+          $ref: '#/components/schemas/BookingV2Api.v1.Channel'
+        listingType:
+          $ref: '#/components/schemas/BookingV2Api.v1.ListingType'
+        eBrochureOption:
+          $ref: '#/components/schemas/BookingV2Api.v1.EBrochureOptions'
+        isNewDevelopment:
+          type: boolean
+      additionalProperties: false
+    BookingV2Api.v1.ListingFilterType:
+      enum:
+      - Residential
+      - NewDevelopment
+      - Project
+      - Rural
+      type: string
+      description: For Dreamhomes listing filters
+    BookingV2Api.v1.UnreserveInventoryByBatchRequest:
+      required:
+      - cancelledBy
+      type: object
+      properties:
+        agencyId:
+          type: integer
+          format: int32
+        cancelledBy:
+          maxLength: 50
+          minLength: 1
+          type: string
+        reservationIds:
+          maxItems: 10
+          minItems: 1
+          type:
+          - array
+          - 'null'
+          items:
+            type: integer
+            format: int32
+      additionalProperties: false
+    BookingV2Api.v1.DurationDto:
+      type: object
+      properties:
+        durationNo:
+          type: integer
+          format: int32
+        dateStart:
+          type: string
+          format: date-time
+        dateEnd:
+          type: string
+          format: date-time
+      additionalProperties: false
+    BookingV2Api.v1.EBrochureOptions:
+      enum:
+      - NoEbrochure
+      - Standard
+      - Platinum
+      type: string
+    BookingV2Api.v1.BookingRate:
+      type: object
+      properties:
+        bookingRule:
+          type:
+          - string
+          - 'null'
+        channel:
+          $ref: '#/components/schemas/BookingV2Api.v1.Channel'
+        listingType:
+          $ref: '#/components/schemas/BookingV2Api.v1.ListingType'
+        tier:
+          type:
+          - string
+          - 'null'
+        durationInDays:
+          type: integer
+          format: int32
+        ebrochureType:
+          type:
+          - string
+          - 'null'
+        isNewDevelopment:
+          type: boolean
+        productCatalogId:
+          type: integer
+          format: int32
+        zoneId:
+          type: integer
+          format: int32
+        matrixVersionId:
+          type:
+          - string
+          - 'null'
+        rateBands:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/BookingV2Api.v1.RateBand'
+      additionalProperties: false
+    BookingV2Api.v1.ProductTypeAndCategoryDto:
+      type: object
+      properties:
+        productType:
+          $ref: '#/components/schemas/BookingV2Api.v1.LimitedInventoryProductType'
+        listingCategory:
+          $ref: '#/components/schemas/BookingV2Api.v1.LimitedInventoryListingCategory'
+      additionalProperties: false
+    BookingV2Api.v1.ProductAvailabilityStatus:
+      enum:
+      - Unavailable
+      - Available
+      type: string
+    SocialBoost.v1.ListingRateInfo:
+      type: object
+      properties:
+        productListingLevel:
+          enum:
+          - None
+          - PlatinumExtend
+          - Platinum
+          - Gold
+          - Silver
+          - Branded
+          - Tier1
+          - Tier2
+          - Tier3
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets ProductListingLevel
+        productListingRule:
+          enum:
+          - None
+          - EarlyAccess
+          - SocialBoostAll
+          - SocialBoostCasual
+          - SocialBoostRuralAll
+          - SocialBoostRuralCasual
+          - SocialBoostAgent
+          - SocialBoostRuralAgent
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets ProductListingRule
+        bookingProductId:
+          type:
+          - integer
+          - 'null'
+          description: Gets or Sets BookingProductId
+          format: int32
+        bookingProductRateId:
+          type:
+          - integer
+          - 'null'
+          description: Gets or Sets BookingProductRateId
+          format: int32
+        bookingProductName:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets BookingProductName
+        durationInDays:
+          type:
+          - integer
+          - 'null'
+          description: Gets or Sets DurationInDays
+          format: int32
+        costExGst:
+          type:
+          - number
+          - 'null'
+          description: Gets or Sets CostExGst
+          format: double
+        costIncGst:
+          type:
+          - number
+          - 'null'
+          description: Gets or Sets CostIncGst
+          format: double
+        zoneId:
+          type:
+          - integer
+          - 'null'
+          description: Gets or Sets ZoneId
+          format: int32
+        productAttributes:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets ProductAttributes
+        rateAttributes:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets RateAttributes
+        bookingMethod:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets BookingMethod
+        productForRural:
+          type:
+          - boolean
+          - 'null'
+          description: Gets or Sets ProductForRural
+      additionalProperties: false
+      description: ListingRateInfo
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    SocialBoost.v1.RateForNewSocialBoostRequestModel:
+      required:
+      - agencyId
+      - agentEmail
+      - agentFirstName
+      - agentLastName
+      - channel
+      - isRural
+      - listingType
+      - postcode
+      - price
+      - propertyType
+      - state
+      - suburb
+      type: object
+      properties:
+        agencyId:
+          type: integer
+          description: Id of the agency for whom rates are to be calculated.
+          format: int32
+        agentFirstName:
+          minLength: 1
+          type: string
+          description: The first name of the primary agent associated with the listing.
+        agentLastName:
+          minLength: 1
+          type: string
+          description: The last name of the primary agent associated with the listing
+        agentEmail:
+          minLength: 1
+          type: string
+          description: The email of the primary agent associated with the listing.
+        suburb:
+          minLength: 1
+          type: string
+          description: Suburb for which rates are to be calculated.
+        postcode:
+          minLength: 1
+          type: string
+          description: Postcode for which rates are to be calculated.
+        state:
+          minLength: 1
+          type: string
+          description: State for which rates are to be calculated
+        propertyType:
+          enum:
+          - Unknown
+          - AcreageSemiRural
+          - ApartmentUnitFlat
+          - Aquaculture
+          - BlockOfUnits
+          - Carspace
+          - DairyFarming
+          - DevelopmentSite
+          - Duplex
+          - Farm
+          - FishingForestry
+          - NewHomeDesigns
+          - House
+          - NewHouseLand
+          - IrrigationServices
+          - NewLand
+          - Livestock
+          - NewApartments
+          - Penthouse
+          - Retirement
+          - RetirementVillage
+          - Rural
+          - SemiDetached
+          - SpecialistFarm
+          - Studio
+          - Terrace
+          - Townhouse
+          - VacantLand
+          - Villa
+          - Cropping
+          - Viticulture
+          - MixedFarming
+          - Grazing
+          - Horticulture
+          - Equine
+          - Farmlet
+          - Orchard
+          - RuralLifestyle
+          type: string
+          description: The property type of the listing e.g. House
+        isRural:
+          type: boolean
+          description: Whether to return the normal or rural rates
+        listingType:
+          enum:
+          - Sale
+          - Rent
+          - None
+          type: string
+          description: Type of the listing whether sale or rent
+        price:
+          type: number
+          description: The value of the listing
+          format: double
+        channel:
+          enum:
+          - Residential
+          - Commercial
+          - Business
+          type: string
+          description: The intended channel of the listing.
+        bookingStartDate:
+          type:
+          - string
+          - 'null'
+          description: Date at which the booking will start. Defaults to today. Allows for returning future contracts/price changes.
+          format: date-time
+      additionalProperties: false
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+  securitySchemes:
+    apikey:
+      type: apiKey
+      description: API Key in Header
+      name: x-api-key
+      in: header
+    oauth2:
+      type: oauth2
+      description: OAuth 2
+      flows:
+        clientCredentials:
+          tokenUrl: https://auth.domain.com.au/v1/connect/token
+          scopes:
+            api_addresslocators_read: api_addresslocators_read
+            api_agencies_read: api_agencies_read
+            api_agencies_write: api_agencies_write
+            api_authorities_write: api_authorities_write
+            api_avm_read: api_avm_read
+            api_campaignperformance_read: api_campaignperformance_read
+            api_dataset_read: api_dataset_read
+            api_demographics_read: api_demographics_read
+            api_enquiries_read: api_enquiries_read
+            api_enquiries_write: api_enquiries_write
+            api_listingperformance_read: api_listingperformance_read
+            api_listings_read: api_listings_read
+            api_listings_write: api_listings_write
+            api_locations_read: api_locations_read
+            api_projectperformance_read: api_projectperformance_read
+            api_properties_read: api_properties_read
+            api_propertyportfolio_read: api_propertyportfolio_read
+            api_propertyportfolio_write: api_propertyportfolio_write
+            api_propertyreports_read: api_propertyreports_read
+            api_salesresults_read: api_salesresults_read
+            api_statistics_write: api_statistics_write
+            api_suburbhistorical_read: api_suburbhistorical_read
+            api_suburbperformance_read: api_suburbperformance_read
+            api_suburbsummary_read: api_suburbsummary_read
+            api_webhooks_write: api_webhooks_write
+        authorizationCode:
+          authorizationUrl: https://auth.domain.com.au/v1/connect/authorize
+          tokenUrl: https://auth.domain.com.au/v1/connect/token
+          refreshUrl: https://auth.domain.com.au/v1/connect/token
+          scopes:
+            api_addresslocators_read: api_addresslocators_read
+            api_agencies_read: api_agencies_read
+            api_agencies_write: api_agencies_write
+            api_authorities_write: api_authorities_write
+            api_avm_read: api_avm_read
+            api_campaignperformance_read: api_campaignperformance_read
+            api_dataset_read: api_dataset_read
+            api_demographics_read: api_demographics_read
+            api_enquiries_read: api_enquiries_read
+            api_enquiries_write: api_enquiries_write
+            api_listingperformance_read: api_listingperformance_read
+            api_listings_read: api_listings_read
+            api_listings_write: api_listings_write
+            api_locations_read: api_locations_read
+            api_projectperformance_read: api_projectperformance_read
+            api_properties_read: api_properties_read
+            api_propertyportfolio_read: api_propertyportfolio_read
+            api_propertyportfolio_write: api_propertyportfolio_write
+            api_propertyreports_read: api_propertyreports_read
+            api_salesresults_read: api_salesresults_read
+            api_statistics_write: api_statistics_write
+            api_suburbhistorical_read: api_suburbhistorical_read
+            api_suburbperformance_read: api_suburbperformance_read
+            api_suburbsummary_read: api_suburbsummary_read
+            api_webhooks_write: api_webhooks_write
+x-refined-from:
+- domain-group-openapi-latest.json
+- domain-group-openapi-v1.json

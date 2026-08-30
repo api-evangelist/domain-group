@@ -1,0 +1,530 @@
+openapi: 3.2.0
+info:
+  title: Domain Group Enquiries API
+  contact:
+    name: Domain Developer Support
+    email: api@domain.com.au
+  termsOfService: https://developer.domain.com.au/docs/latest/support/terms
+  version: '1.0'
+  description: 'Operations tagged Enquiries across 2 of this provider''s published API definitions: domain-group-openapi-latest.json, domain-group-openapi-v1.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.domain.com.au/
+  description: Primary
+- url: https://api.domain.com.au/sandbox/
+  description: Sandbox
+tags:
+- name: Enquiries
+paths:
+  /v1/enquiries:
+    get:
+      tags:
+      - Enquiries
+      summary: Searches enquiries based on agents or agencies.
+      operationId: Enquiries_Search
+      parameters:
+      - name: agencyId
+        in: query
+        description: Agency identifier
+        schema:
+          type: integer
+          format: int32
+      - name: agentId
+        in: query
+        description: Agent identifier
+        schema:
+          type: integer
+          format: int32
+      - name: from
+        in: query
+        description: Enquiries received from
+        schema:
+          type: string
+          format: date-time
+      - name: to
+        in: query
+        description: Enquiries received up to
+        schema:
+          type: string
+          format: date-time
+      - name: pageNumber
+        in: query
+        description: Page number for paginated results (25 per page)
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Enquiries.V1.EnquiryReport'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+      security:
+      - apikey: []
+      - oauth2:
+        - api_enquiries_read
+        - api_enquiries_write
+      x-domain-endpointcost: 1
+      x-domain-usercontextrequired: true
+      x-domain-environment: Any
+    post:
+      tags:
+      - Enquiries
+      summary: 'Sends an enquiry for listing, agency, etc... (based on the enquiry type and referenceid).
+
+        Recipients and template will be automatically selected.'
+      operationId: Enquiries_Post
+      requestBody:
+        description: The enquiry object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Domain.Public.Adapter.Web.Api.Models.v1.Enquiries.Enquiry'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/Domain.Public.Adapter.Web.Api.Models.v1.Enquiries.Enquiry'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Domain.Public.Adapter.Web.Api.Models.v1.Enquiries.Enquiry'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Domain.Public.Adapter.Web.Api.Models.v1.Enquiries.Enquiry'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/Domain.Public.Adapter.Web.Api.Models.v1.Enquiries.Enquiry'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Domain.Public.Adapter.Web.Api.Models.v1.Enquiries.Enquiry'
+        required: true
+        x-bodyName: enquiry
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Domain.EnquiryService.v1.Model.GroupEnquiryServiceModelsEnquiryResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Domain.EnquiryService.v1.Model.GroupEnquiryServiceModelsEnquiryResponse'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Domain.EnquiryService.v1.Model.GroupEnquiryServiceModelsEnquiryResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Domain.EnquiryService.v1.Model.GroupEnquiryServiceModelsEnquiryResponse'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/Domain.EnquiryService.v1.Model.GroupEnquiryServiceModelsEnquiryResponse'
+      security:
+      - apikey: []
+      - oauth2:
+        - api_enquiries_write
+      x-domain-usercontextrequired: false
+      x-domain-endpointcost: 1
+      x-domain-environment: Any
+    servers:
+    - url: https://api.domain.com.au/
+      description: Primary
+    - url: https://api.domain.com.au/sandbox/
+      description: Sandbox
+  /v1/enquiries/{id}:
+    get:
+      tags:
+      - Enquiries
+      summary: Retrieve the details of a specific enquiry
+      operationId: Enquiries_Get
+      parameters:
+      - name: id
+        in: path
+        description: Id of the enquiry
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Enquiries.V1.EnquiryReport'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+      security:
+      - apikey: []
+      - oauth2:
+        - api_enquiries_read
+        - api_enquiries_write
+      x-domain-endpointcost: 1
+      x-domain-usercontextrequired: false
+      x-domain-environment: Any
+    servers:
+    - url: https://api.domain.com.au/
+      description: Primary
+    - url: https://api.domain.com.au/sandbox/
+      description: Sandbox
+components:
+  schemas:
+    Domain.EnquiryService.v1.Model.GroupEnquiryServiceModelsEnquiryResponse:
+      type: object
+      properties:
+        s3Key:
+          type: string
+        message:
+          type: string
+        enquiryReceiptTimestamp:
+          type: string
+          format: date-time
+        warnings:
+          type: array
+          items:
+            type: string
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    Enquiries.V1.Recipient:
+      required:
+      - address
+      type: object
+      properties:
+        recipientType:
+          enum:
+          - primary
+          - secondary
+          - hidden
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets RecipientType
+        address:
+          minLength: 1
+          type: string
+          description: Delivery address ( email address, phone number etc. )  of the recipient
+      additionalProperties: false
+      description: Recipient of an Group.Enquiry.Model.Enquiry
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    Enquiries.V1.Sender:
+      type: object
+      properties:
+        firstName:
+          type:
+          - string
+          - 'null'
+        lastName:
+          type:
+          - string
+          - 'null'
+        email:
+          type:
+          - string
+          - 'null'
+        phoneNumber:
+          type:
+          - string
+          - 'null'
+        postcode:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    Enquiries.V1.EnquiryReport:
+      type: object
+      properties:
+        deliveryMethod:
+          enum:
+          - email
+          - sms
+          type:
+          - string
+          - 'null'
+        enquiryType:
+          enum:
+          - listing
+          - devProject
+          - newDevLanding
+          - agencyProfile
+          - agentProfile
+          - contractRequest
+          - vendorEnquiry
+          - prePortalListing
+          - suburbVendorEnquiry
+          type:
+          - string
+          - 'null'
+        id:
+          type:
+          - string
+          - 'null'
+        message:
+          type:
+          - string
+          - 'null'
+        metaData:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+          x-data-access-level-info:
+            Basic:
+            - '*'
+            Detailed:
+            - '*'
+            Full:
+            - '*'
+        recipientsDeliveryStatus:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Enquiries.V1.RecipientDeliveryStatus'
+        referenceId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        sender:
+          $ref: '#/components/schemas/Enquiries.V1.Sender'
+        dateReceived:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        agencyId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+      additionalProperties: false
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    Domain.Public.Adapter.Web.Api.Models.v1.Enquiries.Sender:
+      type: object
+      properties:
+        firstName:
+          type: string
+          description: Sender first name
+        lastName:
+          type: string
+          description: Sender lastname/surname
+        email:
+          type: string
+          description: Sender email address
+        phoneNumber:
+          type: string
+          description: Sender phone number
+        postcode:
+          pattern: ^\d*$
+          type: string
+          description: Postcode of sender's location
+      description: Contains enquiry sender details
+    Enquiries.V1.RecipientDeliveryStatus:
+      type: object
+      properties:
+        deliveryStatus:
+          enum:
+          - queued
+          - delivered
+          - failed
+          - deferred
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets DeliveryStatus
+        recipient:
+          $ref: '#/components/schemas/Enquiries.V1.Recipient'
+        date:
+          type:
+          - string
+          - 'null'
+          description: Last time when the email delivery status was polled
+          format: date-time
+      additionalProperties: false
+      description: Used for reporting enquiry delivery statusses to recipients
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    Domain.Public.Adapter.Web.Api.Models.v1.Enquiries.Enquiry:
+      type: object
+      properties:
+        deliveryMethod:
+          enum:
+          - email
+          - sms
+          type: string
+          description: Delivery method of the enquiry
+        enquiryType:
+          enum:
+          - listing
+          - devProject
+          - newDevLanding
+          - agencyProfile
+          - agentProfile
+          - contractRequest
+          - vendorEnquiry
+          - prePortalListing
+          type: string
+          description: Type of enquiry
+        referenceId:
+          type: integer
+          description: Listing identifier
+          format: int32
+        id:
+          type: string
+          description: Enquiry identifier
+        sender:
+          $ref: '#/components/schemas/Domain.Public.Adapter.Web.Api.Models.v1.Enquiries.Sender'
+        subject:
+          type: string
+          description: Enquiry subject
+        message:
+          type: string
+          description: Enquiry message
+        metaData:
+          type: object
+          additionalProperties:
+            type: string
+          description: MetaData of the enquiry
+      description: An enquiry with associated reference (eg. listing)
+  securitySchemes:
+    apikey:
+      type: apiKey
+      description: API Key in Header
+      name: x-api-key
+      in: header
+    oauth2:
+      type: oauth2
+      description: OAuth 2
+      flows:
+        clientCredentials:
+          tokenUrl: https://auth.domain.com.au/v1/connect/token
+          scopes:
+            api_addresslocators_read: api_addresslocators_read
+            api_agencies_read: api_agencies_read
+            api_agencies_write: api_agencies_write
+            api_authorities_write: api_authorities_write
+            api_avm_read: api_avm_read
+            api_campaignperformance_read: api_campaignperformance_read
+            api_dataset_read: api_dataset_read
+            api_demographics_read: api_demographics_read
+            api_enquiries_read: api_enquiries_read
+            api_enquiries_write: api_enquiries_write
+            api_listingperformance_read: api_listingperformance_read
+            api_listings_read: api_listings_read
+            api_listings_write: api_listings_write
+            api_locations_read: api_locations_read
+            api_projectperformance_read: api_projectperformance_read
+            api_properties_read: api_properties_read
+            api_propertyportfolio_read: api_propertyportfolio_read
+            api_propertyportfolio_write: api_propertyportfolio_write
+            api_propertyreports_read: api_propertyreports_read
+            api_salesresults_read: api_salesresults_read
+            api_statistics_write: api_statistics_write
+            api_suburbhistorical_read: api_suburbhistorical_read
+            api_suburbperformance_read: api_suburbperformance_read
+            api_suburbsummary_read: api_suburbsummary_read
+            api_webhooks_write: api_webhooks_write
+        authorizationCode:
+          authorizationUrl: https://auth.domain.com.au/v1/connect/authorize
+          tokenUrl: https://auth.domain.com.au/v1/connect/token
+          refreshUrl: https://auth.domain.com.au/v1/connect/token
+          scopes:
+            api_addresslocators_read: api_addresslocators_read
+            api_agencies_read: api_agencies_read
+            api_agencies_write: api_agencies_write
+            api_authorities_write: api_authorities_write
+            api_avm_read: api_avm_read
+            api_campaignperformance_read: api_campaignperformance_read
+            api_dataset_read: api_dataset_read
+            api_demographics_read: api_demographics_read
+            api_enquiries_read: api_enquiries_read
+            api_enquiries_write: api_enquiries_write
+            api_listingperformance_read: api_listingperformance_read
+            api_listings_read: api_listings_read
+            api_listings_write: api_listings_write
+            api_locations_read: api_locations_read
+            api_projectperformance_read: api_projectperformance_read
+            api_properties_read: api_properties_read
+            api_propertyportfolio_read: api_propertyportfolio_read
+            api_propertyportfolio_write: api_propertyportfolio_write
+            api_propertyreports_read: api_propertyreports_read
+            api_salesresults_read: api_salesresults_read
+            api_statistics_write: api_statistics_write
+            api_suburbhistorical_read: api_suburbhistorical_read
+            api_suburbperformance_read: api_suburbperformance_read
+            api_suburbsummary_read: api_suburbsummary_read
+            api_webhooks_write: api_webhooks_write
+x-refined-from:
+- domain-group-openapi-latest.json
+- domain-group-openapi-v1.json

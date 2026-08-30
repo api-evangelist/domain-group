@@ -1,0 +1,352 @@
+openapi: 3.2.0
+info:
+  title: Domain Group Locations API
+  contact:
+    name: Domain Developer Support
+    email: api@domain.com.au
+  termsOfService: https://developer.domain.com.au/docs/latest/support/terms
+  version: '1.0'
+  description: 'Operations tagged Locations across 2 of this provider''s published API definitions: domain-group-openapi-latest.json, domain-group-openapi-v1.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.domain.com.au/
+  description: Primary
+- url: https://api.domain.com.au/sandbox/
+  description: Sandbox
+tags:
+- name: Locations
+paths:
+  /v1/locations/profiles/{domainLocationId}:
+    get:
+      tags:
+      - Locations
+      summary: Get location data based on the given domainLocationId
+      operationId: LocationProfiles_Get
+      parameters:
+      - name: domainLocationId
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Domain.LocationProfilesService.v1.Model.Location'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Domain.LocationProfilesService.v1.Model.Location'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Domain.LocationProfilesService.v1.Model.Location'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Domain.LocationProfilesService.v1.Model.Location'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/Domain.LocationProfilesService.v1.Model.Location'
+        '401':
+          description: Unauthorised
+        '404':
+          description: Not Found
+      security:
+      - apikey: []
+      - oauth2:
+        - api_locations_read
+      x-domain-usercontextrequired: false
+      x-domain-endpointcost: 1
+      x-domain-environment: Any
+    servers:
+    - url: https://api.domain.com.au/
+      description: Primary
+    - url: https://api.domain.com.au/sandbox/
+      description: Sandbox
+components:
+  schemas:
+    Domain.LocationProfilesService.v1.Model.LocationDataPropertyCategories:
+      type: object
+      properties:
+        luxuryLevelPrice:
+          type: number
+          format: double
+        numberSold:
+          type: integer
+          format: int32
+        estimatedRepayments:
+          type: number
+          format: double
+        forSale:
+          type: integer
+          format: int32
+        medianSoldPrice:
+          type: number
+          format: double
+        medianRentPrice:
+          type: number
+          format: double
+        daysOnMarket:
+          type: number
+          format: double
+        bedrooms:
+          type: integer
+          format: int32
+        forRent:
+          type: integer
+          format: int32
+        entryLevelPrice:
+          type: number
+          format: double
+        salesGrowthList:
+          type: array
+          items:
+            $ref: '#/components/schemas/Domain.LocationProfilesService.v1.Model.LocationDataSalesGrowthList'
+        auctionClearanceRate:
+          type: number
+          format: double
+        propertyCategory:
+          type: string
+        mostRecentSale:
+          type: string
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    Domain.LocationProfilesService.v1.Model.LocationDataSalesGrowthList:
+      type: object
+      properties:
+        medianSoldPrice:
+          type: number
+          format: double
+        annualGrowth:
+          type: number
+          format: double
+        numberSold:
+          type: integer
+          format: int32
+        year:
+          type: integer
+          format: int32
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    Domain.LocationProfilesService.v1.Model.Location:
+      type: object
+      properties:
+        domainLocationId:
+          type: integer
+          format: int32
+        postcode:
+          type: string
+        pfLocationId:
+          type: string
+        surroundingSuburbs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Domain.LocationProfilesService.v1.Model.LocationSurroundingSuburbs'
+        urlSlug:
+          type: string
+        suburbName:
+          type: string
+        data:
+          $ref: '#/components/schemas/Domain.LocationProfilesService.v1.Model.LocationData'
+        apmLocationId:
+          type: integer
+          format: int32
+        locationId:
+          type: integer
+          format: int32
+        areaName:
+          type: string
+        regionName:
+          type: string
+        state:
+          type: string
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    Domain.LocationProfilesService.v1.Model.LocationSurroundingSuburbs:
+      type: object
+      properties:
+        name:
+          type: string
+        urlSlug:
+          type: string
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    Domain.LocationProfilesService.v1.Model.LocationData:
+      type: object
+      properties:
+        studiosForRent:
+          type: integer
+          format: int32
+        terracedHousesForSale:
+          type: integer
+          format: int32
+        semiDetachedHousesForSale:
+          type: integer
+          format: int32
+        townhousesForRent:
+          type: integer
+          format: int32
+        apartmentsAndUnitsForSale:
+          type: integer
+          format: int32
+        apartmentsAndUnitsForRent:
+          type: integer
+          format: int32
+        villasForSale:
+          type: integer
+          format: int32
+        duplexesForSale:
+          type: integer
+          format: int32
+        semiDetachedHousesForRent:
+          type: integer
+          format: int32
+        studiosForSale:
+          type: integer
+          format: int32
+        singlePercentage:
+          type: number
+          format: double
+        mostCommonAgeBracket:
+          type: string
+        renterPercentage:
+          type: number
+          format: double
+        penthousesForSale:
+          type: integer
+          format: int32
+        villasForRent:
+          type: integer
+          format: int32
+        duplexesForRent:
+          type: integer
+          format: int32
+        housesForSale:
+          type: integer
+          format: int32
+        ownerOccupierPercentage:
+          type: number
+          format: double
+        propertyCategories:
+          type: array
+          items:
+            $ref: '#/components/schemas/Domain.LocationProfilesService.v1.Model.LocationDataPropertyCategories'
+        population:
+          type: number
+          format: double
+        penthousesForRent:
+          type: integer
+          format: int32
+        townhousesForSale:
+          type: integer
+          format: int32
+        terracedHousesForRent:
+          type: integer
+          format: int32
+        marriedPercentage:
+          type: number
+          format: double
+        housesForRent:
+          type: integer
+          format: int32
+        blockOfUnitsForSale:
+          type: integer
+          format: int32
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+  securitySchemes:
+    apikey:
+      type: apiKey
+      description: API Key in Header
+      name: x-api-key
+      in: header
+    oauth2:
+      type: oauth2
+      description: OAuth 2
+      flows:
+        clientCredentials:
+          tokenUrl: https://auth.domain.com.au/v1/connect/token
+          scopes:
+            api_addresslocators_read: api_addresslocators_read
+            api_agencies_read: api_agencies_read
+            api_agencies_write: api_agencies_write
+            api_authorities_write: api_authorities_write
+            api_avm_read: api_avm_read
+            api_campaignperformance_read: api_campaignperformance_read
+            api_dataset_read: api_dataset_read
+            api_demographics_read: api_demographics_read
+            api_enquiries_read: api_enquiries_read
+            api_enquiries_write: api_enquiries_write
+            api_listingperformance_read: api_listingperformance_read
+            api_listings_read: api_listings_read
+            api_listings_write: api_listings_write
+            api_locations_read: api_locations_read
+            api_projectperformance_read: api_projectperformance_read
+            api_properties_read: api_properties_read
+            api_propertyportfolio_read: api_propertyportfolio_read
+            api_propertyportfolio_write: api_propertyportfolio_write
+            api_propertyreports_read: api_propertyreports_read
+            api_salesresults_read: api_salesresults_read
+            api_statistics_write: api_statistics_write
+            api_suburbhistorical_read: api_suburbhistorical_read
+            api_suburbperformance_read: api_suburbperformance_read
+            api_suburbsummary_read: api_suburbsummary_read
+            api_webhooks_write: api_webhooks_write
+        authorizationCode:
+          authorizationUrl: https://auth.domain.com.au/v1/connect/authorize
+          tokenUrl: https://auth.domain.com.au/v1/connect/token
+          refreshUrl: https://auth.domain.com.au/v1/connect/token
+          scopes:
+            api_addresslocators_read: api_addresslocators_read
+            api_agencies_read: api_agencies_read
+            api_agencies_write: api_agencies_write
+            api_authorities_write: api_authorities_write
+            api_avm_read: api_avm_read
+            api_campaignperformance_read: api_campaignperformance_read
+            api_dataset_read: api_dataset_read
+            api_demographics_read: api_demographics_read
+            api_enquiries_read: api_enquiries_read
+            api_enquiries_write: api_enquiries_write
+            api_listingperformance_read: api_listingperformance_read
+            api_listings_read: api_listings_read
+            api_listings_write: api_listings_write
+            api_locations_read: api_locations_read
+            api_projectperformance_read: api_projectperformance_read
+            api_properties_read: api_properties_read
+            api_propertyportfolio_read: api_propertyportfolio_read
+            api_propertyportfolio_write: api_propertyportfolio_write
+            api_propertyreports_read: api_propertyreports_read
+            api_salesresults_read: api_salesresults_read
+            api_statistics_write: api_statistics_write
+            api_suburbhistorical_read: api_suburbhistorical_read
+            api_suburbperformance_read: api_suburbperformance_read
+            api_suburbsummary_read: api_suburbsummary_read
+            api_webhooks_write: api_webhooks_write
+x-refined-from:
+- domain-group-openapi-latest.json
+- domain-group-openapi-v1.json

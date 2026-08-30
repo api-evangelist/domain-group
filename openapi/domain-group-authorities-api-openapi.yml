@@ -1,0 +1,1066 @@
+openapi: 3.2.0
+info:
+  title: Domain Group Authorities API
+  contact:
+    name: Domain Developer Support
+    email: api@domain.com.au
+  termsOfService: https://developer.domain.com.au/docs/latest/support/terms
+  version: '1.0'
+  description: 'Operations tagged Authorities across 2 of this provider''s published API definitions: domain-group-openapi-latest.json, domain-group-openapi-v1.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.domain.com.au/
+  description: Primary
+- url: https://api.domain.com.au/sandbox/
+  description: Sandbox
+tags:
+- name: Authorities
+paths:
+  /v1/authorities:
+    post:
+      tags:
+      - Authorities
+      summary: Creates a new authority into the system.
+      description: Creates a new authority into the system.
+      operationId: Authorities_Create
+      requestBody:
+        description: Authority information to be created.
+        content:
+          application/vnd.realtimeagent.authorities.v1+json:
+            schema:
+              $ref: '#/components/schemas/Authorities.v1.AuthorityRequest'
+        required: true
+      responses:
+        '200':
+          description: authority created
+          content:
+            application/vnd.realtimeagent.authorities.v1+json:
+              schema:
+                $ref: '#/components/schemas/Authorities.v1.AuthorityResponse'
+        '400':
+          description: invalid input, object invalid
+        '401':
+          description: Unauthorized access.
+        '409':
+          description: an existing authority already exists
+      security:
+      - apikey: []
+      - oauth2:
+        - api_authorities_write
+      x-domain-endpointcost: 1
+      x-domain-usercontextrequired: false
+      x-domain-environment: Primary
+    servers:
+    - url: https://api.domain.com.au/
+      description: Primary
+    - url: https://api.domain.com.au/sandbox/
+      description: Sandbox
+  /v1/authorities/{id}:
+    get:
+      tags:
+      - Authorities
+      summary: Retrieve a single authority
+      description: Retrieve authority details based on the given ID.
+      operationId: Authorities_GetById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Details of a single authority.
+          content:
+            application/vnd.realtimeagent.authorities.v1+json:
+              schema:
+                $ref: '#/components/schemas/Authorities.v1.AuthorityResponse'
+        '400':
+          description: invalid input, object invalid
+        '401':
+          description: Unauthorized access.
+        '404':
+          description: Authority does not exist.
+      security:
+      - apikey: []
+      - oauth2:
+        - api_authorities_write
+      x-domain-endpointcost: 1
+      x-domain-usercontextrequired: false
+      x-domain-environment: Primary
+    put:
+      tags:
+      - Authorities
+      summary: full update an existing authority.
+      description: Executes a full update on an existing authority.
+      operationId: Authorities_UpdateById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        description: Authority information to be updated.
+        content:
+          application/vnd.realtimeagent.authorities.v1+json:
+            schema:
+              $ref: '#/components/schemas/Authorities.v1.AuthorityResponse'
+        required: true
+      responses:
+        '200':
+          description: authority updated
+          content:
+            application/vnd.realtimeagent.authorities.v1+json:
+              schema:
+                $ref: '#/components/schemas/Authorities.v1.AuthorityResponse'
+        '400':
+          description: invalid input, object invalid
+        '401':
+          description: Unauthorized access.
+        '404':
+          description: Authority does not exist.
+      security:
+      - apikey: []
+      - oauth2:
+        - api_authorities_write
+      x-domain-endpointcost: 1
+      x-domain-usercontextrequired: false
+      x-domain-environment: Primary
+    servers:
+    - url: https://api.domain.com.au/
+      description: Primary
+    - url: https://api.domain.com.au/sandbox/
+      description: Sandbox
+  /v1/authorities/{id}/attachments:
+    get:
+      tags:
+      - Authorities
+      summary: Download a compressed file that contains all files attached to an authority.
+      description: Download a compressed file(`.zip`) that contains all files attached to an authority based on the given authority `id`.
+      operationId: Authorities_DownloadAttachments
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: The downloaded compressed file
+          content:
+            multipart/form-data:
+              schema:
+                type: string
+                format: binary
+        '401':
+          description: Unauthorized access.
+        '404':
+          description: Authority does not exist.
+      security:
+      - apikey: []
+      - oauth2:
+        - api_authorities_write
+      x-domain-endpointcost: 1
+      x-domain-usercontextrequired: false
+      x-domain-environment: Primary
+    post:
+      tags:
+      - Authorities
+      summary: Upload multiple files to an authority.
+      description: Upload multiple files to be attached to an authority based on the given `id`.
+      operationId: Authorities_UploadAttachment
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        description: The files to be uploaded.
+        content:
+          multipart/form-data:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Authorities.v1.Attachments'
+      responses:
+        '201':
+          description: The files that were uploaded.
+          content:
+            application/vnd.realtimeagent.authorities.v1+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Authorities.v1.Attachments'
+        '400':
+          description: invalid input, object invalid
+        '401':
+          description: Unauthorized access.
+        '404':
+          description: Authority does not exist.
+      security:
+      - apikey: []
+      - oauth2:
+        - api_authorities_write
+      x-domain-endpointcost: 1
+      x-domain-usercontextrequired: false
+      x-domain-environment: Primary
+    servers:
+    - url: https://api.domain.com.au/
+      description: Primary
+    - url: https://api.domain.com.au/sandbox/
+      description: Sandbox
+  /v1/authorities/{id}/vendors/{vendorId}/attachments:
+    post:
+      tags:
+      - Authorities
+      summary: Upload multiple files to be attached to a specific vendor in an authority.
+      description: Upload multiple files to be attached to a specific vendor in an authority.
+      operationId: Authorities_UploadVendorAttachment
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: vendorId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        description: The files to be uploaded.
+        content:
+          multipart/form-data:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Authorities.v1.Attachments'
+      responses:
+        '201':
+          description: The files that were uploaded.
+          content:
+            application/vnd.realtimeagent.authorities.v1+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Authorities.v1.VendorAttachments'
+        '400':
+          description: invalid input, object invalid
+        '401':
+          description: Unauthorized access.
+        '404':
+          description: Authority/Vendor does not exist.
+      security:
+      - apikey: []
+      - oauth2:
+        - api_authorities_write
+      x-domain-endpointcost: 1
+      x-domain-usercontextrequired: false
+      x-domain-environment: Primary
+    servers:
+    - url: https://api.domain.com.au/
+      description: Primary
+    - url: https://api.domain.com.au/sandbox/
+      description: Sandbox
+  /v1/authorities/webhooks/subscription:
+    put:
+      tags:
+      - Authorities
+      summary: Subscribe to an agency for all its authorities
+      description: Subscribe to an agency to get notified on changes made to the authorities in that agencies scope.
+      operationId: Authorities_Subscribe
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Authorities.v1.SubscriptionRequest'
+      responses:
+        '201':
+          description: Subscription created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Authorities.v1.SubscriptionResponse'
+        '400':
+          description: invalid input, object invalid
+        '401':
+          description: Unauthorized access.
+      security:
+      - apikey: []
+      - oauth2:
+        - api_webhooks_write
+      x-domain-optionalscopes: api_authorities_write
+      x-domain-endpointcost: 1
+      x-domain-usercontextrequired: false
+      x-domain-environment: Primary
+    servers:
+    - url: https://api.domain.com.au/
+      description: Primary
+    - url: https://api.domain.com.au/sandbox/
+      description: Sandbox
+  /v1/authorities/webhooks/subscription/{subscriptionId}:
+    delete:
+      tags:
+      - Authorities
+      summary: Delete a subscription using subscriptionId
+      description: Delete a subscription using subscriptionId.
+      operationId: Authorities_Unsubscribe
+      parameters:
+      - name: subscriptionId
+        in: path
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success.
+        '400':
+          description: invalid input, object invalid
+        '401':
+          description: Unauthorized access.
+      security:
+      - apikey: []
+      - oauth2:
+        - api_webhooks_write
+      x-domain-endpointcost: 1
+      x-domain-usercontextrequired: false
+      x-domain-environment: Primary
+    servers:
+    - url: https://api.domain.com.au/
+      description: Primary
+    - url: https://api.domain.com.au/sandbox/
+      description: Sandbox
+components:
+  schemas:
+    Authorities.v1.AuthorityRequest:
+      required:
+      - address
+      - agency
+      - bathrooms
+      - bedrooms
+      - parking
+      - propertyType
+      - type
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+          example: cf52bbf4-8d00-45e5-917a-8f27631a7da0
+        address:
+          $ref: '#/components/schemas/Authorities.v1.Address'
+        marketingCampaigns:
+          type: array
+          items:
+            $ref: '#/components/schemas/Authorities.v1.MarketingCampaignRequest'
+        vendors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Authorities.v1.VendorRequest'
+        agents:
+          type: array
+          items:
+            $ref: '#/components/schemas/Authorities.v1.AgentRequest'
+        bathrooms:
+          type: integer
+          writeOnly: true
+          example: 2
+        bedrooms:
+          type: integer
+          writeOnly: true
+          example: 3
+        parking:
+          type: integer
+          writeOnly: true
+          example: 1
+        propertyType:
+          type: string
+          description: 'Available options are: `ApartmentUnitFlat`, `House`, `Townhouse`, `VacantLand`'
+          writeOnly: true
+          example: ApartmentUnitFlat
+        created:
+          type: string
+          format: date-time
+          readOnly: true
+          example: '2016-10-22T09:29:24.8137700+11:00'
+        modified:
+          type: string
+          format: date-time
+          readOnly: true
+          example: '2016-10-22T09:29:24.8137700+11:00'
+        status:
+          type: string
+          description: 'Available options are: `draft`, `missing sign`, `executed`'
+          readOnly: true
+          example: executed
+        createdAt:
+          type: string
+          format: date-time
+          readOnly: true
+          example: '2016-10-22T09:29:24.8137700+11:00'
+        updatedAt:
+          type: string
+          format: date-time
+          readOnly: true
+          example: '2016-10-22T09:29:24.8137700+11:00'
+        administrationFee:
+          type: string
+          example: ''
+        agentDetailsDate:
+          type: string
+          format: date-time
+          example: '2016-08-29T09:12:33.0010000+00:00'
+        auctionDate:
+          type: string
+          format: date-time
+          example: '2016-08-29T09:12:33.0010000+00:00'
+        auctionType:
+          type: string
+          example: Onsite
+        chattelsExcluded:
+          type: string
+          example: Value
+        chattelsIncluded:
+          type: array
+          items:
+            type: string
+            example: value
+        continuingPeriod:
+          type: number
+          example: 90
+        espRangeHigher:
+          type: number
+          example: 200000
+        espRangeLower:
+          type: number
+          example: 100000
+        exclusivePeriod:
+          type: number
+          example: 60
+        exclusivePeriodStartDate:
+          type: string
+          format: date-time
+          example: '2016-08-29T09:12:33.0010000+00:00'
+        exclusiveSoldAs:
+          type:
+          - string
+          - 'null'
+          description: 'Available options are: `Private Sale`, `Expression of Interest with the reserve to be advised prior to closing date`'
+          example: Private Sale
+        isOwnersCorporationManaged:
+          type: boolean
+          example: false
+        isPropertyTenanted:
+          type: boolean
+          example: false
+        occupationState:
+          type:
+          - string
+          - 'null'
+          description: 'Available options are: `With vacant possession`, `Subject to any tenancy`, `Both`'
+          example: Both
+        optOutInformation:
+          type: boolean
+          example: false
+        payableIn:
+          type: array
+          items:
+            type: string
+            format: int
+            example: '30'
+        paymentMethod:
+          type:
+          - string
+          - 'null'
+          description: 'Available options are: `Full purchase price`, `Payment of full deposit`'
+          example: Payment of full deposit
+        paymentSum:
+          type: number
+          example: 100000
+        reservePrice:
+          type: number
+          example: 100000
+        salePriceGstType:
+          type: string
+          example: l
+        saleSignPermission:
+          type: boolean
+          example: false
+        searchCriteriaAmount:
+          type: number
+          example: 100000
+        searchCriteriaPriceType:
+          type: string
+          description: 'Available options are: `amount`, `range`, `other`'
+          example: amount
+        transactionType:
+          type: string
+          example: AUTH
+        type:
+          type: string
+          description: 'Available options are: `Exclusive Auction`, `Exclusive Sale`, `General Sale`, `Appraisal`'
+          example: Exclusive Sale
+        vendorMktPriceNa:
+          type: boolean
+          example: true
+        waivedCoolingOff:
+          type: boolean
+          example: false
+        lot:
+          maxLength: 32
+          type: string
+        plan:
+          maxLength: 32
+          type: string
+        titleReference:
+          maxLength: 32
+          type: string
+        certificateOfTitleType:
+          type: string
+          description: This field is unique to SA
+        certificateOfTitleFolio:
+          type: string
+          description: This field is unique to SA
+        certificateOfTitleVolume:
+          type: string
+          description: This field is unique to SA
+        improvedLand:
+          type: boolean
+          description: This field is unique to SA
+          default: false
+        crmDetails:
+          $ref: '#/components/schemas/Authorities.v1.CrmDetails'
+    Authorities.v1.SubscriptionResponse:
+      type: object
+      properties:
+        subscriptionId:
+          type: string
+          example: '123'
+    Authorities.v1.CompanyResponse:
+      required:
+      - id
+      - email
+      - address
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Authorities.v1.CompanyRequest'
+      - type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: cf52bbf4-8d00-45e5-917a-8f27631a7da0
+    Authorities.v1.MarketingCampaignRequest:
+      required:
+      - campaignType
+      properties:
+        advertising:
+          type: string
+          description: advertising cost of this marketing campaign
+          format: decimal
+          example: '3000.00'
+        campaignType:
+          type: string
+          description: 'Available options are: `To Be Advised`, `Paper Based`, `Campaign Track`, `Realhub`'
+          example: Paper Based
+        marketingCampaignItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/Authorities.v1.MarketingCampaignItemRequest'
+        comments:
+          type: string
+          format: json
+          example: '{"children":[{"children":null,"hidden":false,"hides_children":false,"placeholders":null,"remove_css_class":null,"selected":false,"tag_key":null,"text":"Written Request","text_convertible":true,"type":"option_radio"}],"hidden":false,"placeholders":null,"required":false,"text":null,"text_convertible":true,"type":"group_radio"}'
+        commentsFallback:
+          type: string
+          example: ''
+        discountAmount:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          example: '1000.00'
+        discountPercent:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          example: '10.00'
+        expense:
+          type:
+          - string
+          - 'null'
+          description: 'Available options are: `Signing of this Authority`, `Written request`, `Specific Date`, `Signing of this Form 6`, `Signing of this Agency Agreement`, `Upon Invoice or Account`, `Prior to the commencement of marketing campaign`, `On Settlement or Withdrawal whichever occurs first`, `Vendor to pay through Campaign Agent v2`, `Vendor to pay through Market Now`, `Vendor to pay through Rello`, `Vendor to pay through List Ready`'
+          example: Signing of this Authority
+        other:
+          type: string
+          format: decimal
+          example: '1000.00'
+        payableOn:
+          type:
+          - string
+          - 'null'
+          format: date
+          example: '2016-10-22'
+        total:
+          type: string
+          description: Total cost of this marketing campaign. Total of the items cost if there are items or (advertising + other) cost for other types
+          format: decimal
+          example: '4000.00'
+        realhubQuoteId:
+          type:
+          - string
+          - 'null'
+          example: '1234567890'
+    Authorities.v1.VendorResponse:
+      required:
+      - id
+      - contact
+      - authority
+      - nature
+      - order
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Authorities.v1.VendorRequest'
+      - type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: cf52bbf4-8d00-45e5-917a-8f27631a7da0
+        contact:
+          $ref: '#/components/schemas/Authorities.v1.IndividualResponse'
+        contactRepresented:
+          $ref: '#/components/schemas/Authorities.v1.CompanyResponse'
+    Authorities.v1.VendorAttachments:
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+          example: 0557934b-b9f8-4d88-bd5a-9c69d5bf0beb
+        attachment:
+          type: string
+          format: binary
+          writeOnly: true
+          example: /path/to/file
+    Authorities.v1.Attachments:
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+          example: 0557934b-b9f8-4d88-bd5a-9c69d5bf0beb
+        attachment:
+          type: string
+          format: binary
+          writeOnly: true
+          example: /path/to/file
+        fileType:
+          type: string
+          writeOnly: true
+          example: Available options are marketingAttachments, commissionAttachments, espAttachment
+    Authorities.v1.CompanyRequest:
+      required:
+      - address
+      - email
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+          example: cf52bbf4-8d00-45e5-917a-8f27631a7da0
+        address:
+          $ref: '#/components/schemas/Authorities.v1.Address'
+        email:
+          type: string
+          format: email
+          example: johndoe@email.com
+        name:
+          type: string
+          example: Company Name
+        phoneNumber:
+          type: string
+          example: '1234567890'
+        fax:
+          type: string
+          example: '1234567890'
+        abn:
+          type: string
+          example: '1234567890'
+        acn:
+          type: string
+          example: '1234567890'
+        gstRegistered:
+          type:
+          - boolean
+          - 'null'
+          example: false
+        type:
+          type: string
+          description: 'Available options are: `individual`, `company`'
+          readOnly: true
+          example: company
+    Authorities.v1.IndividualRequest:
+      required:
+      - address
+      - email
+      - firstName
+      - lastName
+      - mobile
+      - phoneNumber
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+          example: cf52bbf4-8d00-45e5-917a-8f27631a7da0
+        address:
+          $ref: '#/components/schemas/Authorities.v1.Address'
+        dateOfBirth:
+          type:
+          - string
+          - 'null'
+          format: date
+          example: '2022-07-16'
+        email:
+          type: string
+          format: email
+          example: johndoe@email.com
+        firstName:
+          type: string
+          example: John
+        lastName:
+          type: string
+          example: Smith
+        middleName:
+          type: string
+          example: Doe
+        mobile:
+          type: string
+          example: '1234567890'
+        phoneNumber:
+          type: string
+          example: '1234567890'
+        title:
+          type: string
+          example: ''
+        type:
+          type: string
+          description: 'Available options are: `individual`, `company`'
+          readOnly: true
+          example: individual
+    Authorities.v1.CrmDetails:
+      required:
+      - type
+      - id
+      type: object
+      properties:
+        type:
+          type: string
+          example: D
+        id:
+          type: string
+          example: '1234567890'
+      description: Details of CRM
+    Authorities.v1.AgentRequest:
+      required:
+      - name
+      - email
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+          example: cf52bbf4-8d00-45e5-917a-8f27631a7da0
+        name:
+          type: string
+          example: John Doe
+        email:
+          type: string
+          format: email
+          example: johndoe@email.com
+        user:
+          type: string
+          format: uuid
+          example: cf52bbf4-8d00-45e5-917a-8f27631a7da0
+        mobile:
+          type: string
+          example: 0123456789
+        officeNumber:
+          type: string
+          example: 0123456789
+        licenseNumber:
+          type: string
+          example: 0123456789
+    Authorities.v1.AgentResponse:
+      required:
+      - id
+      - name
+      - email
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Authorities.v1.AgentRequest'
+      - type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: cf52bbf4-8d00-45e5-917a-8f27631a7da0
+    Authorities.v1.MarketingCampaignResponse:
+      required:
+      - id
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Authorities.v1.MarketingCampaignRequest'
+      - type: object
+      properties:
+        marketingCampaignItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/Authorities.v1.MarketingCampaignItemResponse'
+        id:
+          type: string
+          format: uuid
+          example: 0557934b-b9f8-4d88-bd5a-9c69d5bf0beb
+    Authorities.v1.AuthorityResponse:
+      required:
+      - id
+      - address
+      - agency
+      - bathrooms
+      - bedrooms
+      - parking
+      - property_type
+      - type
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Authorities.v1.AuthorityRequest'
+      - type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: cf52bbf4-8d00-45e5-917a-8f27631a7da0
+        marketingCampaigns:
+          type: array
+          items:
+            $ref: '#/components/schemas/Authorities.v1.MarketingCampaignResponse'
+        vendors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Authorities.v1.VendorResponse'
+        agents:
+          type: array
+          items:
+            $ref: '#/components/schemas/Authorities.v1.AgentResponse'
+    Authorities.v1.Address:
+      required:
+      - country
+      - number
+      - postcode
+      - state
+      - street
+      - suburb
+      type: object
+      properties:
+        country:
+          type: string
+          example: Australia
+        number:
+          type: string
+          example: 123123/45
+        postcode:
+          type: string
+          example: '2000'
+        state:
+          type: string
+          example: New South Wales
+        street:
+          type: string
+          example: Sample St
+        suburb:
+          type: string
+          example: Sydney
+    Authorities.v1.IndividualResponse:
+      required:
+      - id
+      - address
+      - email
+      - firstName
+      - lastName
+      - mobile
+      - phoneNumber
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Authorities.v1.IndividualRequest'
+      - type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: cf52bbf4-8d00-45e5-917a-8f27631a7da0
+    Authorities.v1.VendorRequest:
+      required:
+      - contact
+      - authority
+      - nature
+      - order
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+          example: cf52bbf4-8d00-45e5-917a-8f27631a7da0
+        contact:
+          $ref: '#/components/schemas/Authorities.v1.IndividualRequest'
+        contactRepresented:
+          $ref: '#/components/schemas/Authorities.v1.CompanyRequest'
+        conciergeOptedIn:
+          type:
+          - boolean
+          - 'null'
+          example: false
+        nature:
+          type: string
+          example: Legal Representative
+        trust:
+          type:
+          - string
+          - 'null'
+        order:
+          type: integer
+          example: 1
+        authorityAttachments:
+          type: array
+          items:
+            type: string
+            description: ID of an attachment.
+            format: uuid
+            example: ceb22e1d-419a-480f-a1df-ce53914acf5e
+          description: An array of attachment IDs.
+    Authorities.v1.MarketingCampaignItemRequest:
+      type: object
+      properties:
+        itemId:
+          type: string
+        finalPrice:
+          type: string
+          format: decimal
+          example: '4000.00'
+        vendorPrice:
+          type: string
+          format: decimal
+          example: '4000.00'
+        description:
+          type:
+          - string
+          - 'null'
+        selected:
+          type: boolean
+          default: true
+        hidden:
+          type: boolean
+          default: false
+    Authorities.v1.MarketingCampaignItemResponse:
+      required:
+      - id
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Authorities.v1.MarketingCampaignItemRequest'
+      - type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: 0557934b-b9f8-4d88-bd5a-9c69d5bf0beb
+    Authorities.v1.SubscriptionRequest:
+      type: object
+      properties:
+        webhookId:
+          type: string
+          example: whk_7d9c8f4a0cb54b948a010bb56ea98fe0
+  securitySchemes:
+    apikey:
+      type: apiKey
+      description: API Key in Header
+      name: x-api-key
+      in: header
+    oauth2:
+      type: oauth2
+      description: OAuth 2
+      flows:
+        clientCredentials:
+          tokenUrl: https://auth.domain.com.au/v1/connect/token
+          scopes:
+            api_addresslocators_read: api_addresslocators_read
+            api_agencies_read: api_agencies_read
+            api_agencies_write: api_agencies_write
+            api_authorities_write: api_authorities_write
+            api_avm_read: api_avm_read
+            api_campaignperformance_read: api_campaignperformance_read
+            api_dataset_read: api_dataset_read
+            api_demographics_read: api_demographics_read
+            api_enquiries_read: api_enquiries_read
+            api_enquiries_write: api_enquiries_write
+            api_listingperformance_read: api_listingperformance_read
+            api_listings_read: api_listings_read
+            api_listings_write: api_listings_write
+            api_locations_read: api_locations_read
+            api_projectperformance_read: api_projectperformance_read
+            api_properties_read: api_properties_read
+            api_propertyportfolio_read: api_propertyportfolio_read
+            api_propertyportfolio_write: api_propertyportfolio_write
+            api_propertyreports_read: api_propertyreports_read
+            api_salesresults_read: api_salesresults_read
+            api_statistics_write: api_statistics_write
+            api_suburbhistorical_read: api_suburbhistorical_read
+            api_suburbperformance_read: api_suburbperformance_read
+            api_suburbsummary_read: api_suburbsummary_read
+            api_webhooks_write: api_webhooks_write
+        authorizationCode:
+          authorizationUrl: https://auth.domain.com.au/v1/connect/authorize
+          tokenUrl: https://auth.domain.com.au/v1/connect/token
+          refreshUrl: https://auth.domain.com.au/v1/connect/token
+          scopes:
+            api_addresslocators_read: api_addresslocators_read
+            api_agencies_read: api_agencies_read
+            api_agencies_write: api_agencies_write
+            api_authorities_write: api_authorities_write
+            api_avm_read: api_avm_read
+            api_campaignperformance_read: api_campaignperformance_read
+            api_dataset_read: api_dataset_read
+            api_demographics_read: api_demographics_read
+            api_enquiries_read: api_enquiries_read
+            api_enquiries_write: api_enquiries_write
+            api_listingperformance_read: api_listingperformance_read
+            api_listings_read: api_listings_read
+            api_listings_write: api_listings_write
+            api_locations_read: api_locations_read
+            api_projectperformance_read: api_projectperformance_read
+            api_properties_read: api_properties_read
+            api_propertyportfolio_read: api_propertyportfolio_read
+            api_propertyportfolio_write: api_propertyportfolio_write
+            api_propertyreports_read: api_propertyreports_read
+            api_salesresults_read: api_salesresults_read
+            api_statistics_write: api_statistics_write
+            api_suburbhistorical_read: api_suburbhistorical_read
+            api_suburbperformance_read: api_suburbperformance_read
+            api_suburbsummary_read: api_suburbsummary_read
+            api_webhooks_write: api_webhooks_write
+x-refined-from:
+- domain-group-openapi-latest.json
+- domain-group-openapi-v1.json

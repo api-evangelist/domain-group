@@ -1,0 +1,1022 @@
+openapi: 3.2.0
+info:
+  title: Domain Group Pre Market API
+  contact:
+    name: Domain Developer Support
+    email: api@domain.com.au
+  termsOfService: https://developer.domain.com.au/docs/latest/support/terms
+  version: '1.0'
+  description: 'Operations tagged PreMarket across 2 of this provider''s published API definitions: domain-group-openapi-latest.json, domain-group-openapi-v2.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.domain.com.au/
+  description: Primary
+- url: https://api.domain.com.au/sandbox/
+  description: Sandbox
+tags:
+- name: PreMarket
+paths:
+  /v2/premarket/listings:
+    post:
+      tags:
+      - PreMarket
+      summary: Creates or updates a pre-portal listing.
+      operationId: PreMarket_Post
+      requestBody:
+        description: Pre-portal listing request.
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/PreMarket.v1.ListingRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PreMarket.v1.ListingRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/PreMarket.v1.ListingRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/PreMarket.v1.ListingRequest'
+      responses:
+        '202':
+          description: Accepted
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/PreMarket.v1.CreateOrUpdateListingResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreMarket.v1.CreateOrUpdateListingResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/PreMarket.v1.CreateOrUpdateListingResponse'
+        '400':
+          description: Bad Request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/PreMarket.v1.ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreMarket.v1.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/PreMarket.v1.ProblemDetails'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '500':
+          description: Server Error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/PreMarket.v1.ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreMarket.v1.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/PreMarket.v1.ProblemDetails'
+      security:
+      - apikey: []
+      - oauth2:
+        - api_listings_write
+      x-domain-endpointcost: 1
+      x-domain-usercontextrequired: false
+      x-domain-environment: Primary
+    servers:
+    - url: https://api.domain.com.au/
+      description: Primary
+    - url: https://api.domain.com.au/sandbox/
+      description: Sandbox
+  /v2/premarket/listings/{id}:
+    get:
+      tags:
+      - PreMarket
+      summary: Retrieves a pre-portal listing.
+      operationId: PreMarket_Get
+      parameters:
+      - name: id
+        in: path
+        description: Pre-portal listing ID.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/PreMarket.v1.ListingResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreMarket.v1.ListingResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/PreMarket.v1.ListingResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/PreMarket.v1.ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreMarket.v1.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/PreMarket.v1.ProblemDetails'
+        '409':
+          description: Conflict
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/PreMarket.v1.ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreMarket.v1.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/PreMarket.v1.ProblemDetails'
+        '500':
+          description: Server Error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/PreMarket.v1.ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreMarket.v1.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/PreMarket.v1.ProblemDetails'
+      security:
+      - apikey: []
+      - oauth2:
+        - api_listings_read
+      x-domain-endpointcost: 1
+      x-domain-usercontextrequired: false
+      x-domain-environment: Primary
+    patch:
+      tags:
+      - PreMarket
+      summary: Patches a pre-portal listing.
+      operationId: PreMarket_Patch
+      parameters:
+      - name: id
+        in: path
+        description: Pre-portal listing ID.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: "```\nExamples:\n[\n{\n\t\"op\": \"replace\",\n\t\"path\": \"/bedrooms\",\n\t\"value\": 3\n   },\n{\n\t\"op\": \"replace\",\n\t\"path\": \"/listingStatus\",\n\t\"value\": \"sold\"\n},\n{\n\t\"op\": \"remove\",\n\t\"path\": \"/StatementOfInformation\"\n},\n{\n\t\"op\": \"add\",\n\t\"path\": \"/contacts/-\",\n\t\"value\": {\n\t\t\"firstName\": \"lily\",\n\t\t\"lastName\": \"li\",\n\t\t\"email\": \"lily.li@domain.com.au\",\n\t\t\"phone\": \"0411111111\",\n\t\t\"mobile\": null,\n\t\t\"fax\": null\n\t}\n}\n]\n```"
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/PreMarket.v1.ListingRequestJsonPatchDocument'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PreMarket.v1.ListingRequestJsonPatchDocument'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/PreMarket.v1.ListingRequestJsonPatchDocument'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/PreMarket.v1.ListingRequestJsonPatchDocument'
+      responses:
+        '202':
+          description: Accepted
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/PreMarket.v1.ListingRequest'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreMarket.v1.ListingRequest'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/PreMarket.v1.ListingRequest'
+        '400':
+          description: Bad Request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/PreMarket.v1.ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreMarket.v1.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/PreMarket.v1.ProblemDetails'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/PreMarket.v1.ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreMarket.v1.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/PreMarket.v1.ProblemDetails'
+        '500':
+          description: Server Error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/PreMarket.v1.ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreMarket.v1.ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/PreMarket.v1.ProblemDetails'
+      security:
+      - apikey: []
+      - oauth2:
+        - api_listings_write
+      x-domain-endpointcost: 1
+      x-domain-usercontextrequired: false
+      x-domain-environment: Primary
+    servers:
+    - url: https://api.domain.com.au/
+      description: Primary
+    - url: https://api.domain.com.au/sandbox/
+      description: Sandbox
+components:
+  schemas:
+    PreMarket.v1.SoldDetails:
+      type: object
+      properties:
+        soldPrice:
+          maximum: 2147483647
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+          description: Price the property was sold for.
+          format: int32
+        soldDate:
+          type:
+          - string
+          - 'null'
+          description: 'The date when the property was sold.
+
+            The date must comply with the ISO 8601 and be in the UTC format, e.g. 2021-10-15T13:45:30.0000000Z.'
+          format: date-time
+      additionalProperties: false
+    PreMarket.v1.AuthorityType:
+      enum:
+      - privateSale
+      - auction
+      - expressionOfInterest
+      type: string
+    PreMarket.v1.ListingRequestJsonPatchDocument:
+      type: object
+      properties:
+        operations:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/PreMarket.v1.ListingRequestOperation'
+          readOnly: true
+        contractResolver:
+          $ref: '#/components/schemas/PreMarket.v1.IContractResolver'
+      additionalProperties: false
+    PreMarket.v1.ListingRequestOperation:
+      type: object
+      properties:
+        operationType:
+          $ref: '#/components/schemas/PreMarket.v1.OperationType'
+        path:
+          type:
+          - string
+          - 'null'
+        op:
+          type:
+          - string
+          - 'null'
+        from:
+          type:
+          - string
+          - 'null'
+        value: {}
+      additionalProperties: false
+    PreMarket.v1.PrePortalListingStatus:
+      enum:
+      - preMarket
+      - sold
+      - listed
+      - withdrawn
+      - draft
+      type: string
+    PreMarket.v1.IContractResolver:
+      type: object
+      additionalProperties: false
+    PreMarket.v1.PropertyType:
+      enum:
+      - house
+      - townhouse
+      - apartmentUnitFlat
+      - vacantLand
+      type: string
+    PreMarket.v1.Contact:
+      required:
+      - email
+      - firstName
+      - lastName
+      type: object
+      properties:
+        firstName:
+          maxLength: 50
+          minLength: 1
+          type: string
+          description: First name of the agent contact.
+        lastName:
+          maxLength: 50
+          minLength: 1
+          type: string
+          description: Last name of the agent contact.
+        email:
+          maxLength: 100
+          minLength: 1
+          type: string
+          description: Agent contact email. Valid email address.
+          format: email
+        phone:
+          maxLength: 20
+          type:
+          - string
+          - 'null'
+          description: Agent contact phone number. Valid phone number.
+        mobile:
+          maxLength: 20
+          type:
+          - string
+          - 'null'
+          description: Agent contact mobile number. Valid mobile number.
+        fax:
+          maxLength: 20
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    PreMarket.v1.StatementOfInformation:
+      required:
+      - documentationUrl
+      type: object
+      properties:
+        documentationUrl:
+          minLength: 1
+          pattern: ^http[s]?:+.*
+          type: string
+          description: 'Link to the statement of information documentation file.
+
+            Must be a PDF file.
+
+            File should be less than 10 MB in size
+
+            The Statement of Information must be updated if there is a change in the indicative selling price.'
+      additionalProperties: false
+    PreMarket.v1.AddressResponse:
+      required:
+      - postcode
+      - slug
+      - state
+      - street
+      - streetNumber
+      - suburb
+      type: object
+      properties:
+        streetNumber:
+          maxLength: 20
+          minLength: 1
+          type: string
+          description: Street (and possibly unit) number component of an address. E.g. 23, 1a, 11/1.
+        street:
+          maxLength: 50
+          minLength: 1
+          type: string
+          description: Street name, e.g. Punt Road.
+        suburb:
+          maxLength: 50
+          minLength: 1
+          type: string
+        state:
+          $ref: '#/components/schemas/PreMarket.v1.State'
+        postcode:
+          minLength: 1
+          pattern: ^[0-9]{3,4}$
+          type: string
+        slug:
+          minLength: 1
+          type: string
+          readOnly: true
+      additionalProperties: false
+    PreMarket.v1.OperationType:
+      enum:
+      - add
+      - remove
+      - replace
+      - move
+      - copy
+      - test
+      - invalid
+      type: string
+    PreMarket.v1.State:
+      enum:
+      - nsw
+      - vic
+      - act
+      - sa
+      - wa
+      - tas
+      - qld
+      - nt
+      type: string
+      description: Australian states
+    PreMarket.v1.GeoLocation:
+      type: object
+      properties:
+        latitude:
+          type: number
+          description: Latitude of the property.
+          format: double
+        longitude:
+          type: number
+          description: Longitude of the property.
+          format: double
+      additionalProperties: false
+      description: Encapsulates the details of a geo location.
+    PreMarket.v1.PropertyMedia:
+      required:
+      - resourceType
+      - url
+      type: object
+      properties:
+        resourceType:
+          $ref: '#/components/schemas/PreMarket.v1.ResourceType'
+        url:
+          minLength: 1
+          pattern: ^http[s]?:+.*
+          type: string
+      additionalProperties: false
+    PreMarket.v1.ListingResponse:
+      required:
+      - address
+      - bathrooms
+      - bedrooms
+      - carspaces
+      - estimatedSalePrice
+      - id
+      - listingStatus
+      type: object
+      properties:
+        id:
+          minLength: 1
+          type: string
+          description: Pre-portal listing ID.
+        listingStatus:
+          $ref: '#/components/schemas/PreMarket.v1.PrePortalListingStatus'
+        relatedAdId:
+          type:
+          - integer
+          - 'null'
+          description: The Domain Ad Id of the related listing.
+          format: int32
+        providerDetails:
+          $ref: '#/components/schemas/PreMarket.v1.ProviderDetails'
+        address:
+          $ref: '#/components/schemas/PreMarket.v1.AddressResponse'
+        advertiserIdentifiers:
+          $ref: '#/components/schemas/PreMarket.v1.AdvertiserIdentifiers'
+        bedrooms:
+          type: number
+          description: Total number of bedrooms in the property.
+          format: float
+        bathrooms:
+          type: number
+          description: Total number of bathrooms in the property.
+          format: float
+        carspaces:
+          type: number
+          description: Total number of car spaces in the property.
+          format: float
+        headline:
+          maximum: 250
+          minimum: 0
+          type:
+          - string
+          - 'null'
+          description: The short description of the property provided by the advertiser.
+        description:
+          maximum: 6000
+          minimum: 0
+          type:
+          - string
+          - 'null'
+          description: The long description of the property provided by the advertiser.
+        authorityExecutedDate:
+          type:
+          - string
+          - 'null'
+          description: 'The date on which the authority contract was executed.
+
+            The date is compliant with the ISO 8601 and is in the UTC format, e.g. 2009-06-15T13:45:30.0000000Z.'
+          format: date-time
+        reservePrice:
+          type:
+          - number
+          - 'null'
+          description: Vendor reserve price.
+          format: double
+        estimatedSalePrice:
+          $ref: '#/components/schemas/PreMarket.v1.Price'
+        propertyTypes:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/PreMarket.v1.PropertyType'
+          description: The property types (e.g. house, apartment/unit/flat, etc.).
+        authorityType:
+          $ref: '#/components/schemas/PreMarket.v1.AuthorityType'
+        exclusivePeriodDays:
+          type:
+          - integer
+          - 'null'
+          description: The time (in days) that the agent has exclusive authority to sell the property.
+          format: int32
+        exclusiveContinuingPeriodDays:
+          type:
+          - integer
+          - 'null'
+          description: The time (in days) that exclusive authority has been extended.
+          format: int32
+        exclusivePeriodStartDate:
+          type:
+          - string
+          - 'null'
+          description: 'Start date of the exclusivity period.
+
+            The date is compliant with the ISO 8601 and is in the UTC format, e.g. 2009-06-15T13:45:30.0000000Z.'
+          format: date-time
+        geoLocation:
+          $ref: '#/components/schemas/PreMarket.v1.GeoLocation'
+        mapCertainty:
+          type: integer
+          description: Map certainty of the property location.
+          format: int32
+        media:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/PreMarket.v1.PropertyMedia'
+          description: The media associated with the property provided by the advertiser.
+        propertyId:
+          type:
+          - string
+          - 'null'
+          description: 'The identifier which uniquely identifies the property being advertised.
+
+            This may be empty if the Address of property is poorly described.'
+        statementOfInformation:
+          $ref: '#/components/schemas/PreMarket.v1.StatementOfInformation'
+        dateCreated:
+          type: string
+          description: 'The date/time the listing was created.
+
+            The date is compliant with the ISO 8601 and is in the UTC format, e.g. 2009-06-15T13:45:30.0000000Z.'
+          format: date-time
+        dateUpdated:
+          type: string
+          description: 'The date/time the listing was last updated.
+
+            The date is compliant with the ISO 8601 and is in the UTC format, e.g. 2009-06-15T13:45:30.0000000Z.'
+          format: date-time
+        datePreMarket:
+          type:
+          - string
+          - 'null'
+          description: 'The date/time the listing went pre-market.
+
+            The date is compliant with the ISO 8601 and is in the UTC format, e.g. 2009-06-15T13:45:30.0000000Z.'
+          format: date-time
+        dateListed:
+          type:
+          - string
+          - 'null'
+          description: 'The date/time the listing was listed.
+
+            The date is compliant with the ISO 8601 and is in the UTC format, e.g. 2009-06-15T13:45:30.0000000Z.'
+          format: date-time
+        dateSold:
+          type:
+          - string
+          - 'null'
+          description: 'The date/time when the listing status was changed to sold (it is NOT the date/time when the property was sold).
+
+            The date is compliant with the ISO 8601 and is in the UTC format, e.g. 2009-06-15T13:45:30.0000000Z.'
+          format: date-time
+        dateWithdrawn:
+          type:
+          - string
+          - 'null'
+          description: 'The date/time the listing was withdrawn.
+
+            The date is compliant with the ISO 8601 and is in the UTC format, e.g. 2009-06-15T13:45:30.0000000Z.'
+          format: date-time
+        dateDrafted:
+          type:
+          - string
+          - 'null'
+          description: 'The date/time the listing was drafted.
+
+            The date is compliant with the ISO 8601 and is in the UTC format, e.g. 2009-06-15T13:45:30.0000000Z.'
+          format: date-time
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+          description: Optional listing metadata.
+        comment:
+          type:
+          - string
+          - 'null'
+          description: Optional listing comment.
+        soldDetails:
+          $ref: '#/components/schemas/PreMarket.v1.SoldDetails'
+      additionalProperties: false
+      description: Pre-portal listing response.
+    PreMarket.v1.CreateOrUpdateListingResponse:
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          minLength: 1
+          type: string
+          description: Pre-portal listing ID.
+      additionalProperties: false
+      description: Create or update pre-portal listing response.
+    PreMarket.v1.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    PreMarket.v1.AdvertiserIdentifiers:
+      required:
+      - domainAgencyId
+      type: object
+      properties:
+        domainAgencyId:
+          type: integer
+          description: Domain Agency Id
+          format: int32
+        contactIds:
+          type:
+          - array
+          - 'null'
+          items:
+            type: integer
+            format: int32
+          description: Identifier of each contact the advertiser has associated with the listing
+        agentIds:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Identifier of each agent the advertiser has associated with the listing
+      additionalProperties: false
+    PreMarket.v1.Price:
+      required:
+      - from
+      - to
+      type: object
+      properties:
+        from:
+          minimum: 0
+          type: number
+          description: Lower end of the price range.
+          format: double
+        to:
+          minimum: 0
+          type: number
+          description: Upper end of the price range.
+          format: double
+        displayText:
+          maxLength: 80
+          type:
+          - string
+          - 'null'
+          description: 'When provided this will be shown instead of the price range, e.g.: "Offers over $450K considered"'
+      additionalProperties: false
+    PreMarket.v1.ListingRequest:
+      required:
+      - address
+      - bathrooms
+      - bedrooms
+      - carspaces
+      - domainAgencyId
+      - estimatedSalePrice
+      - listingProvider
+      - listingStatus
+      - propertyTypes
+      - providerAdId
+      type: object
+      properties:
+        listingStatus:
+          $ref: '#/components/schemas/PreMarket.v1.PrePortalListingStatus'
+        address:
+          $ref: '#/components/schemas/PreMarket.v1.Address'
+        domainAgencyId:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+          description: The Domain agency ID. Must match an existing Domain agency ID.
+          format: int32
+        listingProvider:
+          maxLength: 50
+          minLength: 1
+          type: string
+          description: A string identifying the source of the listing.
+        providerAdId:
+          maxLength: 50
+          minLength: 1
+          type: string
+          description: 'External Advertisement Id of up to 50 characters will be stored.
+
+            This value is correlated with actual Domain listing when it is created, and it should be unique for the listing provider.
+
+            This value is case-insensitive (meaning AAAA will update aaaa).'
+        contacts:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/PreMarket.v1.Contact'
+        bedrooms:
+          minimum: 0
+          type: number
+          description: Number of bedrooms divisible by 0.5.
+          format: float
+        bathrooms:
+          minimum: 0
+          type: number
+          description: Number of bathrooms divisible by 0.5.
+          format: float
+        carspaces:
+          minimum: 0
+          type: number
+          description: Number of car spaces divisible by 0.5.
+          format: float
+        summary:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Headline of the advertisement. Any HTML will be stripped out.
+        description:
+          maxLength: 6000
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: 'Description of the property.
+
+            Allow up to 6000 characters in length. The following HTML elements are permitted: ```<br />, <p></p>, &nbsp;``` . HTML must be well-formed.
+
+            Carriage Returns are interpreted as line breaks. Foreign characters must be HTML encoded, e.g., façade for façade'
+        authorityExecutedDate:
+          type:
+          - string
+          - 'null'
+          description: 'The date on which the authority contract was executed.
+
+            The date must comply with the ISO 8601 and be in the UTC format, e.g. 2009-06-15T13:45:30.0000000Z.'
+          format: date-time
+        reservePrice:
+          minimum: 0
+          type:
+          - number
+          - 'null'
+          description: Vendor reserve price.
+          format: double
+        estimatedSalePrice:
+          $ref: '#/components/schemas/PreMarket.v1.Price'
+        propertyTypes:
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/PreMarket.v1.PropertyType'
+          description: The property types (e.g. house, apartment/unit/flat, etc.).
+        authorityType:
+          $ref: '#/components/schemas/PreMarket.v1.AuthorityType'
+        exclusivePeriodDays:
+          maximum: 2147483647
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+          description: The time (in days) that the agent has exclusive authority to sell the property.
+          format: int32
+        exclusiveContinuingPeriodDays:
+          maximum: 2147483647
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+          description: The time (in days) that exclusive authority has been extended.
+          format: int32
+        exclusivePeriodStartDate:
+          type:
+          - string
+          - 'null'
+          description: 'Start date of the exclusivity period.
+
+            The date must comply with the ISO 8601 and be in the UTC format, e.g. 2009-06-15T13:45:30.0000000Z.'
+          format: date-time
+        statementOfInformation:
+          $ref: '#/components/schemas/PreMarket.v1.StatementOfInformation'
+        images:
+          maxItems: 20
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/PreMarket.v1.PropertyMedia'
+        metadata:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+          description: Optional listing metadata.
+        comment:
+          maxLength: 100
+          type:
+          - string
+          - 'null'
+          description: Optional listing comment.
+        soldDetails:
+          $ref: '#/components/schemas/PreMarket.v1.SoldDetails'
+      additionalProperties: false
+      description: Pre-portal listing request.
+    PreMarket.v1.ResourceType:
+      enum:
+      - photograph
+      - floorPlan
+      type: string
+    PreMarket.v1.ProviderDetails:
+      type: object
+      properties:
+        providerSystem:
+          type:
+          - string
+          - 'null'
+          description: Identify the source of the listing
+        providerAdID:
+          type:
+          - string
+          - 'null'
+          description: Unique ID within provider system
+      additionalProperties: false
+      description: Information for the listing provider
+    PreMarket.v1.Address:
+      required:
+      - postcode
+      - state
+      - street
+      - streetNumber
+      - suburb
+      type: object
+      properties:
+        streetNumber:
+          maxLength: 20
+          minLength: 1
+          type: string
+          description: Street (and possibly unit) number component of an address. E.g. 23, 1a, 11/1.
+        street:
+          maxLength: 50
+          minLength: 1
+          type: string
+          description: Street name, e.g. Punt Road.
+        suburb:
+          maxLength: 50
+          minLength: 1
+          type: string
+        state:
+          $ref: '#/components/schemas/PreMarket.v1.State'
+        postcode:
+          minLength: 1
+          pattern: ^[0-9]{3,4}$
+          type: string
+      additionalProperties: false
+  securitySchemes:
+    apikey:
+      type: apiKey
+      description: API Key in Header
+      name: x-api-key
+      in: header
+    oauth2:
+      type: oauth2
+      description: OAuth 2
+      flows:
+        clientCredentials:
+          tokenUrl: https://auth.domain.com.au/v1/connect/token
+          scopes:
+            api_addresslocators_read: api_addresslocators_read
+            api_agencies_read: api_agencies_read
+            api_agencies_write: api_agencies_write
+            api_authorities_write: api_authorities_write
+            api_avm_read: api_avm_read
+            api_campaignperformance_read: api_campaignperformance_read
+            api_dataset_read: api_dataset_read
+            api_demographics_read: api_demographics_read
+            api_enquiries_read: api_enquiries_read
+            api_enquiries_write: api_enquiries_write
+            api_listingperformance_read: api_listingperformance_read
+            api_listings_read: api_listings_read
+            api_listings_write: api_listings_write
+            api_locations_read: api_locations_read
+            api_projectperformance_read: api_projectperformance_read
+            api_properties_read: api_properties_read
+            api_propertyportfolio_read: api_propertyportfolio_read
+            api_propertyportfolio_write: api_propertyportfolio_write
+            api_propertyreports_read: api_propertyreports_read
+            api_salesresults_read: api_salesresults_read
+            api_statistics_write: api_statistics_write
+            api_suburbhistorical_read: api_suburbhistorical_read
+            api_suburbperformance_read: api_suburbperformance_read
+            api_suburbsummary_read: api_suburbsummary_read
+            api_webhooks_write: api_webhooks_write
+        authorizationCode:
+          authorizationUrl: https://auth.domain.com.au/v1/connect/authorize
+          tokenUrl: https://auth.domain.com.au/v1/connect/token
+          refreshUrl: https://auth.domain.com.au/v1/connect/token
+          scopes:
+            api_addresslocators_read: api_addresslocators_read
+            api_agencies_read: api_agencies_read
+            api_agencies_write: api_agencies_write
+            api_authorities_write: api_authorities_write
+            api_avm_read: api_avm_read
+            api_campaignperformance_read: api_campaignperformance_read
+            api_dataset_read: api_dataset_read
+            api_demographics_read: api_demographics_read
+            api_enquiries_read: api_enquiries_read
+            api_enquiries_write: api_enquiries_write
+            api_listingperformance_read: api_listingperformance_read
+            api_listings_read: api_listings_read
+            api_listings_write: api_listings_write
+            api_locations_read: api_locations_read
+            api_projectperformance_read: api_projectperformance_read
+            api_properties_read: api_properties_read
+            api_propertyportfolio_read: api_propertyportfolio_read
+            api_propertyportfolio_write: api_propertyportfolio_write
+            api_propertyreports_read: api_propertyreports_read
+            api_salesresults_read: api_salesresults_read
+            api_statistics_write: api_statistics_write
+            api_suburbhistorical_read: api_suburbhistorical_read
+            api_suburbperformance_read: api_suburbperformance_read
+            api_suburbsummary_read: api_suburbsummary_read
+            api_webhooks_write: api_webhooks_write
+x-refined-from:
+- domain-group-openapi-latest.json
+- domain-group-openapi-v2.json
