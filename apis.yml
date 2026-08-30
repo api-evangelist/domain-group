@@ -436,6 +436,8 @@ apis:
   humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
   baseURL: https://api.domain.com.au
   tags:
+  - Campaign Reporting
+  tags_raw:
   - CampaignReporting
   properties:
   - type: OpenAPI
@@ -1448,6 +1450,8 @@ apis:
   humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
   baseURL: https://api.domain.com.au
   tags:
+  - Product
+  tags_raw:
   - Products
   properties:
   - type: OpenAPI
@@ -1540,6 +1544,8 @@ apis:
   humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
   baseURL: https://api.domain.com.au
   tags:
+  - Project
+  tags_raw:
   - Projects
   properties:
   - type: OpenAPI
@@ -2092,6 +2098,8 @@ apis:
   humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
   baseURL: https://api.domain.com.au
   tags:
+  - Property Search
+  tags_raw:
   - PropertySearch
   properties:
   - type: OpenAPI
@@ -2553,6 +2561,8 @@ apis:
   humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
   baseURL: https://api.domain.com.au
   tags:
+  - Webhook
+  tags_raw:
   - Webhooks
   properties:
   - type: OpenAPI
