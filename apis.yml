@@ -35,6 +35,21 @@ deliveryModel:
   - pricing
   generated: '2026-08-28'
   method: derived
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  - scopes
+  - security
+  - sandbox
+  generated: '2026-09-02'
+  method: derived
 image: https://s.domainstatic.com.au/domain/144.png
 tags:
 - Real-Estate
@@ -2707,8 +2722,9 @@ common:
   url: packages/domain-group-packages.yml
 - type: WellKnown
   url: well-known/domain-group-well-known.yml
-- type: MCPServer
+- type: X-MCPServerCandidate
   url: mcp/domain-group-mcp.yml
+  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate — a tool list derived from the published API contracts, not an existing server. The scorer already read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type surfaces with a server that does not exist.'
 - type: LLMsTxt
   url: llms/domain-group-llms.txt
 - type: Overlay
