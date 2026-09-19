@@ -545,6 +545,8 @@ apis:
   humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
   baseURL: https://api.domain.com.au
   tags:
+  - Datasets
+  tags_raw:
   - Dataset
   properties:
   - type: OpenAPI
@@ -1189,6 +1191,8 @@ apis:
   humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
   baseURL: https://api.domain.com.au
   tags:
+  - Location
+  tags_raw:
   - Locations
   properties:
   - type: OpenAPI
