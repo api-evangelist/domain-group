@@ -1,12 +1,12 @@
 openapi: 3.2.0
 info:
-  title: Domain Group Schools API
+  title: Domain Public Schools API
+  description: See https://developer.domain.com.au for more information
+  termsOfService: https://developer.domain.com.au/docs/latest/support/terms
   contact:
     name: Domain Developer Support
     email: api@domain.com.au
-  termsOfService: https://developer.domain.com.au/docs/latest/support/terms
-  version: '1.0'
-  description: 'Operations tagged Schools across 2 of this provider''s published API definitions: domain-group-openapi-latest.json, domain-group-openapi-v2.json. Each path carries the servers of the definition it was published in.'
+  version: latest
 servers:
 - url: https://api.domain.com.au/
   description: Primary
@@ -51,11 +51,6 @@ paths:
       x-domain-endpointcost: 1
       x-domain-usercontextrequired: false
       x-domain-environment: Primary
-    servers:
-    - url: https://api.domain.com.au/
-      description: Primary
-    - url: https://api.domain.com.au/sandbox/
-      description: Sandbox
   /v2/schools/{latitude}/{longitude}:
     get:
       tags:
@@ -101,13 +96,105 @@ paths:
       x-domain-endpointcost: 1
       x-domain-usercontextrequired: false
       x-domain-environment: Primary
-    servers:
-    - url: https://api.domain.com.au/
-      description: Primary
-    - url: https://api.domain.com.au/sandbox/
-      description: Sandbox
 components:
   schemas:
+    Schools.V2.SchoolProfile:
+      type: object
+      properties:
+        url:
+          type:
+          - string
+          - 'null'
+          description: Website for the school
+        yearRange:
+          type:
+          - string
+          - 'null'
+          description: The range of year levels offered by the school.
+        icsea:
+          type:
+          - integer
+          - 'null'
+          description: The Index of Community Socio-Educational Advantage score for the school. This score is derived from a number of variables including parental school and non-school education and occupation, the school’s geographical location and proportion of Indigenous students.
+          format: int32
+        bottomSeaQuarter:
+          type:
+          - integer
+          - 'null'
+          description: The percentage of students positioned in the lowest socio-educational advantage quarter.
+          format: int32
+        lowerMiddleSeaQuarter:
+          type:
+          - integer
+          - 'null'
+          description: The percentage of students positioned in the lower middle socio-educational advantage quarter.
+          format: int32
+        upperMiddleSeaQuarter:
+          type:
+          - integer
+          - 'null'
+          description: The percentage of students positioned in the higher middle socio-educational advantage quarter.
+          format: int32
+        topSeaQuarter:
+          type:
+          - integer
+          - 'null'
+          description: The percentage of students positioned in the highest socio-educational advantage quarter.
+          format: int32
+        totalEnrolments:
+          type:
+          - integer
+          - 'null'
+          description: The total number of students, including both full-time and part-time students, who are enrolled at the school in the calendar year specified.
+          format: int32
+        girlsEnrolments:
+          type:
+          - integer
+          - 'null'
+          description: The total number of female students, including both full-time and part-time students, who are enrolled at the school in the calendar year specified.
+          format: int32
+        boysEnrolments:
+          type:
+          - integer
+          - 'null'
+          description: The total number of male students, including full-time and part-time students, who are enrolled at the school in the calendar year specified.
+          format: int32
+      additionalProperties: false
+      description: SchoolProfile
+      x-data-access-level-info:
+        Basic:
+        - Url
+        - YearRange
+        - GirlsEnrolments
+        - BoysEnrolments
+        - TotalEnrolments
+        - TopSeaQuarter
+        - UpperMiddleSeaQuarter
+        - LowerMiddleSeaQuarter
+        - BottomSeaQuarter
+        - Icsea
+        Detailed:
+        - Url
+        - YearRange
+        - GirlsEnrolments
+        - BoysEnrolments
+        - TotalEnrolments
+        - TopSeaQuarter
+        - UpperMiddleSeaQuarter
+        - LowerMiddleSeaQuarter
+        - BottomSeaQuarter
+        - Icsea
+        Full:
+        - Url
+        - YearRange
+        - GirlsEnrolments
+        - BoysEnrolments
+        - TotalEnrolments
+        - TopSeaQuarter
+        - UpperMiddleSeaQuarter
+        - LowerMiddleSeaQuarter
+        - BottomSeaQuarter
+        - Icsea
     Schools.V2.School:
       type: object
       properties:
@@ -216,6 +303,24 @@ components:
         - Centroid
         - Gender
         - Catchments
+    Schools.V2.SchoolCatchment:
+      type: object
+      properties:
+        type:
+          enum:
+          - Primary
+          - Secondary
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets Type
+      additionalProperties: false
+      description: SchoolCatchment
+      x-data-access-level-info:
+        Basic: []
+        Detailed: []
+        Full:
+        - Type
     ProblemDetails:
       type: object
       properties:
@@ -248,24 +353,6 @@ components:
         - '*'
         Full:
         - '*'
-    Schools.V2.SchoolCatchment:
-      type: object
-      properties:
-        type:
-          enum:
-          - Primary
-          - Secondary
-          type:
-          - string
-          - 'null'
-          description: Gets or Sets Type
-      additionalProperties: false
-      description: SchoolCatchment
-      x-data-access-level-info:
-        Basic: []
-        Detailed: []
-        Full:
-        - Type
     Schools.V2.SchoolWithDistance:
       type: object
       properties:
@@ -286,103 +373,6 @@ components:
         - '*'
         Full:
         - '*'
-    Schools.V2.SchoolProfile:
-      type: object
-      properties:
-        url:
-          type:
-          - string
-          - 'null'
-          description: Website for the school
-        yearRange:
-          type:
-          - string
-          - 'null'
-          description: The range of year levels offered by the school.
-        icsea:
-          type:
-          - integer
-          - 'null'
-          description: The Index of Community Socio-Educational Advantage score for the school. This score is derived from a number of variables including parental school and non-school education and occupation, the school’s geographical location and proportion of Indigenous students.
-          format: int32
-        bottomSeaQuarter:
-          type:
-          - integer
-          - 'null'
-          description: The percentage of students positioned in the lowest socio-educational advantage quarter.
-          format: int32
-        lowerMiddleSeaQuarter:
-          type:
-          - integer
-          - 'null'
-          description: The percentage of students positioned in the lower middle socio-educational advantage quarter.
-          format: int32
-        upperMiddleSeaQuarter:
-          type:
-          - integer
-          - 'null'
-          description: The percentage of students positioned in the higher middle socio-educational advantage quarter.
-          format: int32
-        topSeaQuarter:
-          type:
-          - integer
-          - 'null'
-          description: The percentage of students positioned in the highest socio-educational advantage quarter.
-          format: int32
-        totalEnrolments:
-          type:
-          - integer
-          - 'null'
-          description: The total number of students, including both full-time and part-time students, who are enrolled at the school in the calendar year specified.
-          format: int32
-        girlsEnrolments:
-          type:
-          - integer
-          - 'null'
-          description: The total number of female students, including both full-time and part-time students, who are enrolled at the school in the calendar year specified.
-          format: int32
-        boysEnrolments:
-          type:
-          - integer
-          - 'null'
-          description: The total number of male students, including full-time and part-time students, who are enrolled at the school in the calendar year specified.
-          format: int32
-      additionalProperties: false
-      description: SchoolProfile
-      x-data-access-level-info:
-        Basic:
-        - Url
-        - YearRange
-        - GirlsEnrolments
-        - BoysEnrolments
-        - TotalEnrolments
-        - TopSeaQuarter
-        - UpperMiddleSeaQuarter
-        - LowerMiddleSeaQuarter
-        - BottomSeaQuarter
-        - Icsea
-        Detailed:
-        - Url
-        - YearRange
-        - GirlsEnrolments
-        - BoysEnrolments
-        - TotalEnrolments
-        - TopSeaQuarter
-        - UpperMiddleSeaQuarter
-        - LowerMiddleSeaQuarter
-        - BottomSeaQuarter
-        - Icsea
-        Full:
-        - Url
-        - YearRange
-        - GirlsEnrolments
-        - BoysEnrolments
-        - TotalEnrolments
-        - TopSeaQuarter
-        - UpperMiddleSeaQuarter
-        - LowerMiddleSeaQuarter
-        - BottomSeaQuarter
-        - Icsea
   securitySchemes:
     apikey:
       type: apiKey
@@ -451,6 +441,3 @@ components:
             api_suburbperformance_read: api_suburbperformance_read
             api_suburbsummary_read: api_suburbsummary_read
             api_webhooks_write: api_webhooks_write
-x-refined-from:
-- domain-group-openapi-latest.json
-- domain-group-openapi-v2.json

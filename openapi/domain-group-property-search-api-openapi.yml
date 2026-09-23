@@ -1,24 +1,24 @@
 openapi: 3.2.0
 info:
-  title: Domain Group Property Search API
+  title: Domain Public Property Search API
+  description: See https://developer.domain.com.au for more information
+  termsOfService: https://developer.domain.com.au/docs/latest/support/terms
   contact:
     name: Domain Developer Support
     email: api@domain.com.au
-  termsOfService: https://developer.domain.com.au/docs/latest/support/terms
-  version: '1.0'
-  description: 'Operations tagged PropertySearch across 2 of this provider''s published API definitions: domain-group-openapi-latest.json, domain-group-openapi-v2.json. Each path carries the servers of the definition it was published in.'
+  version: latest
 servers:
 - url: https://api.domain.com.au/
   description: Primary
 - url: https://api.domain.com.au/sandbox/
   description: Sandbox
 tags:
-- name: PropertySearch
+- name: Property Search
 paths:
   /v2/properties/search/radius/{searchType}:
     post:
       tags:
-      - PropertySearch
+      - Property Search
       summary: Point Radius Search
       description: Make a search request to find properties within a point radius of a PropertyID, a GnafID, an Address, or a set of lat-lon coordinates. Only one of `propertyId`, `gnafId`, or `latitude` & `longitude`, or `address` should be provided.
       operationId: PropertySearch_ByRadius
@@ -81,13 +81,28 @@ paths:
       x-domain-endpointcost: 1
       x-domain-usercontextrequired: false
       x-domain-environment: Any
-    servers:
-    - url: https://api.domain.com.au/
-      description: Primary
-    - url: https://api.domain.com.au/sandbox/
-      description: Sandbox
 components:
   schemas:
+    Property.Enrichment.v2.PointRadiusLatLon:
+      required:
+      - latitude
+      - longitude
+      type: object
+      properties:
+        latitude:
+          type: number
+          description: latitude of the coordinates to use as the center of the search radius.
+        longitude:
+          type: number
+          description: longitude of the coordinates to use as the center of the search radius.
+    Property.Enrichment.v2.PointRadiusPropertyId:
+      required:
+      - propertyId
+      type: object
+      properties:
+        propertyId:
+          type: string
+          description: Property ID of property to use as the center of the search radius.
     Property.Enrichment.v2.PointRadiusGnafId:
       required:
       - gnafId
@@ -96,7 +111,13 @@ components:
         gnafId:
           type: string
           description: Gnaf ID of property to use as the center of the search radius.
-    Property.Enrichment.v2.AddressBasic:
+    Property.Enrichment.v2.PropertyAddress-v2:
+      required:
+      - streetNumber
+      - streetName
+      - suburb
+      - postcode
+      - state
       type: object
       properties:
         flatNumber:
@@ -121,7 +142,6 @@ components:
           type: string
         state:
           type: string
-      additionalProperties: false
       description: Address of property
     Property.Enrichment.v2.PointRadiusParams:
       type: object
@@ -177,37 +197,7 @@ components:
         landSizeMax:
           type: integer
           description: Maximum land size in square meters.
-    Property.Enrichment.v2.ImageTypes:
-      enum:
-      - ListingPhoto
-      - OldFloorPlanPhoto
-      - NewFloorPlanPhoto
-      - BuildingPhoto
-      - NewDevelopmentLandPhoto
-      - NewDevelopmentLumierePhoto
-      - NewDevelopmentFeaturedPhoto
-      - ConjunctionAgentLogo
-      - NewDevelopmentRegionalPhoto
-      - AdvertiserImage
-      - YouWishClip
-      - AgentCarousel
-      - DevelopmentProjectGalleryPhoto
-      - DevelopmentProjectAdvertisementPhoto
-    Property.Enrichment.v2.PointRadiusPropertyId:
-      required:
-      - propertyId
-      type: object
-      properties:
-        propertyId:
-          type: string
-          description: Property ID of property to use as the center of the search radius.
-    Property.Enrichment.v2.PropertyAddress-v2:
-      required:
-      - streetNumber
-      - streetName
-      - suburb
-      - postcode
-      - state
+    Property.Enrichment.v2.AddressBasic:
       type: object
       properties:
         flatNumber:
@@ -232,19 +222,8 @@ components:
           type: string
         state:
           type: string
+      additionalProperties: false
       description: Address of property
-    Property.Enrichment.v2.PointRadiusLatLon:
-      required:
-      - latitude
-      - longitude
-      type: object
-      properties:
-        latitude:
-          type: number
-          description: latitude of the coordinates to use as the center of the search radius.
-        longitude:
-          type: number
-          description: longitude of the coordinates to use as the center of the search radius.
     Property.Enrichment.v2.SearchItemOutput:
       type: object
       properties:
@@ -295,6 +274,22 @@ components:
           - 'null'
         distance:
           type: number
+    Property.Enrichment.v2.ImageTypes:
+      enum:
+      - ListingPhoto
+      - OldFloorPlanPhoto
+      - NewFloorPlanPhoto
+      - BuildingPhoto
+      - NewDevelopmentLandPhoto
+      - NewDevelopmentLumierePhoto
+      - NewDevelopmentFeaturedPhoto
+      - ConjunctionAgentLogo
+      - NewDevelopmentRegionalPhoto
+      - AdvertiserImage
+      - YouWishClip
+      - AgentCarousel
+      - DevelopmentProjectGalleryPhoto
+      - DevelopmentProjectAdvertisementPhoto
   securitySchemes:
     apikey:
       type: apiKey
@@ -363,6 +358,3 @@ components:
             api_suburbperformance_read: api_suburbperformance_read
             api_suburbsummary_read: api_suburbsummary_read
             api_webhooks_write: api_webhooks_write
-x-refined-from:
-- domain-group-openapi-latest.json
-- domain-group-openapi-v2.json

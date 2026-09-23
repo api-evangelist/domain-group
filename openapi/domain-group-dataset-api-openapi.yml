@@ -1,12 +1,12 @@
 openapi: 3.2.0
 info:
-  title: Domain Group Dataset API
+  title: Domain Public Dataset API
+  description: See https://developer.domain.com.au for more information
+  termsOfService: https://developer.domain.com.au/docs/latest/support/terms
   contact:
     name: Domain Developer Support
     email: api@domain.com.au
-  termsOfService: https://developer.domain.com.au/docs/latest/support/terms
-  version: '1.0'
-  description: 'Operations tagged Dataset across 2 of this provider''s published API definitions: domain-group-openapi-latest.json, domain-group-openapi-v2.json. Each path carries the servers of the definition it was published in.'
+  version: latest
 servers:
 - url: https://api.domain.com.au/
   description: Primary
@@ -60,11 +60,6 @@ paths:
       x-domain-endpointcost: 1
       x-domain-usercontextrequired: false
       x-domain-environment: Any
-    servers:
-    - url: https://api.domain.com.au/
-      description: Primary
-    - url: https://api.domain.com.au/sandbox/
-      description: Sandbox
 components:
   securitySchemes:
     apikey:
@@ -134,6 +129,3 @@ components:
             api_suburbperformance_read: api_suburbperformance_read
             api_suburbsummary_read: api_suburbsummary_read
             api_webhooks_write: api_webhooks_write
-x-refined-from:
-- domain-group-openapi-latest.json
-- domain-group-openapi-v2.json

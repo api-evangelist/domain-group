@@ -19,7 +19,7 @@ paths:
     get:
       tags:
       - CampaignReporting
-      summary: Retrieves listing performance metrics for the New Developer Listings (linked to New Developer Projects) managed by advertisers.
+      summary: Retrieves listing performance metrics for the New Developer Listings (linked to…
       operationId: Campaign_GetListingPerformance_Report
       parameters:
       - name: listingId
@@ -74,7 +74,7 @@ paths:
     get:
       tags:
       - CampaignReporting
-      summary: Retrieves project performance metrics for the New Developer Projects managed by advertisers.
+      summary: Retrieves project performance metrics for the New Developer Projects managed by…
       operationId: Campaign_GetProjectPerformance_Report
       parameters:
       - name: projectId
@@ -123,40 +123,7 @@ paths:
       description: Sandbox
 components:
   schemas:
-    CampaignAPI.v1.HttpValidationProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        instance:
-          type:
-          - string
-          - 'null'
-        errors:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            type: array
-            items:
-              type: string
-      additionalProperties: {}
-    CampaignAPI.v1.ListingPerformanceDataResponse:
+    CampaignAPI.v1.ProjectPerformanceDataResponse:
       required:
       - data
       type: object
@@ -166,82 +133,7 @@ components:
           - array
           - 'null'
           items:
-            $ref: '#/components/schemas/CampaignAPI.v1.ListingPerformanceResponse'
-      additionalProperties: false
-    CampaignAPI.v1.Shares:
-      type: object
-      properties:
-        total:
-          type: integer
-          format: int32
-        listingLinkCopied:
-          type: integer
-          format: int32
-        sharedViaSocial:
-          type: integer
-          format: int32
-        sharedViaEmail:
-          type: integer
-          format: int32
-      additionalProperties: false
-    CampaignAPI.v1.ListingPerformanceResponse:
-      required:
-      - agencyName
-      - domainAgencyId
-      - ioNumber
-      - leads
-      - listingId
-      - projectId
-      - projectName
-      - shares
-      type: object
-      properties:
-        listingId:
-          type:
-          - string
-          - 'null'
-        projectId:
-          type:
-          - string
-          - 'null'
-        projectName:
-          type:
-          - string
-          - 'null'
-        domainAgencyId:
-          type:
-          - string
-          - 'null'
-        agencyName:
-          type:
-          - string
-          - 'null'
-        ioNumber:
-          type:
-          - string
-          - 'null'
-        date:
-          type: string
-          format: date
-        leads:
-          $ref: '#/components/schemas/CampaignAPI.v1.Leads'
-        photoViews:
-          type: integer
-          format: int32
-        mapViews:
-          type: integer
-          format: int32
-        pageViews:
-          type: integer
-          format: int32
-        floorPlanViews:
-          type: integer
-          format: int32
-        shares:
-          $ref: '#/components/schemas/CampaignAPI.v1.Shares'
-        shortlisted:
-          type: integer
-          format: int32
+            $ref: '#/components/schemas/CampaignAPI.v1.ProjectPerformanceResponse'
       additionalProperties: false
     CampaignAPI.v1.ProjectPerformanceResponse:
       required:
@@ -310,7 +202,7 @@ components:
           - 'null'
           format: double
       additionalProperties: false
-    CampaignAPI.v1.ProjectPerformanceDataResponse:
+    CampaignAPI.v1.ListingPerformanceDataResponse:
       required:
       - data
       type: object
@@ -320,7 +212,7 @@ components:
           - array
           - 'null'
           items:
-            $ref: '#/components/schemas/CampaignAPI.v1.ProjectPerformanceResponse'
+            $ref: '#/components/schemas/CampaignAPI.v1.ListingPerformanceResponse'
       additionalProperties: false
     CampaignAPI.v1.Leads:
       type: object
@@ -338,6 +230,114 @@ components:
           type: integer
           format: int32
       additionalProperties: false
+    CampaignAPI.v1.ListingPerformanceResponse:
+      required:
+      - agencyName
+      - domainAgencyId
+      - ioNumber
+      - leads
+      - listingId
+      - projectId
+      - projectName
+      - shares
+      type: object
+      properties:
+        listingId:
+          type:
+          - string
+          - 'null'
+        projectId:
+          type:
+          - string
+          - 'null'
+        projectName:
+          type:
+          - string
+          - 'null'
+        domainAgencyId:
+          type:
+          - string
+          - 'null'
+        agencyName:
+          type:
+          - string
+          - 'null'
+        ioNumber:
+          type:
+          - string
+          - 'null'
+        date:
+          type: string
+          format: date
+        leads:
+          $ref: '#/components/schemas/CampaignAPI.v1.Leads'
+        photoViews:
+          type: integer
+          format: int32
+        mapViews:
+          type: integer
+          format: int32
+        pageViews:
+          type: integer
+          format: int32
+        floorPlanViews:
+          type: integer
+          format: int32
+        shares:
+          $ref: '#/components/schemas/CampaignAPI.v1.Shares'
+        shortlisted:
+          type: integer
+          format: int32
+      additionalProperties: false
+    CampaignAPI.v1.Shares:
+      type: object
+      properties:
+        total:
+          type: integer
+          format: int32
+        listingLinkCopied:
+          type: integer
+          format: int32
+        sharedViaSocial:
+          type: integer
+          format: int32
+        sharedViaEmail:
+          type: integer
+          format: int32
+      additionalProperties: false
+    CampaignAPI.v1.HttpValidationProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+        errors:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: array
+            items:
+              type: string
+      additionalProperties: {}
   securitySchemes:
     apikey:
       type: apiKey

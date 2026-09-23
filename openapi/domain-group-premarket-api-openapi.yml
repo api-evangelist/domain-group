@@ -1,12 +1,12 @@
 openapi: 3.2.0
 info:
-  title: Domain Group Pre Market API
+  title: Domain Public Pre Market API
+  description: See https://developer.domain.com.au for more information
+  termsOfService: https://developer.domain.com.au/docs/latest/support/terms
   contact:
     name: Domain Developer Support
     email: api@domain.com.au
-  termsOfService: https://developer.domain.com.au/docs/latest/support/terms
-  version: '1.0'
-  description: 'Operations tagged PreMarket across 2 of this provider''s published API definitions: domain-group-openapi-latest.json, domain-group-openapi-v2.json. Each path carries the servers of the definition it was published in.'
+  version: latest
 servers:
 - url: https://api.domain.com.au/
   description: Primary
@@ -19,7 +19,7 @@ paths:
     post:
       tags:
       - PreMarket
-      summary: Creates or updates a pre-portal listing.
+      summary: Creates or updates a pre-portal listing
       operationId: PreMarket_Post
       requestBody:
         description: Pre-portal listing request.
@@ -84,16 +84,11 @@ paths:
       x-domain-endpointcost: 1
       x-domain-usercontextrequired: false
       x-domain-environment: Primary
-    servers:
-    - url: https://api.domain.com.au/
-      description: Primary
-    - url: https://api.domain.com.au/sandbox/
-      description: Sandbox
   /v2/premarket/listings/{id}:
     get:
       tags:
       - PreMarket
-      summary: Retrieves a pre-portal listing.
+      summary: Retrieves a pre-portal listing
       operationId: PreMarket_Get
       parameters:
       - name: id
@@ -165,7 +160,7 @@ paths:
     patch:
       tags:
       - PreMarket
-      summary: Patches a pre-portal listing.
+      summary: Patches a pre-portal listing
       operationId: PreMarket_Patch
       parameters:
       - name: id
@@ -249,147 +244,19 @@ paths:
       x-domain-endpointcost: 1
       x-domain-usercontextrequired: false
       x-domain-environment: Primary
-    servers:
-    - url: https://api.domain.com.au/
-      description: Primary
-    - url: https://api.domain.com.au/sandbox/
-      description: Sandbox
 components:
   schemas:
-    PreMarket.v1.SoldDetails:
-      type: object
-      properties:
-        soldPrice:
-          maximum: 2147483647
-          minimum: 0
-          type:
-          - integer
-          - 'null'
-          description: Price the property was sold for.
-          format: int32
-        soldDate:
-          type:
-          - string
-          - 'null'
-          description: 'The date when the property was sold.
-
-            The date must comply with the ISO 8601 and be in the UTC format, e.g. 2021-10-15T13:45:30.0000000Z.'
-          format: date-time
-      additionalProperties: false
-    PreMarket.v1.AuthorityType:
-      enum:
-      - privateSale
-      - auction
-      - expressionOfInterest
-      type: string
-    PreMarket.v1.ListingRequestJsonPatchDocument:
-      type: object
-      properties:
-        operations:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/PreMarket.v1.ListingRequestOperation'
-          readOnly: true
-        contractResolver:
-          $ref: '#/components/schemas/PreMarket.v1.IContractResolver'
-      additionalProperties: false
-    PreMarket.v1.ListingRequestOperation:
-      type: object
-      properties:
-        operationType:
-          $ref: '#/components/schemas/PreMarket.v1.OperationType'
-        path:
-          type:
-          - string
-          - 'null'
-        op:
-          type:
-          - string
-          - 'null'
-        from:
-          type:
-          - string
-          - 'null'
-        value: {}
-      additionalProperties: false
-    PreMarket.v1.PrePortalListingStatus:
-      enum:
-      - preMarket
-      - sold
-      - listed
-      - withdrawn
-      - draft
-      type: string
-    PreMarket.v1.IContractResolver:
-      type: object
-      additionalProperties: false
-    PreMarket.v1.PropertyType:
-      enum:
-      - house
-      - townhouse
-      - apartmentUnitFlat
-      - vacantLand
-      type: string
-    PreMarket.v1.Contact:
+    PreMarket.v1.CreateOrUpdateListingResponse:
       required:
-      - email
-      - firstName
-      - lastName
+      - id
       type: object
       properties:
-        firstName:
-          maxLength: 50
+        id:
           minLength: 1
           type: string
-          description: First name of the agent contact.
-        lastName:
-          maxLength: 50
-          minLength: 1
-          type: string
-          description: Last name of the agent contact.
-        email:
-          maxLength: 100
-          minLength: 1
-          type: string
-          description: Agent contact email. Valid email address.
-          format: email
-        phone:
-          maxLength: 20
-          type:
-          - string
-          - 'null'
-          description: Agent contact phone number. Valid phone number.
-        mobile:
-          maxLength: 20
-          type:
-          - string
-          - 'null'
-          description: Agent contact mobile number. Valid mobile number.
-        fax:
-          maxLength: 20
-          type:
-          - string
-          - 'null'
+          description: Pre-portal listing ID.
       additionalProperties: false
-    PreMarket.v1.StatementOfInformation:
-      required:
-      - documentationUrl
-      type: object
-      properties:
-        documentationUrl:
-          minLength: 1
-          pattern: ^http[s]?:+.*
-          type: string
-          description: 'Link to the statement of information documentation file.
-
-            Must be a PDF file.
-
-            File should be less than 10 MB in size
-
-            The Statement of Information must be updated if there is a change in the indicative selling price.'
-      additionalProperties: false
+      description: Create or update pre-portal listing response.
     PreMarket.v1.AddressResponse:
       required:
       - postcode
@@ -424,54 +291,6 @@ components:
           minLength: 1
           type: string
           readOnly: true
-      additionalProperties: false
-    PreMarket.v1.OperationType:
-      enum:
-      - add
-      - remove
-      - replace
-      - move
-      - copy
-      - test
-      - invalid
-      type: string
-    PreMarket.v1.State:
-      enum:
-      - nsw
-      - vic
-      - act
-      - sa
-      - wa
-      - tas
-      - qld
-      - nt
-      type: string
-      description: Australian states
-    PreMarket.v1.GeoLocation:
-      type: object
-      properties:
-        latitude:
-          type: number
-          description: Latitude of the property.
-          format: double
-        longitude:
-          type: number
-          description: Longitude of the property.
-          format: double
-      additionalProperties: false
-      description: Encapsulates the details of a geo location.
-    PreMarket.v1.PropertyMedia:
-      required:
-      - resourceType
-      - url
-      type: object
-      properties:
-        resourceType:
-          $ref: '#/components/schemas/PreMarket.v1.ResourceType'
-        url:
-          minLength: 1
-          pattern: ^http[s]?:+.*
-          type: string
       additionalProperties: false
     PreMarket.v1.ListingResponse:
       required:
@@ -663,17 +482,134 @@ components:
           $ref: '#/components/schemas/PreMarket.v1.SoldDetails'
       additionalProperties: false
       description: Pre-portal listing response.
-    PreMarket.v1.CreateOrUpdateListingResponse:
-      required:
-      - id
+    PreMarket.v1.GeoLocation:
       type: object
       properties:
-        id:
-          minLength: 1
-          type: string
-          description: Pre-portal listing ID.
+        latitude:
+          type: number
+          description: Latitude of the property.
+          format: double
+        longitude:
+          type: number
+          description: Longitude of the property.
+          format: double
       additionalProperties: false
-      description: Create or update pre-portal listing response.
+      description: Encapsulates the details of a geo location.
+    PreMarket.v1.ListingRequestOperation:
+      type: object
+      properties:
+        operationType:
+          $ref: '#/components/schemas/PreMarket.v1.OperationType'
+        path:
+          type:
+          - string
+          - 'null'
+        op:
+          type:
+          - string
+          - 'null'
+        from:
+          type:
+          - string
+          - 'null'
+        value: {}
+      additionalProperties: false
+    PreMarket.v1.State:
+      enum:
+      - nsw
+      - vic
+      - act
+      - sa
+      - wa
+      - tas
+      - qld
+      - nt
+      type: string
+      description: Australian states
+    PreMarket.v1.SoldDetails:
+      type: object
+      properties:
+        soldPrice:
+          maximum: 2147483647
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+          description: Price the property was sold for.
+          format: int32
+        soldDate:
+          type:
+          - string
+          - 'null'
+          description: 'The date when the property was sold.
+
+            The date must comply with the ISO 8601 and be in the UTC format, e.g. 2021-10-15T13:45:30.0000000Z.'
+          format: date-time
+      additionalProperties: false
+    PreMarket.v1.ListingRequestJsonPatchDocument:
+      type: object
+      properties:
+        operations:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/PreMarket.v1.ListingRequestOperation'
+          readOnly: true
+        contractResolver:
+          $ref: '#/components/schemas/PreMarket.v1.IContractResolver'
+      additionalProperties: false
+    PreMarket.v1.Price:
+      required:
+      - from
+      - to
+      type: object
+      properties:
+        from:
+          minimum: 0
+          type: number
+          description: Lower end of the price range.
+          format: double
+        to:
+          minimum: 0
+          type: number
+          description: Upper end of the price range.
+          format: double
+        displayText:
+          maxLength: 80
+          type:
+          - string
+          - 'null'
+          description: 'When provided this will be shown instead of the price range, e.g.: "Offers over $450K considered"'
+      additionalProperties: false
+    PreMarket.v1.OperationType:
+      enum:
+      - add
+      - remove
+      - replace
+      - move
+      - copy
+      - test
+      - invalid
+      type: string
+    PreMarket.v1.ResourceType:
+      enum:
+      - photograph
+      - floorPlan
+      type: string
+    PreMarket.v1.PropertyMedia:
+      required:
+      - resourceType
+      - url
+      type: object
+      properties:
+        resourceType:
+          $ref: '#/components/schemas/PreMarket.v1.ResourceType'
+        url:
+          minLength: 1
+          pattern: ^http[s]?:+.*
+          type: string
+      additionalProperties: false
     PreMarket.v1.ProblemDetails:
       type: object
       properties:
@@ -699,54 +635,86 @@ components:
           - string
           - 'null'
       additionalProperties: {}
-    PreMarket.v1.AdvertiserIdentifiers:
+    PreMarket.v1.StatementOfInformation:
       required:
-      - domainAgencyId
+      - documentationUrl
       type: object
       properties:
-        domainAgencyId:
-          type: integer
-          description: Domain Agency Id
-          format: int32
-        contactIds:
-          type:
-          - array
-          - 'null'
-          items:
-            type: integer
-            format: int32
-          description: Identifier of each contact the advertiser has associated with the listing
-        agentIds:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-          description: Identifier of each agent the advertiser has associated with the listing
+        documentationUrl:
+          minLength: 1
+          pattern: ^http[s]?:+.*
+          type: string
+          description: 'Link to the statement of information documentation file.
+
+            Must be a PDF file.
+
+            File should be less than 10 MB in size
+
+            The Statement of Information must be updated if there is a change in the indicative selling price.'
       additionalProperties: false
-    PreMarket.v1.Price:
+    PreMarket.v1.PropertyType:
+      enum:
+      - house
+      - townhouse
+      - apartmentUnitFlat
+      - vacantLand
+      type: string
+    PreMarket.v1.PrePortalListingStatus:
+      enum:
+      - preMarket
+      - sold
+      - listed
+      - withdrawn
+      - draft
+      type: string
+    PreMarket.v1.Address:
       required:
-      - from
-      - to
+      - postcode
+      - state
+      - street
+      - streetNumber
+      - suburb
       type: object
       properties:
-        from:
-          minimum: 0
-          type: number
-          description: Lower end of the price range.
-          format: double
-        to:
-          minimum: 0
-          type: number
-          description: Upper end of the price range.
-          format: double
-        displayText:
-          maxLength: 80
+        streetNumber:
+          maxLength: 20
+          minLength: 1
+          type: string
+          description: Street (and possibly unit) number component of an address. E.g. 23, 1a, 11/1.
+        street:
+          maxLength: 50
+          minLength: 1
+          type: string
+          description: Street name, e.g. Punt Road.
+        suburb:
+          maxLength: 50
+          minLength: 1
+          type: string
+        state:
+          $ref: '#/components/schemas/PreMarket.v1.State'
+        postcode:
+          minLength: 1
+          pattern: ^[0-9]{3,4}$
+          type: string
+      additionalProperties: false
+    PreMarket.v1.IContractResolver:
+      type: object
+      additionalProperties: false
+    PreMarket.v1.ProviderDetails:
+      type: object
+      properties:
+        providerSystem:
           type:
           - string
           - 'null'
-          description: 'When provided this will be shown instead of the price range, e.g.: "Offers over $450K considered"'
+          description: Identify the source of the listing
+        providerAdID:
+          type:
+          - string
+          - 'null'
+          description: Unique ID within provider system
       additionalProperties: false
+      description: Information for the listing provider
     PreMarket.v1.ListingRequest:
       required:
       - address
@@ -899,55 +867,77 @@ components:
           $ref: '#/components/schemas/PreMarket.v1.SoldDetails'
       additionalProperties: false
       description: Pre-portal listing request.
-    PreMarket.v1.ResourceType:
+    PreMarket.v1.AuthorityType:
       enum:
-      - photograph
-      - floorPlan
+      - privateSale
+      - auction
+      - expressionOfInterest
       type: string
-    PreMarket.v1.ProviderDetails:
-      type: object
-      properties:
-        providerSystem:
-          type:
-          - string
-          - 'null'
-          description: Identify the source of the listing
-        providerAdID:
-          type:
-          - string
-          - 'null'
-          description: Unique ID within provider system
-      additionalProperties: false
-      description: Information for the listing provider
-    PreMarket.v1.Address:
+    PreMarket.v1.Contact:
       required:
-      - postcode
-      - state
-      - street
-      - streetNumber
-      - suburb
+      - email
+      - firstName
+      - lastName
       type: object
       properties:
-        streetNumber:
+        firstName:
+          maxLength: 50
+          minLength: 1
+          type: string
+          description: First name of the agent contact.
+        lastName:
+          maxLength: 50
+          minLength: 1
+          type: string
+          description: Last name of the agent contact.
+        email:
+          maxLength: 100
+          minLength: 1
+          type: string
+          description: Agent contact email. Valid email address.
+          format: email
+        phone:
           maxLength: 20
-          minLength: 1
-          type: string
-          description: Street (and possibly unit) number component of an address. E.g. 23, 1a, 11/1.
-        street:
-          maxLength: 50
-          minLength: 1
-          type: string
-          description: Street name, e.g. Punt Road.
-        suburb:
-          maxLength: 50
-          minLength: 1
-          type: string
-        state:
-          $ref: '#/components/schemas/PreMarket.v1.State'
-        postcode:
-          minLength: 1
-          pattern: ^[0-9]{3,4}$
-          type: string
+          type:
+          - string
+          - 'null'
+          description: Agent contact phone number. Valid phone number.
+        mobile:
+          maxLength: 20
+          type:
+          - string
+          - 'null'
+          description: Agent contact mobile number. Valid mobile number.
+        fax:
+          maxLength: 20
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    PreMarket.v1.AdvertiserIdentifiers:
+      required:
+      - domainAgencyId
+      type: object
+      properties:
+        domainAgencyId:
+          type: integer
+          description: Domain Agency Id
+          format: int32
+        contactIds:
+          type:
+          - array
+          - 'null'
+          items:
+            type: integer
+            format: int32
+          description: Identifier of each contact the advertiser has associated with the listing
+        agentIds:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Identifier of each agent the advertiser has associated with the listing
       additionalProperties: false
   securitySchemes:
     apikey:
@@ -1017,6 +1007,3 @@ components:
             api_suburbperformance_read: api_suburbperformance_read
             api_suburbsummary_read: api_suburbsummary_read
             api_webhooks_write: api_webhooks_write
-x-refined-from:
-- domain-group-openapi-latest.json
-- domain-group-openapi-v2.json

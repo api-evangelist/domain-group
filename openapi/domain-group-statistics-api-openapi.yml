@@ -6,7 +6,7 @@ info:
     email: api@domain.com.au
   termsOfService: https://developer.domain.com.au/docs/latest/support/terms
   version: '1.0'
-  description: 'Operations tagged Statistics across 3 of this provider''s published API definitions: domain-group-openapi-latest.json, domain-group-openapi-v1.json, domain-group-openapi-v2.json. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Statistics across 2 of this provider''s published API definitions: domain-group-openapi-latest.json, domain-group-openapi-v1.json. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.domain.com.au/
   description: Primary
@@ -662,6 +662,75 @@ paths:
       description: Sandbox
 components:
   schemas:
+    SuburbSummaryAndHistorical:
+      type: object
+      properties:
+        header:
+          type: object
+          properties:
+            suburb:
+              type: string
+            state:
+              type: string
+            postcode:
+              type: string
+            propertyCategory:
+              type: string
+        series:
+          type: object
+          properties:
+            seriesInfo:
+              type: array
+              items:
+                type: object
+                properties:
+                  bedrooms:
+                    type: integer
+                  year:
+                    type: integer
+                  month:
+                    type: integer
+                  values:
+                    type: object
+                    properties:
+                      numberSold:
+                        type: integer
+                      medianSoldPrice:
+                        type: integer
+                      highestSoldPrice:
+                        type: integer
+                      lowestSoldPrice:
+                        type: integer
+                      numberSaleListing:
+                        type: integer
+                      medianSaleListingPrice:
+                        type: integer
+                      highestSaleListingPrice:
+                        type: integer
+                      lowestSaleListingPrice:
+                        type: integer
+                      daysOnMarket:
+                        type: integer
+                      meanRentYield:
+                        type: number
+                        format: float
+                      numberRentListing:
+                        type: integer
+                      medianRentListingPrice:
+                        type: integer
+                      highestRentListingPrice:
+                        type: integer
+                      lowestRentListingPrice:
+                        type: integer
+                      lowestDiscount:
+                        type: number
+                        format: float
+                      medianDiscount:
+                        type: number
+                        format: float
+                      highestDiscount:
+                        type: number
+                        format: float
     SuburbPerformance:
       type: object
       properties:
@@ -735,75 +804,6 @@ components:
                       meanRentYield:
                         type: number
                         format: float
-    SuburbSummaryAndHistorical:
-      type: object
-      properties:
-        header:
-          type: object
-          properties:
-            suburb:
-              type: string
-            state:
-              type: string
-            postcode:
-              type: string
-            propertyCategory:
-              type: string
-        series:
-          type: object
-          properties:
-            seriesInfo:
-              type: array
-              items:
-                type: object
-                properties:
-                  bedrooms:
-                    type: integer
-                  year:
-                    type: integer
-                  month:
-                    type: integer
-                  values:
-                    type: object
-                    properties:
-                      numberSold:
-                        type: integer
-                      medianSoldPrice:
-                        type: integer
-                      highestSoldPrice:
-                        type: integer
-                      lowestSoldPrice:
-                        type: integer
-                      numberSaleListing:
-                        type: integer
-                      medianSaleListingPrice:
-                        type: integer
-                      highestSaleListingPrice:
-                        type: integer
-                      lowestSaleListingPrice:
-                        type: integer
-                      daysOnMarket:
-                        type: integer
-                      meanRentYield:
-                        type: number
-                        format: float
-                      numberRentListing:
-                        type: integer
-                      medianRentListingPrice:
-                        type: integer
-                      highestRentListingPrice:
-                        type: integer
-                      lowestRentListingPrice:
-                        type: integer
-                      lowestDiscount:
-                        type: number
-                        format: float
-                      medianDiscount:
-                        type: number
-                        format: float
-                      highestDiscount:
-                        type: number
-                        format: float
   securitySchemes:
     apikey:
       type: apiKey
@@ -875,4 +875,3 @@ components:
 x-refined-from:
 - domain-group-openapi-latest.json
 - domain-group-openapi-v1.json
-- domain-group-openapi-v2.json

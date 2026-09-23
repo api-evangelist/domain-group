@@ -19,7 +19,7 @@ paths:
     post:
       tags:
       - ListingSearch
-      summary: Retrieves residential listings matching the specified criteria.
+      summary: Retrieves residential listings matching the specified criteria
       description: 'Search results are limited to the first 1000 results.
 
 
@@ -102,7 +102,7 @@ paths:
     post:
       tags:
       - ListingSearch
-      summary: Retrieves sold residential listings matching the specified criteria.
+      summary: Retrieves sold residential listings matching the specified criteria
       description: 'Search results are limited to the first 1000 results.
 
 
@@ -183,160 +183,22 @@ paths:
       description: Sandbox
 components:
   schemas:
-    SearchService.v2.DomainSearchContractsV2ResultMetadata:
+    SearchService.v2.DomainSearchWebApiV2ModelsTagQuery:
       type: object
       properties:
-        aggregations:
+        tag:
           type:
-          - object
+          - string
           - 'null'
-          additionalProperties:
-            type:
-            - object
-            - 'null'
-            additionalProperties:
-              type: integer
-              format: int64
-            x-data-access-level-info:
-              Basic:
-              - '*'
-              Detailed:
-              - '*'
-              Full:
-              - '*'
-          description: Gets or Sets Aggregations
-          x-data-access-level-info:
-            Basic:
-            - '*'
-            Detailed:
-            - '*'
-            Full:
-            - '*'
-        surroundingSuburbsListingsCount:
-          type:
-          - integer
-          - 'null'
-          description: Gets or Sets SurroundingSuburbsListingsCount
-          format: int64
-        newHomesCount:
-          type:
-          - integer
-          - 'null'
-          description: Gets or Sets NewHomesCount
-          format: int64
-        ruralListingsCount:
-          type:
-          - integer
-          - 'null'
-          description: Gets or Sets RuralListingsCount
-          format: int64
-        medianPrice:
-          type:
-          - integer
-          - 'null'
-          description: Gets or Sets MedianPrice
-          format: int32
-        totalListingsExcludingChildren:
-          type:
-          - integer
-          - 'null'
-          description: Gets or Sets TotalListingsExcludingChildren
-          format: int64
-        surroundingSuburbsListingsExcludingChildren:
-          type:
-          - integer
-          - 'null'
-          description: Gets or Sets SurroundingSuburbsListingsExcludingChildren
-          format: int64
-      additionalProperties: false
-      description: DomainSearchContractsV2ResultMetadata
-      x-data-access-level-info:
-        Basic:
-        - '*'
-        Detailed:
-        - '*'
-        Full:
-        - '*'
-    SearchService.v2.DomainSearchWebApiV2ModelsCustomSort:
-      type: object
-      properties:
-        elements:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/SearchService.v2.DomainSearchWebApiV2ModelsCustomSortElement'
-          description: The elements (field + direction) that comprise the custom sort. Order is significant, so each sort  element will be applied in the order that it appears in the array. If this array is `null` or  empty, no sort order will be applied, other than potentially surrounding suburbs boost.
-        boostPrimarySuburbs:
-          type:
-          - boolean
-          - 'null'
-          description: Gets or Sets BoostPrimarySuburbs
-      additionalProperties: false
-      description: Defines a sort order comprised of 0 or more elements (Domain.Search.Web.Api.v2.Models.CustomSortElement).  <br />  Each element is applied in the  order specified. An element is a combination of field (Domain.Search.Web.Api.v2.Models.CustomSortField) and direction (Domain.Search.Web.Api.v2.Models.SortDirection).
-      x-data-access-level-info:
-        Basic:
-        - '*'
-        Detailed:
-        - '*'
-        Full:
-        - '*'
-    SearchService.v2.DomainSearchWebApiV2ModelsSearchLocation:
-      type: object
-      properties:
-        state:
+          description: The tag value.
+        criteria:
           enum:
-          - ACT
-          - NSW
-          - QLD
-          - VIC
-          - SA
-          - WA
-          - NT
-          - TAS
+          - Include
+          - Exclude
           type: string
-          description: Gets or Sets State
-        region:
-          type:
-          - string
-          - 'null'
-          description: See http://location-api.domain.com.au/locations/regions
-        area:
-          type:
-          - string
-          - 'null'
-          description: See http://location-api.domain.com.au/locations/areas
-        suburb:
-          type:
-          - string
-          - 'null'
-          description: The name of the suburb i.e Sydney
-        postCode:
-          type:
-          - string
-          - 'null'
-          description: The post code for the suburb i.e 2000
-        includeSurroundingSuburbs:
-          type:
-          - boolean
-          - 'null'
-          description: Return listing in surrounding suburbs  <br />  This works only if a location is a complete suburb match (State, Suburb, Postcode)
-        surroundingRadiusInMeters:
-          maximum: 200000
-          minimum: 1
-          type:
-          - integer
-          - 'null'
-          description: 'RadiusInMeters to add to the search area  <br />  It will be used to construct a circular search area based on suburb mid point.  <br />  This area will be searched in additional to the provided suburb (i.e. the results will belong to either suburb Or Circular area)  Radius Search works only for Suburb and will limit the results on selected suburb''s state. i.e. If calculated circular area  overlapes with a different state, overlapping area will be ignored.  <br />  Minimum Value: 1  <br />  Maximum Value: 200000'
-          format: int32
-        definesPostcodeOnly:
-          type:
-          - boolean
-          - 'null'
-          description: If `true`, this instance has a postcode and nothing more.
-          readOnly: true
+          description: Gets or Sets Criteria
       additionalProperties: false
-      description: DomainSearchWebApiV2ModelsSearchLocation
+      description: Used to indicate whether listings with a given Domain.Search.Web.Api.v2.Models.TagQuery.Tag should be included  or excluded, based on the Domain.Search.Web.Api.v2.Models.TagCriteria.
       x-data-access-level-info:
         Basic:
         - '*'
@@ -344,176 +206,26 @@ components:
         - '*'
         Full:
         - '*'
-    SearchService.v2.DomainSearchContractsV2Project:
+    SearchService.v2.DomainSearchWebApiV2ModelsSchoolCatchment:
       type: object
       properties:
-        id:
-          type:
-          - integer
-          - 'null'
-          description: Gets or Sets Id
-          format: int32
         name:
           type:
           - string
           - 'null'
           description: Gets or Sets Name
-        promoLevel:
-          enum:
-          - Standard
-          - Premium
-          type: string
-          description: Gets or Sets PromoLevel
-        bannerUrl:
-          type:
-          - string
-          - 'null'
-          description: Gets or Sets BannerUrl
-        preferredColorHex:
-          type:
-          - string
-          - 'null'
-          description: Gets or Sets PreferredColorHex
-        logoUrl:
-          type:
-          - string
-          - 'null'
-          description: Gets or Sets LogoUrl
-        labels:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-          description: Gets or Sets Labels
-        displayableAddress:
-          type:
-          - string
-          - 'null'
-          description: Gets or Sets DisplayableAddress
-        suburb:
-          type:
-          - string
-          - 'null'
-          description: Gets or Sets Suburb
-        suburbId:
-          type:
-          - integer
-          - 'null'
-          description: Gets or Sets SuburbId
-          format: int32
         state:
-          enum:
-          - ACT
-          - NSW
-          - QLD
-          - VIC
-          - SA
-          - WA
-          - NT
-          - TAS
-          type: string
+          type:
+          - string
+          - 'null'
           description: Gets or Sets State
-        features:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-          description: Gets or Sets Features
-        media:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/SearchService.v2.DomainSearchContractsV2Media'
-          description: Gets or Sets Media
-        projectSlug:
+        postcode:
           type:
           - string
           - 'null'
-          description: Gets or Sets ProjectSlug
-        priceFrom:
-          type:
-          - integer
-          - 'null'
-          description: Gets or Sets PriceFrom
-          format: int32
+          description: Gets or Sets Postcode
       additionalProperties: false
-      description: DomainSearchContractsV2Project
-      x-data-access-level-info:
-        Basic:
-        - '*'
-        Detailed:
-        - '*'
-        Full:
-        - '*'
-    SearchService.v2.DomainSearchContractsV2AuctionSchedule:
-      type: object
-      properties:
-        time:
-          type:
-          - string
-          - 'null'
-          description: Gets or Sets Time
-          format: date-time
-        auctionLocation:
-          type:
-          - string
-          - 'null'
-          description: Gets or Sets AuctionLocation
-      additionalProperties: false
-      description: DomainSearchContractsV2AuctionSchedule
-      x-data-access-level-info:
-        Basic:
-        - '*'
-        Detailed:
-        - '*'
-        Full:
-        - '*'
-    SearchService.v2.DomainSearchContractsV2SearchResults:
-      type: object
-      properties:
-        results:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/SearchService.v2.DomainSearchContractsV2SearchResult'
-          description: Gets or Sets Results
-        totalResults:
-          type:
-          - integer
-          - 'null'
-          description: Gets or Sets TotalResults
-          format: int64
-        totalPages:
-          type:
-          - integer
-          - 'null'
-          description: Gets or Sets TotalPages
-          format: int64
-        page:
-          type:
-          - integer
-          - 'null'
-          description: Gets or Sets Page
-          format: int32
-        metadata:
-          $ref: '#/components/schemas/SearchService.v2.DomainSearchContractsV2ResultMetadata'
-        actualTotalResults:
-          type:
-          - integer
-          - 'null'
-          description: Gets or Sets ActualTotalResults
-          format: int64
-        actualTotalResultsExceedsMaximum:
-          type:
-          - boolean
-          - 'null'
-          description: Gets or Sets ActualTotalResultsExceedsMaximum
-      additionalProperties: false
-      description: DomainSearchContractsV2SearchResults
+      description: DomainSearchWebApiV2ModelsSchoolCatchment
       x-data-access-level-info:
         Basic:
         - '*'
@@ -813,384 +525,6 @@ components:
         - '*'
         Full:
         - '*'
-    SearchService.v2.DomainSearchWebApiV2ModelsGeoWindow:
-      type: object
-      properties:
-        box:
-          $ref: '#/components/schemas/SearchService.v2.DomainSearchWebApiV2ModelsBox'
-        circle:
-          $ref: '#/components/schemas/SearchService.v2.DomainSearchWebApiV2ModelsCircle'
-        polygon:
-          $ref: '#/components/schemas/SearchService.v2.DomainSearchWebApiV2ModelsPolygon'
-      additionalProperties: false
-      description: Define different geo filter shapes
-      x-data-access-level-info:
-        Basic:
-        - '*'
-        Detailed:
-        - '*'
-        Full:
-        - '*'
-    SearchService.v2.DomainSearchContractsV2Media:
-      type: object
-      properties:
-        category:
-          enum:
-          - Image
-          type: string
-          description: Gets or Sets Category
-        type:
-          enum:
-          - Photo
-          - Floorplan
-          type: string
-          description: Gets or Sets Type
-        url:
-          type:
-          - string
-          - 'null'
-          description: Gets or Sets Url
-      additionalProperties: false
-      description: DomainSearchContractsV2Media
-      x-data-access-level-info:
-        Basic:
-        - '*'
-        Detailed:
-        - '*'
-        Full:
-        - '*'
-    SearchService.v2.DomainSearchContractsV2Contact:
-      type: object
-      properties:
-        name:
-          type:
-          - string
-          - 'null'
-          description: Gets or Sets Name
-        photoUrl:
-          type:
-          - string
-          - 'null'
-          description: Gets or Sets PhotoUrl
-      additionalProperties: false
-      description: DomainSearchContractsV2Contact
-      x-data-access-level-info:
-        Basic:
-        - '*'
-        Detailed:
-        - '*'
-        Full:
-        - '*'
-    ProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        instance:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
-      x-data-access-level-info:
-        Basic:
-        - '*'
-        Detailed:
-        - '*'
-        Full:
-        - '*'
-    SearchService.v2.DomainSearchWebApiV2ModelsTagQuery:
-      type: object
-      properties:
-        tag:
-          type:
-          - string
-          - 'null'
-          description: The tag value.
-        criteria:
-          enum:
-          - Include
-          - Exclude
-          type: string
-          description: Gets or Sets Criteria
-      additionalProperties: false
-      description: Used to indicate whether listings with a given Domain.Search.Web.Api.v2.Models.TagQuery.Tag should be included  or excluded, based on the Domain.Search.Web.Api.v2.Models.TagCriteria.
-      x-data-access-level-info:
-        Basic:
-        - '*'
-        Detailed:
-        - '*'
-        Full:
-        - '*'
-    SearchService.v2.DomainSearchWebApiV2ModelsSortBy:
-      type: object
-      properties:
-        sortKey:
-          enum:
-          - Default
-          - Suburb
-          - Price
-          - DateUpdated
-          - InspectionTime
-          - AuctionTime
-          - SoldDate
-          - DefaultThenDateUpdated
-          - DateAvailable
-          - DateListed
-          type: string
-          description: Gets or Sets SortKey
-        direction:
-          enum:
-          - Ascending
-          - Descending
-          type: string
-          description: Gets or Sets Direction
-      additionalProperties: false
-      description: DomainSearchWebApiV2ModelsSortBy
-      x-data-access-level-info:
-        Basic:
-        - '*'
-        Detailed:
-        - '*'
-        Full:
-        - '*'
-    SearchService.v2.DomainSearchContractsV2PropertyListing:
-      type: object
-      properties:
-        id:
-          type:
-          - integer
-          - 'null'
-          description: Gets or Sets Id
-          format: int32
-        projectId:
-          type:
-          - integer
-          - 'null'
-          description: Gets or Sets ProjectId
-          format: int32
-        promoLevel:
-          enum:
-          - Standard
-          - StandardPP
-          - Elite
-          - ElitePP
-          - PremiumPlus
-          type: string
-          description: Gets or Sets PromoLevel
-        listingType:
-          enum:
-          - Sale
-          - Rent
-          - Share
-          - Sold
-          - NewHomes
-          type: string
-          description: Gets or Sets ListingType
-        advertiser:
-          $ref: '#/components/schemas/SearchService.v2.DomainSearchContractsV2Advertiser'
-        priceDetails:
-          $ref: '#/components/schemas/SearchService.v2.DomainSearchContractsV2PriceDetails'
-        media:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/SearchService.v2.DomainSearchContractsV2Media'
-          description: Gets or Sets Media
-        propertyDetails:
-          $ref: '#/components/schemas/SearchService.v2.DomainSearchContractsV2PropertyDetails'
-        headline:
-          type:
-          - string
-          - 'null'
-          description: Gets or Sets Headline
-        summaryDescription:
-          type:
-          - string
-          - 'null'
-          description: Gets or Sets SummaryDescription
-        hasFloorplan:
-          type:
-          - boolean
-          - 'null'
-          description: Gets or Sets HasFloorplan
-        hasVideo:
-          type:
-          - boolean
-          - 'null'
-          description: Gets or Sets HasVideo
-        matterport:
-          $ref: '#/components/schemas/SearchService.v2.DomainSearchContractsV2Matterport'
-        labels:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-          description: Gets or Sets Labels
-        auctionSchedule:
-          $ref: '#/components/schemas/SearchService.v2.DomainSearchContractsV2AuctionSchedule'
-        dateAvailable:
-          type:
-          - string
-          - 'null'
-          description: Gets or Sets DateAvailable
-          format: date-time
-        dateListed:
-          type:
-          - string
-          - 'null'
-          description: Gets or Sets DateListed
-          format: date-time
-        inspectionSchedule:
-          $ref: '#/components/schemas/SearchService.v2.DomainSearchContractsV2InspectionSchedule'
-        soldData:
-          $ref: '#/components/schemas/SearchService.v2.DomainSearchContractsV2SoldData'
-        listingSlug:
-          type:
-          - string
-          - 'null'
-          description: Gets or Sets ListingSlug
-      additionalProperties: false
-      description: DomainSearchContractsV2PropertyListing
-      x-data-access-level-info:
-        Basic:
-        - '*'
-        Detailed:
-        - '*'
-        Full:
-        - '*'
-    SearchService.v2.DomainSearchWebApiV2ModelsCircle:
-      required:
-      - radiusInMeters
-      type: object
-      properties:
-        center:
-          $ref: '#/components/schemas/SearchService.v2.DomainSearchWebApiV2ModelsGeoPoint'
-        radiusInMeters:
-          maximum: 2147483647
-          minimum: 0
-          type: integer
-          description: Gets or Sets RadiusInMeters
-          format: int32
-      additionalProperties: false
-      description: DomainSearchWebApiV2ModelsCircle
-      x-data-access-level-info:
-        Basic:
-        - '*'
-        Detailed:
-        - '*'
-        Full:
-        - '*'
-    SearchService.v2.DomainSearchContractsV2MatterportInterior:
-      type: object
-      properties:
-        matterportKey:
-          type:
-          - string
-          - 'null'
-          description: Gets or Sets MatterportKey
-        matterportThumbnailUri:
-          type:
-          - string
-          - 'null'
-          description: Gets or Sets MatterportThumbnailUri
-      additionalProperties: false
-      description: DomainSearchContractsV2MatterportInterior
-      x-data-access-level-info:
-        Basic:
-        - '*'
-        Detailed:
-        - '*'
-        Full:
-        - '*'
-    SearchService.v2.DomainSearchWebApiV2ModelsPolygon:
-      type: object
-      properties:
-        points:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/SearchService.v2.DomainSearchWebApiV2ModelsGeoPoint'
-          description: You must provide at least three points to form a polygon
-      additionalProperties: false
-      description: DomainSearchWebApiV2ModelsPolygon
-      x-data-access-level-info:
-        Basic:
-        - '*'
-        Detailed:
-        - '*'
-        Full:
-        - '*'
-    SearchService.v2.DomainSearchContractsV2Inspection:
-      type: object
-      properties:
-        openingTime:
-          type:
-          - string
-          - 'null'
-          description: Gets or Sets OpeningTime
-          format: date-time
-        closingTime:
-          type:
-          - string
-          - 'null'
-          description: Gets or Sets ClosingTime
-          format: date-time
-      additionalProperties: false
-      description: DomainSearchContractsV2Inspection
-      x-data-access-level-info:
-        Basic:
-        - '*'
-        Detailed:
-        - '*'
-        Full:
-        - '*'
-    SearchService.v2.DomainSearchContractsV2SearchResult:
-      type: object
-      properties:
-        type:
-          enum:
-          - PropertyListing
-          - Project
-          type: string
-          description: Gets or Sets Type
-        listing:
-          $ref: '#/components/schemas/SearchService.v2.DomainSearchContractsV2PropertyListing'
-        listings:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/SearchService.v2.DomainSearchContractsV2PropertyListing'
-          description: Gets or Sets Listings
-        project:
-          $ref: '#/components/schemas/SearchService.v2.DomainSearchContractsV2Project'
-      additionalProperties: false
-      description: DomainSearchContractsV2SearchResult
-      x-data-access-level-info:
-        Basic:
-        - '*'
-        Detailed:
-        - '*'
-        Full:
-        - '*'
     SearchService.v2.DomainSearchContractsV2PriceDetails:
       type: object
       properties:
@@ -1245,15 +579,476 @@ components:
         - '*'
         Full:
         - '*'
-    SearchService.v2.DomainSearchContractsV2Matterport:
+    SearchService.v2.DomainSearchContractsV2AuctionSchedule:
       type: object
       properties:
-        interior:
-          $ref: '#/components/schemas/SearchService.v2.DomainSearchContractsV2MatterportInterior'
-        exterior:
-          $ref: '#/components/schemas/SearchService.v2.DomainSearchContractsV2MatterportExterior'
+        time:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets Time
+          format: date-time
+        auctionLocation:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets AuctionLocation
       additionalProperties: false
-      description: DomainSearchContractsV2Matterport
+      description: DomainSearchContractsV2AuctionSchedule
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    SearchService.v2.DomainSearchContractsV2SearchResults:
+      type: object
+      properties:
+        results:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SearchService.v2.DomainSearchContractsV2SearchResult'
+          description: Gets or Sets Results
+        totalResults:
+          type:
+          - integer
+          - 'null'
+          description: Gets or Sets TotalResults
+          format: int64
+        totalPages:
+          type:
+          - integer
+          - 'null'
+          description: Gets or Sets TotalPages
+          format: int64
+        page:
+          type:
+          - integer
+          - 'null'
+          description: Gets or Sets Page
+          format: int32
+        metadata:
+          $ref: '#/components/schemas/SearchService.v2.DomainSearchContractsV2ResultMetadata'
+        actualTotalResults:
+          type:
+          - integer
+          - 'null'
+          description: Gets or Sets ActualTotalResults
+          format: int64
+        actualTotalResultsExceedsMaximum:
+          type:
+          - boolean
+          - 'null'
+          description: Gets or Sets ActualTotalResultsExceedsMaximum
+      additionalProperties: false
+      description: DomainSearchContractsV2SearchResults
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    SearchService.v2.DomainSearchWebApiV2ModelsGeoPoint:
+      type: object
+      properties:
+        lat:
+          type:
+          - number
+          - 'null'
+          description: Latitude coordinate
+          format: double
+        lon:
+          type:
+          - number
+          - 'null'
+          description: Longitude coordinate
+          format: double
+      additionalProperties: false
+      description: DomainSearchWebApiV2ModelsGeoPoint
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    SearchService.v2.DomainSearchWebApiV2ModelsGeoWindow:
+      type: object
+      properties:
+        box:
+          $ref: '#/components/schemas/SearchService.v2.DomainSearchWebApiV2ModelsBox'
+        circle:
+          $ref: '#/components/schemas/SearchService.v2.DomainSearchWebApiV2ModelsCircle'
+        polygon:
+          $ref: '#/components/schemas/SearchService.v2.DomainSearchWebApiV2ModelsPolygon'
+      additionalProperties: false
+      description: Define different geo filter shapes
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    SearchService.v2.DomainSearchContractsV2Project:
+      type: object
+      properties:
+        id:
+          type:
+          - integer
+          - 'null'
+          description: Gets or Sets Id
+          format: int32
+        name:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets Name
+        promoLevel:
+          enum:
+          - Standard
+          - Premium
+          type: string
+          description: Gets or Sets PromoLevel
+        bannerUrl:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets BannerUrl
+        preferredColorHex:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets PreferredColorHex
+        logoUrl:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets LogoUrl
+        labels:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Gets or Sets Labels
+        displayableAddress:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets DisplayableAddress
+        suburb:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets Suburb
+        suburbId:
+          type:
+          - integer
+          - 'null'
+          description: Gets or Sets SuburbId
+          format: int32
+        state:
+          enum:
+          - ACT
+          - NSW
+          - QLD
+          - VIC
+          - SA
+          - WA
+          - NT
+          - TAS
+          type: string
+          description: Gets or Sets State
+        features:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Gets or Sets Features
+        media:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SearchService.v2.DomainSearchContractsV2Media'
+          description: Gets or Sets Media
+        projectSlug:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets ProjectSlug
+        priceFrom:
+          type:
+          - integer
+          - 'null'
+          description: Gets or Sets PriceFrom
+          format: int32
+      additionalProperties: false
+      description: DomainSearchContractsV2Project
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    SearchService.v2.DomainSearchContractsV2Advertiser:
+      type: object
+      properties:
+        id:
+          type:
+          - integer
+          - 'null'
+          description: Gets or Sets Id
+          format: int32
+        type:
+          enum:
+          - Agency
+          - Private
+          type: string
+          description: Gets or Sets Type
+        name:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets Name
+        logoUrl:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets LogoUrl
+        preferredColourHex:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets PreferredColourHex
+        bannerUrl:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets BannerUrl
+        contacts:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SearchService.v2.DomainSearchContractsV2Contact'
+          description: Gets or Sets Contacts
+      additionalProperties: false
+      description: DomainSearchContractsV2Advertiser
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    SearchService.v2.DomainSearchContractsV2Media:
+      type: object
+      properties:
+        category:
+          enum:
+          - Image
+          type: string
+          description: Gets or Sets Category
+        type:
+          enum:
+          - Photo
+          - Floorplan
+          type: string
+          description: Gets or Sets Type
+        url:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets Url
+      additionalProperties: false
+      description: DomainSearchContractsV2Media
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    SearchService.v2.DomainSearchWebApiV2ModelsPolygon:
+      type: object
+      properties:
+        points:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SearchService.v2.DomainSearchWebApiV2ModelsGeoPoint'
+          description: You must provide at least three points to form a polygon
+      additionalProperties: false
+      description: DomainSearchWebApiV2ModelsPolygon
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    SearchService.v2.DomainSearchContractsV2SearchResult:
+      type: object
+      properties:
+        type:
+          enum:
+          - PropertyListing
+          - Project
+          type: string
+          description: Gets or Sets Type
+        listing:
+          $ref: '#/components/schemas/SearchService.v2.DomainSearchContractsV2PropertyListing'
+        listings:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SearchService.v2.DomainSearchContractsV2PropertyListing'
+          description: Gets or Sets Listings
+        project:
+          $ref: '#/components/schemas/SearchService.v2.DomainSearchContractsV2Project'
+      additionalProperties: false
+      description: DomainSearchContractsV2SearchResult
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    SearchService.v2.DomainSearchWebApiV2ModelsCustomSortElement:
+      type: object
+      properties:
+        field:
+          enum:
+          - AdId
+          - PromoLevelScore
+          - FreshnessLevel
+          - ProductBoost
+          - DateUpdated
+          - DateListed
+          - SuburbName
+          - PriceDisplayOption
+          - SoldDate
+          - Price
+          - EarliestInspectionOpenTime
+          - EarliestAuctionTime
+          - DateAvailable
+          type: string
+          description: Gets or Sets Field
+        direction:
+          enum:
+          - Ascending
+          - Descending
+          type: string
+          description: Gets or Sets Direction
+      additionalProperties: false
+      description: DomainSearchWebApiV2ModelsCustomSortElement
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    SearchService.v2.DomainSearchContractsV2ResultMetadata:
+      type: object
+      properties:
+        aggregations:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - object
+            - 'null'
+            additionalProperties:
+              type: integer
+              format: int64
+            x-data-access-level-info:
+              Basic:
+              - '*'
+              Detailed:
+              - '*'
+              Full:
+              - '*'
+          description: Gets or Sets Aggregations
+          x-data-access-level-info:
+            Basic:
+            - '*'
+            Detailed:
+            - '*'
+            Full:
+            - '*'
+        surroundingSuburbsListingsCount:
+          type:
+          - integer
+          - 'null'
+          description: Gets or Sets SurroundingSuburbsListingsCount
+          format: int64
+        newHomesCount:
+          type:
+          - integer
+          - 'null'
+          description: Gets or Sets NewHomesCount
+          format: int64
+        ruralListingsCount:
+          type:
+          - integer
+          - 'null'
+          description: Gets or Sets RuralListingsCount
+          format: int64
+        medianPrice:
+          type:
+          - integer
+          - 'null'
+          description: Gets or Sets MedianPrice
+          format: int32
+        totalListingsExcludingChildren:
+          type:
+          - integer
+          - 'null'
+          description: Gets or Sets TotalListingsExcludingChildren
+          format: int64
+        surroundingSuburbsListingsExcludingChildren:
+          type:
+          - integer
+          - 'null'
+          description: Gets or Sets SurroundingSuburbsListingsExcludingChildren
+          format: int64
+      additionalProperties: false
+      description: DomainSearchContractsV2ResultMetadata
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    SearchService.v2.DomainSearchContractsV2MatterportInterior:
+      type: object
+      properties:
+        matterportKey:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets MatterportKey
+        matterportThumbnailUri:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets MatterportThumbnailUri
+      additionalProperties: false
+      description: DomainSearchContractsV2MatterportInterior
       x-data-access-level-info:
         Basic:
         - '*'
@@ -1659,6 +1454,87 @@ components:
         - '*'
         Full:
         - '*'
+    SearchService.v2.DomainSearchContractsV2MatterportExterior:
+      type: object
+      properties:
+        attachmentId:
+          type:
+          - integer
+          - 'null'
+          description: Gets or Sets AttachmentId
+          format: int64
+        gaussianSplatKey:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets GaussianSplatKey
+        gaussianThumbnailUri:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets GaussianThumbnailUri
+      additionalProperties: false
+      description: DomainSearchContractsV2MatterportExterior
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    SearchService.v2.DomainSearchContractsV2InspectionSchedule:
+      type: object
+      properties:
+        byAppointment:
+          type:
+          - boolean
+          - 'null'
+          description: Gets or Sets ByAppointment
+        recurring:
+          type:
+          - boolean
+          - 'null'
+          description: Gets or Sets Recurring
+        times:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SearchService.v2.DomainSearchContractsV2Inspection'
+          description: Gets or Sets Times
+      additionalProperties: false
+      description: DomainSearchContractsV2InspectionSchedule
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    SearchService.v2.DomainSearchContractsV2Inspection:
+      type: object
+      properties:
+        openingTime:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets OpeningTime
+          format: date-time
+        closingTime:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets ClosingTime
+          format: date-time
+      additionalProperties: false
+      description: DomainSearchContractsV2Inspection
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
     SearchService.v2.DomainSearchContractsV2SoldData:
       type: object
       properties:
@@ -1714,50 +1590,23 @@ components:
         - '*'
         Full:
         - '*'
-    SearchService.v2.DomainSearchWebApiV2ModelsGeoPoint:
+    SearchService.v2.DomainSearchWebApiV2ModelsSortBy:
       type: object
       properties:
-        lat:
-          type:
-          - number
-          - 'null'
-          description: Latitude coordinate
-          format: double
-        lon:
-          type:
-          - number
-          - 'null'
-          description: Longitude coordinate
-          format: double
-      additionalProperties: false
-      description: DomainSearchWebApiV2ModelsGeoPoint
-      x-data-access-level-info:
-        Basic:
-        - '*'
-        Detailed:
-        - '*'
-        Full:
-        - '*'
-    SearchService.v2.DomainSearchWebApiV2ModelsCustomSortElement:
-      type: object
-      properties:
-        field:
+        sortKey:
           enum:
-          - AdId
-          - PromoLevelScore
-          - FreshnessLevel
-          - ProductBoost
-          - DateUpdated
-          - DateListed
-          - SuburbName
-          - PriceDisplayOption
-          - SoldDate
+          - Default
+          - Suburb
           - Price
-          - EarliestInspectionOpenTime
-          - EarliestAuctionTime
+          - DateUpdated
+          - InspectionTime
+          - AuctionTime
+          - SoldDate
+          - DefaultThenDateUpdated
           - DateAvailable
+          - DateListed
           type: string
-          description: Gets or Sets Field
+          description: Gets or Sets SortKey
         direction:
           enum:
           - Ascending
@@ -1765,7 +1614,7 @@ components:
           type: string
           description: Gets or Sets Direction
       additionalProperties: false
-      description: DomainSearchWebApiV2ModelsCustomSortElement
+      description: DomainSearchWebApiV2ModelsSortBy
       x-data-access-level-info:
         Basic:
         - '*'
@@ -1773,36 +1622,7 @@ components:
         - '*'
         Full:
         - '*'
-    SearchService.v2.DomainSearchContractsV2InspectionSchedule:
-      type: object
-      properties:
-        byAppointment:
-          type:
-          - boolean
-          - 'null'
-          description: Gets or Sets ByAppointment
-        recurring:
-          type:
-          - boolean
-          - 'null'
-          description: Gets or Sets Recurring
-        times:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/SearchService.v2.DomainSearchContractsV2Inspection'
-          description: Gets or Sets Times
-      additionalProperties: false
-      description: DomainSearchContractsV2InspectionSchedule
-      x-data-access-level-info:
-        Basic:
-        - '*'
-        Detailed:
-        - '*'
-        Full:
-        - '*'
-    SearchService.v2.DomainSearchContractsV2Advertiser:
+    SearchService.v2.DomainSearchContractsV2PropertyListing:
       type: object
       properties:
         id:
@@ -1811,41 +1631,200 @@ components:
           - 'null'
           description: Gets or Sets Id
           format: int32
-        type:
+        projectId:
+          type:
+          - integer
+          - 'null'
+          description: Gets or Sets ProjectId
+          format: int32
+        promoLevel:
           enum:
-          - Agency
-          - Private
+          - Standard
+          - StandardPP
+          - Elite
+          - ElitePP
+          - PremiumPlus
           type: string
-          description: Gets or Sets Type
-        name:
-          type:
-          - string
-          - 'null'
-          description: Gets or Sets Name
-        logoUrl:
-          type:
-          - string
-          - 'null'
-          description: Gets or Sets LogoUrl
-        preferredColourHex:
-          type:
-          - string
-          - 'null'
-          description: Gets or Sets PreferredColourHex
-        bannerUrl:
-          type:
-          - string
-          - 'null'
-          description: Gets or Sets BannerUrl
-        contacts:
+          description: Gets or Sets PromoLevel
+        listingType:
+          enum:
+          - Sale
+          - Rent
+          - Share
+          - Sold
+          - NewHomes
+          type: string
+          description: Gets or Sets ListingType
+        advertiser:
+          $ref: '#/components/schemas/SearchService.v2.DomainSearchContractsV2Advertiser'
+        priceDetails:
+          $ref: '#/components/schemas/SearchService.v2.DomainSearchContractsV2PriceDetails'
+        media:
           type:
           - array
           - 'null'
           items:
-            $ref: '#/components/schemas/SearchService.v2.DomainSearchContractsV2Contact'
-          description: Gets or Sets Contacts
+            $ref: '#/components/schemas/SearchService.v2.DomainSearchContractsV2Media'
+          description: Gets or Sets Media
+        propertyDetails:
+          $ref: '#/components/schemas/SearchService.v2.DomainSearchContractsV2PropertyDetails'
+        headline:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets Headline
+        summaryDescription:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets SummaryDescription
+        hasFloorplan:
+          type:
+          - boolean
+          - 'null'
+          description: Gets or Sets HasFloorplan
+        hasVideo:
+          type:
+          - boolean
+          - 'null'
+          description: Gets or Sets HasVideo
+        matterport:
+          $ref: '#/components/schemas/SearchService.v2.DomainSearchContractsV2Matterport'
+        labels:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Gets or Sets Labels
+        auctionSchedule:
+          $ref: '#/components/schemas/SearchService.v2.DomainSearchContractsV2AuctionSchedule'
+        dateAvailable:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets DateAvailable
+          format: date-time
+        dateListed:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets DateListed
+          format: date-time
+        inspectionSchedule:
+          $ref: '#/components/schemas/SearchService.v2.DomainSearchContractsV2InspectionSchedule'
+        soldData:
+          $ref: '#/components/schemas/SearchService.v2.DomainSearchContractsV2SoldData'
+        listingSlug:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets ListingSlug
       additionalProperties: false
-      description: DomainSearchContractsV2Advertiser
+      description: DomainSearchContractsV2PropertyListing
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    SearchService.v2.DomainSearchWebApiV2ModelsCustomSort:
+      type: object
+      properties:
+        elements:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SearchService.v2.DomainSearchWebApiV2ModelsCustomSortElement'
+          description: The elements (field + direction) that comprise the custom sort. Order is significant, so each sort  element will be applied in the order that it appears in the array. If this array is `null` or  empty, no sort order will be applied, other than potentially surrounding suburbs boost.
+        boostPrimarySuburbs:
+          type:
+          - boolean
+          - 'null'
+          description: Gets or Sets BoostPrimarySuburbs
+      additionalProperties: false
+      description: Defines a sort order comprised of 0 or more elements (Domain.Search.Web.Api.v2.Models.CustomSortElement).  <br />  Each element is applied in the  order specified. An element is a combination of field (Domain.Search.Web.Api.v2.Models.CustomSortField) and direction (Domain.Search.Web.Api.v2.Models.SortDirection).
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    SearchService.v2.DomainSearchWebApiV2ModelsSearchLocation:
+      type: object
+      properties:
+        state:
+          enum:
+          - ACT
+          - NSW
+          - QLD
+          - VIC
+          - SA
+          - WA
+          - NT
+          - TAS
+          type: string
+          description: Gets or Sets State
+        region:
+          type:
+          - string
+          - 'null'
+          description: See http://location-api.domain.com.au/locations/regions
+        area:
+          type:
+          - string
+          - 'null'
+          description: See http://location-api.domain.com.au/locations/areas
+        suburb:
+          type:
+          - string
+          - 'null'
+          description: The name of the suburb i.e Sydney
+        postCode:
+          type:
+          - string
+          - 'null'
+          description: The post code for the suburb i.e 2000
+        includeSurroundingSuburbs:
+          type:
+          - boolean
+          - 'null'
+          description: Return listing in surrounding suburbs  <br />  This works only if a location is a complete suburb match (State, Suburb, Postcode)
+        surroundingRadiusInMeters:
+          maximum: 200000
+          minimum: 1
+          type:
+          - integer
+          - 'null'
+          description: 'RadiusInMeters to add to the search area  <br />  It will be used to construct a circular search area based on suburb mid point.  <br />  This area will be searched in additional to the provided suburb (i.e. the results will belong to either suburb Or Circular area)  Radius Search works only for Suburb and will limit the results on selected suburb''s state. i.e. If calculated circular area  overlapes with a different state, overlapping area will be ignored.  <br />  Minimum Value: 1  <br />  Maximum Value: 200000'
+          format: int32
+        definesPostcodeOnly:
+          type:
+          - boolean
+          - 'null'
+          description: If `true`, this instance has a postcode and nothing more.
+          readOnly: true
+      additionalProperties: false
+      description: DomainSearchWebApiV2ModelsSearchLocation
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    SearchService.v2.DomainSearchContractsV2Matterport:
+      type: object
+      properties:
+        interior:
+          $ref: '#/components/schemas/SearchService.v2.DomainSearchContractsV2MatterportInterior'
+        exterior:
+          $ref: '#/components/schemas/SearchService.v2.DomainSearchContractsV2MatterportExterior'
+      additionalProperties: false
+      description: DomainSearchContractsV2Matterport
       x-data-access-level-info:
         Basic:
         - '*'
@@ -2241,26 +2220,31 @@ components:
         - '*'
         Full:
         - '*'
-    SearchService.v2.DomainSearchWebApiV2ModelsSchoolCatchment:
+    ProblemDetails:
       type: object
       properties:
-        name:
+        type:
           type:
           - string
           - 'null'
-          description: Gets or Sets Name
-        state:
+        title:
           type:
           - string
           - 'null'
-          description: Gets or Sets State
-        postcode:
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
           type:
           - string
           - 'null'
-          description: Gets or Sets Postcode
-      additionalProperties: false
-      description: DomainSearchWebApiV2ModelsSchoolCatchment
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
       x-data-access-level-info:
         Basic:
         - '*'
@@ -2268,27 +2252,43 @@ components:
         - '*'
         Full:
         - '*'
-    SearchService.v2.DomainSearchContractsV2MatterportExterior:
+    SearchService.v2.DomainSearchContractsV2Contact:
       type: object
       properties:
-        attachmentId:
-          type:
-          - integer
-          - 'null'
-          description: Gets or Sets AttachmentId
-          format: int64
-        gaussianSplatKey:
+        name:
           type:
           - string
           - 'null'
-          description: Gets or Sets GaussianSplatKey
-        gaussianThumbnailUri:
+          description: Gets or Sets Name
+        photoUrl:
           type:
           - string
           - 'null'
-          description: Gets or Sets GaussianThumbnailUri
+          description: Gets or Sets PhotoUrl
       additionalProperties: false
-      description: DomainSearchContractsV2MatterportExterior
+      description: DomainSearchContractsV2Contact
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    SearchService.v2.DomainSearchWebApiV2ModelsCircle:
+      required:
+      - radiusInMeters
+      type: object
+      properties:
+        center:
+          $ref: '#/components/schemas/SearchService.v2.DomainSearchWebApiV2ModelsGeoPoint'
+        radiusInMeters:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+          description: Gets or Sets RadiusInMeters
+          format: int32
+      additionalProperties: false
+      description: DomainSearchWebApiV2ModelsCircle
       x-data-access-level-info:
         Basic:
         - '*'

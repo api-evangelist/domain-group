@@ -6,7 +6,7 @@ info:
     email: api@domain.com.au
   termsOfService: https://developer.domain.com.au/docs/latest/support/terms
   version: '1.0'
-  description: 'Operations tagged SalesResults across 3 of this provider''s published API definitions: domain-group-openapi-latest.json, domain-group-openapi-v1.json, domain-group-openapi-v2.json. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged SalesResults across 2 of this provider''s published API definitions: domain-group-openapi-latest.json, domain-group-openapi-v1.json. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.domain.com.au/
   description: Primary
@@ -186,6 +186,88 @@ paths:
       description: Sandbox
 components:
   schemas:
+    AuctionResults.v1.weeklyMediaResultResponse:
+      type: object
+      properties:
+        auctionDate:
+          type: string
+          format: date
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/AuctionResults.v1.weeklyMediaItem'
+      additionalProperties: false
+      description: Weekly media report response
+    AuctionResults.v1.saturdayAuctionItem:
+      required:
+      - region
+      - scheduled
+      - reported
+      - sold
+      - clearanceRate
+      - mostExpensiveSale
+      - leastExpensiveSale
+      - top5
+      type: object
+      properties:
+        region:
+          enum:
+          - Sydney
+          - Melbourne
+          - Brisbane
+          - Adelaide
+          - Perth
+          - Canberra
+          - Hobart
+          - Darwin
+          type: string
+        scheduled:
+          type: number
+        reported:
+          type: number
+        sold:
+          type: number
+        clearanceRate:
+          type:
+          - number
+          - 'null'
+        mostExpensiveSale:
+          oneOf:
+          - $ref: '#/components/schemas/AuctionResults.v1.propertySaleDetails'
+          - type: 'null'
+        leastExpensiveSale:
+          oneOf:
+          - $ref: '#/components/schemas/AuctionResults.v1.propertySaleDetails'
+          - type: 'null'
+        top5:
+          type: array
+          items:
+            type: string
+      additionalProperties: false
+      description: Saturday auction result item
+    AuctionResults.v1.propertySaleDetails:
+      title: Property Sale Details
+      type: object
+      properties:
+        price:
+          type: number
+          description: Final sale price of the property
+        address:
+          type: string
+          description: Full address of the property
+          example: 123 Story Street, NSW
+        bathrooms:
+          type:
+          - number
+          - 'null'
+        bedrooms:
+          type:
+          - number
+          - 'null'
+        carSpaces:
+          type:
+          - number
+          - 'null'
     AuctionResults.v1.summaryResponse:
       type: object
       properties:
@@ -314,18 +396,19 @@ components:
           - 'null'
       additionalProperties: false
       description: Listing event details
-    AuctionResults.v1.weeklyMediaResultResponse:
+    AuctionResults.v1.infoResponse:
       type: object
       properties:
-        auctionDate:
+        auctionedDate:
           type: string
+          description: Date of auction event
           format: date
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/AuctionResults.v1.weeklyMediaItem'
+        lastModifiedDateTime:
+          type: string
+          description: Date when results were published
+          format: date-time
       additionalProperties: false
-      description: Weekly media report response
+      description: Retrieves metadata regarding sales result data of the latest Saturday
     AuctionResults.v1.weeklyMediaItem:
       required:
       - region
@@ -395,42 +478,6 @@ components:
           - type: 'null'
       additionalProperties: false
       description: Email Weekly Media Report details
-    AuctionResults.v1.infoResponse:
-      type: object
-      properties:
-        auctionedDate:
-          type: string
-          description: Date of auction event
-          format: date
-        lastModifiedDateTime:
-          type: string
-          description: Date when results were published
-          format: date-time
-      additionalProperties: false
-      description: Retrieves metadata regarding sales result data of the latest Saturday
-    AuctionResults.v1.propertySaleDetails:
-      title: Property Sale Details
-      type: object
-      properties:
-        price:
-          type: number
-          description: Final sale price of the property
-        address:
-          type: string
-          description: Full address of the property
-          example: 123 Story Street, NSW
-        bathrooms:
-          type:
-          - number
-          - 'null'
-        bedrooms:
-          type:
-          - number
-          - 'null'
-        carSpaces:
-          type:
-          - number
-          - 'null'
     AuctionResults.v1.saturdayAuctionResultResponse:
       type: object
       properties:
@@ -443,53 +490,6 @@ components:
             $ref: '#/components/schemas/AuctionResults.v1.saturdayAuctionItem'
       additionalProperties: false
       description: Saturday auction results response
-    AuctionResults.v1.saturdayAuctionItem:
-      required:
-      - region
-      - scheduled
-      - reported
-      - sold
-      - clearanceRate
-      - mostExpensiveSale
-      - leastExpensiveSale
-      - top5
-      type: object
-      properties:
-        region:
-          enum:
-          - Sydney
-          - Melbourne
-          - Brisbane
-          - Adelaide
-          - Perth
-          - Canberra
-          - Hobart
-          - Darwin
-          type: string
-        scheduled:
-          type: number
-        reported:
-          type: number
-        sold:
-          type: number
-        clearanceRate:
-          type:
-          - number
-          - 'null'
-        mostExpensiveSale:
-          oneOf:
-          - $ref: '#/components/schemas/AuctionResults.v1.propertySaleDetails'
-          - type: 'null'
-        leastExpensiveSale:
-          oneOf:
-          - $ref: '#/components/schemas/AuctionResults.v1.propertySaleDetails'
-          - type: 'null'
-        top5:
-          type: array
-          items:
-            type: string
-      additionalProperties: false
-      description: Saturday auction result item
   securitySchemes:
     apikey:
       type: apiKey
@@ -561,4 +561,3 @@ components:
 x-refined-from:
 - domain-group-openapi-latest.json
 - domain-group-openapi-v1.json
-- domain-group-openapi-v2.json
