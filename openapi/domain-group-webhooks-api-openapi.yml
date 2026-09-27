@@ -187,66 +187,6 @@ paths:
       description: Sandbox
 components:
   schemas:
-    ProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        instance:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
-      x-data-access-level-info:
-        Basic:
-        - '*'
-        Detailed:
-        - '*'
-        Full:
-        - '*'
-    Webhooks.v1.AddSubscriptionRequest:
-      required:
-      - ownerId
-      - ownerType
-      - resourceType
-      type: object
-      properties:
-        resourceType:
-          minLength: 1
-          type: string
-          description: Gets or Sets ResourceType
-        ownerType:
-          minLength: 1
-          type: string
-          description: Gets or Sets OwnerType
-        ownerId:
-          minLength: 1
-          type: string
-          description: Gets or Sets OwnerId
-      additionalProperties: false
-      description: AddSubscriptionRequest
-      x-data-access-level-info:
-        Basic:
-        - '*'
-        Detailed:
-        - '*'
-        Full:
-        - '*'
     Webhooks.v1.WebhookSubscription:
       type: object
       properties:
@@ -313,6 +253,66 @@ components:
           - 'null'
           description: Gets or Sets ResourceType
       additionalProperties: false
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    Webhooks.v1.AddSubscriptionRequest:
+      required:
+      - ownerId
+      - ownerType
+      - resourceType
+      type: object
+      properties:
+        resourceType:
+          minLength: 1
+          type: string
+          description: Gets or Sets ResourceType
+        ownerType:
+          minLength: 1
+          type: string
+          description: Gets or Sets OwnerType
+        ownerId:
+          minLength: 1
+          type: string
+          description: Gets or Sets OwnerId
+      additionalProperties: false
+      description: AddSubscriptionRequest
       x-data-access-level-info:
         Basic:
         - '*'

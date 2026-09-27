@@ -65,6 +65,28 @@ paths:
       description: Sandbox
 components:
   schemas:
+    Domain.LocationProfilesService.v1.Model.LocationDataSalesGrowthList:
+      type: object
+      properties:
+        medianSoldPrice:
+          type: number
+          format: double
+        annualGrowth:
+          type: number
+          format: double
+        numberSold:
+          type: integer
+          format: int32
+        year:
+          type: integer
+          format: int32
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
     Domain.LocationProfilesService.v1.Model.Location:
       type: object
       properties:
@@ -155,21 +177,13 @@ components:
         - '*'
         Full:
         - '*'
-    Domain.LocationProfilesService.v1.Model.LocationDataSalesGrowthList:
+    Domain.LocationProfilesService.v1.Model.LocationSurroundingSuburbs:
       type: object
       properties:
-        medianSoldPrice:
-          type: number
-          format: double
-        annualGrowth:
-          type: number
-          format: double
-        numberSold:
-          type: integer
-          format: int32
-        year:
-          type: integer
-          format: int32
+        name:
+          type: string
+        urlSlug:
+          type: string
       x-data-access-level-info:
         Basic:
         - '*'
@@ -258,20 +272,6 @@ components:
         blockOfUnitsForSale:
           type: integer
           format: int32
-      x-data-access-level-info:
-        Basic:
-        - '*'
-        Detailed:
-        - '*'
-        Full:
-        - '*'
-    Domain.LocationProfilesService.v1.Model.LocationSurroundingSuburbs:
-      type: object
-      properties:
-        name:
-          type: string
-        urlSlug:
-          type: string
       x-data-access-level-info:
         Basic:
         - '*'

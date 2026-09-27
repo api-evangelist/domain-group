@@ -619,402 +619,72 @@ paths:
       description: Sandbox
 components:
   schemas:
-    BookingV2Api.v1.ProductAvailabilityByDurationDto:
+    BookingV2Api.v1.ListingQuote:
       type: object
       properties:
-        durationNo:
-          type: integer
-          format: int32
-        startDate:
-          type: string
-          format: date-time
-        sovAvailable:
-          type: number
-          format: double
-        status:
-          $ref: '#/components/schemas/BookingV2Api.v1.ProductAvailabilityStatus'
-        maxExclusiveAvailable:
-          type: integer
-          format: int32
-        legacyId:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        agencies:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/BookingV2Api.v1.AgencyAvailabilityDetailsDto'
-      additionalProperties: false
-    BookingV2Api.v1.ProductAvailabilityStatus:
-      enum:
-      - Unavailable
-      - Available
-      type: string
-    BookingV2Api.v1.ZoneMapping:
-      type: object
-      properties:
-        zoneId:
-          type: integer
-          format: int32
-        channel:
-          $ref: '#/components/schemas/BookingV2Api.v1.Channel'
-        state:
-          type:
-          - string
-          - 'null'
-        zone:
-          type:
-          - string
-          - 'null'
-        zoneCode:
-          type:
-          - string
-          - 'null'
-        fullName:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    BookingV2Api.v1.ReserveInventoryRequest:
-      required:
-      - assetReferenceId
-      type: object
-      properties:
-        productType:
-          $ref: '#/components/schemas/BookingV2Api.v1.LimitedInventoryProductType'
-        listingCategory:
-          $ref: '#/components/schemas/BookingV2Api.v1.LimitedInventoryListingCategory'
-        listingFilterType:
-          $ref: '#/components/schemas/BookingV2Api.v1.ListingFilterType'
-        channel:
-          $ref: '#/components/schemas/BookingV2Api.v1.Channel'
-        suburbSlug:
-          type:
-          - string
-          - 'null'
-        requestedBy:
-          type:
-          - string
-          - 'null'
-        durations:
-          maxItems: 60
-          minItems: 1
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/BookingV2Api.v1.DurationDto'
-        ipAddress:
-          type:
-          - string
-          - 'null'
-        legacyContractId:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        assetReferenceId:
-          type: string
-          format: uuid
-        isExclusive:
-          type: boolean
-      additionalProperties: false
-    BookingV2Api.v1.GetBatchLimitedInventoryAvailabilityResponse:
-      type: object
-      properties:
-        results:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/BookingV2Api.v1.ProductAvailabilityDetailsDto'
-        summary:
-          $ref: '#/components/schemas/BookingV2Api.v1.BatchSummaryResponse'
-      additionalProperties: false
-    SocialBoost.v1.ListingRateInfo:
-      type: object
-      properties:
-        productListingLevel:
-          enum:
-          - None
-          - PlatinumExtend
-          - Platinum
-          - Gold
-          - Silver
-          - Branded
-          - Tier1
-          - Tier2
-          - Tier3
-          type:
-          - string
-          - 'null'
-          description: Gets or Sets ProductListingLevel
-        productListingRule:
-          enum:
-          - None
-          - EarlyAccess
-          - SocialBoostAll
-          - SocialBoostCasual
-          - SocialBoostRuralAll
-          - SocialBoostRuralCasual
-          - SocialBoostAgent
-          - SocialBoostRuralAgent
-          type:
-          - string
-          - 'null'
-          description: Gets or Sets ProductListingRule
-        bookingProductId:
-          type:
-          - integer
-          - 'null'
-          description: Gets or Sets BookingProductId
-          format: int32
-        bookingProductRateId:
-          type:
-          - integer
-          - 'null'
-          description: Gets or Sets BookingProductRateId
-          format: int32
-        bookingProductName:
-          type:
-          - string
-          - 'null'
-          description: Gets or Sets BookingProductName
-        durationInDays:
-          type:
-          - integer
-          - 'null'
-          description: Gets or Sets DurationInDays
-          format: int32
-        costExGst:
-          type:
-          - number
-          - 'null'
-          description: Gets or Sets CostExGst
-          format: double
-        costIncGst:
-          type:
-          - number
-          - 'null'
-          description: Gets or Sets CostIncGst
-          format: double
-        zoneId:
-          type:
-          - integer
-          - 'null'
-          description: Gets or Sets ZoneId
-          format: int32
-        productAttributes:
-          type:
-          - string
-          - 'null'
-          description: Gets or Sets ProductAttributes
-        rateAttributes:
-          type:
-          - string
-          - 'null'
-          description: Gets or Sets RateAttributes
-        bookingMethod:
-          type:
-          - string
-          - 'null'
-          description: Gets or Sets BookingMethod
-        productForRural:
-          type:
-          - boolean
-          - 'null'
-          description: Gets or Sets ProductForRural
-      additionalProperties: false
-      description: ListingRateInfo
-      x-data-access-level-info:
-        Basic:
-        - '*'
-        Detailed:
-        - '*'
-        Full:
-        - '*'
-    BookingV2Api.v1.LimitedInventoryProductType:
-      enum:
-      - TopSpot
-      - TopSpotRural
-      - ListingShowcase
-      - DreamHomes
-      type: string
-    BookingV2Api.v1.GetBatchLimitedInventoryAvailabilityRequest:
-      required:
-      - suburbSlug
-      type: object
-      properties:
-        suburbSlug:
-          minLength: 1
-          type: string
-        products:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/BookingV2Api.v1.ProductTypeAndCategoryDto'
-        channel:
-          $ref: '#/components/schemas/BookingV2Api.v1.Channel'
-        dateStart:
-          type: string
-          format: date-time
-        numOfDurations:
-          maximum: 60
-          minimum: 1
-          type: integer
-          format: int32
-        durationLimit:
-          maximum: 60
-          minimum: 1
-          type: integer
-          format: int32
-      additionalProperties: false
-    Bookings.V2.RateForNewListing:
-      type: object
-      properties:
-        costExGst:
-          type:
-          - number
-          - 'null'
-          description: Gets or Sets CostExGst
-          format: double
-        costIncGst:
-          type:
-          - number
-          - 'null'
-          description: Gets or Sets CostIncGst
-          format: double
-        contractEndDate:
-          type:
-          - string
-          - 'null'
-          description: Gets or Sets ContractEndDate
-          format: date-time
-        message:
-          type:
-          - string
-          - 'null'
-          description: Gets or Sets Message
-        priceMatrixId:
-          type:
-          - integer
-          - 'null'
-          description: Gets or Sets PriceMatrixId
-          format: int32
-        productName:
-          type:
-          - string
-          - 'null'
-          description: Gets or Sets ProductName
-      additionalProperties: false
-      description: NewListingRateResponse
-      x-data-access-level-info:
-        Basic:
-        - '*'
-        Detailed:
-        - '*'
-        Full:
-        - '*'
-    BookingV2Api.v1.EBrochureOptions:
-      enum:
-      - NoEbrochure
-      - Standard
-      - Platinum
-      type: string
-    BookingV2Api.v1.LimitedInventoryListingCategory:
-      enum:
-      - Sale
-      - Lease
-      type: string
-    BookingV2Api.v1.ListingFilterType:
-      enum:
-      - Residential
-      - NewDevelopment
-      - Project
-      - Rural
-      type: string
-      description: For Dreamhomes listing filters
-    BookingV2Api.v1.UnreserveInventoryByBatchResponse:
-      type: object
-      properties:
-        results:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/BookingV2Api.v1.UnreserveResponse'
-        summary:
-          $ref: '#/components/schemas/BookingV2Api.v1.BatchSummaryResponse'
-      additionalProperties: false
-    BookingV2Api.v1.Channel:
-      enum:
-      - Residential
-      - Commercial
-      - Business
-      type: string
-    BookingV2Api.v1.ListingType:
-      enum:
-      - Sale
-      - Rent
-      - None
-      type: string
-      description: Sale=0 and Rent=1 to match the Objective and PropertyListingType enums
-    BookingV2Api.v1.GetListingPriceQuoteByAgencyRequest:
-      required:
-      - agencyId
-      - listingPrice
-      - postcode
-      - state
-      - suburb
-      type: object
-      properties:
-        channel:
-          $ref: '#/components/schemas/BookingV2Api.v1.Channel'
         listingType:
-          $ref: '#/components/schemas/BookingV2Api.v1.ListingType'
-        agencyId:
-          maximum: 2147483647
-          minimum: 1
-          type: integer
-          format: int32
-        suburb:
-          minLength: 1
-          type: string
-        state:
-          minLength: 1
-          type: string
-        postcode:
-          minLength: 1
-          type: string
-        asAtDate:
-          type: string
-          format: date-time
-        listingPrice:
-          maximum: 2147483647
-          minimum: 1
-          type: number
-          format: double
-        agentId:
           type:
           - string
           - 'null'
-        isNewDevelopment:
+        durationInDays:
+          type: integer
+          format: int32
+        costExGst:
+          type: number
+          format: double
+        costIncGst:
+          type: number
+          format: double
+        originalCostExGst:
+          type: number
+          format: double
+        originalCostIncGst:
+          type: number
+          format: double
+        appliedAdjustment:
+          type: number
+          format: double
+        isDefault:
           type: boolean
-        isRural:
+        isDowngrade:
           type: boolean
+        isUpgrade:
+          type: boolean
+        name:
+          type:
+          - string
+          - 'null'
+        tier:
+          type:
+          - string
+          - 'null'
       additionalProperties: false
-    BookingV2Api.v1.ProductTypeAndCategoryDto:
+    SocialBoost.v1.RateForNewSocialBoost:
       type: object
       properties:
-        productType:
-          $ref: '#/components/schemas/BookingV2Api.v1.LimitedInventoryProductType'
-        listingCategory:
-          $ref: '#/components/schemas/BookingV2Api.v1.LimitedInventoryListingCategory'
+        reason:
+          enum:
+          - BasedOnContract
+          - NoContractFound
+          - NoRateFound
+          - PropertyTypeExcluded
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets Reason
+        contract:
+          $ref: '#/components/schemas/SocialBoost.v1.ContractInfo'
+        rate:
+          $ref: '#/components/schemas/SocialBoost.v1.ListingRateInfo'
       additionalProperties: false
+      description: GetRatesForNewSocialBoostResponse
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
     SocialBoost.v1.RateForNewSocialBoostRequestModel:
       required:
       - agencyId
@@ -1136,58 +806,82 @@ components:
         - '*'
         Full:
         - '*'
-    BookingV2Api.v1.ValidationProblemDetails:
+    BookingV2Api.v1.LimitedInventoryProductType:
+      enum:
+      - TopSpot
+      - TopSpotRural
+      - ListingShowcase
+      - DreamHomes
+      type: string
+    BookingV2Api.v1.ReserveInventoryByBatchResponse:
       type: object
       properties:
-        errors:
+        results:
           type:
-          - object
+          - array
           - 'null'
-          additionalProperties:
-            type: array
-            items:
-              type: string
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
+          items:
+            $ref: '#/components/schemas/BookingV2Api.v1.ReservationResponse'
+        summary:
+          $ref: '#/components/schemas/BookingV2Api.v1.BatchSummaryResponse'
+      additionalProperties: false
+    SocialBoost.v1.ContractInfo:
+      type: object
+      properties:
+        id:
           type:
           - integer
           - 'null'
+          description: Gets or Sets Id
           format: int32
-        detail:
+        bookingProductId:
+          type:
+          - integer
+          - 'null'
+          description: Gets or Sets BookingProductId
+          format: int32
+        agencyId:
+          type:
+          - integer
+          - 'null'
+          description: Gets or Sets AgencyId
+          format: int32
+        startDate:
           type:
           - string
           - 'null'
-        instance:
+          description: Gets or Sets StartDate
+          format: date-time
+        endDate:
           type:
           - string
           - 'null'
-      additionalProperties: {}
-    SocialBoost.v1.RateForNewSocialBoost:
-      type: object
-      properties:
-        reason:
-          enum:
-          - BasedOnContract
-          - NoContractFound
-          - NoRateFound
-          - PropertyTypeExcluded
+          description: Gets or Sets EndDate
+          format: date-time
+        finishedDate:
           type:
           - string
           - 'null'
-          description: Gets or Sets Reason
-        contract:
-          $ref: '#/components/schemas/SocialBoost.v1.ContractInfo'
-        rate:
-          $ref: '#/components/schemas/SocialBoost.v1.ListingRateInfo'
+          description: Gets or Sets FinishedDate
+          format: date-time
+        attributes:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets Attributes
+        agentId:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets AgentId
+        isAgentContract:
+          type:
+          - boolean
+          - 'null'
+          description: Gets or Sets IsAgentContract
+          readOnly: true
       additionalProperties: false
-      description: GetRatesForNewSocialBoostResponse
+      description: ContractInfo
       x-data-access-level-info:
         Basic:
         - '*'
@@ -1195,6 +889,109 @@ components:
         - '*'
         Full:
         - '*'
+    Bookings.V2.RateForNewListing:
+      type: object
+      properties:
+        costExGst:
+          type:
+          - number
+          - 'null'
+          description: Gets or Sets CostExGst
+          format: double
+        costIncGst:
+          type:
+          - number
+          - 'null'
+          description: Gets or Sets CostIncGst
+          format: double
+        contractEndDate:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets ContractEndDate
+          format: date-time
+        message:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets Message
+        priceMatrixId:
+          type:
+          - integer
+          - 'null'
+          description: Gets or Sets PriceMatrixId
+          format: int32
+        productName:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets ProductName
+      additionalProperties: false
+      description: NewListingRateResponse
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    BookingV2Api.v1.ProductAvailabilityStatus:
+      enum:
+      - Unavailable
+      - Available
+      type: string
+    BookingV2Api.v1.GetQuoteListingPriceBySuburbsResponse:
+      type: object
+      properties:
+        zoneMappings:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/BookingV2Api.v1.ZoneMapping'
+        bookingRates:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/BookingV2Api.v1.BookingRate'
+        isSuccess:
+          type: boolean
+          description: 'Gets a value indicating whether the response was successful.
+
+            The response is considered successful if there are no errors.'
+          readOnly: true
+        errors:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Gets or sets a list of errors. If the list is empty, the response is considered successful.
+        error:
+          type:
+          - string
+          - 'null'
+          description: Gets the first error message from the list of errors.
+          readOnly: true
+      additionalProperties: false
+    BookingV2Api.v1.LimitedInventoryListingCategory:
+      enum:
+      - Sale
+      - Lease
+      type: string
+    BookingV2Api.v1.Channel:
+      enum:
+      - Residential
+      - Commercial
+      - Business
+      type: string
+    BookingV2Api.v1.EBrochureOptions:
+      enum:
+      - NoEbrochure
+      - Standard
+      - Platinum
+      type: string
     BookingV2Api.v1.UnreserveInventoryByBatchRequest:
       required:
       - cancelledBy
@@ -1217,91 +1014,124 @@ components:
             type: integer
             format: int32
       additionalProperties: false
-    BookingV2Api.v1.AreaFilter:
+    BookingV2Api.v1.BookingRule:
+      enum:
+      - All
+      - Casual
+      - Agent
+      - None
+      - RestrictedAll
+      type: string
+    BookingV2Api.v1.ReserveInventoryRequest:
       required:
-      - state
-      - zone
+      - assetReferenceId
       type: object
       properties:
-        state:
-          minLength: 1
-          type: string
-        zone:
-          minLength: 1
-          type: string
-      additionalProperties: false
-    BookingV2Api.v1.AgencyAvailabilityDetailsDto:
-      type: object
-      properties:
-        id:
+        productType:
+          $ref: '#/components/schemas/BookingV2Api.v1.LimitedInventoryProductType'
+        listingCategory:
+          $ref: '#/components/schemas/BookingV2Api.v1.LimitedInventoryListingCategory'
+        listingFilterType:
+          $ref: '#/components/schemas/BookingV2Api.v1.ListingFilterType'
+        channel:
+          $ref: '#/components/schemas/BookingV2Api.v1.Channel'
+        suburbSlug:
           type:
           - string
           - 'null'
-        agencyId:
-          type: integer
-          format: int32
-        agencyName:
+        requestedBy:
           type:
           - string
           - 'null'
-        status:
+        durations:
+          maxItems: 60
+          minItems: 1
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/BookingV2Api.v1.DurationDto'
+        ipAddress:
           type:
           - string
           - 'null'
-        reference:
-          type:
-          - string
-          - 'null'
-        internalContractId:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        reservationId:
+        legacyContractId:
           type:
           - integer
           - 'null'
           format: int32
         assetReferenceId:
+          type: string
+          format: uuid
+        isExclusive:
+          type: boolean
+      additionalProperties: false
+    BookingV2Api.v1.ProblemDetails:
+      type: object
+      properties:
+        type:
           type:
           - string
           - 'null'
-          format: uuid
-      additionalProperties: false
-    BookingV2Api.v1.RateBand:
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    BookingV2Api.v1.UnreserveInventoryRequest:
+      required:
+      - cancelledBy
       type: object
       properties:
-        priceFrom:
-          type:
-          - number
-          - 'null'
-          format: double
-        priceTo:
-          type:
-          - number
-          - 'null'
-          format: double
-        costIncGst:
-          type: number
-          format: double
-        costExGst:
-          type: number
-          format: double
-        isBaseRate:
-          type: boolean
+        agencyId:
+          type: integer
+          format: int32
+        cancelledBy:
+          maxLength: 50
+          minLength: 1
+          type: string
       additionalProperties: false
-    BookingV2Api.v1.BatchSummaryResponse:
+    BookingV2Api.v1.ProductTypeAndCategoryDto:
       type: object
       properties:
-        requested:
+        productType:
+          $ref: '#/components/schemas/BookingV2Api.v1.LimitedInventoryProductType'
+        listingCategory:
+          $ref: '#/components/schemas/BookingV2Api.v1.LimitedInventoryListingCategory'
+      additionalProperties: false
+    BookingV2Api.v1.ReserveInventoryByBatchRequest:
+      required:
+      - requestedBy
+      type: object
+      properties:
+        agencyId:
           type: integer
           format: int32
-        succeeded:
-          type: integer
-          format: int32
-        failed:
-          type: integer
-          format: int32
+        requestedBy:
+          maxLength: 50
+          minLength: 1
+          type: string
+        reservations:
+          maxItems: 10
+          minItems: 1
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/BookingV2Api.v1.ReserveInventoryRequest'
       additionalProperties: false
     Bookings.V2.RateForNewListingRequest:
       required:
@@ -1630,63 +1460,239 @@ components:
         - '*'
         Full:
         - '*'
-    SocialBoost.v1.ContractInfo:
+    BookingV2Api.v1.AgencyAvailabilityDetailsDto:
       type: object
       properties:
         id:
           type:
+          - string
+          - 'null'
+        agencyId:
+          type: integer
+          format: int32
+        agencyName:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - string
+          - 'null'
+        reference:
+          type:
+          - string
+          - 'null'
+        internalContractId:
+          type:
           - integer
           - 'null'
-          description: Gets or Sets Id
           format: int32
+        reservationId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        assetReferenceId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+      additionalProperties: false
+    BookingV2Api.v1.GetListingPriceQuoteByAgencyRequest:
+      required:
+      - agencyId
+      - listingPrice
+      - postcode
+      - state
+      - suburb
+      type: object
+      properties:
+        channel:
+          $ref: '#/components/schemas/BookingV2Api.v1.Channel'
+        listingType:
+          $ref: '#/components/schemas/BookingV2Api.v1.ListingType'
+        agencyId:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+          format: int32
+        suburb:
+          minLength: 1
+          type: string
+        state:
+          minLength: 1
+          type: string
+        postcode:
+          minLength: 1
+          type: string
+        asAtDate:
+          type: string
+          format: date-time
+        listingPrice:
+          maximum: 2147483647
+          minimum: 1
+          type: number
+          format: double
+        agentId:
+          type:
+          - string
+          - 'null'
+        isNewDevelopment:
+          type: boolean
+        isRural:
+          type: boolean
+      additionalProperties: false
+    BookingV2Api.v1.DurationDto:
+      type: object
+      properties:
+        durationNo:
+          type: integer
+          format: int32
+        dateStart:
+          type: string
+          format: date-time
+        dateEnd:
+          type: string
+          format: date-time
+      additionalProperties: false
+    BookingV2Api.v1.ListingFilterType:
+      enum:
+      - Residential
+      - NewDevelopment
+      - Project
+      - Rural
+      type: string
+      description: For Dreamhomes listing filters
+    BookingV2Api.v1.RateBand:
+      type: object
+      properties:
+        priceFrom:
+          type:
+          - number
+          - 'null'
+          format: double
+        priceTo:
+          type:
+          - number
+          - 'null'
+          format: double
+        costIncGst:
+          type: number
+          format: double
+        costExGst:
+          type: number
+          format: double
+        isBaseRate:
+          type: boolean
+      additionalProperties: false
+    BookingV2Api.v1.BatchSummaryResponse:
+      type: object
+      properties:
+        requested:
+          type: integer
+          format: int32
+        succeeded:
+          type: integer
+          format: int32
+        failed:
+          type: integer
+          format: int32
+      additionalProperties: false
+    SocialBoost.v1.ListingRateInfo:
+      type: object
+      properties:
+        productListingLevel:
+          enum:
+          - None
+          - PlatinumExtend
+          - Platinum
+          - Gold
+          - Silver
+          - Branded
+          - Tier1
+          - Tier2
+          - Tier3
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets ProductListingLevel
+        productListingRule:
+          enum:
+          - None
+          - EarlyAccess
+          - SocialBoostAll
+          - SocialBoostCasual
+          - SocialBoostRuralAll
+          - SocialBoostRuralCasual
+          - SocialBoostAgent
+          - SocialBoostRuralAgent
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets ProductListingRule
         bookingProductId:
           type:
           - integer
           - 'null'
           description: Gets or Sets BookingProductId
           format: int32
-        agencyId:
+        bookingProductRateId:
           type:
           - integer
           - 'null'
-          description: Gets or Sets AgencyId
+          description: Gets or Sets BookingProductRateId
           format: int32
-        startDate:
+        bookingProductName:
           type:
           - string
           - 'null'
-          description: Gets or Sets StartDate
-          format: date-time
-        endDate:
+          description: Gets or Sets BookingProductName
+        durationInDays:
+          type:
+          - integer
+          - 'null'
+          description: Gets or Sets DurationInDays
+          format: int32
+        costExGst:
+          type:
+          - number
+          - 'null'
+          description: Gets or Sets CostExGst
+          format: double
+        costIncGst:
+          type:
+          - number
+          - 'null'
+          description: Gets or Sets CostIncGst
+          format: double
+        zoneId:
+          type:
+          - integer
+          - 'null'
+          description: Gets or Sets ZoneId
+          format: int32
+        productAttributes:
           type:
           - string
           - 'null'
-          description: Gets or Sets EndDate
-          format: date-time
-        finishedDate:
+          description: Gets or Sets ProductAttributes
+        rateAttributes:
           type:
           - string
           - 'null'
-          description: Gets or Sets FinishedDate
-          format: date-time
-        attributes:
+          description: Gets or Sets RateAttributes
+        bookingMethod:
           type:
           - string
           - 'null'
-          description: Gets or Sets Attributes
-        agentId:
-          type:
-          - string
-          - 'null'
-          description: Gets or Sets AgentId
-        isAgentContract:
+          description: Gets or Sets BookingMethod
+        productForRural:
           type:
           - boolean
           - 'null'
-          description: Gets or Sets IsAgentContract
-          readOnly: true
+          description: Gets or Sets ProductForRural
       additionalProperties: false
-      description: ContractInfo
+      description: ListingRateInfo
       x-data-access-level-info:
         Basic:
         - '*'
@@ -1694,7 +1700,44 @@ components:
         - '*'
         Full:
         - '*'
-    BookingV2Api.v1.ReserveInventoryByBatchResponse:
+    BookingV2Api.v1.ZoneMapping:
+      type: object
+      properties:
+        zoneId:
+          type: integer
+          format: int32
+        channel:
+          $ref: '#/components/schemas/BookingV2Api.v1.Channel'
+        state:
+          type:
+          - string
+          - 'null'
+        zone:
+          type:
+          - string
+          - 'null'
+        zoneCode:
+          type:
+          - string
+          - 'null'
+        fullName:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    BookingV2Api.v1.DurationType:
+      enum:
+      - Weekly
+      - Monthly
+      type: string
+    BookingV2Api.v1.ListingType:
+      enum:
+      - Sale
+      - Rent
+      - None
+      type: string
+      description: Sale=0 and Rent=1 to match the Objective and PropertyListingType enums
+    BookingV2Api.v1.GetBatchLimitedInventoryAvailabilityResponse:
       type: object
       properties:
         results:
@@ -1702,11 +1745,11 @@ components:
           - array
           - 'null'
           items:
-            $ref: '#/components/schemas/BookingV2Api.v1.ReservationResponse'
+            $ref: '#/components/schemas/BookingV2Api.v1.ProductAvailabilityDetailsDto'
         summary:
           $ref: '#/components/schemas/BookingV2Api.v1.BatchSummaryResponse'
       additionalProperties: false
-    BookingV2Api.v1.ProblemDetails:
+    ProblemDetails:
       type: object
       properties:
         type:
@@ -1731,214 +1774,53 @@ components:
           - string
           - 'null'
       additionalProperties: {}
-    BookingV2Api.v1.ReservationResponse:
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    BookingV2Api.v1.UnreserveInventoryByBatchResponse:
       type: object
       properties:
-        error:
-          type:
-          - string
-          - 'null'
-        reservationId:
-          type: integer
-          format: int32
-        agencyId:
-          type: integer
-          format: int32
-        suburbSlug:
-          type:
-          - string
-          - 'null'
-        productType:
-          $ref: '#/components/schemas/BookingV2Api.v1.LimitedInventoryProductType'
-        listingCategory:
-          $ref: '#/components/schemas/BookingV2Api.v1.LimitedInventoryListingCategory'
-        dateStart:
-          type: string
-          format: date-time
-        dateEnd:
-          type: string
-          format: date-time
-        noOfDurations:
-          type: integer
-          format: int32
-        assetReferenceId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-      additionalProperties: false
-    BookingV2Api.v1.GetQuoteListingPriceBySuburbsRequest:
-      required:
-      - areas
-      - duration
-      - tier
-      type: object
-      properties:
-        areas:
-          maxItems: 20
-          minItems: 1
-          type: array
-          items:
-            $ref: '#/components/schemas/BookingV2Api.v1.AreaFilter'
-          description: State and Zones selected
-        tier:
-          minLength: 1
-          type: string
-          description: Product tier e.g. Gold, Silver, Platinum
-        duration:
-          type: integer
-          description: Duration in days of product
-          format: int32
-        asAtDate:
-          type: string
-          description: Date of the quote. Can simulate past or future date but relying on data TP currently has (e.g. quote of a product before recorded expiry)
-          format: date-time
-        contractType:
-          $ref: '#/components/schemas/BookingV2Api.v1.BookingRule'
-        channel:
-          $ref: '#/components/schemas/BookingV2Api.v1.Channel'
-        listingType:
-          $ref: '#/components/schemas/BookingV2Api.v1.ListingType'
-        eBrochureOption:
-          $ref: '#/components/schemas/BookingV2Api.v1.EBrochureOptions'
-        isNewDevelopment:
-          type: boolean
-      additionalProperties: false
-    BookingV2Api.v1.AddonQuote:
-      type: object
-      properties:
-        addonType:
-          type:
-          - string
-          - 'null'
-        costExGst:
-          type: number
-          format: double
-        costIncGst:
-          type: number
-          format: double
-        originalCostExGst:
-          type: number
-          format: double
-        originalCostIncGst:
-          type: number
-          format: double
-        appliedAdjustment:
-          type: number
-          format: double
-        durationInDays:
-          type: integer
-          format: int32
-        name:
-          type:
-          - string
-          - 'null'
-        tier:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    BookingV2Api.v1.ReserveInventoryByBatchRequest:
-      required:
-      - requestedBy
-      type: object
-      properties:
-        agencyId:
-          type: integer
-          format: int32
-        requestedBy:
-          maxLength: 50
-          minLength: 1
-          type: string
-        reservations:
-          maxItems: 10
-          minItems: 1
+        results:
           type:
           - array
           - 'null'
           items:
-            $ref: '#/components/schemas/BookingV2Api.v1.ReserveInventoryRequest'
+            $ref: '#/components/schemas/BookingV2Api.v1.UnreserveResponse'
+        summary:
+          $ref: '#/components/schemas/BookingV2Api.v1.BatchSummaryResponse'
       additionalProperties: false
-    BookingV2Api.v1.UnreserveResponse:
-      type: object
-      properties:
-        error:
-          type:
-          - string
-          - 'null'
-        reservationId:
-          type: integer
-          format: int32
-        agencyId:
-          type: integer
-          format: int32
-      additionalProperties: false
-    BookingV2Api.v1.DurationDto:
+    BookingV2Api.v1.ProductAvailabilityByDurationDto:
       type: object
       properties:
         durationNo:
           type: integer
           format: int32
-        dateStart:
+        startDate:
           type: string
           format: date-time
-        dateEnd:
-          type: string
-          format: date-time
-      additionalProperties: false
-    BookingV2Api.v1.BookingRate:
-      type: object
-      properties:
-        bookingRule:
-          type:
-          - string
-          - 'null'
-        channel:
-          $ref: '#/components/schemas/BookingV2Api.v1.Channel'
-        listingType:
-          $ref: '#/components/schemas/BookingV2Api.v1.ListingType'
-        tier:
-          type:
-          - string
-          - 'null'
-        durationInDays:
+        sovAvailable:
+          type: number
+          format: double
+        status:
+          $ref: '#/components/schemas/BookingV2Api.v1.ProductAvailabilityStatus'
+        maxExclusiveAvailable:
           type: integer
           format: int32
-        ebrochureType:
+        legacyId:
           type:
-          - string
+          - integer
           - 'null'
-        isNewDevelopment:
-          type: boolean
-        productCatalogId:
-          type: integer
           format: int32
-        zoneId:
-          type: integer
-          format: int32
-        matrixVersionId:
-          type:
-          - string
-          - 'null'
-        rateBands:
+        agencies:
           type:
           - array
           - 'null'
           items:
-            $ref: '#/components/schemas/BookingV2Api.v1.RateBand'
-      additionalProperties: false
-    BookingV2Api.v1.UnreserveInventoryRequest:
-      required:
-      - cancelledBy
-      type: object
-      properties:
-        agencyId:
-          type: integer
-          format: int32
-        cancelledBy:
-          maxLength: 50
-          minLength: 1
-          type: string
+            $ref: '#/components/schemas/BookingV2Api.v1.AgencyAvailabilityDetailsDto'
       additionalProperties: false
     BookingV2Api.v1.GetListingPriceQuoteByAgencyResponse:
       type: object
@@ -1982,64 +1864,157 @@ components:
           description: Gets the first error message from the list of errors.
           readOnly: true
       additionalProperties: false
-    BookingV2Api.v1.BookingRule:
-      enum:
-      - All
-      - Casual
-      - Agent
-      - None
-      - RestrictedAll
-      type: string
-    BookingV2Api.v1.GetQuoteListingPriceBySuburbsResponse:
+    BookingV2Api.v1.GetQuoteListingPriceBySuburbsRequest:
+      required:
+      - areas
+      - duration
+      - tier
       type: object
       properties:
-        zoneMappings:
-          type:
-          - array
-          - 'null'
+        areas:
+          maxItems: 20
+          minItems: 1
+          type: array
           items:
-            $ref: '#/components/schemas/BookingV2Api.v1.ZoneMapping'
-        bookingRates:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/BookingV2Api.v1.BookingRate'
-        isSuccess:
+            $ref: '#/components/schemas/BookingV2Api.v1.AreaFilter'
+          description: State and Zones selected
+        tier:
+          minLength: 1
+          type: string
+          description: Product tier e.g. Gold, Silver, Platinum
+        duration:
+          type: integer
+          description: Duration in days of product
+          format: int32
+        asAtDate:
+          type: string
+          description: Date of the quote. Can simulate past or future date but relying on data TP currently has (e.g. quote of a product before recorded expiry)
+          format: date-time
+        contractType:
+          $ref: '#/components/schemas/BookingV2Api.v1.BookingRule'
+        channel:
+          $ref: '#/components/schemas/BookingV2Api.v1.Channel'
+        listingType:
+          $ref: '#/components/schemas/BookingV2Api.v1.ListingType'
+        eBrochureOption:
+          $ref: '#/components/schemas/BookingV2Api.v1.EBrochureOptions'
+        isNewDevelopment:
           type: boolean
-          description: 'Gets a value indicating whether the response was successful.
-
-            The response is considered successful if there are no errors.'
-          readOnly: true
-        errors:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-          description: Gets or sets a list of errors. If the list is empty, the response is considered successful.
+      additionalProperties: false
+    BookingV2Api.v1.ReservationResponse:
+      type: object
+      properties:
         error:
           type:
           - string
           - 'null'
-          description: Gets the first error message from the list of errors.
-          readOnly: true
+        reservationId:
+          type: integer
+          format: int32
+        agencyId:
+          type: integer
+          format: int32
+        suburbSlug:
+          type:
+          - string
+          - 'null'
+        productType:
+          $ref: '#/components/schemas/BookingV2Api.v1.LimitedInventoryProductType'
+        listingCategory:
+          $ref: '#/components/schemas/BookingV2Api.v1.LimitedInventoryListingCategory'
+        dateStart:
+          type: string
+          format: date-time
+        dateEnd:
+          type: string
+          format: date-time
+        noOfDurations:
+          type: integer
+          format: int32
+        assetReferenceId:
+          type:
+          - string
+          - 'null'
+          format: uuid
       additionalProperties: false
-    BookingV2Api.v1.DurationType:
-      enum:
-      - Weekly
-      - Monthly
-      type: string
-    BookingV2Api.v1.ListingQuote:
+    BookingV2Api.v1.BookingRate:
       type: object
       properties:
+        bookingRule:
+          type:
+          - string
+          - 'null'
+        channel:
+          $ref: '#/components/schemas/BookingV2Api.v1.Channel'
         listingType:
+          $ref: '#/components/schemas/BookingV2Api.v1.ListingType'
+        tier:
           type:
           - string
           - 'null'
         durationInDays:
           type: integer
           format: int32
+        ebrochureType:
+          type:
+          - string
+          - 'null'
+        isNewDevelopment:
+          type: boolean
+        productCatalogId:
+          type: integer
+          format: int32
+        zoneId:
+          type: integer
+          format: int32
+        matrixVersionId:
+          type:
+          - string
+          - 'null'
+        rateBands:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/BookingV2Api.v1.RateBand'
+      additionalProperties: false
+    BookingV2Api.v1.GetBatchLimitedInventoryAvailabilityRequest:
+      required:
+      - suburbSlug
+      type: object
+      properties:
+        suburbSlug:
+          minLength: 1
+          type: string
+        products:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/BookingV2Api.v1.ProductTypeAndCategoryDto'
+        channel:
+          $ref: '#/components/schemas/BookingV2Api.v1.Channel'
+        dateStart:
+          type: string
+          format: date-time
+        numOfDurations:
+          maximum: 60
+          minimum: 1
+          type: integer
+          format: int32
+        durationLimit:
+          maximum: 60
+          minimum: 1
+          type: integer
+          format: int32
+      additionalProperties: false
+    BookingV2Api.v1.AddonQuote:
+      type: object
+      properties:
+        addonType:
+          type:
+          - string
+          - 'null'
         costExGst:
           type: number
           format: double
@@ -2055,12 +2030,9 @@ components:
         appliedAdjustment:
           type: number
           format: double
-        isDefault:
-          type: boolean
-        isDowngrade:
-          type: boolean
-        isUpgrade:
-          type: boolean
+        durationInDays:
+          type: integer
+          format: int32
         name:
           type:
           - string
@@ -2070,38 +2042,20 @@ components:
           - string
           - 'null'
       additionalProperties: false
-    ProblemDetails:
+    BookingV2Api.v1.UnreserveResponse:
       type: object
       properties:
-        type:
+        error:
           type:
           - string
           - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
+        reservationId:
+          type: integer
           format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        instance:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
-      x-data-access-level-info:
-        Basic:
-        - '*'
-        Detailed:
-        - '*'
-        Full:
-        - '*'
+        agencyId:
+          type: integer
+          format: int32
+      additionalProperties: false
     BookingV2Api.v1.ProductAvailabilityDetailsDto:
       type: object
       properties:
@@ -2145,6 +2099,52 @@ components:
           description: 'Populated when an error occurs during availability retrieval or processing.
 
             Provides details about the error encountered, allowing consumers to handle error scenarios appropriately.'
+      additionalProperties: false
+    BookingV2Api.v1.ValidationProblemDetails:
+      type: object
+      properties:
+        errors:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    BookingV2Api.v1.AreaFilter:
+      required:
+      - state
+      - zone
+      type: object
+      properties:
+        state:
+          minLength: 1
+          type: string
+        zone:
+          minLength: 1
+          type: string
       additionalProperties: false
   securitySchemes:
     apikey:
