@@ -176,78 +176,30 @@ paths:
       description: Sandbox
 components:
   schemas:
-    Domain.Public.Adapter.Web.Api.Models.v1.Enquiries.Sender:
+    Enquiries.V1.Sender:
       type: object
       properties:
         firstName:
-          type: string
-          description: Sender first name
+          type:
+          - string
+          - 'null'
         lastName:
-          type: string
-          description: Sender lastname/surname
+          type:
+          - string
+          - 'null'
         email:
-          type: string
-          description: Sender email address
+          type:
+          - string
+          - 'null'
         phoneNumber:
-          type: string
-          description: Sender phone number
+          type:
+          - string
+          - 'null'
         postcode:
-          pattern: ^\d*$
-          type: string
-          description: Postcode of sender's location
-      description: Contains enquiry sender details
-    ProblemDetails:
-      type: object
-      properties:
-        type:
           type:
           - string
           - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        instance:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
-      x-data-access-level-info:
-        Basic:
-        - '*'
-        Detailed:
-        - '*'
-        Full:
-        - '*'
-    Enquiries.V1.Recipient:
-      required:
-      - address
-      type: object
-      properties:
-        recipientType:
-          enum:
-          - primary
-          - secondary
-          - hidden
-          type:
-          - string
-          - 'null'
-          description: Gets or Sets RecipientType
-        address:
-          minLength: 1
-          type: string
-          description: Delivery address ( email address, phone number etc. )  of the recipient
       additionalProperties: false
-      description: Recipient of an Group.Enquiry.Model.Enquiry
       x-data-access-level-info:
         Basic:
         - '*'
@@ -285,100 +237,26 @@ components:
         - '*'
         Full:
         - '*'
-    Domain.EnquiryService.v1.Model.GroupEnquiryServiceModelsEnquiryResponse:
-      type: object
-      properties:
-        s3Key:
-          type: string
-        message:
-          type: string
-        enquiryReceiptTimestamp:
-          type: string
-          format: date-time
-        warnings:
-          type: array
-          items:
-            type: string
-      x-data-access-level-info:
-        Basic:
-        - '*'
-        Detailed:
-        - '*'
-        Full:
-        - '*'
-    Domain.Public.Adapter.Web.Api.Models.v1.Enquiries.Enquiry:
-      type: object
-      properties:
-        deliveryMethod:
-          enum:
-          - email
-          - sms
-          type: string
-          description: Delivery method of the enquiry
-        enquiryType:
-          enum:
-          - listing
-          - devProject
-          - newDevLanding
-          - agencyProfile
-          - agentProfile
-          - contractRequest
-          - vendorEnquiry
-          - prePortalListing
-          type: string
-          description: Type of enquiry
-        referenceId:
-          type: integer
-          description: Listing identifier
-          format: int32
-        id:
-          type: string
-          description: Enquiry identifier
-        sender:
-          $ref: '#/components/schemas/Domain.Public.Adapter.Web.Api.Models.v1.Enquiries.Sender'
-        subject:
-          type: string
-          description: Enquiry subject
-        message:
-          type: string
-          description: Enquiry message
-        metaData:
-          type: object
-          additionalProperties:
-            type: string
-          description: MetaData of the enquiry
-      description: An enquiry with associated reference (eg. listing)
-    Enquiries.V1.Sender:
+    Domain.Public.Adapter.Web.Api.Models.v1.Enquiries.Sender:
       type: object
       properties:
         firstName:
-          type:
-          - string
-          - 'null'
+          type: string
+          description: Sender first name
         lastName:
-          type:
-          - string
-          - 'null'
+          type: string
+          description: Sender lastname/surname
         email:
-          type:
-          - string
-          - 'null'
+          type: string
+          description: Sender email address
         phoneNumber:
-          type:
-          - string
-          - 'null'
+          type: string
+          description: Sender phone number
         postcode:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-      x-data-access-level-info:
-        Basic:
-        - '*'
-        Detailed:
-        - '*'
-        Full:
-        - '*'
+          pattern: ^\d*$
+          type: string
+          description: Postcode of sender's location
+      description: Contains enquiry sender details
     Enquiries.V1.EnquiryReport:
       type: object
       properties:
@@ -455,6 +333,128 @@ components:
         - '*'
         Full:
         - '*'
+    Enquiries.V1.Recipient:
+      required:
+      - address
+      type: object
+      properties:
+        recipientType:
+          enum:
+          - primary
+          - secondary
+          - hidden
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets RecipientType
+        address:
+          minLength: 1
+          type: string
+          description: Delivery address ( email address, phone number etc. )  of the recipient
+      additionalProperties: false
+      description: Recipient of an Group.Enquiry.Model.Enquiry
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    Domain.EnquiryService.v1.Model.GroupEnquiryServiceModelsEnquiryResponse:
+      type: object
+      properties:
+        s3Key:
+          type: string
+        message:
+          type: string
+        enquiryReceiptTimestamp:
+          type: string
+          format: date-time
+        warnings:
+          type: array
+          items:
+            type: string
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    Domain.Public.Adapter.Web.Api.Models.v1.Enquiries.Enquiry:
+      type: object
+      properties:
+        deliveryMethod:
+          enum:
+          - email
+          - sms
+          type: string
+          description: Delivery method of the enquiry
+        enquiryType:
+          enum:
+          - listing
+          - devProject
+          - newDevLanding
+          - agencyProfile
+          - agentProfile
+          - contractRequest
+          - vendorEnquiry
+          - prePortalListing
+          type: string
+          description: Type of enquiry
+        referenceId:
+          type: integer
+          description: Listing identifier
+          format: int32
+        id:
+          type: string
+          description: Enquiry identifier
+        sender:
+          $ref: '#/components/schemas/Domain.Public.Adapter.Web.Api.Models.v1.Enquiries.Sender'
+        subject:
+          type: string
+          description: Enquiry subject
+        message:
+          type: string
+          description: Enquiry message
+        metaData:
+          type: object
+          additionalProperties:
+            type: string
+          description: MetaData of the enquiry
+      description: An enquiry with associated reference (eg. listing)
   securitySchemes:
     apikey:
       type: apiKey

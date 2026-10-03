@@ -129,6 +129,34 @@ components:
           type: string
       additionalProperties: false
       description: Address of property
+    Property.Enrichment.v2.PropertyPerils:
+      type: object
+      properties:
+        propertyId:
+          type: string
+        addressComponents:
+          $ref: '#/components/schemas/Property.Enrichment.v2.AddressBasic'
+        bushfireZone:
+          type:
+          - boolean
+          - 'null'
+        floodZone:
+          type:
+          - boolean
+          - 'null'
+        heritageZone:
+          type:
+          - boolean
+          - 'null'
+        zoning:
+          type:
+          - string
+          - 'null'
+        permittedUse:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
     Property.Enrichment.v2.MultipleAddressBasic:
       type: array
       items:
@@ -164,34 +192,6 @@ components:
             additionalProperties: false
             description: Address of property
         additionalProperties: false
-    Property.Enrichment.v2.PropertyPerils:
-      type: object
-      properties:
-        propertyId:
-          type: string
-        addressComponents:
-          $ref: '#/components/schemas/Property.Enrichment.v2.AddressBasic'
-        bushfireZone:
-          type:
-          - boolean
-          - 'null'
-        floodZone:
-          type:
-          - boolean
-          - 'null'
-        heritageZone:
-          type:
-          - boolean
-          - 'null'
-        zoning:
-          type:
-          - string
-          - 'null'
-        permittedUse:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
   securitySchemes:
     apikey:
       type: apiKey

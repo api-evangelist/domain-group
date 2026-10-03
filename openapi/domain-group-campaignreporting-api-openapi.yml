@@ -139,64 +139,17 @@ components:
           type: integer
           format: int32
       additionalProperties: false
-    CampaignAPI.v1.ListingPerformanceResponse:
+    CampaignAPI.v1.ProjectPerformanceDataResponse:
       required:
-      - agencyName
-      - domainAgencyId
-      - ioNumber
-      - leads
-      - listingId
-      - projectId
-      - projectName
-      - shares
+      - data
       type: object
       properties:
-        listingId:
+        data:
           type:
-          - string
+          - array
           - 'null'
-        projectId:
-          type:
-          - string
-          - 'null'
-        projectName:
-          type:
-          - string
-          - 'null'
-        domainAgencyId:
-          type:
-          - string
-          - 'null'
-        agencyName:
-          type:
-          - string
-          - 'null'
-        ioNumber:
-          type:
-          - string
-          - 'null'
-        date:
-          type: string
-          format: date
-        leads:
-          $ref: '#/components/schemas/CampaignAPI.v1.Leads'
-        photoViews:
-          type: integer
-          format: int32
-        mapViews:
-          type: integer
-          format: int32
-        pageViews:
-          type: integer
-          format: int32
-        floorPlanViews:
-          type: integer
-          format: int32
-        shares:
-          $ref: '#/components/schemas/CampaignAPI.v1.Shares'
-        shortlisted:
-          type: integer
-          format: int32
+          items:
+            $ref: '#/components/schemas/CampaignAPI.v1.ProjectPerformanceResponse'
       additionalProperties: false
     CampaignAPI.v1.ProjectPerformanceResponse:
       required:
@@ -265,7 +218,7 @@ components:
           - 'null'
           format: double
       additionalProperties: false
-    CampaignAPI.v1.ProjectPerformanceDataResponse:
+    CampaignAPI.v1.ListingPerformanceDataResponse:
       required:
       - data
       type: object
@@ -275,7 +228,7 @@ components:
           - array
           - 'null'
           items:
-            $ref: '#/components/schemas/CampaignAPI.v1.ProjectPerformanceResponse'
+            $ref: '#/components/schemas/CampaignAPI.v1.ListingPerformanceResponse'
       additionalProperties: false
     CampaignAPI.v1.Shares:
       type: object
@@ -290,6 +243,65 @@ components:
           type: integer
           format: int32
         sharedViaEmail:
+          type: integer
+          format: int32
+      additionalProperties: false
+    CampaignAPI.v1.ListingPerformanceResponse:
+      required:
+      - agencyName
+      - domainAgencyId
+      - ioNumber
+      - leads
+      - listingId
+      - projectId
+      - projectName
+      - shares
+      type: object
+      properties:
+        listingId:
+          type:
+          - string
+          - 'null'
+        projectId:
+          type:
+          - string
+          - 'null'
+        projectName:
+          type:
+          - string
+          - 'null'
+        domainAgencyId:
+          type:
+          - string
+          - 'null'
+        agencyName:
+          type:
+          - string
+          - 'null'
+        ioNumber:
+          type:
+          - string
+          - 'null'
+        date:
+          type: string
+          format: date
+        leads:
+          $ref: '#/components/schemas/CampaignAPI.v1.Leads'
+        photoViews:
+          type: integer
+          format: int32
+        mapViews:
+          type: integer
+          format: int32
+        pageViews:
+          type: integer
+          format: int32
+        floorPlanViews:
+          type: integer
+          format: int32
+        shares:
+          $ref: '#/components/schemas/CampaignAPI.v1.Shares'
+        shortlisted:
           type: integer
           format: int32
       additionalProperties: false
@@ -326,18 +338,6 @@ components:
             items:
               type: string
       additionalProperties: {}
-    CampaignAPI.v1.ListingPerformanceDataResponse:
-      required:
-      - data
-      type: object
-      properties:
-        data:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/CampaignAPI.v1.ListingPerformanceResponse'
-      additionalProperties: false
   securitySchemes:
     apikey:
       type: apiKey

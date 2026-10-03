@@ -340,144 +340,36 @@ paths:
       description: Sandbox
 components:
   schemas:
-    Authorities.v1.SubscriptionRequest:
-      type: object
-      properties:
-        webhookId:
-          type: string
-          example: whk_7d9c8f4a0cb54b948a010bb56ea98fe0
-    Authorities.v1.IndividualRequest:
-      required:
-      - address
-      - email
-      - firstName
-      - lastName
-      - mobile
-      - phoneNumber
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-          example: cf52bbf4-8d00-45e5-917a-8f27631a7da0
-        address:
-          $ref: '#/components/schemas/Authorities.v1.Address'
-        dateOfBirth:
-          type:
-          - string
-          - 'null'
-          format: date
-          example: '2022-07-16'
-        email:
-          type: string
-          format: email
-          example: johndoe@email.com
-        firstName:
-          type: string
-          example: John
-        lastName:
-          type: string
-          example: Smith
-        middleName:
-          type: string
-          example: Doe
-        mobile:
-          type: string
-          example: '1234567890'
-        phoneNumber:
-          type: string
-          example: '1234567890'
-        title:
-          type: string
-          example: ''
-        type:
-          type: string
-          description: 'Available options are: `individual`, `company`'
-          readOnly: true
-          example: individual
-    Authorities.v1.IndividualResponse:
+    Authorities.v1.MarketingCampaignResponse:
       required:
       - id
-      - address
-      - email
-      - firstName
-      - lastName
-      - mobile
-      - phoneNumber
       type: object
       allOf:
-      - $ref: '#/components/schemas/Authorities.v1.IndividualRequest'
+      - $ref: '#/components/schemas/Authorities.v1.MarketingCampaignRequest'
       - type: object
       properties:
-        id:
-          type: string
-          format: uuid
-          example: cf52bbf4-8d00-45e5-917a-8f27631a7da0
-    Authorities.v1.VendorAttachments:
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-          example: 0557934b-b9f8-4d88-bd5a-9c69d5bf0beb
-        attachment:
-          type: string
-          format: binary
-          writeOnly: true
-          example: /path/to/file
-    Authorities.v1.VendorRequest:
-      required:
-      - contact
-      - authority
-      - nature
-      - order
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-          example: cf52bbf4-8d00-45e5-917a-8f27631a7da0
-        contact:
-          $ref: '#/components/schemas/Authorities.v1.IndividualRequest'
-        contactRepresented:
-          $ref: '#/components/schemas/Authorities.v1.CompanyRequest'
-        conciergeOptedIn:
-          type:
-          - boolean
-          - 'null'
-          example: false
-        nature:
-          type: string
-          example: Legal Representative
-        trust:
-          type:
-          - string
-          - 'null'
-        order:
-          type: integer
-          example: 1
-        authorityAttachments:
+        marketingCampaignItems:
           type: array
           items:
-            type: string
-            description: ID of an attachment.
-            format: uuid
-            example: ceb22e1d-419a-480f-a1df-ce53914acf5e
-          description: An array of attachment IDs.
-    Authorities.v1.MarketingCampaignItemResponse:
+            $ref: '#/components/schemas/Authorities.v1.MarketingCampaignItemResponse'
+        id:
+          type: string
+          format: uuid
+          example: 0557934b-b9f8-4d88-bd5a-9c69d5bf0beb
+    Authorities.v1.AgentResponse:
       required:
       - id
+      - name
+      - email
       type: object
       allOf:
-      - $ref: '#/components/schemas/Authorities.v1.MarketingCampaignItemRequest'
+      - $ref: '#/components/schemas/Authorities.v1.AgentRequest'
       - type: object
       properties:
         id:
           type: string
           format: uuid
-          example: 0557934b-b9f8-4d88-bd5a-9c69d5bf0beb
+          example: cf52bbf4-8d00-45e5-917a-8f27631a7da0
     Authorities.v1.VendorResponse:
       required:
       - id
@@ -498,7 +390,13 @@ components:
           $ref: '#/components/schemas/Authorities.v1.IndividualResponse'
         contactRepresented:
           $ref: '#/components/schemas/Authorities.v1.CompanyResponse'
-    Authorities.v1.Attachments:
+    Authorities.v1.SubscriptionRequest:
+      type: object
+      properties:
+        webhookId:
+          type: string
+          example: whk_7d9c8f4a0cb54b948a010bb56ea98fe0
+    Authorities.v1.VendorAttachments:
       properties:
         id:
           type: string
@@ -510,144 +408,6 @@ components:
           format: binary
           writeOnly: true
           example: /path/to/file
-        fileType:
-          type: string
-          writeOnly: true
-          example: Available options are marketingAttachments, commissionAttachments, espAttachment
-    Authorities.v1.CrmDetails:
-      required:
-      - type
-      - id
-      type: object
-      properties:
-        type:
-          type: string
-          example: D
-        id:
-          type: string
-          example: '1234567890'
-      description: Details of CRM
-    Authorities.v1.AuthorityResponse:
-      required:
-      - id
-      - address
-      - agency
-      - bathrooms
-      - bedrooms
-      - parking
-      - property_type
-      - type
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/Authorities.v1.AuthorityRequest'
-      - type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          example: cf52bbf4-8d00-45e5-917a-8f27631a7da0
-        marketingCampaigns:
-          type: array
-          items:
-            $ref: '#/components/schemas/Authorities.v1.MarketingCampaignResponse'
-        vendors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Authorities.v1.VendorResponse'
-        agents:
-          type: array
-          items:
-            $ref: '#/components/schemas/Authorities.v1.AgentResponse'
-    Authorities.v1.AgentResponse:
-      required:
-      - id
-      - name
-      - email
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/Authorities.v1.AgentRequest'
-      - type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          example: cf52bbf4-8d00-45e5-917a-8f27631a7da0
-    Authorities.v1.CompanyResponse:
-      required:
-      - id
-      - email
-      - address
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/Authorities.v1.CompanyRequest'
-      - type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          example: cf52bbf4-8d00-45e5-917a-8f27631a7da0
-    Authorities.v1.MarketingCampaignRequest:
-      required:
-      - campaignType
-      properties:
-        advertising:
-          type: string
-          description: advertising cost of this marketing campaign
-          format: decimal
-          example: '3000.00'
-        campaignType:
-          type: string
-          description: 'Available options are: `To Be Advised`, `Paper Based`, `Campaign Track`, `Realhub`'
-          example: Paper Based
-        marketingCampaignItems:
-          type: array
-          items:
-            $ref: '#/components/schemas/Authorities.v1.MarketingCampaignItemRequest'
-        comments:
-          type: string
-          format: json
-          example: '{"children":[{"children":null,"hidden":false,"hides_children":false,"placeholders":null,"remove_css_class":null,"selected":false,"tag_key":null,"text":"Written Request","text_convertible":true,"type":"option_radio"}],"hidden":false,"placeholders":null,"required":false,"text":null,"text_convertible":true,"type":"group_radio"}'
-        commentsFallback:
-          type: string
-          example: ''
-        discountAmount:
-          type:
-          - string
-          - 'null'
-          format: decimal
-          example: '1000.00'
-        discountPercent:
-          type:
-          - string
-          - 'null'
-          format: decimal
-          example: '10.00'
-        expense:
-          type:
-          - string
-          - 'null'
-          description: 'Available options are: `Signing of this Authority`, `Written request`, `Specific Date`, `Signing of this Form 6`, `Signing of this Agency Agreement`, `Upon Invoice or Account`, `Prior to the commencement of marketing campaign`, `On Settlement or Withdrawal whichever occurs first`, `Vendor to pay through Campaign Agent v2`, `Vendor to pay through Market Now`, `Vendor to pay through Rello`, `Vendor to pay through List Ready`'
-          example: Signing of this Authority
-        other:
-          type: string
-          format: decimal
-          example: '1000.00'
-        payableOn:
-          type:
-          - string
-          - 'null'
-          format: date
-          example: '2016-10-22'
-        total:
-          type: string
-          description: Total cost of this marketing campaign. Total of the items cost if there are items or (advertising + other) cost for other types
-          format: decimal
-          example: '4000.00'
-        realhubQuoteId:
-          type:
-          - string
-          - 'null'
-          example: '1234567890'
     Authorities.v1.AuthorityRequest:
       required:
       - address
@@ -847,110 +607,6 @@ components:
           default: false
         crmDetails:
           $ref: '#/components/schemas/Authorities.v1.CrmDetails'
-    Authorities.v1.Address:
-      required:
-      - country
-      - number
-      - postcode
-      - state
-      - street
-      - suburb
-      type: object
-      properties:
-        country:
-          type: string
-          example: Australia
-        number:
-          type: string
-          example: 123123/45
-        postcode:
-          type: string
-          example: '2000'
-        state:
-          type: string
-          example: New South Wales
-        street:
-          type: string
-          example: Sample St
-        suburb:
-          type: string
-          example: Sydney
-    Authorities.v1.MarketingCampaignResponse:
-      required:
-      - id
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/Authorities.v1.MarketingCampaignRequest'
-      - type: object
-      properties:
-        marketingCampaignItems:
-          type: array
-          items:
-            $ref: '#/components/schemas/Authorities.v1.MarketingCampaignItemResponse'
-        id:
-          type: string
-          format: uuid
-          example: 0557934b-b9f8-4d88-bd5a-9c69d5bf0beb
-    Authorities.v1.MarketingCampaignItemRequest:
-      type: object
-      properties:
-        itemId:
-          type: string
-        finalPrice:
-          type: string
-          format: decimal
-          example: '4000.00'
-        vendorPrice:
-          type: string
-          format: decimal
-          example: '4000.00'
-        description:
-          type:
-          - string
-          - 'null'
-        selected:
-          type: boolean
-          default: true
-        hidden:
-          type: boolean
-          default: false
-    Authorities.v1.SubscriptionResponse:
-      type: object
-      properties:
-        subscriptionId:
-          type: string
-          example: '123'
-    Authorities.v1.AgentRequest:
-      required:
-      - name
-      - email
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-          example: cf52bbf4-8d00-45e5-917a-8f27631a7da0
-        name:
-          type: string
-          example: John Doe
-        email:
-          type: string
-          format: email
-          example: johndoe@email.com
-        user:
-          type: string
-          format: uuid
-          example: cf52bbf4-8d00-45e5-917a-8f27631a7da0
-        mobile:
-          type: string
-          example: 0123456789
-        officeNumber:
-          type: string
-          example: 0123456789
-        licenseNumber:
-          type: string
-          example: 0123456789
     Authorities.v1.CompanyRequest:
       required:
       - address
@@ -993,6 +649,350 @@ components:
           description: 'Available options are: `individual`, `company`'
           readOnly: true
           example: company
+    Authorities.v1.AuthorityResponse:
+      required:
+      - id
+      - address
+      - agency
+      - bathrooms
+      - bedrooms
+      - parking
+      - property_type
+      - type
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Authorities.v1.AuthorityRequest'
+      - type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: cf52bbf4-8d00-45e5-917a-8f27631a7da0
+        marketingCampaigns:
+          type: array
+          items:
+            $ref: '#/components/schemas/Authorities.v1.MarketingCampaignResponse'
+        vendors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Authorities.v1.VendorResponse'
+        agents:
+          type: array
+          items:
+            $ref: '#/components/schemas/Authorities.v1.AgentResponse'
+    Authorities.v1.Attachments:
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+          example: 0557934b-b9f8-4d88-bd5a-9c69d5bf0beb
+        attachment:
+          type: string
+          format: binary
+          writeOnly: true
+          example: /path/to/file
+        fileType:
+          type: string
+          writeOnly: true
+          example: Available options are marketingAttachments, commissionAttachments, espAttachment
+    Authorities.v1.CompanyResponse:
+      required:
+      - id
+      - email
+      - address
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Authorities.v1.CompanyRequest'
+      - type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: cf52bbf4-8d00-45e5-917a-8f27631a7da0
+    Authorities.v1.Address:
+      required:
+      - country
+      - number
+      - postcode
+      - state
+      - street
+      - suburb
+      type: object
+      properties:
+        country:
+          type: string
+          example: Australia
+        number:
+          type: string
+          example: 123123/45
+        postcode:
+          type: string
+          example: '2000'
+        state:
+          type: string
+          example: New South Wales
+        street:
+          type: string
+          example: Sample St
+        suburb:
+          type: string
+          example: Sydney
+    Authorities.v1.VendorRequest:
+      required:
+      - contact
+      - authority
+      - nature
+      - order
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+          example: cf52bbf4-8d00-45e5-917a-8f27631a7da0
+        contact:
+          $ref: '#/components/schemas/Authorities.v1.IndividualRequest'
+        contactRepresented:
+          $ref: '#/components/schemas/Authorities.v1.CompanyRequest'
+        conciergeOptedIn:
+          type:
+          - boolean
+          - 'null'
+          example: false
+        nature:
+          type: string
+          example: Legal Representative
+        trust:
+          type:
+          - string
+          - 'null'
+        order:
+          type: integer
+          example: 1
+        authorityAttachments:
+          type: array
+          items:
+            type: string
+            description: ID of an attachment.
+            format: uuid
+            example: ceb22e1d-419a-480f-a1df-ce53914acf5e
+          description: An array of attachment IDs.
+    Authorities.v1.IndividualResponse:
+      required:
+      - id
+      - address
+      - email
+      - firstName
+      - lastName
+      - mobile
+      - phoneNumber
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Authorities.v1.IndividualRequest'
+      - type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: cf52bbf4-8d00-45e5-917a-8f27631a7da0
+    Authorities.v1.CrmDetails:
+      required:
+      - type
+      - id
+      type: object
+      properties:
+        type:
+          type: string
+          example: D
+        id:
+          type: string
+          example: '1234567890'
+      description: Details of CRM
+    Authorities.v1.MarketingCampaignRequest:
+      required:
+      - campaignType
+      properties:
+        advertising:
+          type: string
+          description: advertising cost of this marketing campaign
+          format: decimal
+          example: '3000.00'
+        campaignType:
+          type: string
+          description: 'Available options are: `To Be Advised`, `Paper Based`, `Campaign Track`, `Realhub`'
+          example: Paper Based
+        marketingCampaignItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/Authorities.v1.MarketingCampaignItemRequest'
+        comments:
+          type: string
+          format: json
+          example: '{"children":[{"children":null,"hidden":false,"hides_children":false,"placeholders":null,"remove_css_class":null,"selected":false,"tag_key":null,"text":"Written Request","text_convertible":true,"type":"option_radio"}],"hidden":false,"placeholders":null,"required":false,"text":null,"text_convertible":true,"type":"group_radio"}'
+        commentsFallback:
+          type: string
+          example: ''
+        discountAmount:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          example: '1000.00'
+        discountPercent:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          example: '10.00'
+        expense:
+          type:
+          - string
+          - 'null'
+          description: 'Available options are: `Signing of this Authority`, `Written request`, `Specific Date`, `Signing of this Form 6`, `Signing of this Agency Agreement`, `Upon Invoice or Account`, `Prior to the commencement of marketing campaign`, `On Settlement or Withdrawal whichever occurs first`, `Vendor to pay through Campaign Agent v2`, `Vendor to pay through Market Now`, `Vendor to pay through Rello`, `Vendor to pay through List Ready`'
+          example: Signing of this Authority
+        other:
+          type: string
+          format: decimal
+          example: '1000.00'
+        payableOn:
+          type:
+          - string
+          - 'null'
+          format: date
+          example: '2016-10-22'
+        total:
+          type: string
+          description: Total cost of this marketing campaign. Total of the items cost if there are items or (advertising + other) cost for other types
+          format: decimal
+          example: '4000.00'
+        realhubQuoteId:
+          type:
+          - string
+          - 'null'
+          example: '1234567890'
+    Authorities.v1.AgentRequest:
+      required:
+      - name
+      - email
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+          example: cf52bbf4-8d00-45e5-917a-8f27631a7da0
+        name:
+          type: string
+          example: John Doe
+        email:
+          type: string
+          format: email
+          example: johndoe@email.com
+        user:
+          type: string
+          format: uuid
+          example: cf52bbf4-8d00-45e5-917a-8f27631a7da0
+        mobile:
+          type: string
+          example: 0123456789
+        officeNumber:
+          type: string
+          example: 0123456789
+        licenseNumber:
+          type: string
+          example: 0123456789
+    Authorities.v1.MarketingCampaignItemResponse:
+      required:
+      - id
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Authorities.v1.MarketingCampaignItemRequest'
+      - type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: 0557934b-b9f8-4d88-bd5a-9c69d5bf0beb
+    Authorities.v1.IndividualRequest:
+      required:
+      - address
+      - email
+      - firstName
+      - lastName
+      - mobile
+      - phoneNumber
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+          example: cf52bbf4-8d00-45e5-917a-8f27631a7da0
+        address:
+          $ref: '#/components/schemas/Authorities.v1.Address'
+        dateOfBirth:
+          type:
+          - string
+          - 'null'
+          format: date
+          example: '2022-07-16'
+        email:
+          type: string
+          format: email
+          example: johndoe@email.com
+        firstName:
+          type: string
+          example: John
+        lastName:
+          type: string
+          example: Smith
+        middleName:
+          type: string
+          example: Doe
+        mobile:
+          type: string
+          example: '1234567890'
+        phoneNumber:
+          type: string
+          example: '1234567890'
+        title:
+          type: string
+          example: ''
+        type:
+          type: string
+          description: 'Available options are: `individual`, `company`'
+          readOnly: true
+          example: individual
+    Authorities.v1.SubscriptionResponse:
+      type: object
+      properties:
+        subscriptionId:
+          type: string
+          example: '123'
+    Authorities.v1.MarketingCampaignItemRequest:
+      type: object
+      properties:
+        itemId:
+          type: string
+        finalPrice:
+          type: string
+          format: decimal
+          example: '4000.00'
+        vendorPrice:
+          type: string
+          format: decimal
+          example: '4000.00'
+        description:
+          type:
+          - string
+          - 'null'
+        selected:
+          type: boolean
+          default: true
+        hidden:
+          type: boolean
+          default: false
   securitySchemes:
     apikey:
       type: apiKey

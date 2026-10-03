@@ -83,14 +83,26 @@ paths:
       x-domain-environment: Any
 components:
   schemas:
-    Property.Enrichment.v2.PointRadiusPropertyId:
+    Property.Enrichment.v2.PointRadiusLatLon:
       required:
-      - propertyId
+      - latitude
+      - longitude
       type: object
       properties:
-        propertyId:
+        latitude:
+          type: number
+          description: latitude of the coordinates to use as the center of the search radius.
+        longitude:
+          type: number
+          description: longitude of the coordinates to use as the center of the search radius.
+    Property.Enrichment.v2.PointRadiusGnafId:
+      required:
+      - gnafId
+      type: object
+      properties:
+        gnafId:
           type: string
-          description: Property ID of property to use as the center of the search radius.
+          description: Gnaf ID of property to use as the center of the search radius.
     Property.Enrichment.v2.ImageTypes:
       enum:
       - ListingPhoto
@@ -107,6 +119,33 @@ components:
       - AgentCarousel
       - DevelopmentProjectGalleryPhoto
       - DevelopmentProjectAdvertisementPhoto
+    Property.Enrichment.v2.AddressBasic:
+      type: object
+      properties:
+        flatNumber:
+          type:
+          - string
+          - 'null'
+        streetNumber:
+          type: string
+        streetName:
+          type: string
+        streetType:
+          type:
+          - string
+          - 'null'
+        streetTypeLong:
+          type:
+          - string
+          - 'null'
+        suburb:
+          type: string
+        postcode:
+          type: string
+        state:
+          type: string
+      additionalProperties: false
+      description: Address of property
     Property.Enrichment.v2.SearchItemOutput:
       type: object
       properties:
@@ -157,6 +196,46 @@ components:
           - 'null'
         distance:
           type: number
+    Property.Enrichment.v2.PointRadiusPropertyId:
+      required:
+      - propertyId
+      type: object
+      properties:
+        propertyId:
+          type: string
+          description: Property ID of property to use as the center of the search radius.
+    Property.Enrichment.v2.PropertyAddress-v2:
+      required:
+      - streetNumber
+      - streetName
+      - suburb
+      - postcode
+      - state
+      type: object
+      properties:
+        flatNumber:
+          type:
+          - string
+          - 'null'
+        streetNumber:
+          type: string
+        streetName:
+          type: string
+        streetType:
+          type:
+          - string
+          - 'null'
+        streetTypeLong:
+          type:
+          - string
+          - 'null'
+        suburb:
+          type: string
+        postcode:
+          type: string
+        state:
+          type: string
+      description: Address of property
     Property.Enrichment.v2.PointRadiusParams:
       type: object
       properties:
@@ -211,85 +290,6 @@ components:
         landSizeMax:
           type: integer
           description: Maximum land size in square meters.
-    Property.Enrichment.v2.PropertyAddress-v2:
-      required:
-      - streetNumber
-      - streetName
-      - suburb
-      - postcode
-      - state
-      type: object
-      properties:
-        flatNumber:
-          type:
-          - string
-          - 'null'
-        streetNumber:
-          type: string
-        streetName:
-          type: string
-        streetType:
-          type:
-          - string
-          - 'null'
-        streetTypeLong:
-          type:
-          - string
-          - 'null'
-        suburb:
-          type: string
-        postcode:
-          type: string
-        state:
-          type: string
-      description: Address of property
-    Property.Enrichment.v2.AddressBasic:
-      type: object
-      properties:
-        flatNumber:
-          type:
-          - string
-          - 'null'
-        streetNumber:
-          type: string
-        streetName:
-          type: string
-        streetType:
-          type:
-          - string
-          - 'null'
-        streetTypeLong:
-          type:
-          - string
-          - 'null'
-        suburb:
-          type: string
-        postcode:
-          type: string
-        state:
-          type: string
-      additionalProperties: false
-      description: Address of property
-    Property.Enrichment.v2.PointRadiusGnafId:
-      required:
-      - gnafId
-      type: object
-      properties:
-        gnafId:
-          type: string
-          description: Gnaf ID of property to use as the center of the search radius.
-    Property.Enrichment.v2.PointRadiusLatLon:
-      required:
-      - latitude
-      - longitude
-      type: object
-      properties:
-        latitude:
-          type: number
-          description: latitude of the coordinates to use as the center of the search radius.
-        longitude:
-          type: number
-          description: longitude of the coordinates to use as the center of the search radius.
   securitySchemes:
     apikey:
       type: apiKey

@@ -186,61 +186,111 @@ paths:
       description: Sandbox
 components:
   schemas:
-    AuctionResults.v1.summaryResponse:
+    AuctionResults.v1.weeklyMediaItem:
+      required:
+      - region
+      - scheduled
+      - reported
+      - sold
+      - soldPrior
+      - withdrawn
+      - passedIn
+      - medianPrice
+      - totalSoldPrice
+      - clearanceRate
+      - clearanceRateLastYear
+      type: object
+      properties:
+        region:
+          enum:
+          - Sydney
+          - Melbourne
+          - Brisbane
+          - Adelaide
+          - Perth
+          - Canberra
+          - Hobart
+          - Darwin
+          - National
+          type: string
+        scheduled:
+          type: number
+        reported:
+          type: number
+        sold:
+          type: number
+        soldPrior:
+          type: number
+        withdrawn:
+          type: number
+        passedIn:
+          type: number
+        privateSales:
+          type:
+          - number
+          - 'null'
+        medianPrice:
+          type:
+          - number
+          - 'null'
+        totalSoldPrice:
+          type:
+          - number
+          - 'null'
+        clearanceRate:
+          type:
+          - number
+          - 'null'
+        clearanceRateLastYear:
+          type:
+          - number
+          - 'null'
+        mostExpensiveSale:
+          oneOf:
+          - $ref: '#/components/schemas/AuctionResults.v1.propertySaleDetails'
+          - type: 'null'
+        leastExpensiveSale:
+          oneOf:
+          - $ref: '#/components/schemas/AuctionResults.v1.propertySaleDetails'
+          - type: 'null'
+      additionalProperties: false
+      description: Email Weekly Media Report details
+    AuctionResults.v1.propertySaleDetails:
+      title: Property Sale Details
+      type: object
+      properties:
+        price:
+          type: number
+          description: Final sale price of the property
+        address:
+          type: string
+          description: Full address of the property
+          example: 123 Story Street, NSW
+        bathrooms:
+          type:
+          - number
+          - 'null'
+        bedrooms:
+          type:
+          - number
+          - 'null'
+        carSpaces:
+          type:
+          - number
+          - 'null'
+    AuctionResults.v1.infoResponse:
       type: object
       properties:
         auctionedDate:
-          type:
-          - string
-          - 'null'
+          type: string
+          description: Date of auction event
           format: date
         lastModifiedDateTime:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        numberListedForAuction:
-          type:
-          - number
-          - 'null'
-        numberWithdrawn:
-          type:
-          - number
-          - 'null'
-        numberUnreported:
-          type:
-          - number
-          - 'null'
-        numberSold:
-          type:
-          - number
-          - 'null'
-        totalSales:
-          type:
-          - number
-          - 'null'
-        median:
-          type:
-          - number
-          - 'null'
-        adjClearanceRate:
-          type:
-          - number
-          - 'null'
-      additionalProperties: false
-      description: Get report stats
-    AuctionResults.v1.weeklyMediaResultResponse:
-      type: object
-      properties:
-        auctionDate:
           type: string
-          format: date
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/AuctionResults.v1.weeklyMediaItem'
+          description: Date when results were published
+          format: date-time
       additionalProperties: false
-      description: Weekly media report response
+      description: Retrieves metadata regarding sales result data of the latest Saturday
     AuctionResults.v1.listingEventItem:
       type: object
       properties:
@@ -326,75 +376,49 @@ components:
           - 'null'
       additionalProperties: false
       description: Listing event details
-    AuctionResults.v1.weeklyMediaItem:
-      required:
-      - region
-      - scheduled
-      - reported
-      - sold
-      - soldPrior
-      - withdrawn
-      - passedIn
-      - medianPrice
-      - totalSoldPrice
-      - clearanceRate
-      - clearanceRateLastYear
+    AuctionResults.v1.summaryResponse:
       type: object
       properties:
-        region:
-          enum:
-          - Sydney
-          - Melbourne
-          - Brisbane
-          - Adelaide
-          - Perth
-          - Canberra
-          - Hobart
-          - Darwin
-          - National
-          type: string
-        scheduled:
-          type: number
-        reported:
-          type: number
-        sold:
-          type: number
-        soldPrior:
-          type: number
-        withdrawn:
-          type: number
-        passedIn:
-          type: number
-        privateSales:
+        auctionedDate:
+          type:
+          - string
+          - 'null'
+          format: date
+        lastModifiedDateTime:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        numberListedForAuction:
           type:
           - number
           - 'null'
-        medianPrice:
+        numberWithdrawn:
           type:
           - number
           - 'null'
-        totalSoldPrice:
+        numberUnreported:
           type:
           - number
           - 'null'
-        clearanceRate:
+        numberSold:
           type:
           - number
           - 'null'
-        clearanceRateLastYear:
+        totalSales:
           type:
           - number
           - 'null'
-        mostExpensiveSale:
-          oneOf:
-          - $ref: '#/components/schemas/AuctionResults.v1.propertySaleDetails'
-          - type: 'null'
-        leastExpensiveSale:
-          oneOf:
-          - $ref: '#/components/schemas/AuctionResults.v1.propertySaleDetails'
-          - type: 'null'
+        median:
+          type:
+          - number
+          - 'null'
+        adjClearanceRate:
+          type:
+          - number
+          - 'null'
       additionalProperties: false
-      description: Email Weekly Media Report details
+      description: Get report stats
     AuctionResults.v1.saturdayAuctionItem:
       required:
       - region
@@ -442,42 +466,6 @@ components:
             type: string
       additionalProperties: false
       description: Saturday auction result item
-    AuctionResults.v1.propertySaleDetails:
-      title: Property Sale Details
-      type: object
-      properties:
-        price:
-          type: number
-          description: Final sale price of the property
-        address:
-          type: string
-          description: Full address of the property
-          example: 123 Story Street, NSW
-        bathrooms:
-          type:
-          - number
-          - 'null'
-        bedrooms:
-          type:
-          - number
-          - 'null'
-        carSpaces:
-          type:
-          - number
-          - 'null'
-    AuctionResults.v1.infoResponse:
-      type: object
-      properties:
-        auctionedDate:
-          type: string
-          description: Date of auction event
-          format: date
-        lastModifiedDateTime:
-          type: string
-          description: Date when results were published
-          format: date-time
-      additionalProperties: false
-      description: Retrieves metadata regarding sales result data of the latest Saturday
     AuctionResults.v1.saturdayAuctionResultResponse:
       type: object
       properties:
@@ -490,6 +478,18 @@ components:
             $ref: '#/components/schemas/AuctionResults.v1.saturdayAuctionItem'
       additionalProperties: false
       description: Saturday auction results response
+    AuctionResults.v1.weeklyMediaResultResponse:
+      type: object
+      properties:
+        auctionDate:
+          type: string
+          format: date
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/AuctionResults.v1.weeklyMediaItem'
+      additionalProperties: false
+      description: Weekly media report response
   securitySchemes:
     apikey:
       type: apiKey

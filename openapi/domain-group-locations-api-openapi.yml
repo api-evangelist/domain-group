@@ -65,67 +65,6 @@ paths:
       description: Sandbox
 components:
   schemas:
-    Domain.LocationProfilesService.v1.Model.LocationDataSalesGrowthList:
-      type: object
-      properties:
-        medianSoldPrice:
-          type: number
-          format: double
-        annualGrowth:
-          type: number
-          format: double
-        numberSold:
-          type: integer
-          format: int32
-        year:
-          type: integer
-          format: int32
-      x-data-access-level-info:
-        Basic:
-        - '*'
-        Detailed:
-        - '*'
-        Full:
-        - '*'
-    Domain.LocationProfilesService.v1.Model.Location:
-      type: object
-      properties:
-        domainLocationId:
-          type: integer
-          format: int32
-        postcode:
-          type: string
-        pfLocationId:
-          type: string
-        surroundingSuburbs:
-          type: array
-          items:
-            $ref: '#/components/schemas/Domain.LocationProfilesService.v1.Model.LocationSurroundingSuburbs'
-        urlSlug:
-          type: string
-        suburbName:
-          type: string
-        data:
-          $ref: '#/components/schemas/Domain.LocationProfilesService.v1.Model.LocationData'
-        apmLocationId:
-          type: integer
-          format: int32
-        locationId:
-          type: integer
-          format: int32
-        areaName:
-          type: string
-        regionName:
-          type: string
-        state:
-          type: string
-      x-data-access-level-info:
-        Basic:
-        - '*'
-        Detailed:
-        - '*'
-        Full:
-        - '*'
     Domain.LocationProfilesService.v1.Model.LocationDataPropertyCategories:
       type: object
       properties:
@@ -177,13 +116,21 @@ components:
         - '*'
         Full:
         - '*'
-    Domain.LocationProfilesService.v1.Model.LocationSurroundingSuburbs:
+    Domain.LocationProfilesService.v1.Model.LocationDataSalesGrowthList:
       type: object
       properties:
-        name:
-          type: string
-        urlSlug:
-          type: string
+        medianSoldPrice:
+          type: number
+          format: double
+        annualGrowth:
+          type: number
+          format: double
+        numberSold:
+          type: integer
+          format: int32
+        year:
+          type: integer
+          format: int32
       x-data-access-level-info:
         Basic:
         - '*'
@@ -272,6 +219,59 @@ components:
         blockOfUnitsForSale:
           type: integer
           format: int32
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    Domain.LocationProfilesService.v1.Model.LocationSurroundingSuburbs:
+      type: object
+      properties:
+        name:
+          type: string
+        urlSlug:
+          type: string
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    Domain.LocationProfilesService.v1.Model.Location:
+      type: object
+      properties:
+        domainLocationId:
+          type: integer
+          format: int32
+        postcode:
+          type: string
+        pfLocationId:
+          type: string
+        surroundingSuburbs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Domain.LocationProfilesService.v1.Model.LocationSurroundingSuburbs'
+        urlSlug:
+          type: string
+        suburbName:
+          type: string
+        data:
+          $ref: '#/components/schemas/Domain.LocationProfilesService.v1.Model.LocationData'
+        apmLocationId:
+          type: integer
+          format: int32
+        locationId:
+          type: integer
+          format: int32
+        areaName:
+          type: string
+        regionName:
+          type: string
+        state:
+          type: string
       x-data-access-level-info:
         Basic:
         - '*'
