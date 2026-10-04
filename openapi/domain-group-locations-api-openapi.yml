@@ -65,72 +65,13 @@ paths:
       description: Sandbox
 components:
   schemas:
-    Domain.LocationProfilesService.v1.Model.LocationDataPropertyCategories:
+    Domain.LocationProfilesService.v1.Model.LocationSurroundingSuburbs:
       type: object
       properties:
-        luxuryLevelPrice:
-          type: number
-          format: double
-        numberSold:
-          type: integer
-          format: int32
-        estimatedRepayments:
-          type: number
-          format: double
-        forSale:
-          type: integer
-          format: int32
-        medianSoldPrice:
-          type: number
-          format: double
-        medianRentPrice:
-          type: number
-          format: double
-        daysOnMarket:
-          type: number
-          format: double
-        bedrooms:
-          type: integer
-          format: int32
-        forRent:
-          type: integer
-          format: int32
-        entryLevelPrice:
-          type: number
-          format: double
-        salesGrowthList:
-          type: array
-          items:
-            $ref: '#/components/schemas/Domain.LocationProfilesService.v1.Model.LocationDataSalesGrowthList'
-        auctionClearanceRate:
-          type: number
-          format: double
-        propertyCategory:
+        name:
           type: string
-        mostRecentSale:
+        urlSlug:
           type: string
-      x-data-access-level-info:
-        Basic:
-        - '*'
-        Detailed:
-        - '*'
-        Full:
-        - '*'
-    Domain.LocationProfilesService.v1.Model.LocationDataSalesGrowthList:
-      type: object
-      properties:
-        medianSoldPrice:
-          type: number
-          format: double
-        annualGrowth:
-          type: number
-          format: double
-        numberSold:
-          type: integer
-          format: int32
-        year:
-          type: integer
-          format: int32
       x-data-access-level-info:
         Basic:
         - '*'
@@ -226,12 +167,71 @@ components:
         - '*'
         Full:
         - '*'
-    Domain.LocationProfilesService.v1.Model.LocationSurroundingSuburbs:
+    Domain.LocationProfilesService.v1.Model.LocationDataSalesGrowthList:
       type: object
       properties:
-        name:
+        medianSoldPrice:
+          type: number
+          format: double
+        annualGrowth:
+          type: number
+          format: double
+        numberSold:
+          type: integer
+          format: int32
+        year:
+          type: integer
+          format: int32
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    Domain.LocationProfilesService.v1.Model.LocationDataPropertyCategories:
+      type: object
+      properties:
+        luxuryLevelPrice:
+          type: number
+          format: double
+        numberSold:
+          type: integer
+          format: int32
+        estimatedRepayments:
+          type: number
+          format: double
+        forSale:
+          type: integer
+          format: int32
+        medianSoldPrice:
+          type: number
+          format: double
+        medianRentPrice:
+          type: number
+          format: double
+        daysOnMarket:
+          type: number
+          format: double
+        bedrooms:
+          type: integer
+          format: int32
+        forRent:
+          type: integer
+          format: int32
+        entryLevelPrice:
+          type: number
+          format: double
+        salesGrowthList:
+          type: array
+          items:
+            $ref: '#/components/schemas/Domain.LocationProfilesService.v1.Model.LocationDataSalesGrowthList'
+        auctionClearanceRate:
+          type: number
+          format: double
+        propertyCategory:
           type: string
-        urlSlug:
+        mostRecentSale:
           type: string
       x-data-access-level-info:
         Basic:

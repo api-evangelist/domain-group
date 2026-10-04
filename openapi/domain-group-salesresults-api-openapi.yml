@@ -255,6 +255,65 @@ components:
           - type: 'null'
       additionalProperties: false
       description: Email Weekly Media Report details
+    AuctionResults.v1.saturdayAuctionItem:
+      required:
+      - region
+      - scheduled
+      - reported
+      - sold
+      - clearanceRate
+      - mostExpensiveSale
+      - leastExpensiveSale
+      - top5
+      type: object
+      properties:
+        region:
+          enum:
+          - Sydney
+          - Melbourne
+          - Brisbane
+          - Adelaide
+          - Perth
+          - Canberra
+          - Hobart
+          - Darwin
+          type: string
+        scheduled:
+          type: number
+        reported:
+          type: number
+        sold:
+          type: number
+        clearanceRate:
+          type:
+          - number
+          - 'null'
+        mostExpensiveSale:
+          oneOf:
+          - $ref: '#/components/schemas/AuctionResults.v1.propertySaleDetails'
+          - type: 'null'
+        leastExpensiveSale:
+          oneOf:
+          - $ref: '#/components/schemas/AuctionResults.v1.propertySaleDetails'
+          - type: 'null'
+        top5:
+          type: array
+          items:
+            type: string
+      additionalProperties: false
+      description: Saturday auction result item
+    AuctionResults.v1.saturdayAuctionResultResponse:
+      type: object
+      properties:
+        auctionDate:
+          type: string
+          format: date
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/AuctionResults.v1.saturdayAuctionItem'
+      additionalProperties: false
+      description: Saturday auction results response
     AuctionResults.v1.propertySaleDetails:
       title: Property Sale Details
       type: object
@@ -291,6 +350,18 @@ components:
           format: date-time
       additionalProperties: false
       description: Retrieves metadata regarding sales result data of the latest Saturday
+    AuctionResults.v1.weeklyMediaResultResponse:
+      type: object
+      properties:
+        auctionDate:
+          type: string
+          format: date
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/AuctionResults.v1.weeklyMediaItem'
+      additionalProperties: false
+      description: Weekly media report response
     AuctionResults.v1.listingEventItem:
       type: object
       properties:
@@ -419,77 +490,6 @@ components:
           - 'null'
       additionalProperties: false
       description: Get report stats
-    AuctionResults.v1.saturdayAuctionItem:
-      required:
-      - region
-      - scheduled
-      - reported
-      - sold
-      - clearanceRate
-      - mostExpensiveSale
-      - leastExpensiveSale
-      - top5
-      type: object
-      properties:
-        region:
-          enum:
-          - Sydney
-          - Melbourne
-          - Brisbane
-          - Adelaide
-          - Perth
-          - Canberra
-          - Hobart
-          - Darwin
-          type: string
-        scheduled:
-          type: number
-        reported:
-          type: number
-        sold:
-          type: number
-        clearanceRate:
-          type:
-          - number
-          - 'null'
-        mostExpensiveSale:
-          oneOf:
-          - $ref: '#/components/schemas/AuctionResults.v1.propertySaleDetails'
-          - type: 'null'
-        leastExpensiveSale:
-          oneOf:
-          - $ref: '#/components/schemas/AuctionResults.v1.propertySaleDetails'
-          - type: 'null'
-        top5:
-          type: array
-          items:
-            type: string
-      additionalProperties: false
-      description: Saturday auction result item
-    AuctionResults.v1.saturdayAuctionResultResponse:
-      type: object
-      properties:
-        auctionDate:
-          type: string
-          format: date
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/AuctionResults.v1.saturdayAuctionItem'
-      additionalProperties: false
-      description: Saturday auction results response
-    AuctionResults.v1.weeklyMediaResultResponse:
-      type: object
-      properties:
-        auctionDate:
-          type: string
-          format: date
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/AuctionResults.v1.weeklyMediaItem'
-      additionalProperties: false
-      description: Weekly media report response
   securitySchemes:
     apikey:
       type: apiKey

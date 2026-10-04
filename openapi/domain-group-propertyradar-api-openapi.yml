@@ -598,6 +598,30 @@ paths:
       description: Sandbox
 components:
   schemas:
+    PropertyActivityAPI.v1.PortfolioList:
+      type: object
+      properties:
+        Portfolios:
+          type: array
+          items:
+            type: object
+            properties:
+              PortfolioId:
+                type: string
+                example: PORTFOLIO_7eedc8e01b2942eaaa396de4b512f6a1
+              PropertyIdCount:
+                type: integer
+                description: Total number of property ids defined
+              GnafIdCount:
+                type: integer
+                description: Total number of gnaf ids defined
+    PropertyActivityAPI.v1.PortfolioCreated:
+      type: object
+      properties:
+        PortfolioId:
+          type: string
+          description: Unique ID for the portfolio
+          example: PORTFOLIO_7eedc8e01b2942eaaa396de4b512f6a1
     PropertyActivityAPI.v1.PortfolioDetails:
       type: object
       anyOf:
@@ -628,30 +652,6 @@ components:
           - GANSW710292212
       additionalProperties: false
       description: Portfolio Details
-    PropertyActivityAPI.v1.PortfolioList:
-      type: object
-      properties:
-        Portfolios:
-          type: array
-          items:
-            type: object
-            properties:
-              PortfolioId:
-                type: string
-                example: PORTFOLIO_7eedc8e01b2942eaaa396de4b512f6a1
-              PropertyIdCount:
-                type: integer
-                description: Total number of property ids defined
-              GnafIdCount:
-                type: integer
-                description: Total number of gnaf ids defined
-    PropertyActivityAPI.v1.PortfolioCreated:
-      type: object
-      properties:
-        PortfolioId:
-          type: string
-          description: Unique ID for the portfolio
-          example: PORTFOLIO_7eedc8e01b2942eaaa396de4b512f6a1
   securitySchemes:
     apikey:
       type: apiKey

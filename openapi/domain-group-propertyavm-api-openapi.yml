@@ -175,45 +175,203 @@ paths:
       description: Sandbox
 components:
   schemas:
-    DomainAvm.v1.PropertyCategory:
+    DomainAvm.v1.SaleAvm:
       type: object
       properties:
-        auctionClearanceRate:
+        confidenceLevel:
+          type:
+          - string
+          - 'null'
+          description: Level of certainty of a property valuation. Valid values [High, Medium, Low].
+        estimate:
+          type:
+          - integer
+          - 'null'
+          description: The estimate.
+          format: int32
+        estimateDate:
+          type:
+          - string
+          - 'null'
+          description: The date the estimates were generated.
+        estimateHigh:
+          type:
+          - integer
+          - 'null'
+          description: The estimate high range.
+          format: int32
+        estimateLow:
+          type:
+          - integer
+          - 'null'
+          description: The estimate low range.
+          format: int32
+        percentFsd:
           type:
           - number
           - 'null'
-          description: Auction clearances rate.
+          description: The forecast standard deviation of the property.
           format: double
-        bedrooms:
+      additionalProperties: false
+      description: A model used to return sale valuation.
+    DomainAvm.v1.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
           type:
           - integer
           - 'null'
-          description: Number of bedrooms in the dwelling.
           format: int32
-        daysOnMarket:
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    DomainAvm.v1.SaleActivity:
+      type: object
+      properties:
+        date:
+          type:
+          - string
+          - 'null'
+          description: The sale date.
+        price:
           type:
           - integer
           - 'null'
-          description: Average days on market.
+          description: The sale price.
           format: int32
-        entryLevelPrice:
+        type:
+          type:
+          - string
+          - 'null'
+          description: The sale type.
+      additionalProperties: false
+      description: 'A model used to return property sale activity.
+
+        ///'
+    DomainAvm.v1.RentalAvm:
+      type: object
+      properties:
+        estimateDate:
+          type:
+          - string
+          - 'null'
+          description: The date the estimate was generated.
+        percentYieldRentEstimate:
+          type:
+          - number
+          - 'null'
+          description: The yield rent estimate as a percentage.
+          format: double
+        rentalFsd:
+          type:
+          - number
+          - 'null'
+          description: The forecast standard deviation of the rent.
+          format: double
+        weeklyRentEstimate:
           type:
           - integer
           - 'null'
-          description: The entry level price.
+          description: The weekly estimated rent.
           format: int32
-        luxuryLevelPrice:
+      additionalProperties: false
+      description: A model used to return rental valuation.
+    DomainAvm.v1.Address:
+      type: object
+      properties:
+        unitNumber:
+          type:
+          - string
+          - 'null'
+          description: The unit number of the address.
+        streetNumber:
+          type:
+          - string
+          - 'null'
+          description: The street number of the address.
+        streetName:
+          type:
+          - string
+          - 'null'
+          description: The street name of the address.
+        streetType:
+          type:
+          - string
+          - 'null'
+          description: The street type of the address.
+        locality:
+          type:
+          - string
+          - 'null'
+          description: The suburb/locality of the address.
+        postcode:
+          pattern: ^[0-9]{3,4}$
+          type:
+          - string
+          - 'null'
+          description: The postcode of the address.
+        state:
+          pattern: ^[A-Za-z]{2,3}$
+          type:
+          - string
+          - 'null'
+          description: The defined State or Territory in Australia (in abbreviated format) where the specific address is located.
+      additionalProperties: false
+      description: The Address model used.
+    DomainAvm.v1.Photo:
+      type: object
+      properties:
+        fullUrl:
+          type:
+          - string
+          - 'null'
+          description: Full Url of the image.
+        rank:
           type:
           - integer
           - 'null'
-          description: The luxury level price.
+          description: The viewing order.
           format: int32
-        medianRentPrice:
+      additionalProperties: false
+      description: A model used to return photo url and rank.
+    DomainAvm.v1.Advert:
+      type: object
+      properties:
+        displayPrice:
           type:
-          - integer
+          - string
           - 'null'
-          description: The median rental price.
-          format: int32
+          description: The property price that appears in advertisements.
+        status:
+          type:
+          - string
+          - 'null'
+          description: 'The status of the property listing. Valid values: [Live, UnderOffer].'
+      additionalProperties: false
+      description: A model used to return advertisement/listing data
+    DomainAvm.v1.SalesGrowth:
+      type: object
+      properties:
+        annualGrowth:
+          type:
+          - number
+          - 'null'
+          description: The annual growth
+          format: double
         medianSoldPrice:
           type:
           - integer
@@ -226,20 +384,66 @@ components:
           - 'null'
           description: Number of sales.
           format: int32
-        propertyCategory:
+        year:
           type:
           - string
           - 'null'
-          description: The property category.
-        salesGrowthList:
+          description: Year.
+      additionalProperties: false
+      description: A model used to group sales growth
+    DomainAvm.v1.AddressCoordinate:
+      type: object
+      properties:
+        lat:
+          type:
+          - number
+          - 'null'
+          description: The angular distance of a place north or south of the Equator.
+          format: double
+        lon:
+          type:
+          - number
+          - 'null'
+          description: Te angular distance of a place east or west of the Greenwich meridian.
+          format: double
+      additionalProperties: false
+      description: A model used for coordinate data.
+    DomainAvm.v1.AvmReportResponse:
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/DomainAvm.v1.Address'
+        propertyId:
+          type:
+          - string
+          - 'null'
+          description: The Unique Property Id of the target property
+        report:
+          type:
+          - string
+          - 'null'
+          description: The B64 encoded pdf of the valuation report.
+      additionalProperties: false
+      description: The response model used to provide the valuation report.
+    DomainAvm.v1.History:
+      type: object
+      properties:
+        rentals:
           type:
           - array
           - 'null'
           items:
-            $ref: '#/components/schemas/DomainAvm.v1.SalesGrowth'
-          description: The sales growth for last 6 years.
+            $ref: '#/components/schemas/DomainAvm.v1.RentalActivity'
+          description: The list of rental activity.
+        sales:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DomainAvm.v1.SaleActivity'
+          description: The list of sale activity.
       additionalProperties: false
-      description: A model used to group sales growth for a property category
+      description: A model used to return property rental and sale history.
     DomainAvm.v1.AvmResponse:
       type: object
       properties:
@@ -336,222 +540,47 @@ components:
           format: int32
       additionalProperties: false
       description: The response model used to provide the detailed bank grade valuation data.
-    DomainAvm.v1.ProblemDetails:
+    DomainAvm.v1.Sale:
       type: object
       properties:
+        date:
+          type:
+          - string
+          - 'null'
+          description: The date of sale
+        price:
+          type:
+          - integer
+          - 'null'
+          description: The price of sale
+          format: int32
         type:
           type:
           - string
           - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
+          description: The type of sale
+      additionalProperties: false
+      description: A model used to return sale history.
+    DomainAvm.v1.RentalActivity:
+      type: object
+      properties:
+        first:
+          $ref: '#/components/schemas/DomainAvm.v1.ActivityBoundary'
+        last:
+          $ref: '#/components/schemas/DomainAvm.v1.ActivityBoundary'
+        rentedPrice:
           type:
           - integer
           - 'null'
+          description: The rental price.
           format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        instance:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
-    DomainAvm.v1.AddressCoordinate:
-      type: object
-      properties:
-        lat:
-          type:
-          - number
-          - 'null'
-          description: The angular distance of a place north or south of the Equator.
-          format: double
-        lon:
-          type:
-          - number
-          - 'null'
-          description: Te angular distance of a place east or west of the Greenwich meridian.
-          format: double
-      additionalProperties: false
-      description: A model used for coordinate data.
-    DomainAvm.v1.ActivityBoundary:
-      type: object
-      properties:
-        advertisedDate:
-          type:
-          - string
-          - 'null'
-          description: The date.
-        advertisedPrice:
-          type:
-          - integer
-          - 'null'
-          description: The price.
-          format: int32
-        agency:
-          type:
-          - string
-          - 'null'
-          description: The agency.
-        suppressPrice:
-          type:
-          - boolean
-          - 'null'
-          description: Flag to suppress price.
-      additionalProperties: false
-      description: A model used to return property rental and sale history.
-    DomainAvm.v1.SalesGrowth:
-      type: object
-      properties:
-        annualGrowth:
-          type:
-          - number
-          - 'null'
-          description: The annual growth
-          format: double
-        medianSoldPrice:
-          type:
-          - integer
-          - 'null'
-          description: The median sold price
-          format: int32
-        numberSold:
-          type:
-          - integer
-          - 'null'
-          description: Number of sales.
-          format: int32
-        year:
-          type:
-          - string
-          - 'null'
-          description: Year.
-      additionalProperties: false
-      description: A model used to group sales growth
-    DomainAvm.v1.Address:
-      type: object
-      properties:
-        unitNumber:
-          type:
-          - string
-          - 'null'
-          description: The unit number of the address.
-        streetNumber:
-          type:
-          - string
-          - 'null'
-          description: The street number of the address.
-        streetName:
-          type:
-          - string
-          - 'null'
-          description: The street name of the address.
-        streetType:
-          type:
-          - string
-          - 'null'
-          description: The street type of the address.
-        locality:
-          type:
-          - string
-          - 'null'
-          description: The suburb/locality of the address.
-        postcode:
-          pattern: ^[0-9]{3,4}$
-          type:
-          - string
-          - 'null'
-          description: The postcode of the address.
-        state:
-          pattern: ^[A-Za-z]{2,3}$
-          type:
-          - string
-          - 'null'
-          description: The defined State or Territory in Australia (in abbreviated format) where the specific address is located.
-      additionalProperties: false
-      description: The Address model used.
-    DomainAvm.v1.Photo:
-      type: object
-      properties:
-        fullUrl:
-          type:
-          - string
-          - 'null'
-          description: Full Url of the image.
-        rank:
-          type:
-          - integer
-          - 'null'
-          description: The viewing order.
-          format: int32
-      additionalProperties: false
-      description: A model used to return photo url and rank.
-    DomainAvm.v1.Advert:
-      type: object
-      properties:
-        displayPrice:
-          type:
-          - string
-          - 'null'
-          description: The property price that appears in advertisements.
         status:
           type:
           - string
           - 'null'
-          description: 'The status of the property listing. Valid values: [Live, UnderOffer].'
+          description: The rental status.
       additionalProperties: false
-      description: A model used to return advertisement/listing data
-    DomainAvm.v1.History:
-      type: object
-      properties:
-        rentals:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/DomainAvm.v1.RentalActivity'
-          description: The list of rental activity.
-        sales:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/DomainAvm.v1.SaleActivity'
-          description: The list of sale activity.
-      additionalProperties: false
-      description: A model used to return property rental and sale history.
-    DomainAvm.v1.RentalAvm:
-      type: object
-      properties:
-        estimateDate:
-          type:
-          - string
-          - 'null'
-          description: The date the estimate was generated.
-        percentYieldRentEstimate:
-          type:
-          - number
-          - 'null'
-          description: The yield rent estimate as a percentage.
-          format: double
-        rentalFsd:
-          type:
-          - number
-          - 'null'
-          description: The forecast standard deviation of the rent.
-          format: double
-        weeklyRentEstimate:
-          type:
-          - integer
-          - 'null'
-          description: The weekly estimated rent.
-          format: int32
-      additionalProperties: false
-      description: A model used to return rental valuation.
+      description: A model used to return property rental activity.
     DomainAvm.v1.Item:
       type: object
       properties:
@@ -620,126 +649,97 @@ components:
           description: The price heading.
       additionalProperties: false
       description: A model used for property data.
-    DomainAvm.v1.Sale:
+    DomainAvm.v1.PropertyCategory:
       type: object
       properties:
-        date:
-          type:
-          - string
-          - 'null'
-          description: The date of sale
-        price:
-          type:
-          - integer
-          - 'null'
-          description: The price of sale
-          format: int32
-        type:
-          type:
-          - string
-          - 'null'
-          description: The type of sale
-      additionalProperties: false
-      description: A model used to return sale history.
-    DomainAvm.v1.RentalActivity:
-      type: object
-      properties:
-        first:
-          $ref: '#/components/schemas/DomainAvm.v1.ActivityBoundary'
-        last:
-          $ref: '#/components/schemas/DomainAvm.v1.ActivityBoundary'
-        rentedPrice:
-          type:
-          - integer
-          - 'null'
-          description: The rental price.
-          format: int32
-        status:
-          type:
-          - string
-          - 'null'
-          description: The rental status.
-      additionalProperties: false
-      description: A model used to return property rental activity.
-    DomainAvm.v1.SaleActivity:
-      type: object
-      properties:
-        date:
-          type:
-          - string
-          - 'null'
-          description: The sale date.
-        price:
-          type:
-          - integer
-          - 'null'
-          description: The sale price.
-          format: int32
-        type:
-          type:
-          - string
-          - 'null'
-          description: The sale type.
-      additionalProperties: false
-      description: 'A model used to return property sale activity.
-
-        ///'
-    DomainAvm.v1.AvmReportResponse:
-      type: object
-      properties:
-        address:
-          $ref: '#/components/schemas/DomainAvm.v1.Address'
-        propertyId:
-          type:
-          - string
-          - 'null'
-          description: The Unique Property Id of the target property
-        report:
-          type:
-          - string
-          - 'null'
-          description: The B64 encoded pdf of the valuation report.
-      additionalProperties: false
-      description: The response model used to provide the valuation report.
-    DomainAvm.v1.SaleAvm:
-      type: object
-      properties:
-        confidenceLevel:
-          type:
-          - string
-          - 'null'
-          description: Level of certainty of a property valuation. Valid values [High, Medium, Low].
-        estimate:
-          type:
-          - integer
-          - 'null'
-          description: The estimate.
-          format: int32
-        estimateDate:
-          type:
-          - string
-          - 'null'
-          description: The date the estimates were generated.
-        estimateHigh:
-          type:
-          - integer
-          - 'null'
-          description: The estimate high range.
-          format: int32
-        estimateLow:
-          type:
-          - integer
-          - 'null'
-          description: The estimate low range.
-          format: int32
-        percentFsd:
+        auctionClearanceRate:
           type:
           - number
           - 'null'
-          description: The forecast standard deviation of the property.
+          description: Auction clearances rate.
           format: double
+        bedrooms:
+          type:
+          - integer
+          - 'null'
+          description: Number of bedrooms in the dwelling.
+          format: int32
+        daysOnMarket:
+          type:
+          - integer
+          - 'null'
+          description: Average days on market.
+          format: int32
+        entryLevelPrice:
+          type:
+          - integer
+          - 'null'
+          description: The entry level price.
+          format: int32
+        luxuryLevelPrice:
+          type:
+          - integer
+          - 'null'
+          description: The luxury level price.
+          format: int32
+        medianRentPrice:
+          type:
+          - integer
+          - 'null'
+          description: The median rental price.
+          format: int32
+        medianSoldPrice:
+          type:
+          - integer
+          - 'null'
+          description: The median sold price
+          format: int32
+        numberSold:
+          type:
+          - integer
+          - 'null'
+          description: Number of sales.
+          format: int32
+        propertyCategory:
+          type:
+          - string
+          - 'null'
+          description: The property category.
+        salesGrowthList:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/DomainAvm.v1.SalesGrowth'
+          description: The sales growth for last 6 years.
       additionalProperties: false
-      description: A model used to return sale valuation.
+      description: A model used to group sales growth for a property category
+    DomainAvm.v1.ActivityBoundary:
+      type: object
+      properties:
+        advertisedDate:
+          type:
+          - string
+          - 'null'
+          description: The date.
+        advertisedPrice:
+          type:
+          - integer
+          - 'null'
+          description: The price.
+          format: int32
+        agency:
+          type:
+          - string
+          - 'null'
+          description: The agency.
+        suppressPrice:
+          type:
+          - boolean
+          - 'null'
+          description: Flag to suppress price.
+      additionalProperties: false
+      description: A model used to return property rental and sale history.
   securitySchemes:
     apikey:
       type: apiKey

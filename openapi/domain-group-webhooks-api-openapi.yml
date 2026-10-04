@@ -187,6 +187,34 @@ paths:
       description: Sandbox
 components:
   schemas:
+    Webhooks.v1.AddSubscriptionRequest:
+      required:
+      - ownerId
+      - ownerType
+      - resourceType
+      type: object
+      properties:
+        resourceType:
+          minLength: 1
+          type: string
+          description: Gets or Sets ResourceType
+        ownerType:
+          minLength: 1
+          type: string
+          description: Gets or Sets OwnerType
+        ownerId:
+          minLength: 1
+          type: string
+          description: Gets or Sets OwnerId
+      additionalProperties: false
+      description: AddSubscriptionRequest
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
     ProblemDetails:
       type: object
       properties:
@@ -285,34 +313,6 @@ components:
           - 'null'
           description: Gets or Sets ResourceType
       additionalProperties: false
-      x-data-access-level-info:
-        Basic:
-        - '*'
-        Detailed:
-        - '*'
-        Full:
-        - '*'
-    Webhooks.v1.AddSubscriptionRequest:
-      required:
-      - ownerId
-      - ownerType
-      - resourceType
-      type: object
-      properties:
-        resourceType:
-          minLength: 1
-          type: string
-          description: Gets or Sets ResourceType
-        ownerType:
-          minLength: 1
-          type: string
-          description: Gets or Sets OwnerType
-        ownerId:
-          minLength: 1
-          type: string
-          description: Gets or Sets OwnerId
-      additionalProperties: false
-      description: AddSubscriptionRequest
       x-data-access-level-info:
         Basic:
         - '*'

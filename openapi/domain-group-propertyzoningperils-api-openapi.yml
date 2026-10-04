@@ -102,33 +102,6 @@ paths:
       x-domain-environment: Any
 components:
   schemas:
-    Property.Enrichment.v2.AddressBasic:
-      type: object
-      properties:
-        flatNumber:
-          type:
-          - string
-          - 'null'
-        streetNumber:
-          type: string
-        streetName:
-          type: string
-        streetType:
-          type:
-          - string
-          - 'null'
-        streetTypeLong:
-          type:
-          - string
-          - 'null'
-        suburb:
-          type: string
-        postcode:
-          type: string
-        state:
-          type: string
-      additionalProperties: false
-      description: Address of property
     Property.Enrichment.v2.PropertyPerils:
       type: object
       properties:
@@ -157,6 +130,33 @@ components:
           - string
           - 'null'
       additionalProperties: false
+    Property.Enrichment.v2.AddressBasic:
+      type: object
+      properties:
+        flatNumber:
+          type:
+          - string
+          - 'null'
+        streetNumber:
+          type: string
+        streetName:
+          type: string
+        streetType:
+          type:
+          - string
+          - 'null'
+        streetTypeLong:
+          type:
+          - string
+          - 'null'
+        suburb:
+          type: string
+        postcode:
+          type: string
+        state:
+          type: string
+      additionalProperties: false
+      description: Address of property
     Property.Enrichment.v2.MultipleAddressBasic:
       type: array
       items:
