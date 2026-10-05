@@ -1,0 +1,12 @@
+{
+ "url": "https://developer.domain.com.au/static/latest/media/latest/openapi.json",
+ "requested_url": "https://developer.domain.com.au/static/latest/media/latest/openapi.json",
+ "status": 200,
+ "content_type": "application/json; charset=UTF-8",
+ "bytes": 1057359,
+ "sha256": "22ad87b9c0cfb57edf9f52fdfad21917721f46d3955cdee6549e95931d1cdf0f",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "equivalent",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the provider's current document describes the same operations (Jaccard 0.931), but the bytes differ, so the archive is an earlier or reformatted copy."
+}
