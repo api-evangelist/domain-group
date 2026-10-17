@@ -98,134 +98,6 @@ paths:
       x-domain-environment: Primary
 components:
   schemas:
-    Schools.V2.School:
-      type: object
-      properties:
-        schoolSector:
-          enum:
-          - Catholic
-          - Government
-          - Independent
-          type:
-          - string
-          - 'null'
-          description: Gets or Sets SchoolSector
-        schoolType:
-          enum:
-          - Combined
-          - Primary
-          - Secondary
-          - Special
-          type:
-          - string
-          - 'null'
-          description: Gets or Sets SchoolType
-        gender:
-          enum:
-          - Boys
-          - Girls
-          - CoEd
-          type:
-          - string
-          - 'null'
-          description: Gets or Sets Gender
-        name:
-          type:
-          - string
-          - 'null'
-          description: Gets or Sets Name
-        suburb:
-          type:
-          - string
-          - 'null'
-          description: Gets or Sets Suburb
-        state:
-          type:
-          - string
-          - 'null'
-          description: Gets or Sets State
-        postcode:
-          type:
-          - string
-          - 'null'
-          description: Gets or Sets Postcode
-        centroid:
-          type:
-          - string
-          - 'null'
-          description: Gets or Sets Centroid
-        profile:
-          $ref: '#/components/schemas/Schools.V2.SchoolProfile'
-        catchments:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/Schools.V2.SchoolCatchment'
-          description: Gets or Sets Catchments
-        domainId:
-          type:
-          - integer
-          - 'null'
-          description: Gets or Sets DomainId
-          format: int32
-      additionalProperties: false
-      description: School
-      x-data-access-level-info:
-        Basic:
-        - DomainId
-        - Name
-        - Profile
-        - SchoolSector
-        - State
-        - SchoolType
-        - Suburb
-        - Postcode
-        - Centroid
-        - Gender
-        Detailed:
-        - DomainId
-        - Name
-        - Profile
-        - SchoolSector
-        - State
-        - SchoolType
-        - Suburb
-        - Postcode
-        - Centroid
-        - Gender
-        Full:
-        - DomainId
-        - Name
-        - Profile
-        - SchoolSector
-        - State
-        - SchoolType
-        - Suburb
-        - Postcode
-        - Centroid
-        - Gender
-        - Catchments
-    Schools.V2.SchoolWithDistance:
-      type: object
-      properties:
-        distance:
-          type:
-          - number
-          - 'null'
-          description: Gets or Sets Distance
-          format: double
-        school:
-          $ref: '#/components/schemas/Schools.V2.School'
-      additionalProperties: false
-      description: SchoolWithDistance
-      x-data-access-level-info:
-        Basic:
-        - '*'
-        Detailed:
-        - '*'
-        Full:
-        - '*'
     ProblemDetails:
       type: object
       properties:
@@ -373,6 +245,134 @@ components:
         - LowerMiddleSeaQuarter
         - BottomSeaQuarter
         - Icsea
+    Schools.V2.School:
+      type: object
+      properties:
+        schoolSector:
+          enum:
+          - Catholic
+          - Government
+          - Independent
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets SchoolSector
+        schoolType:
+          enum:
+          - Combined
+          - Primary
+          - Secondary
+          - Special
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets SchoolType
+        gender:
+          enum:
+          - Boys
+          - Girls
+          - CoEd
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets Gender
+        name:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets Name
+        suburb:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets Suburb
+        state:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets State
+        postcode:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets Postcode
+        centroid:
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets Centroid
+        profile:
+          $ref: '#/components/schemas/Schools.V2.SchoolProfile'
+        catchments:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Schools.V2.SchoolCatchment'
+          description: Gets or Sets Catchments
+        domainId:
+          type:
+          - integer
+          - 'null'
+          description: Gets or Sets DomainId
+          format: int32
+      additionalProperties: false
+      description: School
+      x-data-access-level-info:
+        Basic:
+        - DomainId
+        - Name
+        - Profile
+        - SchoolSector
+        - State
+        - SchoolType
+        - Suburb
+        - Postcode
+        - Centroid
+        - Gender
+        Detailed:
+        - DomainId
+        - Name
+        - Profile
+        - SchoolSector
+        - State
+        - SchoolType
+        - Suburb
+        - Postcode
+        - Centroid
+        - Gender
+        Full:
+        - DomainId
+        - Name
+        - Profile
+        - SchoolSector
+        - State
+        - SchoolType
+        - Suburb
+        - Postcode
+        - Centroid
+        - Gender
+        - Catchments
+    Schools.V2.SchoolWithDistance:
+      type: object
+      properties:
+        distance:
+          type:
+          - number
+          - 'null'
+          description: Gets or Sets Distance
+          format: double
+        school:
+          $ref: '#/components/schemas/Schools.V2.School'
+      additionalProperties: false
+      description: SchoolWithDistance
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
   securitySchemes:
     apikey:
       type: apiKey

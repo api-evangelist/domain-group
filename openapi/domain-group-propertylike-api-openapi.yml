@@ -119,22 +119,6 @@ paths:
       x-domain-environment: Any
 components:
   schemas:
-    Property.Enrichment.v2.ImageTypes:
-      enum:
-      - ListingPhoto
-      - OldFloorPlanPhoto
-      - NewFloorPlanPhoto
-      - BuildingPhoto
-      - NewDevelopmentLandPhoto
-      - NewDevelopmentLumierePhoto
-      - NewDevelopmentFeaturedPhoto
-      - ConjunctionAgentLogo
-      - NewDevelopmentRegionalPhoto
-      - AdvertiserImage
-      - YouWishClip
-      - AgentCarousel
-      - DevelopmentProjectGalleryPhoto
-      - DevelopmentProjectAdvertisementPhoto
     Property.Enrichment.v2.SearchItemOutput:
       type: object
       properties:
@@ -212,6 +196,22 @@ components:
           type: string
       additionalProperties: false
       description: Address of property
+    Property.Enrichment.v2.ImageTypes:
+      enum:
+      - ListingPhoto
+      - OldFloorPlanPhoto
+      - NewFloorPlanPhoto
+      - BuildingPhoto
+      - NewDevelopmentLandPhoto
+      - NewDevelopmentLumierePhoto
+      - NewDevelopmentFeaturedPhoto
+      - ConjunctionAgentLogo
+      - NewDevelopmentRegionalPhoto
+      - AdvertiserImage
+      - YouWishClip
+      - AgentCarousel
+      - DevelopmentProjectGalleryPhoto
+      - DevelopmentProjectAdvertisementPhoto
   securitySchemes:
     apikey:
       type: apiKey

@@ -114,35 +114,6 @@ paths:
       description: Sandbox
 components:
   schemas:
-    Me.V1.AgencySummary:
-      type: object
-      properties:
-        id:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        name:
-          type:
-          - string
-          - 'null'
-        admin:
-          type:
-          - boolean
-          - 'null'
-          description: True if this user is an admin of this agency
-      additionalProperties: false
-      x-data-access-level-info:
-        Basic:
-        - Id
-        - Name
-        Detailed:
-        - Id
-        - Name
-        Full:
-        - Id
-        - Name
-        - Admin
     Me.V1.ProviderSummary:
       type: object
       properties:
@@ -195,38 +166,6 @@ components:
         - '*'
         Full:
         - '*'
-    ProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        instance:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
-      x-data-access-level-info:
-        Basic:
-        - '*'
-        Detailed:
-        - '*'
-        Full:
-        - '*'
     Me.V1.MyDetails:
       type: object
       properties:
@@ -265,6 +204,67 @@ components:
         - ClientId
         - SubjectId
         - SubjectEmail
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    Me.V1.AgencySummary:
+      type: object
+      properties:
+        id:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        name:
+          type:
+          - string
+          - 'null'
+        admin:
+          type:
+          - boolean
+          - 'null'
+          description: True if this user is an admin of this agency
+      additionalProperties: false
+      x-data-access-level-info:
+        Basic:
+        - Id
+        - Name
+        Detailed:
+        - Id
+        - Name
+        Full:
+        - Id
+        - Name
+        - Admin
   securitySchemes:
     apikey:
       type: apiKey

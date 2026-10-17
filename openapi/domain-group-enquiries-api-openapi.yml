@@ -176,151 +176,37 @@ paths:
       description: Sandbox
 components:
   schemas:
-    Domain.EnquiryService.v1.Model.GroupEnquiryServiceModelsEnquiryResponse:
-      type: object
-      properties:
-        s3Key:
-          type: string
-        message:
-          type: string
-        enquiryReceiptTimestamp:
-          type: string
-          format: date-time
-        warnings:
-          type: array
-          items:
-            type: string
-      x-data-access-level-info:
-        Basic:
-        - '*'
-        Detailed:
-        - '*'
-        Full:
-        - '*'
-    Domain.Public.Adapter.Web.Api.Models.v1.Enquiries.Enquiry:
-      type: object
-      properties:
-        deliveryMethod:
-          enum:
-          - email
-          - sms
-          type: string
-          description: Delivery method of the enquiry
-        enquiryType:
-          enum:
-          - listing
-          - devProject
-          - newDevLanding
-          - agencyProfile
-          - agentProfile
-          - contractRequest
-          - vendorEnquiry
-          - prePortalListing
-          type: string
-          description: Type of enquiry
-        referenceId:
-          type: integer
-          description: Listing identifier
-          format: int32
-        id:
-          type: string
-          description: Enquiry identifier
-        sender:
-          $ref: '#/components/schemas/Domain.Public.Adapter.Web.Api.Models.v1.Enquiries.Sender'
-        subject:
-          type: string
-          description: Enquiry subject
-        message:
-          type: string
-          description: Enquiry message
-        metaData:
-          type: object
-          additionalProperties:
-            type: string
-          description: MetaData of the enquiry
-      description: An enquiry with associated reference (eg. listing)
-    Enquiries.V1.RecipientDeliveryStatus:
-      type: object
-      properties:
-        deliveryStatus:
-          enum:
-          - queued
-          - delivered
-          - failed
-          - deferred
-          type:
-          - string
-          - 'null'
-          description: Gets or Sets DeliveryStatus
-        recipient:
-          $ref: '#/components/schemas/Enquiries.V1.Recipient'
-        date:
-          type:
-          - string
-          - 'null'
-          description: Last time when the email delivery status was polled
-          format: date-time
-      additionalProperties: false
-      description: Used for reporting enquiry delivery statusses to recipients
-      x-data-access-level-info:
-        Basic:
-        - '*'
-        Detailed:
-        - '*'
-        Full:
-        - '*'
-    ProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        instance:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
-      x-data-access-level-info:
-        Basic:
-        - '*'
-        Detailed:
-        - '*'
-        Full:
-        - '*'
-    Domain.Public.Adapter.Web.Api.Models.v1.Enquiries.Sender:
+    Enquiries.V1.Sender:
       type: object
       properties:
         firstName:
-          type: string
-          description: Sender first name
+          type:
+          - string
+          - 'null'
         lastName:
-          type: string
-          description: Sender lastname/surname
+          type:
+          - string
+          - 'null'
         email:
-          type: string
-          description: Sender email address
+          type:
+          - string
+          - 'null'
         phoneNumber:
-          type: string
-          description: Sender phone number
+          type:
+          - string
+          - 'null'
         postcode:
-          pattern: ^\d*$
-          type: string
-          description: Postcode of sender's location
-      description: Contains enquiry sender details
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
     Enquiries.V1.EnquiryReport:
       type: object
       properties:
@@ -397,6 +283,58 @@ components:
         - '*'
         Full:
         - '*'
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    Domain.Public.Adapter.Web.Api.Models.v1.Enquiries.Sender:
+      type: object
+      properties:
+        firstName:
+          type: string
+          description: Sender first name
+        lastName:
+          type: string
+          description: Sender lastname/surname
+        email:
+          type: string
+          description: Sender email address
+        phoneNumber:
+          type: string
+          description: Sender phone number
+        postcode:
+          pattern: ^\d*$
+          type: string
+          description: Postcode of sender's location
+      description: Contains enquiry sender details
     Enquiries.V1.Recipient:
       required:
       - address
@@ -424,30 +362,92 @@ components:
         - '*'
         Full:
         - '*'
-    Enquiries.V1.Sender:
+    Domain.Public.Adapter.Web.Api.Models.v1.Enquiries.Enquiry:
       type: object
       properties:
-        firstName:
+        deliveryMethod:
+          enum:
+          - email
+          - sms
+          type: string
+          description: Delivery method of the enquiry
+        enquiryType:
+          enum:
+          - listing
+          - devProject
+          - newDevLanding
+          - agencyProfile
+          - agentProfile
+          - contractRequest
+          - vendorEnquiry
+          - prePortalListing
+          type: string
+          description: Type of enquiry
+        referenceId:
+          type: integer
+          description: Listing identifier
+          format: int32
+        id:
+          type: string
+          description: Enquiry identifier
+        sender:
+          $ref: '#/components/schemas/Domain.Public.Adapter.Web.Api.Models.v1.Enquiries.Sender'
+        subject:
+          type: string
+          description: Enquiry subject
+        message:
+          type: string
+          description: Enquiry message
+        metaData:
+          type: object
+          additionalProperties:
+            type: string
+          description: MetaData of the enquiry
+      description: An enquiry with associated reference (eg. listing)
+    Domain.EnquiryService.v1.Model.GroupEnquiryServiceModelsEnquiryResponse:
+      type: object
+      properties:
+        s3Key:
+          type: string
+        message:
+          type: string
+        enquiryReceiptTimestamp:
+          type: string
+          format: date-time
+        warnings:
+          type: array
+          items:
+            type: string
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    Enquiries.V1.RecipientDeliveryStatus:
+      type: object
+      properties:
+        deliveryStatus:
+          enum:
+          - queued
+          - delivered
+          - failed
+          - deferred
           type:
           - string
           - 'null'
-        lastName:
+          description: Gets or Sets DeliveryStatus
+        recipient:
+          $ref: '#/components/schemas/Enquiries.V1.Recipient'
+        date:
           type:
           - string
           - 'null'
-        email:
-          type:
-          - string
-          - 'null'
-        phoneNumber:
-          type:
-          - string
-          - 'null'
-        postcode:
-          type:
-          - string
-          - 'null'
+          description: Last time when the email delivery status was polled
+          format: date-time
       additionalProperties: false
+      description: Used for reporting enquiry delivery statusses to recipients
       x-data-access-level-info:
         Basic:
         - '*'
