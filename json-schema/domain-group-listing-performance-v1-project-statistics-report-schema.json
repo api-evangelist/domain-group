@@ -1,0 +1,384 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/domain-group/main/json-schema/domain-group-listing-performance-v1-project-statistics-report-schema.json",
+  "title": "ListingPerformance.v1.ProjectStatisticsReport",
+  "x-generated": "2026-10-21",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/domain-group-projects-api-openapi.yml#/components/schemas/ListingPerformance.v1.ProjectStatisticsReport",
+  "type": "object",
+  "properties": {
+    "summary": {
+      "$ref": "#/$defs/ListingPerformance.v1.ProjectStatistics"
+    },
+    "dailyBreakdown": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/$defs/ListingPerformance.v1.DailyProjectStatistics"
+      },
+      "description": "Listing statistic breakdown for the period by days"
+    }
+  },
+  "additionalProperties": false,
+  "x-data-access-level-info": {
+    "Basic": [
+      "*"
+    ],
+    "Detailed": [
+      "*"
+    ],
+    "Full": [
+      "*"
+    ]
+  },
+  "$defs": {
+    "ListingPerformance.v1.DailyProjectStatistics": {
+      "type": "object",
+      "properties": {
+        "totalPhotoViews": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Total number of photo views",
+          "format": "int32"
+        },
+        "totalFloorplanViews": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Total number of floorplan views",
+          "format": "int32"
+        },
+        "totalMapViews": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Total number of address map views",
+          "format": "int32"
+        },
+        "totalVideoViews": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Total number of video views",
+          "format": "int32"
+        },
+        "totalAgentDetailViews": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Total number of agent detail views",
+          "format": "int32"
+        },
+        "totalSearchCarouselViews": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Total number of views under search carousel",
+          "format": "int32"
+        },
+        "totalAgentPhoneNumberReveals": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Total number of times the agent phone number was revealed for contact",
+          "format": "int32"
+        },
+        "totalEnquiries": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Total number of email enquiries",
+          "format": "int32"
+        },
+        "totalEmailToFriend": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Total number of times the link was emailed",
+          "format": "int32"
+        },
+        "totalSharedViaSocialMedia": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Total number of shares via social media",
+          "format": "int32"
+        },
+        "totalInspectionTimeSaving": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Total number of times when the inspection was saved to calendar",
+          "format": "int32"
+        },
+        "totalCallToAgentFromMobile": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Total number of calls made to agent",
+          "format": "int32"
+        },
+        "devProjectId": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Domain Advertisement Id",
+          "format": "int64"
+        },
+        "totalViews": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Total number of views",
+          "format": "int32"
+        },
+        "totalIndividualImageViews": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Total number of individual image views",
+          "format": "int32"
+        },
+        "totalAdClick": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Total number of ads clicked",
+          "format": "int32"
+        },
+        "totalClicksToProjectListing": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Total number of click throughs to project listings",
+          "format": "int32"
+        },
+        "totalExternalWebsiteViews": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Total number of external website view",
+          "format": "int32"
+        },
+        "totalEmailEnquiries": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Total number of email enquiries",
+          "format": "int32"
+        },
+        "eventDate": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        }
+      },
+      "additionalProperties": false,
+      "x-data-access-level-info": {
+        "Basic": [
+          "*"
+        ],
+        "Detailed": [
+          "*"
+        ],
+        "Full": [
+          "*"
+        ]
+      }
+    },
+    "ListingPerformance.v1.ProjectStatistics": {
+      "type": "object",
+      "properties": {
+        "totalPhotoViews": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Total number of photo views",
+          "format": "int32"
+        },
+        "totalFloorplanViews": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Total number of floorplan views",
+          "format": "int32"
+        },
+        "totalMapViews": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Total number of address map views",
+          "format": "int32"
+        },
+        "totalVideoViews": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Total number of video views",
+          "format": "int32"
+        },
+        "totalAgentDetailViews": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Total number of agent detail views",
+          "format": "int32"
+        },
+        "totalSearchCarouselViews": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Total number of views under search carousel",
+          "format": "int32"
+        },
+        "totalAgentPhoneNumberReveals": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Total number of times the agent phone number was revealed for contact",
+          "format": "int32"
+        },
+        "totalEnquiries": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Total number of email enquiries",
+          "format": "int32"
+        },
+        "totalEmailToFriend": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Total number of times the link was emailed",
+          "format": "int32"
+        },
+        "totalSharedViaSocialMedia": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Total number of shares via social media",
+          "format": "int32"
+        },
+        "totalInspectionTimeSaving": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Total number of times when the inspection was saved to calendar",
+          "format": "int32"
+        },
+        "totalCallToAgentFromMobile": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Total number of calls made to agent",
+          "format": "int32"
+        },
+        "devProjectId": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Domain Advertisement Id",
+          "format": "int64"
+        },
+        "totalViews": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Total number of views",
+          "format": "int32"
+        },
+        "totalIndividualImageViews": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Total number of individual image views",
+          "format": "int32"
+        },
+        "totalAdClick": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Total number of ads clicked",
+          "format": "int32"
+        },
+        "totalClicksToProjectListing": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Total number of click throughs to project listings",
+          "format": "int32"
+        },
+        "totalExternalWebsiteViews": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Total number of external website view",
+          "format": "int32"
+        },
+        "totalEmailEnquiries": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Total number of email enquiries",
+          "format": "int32"
+        }
+      },
+      "additionalProperties": false,
+      "x-data-access-level-info": {
+        "Basic": [
+          "*"
+        ],
+        "Detailed": [
+          "*"
+        ],
+        "Full": [
+          "*"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,109 @@
+generated: '2026-10-21'
+method: derived
+source: the pre-flight dossier, apis.yml pointers, spec servers, well-known, vendors -- nothing fetched here
+generator: derive-hosts.py
+summary:
+  hosts: 6
+  own: 4
+  other_domain: 1
+  platform: 1
+  roles:
+  - api
+  - identity
+  - portal
+  - source
+  - website
+hosts:
+- host: api.com.au
+  found_by:
+  - contract-discovery
+  types: []
+  serves: []
+  registrable_domain: api.com.au
+  role: api
+  relation: other-domain
+- host: api.domain.com.au
+  found_by:
+  - apis[]
+  - probed
+  - contract-discovery
+  - well-known
+  types: []
+  serves:
+  - api
+  registrable_domain: domain.com.au
+  role: api
+  relation: own
+- host: auth.domain.com.au
+  found_by:
+  - pointer
+  - probed
+  - contract-discovery
+  - well-known
+  types:
+  - OpenIDConnect
+  serves: []
+  registrable_domain: domain.com.au
+  role: identity
+  relation: own
+- host: developer.domain.com.au
+  found_by:
+  - pointer
+  - apis[]
+  - probed
+  - docs-index
+  - contract-discovery
+  - well-known
+  types:
+  - DeveloperPortal
+  - Documentation
+  - APIReference
+  - SignUp
+  - GettingStarted
+  - Authentication
+  - OpenAPI
+  - RateLimits
+  - Sandbox
+  - Conventions
+  - Versioning
+  - Libraries
+  - Support
+  - SLA
+  - Policies
+  - Troubleshooting
+  - Deprecation
+  - FAQ
+  - Contact
+  - PortalOverview
+  - APIExplorer
+  - DeveloperTermsOfService
+  serves:
+  - docs
+  registrable_domain: domain.com.au
+  role: portal
+  relation: own
+- host: github.com
+  found_by:
+  - pointer
+  types:
+  - GitHubOrganization
+  serves: []
+  registrable_domain: github.com
+  role: source
+  relation: platform
+- host: www.domain.com.au
+  found_by:
+  - pointer
+  - probed
+  - contract-discovery
+  - well-known
+  - vendor-detect
+  types:
+  - Website
+  - TermsOfService
+  serves:
+  - cdn
+  vendor: akamai
+  registrable_domain: domain.com.au
+  role: website
+  relation: own

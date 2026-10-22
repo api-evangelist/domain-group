@@ -1,0 +1,266 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/domain-group/main/json-schema/domain-group-agencies-v2-agency-summary-schema.json",
+  "title": "Agencies.V2.AgencySummary",
+  "description": "AgencySummary",
+  "x-generated": "2026-10-21",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/domain-group-agencies-api-openapi.yml#/components/schemas/Agencies.V2.AgencySummary",
+  "type": "object",
+  "properties": {
+    "inSuburb": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "Gets or Sets InSuburb"
+    },
+    "querySuburb": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets QuerySuburb"
+    },
+    "hasRecentlySold": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "Gets or Sets HasRecentlySold"
+    },
+    "id": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "Gets or Sets Id",
+      "format": "int32"
+    },
+    "name": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets Name"
+    },
+    "suburb": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets Suburb"
+    },
+    "logoUrl": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets LogoUrl"
+    },
+    "baseUrl": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets BaseUrl"
+    },
+    "address1": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets Address1"
+    },
+    "address2": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets Address2"
+    },
+    "telephone": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets Telephone"
+    },
+    "rentalTelephone": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets RentalTelephone"
+    },
+    "mobile": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets Mobile"
+    },
+    "fax": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets Fax"
+    },
+    "state": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets State"
+    },
+    "description": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets Description"
+    },
+    "email": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets Email"
+    },
+    "rentalEmail": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets RentalEmail"
+    },
+    "homePageSearchOptions": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets HomePageSearchOptions"
+    },
+    "accountType": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "Gets or Sets AccountType",
+      "format": "int32"
+    },
+    "numberForSale": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "Gets or Sets NumberForSale",
+      "format": "int32"
+    },
+    "numberForRent": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "Gets or Sets NumberForRent",
+      "format": "int32"
+    },
+    "domainUrl": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets DomainUrl"
+    },
+    "showTabSoldLastYear": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "Gets or Sets ShowTabSoldLastYear"
+    }
+  },
+  "additionalProperties": false,
+  "x-data-access-level-info": {
+    "Basic": [
+      "AccountType",
+      "Address1",
+      "Address2",
+      "BaseUrl",
+      "Description",
+      "DomainUrl",
+      "Email",
+      "Fax",
+      "HasRecentlySold",
+      "HomePageSearchOptions",
+      "Id",
+      "InSuburb",
+      "LogoUrl",
+      "Mobile",
+      "Name",
+      "NumberForRent",
+      "NumberForSale",
+      "QuerySuburb",
+      "RentalEmail",
+      "RentalTelephone",
+      "ShowTabSoldLastYear",
+      "State",
+      "Suburb",
+      "Telephone"
+    ],
+    "Detailed": [
+      "AccountType",
+      "Address1",
+      "Address2",
+      "BaseUrl",
+      "Description",
+      "DomainUrl",
+      "Email",
+      "Fax",
+      "HasRecentlySold",
+      "HomePageSearchOptions",
+      "Id",
+      "InSuburb",
+      "LogoUrl",
+      "Mobile",
+      "Name",
+      "NumberForRent",
+      "NumberForSale",
+      "QuerySuburb",
+      "RentalEmail",
+      "RentalTelephone",
+      "ShowTabSoldLastYear",
+      "State",
+      "Suburb",
+      "Telephone"
+    ],
+    "Full": [
+      "AccountType",
+      "Address1",
+      "Address2",
+      "BaseUrl",
+      "Description",
+      "DomainUrl",
+      "Email",
+      "Fax",
+      "HasRecentlySold",
+      "HomePageSearchOptions",
+      "Id",
+      "InSuburb",
+      "LogoUrl",
+      "Mobile",
+      "Name",
+      "NumberForRent",
+      "NumberForSale",
+      "QuerySuburb",
+      "RentalEmail",
+      "RentalTelephone",
+      "ShowTabSoldLastYear",
+      "State",
+      "Suburb",
+      "Telephone"
+    ]
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/domain-group/main/json-schema/domain-group-domain-avm-v1-avm-report-response-schema.json",
+  "title": "DomainAvm.v1.AvmReportResponse",
+  "description": "The response model used to provide the valuation report.",
+  "x-generated": "2026-10-21",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/domain-group-propertyavm-api-openapi.yml#/components/schemas/DomainAvm.v1.AvmReportResponse",
+  "type": "object",
+  "properties": {
+    "address": {
+      "$ref": "#/$defs/DomainAvm.v1.Address"
+    },
+    "propertyId": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The Unique Property Id of the target property"
+    },
+    "report": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The B64 encoded pdf of the valuation report."
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "DomainAvm.v1.Address": {
+      "type": "object",
+      "properties": {
+        "unitNumber": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The unit number of the address."
+        },
+        "streetNumber": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The street number of the address."
+        },
+        "streetName": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The street name of the address."
+        },
+        "streetType": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The street type of the address."
+        },
+        "locality": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The suburb/locality of the address."
+        },
+        "postcode": {
+          "pattern": "^[0-9]{3,4}$",
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The postcode of the address."
+        },
+        "state": {
+          "pattern": "^[A-Za-z]{2,3}$",
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The defined State or Territory in Australia (in abbreviated format) where the specific address is located."
+        }
+      },
+      "additionalProperties": false,
+      "description": "The Address model used."
+    }
+  }
+}

@@ -2,6 +2,7 @@ generated: '2026-07-26'
 method: searched
 source: https://developer.domain.com.au/docs/latest/conventions/sandbox
 docs: https://developer.domain.com.au/docs/latest/conventions/sandbox
+description: Domain runs a real, separately-hosted Sandbox environment intended for testing Listing Management and any other application that needs write access to the API. It is explicitly NOT for testing read-only applications.
 summary: >-
   Domain runs a real, separately-hosted Sandbox environment intended for testing
   Listing Management and any other application that needs write access to the API.

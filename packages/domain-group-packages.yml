@@ -1,15 +1,12 @@
 generated: '2026-07-26'
-method: searched
+method: none
 source: https://developer.domain.com.au/docs/latest/libraries
 docs: https://developer.domain.com.au/docs/latest/libraries
-summary: >-
-  Domain ships NO first-party client libraries. The Libraries page states plainly
-  that "Prebuilt libraries are not currently available" and instead directs
-  developers to generate their own client from the published OpenAPI documents.
-  This is a deliberate generate-your-own-SDK posture, not an omission.
-
+summary: Domain ships NO first-party client libraries. The Libraries page states plainly that "Prebuilt libraries are not currently available"
+  and instead directs developers to generate their own client from the published OpenAPI documents. This is a deliberate generate-your-own-SDK
+  posture, not an omission.
 official_sdks: []
-
+packages: []
 generation_path:
   specs:
   - name: Latest (combined V1 and V2)
@@ -26,14 +23,26 @@ generation_path:
   generators_recommended_by_domain:
   - name: openapi-generator
     url: https://github.com/OpenAPITools/openapi-generator
-    languages: [dotnet, php, python, ruby, javascript]
+    languages:
+    - dotnet
+    - php
+    - python
+    - ruby
+    - javascript
   - name: Swagger-Codegen
     url: https://swagger.io/tools/swagger-codegen/
-    languages: [csharp, ruby, php, python, typescript, javascript]
+    languages:
+    - csharp
+    - ruby
+    - php
+    - python
+    - typescript
+    - javascript
   - name: NSwag
     url: https://github.com/RSuter/NSwag
-    languages: [csharp, typescript]
-
+    languages:
+    - csharp
+    - typescript
 third_party_packages:
 - language: typescript
   registry: npm
@@ -41,11 +50,23 @@ third_party_packages:
   url: https://www.npmjs.com/package/domain-ts
   install: npm install domain-ts
   official: false
-  note: >-
-    Community-published TypeScript client for domain.com.au (publisher tmiguelt).
-    Not maintained or endorsed by Domain Group.
-
+  note: Community-published TypeScript client for domain.com.au (publisher tmiguelt). Not maintained or endorsed by Domain Group.
 registries_probed:
-- {registry: npm, query: 'domain.com.au', official_hits: 0}
-- {registry: pypi, queries: [domainapi, domain-com-au, domaingroup], official_hits: 0}
-- {registry: github, org: 'https://github.com/domain-group', public_repos: 0, official_hits: 0}
+- registry: npm
+  query: domain.com.au
+  official_hits: 0
+- registry: pypi
+  queries:
+  - domainapi
+  - domain-com-au
+  - domaingroup
+  official_hits: 0
+- registry: github
+  org: https://github.com/domain-group
+  public_repos: 0
+  official_hits: 0
+rejected:
+- name: domain-ts
+  registry: npm
+  reason: 'official: false as written'
+note: 'no first-party package: every candidate a model listed was unowned (harvest-packages.py --audit)'

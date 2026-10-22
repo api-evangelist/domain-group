@@ -1,32 +1,35 @@
 ---
-name: Upload and manage listings on Domain from a CRM
-description: >-
-  The broker-authorised write path - upsert residential, commercial, business and
-  off-market listings, poll the processing report, and read back enquiries and
-  performance statistics.
-api: openapi/domain-group-openapi-latest.json
+name: domain-group-listing-management
+title: Upload and manage listings on Domain from a CRM
+description: The broker-authorised write path - upsert residential, commercial, business and off-market
+  listings, poll the processing report, and read back enquiries and performance statistics.
+api: openapi/domain-group-listings-api-openapi.yml
+apis:
+- openapi/domain-group-listings-api-openapi.yml
+- openapi/domain-group-agencies-api-openapi.yml
+- openapi/domain-group-me-api-openapi.yml
 operations:
-  - Listings_UpsertResidentialListing
-  - listings_upsertcommerciallisting
-  - Listings_UpsertBusinessListing
-  - listings_upsertresidentialoffmarket
-  - listings_upsertcommercialoffmarket
-  - listings_upsertbusinessoffmarket
-  - Listings_GetListingReport
-  - Listings_GetListingReportByReference
-  - Listings_Get
-  - Listings_GetEnquiries
-  - Listings_GetListingStatistics
-  - Agencies_CreateTestAgency
-  - Me_GetMyAgencies
+- Listings_UpsertResidentialListing
+- listings_upsertcommerciallisting
+- Listings_UpsertBusinessListing
+- listings_upsertresidentialoffmarket
+- listings_upsertcommercialoffmarket
+- listings_upsertbusinessoffmarket
+- Listings_GetListingReport
+- Listings_GetListingReportByReference
+- Listings_Get
+- Listings_GetEnquiries
+- Listings_GetListingStatistics
+- Agencies_CreateTestAgency
+- Me_GetMyAgencies
 scopes:
-  - api_listings_write
-  - api_listings_read
-  - api_agencies_write
-  - api_enquiries_read
-generated: '2026-07-26'
+- api_listings_write
+- api_listings_read
+- api_agencies_write
+- api_enquiries_read
+generated: '2026-10-21'
 method: generated
-source: openapi/domain-group-openapi-latest.json + https://developer.domain.com.au/docs/latest/apis/pkg_listing_management
+source: openapi/ per-API documents + https://developer.domain.com.au/docs/latest/apis/pkg_listing_management
 ---
 
 # Upload and manage listings on Domain from a CRM

@@ -1,0 +1,140 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/domain-group/main/json-schema/domain-group-property-enrichment-v2-search-item-output-schema.json",
+  "title": "Property.Enrichment.v2.SearchItemOutput",
+  "x-generated": "2026-10-21",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/domain-group-propertylike-api-openapi.yml#/components/schemas/Property.Enrichment.v2.SearchItemOutput",
+  "type": "object",
+  "properties": {
+    "propertyid": {
+      "type": "string"
+    },
+    "listingid": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "addresscomponents": {
+      "$ref": "#/$defs/Property.Enrichment.v2.AddressBasic"
+    },
+    "bedrooms": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "bathrooms": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "carspaces": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "landarea": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "images": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "image_url": {
+            "type": "string",
+            "description": "URL of image source"
+          },
+          "image_type": {
+            "$ref": "#/$defs/Property.Enrichment.v2.ImageTypes"
+          }
+        }
+      }
+    },
+    "eventdate": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "date of the event in YYYY-MM-DD format.",
+      "format": "date"
+    },
+    "eventprice": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "distance": {
+      "type": "number"
+    }
+  },
+  "$defs": {
+    "Property.Enrichment.v2.AddressBasic": {
+      "type": "object",
+      "properties": {
+        "flatNumber": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "streetNumber": {
+          "type": "string"
+        },
+        "streetName": {
+          "type": "string"
+        },
+        "streetType": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "streetTypeLong": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "suburb": {
+          "type": "string"
+        },
+        "postcode": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Address of property"
+    },
+    "Property.Enrichment.v2.ImageTypes": {
+      "enum": [
+        "ListingPhoto",
+        "OldFloorPlanPhoto",
+        "NewFloorPlanPhoto",
+        "BuildingPhoto",
+        "NewDevelopmentLandPhoto",
+        "NewDevelopmentLumierePhoto",
+        "NewDevelopmentFeaturedPhoto",
+        "ConjunctionAgentLogo",
+        "NewDevelopmentRegionalPhoto",
+        "AdvertiserImage",
+        "YouWishClip",
+        "AgentCarousel",
+        "DevelopmentProjectGalleryPhoto",
+        "DevelopmentProjectAdvertisementPhoto"
+      ]
+    }
+  }
+}

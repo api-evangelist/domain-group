@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/domain-group/main/json-schema/domain-group-me-v1-my-details-schema.json",
+  "title": "Me.V1.MyDetails",
+  "x-generated": "2026-10-21",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/domain-group-me-api-openapi.yml#/components/schemas/Me.V1.MyDetails",
+  "type": "object",
+  "properties": {
+    "authenticated": {
+      "type": "boolean",
+      "description": "True if the current request was successfully authenticated"
+    },
+    "clientId": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The Client ID or API Key used to authenticated this request"
+    },
+    "subjectId": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "A unique user id, only if this request is authenticated as a user context."
+    },
+    "subjectEmail": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The users email address if available"
+    }
+  },
+  "additionalProperties": false,
+  "x-data-access-level-info": {
+    "Basic": [
+      "Authenticated",
+      "ClientId",
+      "SubjectId",
+      "SubjectEmail"
+    ],
+    "Detailed": [
+      "Authenticated",
+      "ClientId",
+      "SubjectId",
+      "SubjectEmail"
+    ],
+    "Full": [
+      "Authenticated",
+      "ClientId",
+      "SubjectId",
+      "SubjectEmail"
+    ]
+  }
+}

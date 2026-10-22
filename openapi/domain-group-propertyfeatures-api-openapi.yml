@@ -102,33 +102,51 @@ paths:
       x-domain-environment: Any
 components:
   schemas:
-    Property.Enrichment.v2.AddressBasic:
-      type: object
-      properties:
-        flatNumber:
-          type:
-          - string
-          - 'null'
-        streetNumber:
-          type: string
-        streetName:
-          type: string
-        streetType:
-          type:
-          - string
-          - 'null'
-        streetTypeLong:
-          type:
-          - string
-          - 'null'
-        suburb:
-          type: string
-        postcode:
-          type: string
-        state:
-          type: string
-      additionalProperties: false
-      description: Address of property
+    Property.Enrichment.v2.MultipleAddressBasic:
+      type: array
+      items:
+        type: object
+        properties:
+          propertyId:
+            type: string
+          addressComponents:
+            type: object
+            properties:
+              flatNumber:
+                type:
+                - string
+                - 'null'
+              streetNumber:
+                type:
+                - string
+                - 'null'
+              streetName:
+                type:
+                - string
+                - 'null'
+              streetType:
+                type:
+                - string
+                - 'null'
+              streetTypeLong:
+                type:
+                - string
+                - 'null'
+              suburb:
+                type:
+                - string
+                - 'null'
+              postcode:
+                type:
+                - string
+                - 'null'
+              state:
+                type:
+                - string
+                - 'null'
+            additionalProperties: false
+            description: Address of property
+        additionalProperties: false
     Property.Enrichment.v2.PropertyFeatures:
       type: object
       properties:
@@ -200,41 +218,43 @@ components:
               - string
               - 'null'
       additionalProperties: false
-    Property.Enrichment.v2.MultipleAddressBasic:
-      type: array
-      items:
-        type: object
-        properties:
-          propertyId:
-            type: string
-          addressComponents:
-            type: object
-            properties:
-              flatNumber:
-                type:
-                - string
-                - 'null'
-              streetNumber:
-                type: string
-              streetName:
-                type: string
-              streetType:
-                type:
-                - string
-                - 'null'
-              streetTypeLong:
-                type:
-                - string
-                - 'null'
-              suburb:
-                type: string
-              postcode:
-                type: string
-              state:
-                type: string
-            additionalProperties: false
-            description: Address of property
-        additionalProperties: false
+    Property.Enrichment.v2.AddressBasic:
+      type: object
+      properties:
+        flatNumber:
+          type:
+          - string
+          - 'null'
+        streetNumber:
+          type:
+          - string
+          - 'null'
+        streetName:
+          type:
+          - string
+          - 'null'
+        streetType:
+          type:
+          - string
+          - 'null'
+        streetTypeLong:
+          type:
+          - string
+          - 'null'
+        suburb:
+          type:
+          - string
+          - 'null'
+        postcode:
+          type:
+          - string
+          - 'null'
+        state:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+      description: Address of property
   securitySchemes:
     apikey:
       type: apiKey
@@ -251,18 +271,19 @@ components:
             api_addresslocators_read: api_addresslocators_read
             api_agencies_read: api_agencies_read
             api_agencies_write: api_agencies_write
+            api_auction_read: api_auction_read
+            api_auction_write: api_auction_write
             api_authorities_write: api_authorities_write
             api_avm_read: api_avm_read
+            api_avmhistory_read: api_avmhistory_read
             api_campaignperformance_read: api_campaignperformance_read
             api_dataset_read: api_dataset_read
             api_demographics_read: api_demographics_read
             api_enquiries_read: api_enquiries_read
             api_enquiries_write: api_enquiries_write
-            api_listingperformance_read: api_listingperformance_read
             api_listings_read: api_listings_read
             api_listings_write: api_listings_write
             api_locations_read: api_locations_read
-            api_projectperformance_read: api_projectperformance_read
             api_properties_read: api_properties_read
             api_propertyportfolio_read: api_propertyportfolio_read
             api_propertyportfolio_write: api_propertyportfolio_write
@@ -281,18 +302,19 @@ components:
             api_addresslocators_read: api_addresslocators_read
             api_agencies_read: api_agencies_read
             api_agencies_write: api_agencies_write
+            api_auction_read: api_auction_read
+            api_auction_write: api_auction_write
             api_authorities_write: api_authorities_write
             api_avm_read: api_avm_read
+            api_avmhistory_read: api_avmhistory_read
             api_campaignperformance_read: api_campaignperformance_read
             api_dataset_read: api_dataset_read
             api_demographics_read: api_demographics_read
             api_enquiries_read: api_enquiries_read
             api_enquiries_write: api_enquiries_write
-            api_listingperformance_read: api_listingperformance_read
             api_listings_read: api_listings_read
             api_listings_write: api_listings_write
             api_locations_read: api_locations_read
-            api_projectperformance_read: api_projectperformance_read
             api_properties_read: api_properties_read
             api_propertyportfolio_read: api_propertyportfolio_read
             api_propertyportfolio_write: api_propertyportfolio_write

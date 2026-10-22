@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/domain-group/main/json-schema/domain-group-auction-results-v1-summary-response-schema.json",
+  "title": "AuctionResults.v1.summaryResponse",
+  "description": "Get report stats",
+  "x-generated": "2026-10-21",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/domain-group-salesresults-api-openapi.yml#/components/schemas/AuctionResults.v1.summaryResponse",
+  "type": "object",
+  "properties": {
+    "auctionedDate": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    },
+    "lastModifiedDateTime": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "numberListedForAuction": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "numberWithdrawn": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "numberUnreported": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "numberSold": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "totalSales": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "median": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "adjClearanceRate": {
+      "type": [
+        "number",
+        "null"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

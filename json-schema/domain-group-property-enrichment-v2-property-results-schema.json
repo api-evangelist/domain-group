@@ -1,0 +1,369 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/domain-group/main/json-schema/domain-group-property-enrichment-v2-property-results-schema.json",
+  "title": "Property.Enrichment.v2.PropertyResults",
+  "x-generated": "2026-10-21",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/domain-group-properties-api-openapi.yml#/components/schemas/Property.Enrichment.v2.PropertyResults",
+  "type": "object",
+  "properties": {
+    "propertyId": {
+      "type": "string",
+      "description": "Unique ID for the property"
+    },
+    "addressComponents": {
+      "$ref": "#/$defs/Property.Enrichment.v2.AddressBasic"
+    },
+    "propertySummary": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/Property.Enrichment.v2.Property.SummaryFull"
+        },
+        {
+          "$ref": "#/$defs/Property.Enrichment.v2.Property.SummaryBasic"
+        }
+      ],
+      "description": "Summary of property information",
+      "x-data-access-level-info": {
+        "Basic": [
+          "propertyType",
+          "bedrooms",
+          "bathrooms",
+          "carSpaces",
+          "landSize",
+          "internalArea",
+          "yearBuilt"
+        ],
+        "Detailed": [
+          "propertyType",
+          "bedrooms",
+          "bathrooms",
+          "carSpaces",
+          "landSize",
+          "buildingSize",
+          "internalArea",
+          "yearBuilt"
+        ],
+        "Full": [
+          "*"
+        ]
+      }
+    },
+    "activitySummary": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/Property.Enrichment.v2.Property.Activity.SummaryFull"
+        },
+        {
+          "$ref": "#/$defs/Property.Enrichment.v2.Property.Activity.SummaryBasic"
+        }
+      ],
+      "description": "Summary of latest rental and sale records",
+      "x-data-access-level-info": {
+        "Basic": [
+          "lastRentedDate",
+          "lastSoldDate",
+          "lastListedDateRent",
+          "lastListedDateSale",
+          "ownerRenter",
+          "marketStatus"
+        ],
+        "Detailed": [
+          "lastListedDate",
+          "lastSoldDate",
+          "lastRentedDate",
+          "lastListedPrice",
+          "lastSoldPrice",
+          "lastRentedPrice",
+          "ownerRenter"
+        ],
+        "Full": [
+          "*"
+        ]
+      }
+    }
+  },
+  "$defs": {
+    "Property.Enrichment.v2.AddressBasic": {
+      "type": "object",
+      "properties": {
+        "flatNumber": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "streetNumber": {
+          "type": "string"
+        },
+        "streetName": {
+          "type": "string"
+        },
+        "streetType": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "streetTypeLong": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "suburb": {
+          "type": "string"
+        },
+        "postcode": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Address of property"
+    },
+    "Property.Enrichment.v2.Property.Activity.SummaryBasic": {
+      "type": "object",
+      "properties": {
+        "lastRentedDate": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "lastSoldDate": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "lastListedDateRent": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "lastListedDateSale": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "ownerRenter": {
+          "enum": [
+            "Owner",
+            "Renter"
+          ],
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Whether the most recent known activity indicates that the current resident is the owner or renter"
+        },
+        "marketStatus": {
+          "enum": [
+            "on-market",
+            "off-market"
+          ],
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Property activity summary derived from property activity events (not currently in EVENT-SCHEMAS project)"
+    },
+    "Property.Enrichment.v2.Property.Activity.SummaryFull": {
+      "type": "object",
+      "properties": {
+        "lastRentedDate": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "lastRentedPrice": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "lastSoldDate": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "lastSoldPrice": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "lastListedDateRent": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "lastListedPriceRent": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "lastListedDateSale": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "lastListedPriceSale": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "ownerRenter": {
+          "enum": [
+            "Owner",
+            "Renter"
+          ],
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "marketStatus": {
+          "enum": [
+            "on-market",
+            "off-market"
+          ],
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "description": "Property activity summary derived from property activity events (not currently in EVENT-SCHEMAS project)"
+    },
+    "Property.Enrichment.v2.Property.SummaryBasic": {
+      "type": "object",
+      "properties": {
+        "propertyType": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "bedrooms": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "bathrooms": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "carSpaces": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "landSize": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "hasStrata": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "internalArea": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "yearBuilt": {
+          "type": [
+            "number",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "description": "Property summary (not currently in EVENT-SCHEMAS project)"
+    },
+    "Property.Enrichment.v2.Property.SummaryFull": {
+      "type": "object",
+      "properties": {
+        "propertyType": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "bedrooms": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "bathrooms": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "carSpaces": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "landSize": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "buildingSize": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "hasStrata": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "internalArea": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "yearBuilt": {
+          "type": [
+            "number",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "description": "Property summary (not currently in EVENT-SCHEMAS project)"
+    }
+  }
+}

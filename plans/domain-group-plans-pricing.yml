@@ -1,0 +1,27 @@
+name: Domain Group pricing
+generated: '2026-10-21'
+method: none
+source: https://developer.domain.com.au/docs/latest/support/faq/
+audience: developer-api
+pricing_basis: tiered-subscription
+published: false
+delivery:
+  delivery: managed
+plan_count: 0
+plans: []
+checked:
+- url: https://developer.domain.com.au/docs/latest/support/faq/
+  status: 200
+- url: https://developer.domain.com.au/docs/latest/apis/
+  status: 200
+- url: https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings
+  status: 200
+- url: https://developer.domain.com.au/docs/latest/conventions/rate-limiting
+  status: 200
+note: >-
+  The FAQ states "A number of plans are available for API Customers" and "Each API
+  option has several available pricing tiers depending on your usage requirements",
+  and the rate-limiting page refers to plans (including "Unlimited plans") chosen
+  when adding an API to a project. No tier names or prices are published on any
+  public docs page; plans are selected inside the logged-in developer portal, so
+  no tier is recorded here.

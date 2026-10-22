@@ -1,0 +1,24 @@
+generated: '2026-10-21'
+method: none
+source:
+- https://zapier.com/apps/domain-group/integrations
+- https://n8n.io/integrations/domain-group/
+- https://composio.dev/toolkits/domain-group
+- https://monid.ai/tools/domain-group
+checked:
+- https://composio.dev/toolkits/domain-group
+- https://monid.ai/tools/domain-group
+- https://n8n.io/integrations/domain-group/
+- https://zapier.com/apps/domain-group/integrations
+- https://zapier.com/apps/domain/integrations (404)
+- https://www.make.com/en/integrations/domain (403)
+- https://n8n.io/integrations/domain/ (404)
+- https://www.workato.com/integrations/domain (404)
+- https://developer.domain.com.au/docs/latest/apis/pkg_listing_management (200, addresses CRMs generically, names
+  no partner)
+summary: null
+marketplace_apps: []
+edges: []
+templates: []
+note: No marketplace listing and no named integration partner found. The Listings Management docs address CRM vendors
+  as a class (authorised listings uploaders) without naming any.

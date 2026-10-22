@@ -1,0 +1,214 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/domain-group/main/json-schema/domain-group-listing-performance-v1-statistics-schema.json",
+  "title": "ListingPerformance.v1.Statistics",
+  "description": "Listing statistics",
+  "x-generated": "2026-10-21",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/domain-group-agencies-api-openapi.yml#/components/schemas/ListingPerformance.v1.Statistics",
+  "type": "object",
+  "properties": {
+    "listingId": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "Domain Advertisement Id",
+      "format": "int64",
+      "readOnly": true
+    },
+    "totalListingViews": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "Total number of views for the listing details",
+      "format": "int32",
+      "readOnly": true
+    },
+    "totalPhotoViews": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "Total number of listing photo views",
+      "format": "int32",
+      "readOnly": true
+    },
+    "totalPhotoGalleryViews": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "Total number of listing photo gallery views",
+      "format": "int32",
+      "readOnly": true
+    },
+    "totalFloorplanViews": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "Total number of floorplan views",
+      "format": "int32",
+      "readOnly": true
+    },
+    "totalMapViews": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "Total number of address map views",
+      "format": "int32",
+      "readOnly": true
+    },
+    "totalVideoViews": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "Total number of vedio views",
+      "format": "int32",
+      "readOnly": true
+    },
+    "totalEbrochureViews": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "Total number of Ebrochure views",
+      "format": "int32",
+      "readOnly": true
+    },
+    "totalAgentDetailViews": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "Total number of agent detail views",
+      "format": "int32",
+      "readOnly": true
+    },
+    "totalShortlisted": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "Total number of times the listing was shortlisted",
+      "format": "int32",
+      "readOnly": true
+    },
+    "totalPrinted": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "Total number of time the listing detail was printed",
+      "format": "int32",
+      "readOnly": true
+    },
+    "totalAgentPhoneNumberReveals": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "Total number of times the agent phone number was revealed for contact",
+      "format": "int32",
+      "readOnly": true
+    },
+    "totalEnquiries": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "Total number of enquiries",
+      "format": "int32",
+      "readOnly": true
+    },
+    "totalEmailToFriend": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "Total number of times the listing link was emailed",
+      "format": "int32",
+      "readOnly": true
+    },
+    "totalSharedViaSocialMedia": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "Total number of shares via social media",
+      "format": "int32",
+      "readOnly": true
+    },
+    "totalInspectionTimeSaving": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "Total numnber of times when the inspection was saved to calendar",
+      "format": "int32",
+      "readOnly": true
+    },
+    "totalCallToAgentFromMobile": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "Total number of calls made to agent from inside the listing",
+      "format": "int32",
+      "readOnly": true
+    },
+    "percentageWebsiteViews": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "description": "Percentage of total views from website",
+      "format": "double",
+      "readOnly": true
+    },
+    "percentageMobileSiteViews": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "description": "Percentage of total views from mobile site",
+      "format": "double",
+      "readOnly": true
+    },
+    "percentageSmartPhoneViews": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "description": "Percentage of total views from smart phone apps",
+      "format": "double",
+      "readOnly": true
+    },
+    "percentageTabletViews": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "description": "Percentage of total views from tablets",
+      "format": "double",
+      "readOnly": true
+    }
+  },
+  "additionalProperties": false,
+  "x-data-access-level-info": {
+    "Basic": [
+      "*"
+    ],
+    "Detailed": [
+      "*"
+    ],
+    "Full": [
+      "*"
+    ]
+  }
+}

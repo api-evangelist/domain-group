@@ -1,0 +1,132 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/domain-group/main/json-schema/domain-group-domain-avm-pi-v1-property-price-estimate-schema.json",
+  "title": "DomainAvm.PI.v1.PropertyPriceEstimate",
+  "x-generated": "2026-10-21",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/domain-group-properties-api-openapi.yml#/components/schemas/DomainAvm.PI.v1.PropertyPriceEstimate",
+  "type": "object",
+  "properties": {
+    "date": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "lowerPrice": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "format": "double"
+    },
+    "midPrice": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "format": "double"
+    },
+    "priceConfidence": {
+      "$ref": "#/$defs/DomainAvm.PI.v1.ConfidenceEnum"
+    },
+    "source": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "upperPrice": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "format": "double"
+    },
+    "history": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/$defs/DomainAvm.PI.v1.PropertyPriceEstimateHistory"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "x-data-access-level-info": {
+    "Basic": [
+      "*"
+    ],
+    "Detailed": [
+      "*"
+    ],
+    "Full": [
+      "*"
+    ]
+  },
+  "$defs": {
+    "DomainAvm.PI.v1.ConfidenceEnum": {
+      "enum": [
+        "high",
+        "medium",
+        "low"
+      ],
+      "type": "string"
+    },
+    "DomainAvm.PI.v1.PropertyPriceEstimateHistory": {
+      "type": "object",
+      "properties": {
+        "confidence": {
+          "$ref": "#/$defs/DomainAvm.PI.v1.ConfidenceEnum"
+        },
+        "date": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "lowerPrice": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "double"
+        },
+        "midPrice": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "double"
+        },
+        "source": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "upperPrice": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "double"
+        }
+      },
+      "additionalProperties": false,
+      "x-data-access-level-info": {
+        "Basic": [
+          "*"
+        ],
+        "Detailed": [
+          "*"
+        ],
+        "Full": [
+          "*"
+        ]
+      }
+    }
+  }
+}

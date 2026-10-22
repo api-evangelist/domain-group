@@ -104,6 +104,28 @@ components:
         - '*'
         Full:
         - '*'
+    Domain.LocationProfilesService.v1.Model.LocationDataSalesGrowthList:
+      type: object
+      properties:
+        medianSoldPrice:
+          type: number
+          format: double
+        annualGrowth:
+          type: number
+          format: double
+        numberSold:
+          type: integer
+          format: int32
+        year:
+          type: integer
+          format: int32
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
     Domain.LocationProfilesService.v1.Model.LocationDataPropertyCategories:
       type: object
       properties:
@@ -148,42 +170,6 @@ components:
           type: string
         mostRecentSale:
           type: string
-      x-data-access-level-info:
-        Basic:
-        - '*'
-        Detailed:
-        - '*'
-        Full:
-        - '*'
-    Domain.LocationProfilesService.v1.Model.LocationSurroundingSuburbs:
-      type: object
-      properties:
-        name:
-          type: string
-        urlSlug:
-          type: string
-      x-data-access-level-info:
-        Basic:
-        - '*'
-        Detailed:
-        - '*'
-        Full:
-        - '*'
-    Domain.LocationProfilesService.v1.Model.LocationDataSalesGrowthList:
-      type: object
-      properties:
-        medianSoldPrice:
-          type: number
-          format: double
-        annualGrowth:
-          type: number
-          format: double
-        numberSold:
-          type: integer
-          format: int32
-        year:
-          type: integer
-          format: int32
       x-data-access-level-info:
         Basic:
         - '*'
@@ -279,6 +265,20 @@ components:
         - '*'
         Full:
         - '*'
+    Domain.LocationProfilesService.v1.Model.LocationSurroundingSuburbs:
+      type: object
+      properties:
+        name:
+          type: string
+        urlSlug:
+          type: string
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
   securitySchemes:
     apikey:
       type: apiKey
@@ -295,18 +295,19 @@ components:
             api_addresslocators_read: api_addresslocators_read
             api_agencies_read: api_agencies_read
             api_agencies_write: api_agencies_write
+            api_auction_read: api_auction_read
+            api_auction_write: api_auction_write
             api_authorities_write: api_authorities_write
             api_avm_read: api_avm_read
+            api_avmhistory_read: api_avmhistory_read
             api_campaignperformance_read: api_campaignperformance_read
             api_dataset_read: api_dataset_read
             api_demographics_read: api_demographics_read
             api_enquiries_read: api_enquiries_read
             api_enquiries_write: api_enquiries_write
-            api_listingperformance_read: api_listingperformance_read
             api_listings_read: api_listings_read
             api_listings_write: api_listings_write
             api_locations_read: api_locations_read
-            api_projectperformance_read: api_projectperformance_read
             api_properties_read: api_properties_read
             api_propertyportfolio_read: api_propertyportfolio_read
             api_propertyportfolio_write: api_propertyportfolio_write
@@ -325,18 +326,19 @@ components:
             api_addresslocators_read: api_addresslocators_read
             api_agencies_read: api_agencies_read
             api_agencies_write: api_agencies_write
+            api_auction_read: api_auction_read
+            api_auction_write: api_auction_write
             api_authorities_write: api_authorities_write
             api_avm_read: api_avm_read
+            api_avmhistory_read: api_avmhistory_read
             api_campaignperformance_read: api_campaignperformance_read
             api_dataset_read: api_dataset_read
             api_demographics_read: api_demographics_read
             api_enquiries_read: api_enquiries_read
             api_enquiries_write: api_enquiries_write
-            api_listingperformance_read: api_listingperformance_read
             api_listings_read: api_listings_read
             api_listings_write: api_listings_write
             api_locations_read: api_locations_read
-            api_projectperformance_read: api_projectperformance_read
             api_properties_read: api_properties_read
             api_propertyportfolio_read: api_propertyportfolio_read
             api_propertyportfolio_write: api_propertyportfolio_write

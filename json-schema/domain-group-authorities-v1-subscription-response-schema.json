@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/domain-group/main/json-schema/domain-group-authorities-v1-subscription-response-schema.json",
+  "title": "Authorities.v1.SubscriptionResponse",
+  "x-generated": "2026-10-21",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/domain-group-authorities-api-openapi.yml#/components/schemas/Authorities.v1.SubscriptionResponse",
+  "type": "object",
+  "properties": {
+    "subscriptionId": {
+      "type": "string"
+    }
+  }
+}

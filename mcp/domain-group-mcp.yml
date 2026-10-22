@@ -1,12 +1,13 @@
-generated: '2026-07-26'
+generated: '2026-10-21'
 method: derived
 status: candidate
-source: openapi/domain-group-openapi-latest.json
-summary: 'Domain Group publishes no MCP server. Probes of https://developer.domain.com.au/mcp and /docs/latest/mcp
-  returned 404, and no Domain server appears in the public MCP registries. This is an API Evangelist derived
-  candidate tool surface: one tool per OpenAPI operation across the property, listing, agency, market-statistics,
-  portfolio and webhook capability areas. Each tool inherits its real input schema from the referenced
-  operation parameters and requestBody in the OpenAPI document.'
+source: openapi/ (31 per-API OpenAPI documents split from https://developer.domain.com.au/static/latest/media/latest/openapi.json)
+name: Domain Group MCP server (candidate)
+summary: 'Domain Group publishes no MCP server. Re-checked 2026-10-21: https://developer.domain.com.au/mcp, /.well-known/mcp.json,
+  /llms.txt and /AGENTS.md all return 404, and a web search found no first-party Domain MCP server (only an unrelated
+  DomainGenius domain-name MCP and third-party scrapers). This is an API Evangelist DERIVED candidate tool surface:
+  one tool per OpenAPI operation across the 31 per-API documents in openapi/. Each tool inherits its real input
+  schema from the referenced operation parameters and requestBody. Nothing here is a live server.'
 server:
   name: domain-group
   transport: http
@@ -22,9 +23,18 @@ server:
 probes:
 - url: https://developer.domain.com.au/mcp
   status: 404
+  checked: '2026-10-21'
+- url: https://developer.domain.com.au/.well-known/mcp.json
+  status: 404
+  checked: '2026-10-21'
 - url: https://developer.domain.com.au/docs/latest/mcp
   status: 404
-tool_count: 82
+  checked: '2026-07-26'
+search:
+  query: Domain.com.au MCP server developer API property listings Model Context Protocol
+  date: '2026-10-21'
+  result: no first-party server found
+tool_count: 121
 tools:
 - name: address_locators_get
   description: Address Locator API
@@ -34,27 +44,27 @@ tools:
   - AddressLocators
   scopes:
   - api_addresslocators_read
-  source_operation: openapi/domain-group-openapi-latest.json#AddressLocators_Get
+  source_operation: openapi/domain-group-addresslocators-api-openapi.yml#AddressLocators_Get
   read_only: true
 - name: agencies_search
-  description: Retrieves summary of agencies matching the specified criteria.
+  description: Retrieves summary of agencies matching the specified criteria
   method: GET
   path: /v1/agencies
   tags:
   - Agencies
   scopes:
   - api_agencies_read
-  source_operation: openapi/domain-group-openapi-latest.json#Agencies_Search
+  source_operation: openapi/domain-group-agencies-api-openapi.yml#Agencies_Search
   read_only: true
 - name: agencies_head
-  description: Retrieves summary of agency search.
+  description: Retrieves summary of agency search
   method: HEAD
   path: /v1/agencies
   tags:
   - Agencies
   scopes:
   - api_agencies_read
-  source_operation: openapi/domain-group-openapi-latest.json#Agencies_Head
+  source_operation: openapi/domain-group-agencies-api-openapi.yml#Agencies_Head
   read_only: true
 - name: agencies_create_test_agency
   description: Create a test agency for sandbox testing
@@ -64,47 +74,57 @@ tools:
   - Agencies
   scopes:
   - api_agencies_write
-  source_operation: openapi/domain-group-openapi-latest.json#Agencies_CreateTestAgency
+  source_operation: openapi/domain-group-agencies-api-openapi.yml#Agencies_CreateTestAgency
   read_only: false
 - name: agencies_get
-  description: Retrieves a specific agency details.
+  description: Retrieves a specific agency details
   method: GET
   path: /v1/agencies/{id}
   tags:
   - Agencies
   scopes:
   - api_agencies_read
-  source_operation: openapi/domain-group-openapi-latest.json#Agencies_Get
+  source_operation: openapi/domain-group-agencies-api-openapi.yml#Agencies_Get
   read_only: true
 - name: agencies_get_listings
-  description: Retrieves listings across all channels for a specific agency matching specified criteria.
+  description: Retrieves listings across all channels for a specific agency matching specified…
   method: GET
   path: /v1/agencies/{id}/listings
   tags:
   - Agencies
   scopes:
   - api_listings_read
-  source_operation: openapi/domain-group-openapi-latest.json#Agencies_GetListings
+  source_operation: openapi/domain-group-agencies-api-openapi.yml#Agencies_GetListings
   read_only: true
 - name: agencies_get_statistics
-  description: Retrieves statistics for a specific agency.
+  description: Retrieves statistics for a specific agency
   method: GET
   path: /v1/agencies/{id}/statistics
   tags:
   - Agencies
   scopes:
   - api_agencies_read
-  source_operation: openapi/domain-group-openapi-latest.json#Agencies_GetStatistics
+  source_operation: openapi/domain-group-agencies-api-openapi.yml#Agencies_GetStatistics
+  read_only: true
+- name: agencies_get_v2
+  description: Returns listings for the agency based on the specified filter parameters.
+  method: GET
+  path: /v2/agencies/{agencyId}/listings
+  tags:
+  - Agencies
+  scopes:
+  - api_listings_read
+  source_operation: openapi/domain-group-agencies-api-openapi.yml#Agencies_Get_v2
   read_only: true
 - name: agents_get
-  description: Retrieves a specific agent details, including contact information.
+  description: Retrieves a specific agent details, including contact information
   method: GET
   path: /v1/agents/{id}
   tags:
   - Agents
   scopes:
   - api_agencies_read
-  source_operation: openapi/domain-group-openapi-latest.json#Agents_Get
+  source_operation: openapi/domain-group-agents-api-openapi.yml#Agents_Get
   read_only: true
 - name: agents_get_listings
   description: Gets listing using the contact id
@@ -114,7 +134,7 @@ tools:
   - Agents
   scopes:
   - api_listings_read
-  source_operation: openapi/domain-group-openapi-latest.json#Agents_GetListings
+  source_operation: openapi/domain-group-agents-api-openapi.yml#Agents_GetListings
   read_only: true
 - name: agents_get_statistics
   description: Retrieves stats for the listings of a given agent
@@ -124,17 +144,189 @@ tools:
   - Agents
   scopes:
   - api_agencies_read
-  source_operation: openapi/domain-group-openapi-latest.json#Agents_GetStatistics
+  source_operation: openapi/domain-group-agents-api-openapi.yml#Agents_GetStatistics
   read_only: true
 - name: agents_search
-  description: Search for agents by name.
+  description: Search for agents by name
   method: GET
   path: /v1/agents/search
   tags:
   - Agents
   scopes:
   - api_agencies_read
-  source_operation: openapi/domain-group-openapi-latest.json#Agents_Search
+  source_operation: openapi/domain-group-agents-api-openapi.yml#Agents_Search
+  read_only: true
+- name: agents_get_reviews_by_ids
+  description: Retrieves the overall star ratings and number of reviews for a list of agents by their ids.
+  method: GET
+  path: /v2/agents/reviews
+  tags:
+  - Agents
+  scopes:
+  - api_agencies_read
+  source_operation: openapi/domain-group-agents-api-openapi.yml#Agents_GetReviewsByIds
+  read_only: true
+- name: agent_location_search
+  description: Retrieves agents matching the specified location criteria.
+  method: POST
+  path: /v2/agentsearch/agents/location
+  tags:
+  - AgentSearch
+  scopes:
+  - api_agencies_read
+  source_operation: openapi/domain-group-agentsearch-api-openapi.yml#agent_location_search
+  read_only: false
+- name: auction_collection_calling_sheet
+  description: Get calling sheet with collection of auction that haven't received results yet
+  method: GET
+  path: /v2/auctions/calling-sheet/{state}
+  tags:
+  - AuctionCollection
+  scopes:
+  - api_auction_read
+  source_operation: openapi/domain-group-auctioncollection-api-openapi.yml#AuctionCollection_CallingSheet
+  read_only: true
+- name: auction_collection_auction_update
+  description: Update auction information
+  method: PUT
+  path: /v2/auctions/update
+  tags:
+  - AuctionCollection
+  scopes:
+  - api_auction_write
+  source_operation: openapi/domain-group-auctioncollection-api-openapi.yml#AuctionCollection_AuctionUpdate
+  read_only: false
+- name: authorities_create
+  description: Creates a new authority into the system
+  method: POST
+  path: /v1/authorities
+  tags:
+  - Authorities
+  scopes:
+  - api_authorities_write
+  source_operation: openapi/domain-group-authorities-api-openapi.yml#Authorities_Create
+  read_only: false
+- name: authorities_get_by_id
+  description: Retrieve a single authority
+  method: GET
+  path: /v1/authorities/{id}
+  tags:
+  - Authorities
+  scopes:
+  - api_authorities_write
+  source_operation: openapi/domain-group-authorities-api-openapi.yml#Authorities_GetById
+  read_only: true
+- name: authorities_update_by_id
+  description: full update an existing authority
+  method: PUT
+  path: /v1/authorities/{id}
+  tags:
+  - Authorities
+  scopes:
+  - api_authorities_write
+  source_operation: openapi/domain-group-authorities-api-openapi.yml#Authorities_UpdateById
+  read_only: false
+- name: authorities_download_attachments
+  description: Download a compressed file that contains all files attached to an authority
+  method: GET
+  path: /v1/authorities/{id}/attachments
+  tags:
+  - Authorities
+  scopes:
+  - api_authorities_write
+  source_operation: openapi/domain-group-authorities-api-openapi.yml#Authorities_DownloadAttachments
+  read_only: true
+- name: authorities_upload_attachment
+  description: Upload multiple files to an authority
+  method: POST
+  path: /v1/authorities/{id}/attachments
+  tags:
+  - Authorities
+  scopes:
+  - api_authorities_write
+  source_operation: openapi/domain-group-authorities-api-openapi.yml#Authorities_UploadAttachment
+  read_only: false
+- name: authorities_upload_vendor_attachment
+  description: Upload multiple files to be attached to a specific vendor in an authority
+  method: POST
+  path: /v1/authorities/{id}/vendors/{vendorId}/attachments
+  tags:
+  - Authorities
+  scopes:
+  - api_authorities_write
+  source_operation: openapi/domain-group-authorities-api-openapi.yml#Authorities_UploadVendorAttachment
+  read_only: false
+- name: authorities_subscribe
+  description: Subscribe to an agency for all its authorities
+  method: PUT
+  path: /v1/authorities/webhooks/subscription
+  tags:
+  - Authorities
+  scopes:
+  - api_webhooks_write
+  source_operation: openapi/domain-group-authorities-api-openapi.yml#Authorities_Subscribe
+  read_only: false
+- name: authorities_unsubscribe
+  description: Delete a subscription using subscriptionId
+  method: DELETE
+  path: /v1/authorities/webhooks/subscription/{subscriptionId}
+  tags:
+  - Authorities
+  scopes:
+  - api_webhooks_write
+  source_operation: openapi/domain-group-authorities-api-openapi.yml#Authorities_Unsubscribe
+  read_only: false
+- name: avm_history_get
+  description: Retrieves valuation history for the property.
+  method: GET
+  path: /v1/avmHistory/{propertyId}
+  tags:
+  - AvmHistory
+  scopes:
+  - api_avmhistory_read
+  source_operation: openapi/domain-group-avmhistory-api-openapi.yml#AvmHistory_Get
+  read_only: true
+- name: campaign_get_listing_performance_report
+  description: Retrieves listing performance metrics for the New Developer Listings (linked to…
+  method: GET
+  path: /v1/campaign/listing-performance
+  tags:
+  - CampaignReporting
+  scopes:
+  - api_campaignperformance_read
+  - api_listingperformance_read
+  source_operation: openapi/domain-group-campaignreporting-api-openapi.yml#Campaign_GetListingPerformance_Report
+  read_only: true
+- name: campaign_get_project_performance_report
+  description: Retrieves project performance metrics for the New Developer Projects managed by…
+  method: GET
+  path: /v1/campaign/project-performance
+  tags:
+  - CampaignReporting
+  scopes:
+  - api_campaignperformance_read
+  - api_projectperformance_read
+  source_operation: openapi/domain-group-campaignreporting-api-openapi.yml#Campaign_GetProjectPerformance_Report
+  read_only: true
+- name: campaign_get_social_performance_report
+  description: Retrieves social performance metrics for campaigns managed by advertisers.
+  method: GET
+  path: /v1/campaign/social-performance
+  tags:
+  - CampaignReporting
+  scopes:
+  - api_campaignperformance_read
+  source_operation: openapi/domain-group-campaignreporting-api-openapi.yml#Campaign_GetSocialPerformance_Report
+  read_only: true
+- name: dataset_get
+  description: Get a value of a given key for a dataset
+  method: GET
+  path: /v2/dataset/{datasetName}/{key}
+  tags:
+  - Dataset
+  scopes:
+  - api_dataset_read
+  source_operation: openapi/domain-group-dataset-api-openapi.yml#dataset_get
   read_only: true
 - name: demographics_get_by_named_suburb
   description: Demographics API
@@ -144,10 +336,30 @@ tools:
   - Demographics
   scopes:
   - api_demographics_read
-  source_operation: openapi/domain-group-openapi-latest.json#Demographics_Get_ByNamedSuburb
+  source_operation: openapi/domain-group-demographics-api-openapi.yml#Demographics_Get_ByNamedSuburb
+  read_only: true
+- name: disclaimers_get
+  description: Disclaimers
+  method: GET
+  path: /v1/disclaimers
+  tags:
+  - Disclaimers
+  scopes:
+  - api_properties_read
+  source_operation: openapi/domain-group-disclaimers-api-openapi.yml#Disclaimers_Get
+  read_only: true
+- name: disclaimers_get_by_product
+  description: Disclaimers by Product
+  method: GET
+  path: /v1/disclaimers/product/{product}
+  tags:
+  - Disclaimers
+  scopes:
+  - api_properties_read
+  source_operation: openapi/domain-group-disclaimers-api-openapi.yml#Disclaimers_GetByProduct
   read_only: true
 - name: enquiries_search
-  description: Searches enquiries based on agents or agencies.
+  description: Searches enquiries based on agents or agencies
   method: GET
   path: /v1/enquiries
   tags:
@@ -155,17 +367,17 @@ tools:
   scopes:
   - api_enquiries_read
   - api_enquiries_write
-  source_operation: openapi/domain-group-openapi-latest.json#Enquiries_Search
+  source_operation: openapi/domain-group-enquiries-api-openapi.yml#Enquiries_Search
   read_only: true
 - name: enquiries_post
-  description: "Sends an enquiry for listing, agency, etc... (based on the enquiry type and referenceid).\r"
+  description: Sends an enquiry for listing, agency, etc...
   method: POST
   path: /v1/enquiries
   tags:
   - Enquiries
   scopes:
   - api_enquiries_write
-  source_operation: openapi/domain-group-openapi-latest.json#Enquiries_Post
+  source_operation: openapi/domain-group-enquiries-api-openapi.yml#Enquiries_Post
   read_only: false
 - name: enquiries_get
   description: Retrieve the details of a specific enquiry
@@ -176,7 +388,27 @@ tools:
   scopes:
   - api_enquiries_read
   - api_enquiries_write
-  source_operation: openapi/domain-group-openapi-latest.json#Enquiries_Get
+  source_operation: openapi/domain-group-enquiries-api-openapi.yml#Enquiries_Get
+  read_only: true
+- name: lead_scope_get_by_id
+  description: URL to download a list of agency predictions
+  method: GET
+  path: /v1/leadscope/predictions/{participantId}
+  tags:
+  - Leadscope
+  scopes:
+  - api_agencies_read
+  source_operation: openapi/domain-group-leadscope-api-openapi.yml#LeadScope_GetById
+  read_only: true
+- name: lead_miner_get_by_id
+  description: URL to download a list of agency predictions
+  method: GET
+  path: /v1/leadminer/predictions/{participantId}
+  tags:
+  - Leadscope
+  scopes:
+  - api_agencies_read
+  source_operation: openapi/domain-group-leadscope-api-openapi.yml#LeadMiner_GetById
   read_only: true
 - name: listings_get
   description: Retrieve details of listing using the listing id
@@ -187,7 +419,7 @@ tools:
   scopes:
   - api_listings_read
   - api_listings_write
-  source_operation: openapi/domain-group-openapi-latest.json#Listings_Get
+  source_operation: openapi/domain-group-listings-api-openapi.yml#Listings_Get
   read_only: true
 - name: listings_get_enquiries
   description: Retrieve details of all enquiries received for a specific listing
@@ -198,7 +430,7 @@ tools:
   scopes:
   - api_enquiries_read
   - api_enquiries_write
-  source_operation: openapi/domain-group-openapi-latest.json#Listings_GetEnquiries
+  source_operation: openapi/domain-group-listings-api-openapi.yml#Listings_GetEnquiries
   read_only: true
 - name: listings_get_listing_statistics
   description: Retrieve details of listing using the listing id
@@ -208,7 +440,7 @@ tools:
   - Listings
   scopes:
   - api_listings_read
-  source_operation: openapi/domain-group-openapi-latest.json#Listings_GetListingStatistics
+  source_operation: openapi/domain-group-listings-api-openapi.yml#Listings_GetListingStatistics
   read_only: true
 - name: listings_upsert_business_listing
   description: Creates or updates a business listing
@@ -218,10 +450,10 @@ tools:
   - Listings
   scopes:
   - api_listings_write
-  source_operation: openapi/domain-group-openapi-latest.json#Listings_UpsertBusinessListing
+  source_operation: openapi/domain-group-listings-api-openapi.yml#Listings_UpsertBusinessListing
   read_only: false
 - name: listings_detailed_business_search
-  description: Retrieves business listings matching the specified criteria.
+  description: Retrieves business listings matching the specified criteria
   method: POST
   path: /v1/listings/business/_search
   tags:
@@ -229,31 +461,30 @@ tools:
   scopes:
   - api_listings_read
   - api_listings_write
-  source_operation: openapi/domain-group-openapi-latest.json#Listings_DetailedBusinessSearch
+  source_operation: openapi/domain-group-listings-api-openapi.yml#Listings_DetailedBusinessSearch
   read_only: false
 - name: listings_upsertbusinessoffmarket
-  description: Creates an externally sold business listing; or takes an existing business listing off
-    the market.
+  description: Creates an externally sold business listing; or takes an existing business…
   method: POST
   path: /v2/listings/business/offmarket
   tags:
   - Listings
   scopes:
   - api_listings_write
-  source_operation: openapi/domain-group-openapi-latest.json#listings_upsertbusinessoffmarket
+  source_operation: openapi/domain-group-listings-api-openapi.yml#listings_upsertbusinessoffmarket
   read_only: false
 - name: listings_upsertcommerciallisting
-  description: Creates a commercial listing.
+  description: Creates a commercial listing
   method: PUT
   path: /v2/listings/commercial
   tags:
   - Listings
   scopes:
   - api_listings_write
-  source_operation: openapi/domain-group-openapi-latest.json#listings_upsertcommerciallisting
+  source_operation: openapi/domain-group-listings-api-openapi.yml#listings_upsertcommerciallisting
   read_only: false
 - name: listings_detailed_commercial_search
-  description: Retrieves commercial listings matching the specified criteria.
+  description: Retrieves commercial listings matching the specified criteria
   method: POST
   path: /v1/listings/commercial/_search
   tags:
@@ -261,18 +492,17 @@ tools:
   scopes:
   - api_listings_read
   - api_listings_write
-  source_operation: openapi/domain-group-openapi-latest.json#Listings_DetailedCommercialSearch
+  source_operation: openapi/domain-group-listings-api-openapi.yml#Listings_DetailedCommercialSearch
   read_only: false
 - name: listings_upsertcommercialoffmarket
-  description: Creates an externally sold or leased commercial listing; or takes an existing commercial
-    listing off the market.
+  description: Creates an externally sold or leased commercial listing; or takes an existing…
   method: POST
   path: /v2/listings/commercial/offmarket
   tags:
   - Listings
   scopes:
   - api_listings_write
-  source_operation: openapi/domain-group-openapi-latest.json#listings_upsertcommercialoffmarket
+  source_operation: openapi/domain-group-listings-api-openapi.yml#listings_upsertcommercialoffmarket
   read_only: false
 - name: listing_locations_search
   description: Suggests listing locations
@@ -283,7 +513,7 @@ tools:
   scopes:
   - api_listings_read
   - api_listings_write
-  source_operation: openapi/domain-group-openapi-latest.json#ListingLocations_Search
+  source_operation: openapi/domain-group-listings-api-openapi.yml#ListingLocations_Search
   read_only: true
 - name: listings_get_listing_report_by_reference
   description: Searches processing reports
@@ -293,7 +523,7 @@ tools:
   - Listings
   scopes:
   - api_listings_read
-  source_operation: openapi/domain-group-openapi-latest.json#Listings_GetListingReportByReference
+  source_operation: openapi/domain-group-listings-api-openapi.yml#Listings_GetListingReportByReference
   read_only: true
 - name: listings_get_listing_report
   description: Gets the processing report
@@ -303,7 +533,7 @@ tools:
   - Listings
   scopes:
   - api_listings_read
-  source_operation: openapi/domain-group-openapi-latest.json#Listings_GetListingReport
+  source_operation: openapi/domain-group-listings-api-openapi.yml#Listings_GetListingReport
   read_only: true
 - name: listings_upsert_residential_listing
   description: Creates or updates a residential listing
@@ -313,10 +543,10 @@ tools:
   - Listings
   scopes:
   - api_listings_write
-  source_operation: openapi/domain-group-openapi-latest.json#Listings_UpsertResidentialListing
+  source_operation: openapi/domain-group-listings-api-openapi.yml#Listings_UpsertResidentialListing
   read_only: false
 - name: listings_detailed_residential_search
-  description: Retrieves residential listings matching the specified criteria.
+  description: Retrieves residential listings matching the specified criteria
   method: POST
   path: /v1/listings/residential/_search
   tags:
@@ -324,38 +554,77 @@ tools:
   scopes:
   - api_listings_read
   - api_listings_write
-  source_operation: openapi/domain-group-openapi-latest.json#Listings_DetailedResidentialSearch
+  source_operation: openapi/domain-group-listings-api-openapi.yml#Listings_DetailedResidentialSearch
   read_only: false
 - name: listings_upsertresidentialoffmarket
-  description: Creates an externally sold or leased residential listing; or takes an existing residential
-    listing off the market.
+  description: Creates an externally sold or leased residential listing; or takes an existing…
   method: POST
   path: /v2/listings/residential/offmarket
   tags:
   - Listings
   scopes:
   - api_listings_write
-  source_operation: openapi/domain-group-openapi-latest.json#listings_upsertresidentialoffmarket
+  source_operation: openapi/domain-group-listings-api-openapi.yml#listings_upsertresidentialoffmarket
   read_only: false
+- name: listings_update_offmarket_details
+  description: Takes a listing offmarket
+  method: POST
+  path: /v1/listings/{id}/offmarket
+  tags:
+  - Listings
+  scopes:
+  - api_listings_write
+  source_operation: openapi/domain-group-listings-api-openapi.yml#Listings_UpdateOffmarketDetails
+  read_only: false
+- name: listings_upsert_commercial_listing
+  description: Creates or updates a commercial listing
+  method: PUT
+  path: /v1/listings/commercial
+  tags:
+  - Listings
+  scopes:
+  - api_listings_write
+  source_operation: openapi/domain-group-listings-api-openapi.yml#Listings_UpsertCommercialListing
+  read_only: false
+- name: listings_get_listing_statistics_by_agent_id
+  description: Retrieves stats for the residential listings of a given agent
+  method: GET
+  path: /v1/listings/statistics
+  tags:
+  - Listings
+  scopes:
+  - api_listings_read
+  source_operation: openapi/domain-group-listings-api-openapi.yml#Listings_GetListingStatisticsByAgentId
+  read_only: true
+- name: listings_get_v2
+  description: Retrieves a list of listings by their unique identifiers.
+  method: GET
+  path: /v2/listings
+  tags:
+  - Listings
+  scopes:
+  - api_listings_read
+  source_operation: openapi/domain-group-listings-api-openapi.yml#Listings_Get_v2
+  read_only: true
 - name: listings_residential_search
-  description: Retrieves residential listings matching the specified criteria.
+  description: Retrieves residential listings matching the specified criteria
   method: POST
   path: /v1/listingSearch/residential/search
   tags:
   - ListingSearch
   scopes:
   - api_listings_read
-  source_operation: openapi/domain-group-openapi-latest.json#Listings_ResidentialSearch
+  source_operation: openapi/domain-group-listingsearch-api-openapi.yml#Listings_ResidentialSearch
   read_only: false
 - name: listings_detailed_sold_residential_search
-  description: Retrieves sold residential listings matching the specified criteria.
+  description: Retrieves sold residential listings matching the specified criteria
   method: POST
   path: /v1/listingSearch/residential/searchSold
   tags:
   - ListingSearch
   scopes:
   - api_listings_read
-  source_operation: openapi/domain-group-openapi-latest.json#Listings_DetailedSoldResidentialSearch
+  source_operation: openapi/domain-group-listingsearch-api-openapi.yml#Listings_DetailedSoldResidentialSearch
   read_only: false
 - name: location_profiles_get
   description: Get location data based on the given domainLocationId
@@ -365,7 +634,7 @@ tools:
   - Locations
   scopes:
   - api_locations_read
-  source_operation: openapi/domain-group-openapi-latest.json#LocationProfiles_Get
+  source_operation: openapi/domain-group-locations-api-openapi.yml#LocationProfiles_Get
   read_only: true
 - name: me_profile
   description: Retrieve information about the currently authorised request
@@ -373,8 +642,8 @@ tools:
   path: /v1/me
   tags:
   - Me
-  scopes: null
-  source_operation: openapi/domain-group-openapi-latest.json#Me_Profile
+  scopes: []
+  source_operation: openapi/domain-group-me-api-openapi.yml#Me_Profile
   read_only: true
 - name: me_get_my_agencies
   description: Retrieve list of agencies with which the current client is associated
@@ -384,7 +653,7 @@ tools:
   - Me
   scopes:
   - api_agencies_read
-  source_operation: openapi/domain-group-openapi-latest.json#Me_GetMyAgencies
+  source_operation: openapi/domain-group-me-api-openapi.yml#Me_GetMyAgencies
   read_only: true
 - name: me_get_my_providers
   description: Retrieve list of provider Ids with which the current client is associated
@@ -394,8 +663,118 @@ tools:
   - Me
   scopes:
   - api_listings_write
-  source_operation: openapi/domain-group-openapi-latest.json#Me_GetMyProviders
+  source_operation: openapi/domain-group-me-api-openapi.yml#Me_GetMyProviders
   read_only: true
+- name: pre_market_post
+  description: Creates or updates a pre-portal listing
+  method: POST
+  path: /v2/premarket/listings
+  tags:
+  - PreMarket
+  scopes:
+  - api_listings_write
+  source_operation: openapi/domain-group-premarket-api-openapi.yml#PreMarket_Post
+  read_only: false
+- name: pre_market_get
+  description: Retrieves a pre-portal listing
+  method: GET
+  path: /v2/premarket/listings/{id}
+  tags:
+  - PreMarket
+  scopes:
+  - api_listings_read
+  source_operation: openapi/domain-group-premarket-api-openapi.yml#PreMarket_Get
+  read_only: true
+- name: pre_market_patch
+  description: Patches a pre-portal listing
+  method: PATCH
+  path: /v2/premarket/listings/{id}
+  tags:
+  - PreMarket
+  scopes:
+  - api_listings_write
+  source_operation: openapi/domain-group-premarket-api-openapi.yml#PreMarket_Patch
+  read_only: false
+- name: limited_inventory_unreserve
+  description: Unreserves (cancels) an existing limited inventory reservation
+  method: PUT
+  path: /v1/Products/LimitedInventory/{inventoryReservationId}/Unreserve
+  tags:
+  - Products
+  scopes:
+  - api_agencies_write
+  source_operation: openapi/domain-group-products-api-openapi.yml#LimitedInventory_Unreserve
+  read_only: false
+- name: limited_inventory_get_batch_availability
+  description: Retrieves batch availability for limited inventory products
+  method: POST
+  path: /v1/Products/LimitedInventory/Availability
+  tags:
+  - Products
+  scopes:
+  - api_agencies_read
+  source_operation: openapi/domain-group-products-api-openapi.yml#LimitedInventory_GetBatchAvailability
+  read_only: false
+- name: limited_inventory_reserve_by_batch
+  description: Reserves inventory for a batch of products based on the provided request
+  method: POST
+  path: /v1/Products/LimitedInventory/ReserveByBatch
+  tags:
+  - Products
+  scopes:
+  - api_agencies_write
+  source_operation: openapi/domain-group-products-api-openapi.yml#LimitedInventory_ReserveByBatch
+  read_only: false
+- name: limited_inventory_unreserve_by_batch
+  description: Unreserve inventory items by batch
+  method: PUT
+  path: /v1/Products/LimitedInventory/UnreserveByBatch
+  tags:
+  - Products
+  scopes:
+  - api_agencies_write
+  source_operation: openapi/domain-group-products-api-openapi.yml#LimitedInventory_UnreserveByBatch
+  read_only: false
+- name: listing_price_quote_by_agency
+  description: Gets a listing price quote based on the agency, channel and location details
+  method: POST
+  path: /v1/Products/Listings/QuoteByAgency
+  tags:
+  - Products
+  scopes:
+  - api_agencies_read
+  source_operation: openapi/domain-group-products-api-openapi.yml#ListingPrice_QuoteByAgency
+  read_only: false
+- name: listing_price_quote_by_suburbs
+  description: Gets a listing price quote based on the provided suburb details
+  method: POST
+  path: /v1/Products/Listings/QuoteBySuburbs
+  tags:
+  - Products
+  scopes:
+  - api_agencies_read
+  source_operation: openapi/domain-group-products-api-openapi.yml#ListingPrice_QuoteBySuburbs
+  read_only: false
+- name: products_rate_for_new_listing
+  description: Get updated pricing information for a hypothetical listing
+  method: POST
+  path: /v1/products/ratefornewlisting
+  tags:
+  - Products
+  scopes:
+  - api_agencies_read
+  source_operation: openapi/domain-group-products-api-openapi.yml#Products_RateForNewListing
+  read_only: false
+- name: social_boost_rate_for_new_social_boost
+  description: Get updated pricing information for a hypothetical listing
+  method: POST
+  path: /v1/products/ratefornewsocialboost
+  tags:
+  - Products
+  scopes:
+  - api_agencies_read
+  source_operation: openapi/domain-group-products-api-openapi.yml#SocialBoost_RateForNewSocialBoost
+  read_only: false
 - name: projects_search
   description: Searches projects
   method: GET
@@ -404,7 +783,7 @@ tools:
   - Projects
   scopes:
   - api_listings_read
-  source_operation: openapi/domain-group-openapi-latest.json#Projects_Search
+  source_operation: openapi/domain-group-projects-api-openapi.yml#Projects_Search
   read_only: true
 - name: projects_get
   description: Details of project
@@ -414,10 +793,10 @@ tools:
   - Projects
   scopes:
   - api_listings_read
-  source_operation: openapi/domain-group-openapi-latest.json#Projects_Get
+  source_operation: openapi/domain-group-projects-api-openapi.yml#Projects_Get
   read_only: true
 - name: projects_get_enquiries
-  description: Retrieve details of all enquiries received for a specific new development project
+  description: Retrieve details of all enquiries received for a specific new development…
   method: GET
   path: /v1/projects/{id}/enquiries
   tags:
@@ -425,7 +804,7 @@ tools:
   scopes:
   - api_enquiries_read
   - api_enquiries_write
-  source_operation: openapi/domain-group-openapi-latest.json#Projects_GetEnquiries
+  source_operation: openapi/domain-group-projects-api-openapi.yml#Projects_GetEnquiries
   read_only: true
 - name: projects_get_child_listings
   description: Project listings
@@ -436,27 +815,27 @@ tools:
   scopes:
   - api_listings_read
   - api_listings_write
-  source_operation: openapi/domain-group-openapi-latest.json#Projects_GetChildListings
+  source_operation: openapi/domain-group-projects-api-openapi.yml#Projects_GetChildListings
   read_only: true
 - name: projects_get_child_listings_statistics
-  description: Retrieves statistics for a specific project with a breakdown for listings.
+  description: Retrieves statistics for a specific project with a breakdown for listings
   method: GET
   path: /v1/projects/{id}/listings/statistics
   tags:
   - Projects
   scopes:
   - api_listings_read
-  source_operation: openapi/domain-group-openapi-latest.json#Projects_GetChildListingsStatistics
+  source_operation: openapi/domain-group-projects-api-openapi.yml#Projects_GetChildListingsStatistics
   read_only: true
 - name: projects_get_statistics
-  description: Retrieves statistics for a specific project.
+  description: Retrieves statistics for a specific project
   method: GET
   path: /v1/projects/{id}/statistics
   tags:
   - Projects
   scopes:
   - api_listings_read
-  source_operation: openapi/domain-group-openapi-latest.json#Projects_GetStatistics
+  source_operation: openapi/domain-group-projects-api-openapi.yml#Projects_GetStatistics
   read_only: true
 - name: properties_suggest
   description: Search for suggested addresses for the given terms
@@ -466,7 +845,7 @@ tools:
   - Properties
   scopes:
   - api_properties_read
-  source_operation: openapi/domain-group-openapi-latest.json#Properties_Suggest
+  source_operation: openapi/domain-group-properties-api-openapi.yml#Properties_Suggest
   read_only: true
 - name: properties_get
   description: Property ID
@@ -476,7 +855,7 @@ tools:
   - Properties
   scopes:
   - api_properties_read
-  source_operation: openapi/domain-group-openapi-latest.json#Properties_Get
+  source_operation: openapi/domain-group-properties-api-openapi.yml#Properties_Get
   read_only: true
 - name: listings_bypropertyid
   description: Retrieve list of listings for the given property id
@@ -486,7 +865,7 @@ tools:
   - Properties
   scopes:
   - api_listings_read
-  source_operation: openapi/domain-group-openapi-latest.json#listings_bypropertyid
+  source_operation: openapi/domain-group-properties-api-openapi.yml#listings_bypropertyid
   read_only: true
 - name: properties_get_price_estimate
   description: Price estimates based on propertyId
@@ -496,7 +875,7 @@ tools:
   - Properties
   scopes:
   - api_properties_read
-  source_operation: openapi/domain-group-openapi-latest.json#Properties_GetPriceEstimate
+  source_operation: openapi/domain-group-properties-api-openapi.yml#Properties_GetPriceEstimate
   read_only: true
 - name: properties_get_rental_estimate
   description: Rental estimates based on propertyId
@@ -506,7 +885,7 @@ tools:
   - Properties
   scopes:
   - api_properties_read
-  source_operation: openapi/domain-group-openapi-latest.json#Properties_GetRentalEstimate
+  source_operation: openapi/domain-group-properties-api-openapi.yml#Properties_GetRentalEstimate
   read_only: true
 - name: property_images_get
   description: Property images
@@ -516,7 +895,7 @@ tools:
   - Properties
   scopes:
   - api_properties_read
-  source_operation: openapi/domain-group-openapi-latest.json#property_images_get
+  source_operation: openapi/domain-group-properties-api-openapi.yml#property_images_get
   read_only: true
 - name: property_listing_history_get
   description: Property Listing History
@@ -526,7 +905,7 @@ tools:
   - Properties
   scopes:
   - api_properties_read
-  source_operation: openapi/domain-group-openapi-latest.json#property_listing_history_get
+  source_operation: openapi/domain-group-properties-api-openapi.yml#property_listing_history_get
   read_only: true
 - name: property_sales_history_get
   description: Sales Listing History
@@ -536,7 +915,7 @@ tools:
   - Properties
   scopes:
   - api_properties_read
-  source_operation: openapi/domain-group-openapi-latest.json#property_sales_history_get
+  source_operation: openapi/domain-group-properties-api-openapi.yml#property_sales_history_get
   read_only: true
 - name: propertyenrichment_get
   description: Property
@@ -546,7 +925,7 @@ tools:
   - Properties
   scopes:
   - api_properties_read
-  source_operation: openapi/domain-group-openapi-latest.json#propertyenrichment_get
+  source_operation: openapi/domain-group-properties-api-openapi.yml#propertyenrichment_get
   read_only: true
 - name: property_reports_get
   description: Retrieves a property report based on query parameters
@@ -556,27 +935,37 @@ tools:
   - Properties
   scopes:
   - api_propertyreports_read
-  source_operation: openapi/domain-group-openapi-latest.json#PropertyReports_Get
+  source_operation: openapi/domain-group-properties-api-openapi.yml#PropertyReports_Get
   read_only: true
+- name: property_search_by_radius
+  description: Point Radius Search
+  method: POST
+  path: /v2/properties/search/radius/{searchType}
+  tags:
+  - Property Search
+  scopes:
+  - api_properties_read
+  source_operation: openapi/domain-group-property-search-api-openapi.yml#PropertySearch_ByRadius
+  read_only: false
 - name: property_avm_get
-  description: "Creates a valuation for a given property id.\r"
+  description: Creates a valuation for a given property id.
   method: GET
   path: /v1/avm/{propertyId}
   tags:
   - PropertyAvm
   scopes:
   - api_avm_read
-  source_operation: openapi/domain-group-openapi-latest.json#PropertyAvm_Get
+  source_operation: openapi/domain-group-propertyavm-api-openapi.yml#PropertyAvm_Get
   read_only: true
 - name: property_avm_report_get
-  description: "Creates a valuation PDF report for a given property id.\r"
+  description: Creates a valuation PDF report for a given property id.
   method: GET
   path: /v1/avmReport/{propertyId}
   tags:
   - PropertyAvm
   scopes:
   - api_avm_read
-  source_operation: openapi/domain-group-openapi-latest.json#PropertyAvm_ReportGet
+  source_operation: openapi/domain-group-propertyavm-api-openapi.yml#PropertyAvm_ReportGet
   read_only: true
 - name: property_features
   description: Property features
@@ -586,7 +975,17 @@ tools:
   - PropertyFeatures
   scopes:
   - api_properties_read
-  source_operation: openapi/domain-group-openapi-latest.json#Property_Features
+  source_operation: openapi/domain-group-propertyfeatures-api-openapi.yml#Property_Features
+  read_only: true
+- name: property_like_comparables
+  description: Comparable properties search
+  method: GET
+  path: /v2/properties/search/like/{searchType}
+  tags:
+  - PropertyLike
+  scopes:
+  - api_properties_read
+  source_operation: openapi/domain-group-propertylike-api-openapi.yml#PropertyLike_Comparables
   read_only: true
 - name: property_radar_create_portfolio
   description: Create Portfolio
@@ -596,7 +995,7 @@ tools:
   - PropertyRadar
   scopes:
   - api_propertyportfolio_write
-  source_operation: openapi/domain-group-openapi-latest.json#PropertyRadar_CreatePortfolio
+  source_operation: openapi/domain-group-propertyradar-api-openapi.yml#PropertyRadar_CreatePortfolio
   read_only: false
 - name: property_radar_view_portfolio
   description: View Properties in Portfolio
@@ -606,7 +1005,7 @@ tools:
   - PropertyRadar
   scopes:
   - api_propertyportfolio_read
-  source_operation: openapi/domain-group-openapi-latest.json#PropertyRadar_ViewPortfolio
+  source_operation: openapi/domain-group-propertyradar-api-openapi.yml#PropertyRadar_ViewPortfolio
   read_only: true
 - name: property_radar_add_to_portfolio
   description: Add Properties to Portfolio
@@ -616,7 +1015,7 @@ tools:
   - PropertyRadar
   scopes:
   - api_propertyportfolio_write
-  source_operation: openapi/domain-group-openapi-latest.json#PropertyRadar_AddToPortfolio
+  source_operation: openapi/domain-group-propertyradar-api-openapi.yml#PropertyRadar_AddToPortfolio
   read_only: false
 - name: property_radar_delete_portfolio
   description: Delete Portfolio
@@ -626,7 +1025,7 @@ tools:
   - PropertyRadar
   scopes:
   - api_propertyportfolio_write
-  source_operation: openapi/domain-group-openapi-latest.json#PropertyRadar_DeletePortfolio
+  source_operation: openapi/domain-group-propertyradar-api-openapi.yml#PropertyRadar_DeletePortfolio
   read_only: false
 - name: property_radar_view_portfolio_full
   description: View Properties in Portfolio - Detailed
@@ -636,7 +1035,7 @@ tools:
   - PropertyRadar
   scopes:
   - api_propertyportfolio_read
-  source_operation: openapi/domain-group-openapi-latest.json#PropertyRadar_ViewPortfolioFull
+  source_operation: openapi/domain-group-propertyradar-api-openapi.yml#PropertyRadar_ViewPortfolioFull
   read_only: true
 - name: property_radar_view_portfolio_full_single
   description: View Single Property in Portfolio - Detailed
@@ -646,7 +1045,7 @@ tools:
   - PropertyRadar
   scopes:
   - api_propertyportfolio_read
-  source_operation: openapi/domain-group-openapi-latest.json#PropertyRadar_viewPortfolioFullSingle
+  source_operation: openapi/domain-group-propertyradar-api-openapi.yml#PropertyRadar_viewPortfolioFullSingle
   read_only: true
 - name: property_radar_view_portfolio_full_single_by_gnaf_id
   description: View Single Property in Portfolio - Detailed
@@ -656,7 +1055,7 @@ tools:
   - PropertyRadar
   scopes:
   - api_propertyportfolio_read
-  source_operation: openapi/domain-group-openapi-latest.json#PropertyRadar_viewPortfolioFullSingleByGnafId
+  source_operation: openapi/domain-group-propertyradar-api-openapi.yml#PropertyRadar_viewPortfolioFullSingleByGnafId
   read_only: true
 - name: property_radar_remove_from_portfolio
   description: Remove Properties from Portfolio
@@ -666,7 +1065,7 @@ tools:
   - PropertyRadar
   scopes:
   - api_propertyportfolio_write
-  source_operation: openapi/domain-group-openapi-latest.json#PropertyRadar_RemoveFromPortfolio
+  source_operation: openapi/domain-group-propertyradar-api-openapi.yml#PropertyRadar_RemoveFromPortfolio
   read_only: false
 - name: property_radar_list_portfolios
   description: List Portfolios
@@ -676,18 +1075,8 @@ tools:
   - PropertyRadar
   scopes:
   - api_propertyportfolio_read
-  source_operation: openapi/domain-group-openapi-latest.json#PropertyRadar_ListPortfolios
+  source_operation: openapi/domain-group-propertyradar-api-openapi.yml#PropertyRadar_ListPortfolios
   read_only: true
-- name: property_search_by_radius
-  description: Point Radius Search
-  method: POST
-  path: /v2/properties/search/radius/{searchType}
-  tags:
-  - PropertySearch
-  scopes:
-  - api_properties_read
-  source_operation: openapi/domain-group-openapi-latest.json#PropertySearch_ByRadius
-  read_only: false
 - name: property_zoning_perils
   description: Property perils
   method: GET
@@ -696,7 +1085,7 @@ tools:
   - PropertyZoningPerils
   scopes:
   - api_properties_read
-  source_operation: openapi/domain-group-openapi-latest.json#Property_Zoning_Perils
+  source_operation: openapi/domain-group-propertyzoningperils-api-openapi.yml#Property_Zoning_Perils
   read_only: true
 - name: sales_results_head
   description: Get weekly results info
@@ -706,7 +1095,7 @@ tools:
   - SalesResults
   scopes:
   - api_salesresults_read
-  source_operation: openapi/domain-group-openapi-latest.json#SalesResults_Head
+  source_operation: openapi/domain-group-salesresults-api-openapi.yml#SalesResults_Head
   read_only: true
 - name: sales_results_get
   description: Get weekly results summary
@@ -716,7 +1105,7 @@ tools:
   - SalesResults
   scopes:
   - api_salesresults_read
-  source_operation: openapi/domain-group-openapi-latest.json#SalesResults_Get
+  source_operation: openapi/domain-group-salesresults-api-openapi.yml#SalesResults_Get
   read_only: true
 - name: sales_results_listings
   description: Get weekly results details
@@ -726,7 +1115,7 @@ tools:
   - SalesResults
   scopes:
   - api_salesresults_read
-  source_operation: openapi/domain-group-openapi-latest.json#SalesResults_Listings
+  source_operation: openapi/domain-group-salesresults-api-openapi.yml#SalesResults_Listings
   read_only: true
 - name: sales_results_saturday_report
   description: Saturday report
@@ -736,7 +1125,7 @@ tools:
   - SalesResults
   scopes:
   - api_salesresults_read
-  source_operation: openapi/domain-group-openapi-latest.json#SalesResults_SaturdayReport
+  source_operation: openapi/domain-group-salesresults-api-openapi.yml#SalesResults_SaturdayReport
   read_only: true
 - name: sales_results_weekly_media_report
   description: Weekly media report
@@ -746,7 +1135,7 @@ tools:
   - SalesResults
   scopes:
   - api_salesresults_read
-  source_operation: openapi/domain-group-openapi-latest.json#SalesResults_WeeklyMediaReport
+  source_operation: openapi/domain-group-salesresults-api-openapi.yml#SalesResults_WeeklyMediaReport
   read_only: true
 - name: schools_get_by_id
   description: Retrieve the details of a school by Id
@@ -756,7 +1145,7 @@ tools:
   - Schools
   scopes:
   - api_locations_read
-  source_operation: openapi/domain-group-openapi-latest.json#Schools_Get_ById
+  source_operation: openapi/domain-group-schools-api-openapi.yml#Schools_Get_ById
   read_only: true
 - name: schools_search_by_location
   description: Search for a school in a location
@@ -766,7 +1155,7 @@ tools:
   - Schools
   scopes:
   - api_locations_read
-  source_operation: openapi/domain-group-openapi-latest.json#Schools_Search_ByLocation
+  source_operation: openapi/domain-group-schools-api-openapi.yml#Schools_Search_ByLocation
   read_only: true
 - name: statistics_post
   description: Record a statistic event along with its associated metadata (if applicable)
@@ -776,7 +1165,7 @@ tools:
   - Statistics
   scopes:
   - api_statistics_write
-  source_operation: openapi/domain-group-openapi-latest.json#Statistics_Post
+  source_operation: openapi/domain-group-statistics-api-openapi.yml#Statistics_Post
   read_only: false
 - name: suburb_historical_get
   description: Suburb Historical
@@ -786,7 +1175,7 @@ tools:
   - Statistics
   scopes:
   - api_suburbhistorical_read
-  source_operation: openapi/domain-group-openapi-latest.json#SuburbHistorical_Get
+  source_operation: openapi/domain-group-statistics-api-openapi.yml#SuburbHistorical_Get
   read_only: true
 - name: suburb_performance_get_by_named_suburb_without_postcode
   description: Suburb Performance by State/Suburb
@@ -796,7 +1185,7 @@ tools:
   - Statistics
   scopes:
   - api_suburbperformance_read
-  source_operation: openapi/domain-group-openapi-latest.json#SuburbPerformance_Get_ByNamedSuburb_WithoutPostcode
+  source_operation: openapi/domain-group-statistics-api-openapi.yml#SuburbPerformance_Get_ByNamedSuburb_WithoutPostcode
   read_only: true
 - name: suburb_performance_get_by_named_suburb
   description: Suburb Performance by State/Suburb/Postcode
@@ -806,7 +1195,7 @@ tools:
   - Statistics
   scopes:
   - api_suburbperformance_read
-  source_operation: openapi/domain-group-openapi-latest.json#SuburbPerformance_Get_ByNamedSuburb
+  source_operation: openapi/domain-group-statistics-api-openapi.yml#SuburbPerformance_Get_ByNamedSuburb
   read_only: true
 - name: suburb_summary_get
   description: Suburb Summary
@@ -816,7 +1205,17 @@ tools:
   - Statistics
   scopes:
   - api_suburbsummary_read
-  source_operation: openapi/domain-group-openapi-latest.json#SuburbSummary_Get
+  source_operation: openapi/domain-group-statistics-api-openapi.yml#SuburbSummary_Get
+  read_only: true
+- name: suburb_performance_statistics_get
+  description: Suburb Performance by Suburb ID
+  method: GET
+  path: /v1/suburbPerformanceStatistics
+  tags:
+  - Statistics
+  scopes:
+  - api_suburbperformance_read
+  source_operation: openapi/domain-group-statistics-api-openapi.yml#SuburbPerformanceStatistics_Get
   read_only: true
 - name: webhooks_get_subscription
   description: Retrieve the details of a single subscription
@@ -826,7 +1225,7 @@ tools:
   - Webhooks
   scopes:
   - api_webhooks_write
-  source_operation: openapi/domain-group-openapi-latest.json#Webhooks_GetSubscription
+  source_operation: openapi/domain-group-webhooks-api-openapi.yml#Webhooks_GetSubscription
   read_only: true
 - name: webhooks_delete_subscription
   description: Delete a single subscription
@@ -836,7 +1235,7 @@ tools:
   - Webhooks
   scopes:
   - api_webhooks_write
-  source_operation: openapi/domain-group-openapi-latest.json#Webhooks_DeleteSubscription
+  source_operation: openapi/domain-group-webhooks-api-openapi.yml#Webhooks_DeleteSubscription
   read_only: false
 - name: webhooks_list_subscriptions
   description: List all subscriptions to the specified webhook
@@ -846,7 +1245,7 @@ tools:
   - Webhooks
   scopes:
   - api_webhooks_write
-  source_operation: openapi/domain-group-openapi-latest.json#Webhooks_ListSubscriptions
+  source_operation: openapi/domain-group-webhooks-api-openapi.yml#Webhooks_ListSubscriptions
   read_only: true
 - name: webhooks_create_subscription
   description: Create a subscription to notifications
@@ -856,11 +1255,13 @@ tools:
   - Webhooks
   scopes:
   - api_webhooks_write
-  source_operation: openapi/domain-group-openapi-latest.json#Webhooks_CreateSubscription
+  source_operation: openapi/domain-group-webhooks-api-openapi.yml#Webhooks_CreateSubscription
   read_only: false
 deployment:
   mode: none
+  auth: unknown
   verified: derived
-  tools: 82
-  checked: '2026-08-12'
-  source: catalog MCP census
+  tools: 121
+  checked: '2026-10-21'
+  note: No provider MCP server exists; tools are a derived candidate from the OpenAPI. The underlying REST API uses
+    x-api-key or OAuth 2.0 (auth.domain.com.au).

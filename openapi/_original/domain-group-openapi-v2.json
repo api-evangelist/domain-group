@@ -21,6 +21,394 @@
     }
   ],
   "paths": {
+    "/v2/agencies/{agencyId}/listings": {
+      "get": {
+        "tags": [
+          "Agencies"
+        ],
+        "summary": "Returns listings for the agency based on the specified filter parameters.",
+        "operationId": "Agencies_Get_v2",
+        "parameters": [
+          {
+            "name": "agencyId",
+            "in": "path",
+            "description": "Domain agency ID.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "channel",
+            "in": "query",
+            "description": "Include listings belonging to this channel only. If not provided, gets listings from all channels.",
+            "schema": {
+              "enum": [
+                "residential",
+                "commercial",
+                "business"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageNumber",
+            "in": "query",
+            "description": "Page number. Starts from 1.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Page size. Default value is 50. Maximum value is 250.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "includeArchive",
+            "in": "query",
+            "description": "If set to true, includes archived listings in the result. Default value: false.",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "lastUpdatedSince",
+            "in": "query",
+            "description": "Filter to remove listings not updated since before the given date time.",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "A comma separated string with field names to include in the result. Leave it empty to get all the fields.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "isNewDevelopment",
+            "in": "query",
+            "description": "If set to true, includes new development listings only.",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "description": "Sort listings by the field. Default value: id.",
+            "schema": {
+              "enum": [
+                "id",
+                "dateMinorUpdated"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Listings for the agency",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Listings.V2.Listing"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apikey": []
+          },
+          {
+            "oauth2": [
+              "api_listings_read"
+            ]
+          }
+        ],
+        "x-domain-endpointcost": 1,
+        "x-domain-usercontextrequired": false,
+        "x-domain-environment": "Any"
+      }
+    },
+    "/v2/agents/reviews": {
+      "get": {
+        "tags": [
+          "Agents"
+        ],
+        "summary": "Retrieves the overall star ratings and number of reviews for a list of agents by their ids.",
+        "description": "A maximum of 50 ids is allowed.",
+        "operationId": "Agents_GetReviewsByIds",
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "query",
+            "description": "Comma-separated list of agent unique identifiers (up to 50).",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Review ratings for the provided agent ids",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Agencies.V2.AgentReviewLiteResponse"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apikey": []
+          },
+          {
+            "oauth2": [
+              "api_agencies_read"
+            ]
+          }
+        ],
+        "x-domain-endpointcost": 1,
+        "x-domain-usercontextrequired": false,
+        "x-domain-environment": "Any"
+      }
+    },
+    "/v2/agentsearch/agents/location": {
+      "post": {
+        "tags": [
+          "AgentSearch"
+        ],
+        "summary": "Retrieves agents matching the specified location criteria.",
+        "operationId": "agent_location_search",
+        "requestBody": {
+          "description": "Search parameters",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Agencies.V2.GetAgentsByLocationRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Agencies.V2.GetAgentsByLocationRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Agencies.V2.GetAgentsByLocationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Agencies.V2.AgentSearchPageResultContactStatsDto"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apikey": []
+          },
+          {
+            "oauth2": [
+              "api_agencies_read"
+            ]
+          }
+        ],
+        "x-domain-endpointcost": 1,
+        "x-domain-usercontextrequired": false,
+        "x-domain-environment": "Any"
+      }
+    },
+    "/v2/auctions/calling-sheet/{state}": {
+      "get": {
+        "tags": [
+          "AuctionCollection"
+        ],
+        "summary": "Get calling sheet with collection of auction that haven't received results yet",
+        "operationId": "AuctionCollection_CallingSheet",
+        "parameters": [
+          {
+            "name": "state",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "State code, one of: NSW, VIC, QLD, SA, WA, TAS, NT, ACT"
+            }
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "description": "Start date and time in UTC timezone in format yyyy-MM-ddTHH:mm:ss. By default it is the last Sunday's date",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "description": "End date and time in UTC timezone in format yyyy-MM-ddTHH:mm:ss. By default it is the current Saturday's date",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "isGreatArea",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "description": "Is property located in Greater Capital City Statistical Areas according to Australian Statistical Geography Standard",
+              "default": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AuctionCollection.v1.CallingSheetResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "apikey": []
+          },
+          {
+            "oauth2": [
+              "api_auction_read"
+            ]
+          }
+        ],
+        "x-domain-endpointcost": 1,
+        "x-domain-usercontextrequired": false,
+        "x-domain-environment": "Primary"
+      }
+    },
+    "/v2/auctions/update": {
+      "put": {
+        "tags": [
+          "AuctionCollection"
+        ],
+        "summary": "Update auction information",
+        "operationId": "AuctionCollection_AuctionUpdate",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AuctionCollection.v1.PutAuctionUpdateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Updated"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "apikey": []
+          },
+          {
+            "oauth2": [
+              "api_auction_write"
+            ]
+          }
+        ],
+        "x-domain-endpointcost": 1,
+        "x-domain-usercontextrequired": false,
+        "x-domain-environment": "Primary"
+      }
+    },
     "/v2/dataset/{datasetName}/{key}": {
       "get": {
         "tags": [
@@ -194,6 +582,76 @@
         "x-domain-endpointcost": 1,
         "x-domain-usercontextrequired": false,
         "x-domain-environment": "Primary"
+      }
+    },
+    "/v2/listings": {
+      "get": {
+        "tags": [
+          "Listings"
+        ],
+        "summary": "Retrieves a list of listings by their unique identifiers.",
+        "description": "A maximum of 50 ids is allowed.",
+        "operationId": "Listings_Get_v2",
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "query",
+            "description": "Comma-separated list of listing unique identifiers (up to 50).",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Optional comma-separated list of fields to include in the results. Leave empty for all fields.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of listings for the provided ids",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Listings.V2.Listing"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apikey": []
+          },
+          {
+            "oauth2": [
+              "api_listings_read"
+            ]
+          }
+        ],
+        "x-domain-endpointcost": 1,
+        "x-domain-usercontextrequired": false,
+        "x-domain-environment": "Any"
       }
     },
     "/v2/listings/business/offmarket": {
@@ -2076,6 +2534,2225 @@
   },
   "components": {
     "schemas": {
+      "Listings.V2.AddressParts": {
+        "type": "object",
+        "properties": {
+          "stateAbbreviation": {
+            "enum": [
+              "nsw",
+              "vic",
+              "sa",
+              "nt",
+              "tas",
+              "act",
+              "qld",
+              "wa"
+            ],
+            "type": "string",
+            "description": "Gets or Sets StateAbbreviation",
+            "nullable": true
+          },
+          "displayType": {
+            "enum": [
+              "fullAddress",
+              "streetAndSuburb",
+              "suburbOnly",
+              "regionOnly",
+              "areaOnly",
+              "stateOnly"
+            ],
+            "type": "string",
+            "description": "Gets or Sets DisplayType",
+            "nullable": true
+          },
+          "streetNumber": {
+            "type": "string",
+            "description": "Street number",
+            "nullable": true
+          },
+          "unitNumber": {
+            "type": "string",
+            "description": "Unit number.",
+            "nullable": true
+          },
+          "street": {
+            "type": "string",
+            "description": "Street address",
+            "nullable": true
+          },
+          "suburb": {
+            "type": "string",
+            "description": "Suburb of the address",
+            "nullable": true
+          },
+          "suburbId": {
+            "type": "integer",
+            "description": "Domain suburb identifier for address lookup via the domain location api",
+            "format": "int32",
+            "nullable": true
+          },
+          "postcode": {
+            "type": "string",
+            "description": "Postcode of the address",
+            "nullable": true
+          },
+          "displayAddress": {
+            "type": "string",
+            "description": "Advertiser's preference in displaying their listing's address",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Encapsulates the parts that make up an Address",
+        "x-data-access-level-info": {
+          "Basic": [
+            "DisplayAddress",
+            "DisplayType",
+            "StateAbbreviation",
+            "Postcode",
+            "Suburb",
+            "SuburbId",
+            "UnitNumber",
+            "StreetNumber",
+            "Street"
+          ],
+          "Detailed": [
+            "DisplayAddress",
+            "DisplayType",
+            "StateAbbreviation",
+            "Postcode",
+            "Suburb",
+            "SuburbId",
+            "UnitNumber",
+            "StreetNumber",
+            "Street"
+          ],
+          "Full": [
+            "DisplayAddress",
+            "DisplayType",
+            "StateAbbreviation",
+            "Postcode",
+            "Suburb",
+            "SuburbId",
+            "UnitNumber",
+            "StreetNumber",
+            "Street"
+          ]
+        }
+      },
+      "Listings.V2.AdvertiserIdentifiers": {
+        "type": "object",
+        "properties": {
+          "advertiserType": {
+            "enum": [
+              "agency",
+              "private"
+            ],
+            "type": "string",
+            "description": "Gets or Sets AdvertiserType",
+            "nullable": true
+          },
+          "advertiserId": {
+            "type": "integer",
+            "description": "Advertiser's identifier",
+            "format": "int32",
+            "nullable": true
+          },
+          "contactIds": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "description": "Identifier of each contact the advertiser has associated with the listing",
+            "nullable": true
+          },
+          "agentIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Identifier of each agent the advertiser has associated with the listing",
+            "nullable": true
+          },
+          "conjunctionContactIds": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "description": "Identifier of each conjunctional contact associated with the listing",
+            "nullable": true
+          },
+          "conjunctionAgentIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Identifier of each conjunctional agent associated with the listing",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Encapsulates the listing's advertiser identifiers",
+        "x-data-access-level-info": {
+          "Basic": [
+            "*"
+          ],
+          "Detailed": [
+            "*"
+          ],
+          "Full": [
+            "*"
+          ]
+        }
+      },
+      "Listings.V2.AustralianPropertyMonitorsIdentifiers": {
+        "type": "object",
+        "properties": {
+          "addressId": {
+            "type": "integer",
+            "description": "APM address identifier",
+            "format": "int32",
+            "nullable": true
+          },
+          "streetId": {
+            "type": "integer",
+            "description": "APM street identifier",
+            "format": "int32",
+            "nullable": true
+          },
+          "suburbId": {
+            "type": "integer",
+            "description": "APM suburb identifier",
+            "format": "int32",
+            "nullable": true
+          },
+          "cadastreId": {
+            "type": "integer",
+            "description": "APM cadastre identifier",
+            "format": "int64",
+            "nullable": true
+          },
+          "postcodeId": {
+            "type": "integer",
+            "description": "APM postcode identifier",
+            "format": "int32",
+            "nullable": true
+          },
+          "stateId": {
+            "type": "integer",
+            "description": "State identifier",
+            "format": "int32",
+            "nullable": true
+          },
+          "state": {
+            "type": "string",
+            "description": "APM State",
+            "nullable": true
+          },
+          "propertyTypeId": {
+            "type": "integer",
+            "description": "APM property type identifier",
+            "format": "int32",
+            "nullable": true
+          },
+          "propertyTypeCategoryId": {
+            "type": "integer",
+            "description": "APM property category type identifier",
+            "format": "int32",
+            "nullable": true
+          },
+          "streetNumber": {
+            "type": "string",
+            "description": "APM washed and standardized address component for the street number,   (including any prefixes, suffixed and composite numbers e.g. \\\"2-4a\\\")",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "APM Identifiers",
+        "x-data-access-level-info": {
+          "Basic": [],
+          "Detailed": [
+            "SuburbId"
+          ],
+          "Full": [
+            "SuburbId",
+            "AddressId",
+            "CadastreId",
+            "PostcodeId",
+            "PropertyTypeCategoryId",
+            "PropertyTypeId",
+            "State",
+            "StateId",
+            "StreetId",
+            "StreetNumber"
+          ]
+        }
+      },
+      "Listings.V2.GeoLocation": {
+        "type": "object",
+        "properties": {
+          "latitude": {
+            "type": "number",
+            "description": "Latitude of the property",
+            "format": "double",
+            "nullable": true
+          },
+          "longitude": {
+            "type": "number",
+            "description": "Longitude of the property",
+            "format": "double",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Encapsulates the details of a geo location, long/lat",
+        "x-data-access-level-info": {
+          "Basic": [
+            "*"
+          ],
+          "Detailed": [
+            "*"
+          ],
+          "Full": [
+            "*"
+          ]
+        }
+      },
+      "Listings.V2.Inspection": {
+        "type": "object",
+        "properties": {
+          "recurrence": {
+            "enum": [
+              "none",
+              "weekly"
+            ],
+            "type": "string",
+            "description": "Gets or Sets Recurrence",
+            "nullable": true
+          },
+          "openingDateTime": {
+            "type": "string",
+            "description": "Opening date and time of the inspection. e.g. 2015-01-01T12:00:00.  Not provided by bulk uploaded listings, in these cases refer to the  inspection description field. DateTime is in a local timezone.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "closingDateTime": {
+            "type": "string",
+            "description": "Closing date and time of the inspection. e.g. 2015-01-01T12:00:00  Not provided by bulk uploaded listings, in these cases refer to the  inspection description field. DateTime is in a local timezone.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the inspection provided by the Advertiser.  When listings are bulk uploaded, inspection times are provided as a string.  Other inspection details will not be provided",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Encapsulates the details of a Listing's Inspection",
+        "x-data-access-level-info": {
+          "Basic": [
+            "*"
+          ],
+          "Detailed": [
+            "*"
+          ],
+          "Full": [
+            "*"
+          ]
+        }
+      },
+      "Listings.V2.PropertyInspections": {
+        "type": "object",
+        "properties": {
+          "inspections": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Listings.V2.Inspection"
+            },
+            "description": "Inspection details for the property. e.g. opening and closing times",
+            "nullable": true
+          },
+          "pastInspections": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Listings.V2.Inspection"
+            },
+            "description": "Inspection details for the property. e.g. opening and closing times",
+            "nullable": true
+          },
+          "isByAppointmentOnly": {
+            "type": "boolean",
+            "description": "True or False indicating whether the inspection is by appointment only",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Property Inspection(s) details",
+        "x-data-access-level-info": {
+          "Basic": [
+            "*"
+          ],
+          "Detailed": [
+            "*"
+          ],
+          "Full": [
+            "*"
+          ]
+        }
+      },
+      "Listings.V2.ListingMedia": {
+        "required": [
+          "url"
+        ],
+        "type": "object",
+        "properties": {
+          "category": {
+            "enum": [
+              "image",
+              "video",
+              "others"
+            ],
+            "type": "string",
+            "description": "Gets or Sets Category",
+            "nullable": true
+          },
+          "type": {
+            "enum": [
+              "photo",
+              "mp4",
+              "youtube",
+              "floorplan",
+              "vimeo",
+              "notSpecified"
+            ],
+            "type": "string",
+            "description": "Gets or Sets Type",
+            "nullable": true
+          },
+          "url": {
+            "minLength": 1,
+            "type": "string",
+            "description": "The URL to the property media"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Encapsulates media associated with a Listing",
+        "x-data-access-level-info": {
+          "Basic": [
+            "*"
+          ],
+          "Detailed": [
+            "*"
+          ],
+          "Full": [
+            "*"
+          ]
+        }
+      },
+      "Listings.V2.PriceDetails": {
+        "type": "object",
+        "properties": {
+          "gstOption": {
+            "enum": [
+              "na",
+              "inc",
+              "ex"
+            ],
+            "type": "string",
+            "description": "Gets or Sets GstOption",
+            "nullable": true
+          },
+          "priceType": {
+            "enum": [
+              "gross",
+              "net"
+            ],
+            "type": "string",
+            "description": "Gets or Sets PriceType",
+            "nullable": true
+          },
+          "priceUnit": {
+            "enum": [
+              "totalAmount",
+              "perSqm"
+            ],
+            "type": "string",
+            "description": "Gets or Sets PriceUnit",
+            "nullable": true
+          },
+          "price": {
+            "type": "number",
+            "description": "Price of the property",
+            "format": "double",
+            "nullable": true
+          },
+          "priceFrom": {
+            "type": "integer",
+            "description": "Price starting range of the property",
+            "format": "int32",
+            "nullable": true
+          },
+          "priceTo": {
+            "type": "integer",
+            "description": "Upper price range of the property",
+            "format": "int32",
+            "nullable": true
+          },
+          "pricePrefix": {
+            "type": "string",
+            "description": "Display price for the advertisement",
+            "nullable": true
+          },
+          "canDisplayPrice": {
+            "type": "boolean",
+            "description": "Flag indicating whether the advertiser has chosen to display the property price",
+            "nullable": true
+          },
+          "hiddenReasons": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "byAgency",
+                "qldRestriction"
+              ],
+              "type": "string",
+              "description": "Reason for price hidden  * `ByAgency` - Agency doesn't want to show prcie * `QLDRestriction` - Price can not be shown due to QLD restrictions"
+            },
+            "description": "Reasons when price need to be hidden",
+            "nullable": true
+          },
+          "displayPrice": {
+            "type": "string",
+            "description": "A string provided by the Advertiser representing the ByIdListingPriceQueryResult of the Listing e.g. Over $1,000,000   This should be the default price field for client to use",
+            "nullable": true
+          },
+          "bond": {
+            "type": "number",
+            "description": "Rental bond",
+            "format": "double",
+            "nullable": true
+          },
+          "priceReduction": {
+            "type": "boolean",
+            "description": "Indicates if this property is under price reduction",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Encapsulates a listing's price information",
+        "x-data-access-level-info": {
+          "Basic": [
+            "DisplayPrice",
+            "Bond",
+            "CanDisplayPrice",
+            "Price",
+            "PriceFrom",
+            "PriceTo",
+            "PricePrefix"
+          ],
+          "Detailed": [
+            "DisplayPrice",
+            "Bond",
+            "CanDisplayPrice",
+            "Price",
+            "PriceFrom",
+            "PriceTo",
+            "PricePrefix"
+          ],
+          "Full": [
+            "DisplayPrice",
+            "Bond",
+            "CanDisplayPrice",
+            "Price",
+            "PriceFrom",
+            "PriceTo",
+            "PricePrefix",
+            "HiddenReasons",
+            "GstOption",
+            "PriceUnit",
+            "PriceType",
+            "PriceReduction"
+          ]
+        }
+      },
+      "Listings.V2.ProviderDetails": {
+        "type": "object",
+        "properties": {
+          "providerSystem": {
+            "type": "string",
+            "description": "Feed provider ID",
+            "nullable": true
+          },
+          "providerAdID": {
+            "type": "string",
+            "description": "Unique ID within provider system",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Information for the listing provider. e.g. bulkuploader information",
+        "x-data-access-level-info": {
+          "Basic": [
+            "*"
+          ],
+          "Detailed": [
+            "*"
+          ],
+          "Full": [
+            "*"
+          ]
+        }
+      },
+      "Listings.V2.RentalDetails": {
+        "type": "object",
+        "properties": {
+          "rentalMethod": {
+            "enum": [
+              "notStated",
+              "rent",
+              "share",
+              "holiday",
+              "lease"
+            ],
+            "type": "string",
+            "description": "Gets or Sets RentalMethod",
+            "nullable": true
+          },
+          "source": {
+            "enum": [
+              "internal",
+              "external"
+            ],
+            "type": "string",
+            "description": "Gets or Sets Source",
+            "nullable": true
+          },
+          "leasedDate": {
+            "type": "string",
+            "description": "The Date the listing was leased. DateTime is in a local timezone.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "leasedPrice": {
+            "type": "integer",
+            "description": "The last leased price entered by the Advertiser  This price will only be visible if allowed by the Advertiser  and the listing as been leased",
+            "format": "int32",
+            "nullable": true
+          },
+          "canDisplayPrice": {
+            "type": "boolean",
+            "description": "Indicates whether this instance can display price",
+            "nullable": true
+          },
+          "leasedMonths": {
+            "type": "integer",
+            "description": "The number of months the property was last leased for  This will only be visible if the property has been leased",
+            "format": "int32",
+            "nullable": true
+          },
+          "termOfLeaseFrom": {
+            "type": "integer",
+            "description": "Lease term range from",
+            "format": "int32",
+            "nullable": true
+          },
+          "termOfLeaseTo": {
+            "type": "integer",
+            "description": "Lease term range to",
+            "format": "int32",
+            "nullable": true
+          },
+          "leaseOutgoings": {
+            "type": "integer",
+            "description": "Outgoing cost of current lease",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "The rental detail's of the listing in case of it being for rent or leased",
+        "x-data-access-level-info": {
+          "Basic": [
+            "*"
+          ],
+          "Detailed": [
+            "*"
+          ],
+          "Full": [
+            "*"
+          ]
+        }
+      },
+      "Listings.V2.SoldDetails": {
+        "type": "object",
+        "properties": {
+          "soldAction": {
+            "enum": [
+              "notStated",
+              "auction",
+              "privateTreaty",
+              "withdrawn",
+              "soldPriorToAuction"
+            ],
+            "type": "string",
+            "description": "Gets or Sets SoldAction",
+            "nullable": true
+          },
+          "source": {
+            "enum": [
+              "internal",
+              "external"
+            ],
+            "type": "string",
+            "description": "Gets or Sets Source",
+            "nullable": true
+          },
+          "soldPrice": {
+            "type": "integer",
+            "description": "The last sold price entered by the Advertiser.  This price will only be visible if allowed by the Advertiser  and the listing as been sold",
+            "format": "int32",
+            "nullable": true
+          },
+          "governmentRecordedSoldPrice": {
+            "type": "integer",
+            "description": "The government recorded sold price sourced from APM",
+            "format": "int32",
+            "nullable": true
+          },
+          "soldDate": {
+            "type": "string",
+            "description": "The Date the listing was sold. DateTime is in a local timezone.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "canDisplayPrice": {
+            "type": "boolean",
+            "description": "Indicates whether this instance can display price",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Sold details in the case of the listing being sold.",
+        "x-data-access-level-info": {
+          "Basic": [
+            "CanDisplayPrice",
+            "SoldAction",
+            "SoldPrice",
+            "SoldDate",
+            "Source"
+          ],
+          "Detailed": [
+            "CanDisplayPrice",
+            "SoldAction",
+            "SoldPrice",
+            "SoldDate",
+            "Source"
+          ],
+          "Full": [
+            "CanDisplayPrice",
+            "SoldAction",
+            "SoldPrice",
+            "SoldDate",
+            "Source",
+            "GovernmentRecordedSoldPrice"
+          ]
+        }
+      },
+      "Listings.V2.AuctionSchedule": {
+        "type": "object",
+        "properties": {
+          "locationDescription": {
+            "type": "string",
+            "description": "Description and location of the auction provided by advertiser",
+            "nullable": true
+          },
+          "openingDateTime": {
+            "type": "string",
+            "description": "Opening date and time of the auction. e.g. 2015-01-01T12:00:00  DateTime is in a local timezone.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "terms": {
+            "type": "string",
+            "description": "Terms of the auction",
+            "nullable": true
+          },
+          "url": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "On-line URL of the auction",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Encapsulates the details of a Property being Auctioned.",
+        "x-data-access-level-info": {
+          "Basic": [
+            "*"
+          ],
+          "Detailed": [
+            "*"
+          ],
+          "Full": [
+            "*"
+          ]
+        }
+      },
+      "Listings.V2.AuctionDetails": {
+        "type": "object",
+        "properties": {
+          "auctionSchedule": {
+            "$ref": "#/components/schemas/Listings.V2.AuctionSchedule"
+          },
+          "auctionedPrice": {
+            "type": "integer",
+            "description": "The auctioned price entered by the Advertiser.  This price will only be visible if allowed by the Advertiser  and the listing as been auctioned",
+            "format": "int32",
+            "nullable": true
+          },
+          "auctionedDate": {
+            "type": "string",
+            "description": "The listing's last auctioned date and time specified by the Advertiser.  This will only be visible if the listing has been auctioned.  DateTime is in a local timezone.",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "The detail's of the auction in case of a listing for sale being auctioned or sold by auction",
+        "x-data-access-level-info": {
+          "Basic": [
+            "*"
+          ],
+          "Detailed": [
+            "*"
+          ],
+          "Full": [
+            "*"
+          ]
+        }
+      },
+      "Listings.V2.TenderDetails": {
+        "type": "object",
+        "properties": {
+          "tenderRecipientName": {
+            "type": "string",
+            "description": "Tender recipient name",
+            "nullable": true
+          },
+          "tenderAddress": {
+            "type": "string",
+            "description": "Tender address",
+            "nullable": true
+          },
+          "tenderEndDate": {
+            "type": "string",
+            "description": "Tender closing date. DateTime is in a local timezone.",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Tender details",
+        "x-data-access-level-info": {
+          "Basic": [
+            "*"
+          ],
+          "Detailed": [
+            "*"
+          ],
+          "Full": [
+            "*"
+          ]
+        }
+      },
+      "Listings.V2.TenantDetails": {
+        "type": "object",
+        "properties": {
+          "leaseDateVariable": {
+            "type": "boolean",
+            "description": "Is tenant lease date variable",
+            "nullable": true
+          },
+          "leaseOptions": {
+            "type": "string",
+            "description": "Leasing options available to a prospective tenant",
+            "nullable": true
+          },
+          "tenantInfoTermOfLeaseFrom": {
+            "type": "integer",
+            "description": "The from range of the tenant's current lease",
+            "format": "int32",
+            "nullable": true
+          },
+          "tenantInfoTermOfLeaseTo": {
+            "type": "integer",
+            "description": "The to range of the tenant's current lease",
+            "format": "int32",
+            "nullable": true
+          },
+          "tenantName": {
+            "type": "string",
+            "description": "Name of the current tenant of the property",
+            "nullable": true
+          },
+          "tenantRentDetails": {
+            "type": "string",
+            "description": "Information regarding current rental",
+            "nullable": true
+          },
+          "leaseStartDate": {
+            "type": "string",
+            "description": "The date on which the tenants lease began, or is due to begin. DateTime is in a local timezone.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "leaseEndDate": {
+            "type": "string",
+            "description": "The date on which the tenants lease is due to end. DateTime is in a local timezone.",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Tenant Details",
+        "x-data-access-level-info": {
+          "Basic": [
+            "*"
+          ],
+          "Detailed": [
+            "*"
+          ],
+          "Full": [
+            "*"
+          ]
+        }
+      },
+      "Listings.V2.SaleDetails": {
+        "type": "object",
+        "properties": {
+          "saleMethod": {
+            "enum": [
+              "notStated",
+              "auction",
+              "privateTreaty",
+              "tender",
+              "expressionOfInterest"
+            ],
+            "type": "string",
+            "description": "Gets or Sets SaleMethod",
+            "nullable": true
+          },
+          "soldDetails": {
+            "$ref": "#/components/schemas/Listings.V2.SoldDetails"
+          },
+          "auctionDetails": {
+            "$ref": "#/components/schemas/Listings.V2.AuctionDetails"
+          },
+          "tenderDetails": {
+            "$ref": "#/components/schemas/Listings.V2.TenderDetails"
+          },
+          "tenantDetails": {
+            "$ref": "#/components/schemas/Listings.V2.TenantDetails"
+          },
+          "annualReturn": {
+            "type": "integer",
+            "description": "Integer value of percentage return on this property or business",
+            "format": "int32",
+            "nullable": true
+          },
+          "saleTerms": {
+            "type": "string",
+            "description": "Information relating to aspects of the sale, such as required deposit, settlement time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "The sale detail's of the listing in case of it being for sale or sold",
+        "x-data-access-level-info": {
+          "Basic": [
+            "*"
+          ],
+          "Detailed": [
+            "*"
+          ],
+          "Full": [
+            "*"
+          ]
+        }
+      },
+      "Listings.V2.BasicPrice": {
+        "type": "object",
+        "properties": {
+          "from": {
+            "type": "integer",
+            "description": "Lowest price the property is expected to sell/rent for to set search price.",
+            "format": "int32",
+            "nullable": true
+          },
+          "to": {
+            "type": "integer",
+            "description": "Highest price the property is expected to sell/rent for to set search price.",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Basic price information",
+        "x-data-access-level-info": {
+          "Basic": [
+            "*"
+          ],
+          "Detailed": [
+            "*"
+          ],
+          "Full": [
+            "*"
+          ]
+        }
+      },
+      "Listings.V2.PastSaleData": {
+        "type": "object",
+        "properties": {
+          "unitNumber": {
+            "type": "string",
+            "description": "Property unit number",
+            "nullable": true
+          },
+          "streetNumber": {
+            "type": "string",
+            "description": "Property street number",
+            "nullable": true
+          },
+          "street": {
+            "type": "string",
+            "description": "Property Street name",
+            "nullable": true
+          },
+          "suburb": {
+            "type": "string",
+            "description": "Property suburb name",
+            "nullable": true
+          },
+          "postcode": {
+            "type": "string",
+            "description": "Property postcode",
+            "nullable": true
+          },
+          "state": {
+            "type": "string",
+            "description": "Property state",
+            "nullable": true
+          },
+          "displayAddress": {
+            "type": "string",
+            "description": "display formatted address",
+            "nullable": true,
+            "readOnly": true
+          },
+          "dateOfSale": {
+            "type": "string",
+            "description": "Registered date of the sale",
+            "nullable": true
+          },
+          "soldPrice": {
+            "type": "integer",
+            "description": "Property sold price",
+            "format": "int64",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Information for past property sales",
+        "x-data-access-level-info": {
+          "Basic": [
+            "*"
+          ],
+          "Detailed": [
+            "*"
+          ],
+          "Full": [
+            "*"
+          ]
+        }
+      },
+      "Listings.V2.ComparableData": {
+        "type": "object",
+        "properties": {
+          "comparableProperty": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Listings.V2.PastSaleData"
+            },
+            "description": "Comparable properties that are of a similar standard or condition to the property for sale",
+            "nullable": true
+          },
+          "declarationText": {
+            "type": "string",
+            "description": "Text description if there are less than three comparable sales available",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Information regarding the past comparable property sales that influenced the setting of the estimation price",
+        "x-data-access-level-info": {
+          "Basic": [
+            "*"
+          ],
+          "Detailed": [
+            "*"
+          ],
+          "Full": [
+            "*"
+          ]
+        }
+      },
+      "Listings.V2.MedianPriceData": {
+        "type": "object",
+        "properties": {
+          "priceType": {
+            "enum": [
+              "house",
+              "apartmentUnitFlat",
+              "vacantLand"
+            ],
+            "type": "string",
+            "description": "Gets or Sets PriceType",
+            "nullable": true
+          },
+          "suburb": {
+            "type": "string",
+            "description": "Name of the suburb median price is based on.",
+            "nullable": true
+          },
+          "postcode": {
+            "type": "string",
+            "description": "Postcode of the suburb",
+            "nullable": true
+          },
+          "medianPrice": {
+            "type": "integer",
+            "description": "Median price for the suburb.",
+            "format": "int32",
+            "nullable": true
+          },
+          "source": {
+            "type": "string",
+            "description": "Where median price data comes from",
+            "nullable": true
+          },
+          "sourceDateFrom": {
+            "type": "string",
+            "description": "Start date of the median price source time period",
+            "nullable": true
+          },
+          "sourceDateTo": {
+            "type": "string",
+            "description": "End date of the median price source time period",
+            "nullable": true
+          },
+          "sourceCollectionDate": {
+            "type": "string",
+            "description": "The collection date of the median price source",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Information regarding median house/unit price   for the suburb",
+        "x-data-access-level-info": {
+          "Basic": [
+            "*"
+          ],
+          "Detailed": [
+            "*"
+          ],
+          "Full": [
+            "*"
+          ]
+        }
+      },
+      "Listings.V2.StatementOfInformation": {
+        "type": "object",
+        "properties": {
+          "estimatedPrice": {
+            "$ref": "#/components/schemas/Listings.V2.BasicPrice"
+          },
+          "comparableData": {
+            "$ref": "#/components/schemas/Listings.V2.ComparableData"
+          },
+          "suburbMedianPrice": {
+            "$ref": "#/components/schemas/Listings.V2.MedianPriceData"
+          },
+          "documentationUrl": {
+            "type": "string",
+            "description": "Link to the statement of information documentation file",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Statement of Information  Regarding sale listing",
+        "x-data-access-level-info": {
+          "Basic": [
+            "*"
+          ],
+          "Detailed": [
+            "*"
+          ],
+          "Full": [
+            "*"
+          ]
+        }
+      },
+      "Listings.V2.Listing": {
+        "required": [
+          "advertiserIdentifiers",
+          "id",
+          "propertyTypes"
+        ],
+        "type": "object",
+        "properties": {
+          "objective": {
+            "enum": [
+              "sale",
+              "rent"
+            ],
+            "type": "string",
+            "description": "Gets or Sets Objective",
+            "nullable": true
+          },
+          "status": {
+            "enum": [
+              "unknown",
+              "archived",
+              "underOffer",
+              "sold",
+              "leased",
+              "newDevelopment",
+              "recentlyUpdated",
+              "new",
+              "live",
+              "pending",
+              "depositTaken"
+            ],
+            "type": "string",
+            "description": "Gets or Sets Status",
+            "nullable": true
+          },
+          "saleMode": {
+            "enum": [
+              "buy",
+              "rent",
+              "share",
+              "sold",
+              "leased",
+              "archived"
+            ],
+            "type": "string",
+            "description": "Gets or Sets SaleMode",
+            "nullable": true
+          },
+          "channel": {
+            "enum": [
+              "residential",
+              "commercial",
+              "business"
+            ],
+            "type": "string",
+            "description": "Gets or Sets Channel",
+            "nullable": true
+          },
+          "id": {
+            "type": "integer",
+            "description": "The identifier which uniquely identifies the listing.",
+            "format": "int32"
+          },
+          "addressParts": {
+            "$ref": "#/components/schemas/Listings.V2.AddressParts"
+          },
+          "advertiserIdentifiers": {
+            "$ref": "#/components/schemas/Listings.V2.AdvertiserIdentifiers"
+          },
+          "apmIdentifiers": {
+            "$ref": "#/components/schemas/Listings.V2.AustralianPropertyMonitorsIdentifiers"
+          },
+          "bathrooms": {
+            "type": "number",
+            "description": "Total number of bathrooms in the property",
+            "format": "float",
+            "nullable": true
+          },
+          "bedrooms": {
+            "type": "number",
+            "description": "Total number of bedrooms in the property; Studio apartments have a value of \\\"0\\\"",
+            "format": "float",
+            "nullable": true
+          },
+          "buildingArea": {
+            "type": "string",
+            "description": "The building area display value of the property e.g. 160 ha",
+            "nullable": true
+          },
+          "buildingAreaSqm": {
+            "type": "number",
+            "description": "The properties building area in square meters",
+            "format": "double",
+            "nullable": true
+          },
+          "carspaces": {
+            "type": "number",
+            "description": "Total number of car spaces in the property.",
+            "format": "float",
+            "nullable": true
+          },
+          "dateAvailable": {
+            "type": "string",
+            "description": "The date the property is available. DateTime is in a local timezone.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "dateCreated": {
+            "type": "string",
+            "description": "The date/time the listing was created. DateTime is in AEST (Australian Eastern Standard Time) or AEDT (Australian Eastern Daylight Time) timezone.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "dateUpdated": {
+            "type": "string",
+            "description": "The date/time the listing had major update. DateTime is in AEST (Australian Eastern Standard Time) or AEDT (Australian Eastern Daylight Time) timezone.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "dateMinorUpdated": {
+            "type": "string",
+            "description": "When minor update applied to the listing. DateTime is in AEST (Australian Eastern Standard Time) or AEDT (Australian Eastern Daylight Time) timezone.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "datePurged": {
+            "type": "string",
+            "description": "The date/time the listing was purged. It's only returned for archived listings. DateTime is in AEST (Australian Eastern Standard Time) or AEDT (Australian Eastern Daylight Time) timezone.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "dateListed": {
+            "type": "string",
+            "description": "The date/time last listed. DateTime is in AEST (Australian Eastern Standard Time) or AEDT (Australian Eastern Daylight Time) timezone.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "description": "The long description of the property provided by the advertiser.",
+            "nullable": true
+          },
+          "devProjectId": {
+            "type": "integer",
+            "description": "The ID of the development project - null if no associated project",
+            "format": "int32",
+            "nullable": true
+          },
+          "energyEfficiencyRating": {
+            "type": "integer",
+            "description": "Energy Efficiency Rating value for ACT properties",
+            "format": "int32",
+            "nullable": true
+          },
+          "features": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The property features specified by the advertiser",
+            "nullable": true
+          },
+          "geoLocation": {
+            "$ref": "#/components/schemas/Listings.V2.GeoLocation"
+          },
+          "headline": {
+            "type": "string",
+            "description": "The short description of the property provided by the advertiser.",
+            "nullable": true
+          },
+          "inspectionDetails": {
+            "$ref": "#/components/schemas/Listings.V2.PropertyInspections"
+          },
+          "isNewDevelopment": {
+            "type": "boolean",
+            "description": "Indicates whether the property is a new development",
+            "nullable": true
+          },
+          "landArea": {
+            "type": "string",
+            "description": "The land area display string for the property e.g. 160 sqm",
+            "nullable": true
+          },
+          "landAreaSqm": {
+            "type": "number",
+            "description": "The properties land area in square meters",
+            "format": "double",
+            "nullable": true
+          },
+          "media": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Listings.V2.ListingMedia"
+            },
+            "description": "The media associated with the property provided by the advertiser",
+            "nullable": true
+          },
+          "priceDetails": {
+            "$ref": "#/components/schemas/Listings.V2.PriceDetails"
+          },
+          "propertyId": {
+            "type": "string",
+            "description": "The identifier which uniquely identifies the property being advertised.  This may be empty if the Address of property is poorly described",
+            "nullable": true
+          },
+          "propertyTypes": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "unknown",
+                "acreageSemiRural",
+                "apartmentUnitFlat",
+                "aquaculture",
+                "blockOfUnits",
+                "carspace",
+                "dairyFarming",
+                "developmentLand",
+                "developmentSite",
+                "duplex",
+                "farm",
+                "fishingForestry",
+                "homeBased",
+                "newHomeDesigns",
+                "hotelLeisure",
+                "house",
+                "newHouseLand",
+                "industrialWarehouse",
+                "irrigationServices",
+                "newLand",
+                "livestock",
+                "international",
+                "medicalConsulting",
+                "newApartments",
+                "offices",
+                "parkingCarSpace",
+                "penthouse",
+                "retail",
+                "retirement",
+                "rural",
+                "ruralCommercialFarming",
+                "semiDetached",
+                "showroomsBulkyGoods",
+                "specialistFarm",
+                "studio",
+                "terrace",
+                "townhouse",
+                "vacantLand",
+                "villa",
+                "servicedOffices",
+                "other",
+                "chickenShop",
+                "seafoodShop",
+                "deliCafe",
+                "cropping",
+                "viticulture",
+                "mixedFarming",
+                "grazing",
+                "horticulture",
+                "equine",
+                "farmlet",
+                "orchard",
+                "ruralLifestyle",
+                "onlineBusiness"
+              ],
+              "type": "string",
+              "description": "Available types of Properties  * `Unknown` - Unknown * `AcreageSemiRural` - Acreage-SemiRural * `ApartmentUnitFlat` - Apartment Unit Flat * `Aquaculture` - Aquaculture             commercial/rural type * `BlockOfUnits` - Block Of Units * `Carspace` - Carspace * `DairyFarming` - Dairy Farming             commercial/rural type * `DevelopmentLand` - Development / Land * `DevelopmentSite` - Development site * `Duplex` - Duplex * `Farm` - Farm * `FishingForestry` - Fishing / Forestry             commercial/rural type * `HomeBased` - Home Based * `NewHomeDesigns` - New Home Designs * `HotelLeisure` - Hotel / Leisure             commercial type * `House` - House * `NewHouseLand` - New House And Land * `IndustrialWarehouse` - Industrial / Warehouse             commercial type * `IrrigationServices` - Irrigation Services             commercial/rural type * `NewLand` - New Land * `Livestock` - Livestock             commercial/rural type * `International` - International             commercial type * `MedicalConsulting` - Medical / Consulting             commercial type * `NewApartments` - New Apartments / Off the Plan * `Offices` - Offices             commercial type * `ParkingCarSpace` - Parking / Car Space             commercial type * `Penthouse` - Penthouse * `Retail` - Retail             commercial type * `Retirement` - Retirement * `Rural` - Rural * `RuralCommercialFarming` - Rural / Commercial Farming              commercial type * `SemiDetached` - Semi Detached * `ShowroomsBulkyGoods` - Showrooms / Bulky Goods             commercial type * `SpecialistFarm` - The specialist farm * `Studio` - Studio * `Terrace` - Terrace * `Townhouse` - The townhouse * `VacantLand` - Vacant Land * `Villa` - Villa * `ServicedOffices` - Serviced Offices             commercial type * `Other` - Other             commercial type * `ChickenShop` - Chicken Shop             commercial type * `SeafoodShop` - Seafood Shop             commercial type * `DeliCafe` - Deli Cafe             commercial type * `Cropping` - Cropping             commercial/rural type * `Viticulture` - Viticulture             commercial/rural type * `MixedFarming` - Mixed Farming             commercial type * `Grazing` - Grazing             commercial/rural type * `Horticulture` - Horticulture             commercial/rural type * `Equine` - Equine             commercial/rural type * `Farmlet` - Farmlet             commercial/rural type * `Orchard` - Orchard             commercial/rural type * `RuralLifestyle` - Rural Lifestyle             commercial/rural type * `OnlineBusiness` - Online Business"
+            },
+            "description": "Types of the property"
+          },
+          "providerDetails": {
+            "$ref": "#/components/schemas/Listings.V2.ProviderDetails"
+          },
+          "rentalDetails": {
+            "$ref": "#/components/schemas/Listings.V2.RentalDetails"
+          },
+          "saleDetails": {
+            "$ref": "#/components/schemas/Listings.V2.SaleDetails"
+          },
+          "isWithdrawn": {
+            "type": "boolean",
+            "description": "Indicates if the property has been withdrawn from the market  The value will be 'true' When a listing is taken off market without being sold or leased.",
+            "nullable": true
+          },
+          "seoUrl": {
+            "type": "string",
+            "description": "Listing SEO URL",
+            "nullable": true
+          },
+          "virtualTourUrl": {
+            "type": "string",
+            "description": "The Listing's Virtual Tour URL.",
+            "nullable": true
+          },
+          "homepassEnabled": {
+            "type": "boolean",
+            "description": "If Homepass is enabled for the listing (agency)",
+            "nullable": true
+          },
+          "statementOfInformation": {
+            "$ref": "#/components/schemas/Listings.V2.StatementOfInformation"
+          },
+          "numberOfDwellings": {
+            "type": "integer",
+            "description": "Number of dwellings for current listing",
+            "format": "int32",
+            "nullable": true
+          },
+          "highlights": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Highlight items for the listing",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Represents a Property Listing",
+        "x-data-access-level-info": {
+          "Basic": [
+            "Id",
+            "Status"
+          ],
+          "Detailed": [
+            "Id",
+            "Status",
+            "RentalDetails",
+            "NumberOfDwellings",
+            "PropertyId",
+            "ApmIdentifiers",
+            "AddressParts",
+            "AdvertiserIdentifiers",
+            "Bathrooms",
+            "Bedrooms",
+            "BuildingAreaSqm",
+            "Carspaces",
+            "Channel",
+            "DateAvailable",
+            "DateListed",
+            "DateUpdated",
+            "Description",
+            "DevProjectId",
+            "EnergyEfficiencyRating",
+            "Features",
+            "GeoLocation",
+            "Headline",
+            "Highlights",
+            "InspectionDetails",
+            "IsNewDevelopment",
+            "LandAreaSqm",
+            "Media",
+            "Objective",
+            "PriceDetails",
+            "PropertyTypes",
+            "SaleDetails",
+            "SaleMode",
+            "SeoUrl",
+            "StatementOfInformation",
+            "VirtualTourUrl"
+          ],
+          "Full": [
+            "Id",
+            "Status",
+            "RentalDetails",
+            "NumberOfDwellings",
+            "PropertyId",
+            "ApmIdentifiers",
+            "AddressParts",
+            "AdvertiserIdentifiers",
+            "Bathrooms",
+            "Bedrooms",
+            "BuildingAreaSqm",
+            "Carspaces",
+            "Channel",
+            "DateAvailable",
+            "DateListed",
+            "DateUpdated",
+            "Description",
+            "DevProjectId",
+            "EnergyEfficiencyRating",
+            "Features",
+            "GeoLocation",
+            "Headline",
+            "Highlights",
+            "InspectionDetails",
+            "IsNewDevelopment",
+            "LandAreaSqm",
+            "Media",
+            "Objective",
+            "PriceDetails",
+            "PropertyTypes",
+            "SaleDetails",
+            "SaleMode",
+            "SeoUrl",
+            "StatementOfInformation",
+            "VirtualTourUrl",
+            "BuildingArea",
+            "DateCreated",
+            "DateMinorUpdated",
+            "DatePurged",
+            "ProviderDetails",
+            "HomepassEnabled",
+            "IsWithdrawn",
+            "LandArea"
+          ]
+        }
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "instance": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": {},
+        "x-data-access-level-info": {
+          "Basic": [
+            "*"
+          ],
+          "Detailed": [
+            "*"
+          ],
+          "Full": [
+            "*"
+          ]
+        }
+      },
+      "Agencies.V2.AgentReviewLiteResponse": {
+        "type": "object",
+        "properties": {
+          "agentId": {
+            "type": "integer",
+            "description": "Gets or Sets AgentId",
+            "format": "int32",
+            "nullable": true
+          },
+          "overallStarRating": {
+            "type": "number",
+            "description": "Gets or Sets OverallStarRating",
+            "format": "double",
+            "nullable": true
+          },
+          "overallStarRatingRecent": {
+            "type": "number",
+            "description": "Gets or Sets OverallStarRatingRecent",
+            "format": "double",
+            "nullable": true
+          },
+          "numberOfReviews": {
+            "type": "integer",
+            "description": "Gets or Sets NumberOfReviews",
+            "format": "int32",
+            "nullable": true
+          },
+          "numberOfReviewsRecent": {
+            "type": "integer",
+            "description": "Gets or Sets NumberOfReviewsRecent",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "DomainAgencyModelResponseAgentReviewLiteResponse",
+        "x-data-access-level-info": {
+          "Basic": [
+            "*"
+          ],
+          "Detailed": [
+            "*"
+          ],
+          "Full": [
+            "*"
+          ]
+        }
+      },
+      "Agencies.V2.GetAgentsByLocationRequest": {
+        "type": "object",
+        "properties": {
+          "suburbs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Gets or Sets Suburbs",
+            "nullable": true
+          },
+          "suburbIds": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "description": "Gets or Sets SuburbIds",
+            "nullable": true
+          },
+          "sortBy": {
+            "enum": [
+              "default",
+              "nameAscending",
+              "nameDescending",
+              "totalSoldAscending",
+              "totalSoldAndAuctionedAscending",
+              "totalSoldAndAuctionedDescending",
+              "totalSoldDescending",
+              "avgSalePriceAscending",
+              "avgSalePriceDescending",
+              "avgDayOnMarketAscending",
+              "avgDayOnMarketDescending",
+              "forSaleAscending",
+              "forSaleDescending",
+              "forRentAscending",
+              "forRentDescending",
+              "totalLeasedDescending"
+            ],
+            "type": "string",
+            "description": "Gets or Sets SortBy"
+          },
+          "page": {
+            "type": "integer",
+            "description": "Gets or Sets Page",
+            "format": "int32",
+            "nullable": true
+          },
+          "pageSize": {
+            "type": "integer",
+            "description": "Gets or Sets PageSize",
+            "format": "int32",
+            "nullable": true
+          },
+          "agentNameKeyword": {
+            "type": "string",
+            "description": "Gets or Sets AgentNameKeyword",
+            "nullable": true
+          },
+          "agentType": {
+            "enum": [
+              "all",
+              "sale",
+              "rent",
+              "soldOnly"
+            ],
+            "type": "string",
+            "description": "Gets or Sets AgentType"
+          },
+          "propertyType": {
+            "type": "string",
+            "description": "Gets or Sets PropertyType",
+            "nullable": true
+          },
+          "bedrooms": {
+            "type": "number",
+            "description": "Gets or Sets Bedrooms",
+            "format": "double",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "DomainAgencyWebApiRequestsV2GetAgentsByLocationRequest",
+        "x-data-access-level-info": {
+          "Basic": [
+            "*"
+          ],
+          "Detailed": [
+            "*"
+          ],
+          "Full": [
+            "*"
+          ]
+        }
+      },
+      "Agencies.V2.ContactStatsDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Gets or Sets Id",
+            "format": "int32",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "description": "Gets or Sets Name",
+            "nullable": true
+          },
+          "agentIdV2": {
+            "type": "string",
+            "description": "Gets or Sets AgentIdV2",
+            "nullable": true
+          },
+          "propertyType": {
+            "type": "string",
+            "description": "Gets or Sets PropertyType",
+            "nullable": true
+          },
+          "bedrooms": {
+            "type": "number",
+            "description": "Gets or Sets Bedrooms",
+            "format": "double",
+            "nullable": true
+          },
+          "profileTier": {
+            "type": "string",
+            "description": "Gets or Sets ProfileTier",
+            "nullable": true
+          },
+          "depthTier": {
+            "type": "string",
+            "description": "Gets or Sets DepthTier",
+            "nullable": true
+          },
+          "currentProductTier": {
+            "type": "string",
+            "description": "Gets or Sets CurrentProductTier",
+            "nullable": true,
+            "readOnly": true
+          },
+          "profileUrl": {
+            "type": "string",
+            "description": "Gets or Sets ProfileUrl",
+            "nullable": true
+          },
+          "profilePhoto": {
+            "type": "string",
+            "description": "Gets or Sets ProfilePhoto",
+            "nullable": true
+          },
+          "thumbnail": {
+            "type": "string",
+            "description": "Gets or Sets Thumbnail",
+            "nullable": true
+          },
+          "jobTitle": {
+            "type": "string",
+            "description": "Gets or Sets JobTitle",
+            "nullable": true
+          },
+          "jobCategory": {
+            "type": "string",
+            "description": "Gets or Sets JobCategory",
+            "nullable": true
+          },
+          "mobile": {
+            "type": "string",
+            "description": "Gets or Sets Mobile",
+            "nullable": true
+          },
+          "telephone": {
+            "type": "string",
+            "description": "Gets or Sets Telephone",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "description": "Gets or Sets Email",
+            "nullable": true
+          },
+          "averageSoldDaysOnMarket": {
+            "type": "number",
+            "description": "Gets or Sets AverageSoldDaysOnMarket",
+            "format": "double",
+            "nullable": true
+          },
+          "averageSoldPrice": {
+            "type": "number",
+            "description": "Gets or Sets AverageSoldPrice",
+            "format": "double",
+            "nullable": true
+          },
+          "averageSoldPriceIncWithheld": {
+            "type": "number",
+            "description": "Gets or Sets AverageSoldPriceIncWithheld",
+            "format": "double",
+            "nullable": true
+          },
+          "maxSoldPrice": {
+            "type": "number",
+            "description": "Gets or Sets MaxSoldPrice",
+            "format": "double",
+            "nullable": true
+          },
+          "maxSoldPriceIncWithheld": {
+            "type": "number",
+            "description": "Gets or Sets MaxSoldPriceIncWithheld",
+            "format": "double",
+            "nullable": true
+          },
+          "minSoldPrice": {
+            "type": "number",
+            "description": "Gets or Sets MinSoldPrice",
+            "format": "double",
+            "nullable": true
+          },
+          "minSoldPriceIncWithheld": {
+            "type": "number",
+            "description": "Gets or Sets MinSoldPriceIncWithheld",
+            "format": "double",
+            "nullable": true
+          },
+          "totalForRent": {
+            "type": "integer",
+            "description": "Gets or Sets TotalForRent",
+            "format": "int32",
+            "nullable": true
+          },
+          "totalLeased": {
+            "type": "integer",
+            "description": "Gets or Sets TotalLeased",
+            "format": "int32",
+            "nullable": true
+          },
+          "totalForSale": {
+            "type": "integer",
+            "description": "Gets or Sets TotalForSale",
+            "format": "int32",
+            "nullable": true
+          },
+          "totalSold": {
+            "type": "integer",
+            "description": "Gets or Sets TotalSold",
+            "format": "int32",
+            "nullable": true
+          },
+          "totalJointSold": {
+            "type": "integer",
+            "description": "Gets or Sets TotalJointSold",
+            "format": "int32",
+            "nullable": true
+          },
+          "totalJointLeased": {
+            "type": "integer",
+            "description": "Gets or Sets TotalJointLeased",
+            "format": "int32",
+            "nullable": true
+          },
+          "totalSoldAndAuctioned": {
+            "type": "integer",
+            "description": "Gets or Sets TotalSoldAndAuctioned",
+            "format": "int32",
+            "nullable": true
+          },
+          "totalJointSoldAndAuctioned": {
+            "type": "integer",
+            "description": "Gets or Sets TotalJointSoldAndAuctioned",
+            "format": "int32",
+            "nullable": true
+          },
+          "totalDaysOnMarket": {
+            "type": "number",
+            "description": "Gets or Sets TotalDaysOnMarket",
+            "format": "double",
+            "nullable": true
+          },
+          "totalSoldPrice": {
+            "type": "integer",
+            "description": "Gets or Sets TotalSoldPrice",
+            "format": "int64",
+            "nullable": true
+          },
+          "totalSoldPriceIncWithheld": {
+            "type": "integer",
+            "description": "Gets or Sets TotalSoldPriceIncWithheld",
+            "format": "int64",
+            "nullable": true
+          },
+          "totalAuctioned": {
+            "type": "integer",
+            "description": "Gets or Sets TotalAuctioned",
+            "format": "int32",
+            "nullable": true
+          },
+          "totalNotWithheldSoldCount": {
+            "type": "integer",
+            "description": "Gets or Sets TotalNotWithheldSoldCount",
+            "format": "int32",
+            "nullable": true
+          },
+          "totalSoldWithValidDaysOnMarket": {
+            "type": "integer",
+            "description": "Gets or Sets TotalSoldWithValidDaysOnMarket",
+            "format": "int32",
+            "nullable": true
+          },
+          "agencyId": {
+            "type": "integer",
+            "description": "Gets or Sets AgencyId",
+            "format": "int32",
+            "nullable": true
+          },
+          "agencyName": {
+            "type": "string",
+            "description": "Gets or Sets AgencyName",
+            "nullable": true
+          },
+          "agencyLogoSmall": {
+            "type": "string",
+            "description": "Gets or Sets AgencyLogoSmall",
+            "nullable": true
+          },
+          "agencyLogoUrl": {
+            "type": "string",
+            "description": "Gets or Sets AgencyLogoUrl",
+            "nullable": true
+          },
+          "brandColour": {
+            "type": "string",
+            "description": "Gets or Sets BrandColour",
+            "nullable": true
+          },
+          "agencyProfileUrl": {
+            "type": "string",
+            "description": "Gets or Sets AgencyProfileUrl",
+            "nullable": true
+          },
+          "showRecentlySold": {
+            "type": "boolean",
+            "description": "Gets or Sets ShowRecentlySold",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "DomainAgencyModelResponseAgentSearchContactStatsDto",
+        "x-data-access-level-info": {
+          "Basic": [
+            "*"
+          ],
+          "Detailed": [
+            "*"
+          ],
+          "Full": [
+            "*"
+          ]
+        }
+      },
+      "Agencies.V2.AgentSearchPageResultContactStatsDto": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "integer",
+            "description": "Gets or Sets Total",
+            "format": "int32",
+            "nullable": true
+          },
+          "totalPages": {
+            "type": "integer",
+            "description": "Gets or Sets TotalPages",
+            "format": "int32",
+            "nullable": true
+          },
+          "pageNumber": {
+            "type": "integer",
+            "description": "Gets or Sets PageNumber",
+            "format": "int32",
+            "nullable": true
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Agencies.V2.ContactStatsDto"
+            },
+            "description": "Gets or Sets Results",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "DomainAgencyModelResponseAgentSearchPageResult1",
+        "x-data-access-level-info": {
+          "Basic": [
+            "*"
+          ],
+          "Detailed": [
+            "*"
+          ],
+          "Full": [
+            "*"
+          ]
+        }
+      },
+      "AuctionCollection.v1.CallingSheetResponse": {
+        "type": "object",
+        "properties": {
+          "agencyName": {
+            "type": "string",
+            "description": "Agency name",
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "description": "Domain listing id",
+            "nullable": true
+          },
+          "address": {
+            "type": "string",
+            "description": "Full property address",
+            "nullable": true
+          },
+          "bedroomCount": {
+            "type": "string",
+            "nullable": true
+          },
+          "propertyType": {
+            "type": "string",
+            "description": "Property type, House, Unity etc.",
+            "nullable": true
+          },
+          "auctionDate": {
+            "type": "string",
+            "description": "Auction date and time in Sydney timezone in format yyyy-MM-ddTHH:mm:ss",
+            "format": "date-time"
+          },
+          "agentId": {
+            "type": "string",
+            "nullable": true
+          },
+          "agentName": {
+            "type": "string",
+            "nullable": true
+          },
+          "agentContactNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "secondaryAgentId": {
+            "type": "string",
+            "nullable": true
+          },
+          "secondaryAgentName": {
+            "type": "string",
+            "nullable": true
+          },
+          "secondaryAgentContactNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "agencyId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AuctionCollection.v1.PutAuctionUpdateRequest": {
+        "required": [
+          "eventDate",
+          "listingId",
+          "result",
+          "submissionSource",
+          "submittedAt"
+        ],
+        "type": "object",
+        "properties": {
+          "listingId": {
+            "minLength": 1,
+            "pattern": "^\\d*$",
+            "type": "string",
+            "description": "Domain listing id",
+            "example": "2020202020"
+          },
+          "eventDate": {
+            "type": "string",
+            "description": "Scheduled auction date and time in Sydney timezone in format yyyy-MM-ddTHH:mm:ss.",
+            "format": "date-time"
+          },
+          "result": {
+            "minLength": 1,
+            "type": "string",
+            "description": "Auction result, one of: AUSD, AUSP, AUSA, AUWD, AUPP, AUPI"
+          },
+          "price": {
+            "maximum": 1000000000,
+            "minimum": 0,
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "soldDate": {
+            "type": "string",
+            "description": "Sold date and time in Sydney timezone in format yyyy-MM-ddTHH:mm:ss",
+            "format": "date-time",
+            "nullable": true
+          },
+          "isPriceDisclosed": {
+            "type": "boolean",
+            "description": "Is price disclosed flag",
+            "nullable": true
+          },
+          "canPublish": {
+            "type": "boolean",
+            "description": "Listing can be published flag",
+            "nullable": true
+          },
+          "submittedAt": {
+            "type": "string",
+            "description": "Submission date and time of agent form submission in UTC timezone in format yyyy-MM-ddTHH:mm:ss",
+            "format": "date-time"
+          },
+          "submissionSource": {
+            "minLength": 1,
+            "type": "string",
+            "description": "Submission source, one of: sms_form, call_centre"
+          },
+          "registeredBidders": {
+            "type": "integer",
+            "description": "Total number of registered bidders - required except withdrawn",
+            "format": "int32",
+            "nullable": true
+          },
+          "activeBidders": {
+            "type": "integer",
+            "description": "Number of bidders who placed a bid - required except withdrawn",
+            "format": "int32",
+            "nullable": true
+          },
+          "isVendorBid": {
+            "type": "boolean",
+            "description": "Is vendor bid flag",
+            "nullable": true
+          },
+          "withdrawalReason": {
+            "type": "string",
+            "description": "Required for withdrawal, one of: sold_prior, lack_of_interest, vendor_changed_mind, other",
+            "nullable": true
+          },
+          "contractStatus": {
+            "type": "string",
+            "description": "Required for sold after (AUSA), one of: unconditional or conditional",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "DemographicsResponse": {
         "type": "object",
         "properties": {
@@ -4909,1622 +7586,6 @@
         },
         "additionalProperties": false
       },
-      "Listings.V2.AddressParts": {
-        "type": "object",
-        "properties": {
-          "stateAbbreviation": {
-            "enum": [
-              "nsw",
-              "vic",
-              "sa",
-              "nt",
-              "tas",
-              "act",
-              "qld",
-              "wa"
-            ],
-            "type": "string",
-            "description": "Gets or Sets StateAbbreviation",
-            "nullable": true
-          },
-          "displayType": {
-            "enum": [
-              "fullAddress",
-              "streetAndSuburb",
-              "suburbOnly",
-              "regionOnly",
-              "areaOnly",
-              "stateOnly"
-            ],
-            "type": "string",
-            "description": "Gets or Sets DisplayType",
-            "nullable": true
-          },
-          "streetNumber": {
-            "type": "string",
-            "description": "Street number",
-            "nullable": true
-          },
-          "unitNumber": {
-            "type": "string",
-            "description": "Unit number.",
-            "nullable": true
-          },
-          "street": {
-            "type": "string",
-            "description": "Street address",
-            "nullable": true
-          },
-          "suburb": {
-            "type": "string",
-            "description": "Suburb of the address",
-            "nullable": true
-          },
-          "suburbId": {
-            "type": "integer",
-            "description": "Domain suburb identifier for address lookup via the domain location api",
-            "format": "int32",
-            "nullable": true
-          },
-          "postcode": {
-            "type": "string",
-            "description": "Postcode of the address",
-            "nullable": true
-          },
-          "displayAddress": {
-            "type": "string",
-            "description": "Advertiser's preference in displaying their listing's address",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "description": "Encapsulates the parts that make up an Address",
-        "x-data-access-level-info": {
-          "Basic": [
-            "DisplayAddress",
-            "DisplayType",
-            "StateAbbreviation",
-            "Postcode",
-            "Suburb",
-            "SuburbId",
-            "UnitNumber",
-            "StreetNumber",
-            "Street"
-          ],
-          "Detailed": [
-            "DisplayAddress",
-            "DisplayType",
-            "StateAbbreviation",
-            "Postcode",
-            "Suburb",
-            "SuburbId",
-            "UnitNumber",
-            "StreetNumber",
-            "Street"
-          ],
-          "Full": [
-            "DisplayAddress",
-            "DisplayType",
-            "StateAbbreviation",
-            "Postcode",
-            "Suburb",
-            "SuburbId",
-            "UnitNumber",
-            "StreetNumber",
-            "Street"
-          ]
-        }
-      },
-      "Listings.V2.AdvertiserIdentifiers": {
-        "type": "object",
-        "properties": {
-          "advertiserType": {
-            "enum": [
-              "agency",
-              "private"
-            ],
-            "type": "string",
-            "description": "Gets or Sets AdvertiserType",
-            "nullable": true
-          },
-          "advertiserId": {
-            "type": "integer",
-            "description": "Advertiser's identifier",
-            "format": "int32",
-            "nullable": true
-          },
-          "contactIds": {
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "description": "Identifier of each contact the advertiser has associated with the listing",
-            "nullable": true
-          },
-          "agentIds": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Identifier of each agent the advertiser has associated with the listing",
-            "nullable": true
-          },
-          "conjunctionContactIds": {
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "description": "Identifier of each conjunctional contact associated with the listing",
-            "nullable": true
-          },
-          "conjunctionAgentIds": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Identifier of each conjunctional agent associated with the listing",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "description": "Encapsulates the listing's advertiser identifiers",
-        "x-data-access-level-info": {
-          "Basic": [
-            "*"
-          ],
-          "Detailed": [
-            "*"
-          ],
-          "Full": [
-            "*"
-          ]
-        }
-      },
-      "Listings.V2.AustralianPropertyMonitorsIdentifiers": {
-        "type": "object",
-        "properties": {
-          "addressId": {
-            "type": "integer",
-            "description": "APM address identifier",
-            "format": "int32",
-            "nullable": true
-          },
-          "streetId": {
-            "type": "integer",
-            "description": "APM street identifier",
-            "format": "int32",
-            "nullable": true
-          },
-          "suburbId": {
-            "type": "integer",
-            "description": "APM suburb identifier",
-            "format": "int32",
-            "nullable": true
-          },
-          "cadastreId": {
-            "type": "integer",
-            "description": "APM cadastre identifier",
-            "format": "int64",
-            "nullable": true
-          },
-          "postcodeId": {
-            "type": "integer",
-            "description": "APM postcode identifier",
-            "format": "int32",
-            "nullable": true
-          },
-          "stateId": {
-            "type": "integer",
-            "description": "State identifier",
-            "format": "int32",
-            "nullable": true
-          },
-          "state": {
-            "type": "string",
-            "description": "APM State",
-            "nullable": true
-          },
-          "propertyTypeId": {
-            "type": "integer",
-            "description": "APM property type identifier",
-            "format": "int32",
-            "nullable": true
-          },
-          "propertyTypeCategoryId": {
-            "type": "integer",
-            "description": "APM property category type identifier",
-            "format": "int32",
-            "nullable": true
-          },
-          "streetNumber": {
-            "type": "string",
-            "description": "APM washed and standardized address component for the street number,   (including any prefixes, suffixed and composite numbers e.g. \\\"2-4a\\\")",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "description": "APM Identifiers",
-        "x-data-access-level-info": {
-          "Basic": [],
-          "Detailed": [
-            "SuburbId"
-          ],
-          "Full": [
-            "SuburbId",
-            "AddressId",
-            "CadastreId",
-            "PostcodeId",
-            "PropertyTypeCategoryId",
-            "PropertyTypeId",
-            "State",
-            "StateId",
-            "StreetId",
-            "StreetNumber"
-          ]
-        }
-      },
-      "Listings.V2.GeoLocation": {
-        "type": "object",
-        "properties": {
-          "latitude": {
-            "type": "number",
-            "description": "Latitude of the property",
-            "format": "double",
-            "nullable": true
-          },
-          "longitude": {
-            "type": "number",
-            "description": "Longitude of the property",
-            "format": "double",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "description": "Encapsulates the details of a geo location, long/lat",
-        "x-data-access-level-info": {
-          "Basic": [
-            "*"
-          ],
-          "Detailed": [
-            "*"
-          ],
-          "Full": [
-            "*"
-          ]
-        }
-      },
-      "Listings.V2.Inspection": {
-        "type": "object",
-        "properties": {
-          "recurrence": {
-            "enum": [
-              "none",
-              "weekly"
-            ],
-            "type": "string",
-            "description": "Gets or Sets Recurrence",
-            "nullable": true
-          },
-          "openingDateTime": {
-            "type": "string",
-            "description": "Opening date and time of the inspection. e.g. 2015-01-01T12:00:00.  Not provided by bulk uploaded listings, in these cases refer to the  inspection description field. DateTime is in a local timezone.",
-            "format": "date-time",
-            "nullable": true
-          },
-          "closingDateTime": {
-            "type": "string",
-            "description": "Closing date and time of the inspection. e.g. 2015-01-01T12:00:00  Not provided by bulk uploaded listings, in these cases refer to the  inspection description field. DateTime is in a local timezone.",
-            "format": "date-time",
-            "nullable": true
-          },
-          "description": {
-            "type": "string",
-            "description": "Description of the inspection provided by the Advertiser.  When listings are bulk uploaded, inspection times are provided as a string.  Other inspection details will not be provided",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "description": "Encapsulates the details of a Listing's Inspection",
-        "x-data-access-level-info": {
-          "Basic": [
-            "*"
-          ],
-          "Detailed": [
-            "*"
-          ],
-          "Full": [
-            "*"
-          ]
-        }
-      },
-      "Listings.V2.PropertyInspections": {
-        "type": "object",
-        "properties": {
-          "inspections": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Listings.V2.Inspection"
-            },
-            "description": "Inspection details for the property. e.g. opening and closing times",
-            "nullable": true
-          },
-          "pastInspections": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Listings.V2.Inspection"
-            },
-            "description": "Inspection details for the property. e.g. opening and closing times",
-            "nullable": true
-          },
-          "isByAppointmentOnly": {
-            "type": "boolean",
-            "description": "True or False indicating whether the inspection is by appointment only",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "description": "Property Inspection(s) details",
-        "x-data-access-level-info": {
-          "Basic": [
-            "*"
-          ],
-          "Detailed": [
-            "*"
-          ],
-          "Full": [
-            "*"
-          ]
-        }
-      },
-      "Listings.V2.ListingMedia": {
-        "required": [
-          "url"
-        ],
-        "type": "object",
-        "properties": {
-          "category": {
-            "enum": [
-              "image",
-              "video",
-              "others"
-            ],
-            "type": "string",
-            "description": "Gets or Sets Category",
-            "nullable": true
-          },
-          "type": {
-            "enum": [
-              "photo",
-              "mp4",
-              "youtube",
-              "floorplan",
-              "vimeo",
-              "notSpecified"
-            ],
-            "type": "string",
-            "description": "Gets or Sets Type",
-            "nullable": true
-          },
-          "url": {
-            "minLength": 1,
-            "type": "string",
-            "description": "The URL to the property media"
-          }
-        },
-        "additionalProperties": false,
-        "description": "Encapsulates media associated with a Listing",
-        "x-data-access-level-info": {
-          "Basic": [
-            "*"
-          ],
-          "Detailed": [
-            "*"
-          ],
-          "Full": [
-            "*"
-          ]
-        }
-      },
-      "Listings.V2.PriceDetails": {
-        "type": "object",
-        "properties": {
-          "gstOption": {
-            "enum": [
-              "na",
-              "inc",
-              "ex"
-            ],
-            "type": "string",
-            "description": "Gets or Sets GstOption",
-            "nullable": true
-          },
-          "priceType": {
-            "enum": [
-              "gross",
-              "net"
-            ],
-            "type": "string",
-            "description": "Gets or Sets PriceType",
-            "nullable": true
-          },
-          "priceUnit": {
-            "enum": [
-              "totalAmount",
-              "perSqm"
-            ],
-            "type": "string",
-            "description": "Gets or Sets PriceUnit",
-            "nullable": true
-          },
-          "price": {
-            "type": "number",
-            "description": "Price of the property",
-            "format": "double",
-            "nullable": true
-          },
-          "priceFrom": {
-            "type": "integer",
-            "description": "Price starting range of the property",
-            "format": "int32",
-            "nullable": true
-          },
-          "priceTo": {
-            "type": "integer",
-            "description": "Upper price range of the property",
-            "format": "int32",
-            "nullable": true
-          },
-          "pricePrefix": {
-            "type": "string",
-            "description": "Display price for the advertisement",
-            "nullable": true
-          },
-          "canDisplayPrice": {
-            "type": "boolean",
-            "description": "Flag indicating whether the advertiser has chosen to display the property price",
-            "nullable": true
-          },
-          "hiddenReasons": {
-            "type": "array",
-            "items": {
-              "enum": [
-                "byAgency",
-                "qldRestriction"
-              ],
-              "type": "string",
-              "description": "Reason for price hidden  * `ByAgency` - Agency doesn't want to show prcie * `QLDRestriction` - Price can not be shown due to QLD restrictions"
-            },
-            "description": "Reasons when price need to be hidden",
-            "nullable": true
-          },
-          "displayPrice": {
-            "type": "string",
-            "description": "A string provided by the Advertiser representing the ByIdListingPriceQueryResult of the Listing e.g. Over $1,000,000   This should be the default price field for client to use",
-            "nullable": true
-          },
-          "bond": {
-            "type": "number",
-            "description": "Rental bond",
-            "format": "double",
-            "nullable": true
-          },
-          "priceReduction": {
-            "type": "boolean",
-            "description": "Indicates if this property is under price reduction",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "description": "Encapsulates a listing's price information",
-        "x-data-access-level-info": {
-          "Basic": [
-            "DisplayPrice",
-            "Bond",
-            "CanDisplayPrice",
-            "Price",
-            "PriceFrom",
-            "PriceTo",
-            "PricePrefix"
-          ],
-          "Detailed": [
-            "DisplayPrice",
-            "Bond",
-            "CanDisplayPrice",
-            "Price",
-            "PriceFrom",
-            "PriceTo",
-            "PricePrefix"
-          ],
-          "Full": [
-            "DisplayPrice",
-            "Bond",
-            "CanDisplayPrice",
-            "Price",
-            "PriceFrom",
-            "PriceTo",
-            "PricePrefix",
-            "HiddenReasons",
-            "GstOption",
-            "PriceUnit",
-            "PriceType",
-            "PriceReduction"
-          ]
-        }
-      },
-      "Listings.V2.ProviderDetails": {
-        "type": "object",
-        "properties": {
-          "providerSystem": {
-            "type": "string",
-            "description": "Feed provider ID",
-            "nullable": true
-          },
-          "providerAdID": {
-            "type": "string",
-            "description": "Unique ID within provider system",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "description": "Information for the listing provider. e.g. bulkuploader information",
-        "x-data-access-level-info": {
-          "Basic": [
-            "*"
-          ],
-          "Detailed": [
-            "*"
-          ],
-          "Full": [
-            "*"
-          ]
-        }
-      },
-      "Listings.V2.RentalDetails": {
-        "type": "object",
-        "properties": {
-          "rentalMethod": {
-            "enum": [
-              "notStated",
-              "rent",
-              "share",
-              "holiday",
-              "lease"
-            ],
-            "type": "string",
-            "description": "Gets or Sets RentalMethod",
-            "nullable": true
-          },
-          "source": {
-            "enum": [
-              "internal",
-              "external"
-            ],
-            "type": "string",
-            "description": "Gets or Sets Source",
-            "nullable": true
-          },
-          "leasedDate": {
-            "type": "string",
-            "description": "The Date the listing was leased. DateTime is in a local timezone.",
-            "format": "date-time",
-            "nullable": true
-          },
-          "leasedPrice": {
-            "type": "integer",
-            "description": "The last leased price entered by the Advertiser  This price will only be visible if allowed by the Advertiser  and the listing as been leased",
-            "format": "int32",
-            "nullable": true
-          },
-          "canDisplayPrice": {
-            "type": "boolean",
-            "description": "Indicates whether this instance can display price",
-            "nullable": true
-          },
-          "leasedMonths": {
-            "type": "integer",
-            "description": "The number of months the property was last leased for  This will only be visible if the property has been leased",
-            "format": "int32",
-            "nullable": true
-          },
-          "termOfLeaseFrom": {
-            "type": "integer",
-            "description": "Lease term range from",
-            "format": "int32",
-            "nullable": true
-          },
-          "termOfLeaseTo": {
-            "type": "integer",
-            "description": "Lease term range to",
-            "format": "int32",
-            "nullable": true
-          },
-          "leaseOutgoings": {
-            "type": "integer",
-            "description": "Outgoing cost of current lease",
-            "format": "int32",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "description": "The rental detail's of the listing in case of it being for rent or leased",
-        "x-data-access-level-info": {
-          "Basic": [
-            "*"
-          ],
-          "Detailed": [
-            "*"
-          ],
-          "Full": [
-            "*"
-          ]
-        }
-      },
-      "Listings.V2.SoldDetails": {
-        "type": "object",
-        "properties": {
-          "soldAction": {
-            "enum": [
-              "notStated",
-              "auction",
-              "privateTreaty",
-              "withdrawn",
-              "soldPriorToAuction"
-            ],
-            "type": "string",
-            "description": "Gets or Sets SoldAction",
-            "nullable": true
-          },
-          "source": {
-            "enum": [
-              "internal",
-              "external"
-            ],
-            "type": "string",
-            "description": "Gets or Sets Source",
-            "nullable": true
-          },
-          "soldPrice": {
-            "type": "integer",
-            "description": "The last sold price entered by the Advertiser.  This price will only be visible if allowed by the Advertiser  and the listing as been sold",
-            "format": "int32",
-            "nullable": true
-          },
-          "governmentRecordedSoldPrice": {
-            "type": "integer",
-            "description": "The government recorded sold price sourced from APM",
-            "format": "int32",
-            "nullable": true
-          },
-          "soldDate": {
-            "type": "string",
-            "description": "The Date the listing was sold. DateTime is in a local timezone.",
-            "format": "date-time",
-            "nullable": true
-          },
-          "canDisplayPrice": {
-            "type": "boolean",
-            "description": "Indicates whether this instance can display price",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "description": "Sold details in the case of the listing being sold.",
-        "x-data-access-level-info": {
-          "Basic": [
-            "CanDisplayPrice",
-            "SoldAction",
-            "SoldPrice",
-            "SoldDate",
-            "Source"
-          ],
-          "Detailed": [
-            "CanDisplayPrice",
-            "SoldAction",
-            "SoldPrice",
-            "SoldDate",
-            "Source"
-          ],
-          "Full": [
-            "CanDisplayPrice",
-            "SoldAction",
-            "SoldPrice",
-            "SoldDate",
-            "Source",
-            "GovernmentRecordedSoldPrice"
-          ]
-        }
-      },
-      "Listings.V2.AuctionSchedule": {
-        "type": "object",
-        "properties": {
-          "locationDescription": {
-            "type": "string",
-            "description": "Description and location of the auction provided by advertiser",
-            "nullable": true
-          },
-          "openingDateTime": {
-            "type": "string",
-            "description": "Opening date and time of the auction. e.g. 2015-01-01T12:00:00  DateTime is in a local timezone.",
-            "format": "date-time",
-            "nullable": true
-          },
-          "terms": {
-            "type": "string",
-            "description": "Terms of the auction",
-            "nullable": true
-          },
-          "url": {
-            "maxLength": 255,
-            "type": "string",
-            "description": "On-line URL of the auction",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "description": "Encapsulates the details of a Property being Auctioned.",
-        "x-data-access-level-info": {
-          "Basic": [
-            "*"
-          ],
-          "Detailed": [
-            "*"
-          ],
-          "Full": [
-            "*"
-          ]
-        }
-      },
-      "Listings.V2.AuctionDetails": {
-        "type": "object",
-        "properties": {
-          "auctionSchedule": {
-            "$ref": "#/components/schemas/Listings.V2.AuctionSchedule"
-          },
-          "auctionedPrice": {
-            "type": "integer",
-            "description": "The auctioned price entered by the Advertiser.  This price will only be visible if allowed by the Advertiser  and the listing as been auctioned",
-            "format": "int32",
-            "nullable": true
-          },
-          "auctionedDate": {
-            "type": "string",
-            "description": "The listing's last auctioned date and time specified by the Advertiser.  This will only be visible if the listing has been auctioned.  DateTime is in a local timezone.",
-            "format": "date-time",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "description": "The detail's of the auction in case of a listing for sale being auctioned or sold by auction",
-        "x-data-access-level-info": {
-          "Basic": [
-            "*"
-          ],
-          "Detailed": [
-            "*"
-          ],
-          "Full": [
-            "*"
-          ]
-        }
-      },
-      "Listings.V2.TenderDetails": {
-        "type": "object",
-        "properties": {
-          "tenderRecipientName": {
-            "type": "string",
-            "description": "Tender recipient name",
-            "nullable": true
-          },
-          "tenderAddress": {
-            "type": "string",
-            "description": "Tender address",
-            "nullable": true
-          },
-          "tenderEndDate": {
-            "type": "string",
-            "description": "Tender closing date. DateTime is in a local timezone.",
-            "format": "date-time",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "description": "Tender details",
-        "x-data-access-level-info": {
-          "Basic": [
-            "*"
-          ],
-          "Detailed": [
-            "*"
-          ],
-          "Full": [
-            "*"
-          ]
-        }
-      },
-      "Listings.V2.TenantDetails": {
-        "type": "object",
-        "properties": {
-          "leaseDateVariable": {
-            "type": "boolean",
-            "description": "Is tenant lease date variable",
-            "nullable": true
-          },
-          "leaseOptions": {
-            "type": "string",
-            "description": "Leasing options available to a prospective tenant",
-            "nullable": true
-          },
-          "tenantInfoTermOfLeaseFrom": {
-            "type": "integer",
-            "description": "The from range of the tenant's current lease",
-            "format": "int32",
-            "nullable": true
-          },
-          "tenantInfoTermOfLeaseTo": {
-            "type": "integer",
-            "description": "The to range of the tenant's current lease",
-            "format": "int32",
-            "nullable": true
-          },
-          "tenantName": {
-            "type": "string",
-            "description": "Name of the current tenant of the property",
-            "nullable": true
-          },
-          "tenantRentDetails": {
-            "type": "string",
-            "description": "Information regarding current rental",
-            "nullable": true
-          },
-          "leaseStartDate": {
-            "type": "string",
-            "description": "The date on which the tenants lease began, or is due to begin. DateTime is in a local timezone.",
-            "format": "date-time",
-            "nullable": true
-          },
-          "leaseEndDate": {
-            "type": "string",
-            "description": "The date on which the tenants lease is due to end. DateTime is in a local timezone.",
-            "format": "date-time",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "description": "Tenant Details",
-        "x-data-access-level-info": {
-          "Basic": [
-            "*"
-          ],
-          "Detailed": [
-            "*"
-          ],
-          "Full": [
-            "*"
-          ]
-        }
-      },
-      "Listings.V2.SaleDetails": {
-        "type": "object",
-        "properties": {
-          "saleMethod": {
-            "enum": [
-              "notStated",
-              "auction",
-              "privateTreaty",
-              "tender",
-              "expressionOfInterest"
-            ],
-            "type": "string",
-            "description": "Gets or Sets SaleMethod",
-            "nullable": true
-          },
-          "soldDetails": {
-            "$ref": "#/components/schemas/Listings.V2.SoldDetails"
-          },
-          "auctionDetails": {
-            "$ref": "#/components/schemas/Listings.V2.AuctionDetails"
-          },
-          "tenderDetails": {
-            "$ref": "#/components/schemas/Listings.V2.TenderDetails"
-          },
-          "tenantDetails": {
-            "$ref": "#/components/schemas/Listings.V2.TenantDetails"
-          },
-          "annualReturn": {
-            "type": "integer",
-            "description": "Integer value of percentage return on this property or business",
-            "format": "int32",
-            "nullable": true
-          },
-          "saleTerms": {
-            "type": "string",
-            "description": "Information relating to aspects of the sale, such as required deposit, settlement time",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "description": "The sale detail's of the listing in case of it being for sale or sold",
-        "x-data-access-level-info": {
-          "Basic": [
-            "*"
-          ],
-          "Detailed": [
-            "*"
-          ],
-          "Full": [
-            "*"
-          ]
-        }
-      },
-      "Listings.V2.BasicPrice": {
-        "type": "object",
-        "properties": {
-          "from": {
-            "type": "integer",
-            "description": "Lowest price the property is expected to sell/rent for to set search price.",
-            "format": "int32",
-            "nullable": true
-          },
-          "to": {
-            "type": "integer",
-            "description": "Highest price the property is expected to sell/rent for to set search price.",
-            "format": "int32",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "description": "Basic price information",
-        "x-data-access-level-info": {
-          "Basic": [
-            "*"
-          ],
-          "Detailed": [
-            "*"
-          ],
-          "Full": [
-            "*"
-          ]
-        }
-      },
-      "Listings.V2.PastSaleData": {
-        "type": "object",
-        "properties": {
-          "unitNumber": {
-            "type": "string",
-            "description": "Property unit number",
-            "nullable": true
-          },
-          "streetNumber": {
-            "type": "string",
-            "description": "Property street number",
-            "nullable": true
-          },
-          "street": {
-            "type": "string",
-            "description": "Property Street name",
-            "nullable": true
-          },
-          "suburb": {
-            "type": "string",
-            "description": "Property suburb name",
-            "nullable": true
-          },
-          "postcode": {
-            "type": "string",
-            "description": "Property postcode",
-            "nullable": true
-          },
-          "state": {
-            "type": "string",
-            "description": "Property state",
-            "nullable": true
-          },
-          "displayAddress": {
-            "type": "string",
-            "description": "display formatted address",
-            "nullable": true,
-            "readOnly": true
-          },
-          "dateOfSale": {
-            "type": "string",
-            "description": "Registered date of the sale",
-            "nullable": true
-          },
-          "soldPrice": {
-            "type": "integer",
-            "description": "Property sold price",
-            "format": "int64",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "description": "Information for past property sales",
-        "x-data-access-level-info": {
-          "Basic": [
-            "*"
-          ],
-          "Detailed": [
-            "*"
-          ],
-          "Full": [
-            "*"
-          ]
-        }
-      },
-      "Listings.V2.ComparableData": {
-        "type": "object",
-        "properties": {
-          "comparableProperty": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Listings.V2.PastSaleData"
-            },
-            "description": "Comparable properties that are of a similar standard or condition to the property for sale",
-            "nullable": true
-          },
-          "declarationText": {
-            "type": "string",
-            "description": "Text description if there are less than three comparable sales available",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "description": "Information regarding the past comparable property sales that influenced the setting of the estimation price",
-        "x-data-access-level-info": {
-          "Basic": [
-            "*"
-          ],
-          "Detailed": [
-            "*"
-          ],
-          "Full": [
-            "*"
-          ]
-        }
-      },
-      "Listings.V2.MedianPriceData": {
-        "type": "object",
-        "properties": {
-          "priceType": {
-            "enum": [
-              "house",
-              "apartmentUnitFlat",
-              "vacantLand"
-            ],
-            "type": "string",
-            "description": "Gets or Sets PriceType",
-            "nullable": true
-          },
-          "suburb": {
-            "type": "string",
-            "description": "Name of the suburb median price is based on.",
-            "nullable": true
-          },
-          "postcode": {
-            "type": "string",
-            "description": "Postcode of the suburb",
-            "nullable": true
-          },
-          "medianPrice": {
-            "type": "integer",
-            "description": "Median price for the suburb.",
-            "format": "int32",
-            "nullable": true
-          },
-          "source": {
-            "type": "string",
-            "description": "Where median price data comes from",
-            "nullable": true
-          },
-          "sourceDateFrom": {
-            "type": "string",
-            "description": "Start date of the median price source time period",
-            "nullable": true
-          },
-          "sourceDateTo": {
-            "type": "string",
-            "description": "End date of the median price source time period",
-            "nullable": true
-          },
-          "sourceCollectionDate": {
-            "type": "string",
-            "description": "The collection date of the median price source",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "description": "Information regarding median house/unit price   for the suburb",
-        "x-data-access-level-info": {
-          "Basic": [
-            "*"
-          ],
-          "Detailed": [
-            "*"
-          ],
-          "Full": [
-            "*"
-          ]
-        }
-      },
-      "Listings.V2.StatementOfInformation": {
-        "type": "object",
-        "properties": {
-          "estimatedPrice": {
-            "$ref": "#/components/schemas/Listings.V2.BasicPrice"
-          },
-          "comparableData": {
-            "$ref": "#/components/schemas/Listings.V2.ComparableData"
-          },
-          "suburbMedianPrice": {
-            "$ref": "#/components/schemas/Listings.V2.MedianPriceData"
-          },
-          "documentationUrl": {
-            "type": "string",
-            "description": "Link to the statement of information documentation file",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "description": "Statement of Information  Regarding sale listing",
-        "x-data-access-level-info": {
-          "Basic": [
-            "*"
-          ],
-          "Detailed": [
-            "*"
-          ],
-          "Full": [
-            "*"
-          ]
-        }
-      },
-      "Listings.V2.Listing": {
-        "required": [
-          "advertiserIdentifiers",
-          "id",
-          "propertyTypes"
-        ],
-        "type": "object",
-        "properties": {
-          "objective": {
-            "enum": [
-              "sale",
-              "rent"
-            ],
-            "type": "string",
-            "description": "Gets or Sets Objective",
-            "nullable": true
-          },
-          "status": {
-            "enum": [
-              "unknown",
-              "archived",
-              "underOffer",
-              "sold",
-              "leased",
-              "newDevelopment",
-              "recentlyUpdated",
-              "new",
-              "live",
-              "pending",
-              "depositTaken"
-            ],
-            "type": "string",
-            "description": "Gets or Sets Status",
-            "nullable": true
-          },
-          "saleMode": {
-            "enum": [
-              "buy",
-              "rent",
-              "share",
-              "sold",
-              "leased",
-              "archived"
-            ],
-            "type": "string",
-            "description": "Gets or Sets SaleMode",
-            "nullable": true
-          },
-          "channel": {
-            "enum": [
-              "residential",
-              "commercial",
-              "business"
-            ],
-            "type": "string",
-            "description": "Gets or Sets Channel",
-            "nullable": true
-          },
-          "id": {
-            "type": "integer",
-            "description": "The identifier which uniquely identifies the listing.",
-            "format": "int32"
-          },
-          "addressParts": {
-            "$ref": "#/components/schemas/Listings.V2.AddressParts"
-          },
-          "advertiserIdentifiers": {
-            "$ref": "#/components/schemas/Listings.V2.AdvertiserIdentifiers"
-          },
-          "apmIdentifiers": {
-            "$ref": "#/components/schemas/Listings.V2.AustralianPropertyMonitorsIdentifiers"
-          },
-          "bathrooms": {
-            "type": "number",
-            "description": "Total number of bathrooms in the property",
-            "format": "float",
-            "nullable": true
-          },
-          "bedrooms": {
-            "type": "number",
-            "description": "Total number of bedrooms in the property; Studio apartments have a value of \\\"0\\\"",
-            "format": "float",
-            "nullable": true
-          },
-          "buildingArea": {
-            "type": "string",
-            "description": "The building area display value of the property e.g. 160 ha",
-            "nullable": true
-          },
-          "buildingAreaSqm": {
-            "type": "number",
-            "description": "The properties building area in square meters",
-            "format": "double",
-            "nullable": true
-          },
-          "carspaces": {
-            "type": "number",
-            "description": "Total number of car spaces in the property.",
-            "format": "float",
-            "nullable": true
-          },
-          "dateAvailable": {
-            "type": "string",
-            "description": "The date the property is available. DateTime is in a local timezone.",
-            "format": "date-time",
-            "nullable": true
-          },
-          "dateCreated": {
-            "type": "string",
-            "description": "The date/time the listing was created. DateTime is in AEST (Australian Eastern Standard Time) or AEDT (Australian Eastern Daylight Time) timezone.",
-            "format": "date-time",
-            "nullable": true
-          },
-          "dateUpdated": {
-            "type": "string",
-            "description": "The date/time the listing had major update. DateTime is in AEST (Australian Eastern Standard Time) or AEDT (Australian Eastern Daylight Time) timezone.",
-            "format": "date-time",
-            "nullable": true
-          },
-          "dateMinorUpdated": {
-            "type": "string",
-            "description": "When minor update applied to the listing. DateTime is in AEST (Australian Eastern Standard Time) or AEDT (Australian Eastern Daylight Time) timezone.",
-            "format": "date-time",
-            "nullable": true
-          },
-          "datePurged": {
-            "type": "string",
-            "description": "The date/time the listing was purged. It's only returned for archived listings. DateTime is in AEST (Australian Eastern Standard Time) or AEDT (Australian Eastern Daylight Time) timezone.",
-            "format": "date-time",
-            "nullable": true
-          },
-          "dateListed": {
-            "type": "string",
-            "description": "The date/time last listed. DateTime is in AEST (Australian Eastern Standard Time) or AEDT (Australian Eastern Daylight Time) timezone.",
-            "format": "date-time",
-            "nullable": true
-          },
-          "description": {
-            "type": "string",
-            "description": "The long description of the property provided by the advertiser.",
-            "nullable": true
-          },
-          "devProjectId": {
-            "type": "integer",
-            "description": "The ID of the development project - null if no associated project",
-            "format": "int32",
-            "nullable": true
-          },
-          "energyEfficiencyRating": {
-            "type": "integer",
-            "description": "Energy Efficiency Rating value for ACT properties",
-            "format": "int32",
-            "nullable": true
-          },
-          "features": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "The property features specified by the advertiser",
-            "nullable": true
-          },
-          "geoLocation": {
-            "$ref": "#/components/schemas/Listings.V2.GeoLocation"
-          },
-          "headline": {
-            "type": "string",
-            "description": "The short description of the property provided by the advertiser.",
-            "nullable": true
-          },
-          "inspectionDetails": {
-            "$ref": "#/components/schemas/Listings.V2.PropertyInspections"
-          },
-          "isNewDevelopment": {
-            "type": "boolean",
-            "description": "Indicates whether the property is a new development",
-            "nullable": true
-          },
-          "landArea": {
-            "type": "string",
-            "description": "The land area display string for the property e.g. 160 sqm",
-            "nullable": true
-          },
-          "landAreaSqm": {
-            "type": "number",
-            "description": "The properties land area in square meters",
-            "format": "double",
-            "nullable": true
-          },
-          "media": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Listings.V2.ListingMedia"
-            },
-            "description": "The media associated with the property provided by the advertiser",
-            "nullable": true
-          },
-          "priceDetails": {
-            "$ref": "#/components/schemas/Listings.V2.PriceDetails"
-          },
-          "propertyId": {
-            "type": "string",
-            "description": "The identifier which uniquely identifies the property being advertised.  This may be empty if the Address of property is poorly described",
-            "nullable": true
-          },
-          "propertyTypes": {
-            "type": "array",
-            "items": {
-              "enum": [
-                "unknown",
-                "acreageSemiRural",
-                "apartmentUnitFlat",
-                "aquaculture",
-                "blockOfUnits",
-                "carspace",
-                "dairyFarming",
-                "developmentLand",
-                "developmentSite",
-                "duplex",
-                "farm",
-                "fishingForestry",
-                "homeBased",
-                "newHomeDesigns",
-                "hotelLeisure",
-                "house",
-                "newHouseLand",
-                "industrialWarehouse",
-                "irrigationServices",
-                "newLand",
-                "livestock",
-                "international",
-                "medicalConsulting",
-                "newApartments",
-                "offices",
-                "parkingCarSpace",
-                "penthouse",
-                "retail",
-                "retirement",
-                "rural",
-                "ruralCommercialFarming",
-                "semiDetached",
-                "showroomsBulkyGoods",
-                "specialistFarm",
-                "studio",
-                "terrace",
-                "townhouse",
-                "vacantLand",
-                "villa",
-                "servicedOffices",
-                "other",
-                "chickenShop",
-                "seafoodShop",
-                "deliCafe",
-                "cropping",
-                "viticulture",
-                "mixedFarming",
-                "grazing",
-                "horticulture",
-                "equine",
-                "farmlet",
-                "orchard",
-                "ruralLifestyle",
-                "onlineBusiness"
-              ],
-              "type": "string",
-              "description": "Available types of Properties  * `Unknown` - Unknown * `AcreageSemiRural` - Acreage-SemiRural * `ApartmentUnitFlat` - Apartment Unit Flat * `Aquaculture` - Aquaculture             commercial/rural type * `BlockOfUnits` - Block Of Units * `Carspace` - Carspace * `DairyFarming` - Dairy Farming             commercial/rural type * `DevelopmentLand` - Development / Land * `DevelopmentSite` - Development site * `Duplex` - Duplex * `Farm` - Farm * `FishingForestry` - Fishing / Forestry             commercial/rural type * `HomeBased` - Home Based * `NewHomeDesigns` - New Home Designs * `HotelLeisure` - Hotel / Leisure             commercial type * `House` - House * `NewHouseLand` - New House And Land * `IndustrialWarehouse` - Industrial / Warehouse             commercial type * `IrrigationServices` - Irrigation Services             commercial/rural type * `NewLand` - New Land * `Livestock` - Livestock             commercial/rural type * `International` - International             commercial type * `MedicalConsulting` - Medical / Consulting             commercial type * `NewApartments` - New Apartments / Off the Plan * `Offices` - Offices             commercial type * `ParkingCarSpace` - Parking / Car Space             commercial type * `Penthouse` - Penthouse * `Retail` - Retail             commercial type * `Retirement` - Retirement * `Rural` - Rural * `RuralCommercialFarming` - Rural / Commercial Farming              commercial type * `SemiDetached` - Semi Detached * `ShowroomsBulkyGoods` - Showrooms / Bulky Goods             commercial type * `SpecialistFarm` - The specialist farm * `Studio` - Studio * `Terrace` - Terrace * `Townhouse` - The townhouse * `VacantLand` - Vacant Land * `Villa` - Villa * `ServicedOffices` - Serviced Offices             commercial type * `Other` - Other             commercial type * `ChickenShop` - Chicken Shop             commercial type * `SeafoodShop` - Seafood Shop             commercial type * `DeliCafe` - Deli Cafe             commercial type * `Cropping` - Cropping             commercial/rural type * `Viticulture` - Viticulture             commercial/rural type * `MixedFarming` - Mixed Farming             commercial type * `Grazing` - Grazing             commercial/rural type * `Horticulture` - Horticulture             commercial/rural type * `Equine` - Equine             commercial/rural type * `Farmlet` - Farmlet             commercial/rural type * `Orchard` - Orchard             commercial/rural type * `RuralLifestyle` - Rural Lifestyle             commercial/rural type * `OnlineBusiness` - Online Business"
-            },
-            "description": "Types of the property"
-          },
-          "providerDetails": {
-            "$ref": "#/components/schemas/Listings.V2.ProviderDetails"
-          },
-          "rentalDetails": {
-            "$ref": "#/components/schemas/Listings.V2.RentalDetails"
-          },
-          "saleDetails": {
-            "$ref": "#/components/schemas/Listings.V2.SaleDetails"
-          },
-          "isWithdrawn": {
-            "type": "boolean",
-            "description": "Indicates if the property has been withdrawn from the market  The value will be 'true' When a listing is taken off market without being sold or leased.",
-            "nullable": true
-          },
-          "seoUrl": {
-            "type": "string",
-            "description": "Listing SEO URL",
-            "nullable": true
-          },
-          "virtualTourUrl": {
-            "type": "string",
-            "description": "The Listing's Virtual Tour URL.",
-            "nullable": true
-          },
-          "homepassEnabled": {
-            "type": "boolean",
-            "description": "If Homepass is enabled for the listing (agency)",
-            "nullable": true
-          },
-          "statementOfInformation": {
-            "$ref": "#/components/schemas/Listings.V2.StatementOfInformation"
-          },
-          "numberOfDwellings": {
-            "type": "integer",
-            "description": "Number of dwellings for current listing",
-            "format": "int32",
-            "nullable": true
-          },
-          "highlights": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Highlight items for the listing",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "description": "Represents a Property Listing",
-        "x-data-access-level-info": {
-          "Basic": [
-            "Id",
-            "Status"
-          ],
-          "Detailed": [
-            "Id",
-            "Status",
-            "RentalDetails",
-            "NumberOfDwellings",
-            "PropertyId",
-            "ApmIdentifiers",
-            "AddressParts",
-            "AdvertiserIdentifiers",
-            "Bathrooms",
-            "Bedrooms",
-            "BuildingAreaSqm",
-            "Carspaces",
-            "Channel",
-            "DateAvailable",
-            "DateListed",
-            "DateUpdated",
-            "Description",
-            "DevProjectId",
-            "EnergyEfficiencyRating",
-            "Features",
-            "GeoLocation",
-            "Headline",
-            "Highlights",
-            "InspectionDetails",
-            "IsNewDevelopment",
-            "LandAreaSqm",
-            "Media",
-            "Objective",
-            "PriceDetails",
-            "PropertyTypes",
-            "SaleDetails",
-            "SaleMode",
-            "SeoUrl",
-            "StatementOfInformation",
-            "VirtualTourUrl"
-          ],
-          "Full": [
-            "Id",
-            "Status",
-            "RentalDetails",
-            "NumberOfDwellings",
-            "PropertyId",
-            "ApmIdentifiers",
-            "AddressParts",
-            "AdvertiserIdentifiers",
-            "Bathrooms",
-            "Bedrooms",
-            "BuildingAreaSqm",
-            "Carspaces",
-            "Channel",
-            "DateAvailable",
-            "DateListed",
-            "DateUpdated",
-            "Description",
-            "DevProjectId",
-            "EnergyEfficiencyRating",
-            "Features",
-            "GeoLocation",
-            "Headline",
-            "Highlights",
-            "InspectionDetails",
-            "IsNewDevelopment",
-            "LandAreaSqm",
-            "Media",
-            "Objective",
-            "PriceDetails",
-            "PropertyTypes",
-            "SaleDetails",
-            "SaleMode",
-            "SeoUrl",
-            "StatementOfInformation",
-            "VirtualTourUrl",
-            "BuildingArea",
-            "DateCreated",
-            "DateMinorUpdated",
-            "DatePurged",
-            "ProviderDetails",
-            "HomepassEnabled",
-            "IsWithdrawn",
-            "LandArea"
-          ]
-        }
-      },
-      "ProblemDetails": {
-        "type": "object",
-        "properties": {
-          "type": {
-            "type": "string",
-            "nullable": true
-          },
-          "title": {
-            "type": "string",
-            "nullable": true
-          },
-          "status": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "detail": {
-            "type": "string",
-            "nullable": true
-          },
-          "instance": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": {},
-        "x-data-access-level-info": {
-          "Basic": [
-            "*"
-          ],
-          "Detailed": [
-            "*"
-          ],
-          "Full": [
-            "*"
-          ]
-        }
-      },
       "Property.Enrichment.v2.AddressBasic": {
         "type": "object",
         "properties": {
@@ -6533,10 +7594,12 @@
             "nullable": true
           },
           "streetNumber": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "streetName": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "streetType": {
             "type": "string",
@@ -6547,13 +7610,16 @@
             "nullable": true
           },
           "suburb": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "postcode": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "state": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false,
@@ -6680,10 +7746,12 @@
                   "nullable": true
                 },
                 "streetNumber": {
-                  "type": "string"
+                  "type": "string",
+                  "nullable": true
                 },
                 "streetName": {
-                  "type": "string"
+                  "type": "string",
+                  "nullable": true
                 },
                 "streetType": {
                   "type": "string",
@@ -6694,13 +7762,16 @@
                   "nullable": true
                 },
                 "suburb": {
-                  "type": "string"
+                  "type": "string",
+                  "nullable": true
                 },
                 "postcode": {
-                  "type": "string"
+                  "type": "string",
+                  "nullable": true
                 },
                 "state": {
-                  "type": "string"
+                  "type": "string",
+                  "nullable": true
                 }
               },
               "additionalProperties": false,
@@ -7592,6 +8663,9 @@
           "clientCredentials": {
             "tokenUrl": "https://auth.domain.com.au/v1/connect/token",
             "scopes": {
+              "api_agencies_read": "api_agencies_read",
+              "api_auction_read": "api_auction_read",
+              "api_auction_write": "api_auction_write",
               "api_dataset_read": "api_dataset_read",
               "api_demographics_read": "api_demographics_read",
               "api_listings_read": "api_listings_read",
@@ -7607,6 +8681,9 @@
             "tokenUrl": "https://auth.domain.com.au/v1/connect/token",
             "refreshUrl": "https://auth.domain.com.au/v1/connect/token",
             "scopes": {
+              "api_agencies_read": "api_agencies_read",
+              "api_auction_read": "api_auction_read",
+              "api_auction_write": "api_auction_write",
               "api_dataset_read": "api_dataset_read",
               "api_demographics_read": "api_demographics_read",
               "api_listings_read": "api_listings_read",

@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/domain-group/main/json-schema/domain-group-domain-agent-search-v1-model-auto-suggest-agent-result-dto-schema.json",
+  "title": "Domain.AgentSearch.v1.Model.AutoSuggestAgentResultDto",
+  "x-generated": "2026-10-21",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/domain-group-agents-api-openapi.yml#/components/schemas/Domain.AgentSearch.v1.Model.AutoSuggestAgentResultDto",
+  "type": "object",
+  "properties": {
+    "agentId": {
+      "type": "integer",
+      "format": "int32"
+    },
+    "name": {
+      "type": "string"
+    },
+    "agencyName": {
+      "type": "string"
+    },
+    "suburb": {
+      "type": "string"
+    },
+    "state": {
+      "type": "string"
+    },
+    "profileUrl": {
+      "type": "string"
+    },
+    "thumbnail": {
+      "type": "string"
+    }
+  },
+  "x-data-access-level-info": {
+    "Basic": [
+      "*"
+    ],
+    "Detailed": [
+      "*"
+    ],
+    "Full": [
+      "*"
+    ]
+  }
+}

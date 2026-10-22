@@ -1,0 +1,31 @@
+generated: '2026-10-21'
+method: searched
+source:
+- https://developer.domain.com.au/docs/latest/support/faq/
+- https://developer.domain.com.au/docs/latest/support/terms/
+- https://www.domain.com.au/group/api-terms-and-conditions/
+coverage:
+  state: partial
+  note: >-
+    The governing legal text (Domain Group - API Terms and Conditions, https://www.domain.com.au/group/api-terms-and-conditions/)
+    answered HTTP 403 "Access Denied" (bot-challenge on www.domain.com.au) on 2026-10-21, so the provider's privacy,
+    retention, incident and subprocessor language could not be read. The developer portal's own Terms & Conditions page
+    (200) only links out to that document; the Attribution and Usage Policies page (200) only links to "Domain Group -
+    Copyright Notices and Third Party Terms"; the SLA page (200) speaks to availability and support response, not
+    regulatory posture. No privacy policy was reachable on any readable host.
+signals:
+  data_retention:
+    url: https://developer.domain.com.au/docs/latest/support/faq/
+    section: Can I put Domain Listings on my Website?
+    evidence:
+    - source: https://developer.domain.com.au/docs/latest/support/faq/
+      http_status: 200
+      fetched: '2026-10-21'
+      quote: >-
+        Please be sure to check out our terms of use, specifically the bit about storing Listings data. It’s not a good
+        idea to store Listing data because prices, inspections and even the metadata about a property can change regularly
+        - we see around 4,000 listing updates across the group each day.
+    note: >-
+      This concerns API CONSUMERS storing Domain listings data, not Domain's retention of personal data. It establishes that
+      the API terms contain a clause restricting storage of Listings data, but the clause itself sits in the 403-gated API
+      T&Cs and its exact terms (any permitted cache period) were not read.

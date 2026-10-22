@@ -1,0 +1,156 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/domain-group/main/json-schema/domain-group-property-enrichment-v2-property-features-schema.json",
+  "title": "Property.Enrichment.v2.PropertyFeatures",
+  "x-generated": "2026-10-21",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/domain-group-propertyfeatures-api-openapi.yml#/components/schemas/Property.Enrichment.v2.PropertyFeatures",
+  "type": "object",
+  "properties": {
+    "propertyId": {
+      "type": "string"
+    },
+    "addressComponents": {
+      "$ref": "#/$defs/Property.Enrichment.v2.AddressBasic"
+    },
+    "features": {
+      "type": "object",
+      "properties": {
+        "solarPvSystem": {
+          "type": "boolean"
+        },
+        "solarHotWater": {
+          "type": "boolean"
+        },
+        "pool": {
+          "type": "boolean"
+        },
+        "tennisCourt": {
+          "type": "boolean"
+        },
+        "heating": {
+          "type": "boolean"
+        },
+        "heatingGas": {
+          "type": "boolean"
+        },
+        "airConditioning": {
+          "type": "boolean"
+        },
+        "airConditioningDucted": {
+          "type": "boolean"
+        },
+        "alarmSystem": {
+          "type": "boolean"
+        },
+        "vacuumSystem": {
+          "type": "boolean"
+        },
+        "intercom": {
+          "type": "boolean"
+        },
+        "spa": {
+          "type": "boolean"
+        },
+        "waterTank": {
+          "type": "boolean"
+        },
+        "greyWaterSystem": {
+          "type": "boolean"
+        },
+        "builtInRobes": {
+          "type": "boolean"
+        },
+        "deck": {
+          "type": "boolean"
+        },
+        "courtyard": {
+          "type": "boolean"
+        },
+        "shed": {
+          "type": "boolean"
+        },
+        "fullyFenced": {
+          "type": "boolean"
+        },
+        "openFirePlace": {
+          "type": "boolean"
+        },
+        "floorboards": {
+          "type": "boolean"
+        },
+        "gym": {
+          "type": "boolean"
+        },
+        "openPlanLiving": {
+          "type": "boolean"
+        },
+        "study": {
+          "type": "boolean"
+        },
+        "balcony": {
+          "type": "boolean"
+        },
+        "rumpusRoom": {
+          "type": "boolean"
+        },
+        "workshop": {
+          "type": "boolean"
+        },
+        "remoteGarage": {
+          "type": "boolean"
+        },
+        "primaryRoofMaterial": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "Property.Enrichment.v2.AddressBasic": {
+      "type": "object",
+      "properties": {
+        "flatNumber": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "streetNumber": {
+          "type": "string"
+        },
+        "streetName": {
+          "type": "string"
+        },
+        "streetType": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "streetTypeLong": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "suburb": {
+          "type": "string"
+        },
+        "postcode": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Address of property"
+    }
+  }
+}

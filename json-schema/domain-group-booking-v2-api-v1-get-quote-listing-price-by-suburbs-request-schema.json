@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/domain-group/main/json-schema/domain-group-booking-v2-api-v1-get-quote-listing-price-by-suburbs-request-schema.json",
+  "title": "BookingV2Api.v1.GetQuoteListingPriceBySuburbsRequest",
+  "x-generated": "2026-10-21",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/domain-group-products-api-openapi.yml#/components/schemas/BookingV2Api.v1.GetQuoteListingPriceBySuburbsRequest",
+  "required": [
+    "areas",
+    "duration",
+    "tier"
+  ],
+  "type": "object",
+  "properties": {
+    "areas": {
+      "maxItems": 20,
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/BookingV2Api.v1.AreaFilter"
+      },
+      "description": "State and Zones selected"
+    },
+    "tier": {
+      "minLength": 1,
+      "type": "string",
+      "description": "Product tier e.g. Gold, Silver, Platinum"
+    },
+    "duration": {
+      "type": "integer",
+      "description": "Duration in days of product",
+      "format": "int32"
+    },
+    "asAtDate": {
+      "type": "string",
+      "description": "Date of the quote. Can simulate past or future date but relying on data TP currently has (e.g. quote of a product before recorded expiry)",
+      "format": "date-time"
+    },
+    "contractType": {
+      "$ref": "#/$defs/BookingV2Api.v1.BookingRule"
+    },
+    "channel": {
+      "$ref": "#/$defs/BookingV2Api.v1.Channel"
+    },
+    "listingType": {
+      "$ref": "#/$defs/BookingV2Api.v1.ListingType"
+    },
+    "eBrochureOption": {
+      "$ref": "#/$defs/BookingV2Api.v1.EBrochureOptions"
+    },
+    "isNewDevelopment": {
+      "type": "boolean"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "BookingV2Api.v1.AreaFilter": {
+      "required": [
+        "state",
+        "zone"
+      ],
+      "type": "object",
+      "properties": {
+        "state": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "zone": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "BookingV2Api.v1.BookingRule": {
+      "enum": [
+        "All",
+        "Casual",
+        "Agent",
+        "None",
+        "RestrictedAll"
+      ],
+      "type": "string"
+    },
+    "BookingV2Api.v1.Channel": {
+      "enum": [
+        "Residential",
+        "Commercial",
+        "Business"
+      ],
+      "type": "string"
+    },
+    "BookingV2Api.v1.EBrochureOptions": {
+      "enum": [
+        "NoEbrochure",
+        "Standard",
+        "Platinum"
+      ],
+      "type": "string"
+    },
+    "BookingV2Api.v1.ListingType": {
+      "enum": [
+        "Sale",
+        "Rent",
+        "None"
+      ],
+      "type": "string",
+      "description": "Sale=0 and Rent=1 to match the Objective and PropertyListingType enums"
+    }
+  }
+}

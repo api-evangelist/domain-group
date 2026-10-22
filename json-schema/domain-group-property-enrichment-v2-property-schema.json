@@ -1,0 +1,660 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/domain-group/main/json-schema/domain-group-property-enrichment-v2-property-schema.json",
+  "title": "Property.Enrichment.v2.Property",
+  "x-generated": "2026-10-21",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/domain-group-properties-api-openapi.yml#/components/schemas/Property.Enrichment.v2.Property",
+  "type": "object",
+  "properties": {
+    "cadastreType": {
+      "enum": [
+        "Point",
+        "MultiPoint",
+        "LineString",
+        "MultiLineString",
+        "Polygon",
+        "MultiPolygon",
+        "GeometryCollection",
+        "Feature",
+        "FeatureCollection"
+      ],
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "onMarketTypes": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "enum": [
+          "Sale",
+          "Rent",
+          "Share",
+          "Unknown",
+          null
+        ],
+        "type": "string"
+      }
+    },
+    "status": {
+      "enum": [
+        "OffMarket",
+        "OnMarket"
+      ],
+      "type": "string"
+    },
+    "address": {
+      "type": "string"
+    },
+    "addressCoordinate": {
+      "$ref": "#/$defs/Property.Enrichment.v2.coordinates"
+    },
+    "addressId": {
+      "type": "integer"
+    },
+    "adverts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Property.Enrichment.v2.Advert"
+      }
+    },
+    "bathrooms": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "bedrooms": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "carSpaces": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "claim": {
+      "$ref": "#/$defs/Property.Enrichment.v2.Claim"
+    },
+    "created": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "features": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": "string"
+      }
+    },
+    "flatNumber": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "history": {
+      "$ref": "#/$defs/Property.Enrichment.v2.PropertyId-History"
+    },
+    "id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "internalArea": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "yearBuilt": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "isResidential": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "landUse": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "lotNumber": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "photos": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Property.Enrichment.v2.PropertyId-Photo"
+      }
+    },
+    "planNumber": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "postcode": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "propertyCategory": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "propertyCategoryId": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "propertyType": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "propertyTypeId": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "state": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "storeys": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "streetAddress": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "streetName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "streetNumber": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "streetType": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "streetTypeLong": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "suburb": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "suburbId": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "title": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "updated": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    },
+    "urlSlug": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "urlSlugShort": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "zone": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "gnafIds": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "monthNo": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "yearNo": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "gnafPID": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "areaSize": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "canonicalUrl": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "hasStrata": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    }
+  },
+  "$defs": {
+    "Property.Enrichment.v2.Advert": {
+      "type": "object",
+      "properties": {
+        "onMarketTypes": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "enum": [
+              "Unknown",
+              "Rent",
+              "Sale",
+              "Share"
+            ],
+            "type": "string"
+          }
+        },
+        "advertId": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "agency": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "agencyId": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "url": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "description": "Advert of properties"
+    },
+    "Property.Enrichment.v2.Claim": {
+      "type": "object",
+      "properties": {
+        "claimant": {
+          "enum": [
+            "Owner",
+            "Tenant",
+            "Investor",
+            "Unspecified"
+          ],
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "description": "Advert of properties"
+    },
+    "Property.Enrichment.v2.PropertyId-ActivityBoundary": {
+      "type": "object",
+      "properties": {
+        "advertisedDate": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "advertisedPrice": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "agency": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "agencyId": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "source": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "suppressDetails": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "suppressPrice": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "type": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "url": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "listingId": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "description": "Property History Activity Record"
+    },
+    "Property.Enrichment.v2.PropertyId-History": {
+      "type": "object",
+      "properties": {
+        "rentals": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "format": "int64"
+              },
+              "first": {
+                "$ref": "#/$defs/Property.Enrichment.v2.PropertyId-ActivityBoundary"
+              },
+              "last": {
+                "$ref": "#/$defs/Property.Enrichment.v2.PropertyId-ActivityBoundary"
+              },
+              "propertyType": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          }
+        },
+        "sales": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Property.Enrichment.v2.PropertyId-Sales"
+          }
+        }
+      },
+      "description": "Array of Rental and History Items"
+    },
+    "Property.Enrichment.v2.PropertyId-Photo": {
+      "type": "object",
+      "properties": {
+        "imageType": {
+          "enum": [
+            "Property",
+            "Floorplan",
+            "GoogleStreetView"
+          ],
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "advertId": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "date": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
+        },
+        "fullUrl": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "rank": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "Property.Enrichment.v2.PropertyId-Sales": {
+      "type": "object",
+      "properties": {
+        "advertId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "agency": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "agencyId": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "agencyUrl": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "apmAgencyId": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "date": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
+        },
+        "daysOnMarket": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "double"
+        },
+        "documentedAsSold": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "price": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "reportedAsSold": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "suppressDetails": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "suppressPrice": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "type": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "url": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "first": {
+          "$ref": "#/$defs/Property.Enrichment.v2.PropertyId-ActivityBoundary"
+        },
+        "id": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "format": "int64"
+        },
+        "last": {
+          "$ref": "#/$defs/Property.Enrichment.v2.PropertyId-ActivityBoundary"
+        },
+        "propertyType": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "Property.Enrichment.v2.coordinates": {
+      "type": "object",
+      "properties": {
+        "lat": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "lon": {
+          "type": [
+            "number",
+            "null"
+          ]
+        }
+      },
+      "description": "Longitude/Latitude coordinates"
+    }
+  }
+}

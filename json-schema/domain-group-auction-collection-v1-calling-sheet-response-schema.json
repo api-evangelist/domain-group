@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/domain-group/main/json-schema/domain-group-auction-collection-v1-calling-sheet-response-schema.json",
+  "title": "AuctionCollection.v1.CallingSheetResponse",
+  "x-generated": "2026-10-21",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/domain-group-auctioncollection-api-openapi.yml#/components/schemas/AuctionCollection.v1.CallingSheetResponse",
+  "type": "object",
+  "properties": {
+    "agencyName": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Agency name"
+    },
+    "id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Domain listing id"
+    },
+    "address": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Full property address"
+    },
+    "bedroomCount": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "propertyType": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Property type, House, Unity etc."
+    },
+    "auctionDate": {
+      "type": "string",
+      "description": "Auction date and time in Sydney timezone in format yyyy-MM-ddTHH:mm:ss",
+      "format": "date-time"
+    },
+    "agentId": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "agentName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "agentContactNumber": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "secondaryAgentId": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "secondaryAgentName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "secondaryAgentContactNumber": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "agencyId": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

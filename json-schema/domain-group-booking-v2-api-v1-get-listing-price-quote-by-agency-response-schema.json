@@ -1,0 +1,179 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/domain-group/main/json-schema/domain-group-booking-v2-api-v1-get-listing-price-quote-by-agency-response-schema.json",
+  "title": "BookingV2Api.v1.GetListingPriceQuoteByAgencyResponse",
+  "x-generated": "2026-10-21",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/domain-group-products-api-openapi.yml#/components/schemas/BookingV2Api.v1.GetListingPriceQuoteByAgencyResponse",
+  "type": "object",
+  "properties": {
+    "channel": {
+      "$ref": "#/$defs/BookingV2Api.v1.Channel"
+    },
+    "adType": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Sale | Rent"
+    },
+    "listings": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/$defs/BookingV2Api.v1.ListingQuote"
+      }
+    },
+    "addons": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/$defs/BookingV2Api.v1.AddonQuote"
+      }
+    },
+    "isSuccess": {
+      "type": "boolean",
+      "description": "Gets a value indicating whether the response was successful.\nThe response is considered successful if there are no errors.",
+      "readOnly": true
+    },
+    "errors": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": "string"
+      },
+      "description": "Gets or sets a list of errors. If the list is empty, the response is considered successful."
+    },
+    "error": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets the first error message from the list of errors.",
+      "readOnly": true
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "BookingV2Api.v1.AddonQuote": {
+      "type": "object",
+      "properties": {
+        "addonType": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "costExGst": {
+          "type": "number",
+          "format": "double"
+        },
+        "costIncGst": {
+          "type": "number",
+          "format": "double"
+        },
+        "originalCostExGst": {
+          "type": "number",
+          "format": "double"
+        },
+        "originalCostIncGst": {
+          "type": "number",
+          "format": "double"
+        },
+        "appliedAdjustment": {
+          "type": "number",
+          "format": "double"
+        },
+        "durationInDays": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "tier": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "BookingV2Api.v1.Channel": {
+      "enum": [
+        "Residential",
+        "Commercial",
+        "Business"
+      ],
+      "type": "string"
+    },
+    "BookingV2Api.v1.ListingQuote": {
+      "type": "object",
+      "properties": {
+        "listingType": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "durationInDays": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "costExGst": {
+          "type": "number",
+          "format": "double"
+        },
+        "costIncGst": {
+          "type": "number",
+          "format": "double"
+        },
+        "originalCostExGst": {
+          "type": "number",
+          "format": "double"
+        },
+        "originalCostIncGst": {
+          "type": "number",
+          "format": "double"
+        },
+        "appliedAdjustment": {
+          "type": "number",
+          "format": "double"
+        },
+        "isDefault": {
+          "type": "boolean"
+        },
+        "isDowngrade": {
+          "type": "boolean"
+        },
+        "isUpgrade": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "tier": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

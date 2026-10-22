@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/domain-group/main/json-schema/domain-group-pre-market-v1-create-or-update-listing-response-schema.json",
+  "title": "PreMarket.v1.CreateOrUpdateListingResponse",
+  "description": "Create or update pre-portal listing response.",
+  "x-generated": "2026-10-21",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/domain-group-premarket-api-openapi.yml#/components/schemas/PreMarket.v1.CreateOrUpdateListingResponse",
+  "required": [
+    "id"
+  ],
+  "type": "object",
+  "properties": {
+    "id": {
+      "minLength": 1,
+      "type": "string",
+      "description": "Pre-portal listing ID."
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/domain-group/main/json-schema/domain-group-agencies-v2-get-agents-by-location-request-schema.json",
+  "title": "Agencies.V2.GetAgentsByLocationRequest",
+  "description": "DomainAgencyWebApiRequestsV2GetAgentsByLocationRequest",
+  "x-generated": "2026-10-21",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/domain-group-agentsearch-api-openapi.yml#/components/schemas/Agencies.V2.GetAgentsByLocationRequest",
+  "type": "object",
+  "properties": {
+    "suburbs": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": "string"
+      },
+      "description": "Gets or Sets Suburbs"
+    },
+    "suburbIds": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": "integer",
+        "format": "int32"
+      },
+      "description": "Gets or Sets SuburbIds"
+    },
+    "sortBy": {
+      "enum": [
+        "default",
+        "nameAscending",
+        "nameDescending",
+        "totalSoldAscending",
+        "totalSoldAndAuctionedAscending",
+        "totalSoldAndAuctionedDescending",
+        "totalSoldDescending",
+        "avgSalePriceAscending",
+        "avgSalePriceDescending",
+        "avgDayOnMarketAscending",
+        "avgDayOnMarketDescending",
+        "forSaleAscending",
+        "forSaleDescending",
+        "forRentAscending",
+        "forRentDescending",
+        "totalLeasedDescending"
+      ],
+      "type": "string",
+      "description": "Gets or Sets SortBy"
+    },
+    "page": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "Gets or Sets Page",
+      "format": "int32"
+    },
+    "pageSize": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "Gets or Sets PageSize",
+      "format": "int32"
+    },
+    "agentNameKeyword": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets AgentNameKeyword"
+    },
+    "agentType": {
+      "enum": [
+        "all",
+        "sale",
+        "rent",
+        "soldOnly"
+      ],
+      "type": "string",
+      "description": "Gets or Sets AgentType"
+    },
+    "propertyType": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets PropertyType"
+    },
+    "bedrooms": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "description": "Gets or Sets Bedrooms",
+      "format": "double"
+    }
+  },
+  "additionalProperties": false,
+  "x-data-access-level-info": {
+    "Basic": [
+      "*"
+    ],
+    "Detailed": [
+      "*"
+    ],
+    "Full": [
+      "*"
+    ]
+  }
+}

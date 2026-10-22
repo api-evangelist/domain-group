@@ -251,7 +251,7 @@ problems:
   - openapi/domain-group-openapi-latest.json#Listings_ResidentialSearch
   - openapi/domain-group-openapi-latest.json#Listings_DetailedSoldResidentialSearch
   - openapi/domain-group-openapi-v1.json#Listings_ResidentialSearch
-- status: null
+- status: default
   code: default
   title: Error
   occurrences: 63

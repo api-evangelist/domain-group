@@ -1,23 +1,27 @@
 ---
-name: Subscribe to Domain webhooks and process notifications
-description: >-
-  Register and verify a webhook endpoint, create subscriptions for the resource
-  types you care about, verify the HMAC signature on incoming batches, and
-  acknowledge correctly so Domain does not disable the endpoint.
-api: openapi/domain-group-openapi-latest.json
+name: domain-group-webhook-subscriptions
+title: Subscribe to Domain webhooks and process notifications
+description: Register and verify a webhook endpoint, create subscriptions for the resource types you care
+  about, verify the HMAC signature on incoming batches, and acknowledge correctly so Domain does not disable
+  the endpoint.
+api: openapi/domain-group-webhooks-api-openapi.yml
+apis:
+- openapi/domain-group-webhooks-api-openapi.yml
+- openapi/domain-group-me-api-openapi.yml
+- openapi/domain-group-listings-api-openapi.yml
 operations:
-  - Webhooks_CreateSubscription
-  - Webhooks_ListSubscriptions
-  - Webhooks_GetSubscription
-  - Webhooks_DeleteSubscription
-  - Me_GetMyAgencies
-  - Me_GetMyProviders
-  - Listings_GetListingReport
+- Webhooks_CreateSubscription
+- Webhooks_ListSubscriptions
+- Webhooks_GetSubscription
+- Webhooks_DeleteSubscription
+- Me_GetMyAgencies
+- Me_GetMyProviders
+- Listings_GetListingReport
 scopes:
-  - api_webhooks_write
-generated: '2026-07-26'
+- api_webhooks_write
+generated: '2026-10-21'
 method: generated
-source: openapi/domain-group-openapi-latest.json + https://developer.domain.com.au/docs/latest/apis/pkg_webhooks
+source: openapi/ per-API documents + https://developer.domain.com.au/docs/latest/apis/pkg_webhooks
 ---
 
 # Subscribe to Domain webhooks and process notifications

@@ -1,0 +1,296 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/domain-group/main/json-schema/domain-group-schools-v2-school-schema.json",
+  "title": "Schools.V2.School",
+  "description": "School",
+  "x-generated": "2026-10-21",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/domain-group-schools-api-openapi.yml#/components/schemas/Schools.V2.School",
+  "type": "object",
+  "properties": {
+    "schoolSector": {
+      "enum": [
+        "Catholic",
+        "Government",
+        "Independent"
+      ],
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets SchoolSector"
+    },
+    "schoolType": {
+      "enum": [
+        "Combined",
+        "Primary",
+        "Secondary",
+        "Special"
+      ],
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets SchoolType"
+    },
+    "gender": {
+      "enum": [
+        "Boys",
+        "Girls",
+        "CoEd"
+      ],
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets Gender"
+    },
+    "name": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets Name"
+    },
+    "suburb": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets Suburb"
+    },
+    "state": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets State"
+    },
+    "postcode": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets Postcode"
+    },
+    "centroid": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets Centroid"
+    },
+    "profile": {
+      "$ref": "#/$defs/Schools.V2.SchoolProfile"
+    },
+    "catchments": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/$defs/Schools.V2.SchoolCatchment"
+      },
+      "description": "Gets or Sets Catchments"
+    },
+    "domainId": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "Gets or Sets DomainId",
+      "format": "int32"
+    }
+  },
+  "additionalProperties": false,
+  "x-data-access-level-info": {
+    "Basic": [
+      "DomainId",
+      "Name",
+      "Profile",
+      "SchoolSector",
+      "State",
+      "SchoolType",
+      "Suburb",
+      "Postcode",
+      "Centroid",
+      "Gender"
+    ],
+    "Detailed": [
+      "DomainId",
+      "Name",
+      "Profile",
+      "SchoolSector",
+      "State",
+      "SchoolType",
+      "Suburb",
+      "Postcode",
+      "Centroid",
+      "Gender"
+    ],
+    "Full": [
+      "DomainId",
+      "Name",
+      "Profile",
+      "SchoolSector",
+      "State",
+      "SchoolType",
+      "Suburb",
+      "Postcode",
+      "Centroid",
+      "Gender",
+      "Catchments"
+    ]
+  },
+  "$defs": {
+    "Schools.V2.SchoolCatchment": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "Primary",
+            "Secondary"
+          ],
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets Type"
+        }
+      },
+      "additionalProperties": false,
+      "description": "SchoolCatchment",
+      "x-data-access-level-info": {
+        "Basic": [],
+        "Detailed": [],
+        "Full": [
+          "Type"
+        ]
+      }
+    },
+    "Schools.V2.SchoolProfile": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Website for the school"
+        },
+        "yearRange": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The range of year levels offered by the school."
+        },
+        "icsea": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "The Index of Community Socio-Educational Advantage score for the school. This score is derived from a number of variables including parental school and non-school education and occupation, the school’s geographical location and proportion of Indigenous students.",
+          "format": "int32"
+        },
+        "bottomSeaQuarter": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "The percentage of students positioned in the lowest socio-educational advantage quarter.",
+          "format": "int32"
+        },
+        "lowerMiddleSeaQuarter": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "The percentage of students positioned in the lower middle socio-educational advantage quarter.",
+          "format": "int32"
+        },
+        "upperMiddleSeaQuarter": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "The percentage of students positioned in the higher middle socio-educational advantage quarter.",
+          "format": "int32"
+        },
+        "topSeaQuarter": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "The percentage of students positioned in the highest socio-educational advantage quarter.",
+          "format": "int32"
+        },
+        "totalEnrolments": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "The total number of students, including both full-time and part-time students, who are enrolled at the school in the calendar year specified.",
+          "format": "int32"
+        },
+        "girlsEnrolments": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "The total number of female students, including both full-time and part-time students, who are enrolled at the school in the calendar year specified.",
+          "format": "int32"
+        },
+        "boysEnrolments": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "The total number of male students, including full-time and part-time students, who are enrolled at the school in the calendar year specified.",
+          "format": "int32"
+        }
+      },
+      "additionalProperties": false,
+      "description": "SchoolProfile",
+      "x-data-access-level-info": {
+        "Basic": [
+          "Url",
+          "YearRange",
+          "GirlsEnrolments",
+          "BoysEnrolments",
+          "TotalEnrolments",
+          "TopSeaQuarter",
+          "UpperMiddleSeaQuarter",
+          "LowerMiddleSeaQuarter",
+          "BottomSeaQuarter",
+          "Icsea"
+        ],
+        "Detailed": [
+          "Url",
+          "YearRange",
+          "GirlsEnrolments",
+          "BoysEnrolments",
+          "TotalEnrolments",
+          "TopSeaQuarter",
+          "UpperMiddleSeaQuarter",
+          "LowerMiddleSeaQuarter",
+          "BottomSeaQuarter",
+          "Icsea"
+        ],
+        "Full": [
+          "Url",
+          "YearRange",
+          "GirlsEnrolments",
+          "BoysEnrolments",
+          "TotalEnrolments",
+          "TopSeaQuarter",
+          "UpperMiddleSeaQuarter",
+          "LowerMiddleSeaQuarter",
+          "BottomSeaQuarter",
+          "Icsea"
+        ]
+      }
+    }
+  }
+}

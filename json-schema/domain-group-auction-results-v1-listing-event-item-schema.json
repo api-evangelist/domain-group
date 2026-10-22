@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/domain-group/main/json-schema/domain-group-auction-results-v1-listing-event-item-schema.json",
+  "title": "AuctionResults.v1.listingEventItem",
+  "description": "Listing event details",
+  "x-generated": "2026-10-21",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/domain-group-salesresults-api-openapi.yml#/components/schemas/AuctionResults.v1.listingEventItem",
+  "type": "object",
+  "properties": {
+    "unitNumber": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "streetNumber": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "streetName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "streetType": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "suburb": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "postcode": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "state": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "geoLocation": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "propertyType": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "bedrooms": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "bathrooms": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "carspaces": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "price": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "result": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "agent": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "agencyName": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "agencyProfilePageUrl": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "id": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "agencyId": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "propertyDetailsUrl": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,756 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/domain-group/main/json-schema/domain-group-authorities-v1-authority-response-schema.json",
+  "title": "Authorities.v1.AuthorityResponse",
+  "x-generated": "2026-10-21",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/domain-group-authorities-api-openapi.yml#/components/schemas/Authorities.v1.AuthorityResponse",
+  "required": [
+    "id",
+    "address",
+    "agency",
+    "bathrooms",
+    "bedrooms",
+    "parking",
+    "property_type",
+    "type"
+  ],
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "#/$defs/Authorities.v1.AuthorityRequest"
+    },
+    {
+      "type": "object"
+    }
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "marketingCampaigns": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Authorities.v1.MarketingCampaignResponse"
+      }
+    },
+    "vendors": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Authorities.v1.VendorResponse"
+      }
+    },
+    "agents": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Authorities.v1.AgentResponse"
+      }
+    }
+  },
+  "$defs": {
+    "Authorities.v1.Address": {
+      "required": [
+        "country",
+        "number",
+        "postcode",
+        "state",
+        "street",
+        "suburb"
+      ],
+      "type": "object",
+      "properties": {
+        "country": {
+          "type": "string"
+        },
+        "number": {
+          "type": "string"
+        },
+        "postcode": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "street": {
+          "type": "string"
+        },
+        "suburb": {
+          "type": "string"
+        }
+      }
+    },
+    "Authorities.v1.AgentRequest": {
+      "required": [
+        "name",
+        "email"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string",
+          "format": "email"
+        },
+        "user": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "mobile": {
+          "type": "string"
+        },
+        "officeNumber": {
+          "type": "string"
+        },
+        "licenseNumber": {
+          "type": "string"
+        }
+      }
+    },
+    "Authorities.v1.AgentResponse": {
+      "required": [
+        "id",
+        "name",
+        "email"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/$defs/Authorities.v1.AgentRequest"
+        },
+        {
+          "type": "object"
+        }
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        }
+      }
+    },
+    "Authorities.v1.AuthorityRequest": {
+      "required": [
+        "address",
+        "agency",
+        "bathrooms",
+        "bedrooms",
+        "parking",
+        "propertyType",
+        "type"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "address": {
+          "$ref": "#/$defs/Authorities.v1.Address"
+        },
+        "marketingCampaigns": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Authorities.v1.MarketingCampaignRequest"
+          }
+        },
+        "vendors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Authorities.v1.VendorRequest"
+          }
+        },
+        "agents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Authorities.v1.AgentRequest"
+          }
+        },
+        "bathrooms": {
+          "type": "integer",
+          "writeOnly": true
+        },
+        "bedrooms": {
+          "type": "integer",
+          "writeOnly": true
+        },
+        "parking": {
+          "type": "integer",
+          "writeOnly": true
+        },
+        "propertyType": {
+          "type": "string",
+          "description": "Available options are: `ApartmentUnitFlat`, `House`, `Townhouse`, `VacantLand`",
+          "writeOnly": true
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "modified": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "Available options are: `draft`, `missing sign`, `executed`",
+          "readOnly": true
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "administrationFee": {
+          "type": "string"
+        },
+        "agentDetailsDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "auctionDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "auctionType": {
+          "type": "string"
+        },
+        "chattelsExcluded": {
+          "type": "string"
+        },
+        "chattelsIncluded": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "continuingPeriod": {
+          "type": "number"
+        },
+        "espRangeHigher": {
+          "type": "number"
+        },
+        "espRangeLower": {
+          "type": "number"
+        },
+        "exclusivePeriod": {
+          "type": "number"
+        },
+        "exclusivePeriodStartDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "exclusiveSoldAs": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Available options are: `Private Sale`, `Expression of Interest with the reserve to be advised prior to closing date`"
+        },
+        "isOwnersCorporationManaged": {
+          "type": "boolean"
+        },
+        "isPropertyTenanted": {
+          "type": "boolean"
+        },
+        "occupationState": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Available options are: `With vacant possession`, `Subject to any tenancy`, `Both`"
+        },
+        "optOutInformation": {
+          "type": "boolean"
+        },
+        "payableIn": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int"
+          }
+        },
+        "paymentMethod": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Available options are: `Full purchase price`, `Payment of full deposit`"
+        },
+        "paymentSum": {
+          "type": "number"
+        },
+        "reservePrice": {
+          "type": "number"
+        },
+        "salePriceGstType": {
+          "type": "string"
+        },
+        "saleSignPermission": {
+          "type": "boolean"
+        },
+        "searchCriteriaAmount": {
+          "type": "number"
+        },
+        "searchCriteriaPriceType": {
+          "type": "string",
+          "description": "Available options are: `amount`, `range`, `other`"
+        },
+        "transactionType": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "description": "Available options are: `Exclusive Auction`, `Exclusive Sale`, `General Sale`, `Appraisal`"
+        },
+        "vendorMktPriceNa": {
+          "type": "boolean"
+        },
+        "waivedCoolingOff": {
+          "type": "boolean"
+        },
+        "lot": {
+          "maxLength": 32,
+          "type": "string"
+        },
+        "plan": {
+          "maxLength": 32,
+          "type": "string"
+        },
+        "titleReference": {
+          "maxLength": 32,
+          "type": "string"
+        },
+        "certificateOfTitleType": {
+          "type": "string",
+          "description": "This field is unique to SA"
+        },
+        "certificateOfTitleFolio": {
+          "type": "string",
+          "description": "This field is unique to SA"
+        },
+        "certificateOfTitleVolume": {
+          "type": "string",
+          "description": "This field is unique to SA"
+        },
+        "improvedLand": {
+          "type": "boolean",
+          "description": "This field is unique to SA",
+          "default": false
+        },
+        "crmDetails": {
+          "$ref": "#/$defs/Authorities.v1.CrmDetails"
+        }
+      }
+    },
+    "Authorities.v1.CompanyRequest": {
+      "required": [
+        "address",
+        "email"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "address": {
+          "$ref": "#/$defs/Authorities.v1.Address"
+        },
+        "email": {
+          "type": "string",
+          "format": "email"
+        },
+        "name": {
+          "type": "string"
+        },
+        "phoneNumber": {
+          "type": "string"
+        },
+        "fax": {
+          "type": "string"
+        },
+        "abn": {
+          "type": "string"
+        },
+        "acn": {
+          "type": "string"
+        },
+        "gstRegistered": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "description": "Available options are: `individual`, `company`",
+          "readOnly": true
+        }
+      }
+    },
+    "Authorities.v1.CompanyResponse": {
+      "required": [
+        "id",
+        "email",
+        "address"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/$defs/Authorities.v1.CompanyRequest"
+        },
+        {
+          "type": "object"
+        }
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        }
+      }
+    },
+    "Authorities.v1.CrmDetails": {
+      "required": [
+        "type",
+        "id"
+      ],
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        }
+      },
+      "description": "Details of CRM"
+    },
+    "Authorities.v1.IndividualRequest": {
+      "required": [
+        "address",
+        "email",
+        "firstName",
+        "lastName",
+        "mobile",
+        "phoneNumber"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "address": {
+          "$ref": "#/$defs/Authorities.v1.Address"
+        },
+        "dateOfBirth": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
+        },
+        "email": {
+          "type": "string",
+          "format": "email"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "middleName": {
+          "type": "string"
+        },
+        "mobile": {
+          "type": "string"
+        },
+        "phoneNumber": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "description": "Available options are: `individual`, `company`",
+          "readOnly": true
+        }
+      }
+    },
+    "Authorities.v1.IndividualResponse": {
+      "required": [
+        "id",
+        "address",
+        "email",
+        "firstName",
+        "lastName",
+        "mobile",
+        "phoneNumber"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/$defs/Authorities.v1.IndividualRequest"
+        },
+        {
+          "type": "object"
+        }
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        }
+      }
+    },
+    "Authorities.v1.MarketingCampaignItemRequest": {
+      "type": "object",
+      "properties": {
+        "itemId": {
+          "type": "string"
+        },
+        "finalPrice": {
+          "type": "string",
+          "format": "decimal"
+        },
+        "vendorPrice": {
+          "type": "string",
+          "format": "decimal"
+        },
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "selected": {
+          "type": "boolean",
+          "default": true
+        },
+        "hidden": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    "Authorities.v1.MarketingCampaignItemResponse": {
+      "required": [
+        "id"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/$defs/Authorities.v1.MarketingCampaignItemRequest"
+        },
+        {
+          "type": "object"
+        }
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        }
+      }
+    },
+    "Authorities.v1.MarketingCampaignRequest": {
+      "required": [
+        "campaignType"
+      ],
+      "properties": {
+        "advertising": {
+          "type": "string",
+          "description": "advertising cost of this marketing campaign",
+          "format": "decimal"
+        },
+        "campaignType": {
+          "type": "string",
+          "description": "Available options are: `To Be Advised`, `Paper Based`, `Campaign Track`, `Realhub`"
+        },
+        "marketingCampaignItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Authorities.v1.MarketingCampaignItemRequest"
+          }
+        },
+        "comments": {
+          "type": "string",
+          "format": "json"
+        },
+        "commentsFallback": {
+          "type": "string"
+        },
+        "discountAmount": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "decimal"
+        },
+        "discountPercent": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "decimal"
+        },
+        "expense": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Available options are: `Signing of this Authority`, `Written request`, `Specific Date`, `Signing of this Form 6`, `Signing of this Agency Agreement`, `Upon Invoice or Account`, `Prior to the commencement of marketing campaign`, `On Settlement or Withdrawal whichever occurs first`, `Vendor to pay through Campaign Agent v2`, `Vendor to pay through Market Now`, `Vendor to pay through Rello`, `Vendor to pay through List Ready`"
+        },
+        "other": {
+          "type": "string",
+          "format": "decimal"
+        },
+        "payableOn": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
+        },
+        "total": {
+          "type": "string",
+          "description": "Total cost of this marketing campaign. Total of the items cost if there are items or (advertising + other) cost for other types",
+          "format": "decimal"
+        },
+        "realhubQuoteId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "Authorities.v1.MarketingCampaignResponse": {
+      "required": [
+        "id"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/$defs/Authorities.v1.MarketingCampaignRequest"
+        },
+        {
+          "type": "object"
+        }
+      ],
+      "properties": {
+        "marketingCampaignItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Authorities.v1.MarketingCampaignItemResponse"
+          }
+        },
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        }
+      }
+    },
+    "Authorities.v1.VendorRequest": {
+      "required": [
+        "contact",
+        "authority",
+        "nature",
+        "order"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "contact": {
+          "$ref": "#/$defs/Authorities.v1.IndividualRequest"
+        },
+        "contactRepresented": {
+          "$ref": "#/$defs/Authorities.v1.CompanyRequest"
+        },
+        "conciergeOptedIn": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "nature": {
+          "type": "string"
+        },
+        "trust": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "order": {
+          "type": "integer"
+        },
+        "authorityAttachments": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "ID of an attachment.",
+            "format": "uuid"
+          },
+          "description": "An array of attachment IDs."
+        }
+      }
+    },
+    "Authorities.v1.VendorResponse": {
+      "required": [
+        "id",
+        "contact",
+        "authority",
+        "nature",
+        "order"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/$defs/Authorities.v1.VendorRequest"
+        },
+        {
+          "type": "object"
+        }
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "contact": {
+          "$ref": "#/$defs/Authorities.v1.IndividualResponse"
+        },
+        "contactRepresented": {
+          "$ref": "#/$defs/Authorities.v1.CompanyResponse"
+        }
+      }
+    }
+  }
+}

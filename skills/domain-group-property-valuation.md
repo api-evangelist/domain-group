@@ -1,27 +1,30 @@
 ---
-name: Value an Australian property with Domain
-description: >-
-  Resolve a free-text Australian address to a Domain property id, then pull the
-  sale price estimate, the rental estimate, and the supporting sales and listing
-  history for that property.
-api: openapi/domain-group-openapi-latest.json
+name: domain-group-property-valuation
+title: Value an Australian property with Domain
+description: Resolve a free-text Australian address to a Domain property id, then pull the sale price
+  estimate, the rental estimate, and the supporting sales and listing history for that property.
+api: openapi/domain-group-properties-api-openapi.yml
+apis:
+- openapi/domain-group-properties-api-openapi.yml
+- openapi/domain-group-addresslocators-api-openapi.yml
+- openapi/domain-group-propertyavm-api-openapi.yml
 operations:
-  - Properties_Suggest
-  - AddressLocators_Get
-  - Properties_Get
-  - Properties_GetPriceEstimate
-  - Properties_GetRentalEstimate
-  - property_sales_history_get
-  - property_listing_history_get
-  - PropertyAvm_Get
-  - PropertyAvm_ReportGet
+- Properties_Suggest
+- AddressLocators_Get
+- Properties_Get
+- Properties_GetPriceEstimate
+- Properties_GetRentalEstimate
+- property_sales_history_get
+- property_listing_history_get
+- PropertyAvm_Get
+- PropertyAvm_ReportGet
 scopes:
-  - api_properties_read
-  - api_addresslocators_read
-  - api_avm_read
-generated: '2026-07-26'
+- api_properties_read
+- api_addresslocators_read
+- api_avm_read
+generated: '2026-10-21'
 method: generated
-source: openapi/domain-group-openapi-latest.json + https://developer.domain.com.au/docs/latest
+source: openapi/ per-API documents + https://developer.domain.com.au/docs/latest
 ---
 
 # Value an Australian property with Domain

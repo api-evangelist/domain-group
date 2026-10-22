@@ -1,0 +1,201 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/domain-group/main/json-schema/domain-group-booking-v2-api-v1-get-quote-listing-price-by-suburbs-response-schema.json",
+  "title": "BookingV2Api.v1.GetQuoteListingPriceBySuburbsResponse",
+  "x-generated": "2026-10-21",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/domain-group-products-api-openapi.yml#/components/schemas/BookingV2Api.v1.GetQuoteListingPriceBySuburbsResponse",
+  "type": "object",
+  "properties": {
+    "zoneMappings": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/$defs/BookingV2Api.v1.ZoneMapping"
+      }
+    },
+    "bookingRates": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/$defs/BookingV2Api.v1.BookingRate"
+      }
+    },
+    "isSuccess": {
+      "type": "boolean",
+      "description": "Gets a value indicating whether the response was successful.\nThe response is considered successful if there are no errors.",
+      "readOnly": true
+    },
+    "errors": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": "string"
+      },
+      "description": "Gets or sets a list of errors. If the list is empty, the response is considered successful."
+    },
+    "error": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets the first error message from the list of errors.",
+      "readOnly": true
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "BookingV2Api.v1.BookingRate": {
+      "type": "object",
+      "properties": {
+        "bookingRule": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "channel": {
+          "$ref": "#/$defs/BookingV2Api.v1.Channel"
+        },
+        "listingType": {
+          "$ref": "#/$defs/BookingV2Api.v1.ListingType"
+        },
+        "tier": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "durationInDays": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "ebrochureType": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "isNewDevelopment": {
+          "type": "boolean"
+        },
+        "productCatalogId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "zoneId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "matrixVersionId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "rateBands": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/$defs/BookingV2Api.v1.RateBand"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "BookingV2Api.v1.Channel": {
+      "enum": [
+        "Residential",
+        "Commercial",
+        "Business"
+      ],
+      "type": "string"
+    },
+    "BookingV2Api.v1.ListingType": {
+      "enum": [
+        "Sale",
+        "Rent",
+        "None"
+      ],
+      "type": "string",
+      "description": "Sale=0 and Rent=1 to match the Objective and PropertyListingType enums"
+    },
+    "BookingV2Api.v1.RateBand": {
+      "type": "object",
+      "properties": {
+        "priceFrom": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "double"
+        },
+        "priceTo": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "double"
+        },
+        "costIncGst": {
+          "type": "number",
+          "format": "double"
+        },
+        "costExGst": {
+          "type": "number",
+          "format": "double"
+        },
+        "isBaseRate": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "BookingV2Api.v1.ZoneMapping": {
+      "type": "object",
+      "properties": {
+        "zoneId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "channel": {
+          "$ref": "#/$defs/BookingV2Api.v1.Channel"
+        },
+        "state": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "zone": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "zoneCode": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "fullName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

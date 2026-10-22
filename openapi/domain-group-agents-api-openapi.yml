@@ -208,6 +208,49 @@ paths:
       description: Primary
     - url: https://api.domain.com.au/sandbox/
       description: Sandbox
+  /v2/agents/reviews:
+    get:
+      tags:
+      - Agents
+      summary: Retrieves the overall star ratings and number of reviews for a list of agents…
+      description: A maximum of 50 ids is allowed.
+      operationId: Agents_GetReviewsByIds
+      parameters:
+      - name: ids
+        in: query
+        description: Comma-separated list of agent unique identifiers (up to 50).
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Review ratings for the provided agent ids
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Agencies.V2.AgentReviewLiteResponse'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+      security:
+      - apikey: []
+      - oauth2:
+        - api_agencies_read
+      x-domain-endpointcost: 1
+      x-domain-usercontextrequired: false
+      x-domain-environment: Any
+    servers:
+    - url: https://api.domain.com.au/
+      description: Primary
+    - url: https://api.domain.com.au/sandbox/
+      description: Sandbox
   /v1/agents/search:
     get:
       tags:
@@ -277,200 +320,58 @@ paths:
       description: Sandbox
 components:
   schemas:
-    ListingPerformance.v1.Statistics:
+    Listings.v1.PastSaleData:
       type: object
       properties:
-        listingId:
+        unitNumber:
+          type:
+          - string
+          - 'null'
+          description: Property unit number
+        streetNumber:
+          type:
+          - string
+          - 'null'
+          description: Property street number
+        street:
+          type:
+          - string
+          - 'null'
+          description: Property Street name
+        suburb:
+          type:
+          - string
+          - 'null'
+          description: Property suburb name
+        postcode:
+          type:
+          - string
+          - 'null'
+          description: Property postcode
+        state:
+          type:
+          - string
+          - 'null'
+          description: Property state
+        displayAddress:
+          type:
+          - string
+          - 'null'
+          description: display formatted address
+          readOnly: true
+        dateOfSale:
+          type:
+          - string
+          - 'null'
+          description: Registered date of the sale
+        soldPrice:
           type:
           - integer
           - 'null'
-          description: Domain Advertisement Id
+          description: Property sold price
           format: int64
-          readOnly: true
-        totalListingViews:
-          type:
-          - integer
-          - 'null'
-          description: Total number of views for the listing details
-          format: int32
-          readOnly: true
-        totalPhotoViews:
-          type:
-          - integer
-          - 'null'
-          description: Total number of listing photo views
-          format: int32
-          readOnly: true
-        totalPhotoGalleryViews:
-          type:
-          - integer
-          - 'null'
-          description: Total number of listing photo gallery views
-          format: int32
-          readOnly: true
-        totalFloorplanViews:
-          type:
-          - integer
-          - 'null'
-          description: Total number of floorplan views
-          format: int32
-          readOnly: true
-        totalMapViews:
-          type:
-          - integer
-          - 'null'
-          description: Total number of address map views
-          format: int32
-          readOnly: true
-        totalVideoViews:
-          type:
-          - integer
-          - 'null'
-          description: Total number of vedio views
-          format: int32
-          readOnly: true
-        totalEbrochureViews:
-          type:
-          - integer
-          - 'null'
-          description: Total number of Ebrochure views
-          format: int32
-          readOnly: true
-        totalAgentDetailViews:
-          type:
-          - integer
-          - 'null'
-          description: Total number of agent detail views
-          format: int32
-          readOnly: true
-        totalShortlisted:
-          type:
-          - integer
-          - 'null'
-          description: Total number of times the listing was shortlisted
-          format: int32
-          readOnly: true
-        totalPrinted:
-          type:
-          - integer
-          - 'null'
-          description: Total number of time the listing detail was printed
-          format: int32
-          readOnly: true
-        totalAgentPhoneNumberReveals:
-          type:
-          - integer
-          - 'null'
-          description: Total number of times the agent phone number was revealed for contact
-          format: int32
-          readOnly: true
-        totalEnquiries:
-          type:
-          - integer
-          - 'null'
-          description: Total number of enquiries
-          format: int32
-          readOnly: true
-        totalEmailToFriend:
-          type:
-          - integer
-          - 'null'
-          description: Total number of times the listing link was emailed
-          format: int32
-          readOnly: true
-        totalSharedViaSocialMedia:
-          type:
-          - integer
-          - 'null'
-          description: Total number of shares via social media
-          format: int32
-          readOnly: true
-        totalInspectionTimeSaving:
-          type:
-          - integer
-          - 'null'
-          description: Total numnber of times when the inspection was saved to calendar
-          format: int32
-          readOnly: true
-        totalCallToAgentFromMobile:
-          type:
-          - integer
-          - 'null'
-          description: Total number of calls made to agent from inside the listing
-          format: int32
-          readOnly: true
-        percentageWebsiteViews:
-          type:
-          - number
-          - 'null'
-          description: Percentage of total views from website
-          format: double
-          readOnly: true
-        percentageMobileSiteViews:
-          type:
-          - number
-          - 'null'
-          description: Percentage of total views from mobile site
-          format: double
-          readOnly: true
-        percentageSmartPhoneViews:
-          type:
-          - number
-          - 'null'
-          description: Percentage of total views from smart phone apps
-          format: double
-          readOnly: true
-        percentageTabletViews:
-          type:
-          - number
-          - 'null'
-          description: Percentage of total views from tablets
-          format: double
-          readOnly: true
       additionalProperties: false
-      description: Listing statistics
-      x-data-access-level-info:
-        Basic:
-        - '*'
-        Detailed:
-        - '*'
-        Full:
-        - '*'
-    Listings.V1.SaleDetails:
-      type: object
-      properties:
-        saleMethod:
-          enum:
-          - notStated
-          - auction
-          - privateTreaty
-          - tender
-          - expressionOfInterest
-          type:
-          - string
-          - 'null'
-          description: Gets or Sets SaleMethod
-        soldDetails:
-          $ref: '#/components/schemas/Listings.V1.SoldDetails'
-        auctionDetails:
-          $ref: '#/components/schemas/Listings.v1.AuctionDetails'
-        tenderDetails:
-          $ref: '#/components/schemas/Listings.v1.TenderDetails'
-        tenantDetails:
-          $ref: '#/components/schemas/Listings.v1.TenantDetails'
-        annualReturn:
-          type:
-          - integer
-          - 'null'
-          description: Integer value of percentage return on this property or business
-          format: int32
-        saleTerms:
-          type:
-          - string
-          - 'null'
-          description: Information relating to aspects of the sale, such as required deposit, settlement time
-      additionalProperties: false
-      description: The sale detail's of the listing in case of it being for sale or sold
+      description: Information for past property sales
       x-data-access-level-info:
         Basic:
         - '*'
@@ -556,228 +457,6 @@ components:
         - StateId
         - StreetId
         - StreetNumber
-    Listings.V1.SoldDetails:
-      type: object
-      properties:
-        soldAction:
-          enum:
-          - notStated
-          - auction
-          - privateTreaty
-          - withdrawn
-          - soldPriorToAuction
-          type:
-          - string
-          - 'null'
-          description: Gets or Sets SoldAction
-        source:
-          enum:
-          - internal
-          - external
-          type:
-          - string
-          - 'null'
-          description: Gets or Sets Source
-        soldPrice:
-          type:
-          - integer
-          - 'null'
-          description: The last sold price entered by the Advertiser.  This price will only be visible if allowed by the Advertiser  and the listing as been sold
-          format: int32
-        governmentRecordedSoldPrice:
-          type:
-          - integer
-          - 'null'
-          description: The government recorded sold price sourced from APM
-          format: int32
-        soldDate:
-          type:
-          - string
-          - 'null'
-          description: The Date the listing was sold. DateTime is in a local timezone.
-          format: date-time
-        canDisplayPrice:
-          type:
-          - boolean
-          - 'null'
-          description: Indicates whether this instance can display price
-      additionalProperties: false
-      description: Sold details in the case of the listing being sold.
-      x-data-access-level-info:
-        Basic:
-        - CanDisplayPrice
-        - SoldAction
-        - SoldDate
-        - SoldPrice
-        - Source
-        Detailed:
-        - CanDisplayPrice
-        - SoldAction
-        - SoldDate
-        - SoldPrice
-        - Source
-        Full:
-        - CanDisplayPrice
-        - SoldAction
-        - SoldDate
-        - SoldPrice
-        - Source
-        - GovernmentRecordedSoldPrice
-    Listings.v1.AuctionDetails:
-      type: object
-      properties:
-        auctionSchedule:
-          $ref: '#/components/schemas/Listings.v1.AuctionSchedule'
-        auctionedPrice:
-          type:
-          - integer
-          - 'null'
-          description: The auctioned price entered by the Advertiser.  This price will only be visible if allowed by the Advertiser  and the listing as been auctioned
-          format: int32
-        auctionedDate:
-          type:
-          - string
-          - 'null'
-          description: The listing's last auctioned date and time specified by the Advertiser.  This will only be visible if the listing has been auctioned.  DateTime is in a local timezone.
-          format: date-time
-      additionalProperties: false
-      description: The detail's of the auction in case of a listing for sale being auctioned or sold by auction
-      x-data-access-level-info:
-        Basic:
-        - '*'
-        Detailed:
-        - '*'
-        Full:
-        - '*'
-    Listings.v1.AuctionSchedule:
-      type: object
-      properties:
-        locationDescription:
-          type:
-          - string
-          - 'null'
-          description: Description and location of the auction provided by advertiser
-        openingDateTime:
-          type:
-          - string
-          - 'null'
-          description: Opening date and time of the auction. e.g. 2015-01-01T12:00:00  DateTime is in a local timezone.
-          format: date-time
-        terms:
-          type:
-          - string
-          - 'null'
-          description: Terms of the auction
-        url:
-          maxLength: 255
-          type:
-          - string
-          - 'null'
-          description: On-line URL of the auction
-      additionalProperties: false
-      description: Encapsulates the details of a Property being Auctioned.
-      x-data-access-level-info:
-        Basic:
-        - '*'
-        Detailed:
-        - '*'
-        Full:
-        - '*'
-    Listings.v1.ListingMedia:
-      required:
-      - url
-      type: object
-      properties:
-        category:
-          enum:
-          - image
-          - video
-          - others
-          type:
-          - string
-          - 'null'
-          description: Gets or Sets Category
-        type:
-          enum:
-          - photo
-          - mp4
-          - youtube
-          - floorplan
-          - vimeo
-          - notSpecified
-          type:
-          - string
-          - 'null'
-          description: Gets or Sets Type
-        url:
-          minLength: 1
-          type: string
-          description: The URL to the property media
-      additionalProperties: false
-      description: Encapsulates media associated with a Listing
-      x-data-access-level-info:
-        Basic:
-        - '*'
-        Detailed:
-        - '*'
-        Full:
-        - '*'
-    Listings.v1.TenantDetails:
-      type: object
-      properties:
-        leaseDateVariable:
-          type:
-          - boolean
-          - 'null'
-          description: Is tenant lease date variable
-        leaseOptions:
-          type:
-          - string
-          - 'null'
-          description: Leasing options available to a prospective tenant
-        tenantInfoTermOfLeaseFrom:
-          type:
-          - integer
-          - 'null'
-          description: The from range of the tenant's current lease
-          format: int32
-        tenantInfoTermOfLeaseTo:
-          type:
-          - integer
-          - 'null'
-          description: The to range of the tenant's current lease
-          format: int32
-        tenantName:
-          type:
-          - string
-          - 'null'
-          description: Name of the current tenant of the property
-        tenantRentDetails:
-          type:
-          - string
-          - 'null'
-          description: Information regarding current rental
-        leaseStartDate:
-          type:
-          - string
-          - 'null'
-          description: The date on which the tenants lease began, or is due to begin. DateTime is in a local timezone.
-          format: date-time
-        leaseEndDate:
-          type:
-          - string
-          - 'null'
-          description: The date on which the tenants lease is due to end. DateTime is in a local timezone.
-          format: date-time
-      additionalProperties: false
-      description: Tenant Details
-      x-data-access-level-info:
-        Basic:
-        - '*'
-        Detailed:
-        - '*'
-        Full:
-        - '*'
     Listings.V1.PriceDetails:
       type: object
       properties:
@@ -893,71 +572,24 @@ components:
         - PriceUnit
         - PriceType
         - PriceReduction
-    Listings.V1.RentalDetails:
+    Domain.AgentSearch.v1.Model.AutoSuggestAgentResultDto:
       type: object
       properties:
-        rentalMethod:
-          enum:
-          - notStated
-          - rent
-          - share
-          - holiday
-          - lease
-          type:
-          - string
-          - 'null'
-          description: Gets or Sets RentalMethod
-        source:
-          enum:
-          - internal
-          - external
-          type:
-          - string
-          - 'null'
-          description: Gets or Sets Source
-        leasedDate:
-          type:
-          - string
-          - 'null'
-          description: The Date the listing was leased. DateTime is in a local timezone.
-          format: date-time
-        leasedPrice:
-          type:
-          - integer
-          - 'null'
-          description: The last leased price entered by the Advertiser  This price will only be visible if allowed by the Advertiser  and the listing as been leased
+        agentId:
+          type: integer
           format: int32
-        canDisplayPrice:
-          type:
-          - boolean
-          - 'null'
-          description: Indicates whether this instance can display price
-        leasedMonths:
-          type:
-          - integer
-          - 'null'
-          description: The number of months the property was last leased for  This will only be visible if the property has been leased
-          format: int32
-        termOfLeaseFrom:
-          type:
-          - integer
-          - 'null'
-          description: Lease term range from
-          format: int32
-        termOfLeaseTo:
-          type:
-          - integer
-          - 'null'
-          description: Lease term range to
-          format: int32
-        leaseOutgoings:
-          type:
-          - integer
-          - 'null'
-          description: Outgoing cost of current lease
-          format: int32
-      additionalProperties: false
-      description: The rental detail's of the listing in case of it being for rent or leased
+        name:
+          type: string
+        agencyName:
+          type: string
+        suburb:
+          type: string
+        state:
+          type: string
+        profileUrl:
+          type: string
+        thumbnail:
+          type: string
       x-data-access-level-info:
         Basic:
         - '*'
@@ -965,31 +597,147 @@ components:
         - '*'
         Full:
         - '*'
-    ProblemDetails:
+    Listings.v1.AuctionDetails:
       type: object
       properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
+        auctionSchedule:
+          $ref: '#/components/schemas/Listings.v1.AuctionSchedule'
+        auctionedPrice:
           type:
           - integer
           - 'null'
+          description: The auctioned price entered by the Advertiser.  This price will only be visible if allowed by the Advertiser  and the listing as been auctioned
           format: int32
-        detail:
+        auctionedDate:
           type:
           - string
           - 'null'
-        instance:
+          description: The listing's last auctioned date and time specified by the Advertiser.  This will only be visible if the listing has been auctioned.  DateTime is in a local timezone.
+          format: date-time
+      additionalProperties: false
+      description: The detail's of the auction in case of a listing for sale being auctioned or sold by auction
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    Listings.V1.AddressParts:
+      type: object
+      properties:
+        stateAbbreviation:
+          enum:
+          - nsw
+          - vic
+          - sa
+          - nt
+          - tas
+          - act
+          - qld
+          - wa
           type:
           - string
           - 'null'
-      additionalProperties: {}
+          description: Gets or Sets StateAbbreviation
+        displayType:
+          enum:
+          - fullAddress
+          - streetAndSuburb
+          - suburbOnly
+          - regionOnly
+          - areaOnly
+          - stateOnly
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets DisplayType
+        streetNumber:
+          type:
+          - string
+          - 'null'
+          description: Street number
+        unitNumber:
+          type:
+          - string
+          - 'null'
+          description: Unit number.
+        street:
+          type:
+          - string
+          - 'null'
+          description: Street address
+        suburb:
+          type:
+          - string
+          - 'null'
+          description: Suburb of the address
+        suburbId:
+          type:
+          - integer
+          - 'null'
+          description: Domain suburb identifier for address lookup via the domain location api
+          format: int32
+        postcode:
+          type:
+          - string
+          - 'null'
+          description: Postcode of the address
+        displayAddress:
+          type:
+          - string
+          - 'null'
+          description: Advertiser's preference in displaying their listing's address
+      additionalProperties: false
+      description: Encapsulates the parts that make up an Address
+      x-data-access-level-info:
+        Basic:
+        - DisplayAddress
+        - DisplayType
+        - StateAbbreviation
+        - Postcode
+        - Suburb
+        - SuburbId
+        - UnitNumber
+        - StreetNumber
+        - Street
+        Detailed:
+        - DisplayAddress
+        - DisplayType
+        - StateAbbreviation
+        - Postcode
+        - Suburb
+        - SuburbId
+        - UnitNumber
+        - StreetNumber
+        - Street
+        Full:
+        - DisplayAddress
+        - DisplayType
+        - StateAbbreviation
+        - Postcode
+        - Suburb
+        - SuburbId
+        - UnitNumber
+        - StreetNumber
+        - Street
+    Listings.v1.BasicPrice:
+      type: object
+      properties:
+        from:
+          type:
+          - integer
+          - 'null'
+          description: Lowest price the property is expected to sell/rent for to set search price.
+          format: int32
+        to:
+          type:
+          - integer
+          - 'null'
+          description: Highest price the property is expected to sell/rent for to set search price.
+          format: int32
+      additionalProperties: false
+      description: Basic price information
       x-data-access-level-info:
         Basic:
         - '*'
@@ -1028,56 +776,79 @@ components:
         - '*'
         Full:
         - '*'
-    Listings.v1.MedianPriceData:
+    Listings.v1.GeoLocation:
       type: object
       properties:
-        priceType:
-          enum:
-          - house
-          - apartmentUnitFlat
-          - vacantLand
+        latitude:
+          type:
+          - number
+          - 'null'
+          description: Latitude of the property
+          format: double
+        longitude:
+          type:
+          - number
+          - 'null'
+          description: Longitude of the property
+          format: double
+      additionalProperties: false
+      description: Encapsulates the details of a geo location, long/lat
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    Listings.v1.TenantDetails:
+      type: object
+      properties:
+        leaseDateVariable:
+          type:
+          - boolean
+          - 'null'
+          description: Is tenant lease date variable
+        leaseOptions:
           type:
           - string
           - 'null'
-          description: Gets or Sets PriceType
-        suburb:
-          type:
-          - string
-          - 'null'
-          description: Name of the suburb median price is based on.
-        postcode:
-          type:
-          - string
-          - 'null'
-          description: Postcode of the suburb
-        medianPrice:
+          description: Leasing options available to a prospective tenant
+        tenantInfoTermOfLeaseFrom:
           type:
           - integer
           - 'null'
-          description: Median price for the suburb.
+          description: The from range of the tenant's current lease
           format: int32
-        source:
+        tenantInfoTermOfLeaseTo:
+          type:
+          - integer
+          - 'null'
+          description: The to range of the tenant's current lease
+          format: int32
+        tenantName:
           type:
           - string
           - 'null'
-          description: Where median price data comes from
-        sourceDateFrom:
+          description: Name of the current tenant of the property
+        tenantRentDetails:
           type:
           - string
           - 'null'
-          description: Start date of the median price source time period
-        sourceDateTo:
+          description: Information regarding current rental
+        leaseStartDate:
           type:
           - string
           - 'null'
-          description: End date of the median price source time period
-        sourceCollectionDate:
+          description: The date on which the tenants lease began, or is due to begin. DateTime is in a local timezone.
+          format: date-time
+        leaseEndDate:
           type:
           - string
           - 'null'
-          description: The collection date of the median price source
+          description: The date on which the tenants lease is due to end. DateTime is in a local timezone.
+          format: date-time
       additionalProperties: false
-      description: Information regarding median house/unit price   for the suburb
+      description: Tenant Details
       x-data-access-level-info:
         Basic:
         - '*'
@@ -1315,22 +1086,331 @@ components:
         - ReceivesRequests
         - RentalActive
         - SaleActive
-    Listings.v1.StatementOfInformation:
+    Listings.v1.MedianPriceData:
       type: object
       properties:
-        estimatedPrice:
-          $ref: '#/components/schemas/Listings.v1.BasicPrice'
-        comparableData:
-          $ref: '#/components/schemas/Listings.v1.ComparableData'
-        suburbMedianPrice:
-          $ref: '#/components/schemas/Listings.v1.MedianPriceData'
-        documentationUrl:
+        priceType:
+          enum:
+          - house
+          - apartmentUnitFlat
+          - vacantLand
           type:
           - string
           - 'null'
-          description: Link to the statement of information documentation file
+          description: Gets or Sets PriceType
+        suburb:
+          type:
+          - string
+          - 'null'
+          description: Name of the suburb median price is based on.
+        postcode:
+          type:
+          - string
+          - 'null'
+          description: Postcode of the suburb
+        medianPrice:
+          type:
+          - integer
+          - 'null'
+          description: Median price for the suburb.
+          format: int32
+        source:
+          type:
+          - string
+          - 'null'
+          description: Where median price data comes from
+        sourceDateFrom:
+          type:
+          - string
+          - 'null'
+          description: Start date of the median price source time period
+        sourceDateTo:
+          type:
+          - string
+          - 'null'
+          description: End date of the median price source time period
+        sourceCollectionDate:
+          type:
+          - string
+          - 'null'
+          description: The collection date of the median price source
       additionalProperties: false
-      description: Statement of Information  Regarding sale listing
+      description: Information regarding median house/unit price   for the suburb
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    ListingPerformance.v1.Statistics:
+      type: object
+      properties:
+        listingId:
+          type:
+          - integer
+          - 'null'
+          description: Domain Advertisement Id
+          format: int64
+          readOnly: true
+        totalListingViews:
+          type:
+          - integer
+          - 'null'
+          description: Total number of views for the listing details
+          format: int32
+          readOnly: true
+        totalPhotoViews:
+          type:
+          - integer
+          - 'null'
+          description: Total number of listing photo views
+          format: int32
+          readOnly: true
+        totalPhotoGalleryViews:
+          type:
+          - integer
+          - 'null'
+          description: Total number of listing photo gallery views
+          format: int32
+          readOnly: true
+        totalFloorplanViews:
+          type:
+          - integer
+          - 'null'
+          description: Total number of floorplan views
+          format: int32
+          readOnly: true
+        totalMapViews:
+          type:
+          - integer
+          - 'null'
+          description: Total number of address map views
+          format: int32
+          readOnly: true
+        totalVideoViews:
+          type:
+          - integer
+          - 'null'
+          description: Total number of vedio views
+          format: int32
+          readOnly: true
+        totalEbrochureViews:
+          type:
+          - integer
+          - 'null'
+          description: Total number of Ebrochure views
+          format: int32
+          readOnly: true
+        totalAgentDetailViews:
+          type:
+          - integer
+          - 'null'
+          description: Total number of agent detail views
+          format: int32
+          readOnly: true
+        totalShortlisted:
+          type:
+          - integer
+          - 'null'
+          description: Total number of times the listing was shortlisted
+          format: int32
+          readOnly: true
+        totalPrinted:
+          type:
+          - integer
+          - 'null'
+          description: Total number of time the listing detail was printed
+          format: int32
+          readOnly: true
+        totalAgentPhoneNumberReveals:
+          type:
+          - integer
+          - 'null'
+          description: Total number of times the agent phone number was revealed for contact
+          format: int32
+          readOnly: true
+        totalEnquiries:
+          type:
+          - integer
+          - 'null'
+          description: Total number of enquiries
+          format: int32
+          readOnly: true
+        totalEmailToFriend:
+          type:
+          - integer
+          - 'null'
+          description: Total number of times the listing link was emailed
+          format: int32
+          readOnly: true
+        totalSharedViaSocialMedia:
+          type:
+          - integer
+          - 'null'
+          description: Total number of shares via social media
+          format: int32
+          readOnly: true
+        totalInspectionTimeSaving:
+          type:
+          - integer
+          - 'null'
+          description: Total numnber of times when the inspection was saved to calendar
+          format: int32
+          readOnly: true
+        totalCallToAgentFromMobile:
+          type:
+          - integer
+          - 'null'
+          description: Total number of calls made to agent from inside the listing
+          format: int32
+          readOnly: true
+        percentageWebsiteViews:
+          type:
+          - number
+          - 'null'
+          description: Percentage of total views from website
+          format: double
+          readOnly: true
+        percentageMobileSiteViews:
+          type:
+          - number
+          - 'null'
+          description: Percentage of total views from mobile site
+          format: double
+          readOnly: true
+        percentageSmartPhoneViews:
+          type:
+          - number
+          - 'null'
+          description: Percentage of total views from smart phone apps
+          format: double
+          readOnly: true
+        percentageTabletViews:
+          type:
+          - number
+          - 'null'
+          description: Percentage of total views from tablets
+          format: double
+          readOnly: true
+      additionalProperties: false
+      description: Listing statistics
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    Agencies.V2.AgentReviewLiteResponse:
+      type: object
+      properties:
+        agentId:
+          type:
+          - integer
+          - 'null'
+          description: Gets or Sets AgentId
+          format: int32
+        overallStarRating:
+          type:
+          - number
+          - 'null'
+          description: Gets or Sets OverallStarRating
+          format: double
+        overallStarRatingRecent:
+          type:
+          - number
+          - 'null'
+          description: Gets or Sets OverallStarRatingRecent
+          format: double
+        numberOfReviews:
+          type:
+          - integer
+          - 'null'
+          description: Gets or Sets NumberOfReviews
+          format: int32
+        numberOfReviewsRecent:
+          type:
+          - integer
+          - 'null'
+          description: Gets or Sets NumberOfReviewsRecent
+          format: int32
+      additionalProperties: false
+      description: DomainAgencyModelResponseAgentReviewLiteResponse
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    Listings.V1.SaleDetails:
+      type: object
+      properties:
+        saleMethod:
+          enum:
+          - notStated
+          - auction
+          - privateTreaty
+          - tender
+          - expressionOfInterest
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets SaleMethod
+        soldDetails:
+          $ref: '#/components/schemas/Listings.V1.SoldDetails'
+        auctionDetails:
+          $ref: '#/components/schemas/Listings.v1.AuctionDetails'
+        tenderDetails:
+          $ref: '#/components/schemas/Listings.v1.TenderDetails'
+        tenantDetails:
+          $ref: '#/components/schemas/Listings.v1.TenantDetails'
+        annualReturn:
+          type:
+          - integer
+          - 'null'
+          description: Integer value of percentage return on this property or business
+          format: int32
+        saleTerms:
+          type:
+          - string
+          - 'null'
+          description: Information relating to aspects of the sale, such as required deposit, settlement time
+      additionalProperties: false
+      description: The sale detail's of the listing in case of it being for sale or sold
       x-data-access-level-info:
         Basic:
         - '*'
@@ -1907,58 +1987,38 @@ components:
         - ProviderDetails
         - HomepassEnabled
         - IsWithdrawn
-    Listings.v1.PastSaleData:
+    Listings.v1.ListingMedia:
+      required:
+      - url
       type: object
       properties:
-        unitNumber:
+        category:
+          enum:
+          - image
+          - video
+          - others
           type:
           - string
           - 'null'
-          description: Property unit number
-        streetNumber:
+          description: Gets or Sets Category
+        type:
+          enum:
+          - photo
+          - mp4
+          - youtube
+          - floorplan
+          - vimeo
+          - notSpecified
           type:
           - string
           - 'null'
-          description: Property street number
-        street:
-          type:
-          - string
-          - 'null'
-          description: Property Street name
-        suburb:
-          type:
-          - string
-          - 'null'
-          description: Property suburb name
-        postcode:
-          type:
-          - string
-          - 'null'
-          description: Property postcode
-        state:
-          type:
-          - string
-          - 'null'
-          description: Property state
-        displayAddress:
-          type:
-          - string
-          - 'null'
-          description: display formatted address
-          readOnly: true
-        dateOfSale:
-          type:
-          - string
-          - 'null'
-          description: Registered date of the sale
-        soldPrice:
-          type:
-          - integer
-          - 'null'
-          description: Property sold price
-          format: int64
+          description: Gets or Sets Type
+        url:
+          minLength: 1
+          type: string
+          description: The URL to the property media
       additionalProperties: false
-      description: Information for past property sales
+      description: Encapsulates media associated with a Listing
       x-data-access-level-info:
         Basic:
         - '*'
@@ -1983,34 +2043,6 @@ components:
           description: Text description if there are less than three comparable sales available
       additionalProperties: false
       description: Information regarding the past comparable property sales that influenced the setting of the estimation price
-      x-data-access-level-info:
-        Basic:
-        - '*'
-        Detailed:
-        - '*'
-        Full:
-        - '*'
-    Listings.v1.TenderDetails:
-      type: object
-      properties:
-        tenderRecipientName:
-          type:
-          - string
-          - 'null'
-          description: Tender recipient name
-        tenderAddress:
-          type:
-          - string
-          - 'null'
-          description: Tender address
-        tenderEndDate:
-          type:
-          - string
-          - 'null'
-          description: Tender closing date. DateTime is in a local timezone.
-          format: date-time
-      additionalProperties: false
-      description: Tender details
       x-data-access-level-info:
         Basic:
         - '*'
@@ -2074,104 +2106,6 @@ components:
         - '*'
         Full:
         - '*'
-    Listings.V1.AddressParts:
-      type: object
-      properties:
-        stateAbbreviation:
-          enum:
-          - nsw
-          - vic
-          - sa
-          - nt
-          - tas
-          - act
-          - qld
-          - wa
-          type:
-          - string
-          - 'null'
-          description: Gets or Sets StateAbbreviation
-        displayType:
-          enum:
-          - fullAddress
-          - streetAndSuburb
-          - suburbOnly
-          - regionOnly
-          - areaOnly
-          - stateOnly
-          type:
-          - string
-          - 'null'
-          description: Gets or Sets DisplayType
-        streetNumber:
-          type:
-          - string
-          - 'null'
-          description: Street number
-        unitNumber:
-          type:
-          - string
-          - 'null'
-          description: Unit number.
-        street:
-          type:
-          - string
-          - 'null'
-          description: Street address
-        suburb:
-          type:
-          - string
-          - 'null'
-          description: Suburb of the address
-        suburbId:
-          type:
-          - integer
-          - 'null'
-          description: Domain suburb identifier for address lookup via the domain location api
-          format: int32
-        postcode:
-          type:
-          - string
-          - 'null'
-          description: Postcode of the address
-        displayAddress:
-          type:
-          - string
-          - 'null'
-          description: Advertiser's preference in displaying their listing's address
-      additionalProperties: false
-      description: Encapsulates the parts that make up an Address
-      x-data-access-level-info:
-        Basic:
-        - DisplayAddress
-        - DisplayType
-        - StateAbbreviation
-        - Postcode
-        - Suburb
-        - SuburbId
-        - UnitNumber
-        - StreetNumber
-        - Street
-        Detailed:
-        - DisplayAddress
-        - DisplayType
-        - StateAbbreviation
-        - Postcode
-        - Suburb
-        - SuburbId
-        - UnitNumber
-        - StreetNumber
-        - Street
-        Full:
-        - DisplayAddress
-        - DisplayType
-        - StateAbbreviation
-        - Postcode
-        - Suburb
-        - SuburbId
-        - UnitNumber
-        - StreetNumber
-        - Street
     Listings.v1.Inspection:
       type: object
       properties:
@@ -2209,23 +2143,22 @@ components:
         - '*'
         Full:
         - '*'
-    Listings.v1.BasicPrice:
+    Listings.v1.StatementOfInformation:
       type: object
       properties:
-        from:
+        estimatedPrice:
+          $ref: '#/components/schemas/Listings.v1.BasicPrice'
+        comparableData:
+          $ref: '#/components/schemas/Listings.v1.ComparableData'
+        suburbMedianPrice:
+          $ref: '#/components/schemas/Listings.v1.MedianPriceData'
+        documentationUrl:
           type:
-          - integer
+          - string
           - 'null'
-          description: Lowest price the property is expected to sell/rent for to set search price.
-          format: int32
-        to:
-          type:
-          - integer
-          - 'null'
-          description: Highest price the property is expected to sell/rent for to set search price.
-          format: int32
+          description: Link to the statement of information documentation file
       additionalProperties: false
-      description: Basic price information
+      description: Statement of Information  Regarding sale listing
       x-data-access-level-info:
         Basic:
         - '*'
@@ -2233,31 +2166,73 @@ components:
         - '*'
         Full:
         - '*'
-    Domain.AgentSearch.v1.Model.AutoSuggestAgentResultDto:
+    Listings.V1.SoldDetails:
       type: object
       properties:
-        agentId:
-          type: integer
+        soldAction:
+          enum:
+          - notStated
+          - auction
+          - privateTreaty
+          - withdrawn
+          - soldPriorToAuction
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets SoldAction
+        source:
+          enum:
+          - internal
+          - external
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets Source
+        soldPrice:
+          type:
+          - integer
+          - 'null'
+          description: The last sold price entered by the Advertiser.  This price will only be visible if allowed by the Advertiser  and the listing as been sold
           format: int32
-        name:
-          type: string
-        agencyName:
-          type: string
-        suburb:
-          type: string
-        state:
-          type: string
-        profileUrl:
-          type: string
-        thumbnail:
-          type: string
+        governmentRecordedSoldPrice:
+          type:
+          - integer
+          - 'null'
+          description: The government recorded sold price sourced from APM
+          format: int32
+        soldDate:
+          type:
+          - string
+          - 'null'
+          description: The Date the listing was sold. DateTime is in a local timezone.
+          format: date-time
+        canDisplayPrice:
+          type:
+          - boolean
+          - 'null'
+          description: Indicates whether this instance can display price
+      additionalProperties: false
+      description: Sold details in the case of the listing being sold.
       x-data-access-level-info:
         Basic:
-        - '*'
+        - CanDisplayPrice
+        - SoldAction
+        - SoldDate
+        - SoldPrice
+        - Source
         Detailed:
-        - '*'
+        - CanDisplayPrice
+        - SoldAction
+        - SoldDate
+        - SoldPrice
+        - Source
         Full:
-        - '*'
+        - CanDisplayPrice
+        - SoldAction
+        - SoldDate
+        - SoldPrice
+        - Source
+        - GovernmentRecordedSoldPrice
     Listings.v1.ProviderDetails:
       type: object
       properties:
@@ -2280,23 +2255,133 @@ components:
         - '*'
         Full:
         - '*'
-    Listings.v1.GeoLocation:
+    Listings.v1.TenderDetails:
       type: object
       properties:
-        latitude:
+        tenderRecipientName:
           type:
-          - number
+          - string
           - 'null'
-          description: Latitude of the property
-          format: double
-        longitude:
+          description: Tender recipient name
+        tenderAddress:
           type:
-          - number
+          - string
           - 'null'
-          description: Longitude of the property
-          format: double
+          description: Tender address
+        tenderEndDate:
+          type:
+          - string
+          - 'null'
+          description: Tender closing date. DateTime is in a local timezone.
+          format: date-time
       additionalProperties: false
-      description: Encapsulates the details of a geo location, long/lat
+      description: Tender details
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    Listings.v1.AuctionSchedule:
+      type: object
+      properties:
+        locationDescription:
+          type:
+          - string
+          - 'null'
+          description: Description and location of the auction provided by advertiser
+        openingDateTime:
+          type:
+          - string
+          - 'null'
+          description: Opening date and time of the auction. e.g. 2015-01-01T12:00:00  DateTime is in a local timezone.
+          format: date-time
+        terms:
+          type:
+          - string
+          - 'null'
+          description: Terms of the auction
+        url:
+          maxLength: 255
+          type:
+          - string
+          - 'null'
+          description: On-line URL of the auction
+      additionalProperties: false
+      description: Encapsulates the details of a Property being Auctioned.
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    Listings.V1.RentalDetails:
+      type: object
+      properties:
+        rentalMethod:
+          enum:
+          - notStated
+          - rent
+          - share
+          - holiday
+          - lease
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets RentalMethod
+        source:
+          enum:
+          - internal
+          - external
+          type:
+          - string
+          - 'null'
+          description: Gets or Sets Source
+        leasedDate:
+          type:
+          - string
+          - 'null'
+          description: The Date the listing was leased. DateTime is in a local timezone.
+          format: date-time
+        leasedPrice:
+          type:
+          - integer
+          - 'null'
+          description: The last leased price entered by the Advertiser  This price will only be visible if allowed by the Advertiser  and the listing as been leased
+          format: int32
+        canDisplayPrice:
+          type:
+          - boolean
+          - 'null'
+          description: Indicates whether this instance can display price
+        leasedMonths:
+          type:
+          - integer
+          - 'null'
+          description: The number of months the property was last leased for  This will only be visible if the property has been leased
+          format: int32
+        termOfLeaseFrom:
+          type:
+          - integer
+          - 'null'
+          description: Lease term range from
+          format: int32
+        termOfLeaseTo:
+          type:
+          - integer
+          - 'null'
+          description: Lease term range to
+          format: int32
+        leaseOutgoings:
+          type:
+          - integer
+          - 'null'
+          description: Outgoing cost of current lease
+          format: int32
+      additionalProperties: false
+      description: The rental detail's of the listing in case of it being for rent or leased
       x-data-access-level-info:
         Basic:
         - '*'
@@ -2320,18 +2405,19 @@ components:
             api_addresslocators_read: api_addresslocators_read
             api_agencies_read: api_agencies_read
             api_agencies_write: api_agencies_write
+            api_auction_read: api_auction_read
+            api_auction_write: api_auction_write
             api_authorities_write: api_authorities_write
             api_avm_read: api_avm_read
+            api_avmhistory_read: api_avmhistory_read
             api_campaignperformance_read: api_campaignperformance_read
             api_dataset_read: api_dataset_read
             api_demographics_read: api_demographics_read
             api_enquiries_read: api_enquiries_read
             api_enquiries_write: api_enquiries_write
-            api_listingperformance_read: api_listingperformance_read
             api_listings_read: api_listings_read
             api_listings_write: api_listings_write
             api_locations_read: api_locations_read
-            api_projectperformance_read: api_projectperformance_read
             api_properties_read: api_properties_read
             api_propertyportfolio_read: api_propertyportfolio_read
             api_propertyportfolio_write: api_propertyportfolio_write
@@ -2350,18 +2436,19 @@ components:
             api_addresslocators_read: api_addresslocators_read
             api_agencies_read: api_agencies_read
             api_agencies_write: api_agencies_write
+            api_auction_read: api_auction_read
+            api_auction_write: api_auction_write
             api_authorities_write: api_authorities_write
             api_avm_read: api_avm_read
+            api_avmhistory_read: api_avmhistory_read
             api_campaignperformance_read: api_campaignperformance_read
             api_dataset_read: api_dataset_read
             api_demographics_read: api_demographics_read
             api_enquiries_read: api_enquiries_read
             api_enquiries_write: api_enquiries_write
-            api_listingperformance_read: api_listingperformance_read
             api_listings_read: api_listings_read
             api_listings_write: api_listings_write
             api_locations_read: api_locations_read
-            api_projectperformance_read: api_projectperformance_read
             api_properties_read: api_properties_read
             api_propertyportfolio_read: api_propertyportfolio_read
             api_propertyportfolio_write: api_propertyportfolio_write

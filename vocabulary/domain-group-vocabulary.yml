@@ -1,0 +1,418 @@
+generated: '2026-10-21'
+method: derived
+generator: derive-vocabulary.py
+source:
+- openapi/domain-group-addresslocators-api-openapi.yml
+- openapi/domain-group-agencies-api-openapi.yml
+- openapi/domain-group-agents-api-openapi.yml
+- openapi/domain-group-agentsearch-api-openapi.yml
+- openapi/domain-group-auctioncollection-api-openapi.yml
+vocabulary:
+  name: Domain Group Domain Vocabulary
+  description: 'Terms declared by Domain Group''s own API contract: its resource groups, objects and enumerations, with the contract''s definitions.
+    Derived, not authored.'
+  version: '2026-10-21'
+  terms:
+  - term: Agencies.V2.EmailPhone
+    definition: EmailPhone
+    tags:
+    - Object
+    source: openapi/domain-group-agencies-api-openapi.yml#/components/schemas/Agencies.V2.EmailPhone
+  - term: ListingPerformance.v1.Statistics
+    definition: Listing statistics
+    tags:
+    - Object
+    source: openapi/domain-group-agencies-api-openapi.yml#/components/schemas/ListingPerformance.v1.Statistics
+  - term: Listings.V1.SaleDetails
+    definition: The sale detail's of the listing in case of it being for sale or sold
+    tags:
+    - Object
+    source: openapi/domain-group-agencies-api-openapi.yml#/components/schemas/Listings.V1.SaleDetails
+  - term: Listings.V1.AustralianPropertyMonitorsIdentifiers
+    definition: APM Identifiers
+    tags:
+    - Object
+    source: openapi/domain-group-agencies-api-openapi.yml#/components/schemas/Listings.V1.AustralianPropertyMonitorsIdentifiers
+  - term: Listings.V1.SoldDetails
+    definition: Sold details in the case of the listing being sold.
+    tags:
+    - Object
+    source: openapi/domain-group-agencies-api-openapi.yml#/components/schemas/Listings.V1.SoldDetails
+  - term: Agencies.V2.AgencyContactDetails
+    definition: AgencyContactDetails
+    tags:
+    - Object
+    source: openapi/domain-group-agencies-api-openapi.yml#/components/schemas/Agencies.V2.AgencyContactDetails
+  - term: Agencies.V2.Agency
+    definition: Agency
+    tags:
+    - Object
+    source: openapi/domain-group-agencies-api-openapi.yml#/components/schemas/Agencies.V2.Agency
+  - term: Listings.v1.AuctionDetails
+    definition: The detail's of the auction in case of a listing for sale being auctioned or sold by auction
+    tags:
+    - Object
+    source: openapi/domain-group-agencies-api-openapi.yml#/components/schemas/Listings.v1.AuctionDetails
+  - term: Listings.v1.AuctionSchedule
+    definition: Encapsulates the details of a Property being Auctioned.
+    tags:
+    - Object
+    source: openapi/domain-group-agencies-api-openapi.yml#/components/schemas/Listings.v1.AuctionSchedule
+  - term: Listings.v1.ListingMedia
+    definition: Encapsulates media associated with a Listing
+    tags:
+    - Object
+    source: openapi/domain-group-agencies-api-openapi.yml#/components/schemas/Listings.v1.ListingMedia
+  - term: Agencies.V2.AgencyProfile
+    definition: AgencyProfile
+    tags:
+    - Object
+    source: openapi/domain-group-agencies-api-openapi.yml#/components/schemas/Agencies.V2.AgencyProfile
+  - term: Listings.v1.TenantDetails
+    definition: Tenant Details
+    tags:
+    - Object
+    source: openapi/domain-group-agencies-api-openapi.yml#/components/schemas/Listings.v1.TenantDetails
+  - term: Listings.V1.PriceDetails
+    definition: Encapsulates a listing's price information
+    tags:
+    - Object
+    source: openapi/domain-group-agencies-api-openapi.yml#/components/schemas/Listings.V1.PriceDetails
+  - term: Listings.V1.RentalDetails
+    definition: The rental detail's of the listing in case of it being for rent or leased
+    tags:
+    - Object
+    source: openapi/domain-group-agencies-api-openapi.yml#/components/schemas/Listings.V1.RentalDetails
+  - term: Agencies.V2.AgencySummary
+    definition: AgencySummary
+    tags:
+    - Object
+    source: openapi/domain-group-agencies-api-openapi.yml#/components/schemas/Agencies.V2.AgencySummary
+  - term: ProblemDetails
+    definition: 'Object declared by the contract with fields: type, title, status, detail, instance.'
+    tags:
+    - Object
+    source: openapi/domain-group-agencies-api-openapi.yml#/components/schemas/ProblemDetails
+  - term: Listings.v1.PropertyInspections
+    definition: Property Inspection(s) details
+    tags:
+    - Object
+    source: openapi/domain-group-agencies-api-openapi.yml#/components/schemas/Listings.v1.PropertyInspections
+  - term: Agencies.V2.AgencyPhoto
+    definition: AgencyPhoto
+    tags:
+    - Object
+    source: openapi/domain-group-agencies-api-openapi.yml#/components/schemas/Agencies.V2.AgencyPhoto
+  - term: Listings.v1.MedianPriceData
+    definition: Information regarding median house/unit price for the suburb
+    tags:
+    - Object
+    source: openapi/domain-group-agencies-api-openapi.yml#/components/schemas/Listings.v1.MedianPriceData
+  - term: Listings.v1.StatementOfInformation
+    definition: Statement of Information Regarding sale listing
+    tags:
+    - Object
+    source: openapi/domain-group-agencies-api-openapi.yml#/components/schemas/Listings.v1.StatementOfInformation
+  - term: Listings.V1.Listing
+    definition: Listing
+    tags:
+    - Object
+    source: openapi/domain-group-agencies-api-openapi.yml#/components/schemas/Listings.V1.Listing
+  - term: Agencies.V2.EmailDomain
+    definition: EmailDomain
+    tags:
+    - Object
+    source: openapi/domain-group-agencies-api-openapi.yml#/components/schemas/Agencies.V2.EmailDomain
+  - term: Listings.v1.PastSaleData
+    definition: Information for past property sales
+    tags:
+    - Object
+    source: openapi/domain-group-agencies-api-openapi.yml#/components/schemas/Listings.v1.PastSaleData
+  - term: Agencies.V2.AgencyDetails
+    definition: AgencyDetails
+    tags:
+    - Object
+    source: openapi/domain-group-agencies-api-openapi.yml#/components/schemas/Agencies.V2.AgencyDetails
+  - term: Listings.v1.ComparableData
+    definition: Information regarding the past comparable property sales that influenced the setting of the estimation price
+    tags:
+    - Object
+    source: openapi/domain-group-agencies-api-openapi.yml#/components/schemas/Listings.v1.ComparableData
+  - term: Agencies.V2.GeneralAgencyContactDetails
+    definition: GeneralAgencyContactDetails
+    tags:
+    - Object
+    source: openapi/domain-group-agencies-api-openapi.yml#/components/schemas/Agencies.V2.GeneralAgencyContactDetails
+  - term: Listings.v1.TenderDetails
+    definition: Tender details
+    tags:
+    - Object
+    source: openapi/domain-group-agencies-api-openapi.yml#/components/schemas/Listings.v1.TenderDetails
+  - term: Listings.v1.AdvertiserIdentifiers
+    definition: Encapsulates the listing's advertiser identifiers
+    tags:
+    - Object
+    source: openapi/domain-group-agencies-api-openapi.yml#/components/schemas/Listings.v1.AdvertiserIdentifiers
+  - term: Agencies.V2.ContactInAgencyList
+    definition: ContactInAgencyList
+    tags:
+    - Object
+    source: openapi/domain-group-agencies-api-openapi.yml#/components/schemas/Agencies.V2.ContactInAgencyList
+  - term: Agencies.V2.AgencyOptions
+    definition: AgencyOptions
+    tags:
+    - Object
+    source: openapi/domain-group-agencies-api-openapi.yml#/components/schemas/Agencies.V2.AgencyOptions
+  - term: Listings.V1.AddressParts
+    definition: Encapsulates the parts that make up an Address
+    tags:
+    - Object
+    source: openapi/domain-group-agencies-api-openapi.yml#/components/schemas/Listings.V1.AddressParts
+  - term: Listings.v1.Inspection
+    definition: Encapsulates the details of a Listing's Inspection
+    tags:
+    - Object
+    source: openapi/domain-group-agencies-api-openapi.yml#/components/schemas/Listings.v1.Inspection
+  - term: Listings.v1.BasicPrice
+    definition: Basic price information
+    tags:
+    - Object
+    source: openapi/domain-group-agencies-api-openapi.yml#/components/schemas/Listings.v1.BasicPrice
+  - term: Listings.v1.ProviderDetails
+    definition: Information for the listing provider. e.g. bulkuploader information
+    tags:
+    - Object
+    source: openapi/domain-group-agencies-api-openapi.yml#/components/schemas/Listings.v1.ProviderDetails
+  - term: Listings.v1.GeoLocation
+    definition: Encapsulates the details of a geo location, long/lat
+    tags:
+    - Object
+    source: openapi/domain-group-agencies-api-openapi.yml#/components/schemas/Listings.v1.GeoLocation
+  - term: Listings.V2.AuctionSchedule
+    definition: Encapsulates the details of a Property being Auctioned.
+    tags:
+    - Object
+    source: openapi/domain-group-agencies-api-openapi.yml#/components/schemas/Listings.V2.AuctionSchedule
+  - term: Listings.V2.GeoLocation
+    definition: Encapsulates the details of a geo location, long/lat
+    tags:
+    - Object
+    source: openapi/domain-group-agencies-api-openapi.yml#/components/schemas/Listings.V2.GeoLocation
+  - term: Listings.V2.BasicPrice
+    definition: Basic price information
+    tags:
+    - Object
+    source: openapi/domain-group-agencies-api-openapi.yml#/components/schemas/Listings.V2.BasicPrice
+  - term: Listings.V2.TenantDetails
+    definition: Tenant Details
+    tags:
+    - Object
+    source: openapi/domain-group-agencies-api-openapi.yml#/components/schemas/Listings.V2.TenantDetails
+  - term: Listings.V2.AdvertiserIdentifiers
+    definition: Encapsulates the listing's advertiser identifiers
+    tags:
+    - Object
+    source: openapi/domain-group-agencies-api-openapi.yml#/components/schemas/Listings.V2.AdvertiserIdentifiers
+  - term: Listings.V2.PropertyInspections
+    definition: Property Inspection(s) details
+    tags:
+    - Object
+    source: openapi/domain-group-agencies-api-openapi.yml#/components/schemas/Listings.V2.PropertyInspections
+  - term: Listings.V2.Inspection
+    definition: Encapsulates the details of a Listing's Inspection
+    tags:
+    - Object
+    source: openapi/domain-group-agencies-api-openapi.yml#/components/schemas/Listings.V2.Inspection
+  - term: Listings.V2.AddressParts
+    definition: Encapsulates the parts that make up an Address
+    tags:
+    - Object
+    source: openapi/domain-group-agencies-api-openapi.yml#/components/schemas/Listings.V2.AddressParts
+  - term: Listings.V2.SaleDetails
+    definition: The sale detail's of the listing in case of it being for sale or sold
+    tags:
+    - Object
+    source: openapi/domain-group-agencies-api-openapi.yml#/components/schemas/Listings.V2.SaleDetails
+  - term: Listings.V2.MedianPriceData
+    definition: Information regarding median house/unit price for the suburb
+    tags:
+    - Object
+    source: openapi/domain-group-agencies-api-openapi.yml#/components/schemas/Listings.V2.MedianPriceData
+  - term: Listings.V2.AuctionDetails
+    definition: The detail's of the auction in case of a listing for sale being auctioned or sold by auction
+    tags:
+    - Object
+    source: openapi/domain-group-agencies-api-openapi.yml#/components/schemas/Listings.V2.AuctionDetails
+  - term: Listings.V2.Listing
+    definition: Represents a Property Listing
+    tags:
+    - Object
+    source: openapi/domain-group-agencies-api-openapi.yml#/components/schemas/Listings.V2.Listing
+  - term: Listings.V2.RentalDetails
+    definition: The rental detail's of the listing in case of it being for rent or leased
+    tags:
+    - Object
+    source: openapi/domain-group-agencies-api-openapi.yml#/components/schemas/Listings.V2.RentalDetails
+  - term: Listings.V2.StatementOfInformation
+    definition: Statement of Information Regarding sale listing
+    tags:
+    - Object
+    source: openapi/domain-group-agencies-api-openapi.yml#/components/schemas/Listings.V2.StatementOfInformation
+  - term: Listings.V2.ProviderDetails
+    definition: Information for the listing provider. e.g. bulkuploader information
+    tags:
+    - Object
+    source: openapi/domain-group-agencies-api-openapi.yml#/components/schemas/Listings.V2.ProviderDetails
+  - term: Listings.V2.TenderDetails
+    definition: Tender details
+    tags:
+    - Object
+    source: openapi/domain-group-agencies-api-openapi.yml#/components/schemas/Listings.V2.TenderDetails
+  - term: Listings.V2.ComparableData
+    definition: Information regarding the past comparable property sales that influenced the setting of the estimation price
+    tags:
+    - Object
+    source: openapi/domain-group-agencies-api-openapi.yml#/components/schemas/Listings.V2.ComparableData
+  - term: Listings.V2.SoldDetails
+    definition: Sold details in the case of the listing being sold.
+    tags:
+    - Object
+    source: openapi/domain-group-agencies-api-openapi.yml#/components/schemas/Listings.V2.SoldDetails
+  - term: Listings.V2.ListingMedia
+    definition: Encapsulates media associated with a Listing
+    tags:
+    - Object
+    source: openapi/domain-group-agencies-api-openapi.yml#/components/schemas/Listings.V2.ListingMedia
+  - term: Listings.V2.PriceDetails
+    definition: Encapsulates a listing's price information
+    tags:
+    - Object
+    source: openapi/domain-group-agencies-api-openapi.yml#/components/schemas/Listings.V2.PriceDetails
+  - term: Listings.V2.AustralianPropertyMonitorsIdentifiers
+    definition: APM Identifiers
+    tags:
+    - Object
+    source: openapi/domain-group-agencies-api-openapi.yml#/components/schemas/Listings.V2.AustralianPropertyMonitorsIdentifiers
+  - term: Listings.V2.PastSaleData
+    definition: Information for past property sales
+    tags:
+    - Object
+    source: openapi/domain-group-agencies-api-openapi.yml#/components/schemas/Listings.V2.PastSaleData
+  - term: Agencies.V1.Agent
+    definition: AgentDto
+    tags:
+    - Object
+    source: openapi/domain-group-agents-api-openapi.yml#/components/schemas/Agencies.V1.Agent
+  - term: Domain.AgentSearch.v1.Model.AutoSuggestAgentResultDto
+    definition: 'Object declared by the contract with fields: agentId, name, agencyName, suburb, state, profileUrl, thumbnail.'
+    tags:
+    - Object
+    source: openapi/domain-group-agents-api-openapi.yml#/components/schemas/Domain.AgentSearch.v1.Model.AutoSuggestAgentResultDto
+  - term: Agencies.V2.AgentReviewLiteResponse
+    definition: DomainAgencyModelResponseAgentReviewLiteResponse
+    tags:
+    - Object
+    source: openapi/domain-group-agents-api-openapi.yml#/components/schemas/Agencies.V2.AgentReviewLiteResponse
+  - term: Agencies.V2.AgentSearchPageResultContactStatsDto
+    definition: DomainAgencyModelResponseAgentSearchPageResult1
+    tags:
+    - Object
+    source: openapi/domain-group-agentsearch-api-openapi.yml#/components/schemas/Agencies.V2.AgentSearchPageResultContactStatsDto
+  - term: Agencies.V2.GetAgentsByLocationRequest
+    definition: DomainAgencyWebApiRequestsV2GetAgentsByLocationRequest
+    tags:
+    - Object
+    source: openapi/domain-group-agentsearch-api-openapi.yml#/components/schemas/Agencies.V2.GetAgentsByLocationRequest
+  - term: Agencies.V2.ContactStatsDto
+    definition: DomainAgencyModelResponseAgentSearchContactStatsDto
+    tags:
+    - Object
+    source: openapi/domain-group-agentsearch-api-openapi.yml#/components/schemas/Agencies.V2.ContactStatsDto
+  - term: AuctionCollection.v1.PutAuctionUpdateRequest
+    definition: 'Object declared by the contract with fields: listingId, eventDate, result, price, soldDate, isPriceDisclosed, canPublish, submittedAt,
+      submissionSource, registeredBidders, activeBidders, isVendorBid. (2 more)'
+    tags:
+    - Object
+    source: openapi/domain-group-auctioncollection-api-openapi.yml#/components/schemas/AuctionCollection.v1.PutAuctionUpdateRequest
+  - term: AuctionCollection.v1.CallingSheetResponse
+    definition: 'Object declared by the contract with fields: agencyName, id, address, bedroomCount, propertyType, auctionDate, agentId, agentName,
+      agentContactNumber, secondaryAgentId, secondaryAgentName, secondaryAgentContactNumber. (1 more)'
+    tags:
+    - Object
+    source: openapi/domain-group-auctioncollection-api-openapi.yml#/components/schemas/AuctionCollection.v1.CallingSheetResponse
+  - term: Authorities.v1.IndividualResponse
+    definition: 'Object declared by the contract with fields: id.'
+    tags:
+    - Object
+    source: openapi/domain-group-authorities-api-openapi.yml#/components/schemas/Authorities.v1.IndividualResponse
+  - term: Authorities.v1.Attachments
+    definition: 'Object declared by the contract with fields: id, attachment, fileType.'
+    tags:
+    - Object
+    source: openapi/domain-group-authorities-api-openapi.yml#/components/schemas/Authorities.v1.Attachments
+  - term: Authorities.v1.MarketingCampaignRequest
+    definition: 'Object declared by the contract with fields: advertising, campaignType, marketingCampaignItems, comments, commentsFallback, discountAmount,
+      discountPercent, expense, other, payableOn, total, realhubQuoteId.'
+    tags:
+    - Object
+    source: openapi/domain-group-authorities-api-openapi.yml#/components/schemas/Authorities.v1.MarketingCampaignRequest
+  - term: Authorities.v1.SubscriptionResponse
+    definition: 'Object declared by the contract with fields: subscriptionId.'
+    tags:
+    - Object
+    source: openapi/domain-group-authorities-api-openapi.yml#/components/schemas/Authorities.v1.SubscriptionResponse
+  - term: Authorities.v1.AgentResponse
+    definition: 'Object declared by the contract with fields: id.'
+    tags:
+    - Object
+    source: openapi/domain-group-authorities-api-openapi.yml#/components/schemas/Authorities.v1.AgentResponse
+  - term: Authorities.v1.MarketingCampaignItemResponse
+    definition: 'Object declared by the contract with fields: id.'
+    tags:
+    - Object
+    source: openapi/domain-group-authorities-api-openapi.yml#/components/schemas/Authorities.v1.MarketingCampaignItemResponse
+  - term: Authorities.v1.VendorAttachments
+    definition: 'Object declared by the contract with fields: id, attachment.'
+    tags:
+    - Object
+    source: openapi/domain-group-authorities-api-openapi.yml#/components/schemas/Authorities.v1.VendorAttachments
+  - term: Authorities.v1.CompanyRequest
+    definition: 'Object declared by the contract with fields: id, address, email, name, phoneNumber, fax, abn, acn, gstRegistered, type.'
+    tags:
+    - Object
+    source: openapi/domain-group-authorities-api-openapi.yml#/components/schemas/Authorities.v1.CompanyRequest
+  - term: Authorities.v1.MarketingCampaignResponse
+    definition: 'Object declared by the contract with fields: marketingCampaignItems, id.'
+    tags:
+    - Object
+    source: openapi/domain-group-authorities-api-openapi.yml#/components/schemas/Authorities.v1.MarketingCampaignResponse
+  - term: Authorities.v1.AuthorityResponse
+    definition: 'Object declared by the contract with fields: id, marketingCampaigns, vendors, agents.'
+    tags:
+    - Object
+    source: openapi/domain-group-authorities-api-openapi.yml#/components/schemas/Authorities.v1.AuthorityResponse
+  - term: Authorities.v1.CrmDetails
+    definition: Details of CRM
+    tags:
+    - Object
+    source: openapi/domain-group-authorities-api-openapi.yml#/components/schemas/Authorities.v1.CrmDetails
+  - term: Authorities.v1.VendorRequest
+    definition: 'Object declared by the contract with fields: id, contact, contactRepresented, conciergeOptedIn, nature, trust, order, authorityAttachments.'
+    tags:
+    - Object
+    source: openapi/domain-group-authorities-api-openapi.yml#/components/schemas/Authorities.v1.VendorRequest
+  - term: Authorities.v1.CompanyResponse
+    definition: 'Object declared by the contract with fields: id.'
+    tags:
+    - Object
+    source: openapi/domain-group-authorities-api-openapi.yml#/components/schemas/Authorities.v1.CompanyResponse
+  - term: Authorities.v1.AgentRequest
+    definition: 'Object declared by the contract with fields: id, name, email, user, mobile, officeNumber, licenseNumber.'
+    tags:
+    - Object
+    source: openapi/domain-group-authorities-api-openapi.yml#/components/schemas/Authorities.v1.AgentRequest
+  - term: Authorities.v1.VendorResponse
+    definition: 'Object declared by the contract with fields: id, contact, contactRepresented.'
+    tags:
+    - Object
+    source: openapi/domain-group-authorities-api-openapi.yml#/components/schemas/Authorities.v1.VendorResponse

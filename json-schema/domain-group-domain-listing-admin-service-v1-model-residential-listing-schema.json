@@ -1,0 +1,810 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/domain-group/main/json-schema/domain-group-domain-listing-admin-service-v1-model-residential-listing-schema.json",
+  "title": "Domain.ListingAdminService.v1.Model.ResidentialListing",
+  "description": "Residential Listing",
+  "x-generated": "2026-10-21",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/domain-group-listings-api-openapi.yml#/components/schemas/Domain.ListingAdminService.v1.Model.ResidentialListing",
+  "type": "object",
+  "properties": {
+    "lifeStyleType": {
+      "enum": [
+        "firstHome",
+        "investment",
+        "retirement",
+        "seaChange",
+        "treeChange",
+        "youngFamilies"
+      ],
+      "type": "string",
+      "description": "Lifestyle type"
+    },
+    "listingAction": {
+      "enum": [
+        "sale",
+        "rent",
+        "saleAndLease"
+      ],
+      "type": "string",
+      "description": "Sale or Rent"
+    },
+    "contactPreference": {
+      "enum": [
+        "byPhone"
+      ],
+      "type": "string",
+      "description": "Indicates the listing preferred contact method. Default by both phone and email if not provided."
+    },
+    "underOfferOrContract": {
+      "type": "boolean",
+      "description": "Set for Sale listings only"
+    },
+    "auction": {
+      "$ref": "#/$defs/Domain.ListingAdminService.v1.Model.Auction"
+    },
+    "bond": {
+      "type": "integer",
+      "description": "Optional.  Ignored for sale listings",
+      "format": "int32"
+    },
+    "availableFrom": {
+      "type": "string",
+      "description": "Optional. Sets the Date from which a Rental or Share property is available. Date format: yyyy-mm-dd",
+      "format": "date-time"
+    },
+    "propertyDetails": {
+      "$ref": "#/$defs/Domain.ListingAdminService.v1.Model.ResidentialProperty"
+    },
+    "isNewDevelopment": {
+      "type": "boolean",
+      "description": "True if the property is a new development"
+    },
+    "statementOfInformation": {
+      "$ref": "#/$defs/Domain.ListingAdminService.v1.Model.StatementOfInformation"
+    },
+    "price": {
+      "$ref": "#/$defs/Domain.ListingAdminService.v1.Model.Price"
+    },
+    "project": {
+      "$ref": "#/$defs/Domain.ListingAdminService.v1.Model.ListingProject"
+    },
+    "domainAdId": {
+      "type": "integer",
+      "description": "Domain Advertisement Id, not applicable for creating new ads.  Mandatory when updating a listing that belongs to an agency that  is in the process of being migrated between listing providers.",
+      "format": "int32"
+    },
+    "domainAgencyID": {
+      "type": "integer",
+      "description": "The Domain Agency Id number",
+      "format": "int32"
+    },
+    "providerAdId": {
+      "type": "string",
+      "description": "External Advertisement Id of up to 50 characters will be stored.&lt;br /&gt;  This value is used to identify an Advertisement for updates and should be unique for listing provider.&lt;br /&gt;  This value is case-insensitive (meaning AAAA will update aaaa)."
+    },
+    "features": {
+      "type": "string",
+      "description": "Comma-separated list of features. 1000 characters in length. Select as appropriate or write your own.  INSIDE: Air conditioning, Ensuite, Floorboards, Indoor Spa, Gym, Alarm System, Intercom, Built in wardrobes, Furnished, Internal Laundry, Pets allowed, Cable or Satellite, Gas, Broadband internet access, Bath, Fireplace(s), Separate Dining Room, Heating, Dishwasher, Study.  OUTSIDE: Tennis Court, Secure Parking, Shed, Fully fenced, Balcony / Deck, Garden / Courtyard, Swimming Pool, Outdoor Spa.  LOCATION: Ground floor, Water Views, North Facing, City Views.  ECO FRIENDLY: Double glazed windows, Energy efficient appliances, Water efficient appliances, Wall / ceiling insulation, Rainwater storage tank, Greywater system, Water efficient fixtures, Solar hot water, Solar panels"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the property.  6000 characters in length. The following HTML elements are permitted: &amp;lt;br /&amp;gt;, &amp;lt;p&amp;gt;&amp;lt;/p&amp;gt;, &amp;amp;nbsp;. HTML must be well-formed.  Carriage Returns are interpreted as line breaks. Foreign characters must be HTML encoded, e.g., façade for façade.  Unicode characters which are unsupported by Latin-1 (ISO-8859-1 range from U+0080 to U+00FF), will be removed https://en.wikipedia.org/wiki/ISO/IEC_8859-1"
+    },
+    "summary": {
+      "type": "string",
+      "description": "'Headline' Any HTML stripped out.  If the Summary is less than 80 characters long then the description is concatenated to it and the total trimmed to 250 characters."
+    },
+    "inspectionDetails": {
+      "$ref": "#/$defs/Domain.ListingAdminService.v1.Model.InspectionDetails"
+    },
+    "media": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Domain.ListingAdminService.v1.Model.PropertyMedia"
+      },
+      "description": "Links to VideoURL, virtual tour or weblink. Maximum length of media URLs is 255 characters."
+    },
+    "contacts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Domain.ListingAdminService.v1.Model.Contact"
+      },
+      "description": "Minimum required attributes: First name, last name and E-mail.  If the DomainAgentId is provided, contact information will be based on the existing agent found for that id.  Otherwise first name, last name and email will be used to find the matching contact. A new contact will be created if no contact can be found."
+    },
+    "otherEnquiryEmail": {
+      "type": "string",
+      "description": "Sets an additional Email Address to which enquiries on the Listing will be sent"
+    },
+    "receiveEmailsToDefaultAddress": {
+      "type": "boolean",
+      "description": "Send email enquiries to the default address for this listing type"
+    },
+    "isRural": {
+      "type": "boolean",
+      "description": "True if the property is rural"
+    },
+    "supplementary": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Domain.ListingAdminService.v1.Model.ListingSupplementary"
+      },
+      "description": "Rural attributes    *Improvements* (optional)    Available `types` (fixed list, optional):  * Machinery Shed  * Shearing Shed  * Workshop  * Shearers Quarters  * Silos  * Other Housing  * Managers Accommodation    *Fencing* (optional)    `description` (string, optional): free text fencing description, maximum 250 characters.    *Yards* (optional)    Available `types` (fixed list, optional):  * Sheep  * Cattle    *Homestead* (optional)    `description` (string, optional): description of the homestead and construction, maximum 250 characters.    `metadata` (optional)  * `area` (decimal, optional): homestead area in square metres.    Available `types` (fixed list, optional):  * Office  * Ensuite  * Tennis Court  * Mains Gas  * Floorboards  * Internal Laundry    *Water* (optional)    `description` (string, optional): water comments, maximum 250 characters.    Available `types` (fixed list, optional):  * Tank  * Well  * Reticulated  * Bores  * Springs  * Creeks  * Dams  * River    *Crops* (optional)    `description` (string, optional): description of the crops, maximum 250 characters.    `metadata` (optional)  * `croppedAnnually` (decimal, optional): average annual area cropped in hectares.  * `fallowAnnually` (decimal, optional): average annual fallow area in hectares.  * `pastures` (string, optional): description of pastures available, maximum 250 characters.    *Livestock* (optional)    `description` (string, optional): additional comments, maximum 250 characters.    `metadata` (optional)  * `capacity` (decimal, optional): property carrying capacity in DSE (unit of carry capacity).    Available `types` (fixed list, optional):  * Sheep  * Pigs  * Cattle  * Poultry  * Horses  * Exotic  * Goats  * Stud    *Inclusions* (optional)    `description` (string, optional): description of plant and machinery included in sale, maximum 250 characters.    `metadata` (optional)  * `livestock` (string, optional): description of livestock included in sale, maximum 250 characters.  * `crop` (string, optional): description of crops included in sale, maximum 250 characters.    *Irrigation* (optional)    `description` (string, optional): irrigation comments, maximum 250 characters    `metadata` (optional)  * `rainfall` (decimal, optional): annual rainfall in millimetres."
+    }
+  },
+  "$defs": {
+    "Domain.ListingAdminService.v1.Model.Address": {
+      "type": "object",
+      "properties": {
+        "displayOption": {
+          "enum": [
+            "unspecified",
+            "fullAddress",
+            "streetAndSuburb",
+            "suburbOnly",
+            "regionOnly",
+            "areaOnly",
+            "stateOnly"
+          ],
+          "type": "string",
+          "description": "What granularity to display the properties location at. For residential listings, the accepted displayOption values are `FullAddress`, `StreetAndSuburb` or `SuburbOnly`."
+        },
+        "state": {
+          "enum": [
+            "nsw",
+            "vic",
+            "act",
+            "sa",
+            "wa",
+            "tas",
+            "qld",
+            "nt"
+          ],
+          "type": "string",
+          "description": "State"
+        },
+        "unitNumber": {
+          "type": "string",
+          "description": "Unit number for apartments, maximum 30 characters"
+        },
+        "street": {
+          "type": "string",
+          "description": "Street name, maximum 100 characters"
+        },
+        "suggestedGeoLocation": {
+          "$ref": "#/$defs/Domain.ListingAdminService.v1.Model.GeoLocation"
+        },
+        "streetNumber": {
+          "type": "string",
+          "description": "Street number, maximum 20 characters"
+        },
+        "suburb": {
+          "type": "string",
+          "description": "Suburb name , maximum 50 characters"
+        },
+        "postcode": {
+          "type": "string",
+          "description": "Postcode"
+        }
+      },
+      "description": "Address structure for property"
+    },
+    "Domain.ListingAdminService.v1.Model.Area": {
+      "type": "object",
+      "properties": {
+        "unit": {
+          "enum": [
+            "squareMetres",
+            "acres",
+            "hectares",
+            "squareFeet",
+            "squareYards",
+            "squares"
+          ],
+          "type": "string",
+          "description": "Unit of measure, defaults to SquareMetres if not provided."
+        },
+        "value": {
+          "type": "number",
+          "description": "Area. Will be rounded to 2 decimals.",
+          "format": "double"
+        },
+        "from": {
+          "type": "number",
+          "description": "Minimum area",
+          "format": "double"
+        },
+        "to": {
+          "type": "number",
+          "description": "Maximum area",
+          "format": "double"
+        }
+      },
+      "description": "Area information, Either single value or from and To must be provided"
+    },
+    "Domain.ListingAdminService.v1.Model.Auction": {
+      "type": "object",
+      "properties": {
+        "dateTime": {
+          "type": "string",
+          "description": "Date of the auction. format: yyyy-MM-ddTHH:mm:ss",
+          "format": "date-time"
+        },
+        "location": {
+          "type": "string",
+          "description": "Optional. Venue for the Auction. String max 100 characters. If the Location is omitted, or included but empty, the Venue will default to \\\"On Site\\\"."
+        },
+        "url": {
+          "type": "string",
+          "description": "Optional on-line auction URL. Must be a valid URL and maximum 255 characters. If an empty string is received, the property will be re-set."
+        }
+      },
+      "description": "Auction Details"
+    },
+    "Domain.ListingAdminService.v1.Model.BasicPrice": {
+      "type": "object",
+      "properties": {
+        "from": {
+          "type": "integer",
+          "description": "Lowest price the property is expected to sell/rent for to set search price. For a fixed price, set this value the same as To",
+          "format": "int32"
+        },
+        "to": {
+          "type": "integer",
+          "description": "Highest price the property is expected to sell/rent for to set search price.   For a fixed price, set this value the same as From",
+          "format": "int32"
+        }
+      },
+      "description": "Basic price information"
+    },
+    "Domain.ListingAdminService.v1.Model.ComparableData": {
+      "type": "object",
+      "properties": {
+        "comparableProperty": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Domain.ListingAdminService.v1.Model.PastSaleData"
+          },
+          "description": "To be comparable, property must be Of a similar standard or condition to the property for sale  And Sold in the last six months and be within two kilometres of the property for sale (if the property for sale is in the Melbourne metropolitan area)  Or Sold in the last 18 months and be within five kilometres of the property for sale (if the property for sale is outside the Melbourne metropolitan area)."
+        },
+        "declarationText": {
+          "type": "string",
+          "description": "Text description should be provided   If you reasonably believe that there are less than three comparable sales within the prescribed period outlined above  for ComparableProperty {Domain.Listing.Admin.Model.Entities.ComparableData.ComparableProperty}  Required when no past sale property data   was provided"
+        }
+      },
+      "description": "Information regarding past comparable   property sales that influenced the setting of teh estimationPrice"
+    },
+    "Domain.ListingAdminService.v1.Model.Contact": {
+      "type": "object",
+      "properties": {
+        "domainAgentId": {
+          "type": "integer",
+          "description": "Domain ID of the contact person at the agency",
+          "format": "int32"
+        },
+        "firstName": {
+          "type": "string",
+          "description": "First name. Maximum 50 characters."
+        },
+        "lastName": {
+          "type": "string",
+          "description": "Last name. Maximum 50 characters."
+        },
+        "phone": {
+          "type": "string",
+          "description": "Phone. Maximum 20 characters."
+        },
+        "fax": {
+          "type": "string",
+          "description": "Fax. Maximum 20 characters."
+        },
+        "mobile": {
+          "type": "string",
+          "description": "Mobile. Maximum 20 characters."
+        },
+        "email": {
+          "type": "string",
+          "description": "Email. Maximum 100 characters."
+        },
+        "receiveEmails": {
+          "type": "boolean",
+          "description": "Indicates whether the contact person should receive emails for the listing"
+        }
+      },
+      "description": "Contact domain model"
+    },
+    "Domain.ListingAdminService.v1.Model.GeoLocation": {
+      "type": "object",
+      "properties": {
+        "latitude": {
+          "type": "number",
+          "description": "Latitude",
+          "format": "double"
+        },
+        "longitude": {
+          "type": "number",
+          "description": "Longitude",
+          "format": "double"
+        }
+      },
+      "description": "Contains geocoding of an address"
+    },
+    "Domain.ListingAdminService.v1.Model.Inspection": {
+      "type": "object",
+      "properties": {
+        "from": {
+          "type": "string",
+          "description": "Format: yyyy-mm-dd HH:mm:ss eg: 2015-10-20 13:30:00",
+          "format": "date-time"
+        },
+        "to": {
+          "type": "string",
+          "description": "Format: yyyy-mm-dd HH:mm:ss, eg: 2015-10-20 14:30:00",
+          "format": "date-time"
+        },
+        "repeat": {
+          "type": "boolean",
+          "description": "Specifies if the inspection is recurring weekly"
+        }
+      },
+      "description": "Inspection times"
+    },
+    "Domain.ListingAdminService.v1.Model.InspectionDetails": {
+      "type": "object",
+      "properties": {
+        "inspectionDescription": {
+          "type": "string",
+          "description": "Free text field for inspections"
+        },
+        "inspections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Domain.ListingAdminService.v1.Model.Inspection"
+          },
+          "description": "Inspection times of the listing"
+        }
+      },
+      "description": "Inspection details"
+    },
+    "Domain.ListingAdminService.v1.Model.LandArea": {
+      "type": "object",
+      "properties": {
+        "unit": {
+          "enum": [
+            "squareMetres",
+            "acres",
+            "hectares",
+            "squareFeet",
+            "squareYards",
+            "squares"
+          ],
+          "type": "string",
+          "description": "Unit of measure"
+        },
+        "value": {
+          "type": "number",
+          "description": "Area. Will be rounded to 2 decimals.",
+          "format": "double"
+        },
+        "from": {
+          "type": "number",
+          "description": "Minimum area",
+          "format": "double"
+        },
+        "to": {
+          "type": "number",
+          "description": "Maximum area",
+          "format": "double"
+        }
+      },
+      "description": "Area information, Either single value or from and To must be provided"
+    },
+    "Domain.ListingAdminService.v1.Model.ListingProject": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Domain's development project identifier. If the value is not provided, the listing will be unlinked.",
+          "format": "int32"
+        },
+        "order": {
+          "type": "integer",
+          "description": "Listing's order. If the value is not provided, the listing will be last.",
+          "format": "int32"
+        }
+      },
+      "description": "Listing development project details."
+    },
+    "Domain.ListingAdminService.v1.Model.ListingSupplementary": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description"
+        },
+        "types": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Types"
+        },
+        "metadata": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Domain.ListingAdminService.v1.Model.SupplementaryMetadata"
+          },
+          "description": "Metadata"
+        }
+      },
+      "description": "Listing supplementary"
+    },
+    "Domain.ListingAdminService.v1.Model.MedianPriceData": {
+      "type": "object",
+      "properties": {
+        "priceType": {
+          "enum": [
+            "house",
+            "apartmentUnitFlat",
+            "vacantLand"
+          ],
+          "type": "string",
+          "description": "Type of property this median price is based on ."
+        },
+        "suburb": {
+          "type": "string",
+          "description": "Name of the suburb median price is based on."
+        },
+        "postcode": {
+          "type": "string",
+          "description": "Postcode of the suburb"
+        },
+        "medianPrice": {
+          "type": "integer",
+          "description": "Median price for the suburb .",
+          "format": "int32"
+        },
+        "source": {
+          "type": "string",
+          "description": "Where the Median Price come from"
+        },
+        "sourceDateFrom": {
+          "type": "string",
+          "description": "Median Price Source Data From Date",
+          "format": "date-time"
+        },
+        "sourceDateTo": {
+          "type": "string",
+          "description": "Median Price Source Data To Date",
+          "format": "date-time"
+        },
+        "declarationText": {
+          "type": "string",
+          "description": "Declaration text should be provided when no median price data available"
+        }
+      },
+      "description": "Information regarding median house/unit price   for the suburb"
+    },
+    "Domain.ListingAdminService.v1.Model.ParkingDetails": {
+      "type": "object",
+      "properties": {
+        "parkingType": {
+          "enum": [
+            "onSite",
+            "onStreet",
+            "noParking",
+            "garage",
+            "carport",
+            "outdoor"
+          ],
+          "type": "string",
+          "description": "Can have the value \\\"OnSite\\\", \\\"OnStreet\\\", \\\"NoParking\\\". Default: \\\"NoParking\\\""
+        },
+        "numberOfSpaces": {
+          "type": "integer",
+          "description": "Number of parking spaces on site",
+          "format": "int32"
+        }
+      },
+      "description": "Parking Details"
+    },
+    "Domain.ListingAdminService.v1.Model.ParkingInfo": {
+      "type": "object",
+      "properties": {
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Domain.ListingAdminService.v1.Model.ParkingDetails"
+          },
+          "description": "Details for available parking spaces"
+        },
+        "information": {
+          "type": "string",
+          "description": "Additional information regarding the parking condition"
+        }
+      },
+      "description": "Parking Details"
+    },
+    "Domain.ListingAdminService.v1.Model.PastSaleAddress": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "enum": [
+            "nsw",
+            "vic",
+            "act",
+            "sa",
+            "wa",
+            "tas",
+            "qld",
+            "nt"
+          ],
+          "type": "string",
+          "description": "State"
+        },
+        "unitNumber": {
+          "type": "string",
+          "description": "Unit number for apartments, maximum 30 characters"
+        },
+        "streetNumber": {
+          "type": "string",
+          "description": "Street number, maximum 20 characters"
+        },
+        "street": {
+          "type": "string",
+          "description": "Street name, maximum 100 characters"
+        },
+        "suburb": {
+          "type": "string",
+          "description": "Suburb name , maximum 50 characters"
+        },
+        "postcode": {
+          "type": "string",
+          "description": "Postcode"
+        }
+      },
+      "description": "Address for past sold listing"
+    },
+    "Domain.ListingAdminService.v1.Model.PastSaleData": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "$ref": "#/$defs/Domain.ListingAdminService.v1.Model.PastSaleAddress"
+        },
+        "dateOfSale": {
+          "type": "string",
+          "description": "Registered date of the sale",
+          "format": "date-time"
+        },
+        "soldPrice": {
+          "type": "integer",
+          "description": "Price property has been sold",
+          "format": "int32"
+        }
+      },
+      "description": "Information for past property sales"
+    },
+    "Domain.ListingAdminService.v1.Model.Price": {
+      "type": "object",
+      "properties": {
+        "displayText": {
+          "type": "string",
+          "description": "When provided this will be shown instead of the price range, e.g.: \\\"Offers over $450K considered\\\""
+        },
+        "from": {
+          "type": "integer",
+          "description": "Lowest price the property is expected to sell/rent for to set search price. For a fixed price, set this value the same as To",
+          "format": "int32"
+        },
+        "to": {
+          "type": "integer",
+          "description": "Highest price the property is expected to sell/rent for to set search price.   For a fixed price, set this value the same as From",
+          "format": "int32"
+        }
+      },
+      "description": "Pricing Information"
+    },
+    "Domain.ListingAdminService.v1.Model.PropertyMedia": {
+      "type": "object",
+      "properties": {
+        "resourceType": {
+          "enum": [
+            "photograph",
+            "floorPlan",
+            "video",
+            "virtualTour",
+            "webLink"
+          ],
+          "type": "string",
+          "description": "Type of the resource"
+        },
+        "url": {
+          "type": "string",
+          "description": "shows the place from where file can be downloaded"
+        }
+      },
+      "description": "Resource related to the listing"
+    },
+    "Domain.ListingAdminService.v1.Model.PropertyPdf": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "commercialPdf",
+            "newDevBrochurePdf",
+            "floorplanPdf",
+            "devProjectPdf"
+          ],
+          "type": "string",
+          "description": "Type of the PDF"
+        },
+        "url": {
+          "type": "string",
+          "description": "Url of the PDF"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the PDF"
+        }
+      },
+      "description": "PDF file related to the listing"
+    },
+    "Domain.ListingAdminService.v1.Model.ResidentialProperty": {
+      "type": "object",
+      "properties": {
+        "propertyType": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "acreageSemiRural",
+              "apartmentUnitFlat",
+              "aquaculture",
+              "blockOfUnits",
+              "carSpace",
+              "dairyFarming",
+              "developmentSite",
+              "duplex",
+              "farm",
+              "fishingForestry",
+              "newHomeDesigns",
+              "house",
+              "newHouseLand",
+              "irrigationServices",
+              "newLand",
+              "livestock",
+              "newApartments",
+              "penthouse",
+              "retirement",
+              "rural",
+              "semiDetached",
+              "specialistFarm",
+              "studio",
+              "terrace",
+              "townhouse",
+              "vacantLand",
+              "villa",
+              "cropping",
+              "viticulture",
+              "mixedFarming",
+              "grazing",
+              "horticulture",
+              "equine",
+              "farmlet",
+              "orchard",
+              "ruralLifestyle"
+            ],
+            "type": "string"
+          },
+          "description": "'Retirement' requires at least one more property type to be specified with it (for example: \\\"Retirement\\\", \\\"ApartmentUnitFlat\\\") ['acreageSemiRural', 'apartmentUnitFlat', 'aquaculture', 'blockOfUnits', 'carSpace', 'dairyFarming', 'developmentSite', 'duplex', 'farm', 'fishingForestry', 'newHomeDesigns', 'house', 'newHouseLand', 'irrigationServices', 'newLand', 'livestock', 'newApartments', 'penthouse', 'retirement', 'rural', 'semiDetached', 'specialistFarm', 'studio', 'terrace', 'townhouse', 'vacantLand', 'villa', 'cropping', 'viticulture', 'mixedFarming', 'grazing', 'horticulture', 'equine', 'farmlet', 'orchard', 'ruralLifestyle']."
+        },
+        "bedRooms": {
+          "type": "integer",
+          "description": "Number of bedrooms",
+          "format": "int32"
+        },
+        "bathRooms": {
+          "type": "integer",
+          "description": "Number of bathrooms",
+          "format": "int32"
+        },
+        "parkingInfo": {
+          "$ref": "#/$defs/Domain.ListingAdminService.v1.Model.ParkingInfo"
+        },
+        "energyEfficiencyRating": {
+          "type": "number",
+          "description": "Optional, although must be set for ACT dwellings for sale. Valid values range from 0 to 10 inclusive, in increments of 0.5",
+          "format": "double"
+        },
+        "pdfs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Domain.ListingAdminService.v1.Model.PropertyPdf"
+          },
+          "description": "List of PDF files related to the listing"
+        },
+        "isMarkedForLiveability": {
+          "type": "boolean",
+          "description": "Is the property liveability compliant"
+        },
+        "propertyName": {
+          "type": "string",
+          "description": "Name of the property up to 70 characters"
+        },
+        "location": {
+          "type": "string",
+          "description": "Short location information up to 30 character, e.g.: Greenhills Beach"
+        },
+        "images": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Domain.ListingAdminService.v1.Model.PropertyMedia"
+          },
+          "description": "List of image files, photos or floor plans related to the listing."
+        },
+        "address": {
+          "$ref": "#/$defs/Domain.ListingAdminService.v1.Model.Address"
+        },
+        "area": {
+          "$ref": "#/$defs/Domain.ListingAdminService.v1.Model.Area"
+        },
+        "landArea": {
+          "$ref": "#/$defs/Domain.ListingAdminService.v1.Model.LandArea"
+        }
+      },
+      "description": "Residential Property"
+    },
+    "Domain.ListingAdminService.v1.Model.StatementOfInformation": {
+      "type": "object",
+      "properties": {
+        "estimatedPrice": {
+          "$ref": "#/$defs/Domain.ListingAdminService.v1.Model.BasicPrice"
+        },
+        "comparableData": {
+          "$ref": "#/$defs/Domain.ListingAdminService.v1.Model.ComparableData"
+        },
+        "suburbMedianPrice": {
+          "$ref": "#/$defs/Domain.ListingAdminService.v1.Model.MedianPriceData"
+        },
+        "documentationUrl": {
+          "type": "string",
+          "description": "Link to the statement of information documentation file.  Must be a PDF file.  File should be less than 10 MB in size  The Statement of Information must be updated if there is a change in the indicative selling price."
+        }
+      },
+      "description": "Statement of Information  Regarding sale listing"
+    },
+    "Domain.ListingAdminService.v1.Model.SupplementaryMetadata": {
+      "type": "object",
+      "properties": {
+        "measurementUnit": {
+          "enum": [
+            "squareMetres",
+            "hectares",
+            "millimetres",
+            "dse"
+          ],
+          "type": "string",
+          "description": "Measurement unit"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description"
+        },
+        "measurement": {
+          "type": "number",
+          "description": "Measurement",
+          "format": "double"
+        }
+      },
+      "description": "Supplementary metadata"
+    }
+  }
+}

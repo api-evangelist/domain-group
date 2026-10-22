@@ -2,27 +2,21 @@ aid: domain-group
 url: https://raw.githubusercontent.com/api-evangelist/domain-group/refs/heads/main/apis.yml
 name: Domain Group
 kind: company
-description: 'Domain Group (Domain Holdings Australia Ltd, trading as domain.com.au) is the second of
-  Australia''s two national residential property portals, alongside REA Group''s realestate.com.au, and
-  since 27 August 2025 has been a wholly owned subsidiary of CoStar Group. Headquartered in Sydney, Domain
-  operates the domain.com.au consumer marketplace plus commercial, agent, and developer-project brands,
-  and sits in the middle of the Australian value chain between selling and leasing agencies on one side
-  and buyers, renters, banks, and PropTech builders on the other. Unlike most of the real estate sector,
-  Domain runs a genuine, self-serve public developer portal at developer.domain.com.au: a developer signs
-  up with GitHub, Google, or email, creates a project, and is immediately granted the "Agents & Listings"
-  and "Properties & Locations" packages, with the remaining eleven packages - Address Suggestions, Campaign
-  reporting, Listings Management, Price Estimation, Property Enrichment, Property Package, PropertyRadar,
-  Rental AVM, Schools Data, and Webhooks - added per project and negotiated with an account manager. Domain
-  publishes three machine-readable OpenAPI 3.0.4 documents (latest, v1, v2) directly from its Libraries
-  page, backs them with an OpenID Connect discovery document at auth.domain.com.au, and serves everything
-  from api.domain.com.au behind API-key or OAuth 2.0 (client credentials, authorization code, implicit)
-  credentials. Write access is a different gate entirely: uploading or updating listings requires sandbox
-  sign-off by email to api@domain.com.au and written permission from the principal agent of each agency,
-  making listing management broker-authorised even though the read surface is self-serve. Domain carries
-  no RESO Web API or RESO Data Dictionary certification, exposes no OData $metadata document and no Universal
-  Property Identifier - RESO is a North American NAR-driven standard with no presence in the Australian
-  portal duopoly - and it publishes no open, unlicensed dataset; all data is licensed under the Domain
-  Group API Terms and Conditions.'
+description: 'Domain Group (Domain Holdings Australia Ltd, trading as domain.com.au) is the second of Australia''s two national residential property
+  portals, alongside REA Group''s realestate.com.au, and since 27 August 2025 has been a wholly owned subsidiary of CoStar Group. Headquartered
+  in Sydney, Domain operates the domain.com.au consumer marketplace plus commercial, agent, and developer-project brands, and sits in the middle
+  of the Australian value chain between selling and leasing agencies on one side and buyers, renters, banks, and PropTech builders on the other.
+  Unlike most of the real estate sector, Domain runs a genuine, self-serve public developer portal at developer.domain.com.au: a developer signs
+  up with GitHub, Google, or email, creates a project, and is immediately granted the "Agents & Listings" and "Properties & Locations" packages,
+  with the remaining eleven packages - Address Suggestions, Campaign reporting, Listings Management, Price Estimation, Property Enrichment, Property
+  Package, PropertyRadar, Rental AVM, Schools Data, and Webhooks - added per project and negotiated with an account manager. Domain publishes
+  three machine-readable OpenAPI 3.0.4 documents (latest, v1, v2) directly from its Libraries page, backs them with an OpenID Connect discovery
+  document at auth.domain.com.au, and serves everything from api.domain.com.au behind API-key or OAuth 2.0 (client credentials, authorization
+  code, implicit) credentials. Write access is a different gate entirely: uploading or updating listings requires sandbox sign-off by email to
+  api@domain.com.au and written permission from the principal agent of each agency, making listing management broker-authorised even though the
+  read surface is self-serve. Domain carries no RESO Web API or RESO Data Dictionary certification, exposes no OData $metadata document and no
+  Universal Property Identifier - RESO is a North American NAR-driven standard with no presence in the Australian portal duopoly - and it publishes
+  no open, unlicensed dataset; all data is licensed under the Domain Group API Terms and Conditions.'
 deliveryModel:
   model: saas
   open_source: false
@@ -75,13 +69,151 @@ tags_raw:
 - Portal Marketplace
 - Real-Estate
 created: '2026-07-26'
-modified: '2026-09-16'
+modified: '2026-10-21'
 specificationVersion: '0.23'
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
+common:
+- type: RateLimits
+  url: rate-limits/domain-group-rate-limits.yml
+- type: Spectral
+  url: rules/domain-group-rules.yml
+- type: JSONLD
+  url: json-ld/domain-group-context.jsonld
+- type: Vocabulary
+  url: vocabulary/domain-group-vocabulary.yml
+- type: Webhooks
+  url: asyncapi/domain-group-webhooks-asyncapi.yml
+- type: ErrorCatalog
+  url: errors/domain-group-error-codes.yml
+- type: Overlay
+  url: overlays/domain-group-addresslocators-api-overlay.yaml
+- type: Hosts
+  url: hosts/domain-group-hosts.yml
+- type: Vendors
+  url: vendors/domain-group-vendors.yml
+- type: CapabilityMap
+  url: capabilities/domain-group-capability-edges.yml
+  name: Domain Group Business Capability Map
+- type: AgenticAccess
+  url: agentic-access/domain-group-agentic-access.yml
+- type: DomainSecurity
+  url: security/domain-group-domain-security.yml
+- type: OAuthScopes
+  url: scopes/domain-group-scopes.yml
+- type: Authentication
+  url: authentication/domain-group-authentication.yml
+- type: Website
+  url: https://www.domain.com.au/
+- type: DeveloperPortal
+  url: https://developer.domain.com.au/
+- type: Documentation
+  url: https://developer.domain.com.au/docs/latest
+- type: APIReference
+  url: https://developer.domain.com.au/docs/latest/apis
+- type: SignUp
+  url: https://developer.domain.com.au/docs/latest/getting-started/creating-first-project
+- type: GettingStarted
+  url: https://developer.domain.com.au/docs/latest/getting-started
+- type: Authentication
+  url: https://developer.domain.com.au/docs/latest/authentication
+- type: OpenAPI
+  url: https://developer.domain.com.au/static/latest/media/latest/openapi.json
+- type: WellKnown
+  url: well-known/domain-group-openid-configuration.json
+- type: OpenIDConnect
+  url: https://auth.domain.com.au/v1/.well-known/openid-configuration
+- type: RateLimits
+  url: https://developer.domain.com.au/docs/latest/conventions/rate-limiting
+- type: Sandbox
+  url: https://developer.domain.com.au/docs/latest/conventions/sandbox
+- type: Conventions
+  url: https://developer.domain.com.au/docs/latest/conventions
+- type: Versioning
+  url: https://developer.domain.com.au/docs/latest/conventions/versioning
+- type: Libraries
+  url: https://developer.domain.com.au/docs/latest/libraries
+- type: Support
+  url: https://developer.domain.com.au/docs/latest/support
+- type: SLA
+  url: https://developer.domain.com.au/docs/latest/support/sla
+- type: TermsOfService
+  url: https://www.domain.com.au/group/api-terms-and-conditions/
+- type: Policies
+  url: https://developer.domain.com.au/docs/latest/support/policies
+- type: Troubleshooting
+  url: https://developer.domain.com.au/docs/latest/troubleshooting
+- type: GitHubOrganization
+  url: https://github.com/domain-group
+- type: WellKnown
+  url: well-known/domain-group-well-known.yml
+- type: X-MCPServerCandidate
+  url: mcp/domain-group-mcp.yml
+  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate — a tool list derived from the published
+    API contracts, not an existing server. The scorer already read the manifest and reported mcp_server correctly; the MCPServer type was crediting
+    the artifact-type surfaces with a server that does not exist.'
+  name: API Evangelist enhancements for Domain Public API v2
+- type: Conformance
+  url: conformance/domain-group-conformance.yml
+- type: ErrorCatalog
+  url: errors/domain-group-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/domain-group-lifecycle.yml
+- type: Deprecation
+  url: https://developer.domain.com.au/docs/latest/conventions/versioning
+- type: Conventions
+  url: conventions/domain-group-conventions.yml
+- type: Sandbox
+  url: sandbox/domain-group-sandbox.yml
+- type: DataModel
+  url: data-model/domain-group-data-model.yml
+- type: Webhooks
+  url: asyncapi/domain-group-webhooks.yml
+- type: AsyncAPI
+  url: asyncapi/domain-group-webhooks-asyncapi.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: OpenAPI
+  url: openapi/_original/domain-group-openapi-latest.json
+- type: OpenAPI
+  url: openapi/_original/domain-group-openapi-v1.json
+- type: OpenAPI
+  url: openapi/_original/domain-group-openapi-v2.json
+- type: AgentSkill
+  url: skills/domain-group-property-valuation.md
+  name: Value an Australian property with Domain
+- type: AgentSkill
+  url: skills/domain-group-listing-search.md
+  name: Search Domain listings and enquire on one
+- type: AgentSkill
+  url: skills/domain-group-suburb-market-data.md
+  name: Pull Australian suburb market data from Domain
+- type: AgentSkill
+  url: skills/domain-group-listing-management.md
+  name: Upload and manage listings on Domain from a CRM
+- type: AgentSkill
+  url: skills/domain-group-webhook-subscriptions.md
+  name: Subscribe to Domain webhooks and process notifications
+- type: WellKnown
+  url: well-known/domain-group-jwks.json
+  name: JWKS
+- type: FAQ
+  url: https://developer.domain.com.au/docs/latest/support/faq/
+- type: Contact
+  url: https://developer.domain.com.au/contact/
+- type: PortalOverview
+  url: https://developer.domain.com.au/docs/latest/portal-overview/
+- type: APIExplorer
+  url: https://developer.domain.com.au/docs/latest/live/
+  name: Live API Browser
+- type: DeveloperTermsOfService
+  url: https://developer.domain.com.au/docs/latest/support/terms/
 apis:
 - aid: domain-group:domain-group-addresslocators-api
   name: Domain Group Address Locators API
   description: The AddressLocators API from Domain Group — 1 operation(s) for addresslocators.
-  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  humanURL: https://developer.domain.com.au/docs/latest/apis
   baseURL: https://api.domain.com.au
   tags:
   - AddressLocators
@@ -172,8 +304,8 @@ apis:
     url: asyncapi/domain-group-webhooks-asyncapi.yml
 - aid: domain-group:domain-group-agencies-api
   name: Domain Group Agencies API
-  description: The Agencies API from Domain Group — 5 operation(s) for agencies.
-  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  description: The Agencies API from Domain Group — 6 operation(s) for agencies.
+  humanURL: https://developer.domain.com.au/docs/latest/apis
   baseURL: https://api.domain.com.au
   tags:
   - Agencies
@@ -262,10 +394,20 @@ apis:
     url: asyncapi/domain-group-webhooks.yml
   - type: AsyncAPI
     url: asyncapi/domain-group-webhooks-asyncapi.yml
+  - type: JSONSchema
+    url: json-schema/domain-group-listings-v1-listing-schema.json
+  - type: JSONSchema
+    url: json-schema/domain-group-listings-v2-listing-schema.json
+  - type: JSONSchema
+    url: json-schema/domain-group-listing-performance-v1-statistics-schema.json
+  - type: JSONSchema
+    url: json-schema/domain-group-agencies-v2-agency-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/domain-group-agencies-v2-agency-schema.json
 - aid: domain-group:domain-group-agents-api
   name: Domain Group Agents API
-  description: The Agents API from Domain Group — 4 operation(s) for agents.
-  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  description: The Agents API from Domain Group — 5 operation(s) for agents.
+  humanURL: https://developer.domain.com.au/docs/latest/apis
   baseURL: https://api.domain.com.au
   tags:
   - Agents
@@ -354,10 +496,21 @@ apis:
     url: asyncapi/domain-group-webhooks.yml
   - type: AsyncAPI
     url: asyncapi/domain-group-webhooks-asyncapi.yml
+  - type: JSONSchema
+    url: json-schema/domain-group-listings-v1-listing-schema.json
+  - type: JSONSchema
+    url: json-schema/domain-group-agencies-v1-agent-schema.json
+  - type: JSONSchema
+    url: json-schema/domain-group-listing-performance-v1-statistics-schema.json
+  - type: JSONSchema
+    url: json-schema/domain-group-agencies-v2-agent-review-lite-response-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/domain-group-domain-agent-search-v1-model-auto-suggest-agent-result-dto-schema.json
 - aid: domain-group:domain-group-authorities-api
   name: Domain Group Authorities API
   description: The Authorities API from Domain Group — 6 operation(s) for authorities.
-  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  humanURL: https://developer.domain.com.au/docs/latest/apis
   baseURL: https://api.domain.com.au
   tags:
   - Authorities
@@ -446,10 +599,22 @@ apis:
     url: asyncapi/domain-group-webhooks.yml
   - type: AsyncAPI
     url: asyncapi/domain-group-webhooks-asyncapi.yml
+  - type: JSONSchema
+    url: json-schema/domain-group-authorities-v1-authority-request-schema.json
+  - type: JSONSchema
+    url: json-schema/domain-group-authorities-v1-authority-response-schema.json
+  - type: JSONSchema
+    url: json-schema/domain-group-authorities-v1-attachments-schema.json
+  - type: JSONSchema
+    url: json-schema/domain-group-authorities-v1-vendor-attachments-schema.json
+  - type: JSONSchema
+    url: json-schema/domain-group-authorities-v1-subscription-request-schema.json
+  - type: JSONSchema
+    url: json-schema/domain-group-authorities-v1-subscription-response-schema.json
 - aid: domain-group:domain-group-campaignreporting-api
   name: Domain Group Campaign Reporting API
-  description: The CampaignReporting API from Domain Group — 2 operation(s) for campaignreporting.
-  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  description: The CampaignReporting API from Domain Group — 3 operation(s) for campaignreporting.
+  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api
   baseURL: https://api.domain.com.au
   tags:
   - Campaign Reporting
@@ -540,10 +705,16 @@ apis:
     url: asyncapi/domain-group-webhooks.yml
   - type: AsyncAPI
     url: asyncapi/domain-group-webhooks-asyncapi.yml
+  - type: JSONSchema
+    url: json-schema/domain-group-campaign-api-v1-social-performance-data-response-schema.json
+  - type: JSONSchema
+    url: json-schema/domain-group-campaign-api-v1-listing-performance-data-response-schema.json
+  - type: JSONSchema
+    url: json-schema/domain-group-campaign-api-v1-project-performance-data-response-schema.json
 - aid: domain-group:domain-group-dataset-api
   name: Domain Group Dataset API
   description: The Dataset API from Domain Group — 1 operation(s) for dataset.
-  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  humanURL: https://developer.domain.com.au/docs/latest/apis
   baseURL: https://api.domain.com.au
   tags:
   - Datasets
@@ -637,7 +808,7 @@ apis:
 - aid: domain-group:domain-group-demographics-api
   name: Domain Group Demographics API
   description: The Demographics API from Domain Group — 1 operation(s) for demographics.
-  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  humanURL: https://developer.domain.com.au/docs/latest/apis
   baseURL: https://api.domain.com.au
   tags:
   - Demographics
@@ -726,10 +897,12 @@ apis:
     url: asyncapi/domain-group-webhooks.yml
   - type: AsyncAPI
     url: asyncapi/domain-group-webhooks-asyncapi.yml
+  - type: JSONSchema
+    url: json-schema/domain-group-demographics-response-schema.json
 - aid: domain-group:domain-group-disclaimers-api
   name: Domain Group Disclaimers API
   description: The Disclaimers API from Domain Group — 2 operation(s) for disclaimers.
-  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  humanURL: https://developer.domain.com.au/docs/latest/apis
   baseURL: https://api.domain.com.au
   tags:
   - Disclaimers
@@ -821,7 +994,7 @@ apis:
 - aid: domain-group:domain-group-enquiries-api
   name: Domain Group Enquiries API
   description: The Enquiries API from Domain Group — 2 operation(s) for enquiries.
-  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  humanURL: https://developer.domain.com.au/docs/latest/apis
   baseURL: https://api.domain.com.au
   tags:
   - Enquiries
@@ -910,10 +1083,18 @@ apis:
     url: asyncapi/domain-group-webhooks.yml
   - type: AsyncAPI
     url: asyncapi/domain-group-webhooks-asyncapi.yml
+  - type: JSONSchema
+    url: json-schema/domain-group-enquiries-v1-enquiry-report-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/domain-group-domain-public-adapter-web-api-models-v1-enquiries-enquiry-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/domain-group-domain-enquiry-service-v1-model-group-enquiry-service-models-enquiry-response-schema.json
 - aid: domain-group:domain-group-leadscope-api
   name: Domain Group Leadscope API
   description: The Leadscope API from Domain Group — 2 operation(s) for leadscope.
-  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  humanURL: https://developer.domain.com.au/docs/latest/apis
   baseURL: https://api.domain.com.au
   tags:
   - Leadscope
@@ -1004,8 +1185,8 @@ apis:
     url: asyncapi/domain-group-webhooks-asyncapi.yml
 - aid: domain-group:domain-group-listings-api
   name: Domain Group Listings API
-  description: The Listings API from Domain Group — 18 operation(s) for listings.
-  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  description: The Listings API from Domain Group — 19 operation(s) for listings.
+  humanURL: https://developer.domain.com.au/docs/latest/apis
   baseURL: https://api.domain.com.au
   tags:
   - Listings
@@ -1094,10 +1275,25 @@ apis:
     url: asyncapi/domain-group-webhooks.yml
   - type: AsyncAPI
     url: asyncapi/domain-group-webhooks-asyncapi.yml
+  - type: JSONSchema
+    url: json-schema/domain-group-listings-v1-listing-schema.json
+  - type: JSONSchema
+    url: json-schema/domain-group-listing-admin-v2-commercial-listing-v2-schema.json
+  - type: JSONSchema
+    url: json-schema/domain-group-listings-v2-listing-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/domain-group-domain-listing-admin-service-v1-model-commercial-listing-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/domain-group-domain-listing-admin-service-v1-model-business-listing-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/domain-group-domain-listing-admin-service-v1-model-residential-listing-schema.json
 - aid: domain-group:domain-group-listingsearch-api
   name: Domain Group Listing Search API
   description: The ListingSearch API from Domain Group — 2 operation(s) for listingsearch.
-  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  humanURL: https://developer.domain.com.au/docs/latest/apis
   baseURL: https://api.domain.com.au
   tags:
   - ListingSearch
@@ -1186,10 +1382,19 @@ apis:
     url: asyncapi/domain-group-webhooks.yml
   - type: AsyncAPI
     url: asyncapi/domain-group-webhooks-asyncapi.yml
+  - type: JSONSchema
+    url: >-
+      json-schema/domain-group-search-service-v2-domain-search-web-api-v2-models-search-parameters-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/domain-group-search-service-v2-domain-search-web-api-v2-models-sold-search-parameters-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/domain-group-search-service-v2-domain-search-contracts-v2-search-results-schema.json
 - aid: domain-group:domain-group-locations-api
   name: Domain Group Locations API
   description: The Locations API from Domain Group — 1 operation(s) for locations.
-  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  humanURL: https://developer.domain.com.au/docs/latest/apis
   baseURL: https://api.domain.com.au
   tags:
   - Location
@@ -1280,10 +1485,12 @@ apis:
     url: asyncapi/domain-group-webhooks.yml
   - type: AsyncAPI
     url: asyncapi/domain-group-webhooks-asyncapi.yml
+  - type: JSONSchema
+    url: json-schema/domain-group-domain-location-profiles-service-v1-model-location-schema.json
 - aid: domain-group:domain-group-me-api
   name: Domain Group Me API
   description: The Me API from Domain Group — 3 operation(s) for me.
-  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  humanURL: https://developer.domain.com.au/docs/latest/apis
   baseURL: https://api.domain.com.au
   tags:
   - Me
@@ -1372,10 +1579,16 @@ apis:
     url: asyncapi/domain-group-webhooks.yml
   - type: AsyncAPI
     url: asyncapi/domain-group-webhooks-asyncapi.yml
+  - type: JSONSchema
+    url: json-schema/domain-group-me-v1-provider-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/domain-group-me-v1-my-details-schema.json
+  - type: JSONSchema
+    url: json-schema/domain-group-me-v1-agency-summary-schema.json
 - aid: domain-group:domain-group-premarket-api
   name: Domain Group Pre Market API
   description: The PreMarket API from Domain Group — 2 operation(s) for premarket.
-  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  humanURL: https://developer.domain.com.au/docs/latest/apis
   baseURL: https://api.domain.com.au
   tags:
   - PreMarket
@@ -1464,10 +1677,18 @@ apis:
     url: asyncapi/domain-group-webhooks.yml
   - type: AsyncAPI
     url: asyncapi/domain-group-webhooks-asyncapi.yml
+  - type: JSONSchema
+    url: json-schema/domain-group-pre-market-v1-listing-response-schema.json
+  - type: JSONSchema
+    url: json-schema/domain-group-pre-market-v1-listing-request-schema.json
+  - type: JSONSchema
+    url: json-schema/domain-group-pre-market-v1-listing-request-json-patch-document-schema.json
+  - type: JSONSchema
+    url: json-schema/domain-group-pre-market-v1-create-or-update-listing-response-schema.json
 - aid: domain-group:domain-group-products-api
   name: Domain Group Products API
   description: The Products API from Domain Group — 8 operation(s) for products.
-  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  humanURL: https://developer.domain.com.au/docs/latest/apis
   baseURL: https://api.domain.com.au
   tags:
   - Product
@@ -1558,10 +1779,26 @@ apis:
     url: asyncapi/domain-group-webhooks.yml
   - type: AsyncAPI
     url: asyncapi/domain-group-webhooks-asyncapi.yml
+  - type: JSONSchema
+    url: json-schema/domain-group-bookings-v2-rate-for-new-listing-request-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/domain-group-social-boost-v1-rate-for-new-social-boost-request-model-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/domain-group-booking-v2-api-v1-get-quote-listing-price-by-suburbs-request-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/domain-group-booking-v2-api-v1-get-listing-price-quote-by-agency-response-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/domain-group-booking-v2-api-v1-get-quote-listing-price-by-suburbs-response-schema.json
+  - type: JSONSchema
+    url: json-schema/domain-group-bookings-v2-rate-for-new-listing-schema.json
 - aid: domain-group:domain-group-projects-api
   name: Domain Group Projects API
   description: The Projects API from Domain Group — 6 operation(s) for projects.
-  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  humanURL: https://developer.domain.com.au/docs/latest/apis
   baseURL: https://api.domain.com.au
   tags:
   - Project
@@ -1652,10 +1889,21 @@ apis:
     url: asyncapi/domain-group-webhooks.yml
   - type: AsyncAPI
     url: asyncapi/domain-group-webhooks-asyncapi.yml
+  - type: JSONSchema
+    url: json-schema/domain-group-listings-v2-listing-schema.json
+  - type: JSONSchema
+    url: json-schema/domain-group-listings-v2-project-schema.json
+  - type: JSONSchema
+    url: json-schema/domain-group-enquiries-v1-enquiry-report-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/domain-group-listing-performance-v1-project-listing-statistics-report-schema.json
+  - type: JSONSchema
+    url: json-schema/domain-group-listing-performance-v1-project-statistics-report-schema.json
 - aid: domain-group:domain-group-properties-api
   name: Domain Group Properties API
   description: The Properties API from Domain Group — 10 operation(s) for properties.
-  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  humanURL: https://developer.domain.com.au/docs/latest/apis
   baseURL: https://api.domain.com.au
   tags:
   - Properties
@@ -1744,10 +1992,22 @@ apis:
     url: asyncapi/domain-group-webhooks.yml
   - type: AsyncAPI
     url: asyncapi/domain-group-webhooks-asyncapi.yml
+  - type: JSONSchema
+    url: json-schema/domain-group-listings-v2-listing-schema.json
+  - type: JSONSchema
+    url: json-schema/domain-group-property-enrichment-v2-property-schema.json
+  - type: JSONSchema
+    url: json-schema/domain-group-property-enrichment-v2-property-results-schema.json
+  - type: JSONSchema
+    url: json-schema/domain-group-domain-avm-pi-v1-property-price-estimate-schema.json
+  - type: JSONSchema
+    url: json-schema/domain-group-property-enrichment-v2-sale-history-schema.json
+  - type: JSONSchema
+    url: json-schema/domain-group-type-ahead-v2-properties-suggest-schema.json
 - aid: domain-group:domain-group-propertyavm-api
   name: Domain Group Property Avm API
   description: The PropertyAvm API from Domain Group — 2 operation(s) for propertyavm.
-  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  humanURL: https://developer.domain.com.au/docs/latest/apis
   baseURL: https://api.domain.com.au
   tags:
   - PropertyAvm
@@ -1836,10 +2096,14 @@ apis:
     url: asyncapi/domain-group-webhooks.yml
   - type: AsyncAPI
     url: asyncapi/domain-group-webhooks-asyncapi.yml
+  - type: JSONSchema
+    url: json-schema/domain-group-domain-avm-v1-avm-response-schema.json
+  - type: JSONSchema
+    url: json-schema/domain-group-domain-avm-v1-avm-report-response-schema.json
 - aid: domain-group:domain-group-propertyfeatures-api
   name: Domain Group Property Features API
   description: The PropertyFeatures API from Domain Group — 1 operation(s) for propertyfeatures.
-  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  humanURL: https://developer.domain.com.au/docs/latest/apis
   baseURL: https://api.domain.com.au
   tags:
   - PropertyFeatures
@@ -1928,10 +2192,12 @@ apis:
     url: asyncapi/domain-group-webhooks.yml
   - type: AsyncAPI
     url: asyncapi/domain-group-webhooks-asyncapi.yml
+  - type: JSONSchema
+    url: json-schema/domain-group-property-enrichment-v2-property-features-schema.json
 - aid: domain-group:domain-group-propertylike-api
   name: Domain Group Property Like API
   description: The PropertyLike API from Domain Group — 1 operation(s) for propertylike.
-  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  humanURL: https://developer.domain.com.au/docs/latest/apis
   baseURL: https://api.domain.com.au
   tags:
   - PropertyLike
@@ -2020,10 +2286,12 @@ apis:
     url: asyncapi/domain-group-webhooks.yml
   - type: AsyncAPI
     url: asyncapi/domain-group-webhooks-asyncapi.yml
+  - type: JSONSchema
+    url: json-schema/domain-group-property-enrichment-v2-search-item-output-schema.json
 - aid: domain-group:domain-group-propertyradar-api
   name: Domain Group Property Radar API
   description: The PropertyRadar API from Domain Group — 7 operation(s) for propertyradar.
-  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar
   baseURL: https://api.domain.com.au
   tags:
   - PropertyRadar
@@ -2112,11 +2380,17 @@ apis:
     url: asyncapi/domain-group-webhooks.yml
   - type: AsyncAPI
     url: asyncapi/domain-group-webhooks-asyncapi.yml
+  - type: JSONSchema
+    url: json-schema/domain-group-property-activity-api-v1-portfolio-details-schema.json
+  - type: JSONSchema
+    url: json-schema/domain-group-property-activity-api-v1-portfolio-list-schema.json
+  - type: JSONSchema
+    url: json-schema/domain-group-property-activity-api-v1-portfolio-created-schema.json
 - aid: domain-group:domain-group-propertyzoningperils-api
   name: Domain Group Property Zoning Perils API
   description: >-
     The PropertyZoningPerils API from Domain Group — 1 operation(s) for propertyzoningperils.
-  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  humanURL: https://developer.domain.com.au/docs/latest/apis
   baseURL: https://api.domain.com.au
   tags:
   - PropertyZoningPerils
@@ -2205,10 +2479,12 @@ apis:
     url: asyncapi/domain-group-webhooks.yml
   - type: AsyncAPI
     url: asyncapi/domain-group-webhooks-asyncapi.yml
+  - type: JSONSchema
+    url: json-schema/domain-group-property-enrichment-v2-property-perils-schema.json
 - aid: domain-group:domain-group-salesresults-api
   name: Domain Group Sales Results API
   description: The SalesResults API from Domain Group — 5 operation(s) for salesresults.
-  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  humanURL: https://developer.domain.com.au/docs/latest/apis
   baseURL: https://api.domain.com.au
   tags:
   - SalesResults
@@ -2297,10 +2573,14 @@ apis:
     url: asyncapi/domain-group-webhooks.yml
   - type: AsyncAPI
     url: asyncapi/domain-group-webhooks-asyncapi.yml
+  - type: JSONSchema
+    url: json-schema/domain-group-auction-results-v1-listing-event-item-schema.json
+  - type: JSONSchema
+    url: json-schema/domain-group-auction-results-v1-summary-response-schema.json
 - aid: domain-group:domain-group-schools-api
   name: Domain Group Schools API
   description: The Schools API from Domain Group — 2 operation(s) for schools.
-  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_schools_data
   baseURL: https://api.domain.com.au
   tags:
   - Schools
@@ -2389,10 +2669,14 @@ apis:
     url: asyncapi/domain-group-webhooks.yml
   - type: AsyncAPI
     url: asyncapi/domain-group-webhooks-asyncapi.yml
+  - type: JSONSchema
+    url: json-schema/domain-group-schools-v2-school-schema.json
+  - type: JSONSchema
+    url: json-schema/domain-group-schools-v2-school-with-distance-schema.json
 - aid: domain-group:domain-group-statistics-api
   name: Domain Group Statistics API
   description: The Statistics API from Domain Group — 6 operation(s) for statistics.
-  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  humanURL: https://developer.domain.com.au/docs/latest/apis
   baseURL: https://api.domain.com.au
   tags:
   - Statistics
@@ -2481,10 +2765,14 @@ apis:
     url: asyncapi/domain-group-webhooks.yml
   - type: AsyncAPI
     url: asyncapi/domain-group-webhooks-asyncapi.yml
+  - type: JSONSchema
+    url: json-schema/domain-group-suburb-performance-schema.json
+  - type: JSONSchema
+    url: json-schema/domain-group-suburb-summary-and-historical-schema.json
 - aid: domain-group:domain-group-webhooks-api
   name: Domain Group Webhooks API
   description: The Webhooks API from Domain Group — 2 operation(s) for webhooks.
-  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_webhooks
   baseURL: https://api.domain.com.au
   tags:
   - Webhook
@@ -2575,10 +2863,80 @@ apis:
     url: asyncapi/domain-group-webhooks.yml
   - type: AsyncAPI
     url: asyncapi/domain-group-webhooks-asyncapi.yml
+  - type: JSONSchema
+    url: json-schema/domain-group-webhooks-v1-webhook-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/domain-group-webhooks-v1-add-subscription-request-schema.json
+- aid: domain-group:domain-group-avmhistory-api
+  name: Domain Group Avm History API
+  description: >-
+    The Avm History API from Domain Group — 1 operation(s) for property valuation history (GET /v1/avmHistory/{propertyId},
+    "Retrieves valuation history for the property"). Present in the provider's published Domain Public
+    API latest OpenAPI document.
+  humanURL: https://developer.domain.com.au/docs/latest/apis
+  baseURL: https://api.domain.com.au
+  tags:
+  - AVM History
+  properties:
+  - type: OpenAPI
+    url: openapi/domain-group-avmhistory-api-openapi.yml
+  - name: OpenAPI (provider-hosted)
+    type: OpenAPI
+    url: https://developer.domain.com.au/static/latest/media/latest/openapi.json
+  - type: DeveloperPortal
+    url: https://developer.domain.com.au/
+  - type: JSONSchema
+    url: json-schema/domain-group-avm-history-v1-response-schema.json
+- aid: domain-group:domain-group-auctioncollection-api
+  name: Domain Group Auction Collection API
+  description: >-
+    The Auction Collection API from Domain Group — 2 operation(s) for auction collection: the auction
+    calling sheet of auctions without results yet (GET /v2/auctions/calling-sheet/{state}) and auction
+    updates (PUT /v2/auctions/update). Present in the provider's published Domain Public API latest OpenAPI
+    document.
+  humanURL: https://developer.domain.com.au/docs/latest/apis
+  baseURL: https://api.domain.com.au
+  tags:
+  - Auctions
+  properties:
+  - type: OpenAPI
+    url: openapi/domain-group-auctioncollection-api-openapi.yml
+  - name: OpenAPI (provider-hosted)
+    type: OpenAPI
+    url: https://developer.domain.com.au/static/latest/media/latest/openapi.json
+  - type: DeveloperPortal
+    url: https://developer.domain.com.au/
+  - type: JSONSchema
+    url: json-schema/domain-group-auction-collection-v1-put-auction-update-request-schema.json
+  - type: JSONSchema
+    url: json-schema/domain-group-auction-collection-v1-calling-sheet-response-schema.json
+- aid: domain-group:domain-group-agentsearch-api
+  name: Domain Group Agent Search API
+  description: >-
+    The Agent Search API from Domain Group — 1 operation(s) for agent search by location (POST /v2/agentsearch/agents/location,
+    "Retrieves agents matching the specified location criteria"). Present in the provider's published
+    Domain Public API latest OpenAPI document.
+  humanURL: https://developer.domain.com.au/docs/latest/apis
+  baseURL: https://api.domain.com.au
+  tags:
+  - Agents
+  properties:
+  - type: OpenAPI
+    url: openapi/domain-group-agentsearch-api-openapi.yml
+  - name: OpenAPI (provider-hosted)
+    type: OpenAPI
+    url: https://developer.domain.com.au/static/latest/media/latest/openapi.json
+  - type: DeveloperPortal
+    url: https://developer.domain.com.au/
+  - type: JSONSchema
+    url: json-schema/domain-group-agencies-v2-get-agents-by-location-request-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/domain-group-agencies-v2-agent-search-page-result-contact-stats-dto-schema.json
 - aid: domain-group:domain-group-property-search-api
   name: Domain Group Property Search API
   description: The Property Search API from Domain Group — 1 operation(s) for property search.
-  humanURL: https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion
+  humanURL: https://developer.domain.com.au/docs/latest/apis
   baseURL: https://api.domain.com.au
   tags:
   - Property Search
@@ -2667,125 +3025,42 @@ apis:
     url: asyncapi/domain-group-webhooks.yml
   - type: AsyncAPI
     url: asyncapi/domain-group-webhooks-asyncapi.yml
-common:
-- type: CapabilityMap
-  url: capabilities/domain-group-capability-edges.yml
-  name: Domain Group Business Capability Map
-- type: AgenticAccess
-  url: agentic-access/domain-group-agentic-access.yml
-- type: DomainSecurity
-  url: security/domain-group-domain-security.yml
-- type: OAuthScopes
-  url: scopes/domain-group-scopes.yml
-- type: Authentication
-  url: authentication/domain-group-authentication.yml
-- type: Website
-  url: https://www.domain.com.au/
-- type: DeveloperPortal
-  url: https://developer.domain.com.au/
-- type: Documentation
-  url: https://developer.domain.com.au/docs/latest
-- type: APIReference
-  url: https://developer.domain.com.au/docs/latest/apis
-- type: SignUp
-  url: https://developer.domain.com.au/docs/latest/getting-started/creating-first-project
-- type: GettingStarted
-  url: https://developer.domain.com.au/docs/latest/getting-started
-- type: Authentication
-  url: https://developer.domain.com.au/docs/latest/authentication
-- type: OpenAPI
-  url: https://developer.domain.com.au/static/latest/media/latest/openapi.json
-- type: WellKnown
-  url: well-known/domain-group-openid-configuration.json
-- type: OpenIDConnect
-  url: https://auth.domain.com.au/v1/.well-known/openid-configuration
-- type: RateLimits
-  url: https://developer.domain.com.au/docs/latest/conventions/rate-limiting
-- type: Sandbox
-  url: https://developer.domain.com.au/docs/latest/conventions/sandbox
-- type: Conventions
-  url: https://developer.domain.com.au/docs/latest/conventions
-- type: Versioning
-  url: https://developer.domain.com.au/docs/latest/conventions/versioning
-- type: Libraries
-  url: https://developer.domain.com.au/docs/latest/libraries
-- type: Support
-  url: https://developer.domain.com.au/docs/latest/support
-- type: SLA
-  url: https://developer.domain.com.au/docs/latest/support/sla
-- type: TermsOfService
-  url: https://www.domain.com.au/group/api-terms-and-conditions/
-- type: Policies
-  url: https://developer.domain.com.au/docs/latest/support/policies
-- type: Troubleshooting
-  url: https://developer.domain.com.au/docs/latest/troubleshooting
-- type: GitHubOrganization
-  url: https://github.com/domain-group
-- type: Packages
-  url: packages/domain-group-packages.yml
-- type: WellKnown
-  url: well-known/domain-group-well-known.yml
-- type: X-MCPServerCandidate
-  url: mcp/domain-group-mcp.yml
-  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate
-    — a tool list derived from the published API contracts, not an existing server. The scorer already
-    read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type
-    surfaces with a server that does not exist.'
-- type: LLMsTxt
-  url: llms/domain-group-llms.txt
-- type: Overlay
-  url: overlays/domain-group-latest-overlay.yaml
-  name: API Evangelist enhancements for Domain Public API latest
-- type: Overlay
-  url: overlays/domain-group-v1-overlay.yaml
-  name: API Evangelist enhancements for Domain Public API v1
-- type: Overlay
-  url: overlays/domain-group-v2-overlay.yaml
-  name: API Evangelist enhancements for Domain Public API v2
-- type: Conformance
-  url: conformance/domain-group-conformance.yml
-- type: ErrorCatalog
-  url: errors/domain-group-problem-types.yml
-- type: Lifecycle
-  url: lifecycle/domain-group-lifecycle.yml
-- type: Deprecation
-  url: https://developer.domain.com.au/docs/latest/conventions/versioning
-- type: Conventions
-  url: conventions/domain-group-conventions.yml
-- type: Sandbox
-  url: sandbox/domain-group-sandbox.yml
-- type: DataModel
-  url: data-model/domain-group-data-model.yml
-- type: Webhooks
-  url: asyncapi/domain-group-webhooks.yml
-- type: AsyncAPI
-  url: asyncapi/domain-group-webhooks-asyncapi.yml
-- type: AgentSkill
-  url: skills/_index.yml
-- type: OpenAPI
-  url: openapi/_original/domain-group-openapi-latest.json
-- type: OpenAPI
-  url: openapi/_original/domain-group-openapi-v1.json
-- type: OpenAPI
-  url: openapi/_original/domain-group-openapi-v2.json
-- type: AgentSkill
-  url: skills/domain-group-property-valuation.md
-  name: Value an Australian property with Domain
-- type: AgentSkill
-  url: skills/domain-group-listing-search.md
-  name: Search Domain listings and enquire on one
-- type: AgentSkill
-  url: skills/domain-group-suburb-market-data.md
-  name: Pull Australian suburb market data from Domain
-- type: AgentSkill
-  url: skills/domain-group-listing-management.md
-  name: Upload and manage listings on Domain from a CRM
-- type: AgentSkill
-  url: skills/domain-group-webhook-subscriptions.md
-  name: Subscribe to Domain webhooks and process notifications
-- type: WellKnown
-  url: well-known/domain-group-jwks.json
-  name: JWKS
-maintainers:
-- FN: Kin Lane
-  email: kin@apievangelist.com
+  - type: JSONSchema
+    url: json-schema/domain-group-property-enrichment-v2-point-radius-params-schema.json
+  - type: JSONSchema
+    url: json-schema/domain-group-property-enrichment-v2-search-item-output-schema.json
+  - type: JSONSchema
+    url: json-schema/domain-group-property-enrichment-v2-property-address-v2-schema.json
+  - type: JSONSchema
+    url: json-schema/domain-group-property-enrichment-v2-point-radius-lat-lon-schema.json
+  - type: JSONSchema
+    url: json-schema/domain-group-property-enrichment-v2-point-radius-property-id-schema.json
+  - type: JSONSchema
+    url: json-schema/domain-group-property-enrichment-v2-point-radius-gnaf-id-schema.json
+x-coverage:
+  state: covered
+  reason: identity-verified
+  detail: Website www.domain.com.au answers 403 bot-challenge to a browser UA (edge policy, not dead); identity rests on developer.domain.com.au,
+    whose pages name Domain Group (footer "(c) 2026 Domain Group", links to domain.com.au, commercialrealestate.com.au, allhomes.com.au). No PrivacyPolicy,
+    Blog, Pricing, StatusPage, Roadmap or Postman pointer was found on the developer portal pages read; corporate site unreadable to us.
+  evidence:
+  - url: https://www.domain.com.au/
+    status: 403
+  - url: https://developer.domain.com.au/
+    status: 200
+  - url: https://developer.domain.com.au/contact/
+    status: 200
+  - url: https://developer.domain.com.au/docs/latest/support/faq/
+    status: 200
+  - url: https://developer.domain.com.au/docs/latest/support/terms/
+    status: 200
+  - url: https://developer.domain.com.au/docs/latest/portal-overview/
+    status: 200
+  - url: https://developer.domain.com.au/docs/latest/live/
+    status: 200
+x-enrichment:
+  date: '2026-10-21'
+  status: enriched
+  artifacts_added: 122
+  pass: modular-v1
+  engine: identity=anthropic,contract=anthropic,surfaces=anthropic,docs=anthropic,regulatory=anthropic

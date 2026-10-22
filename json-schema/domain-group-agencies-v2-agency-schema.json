@@ -1,0 +1,1136 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/domain-group/main/json-schema/domain-group-agencies-v2-agency-schema.json",
+  "title": "Agencies.V2.Agency",
+  "description": "Agency",
+  "x-generated": "2026-10-21",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/domain-group-agencies-api-openapi.yml#/components/schemas/Agencies.V2.Agency",
+  "type": "object",
+  "properties": {
+    "accountType": {
+      "enum": [
+        "none",
+        "residential",
+        "commercialLight",
+        "commercialFull",
+        "developer",
+        "holiday",
+        "business"
+      ],
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets AccountType"
+    },
+    "profile": {
+      "$ref": "#/$defs/Agencies.V2.AgencyProfile"
+    },
+    "dateUpdated": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets DateUpdated",
+      "format": "date-time"
+    },
+    "name": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets Name"
+    },
+    "details": {
+      "$ref": "#/$defs/Agencies.V2.AgencyDetails"
+    },
+    "id": {
+      "maximum": 2147483647,
+      "minimum": -2147483648,
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "Gets or Sets Id",
+      "format": "int32"
+    },
+    "creId": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "Gets or Sets CreId",
+      "format": "int32"
+    },
+    "agents": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/$defs/Agencies.V2.ContactInAgencyList"
+      },
+      "description": "Gets or Sets Agents"
+    },
+    "contactDetails": {
+      "$ref": "#/$defs/Agencies.V2.AgencyContactDetails"
+    },
+    "homepassEnabled": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "Gets or Sets HomepassEnabled"
+    },
+    "suburbsServed": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets SuburbsServed"
+    },
+    "subscribedToAgencyPerformanceReport": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "Gets or Sets SubscribedToAgencyPerformanceReport"
+    },
+    "agencyOptions": {
+      "$ref": "#/$defs/Agencies.V2.AgencyOptions"
+    },
+    "welcomeMessage": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets WelcomeMessage"
+    },
+    "adFormat": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets AdFormat"
+    },
+    "providerAgencyId": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets ProviderAgencyId"
+    }
+  },
+  "additionalProperties": false,
+  "x-data-access-level-info": {
+    "Basic": [
+      "AccountType",
+      "Agents",
+      "ContactDetails",
+      "CreId",
+      "Details",
+      "Id",
+      "Name",
+      "Profile",
+      "SuburbsServed"
+    ],
+    "Detailed": [
+      "AccountType",
+      "Agents",
+      "ContactDetails",
+      "CreId",
+      "Details",
+      "Id",
+      "Name",
+      "Profile",
+      "SuburbsServed",
+      "DateUpdated"
+    ],
+    "Full": [
+      "AccountType",
+      "Agents",
+      "ContactDetails",
+      "CreId",
+      "Details",
+      "Id",
+      "Name",
+      "Profile",
+      "SuburbsServed",
+      "DateUpdated",
+      "AdFormat",
+      "AgencyOptions",
+      "HomepassEnabled",
+      "ProviderAgencyId",
+      "SubscribedToAgencyPerformanceReport",
+      "WelcomeMessage"
+    ]
+  },
+  "$defs": {
+    "Agencies.V2.AgencyContactDetails": {
+      "type": "object",
+      "properties": {
+        "businessSale": {
+          "$ref": "#/$defs/Agencies.V2.EmailPhone"
+        },
+        "businessRent": {
+          "$ref": "#/$defs/Agencies.V2.EmailPhone"
+        },
+        "commercialLease": {
+          "$ref": "#/$defs/Agencies.V2.EmailPhone"
+        },
+        "commercialSale": {
+          "$ref": "#/$defs/Agencies.V2.EmailPhone"
+        },
+        "emailDomains": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/$defs/Agencies.V2.EmailDomain"
+          },
+          "description": "Gets or Sets EmailDomains"
+        },
+        "general": {
+          "$ref": "#/$defs/Agencies.V2.GeneralAgencyContactDetails"
+        },
+        "residentialRent": {
+          "$ref": "#/$defs/Agencies.V2.EmailPhone"
+        },
+        "residentialSale": {
+          "$ref": "#/$defs/Agencies.V2.EmailPhone"
+        }
+      },
+      "additionalProperties": false,
+      "description": "AgencyContactDetails",
+      "x-data-access-level-info": {
+        "Basic": [
+          "*"
+        ],
+        "Detailed": [
+          "*"
+        ],
+        "Full": [
+          "*"
+        ]
+      }
+    },
+    "Agencies.V2.AgencyDetails": {
+      "required": [
+        "contractState",
+        "excludeFromAgencyRanking",
+        "hideMarketPriceEstimate",
+        "limitEmailDomain",
+        "postcode",
+        "state",
+        "streetAddress1",
+        "suburb"
+      ],
+      "type": "object",
+      "properties": {
+        "streetAddress1": {
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string",
+          "description": "Gets or Sets StreetAddress1"
+        },
+        "streetAddress2": {
+          "maxLength": 100,
+          "minLength": 0,
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets StreetAddress2"
+        },
+        "suburb": {
+          "maxLength": 25,
+          "minLength": 0,
+          "type": "string",
+          "description": "Gets or Sets Suburb"
+        },
+        "state": {
+          "maxLength": 3,
+          "minLength": 0,
+          "type": "string",
+          "description": "Gets or Sets State"
+        },
+        "postcode": {
+          "maxLength": 4,
+          "minLength": 0,
+          "type": "string",
+          "description": "Gets or Sets Postcode"
+        },
+        "agencyWebsite": {
+          "maxLength": 100,
+          "minLength": 0,
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets AgencyWebsite"
+        },
+        "principalName": {
+          "maxLength": 50,
+          "minLength": 0,
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets PrincipalName"
+        },
+        "principalEmail": {
+          "maxLength": 150,
+          "minLength": 0,
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets PrincipalEmail"
+        },
+        "showPastSalesPrices": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "description": "Gets or Sets ShowPastSalesPrices"
+        },
+        "isAgencyReportEnabled": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "description": "Gets or Sets IsAgencyReportEnabled"
+        },
+        "salesEmail": {
+          "maxLength": 100,
+          "minLength": 0,
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets SalesEmail"
+        },
+        "rentalEmail": {
+          "maxLength": 100,
+          "minLength": 0,
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets RentalEmail"
+        },
+        "isPromotionalTelephoneActive": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "description": "Gets or Sets IsPromotionalTelephoneActive"
+        },
+        "hideMarketPriceEstimate": {
+          "type": "boolean",
+          "description": "Gets or Sets HideMarketPriceEstimate"
+        },
+        "limitEmailDomain": {
+          "type": "boolean",
+          "description": "Gets or Sets LimitEmailDomain"
+        },
+        "showTabSoldLastYear": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "description": "Gets or Sets ShowTabSoldLastYear"
+        }
+      },
+      "additionalProperties": false,
+      "description": "AgencyDetails",
+      "x-data-access-level-info": {
+        "Basic": [
+          "AgencyWebsite",
+          "Postcode",
+          "PrincipalName",
+          "State",
+          "Suburb",
+          "StreetAddress1",
+          "StreetAddress2"
+        ],
+        "Detailed": [
+          "AgencyWebsite",
+          "Postcode",
+          "PrincipalName",
+          "State",
+          "Suburb",
+          "StreetAddress1",
+          "StreetAddress2",
+          "PrincipalEmail",
+          "RentalEmail",
+          "SalesEmail"
+        ],
+        "Full": [
+          "AgencyWebsite",
+          "Postcode",
+          "PrincipalName",
+          "State",
+          "Suburb",
+          "StreetAddress1",
+          "StreetAddress2",
+          "PrincipalEmail",
+          "RentalEmail",
+          "SalesEmail",
+          "HideMarketPriceEstimate",
+          "IsAgencyReportEnabled",
+          "IsPromotionalTelephoneActive",
+          "LimitEmailDomain",
+          "ShowPastSalesPrices",
+          "ShowTabSoldLastYear"
+        ]
+      }
+    },
+    "Agencies.V2.AgencyOptions": {
+      "required": [
+        "agentDirectoryListing",
+        "leaseListingsGstOption",
+        "receiveLookForPropertyRequests",
+        "receivePropertyValuationRequests",
+        "receiveSellPropertyRequests",
+        "saleListingsGstOption"
+      ],
+      "type": "object",
+      "properties": {
+        "saleListingsGstOption": {
+          "type": "integer",
+          "description": "Gets or Sets SaleListingsGstOption",
+          "format": "int32"
+        },
+        "leaseListingsGstOption": {
+          "type": "integer",
+          "description": "Gets or Sets LeaseListingsGstOption",
+          "format": "int32"
+        },
+        "receiveLookForPropertyRequests": {
+          "type": "boolean",
+          "description": "Gets or Sets ReceiveLookForPropertyRequests"
+        },
+        "receiveSellPropertyRequests": {
+          "type": "boolean",
+          "description": "Gets or Sets ReceiveSellPropertyRequests"
+        },
+        "receivePropertyValuationRequests": {
+          "type": "boolean",
+          "description": "Gets or Sets ReceivePropertyValuationRequests"
+        },
+        "agentDirectoryListing": {
+          "type": "boolean",
+          "description": "Gets or Sets AgentDirectoryListing"
+        }
+      },
+      "additionalProperties": false,
+      "description": "AgencyOptions",
+      "x-data-access-level-info": {
+        "Basic": [
+          "*"
+        ],
+        "Detailed": [
+          "*"
+        ],
+        "Full": [
+          "*"
+        ]
+      }
+    },
+    "Agencies.V2.AgencyPhoto": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "maxLength": 250,
+          "minLength": 0,
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets Url"
+        }
+      },
+      "additionalProperties": false,
+      "description": "AgencyPhoto",
+      "x-data-access-level-info": {
+        "Basic": [
+          "*"
+        ],
+        "Detailed": [
+          "*"
+        ],
+        "Full": [
+          "*"
+        ]
+      }
+    },
+    "Agencies.V2.AgencyProfile": {
+      "type": "object",
+      "properties": {
+        "agencyPhotos": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/$defs/Agencies.V2.AgencyPhoto"
+          },
+          "description": "Gets or Sets AgencyPhotos"
+        },
+        "profileWebsite": {
+          "maxLength": 50,
+          "minLength": 0,
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets ProfileWebsite"
+        },
+        "agencyBanner": {
+          "maxLength": 100,
+          "minLength": 0,
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets AgencyBanner"
+        },
+        "agencyWebsite": {
+          "maxLength": 100,
+          "minLength": 0,
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets AgencyWebsite"
+        },
+        "agencyLogoStandard": {
+          "maxLength": 100,
+          "minLength": 0,
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets AgencyLogoStandard"
+        },
+        "agencyLogoSmall": {
+          "maxLength": 100,
+          "minLength": 0,
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets AgencyLogoSmall"
+        },
+        "logoColour": {
+          "maxLength": 10,
+          "minLength": 0,
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets LogoColour"
+        },
+        "primaryAgencyColour": {
+          "maxLength": 10,
+          "minLength": 0,
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets PrimaryAgencyColour"
+        },
+        "backgroundColour": {
+          "maxLength": 10,
+          "minLength": 0,
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets BackgroundColour"
+        },
+        "mapLatitude": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets MapLatitude"
+        },
+        "mapLongitude": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets MapLongitude"
+        },
+        "mapCertainty": {
+          "maximum": 2147483647,
+          "minimum": -2147483648,
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Gets or Sets MapCertainty",
+          "format": "int32"
+        },
+        "agencyVideoUrl": {
+          "maxLength": 250,
+          "minLength": 0,
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets AgencyVideoUrl"
+        },
+        "agencyDescription": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets AgencyDescription"
+        },
+        "agencyDescriptionCre": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets AgencyDescriptionCre"
+        },
+        "creProfileWebsite": {
+          "maxLength": 50,
+          "minLength": 0,
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets CreProfileWebsite"
+        },
+        "agencyCreBanner": {
+          "maxLength": 100,
+          "minLength": 0,
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets AgencyCreBanner"
+        },
+        "agencyCreWebsite": {
+          "maxLength": 100,
+          "minLength": 0,
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets AgencyCreWebsite"
+        },
+        "agencyCreLogoStandard": {
+          "maxLength": 100,
+          "minLength": 0,
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets AgencyCreLogoStandard"
+        },
+        "numberForSale": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Gets or Sets NumberForSale",
+          "format": "int32"
+        },
+        "numberForRent": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Gets or Sets NumberForRent",
+          "format": "int32"
+        },
+        "numberForSaleCommercial": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Gets or Sets NumberForSaleCommercial",
+          "format": "int32"
+        },
+        "numberForRentCommercial": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Gets or Sets NumberForRentCommercial",
+          "format": "int32"
+        },
+        "creAgencyVideoUrl": {
+          "maxLength": 240,
+          "minLength": 0,
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets CreAgencyVideoUrl"
+        }
+      },
+      "additionalProperties": false,
+      "description": "AgencyProfile",
+      "x-data-access-level-info": {
+        "Basic": [
+          "AgencyBanner",
+          "AgencyCreBanner",
+          "AgencyCreLogoStandard",
+          "AgencyCreWebsite",
+          "AgencyDescription",
+          "AgencyDescriptionCre",
+          "AgencyLogoStandard",
+          "AgencyLogoSmall",
+          "BackgroundColour",
+          "LogoColour",
+          "PrimaryAgencyColour",
+          "AgencyWebsite",
+          "CreProfileWebsite",
+          "MapCertainty",
+          "MapLatitude",
+          "MapLongitude",
+          "NumberForRent",
+          "NumberForRentCommercial",
+          "NumberForSale",
+          "NumberForSaleCommercial",
+          "ProfileWebsite"
+        ],
+        "Detailed": [
+          "AgencyBanner",
+          "AgencyCreBanner",
+          "AgencyCreLogoStandard",
+          "AgencyCreWebsite",
+          "AgencyDescription",
+          "AgencyDescriptionCre",
+          "AgencyLogoStandard",
+          "AgencyLogoSmall",
+          "BackgroundColour",
+          "LogoColour",
+          "PrimaryAgencyColour",
+          "AgencyWebsite",
+          "CreProfileWebsite",
+          "MapCertainty",
+          "MapLatitude",
+          "MapLongitude",
+          "NumberForRent",
+          "NumberForRentCommercial",
+          "NumberForSale",
+          "NumberForSaleCommercial",
+          "ProfileWebsite",
+          "CreAgencyVideoUrl",
+          "AgencyVideoUrl",
+          "AgencyPhotos"
+        ],
+        "Full": [
+          "AgencyBanner",
+          "AgencyCreBanner",
+          "AgencyCreLogoStandard",
+          "AgencyCreWebsite",
+          "AgencyDescription",
+          "AgencyDescriptionCre",
+          "AgencyLogoStandard",
+          "AgencyLogoSmall",
+          "BackgroundColour",
+          "LogoColour",
+          "PrimaryAgencyColour",
+          "AgencyWebsite",
+          "CreProfileWebsite",
+          "MapCertainty",
+          "MapLatitude",
+          "MapLongitude",
+          "NumberForRent",
+          "NumberForRentCommercial",
+          "NumberForSale",
+          "NumberForSaleCommercial",
+          "ProfileWebsite",
+          "CreAgencyVideoUrl",
+          "AgencyVideoUrl",
+          "AgencyPhotos"
+        ]
+      }
+    },
+    "Agencies.V2.ContactInAgencyList": {
+      "type": "object",
+      "properties": {
+        "agencyId": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Gets or Sets AgencyId",
+          "format": "int32"
+        },
+        "id": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Gets or Sets Id",
+          "format": "int32"
+        },
+        "email": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets Email"
+        },
+        "firstName": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets FirstName"
+        },
+        "mobile": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets Mobile"
+        },
+        "photo": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets Photo"
+        },
+        "lastName": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets LastName"
+        },
+        "isActiveProfilePage": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets IsActiveProfilePage"
+        },
+        "phone": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets Phone"
+        },
+        "saleActive": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "description": "Gets or Sets SaleActive"
+        },
+        "rentalActive": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "description": "Gets or Sets RentalActive"
+        },
+        "secondaryEmail": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets SecondaryEmail"
+        },
+        "facebookUrl": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets FacebookUrl"
+        },
+        "twitterUrl": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets TwitterUrl"
+        },
+        "agentVideo": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets AgentVideo"
+        },
+        "profileText": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets ProfileText"
+        },
+        "isHideSoldLeasedListings": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "description": "Gets or Sets IsHideSoldLeasedListings"
+        },
+        "googlePlusUrl": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets GooglePlusUrl"
+        },
+        "personalWebsiteUrl": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets PersonalWebsiteUrl"
+        },
+        "linkedInUrl": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets LinkedInUrl"
+        },
+        "fax": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets Fax"
+        },
+        "mugShotNew": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets MugShotNew"
+        },
+        "contactTypeCode": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Gets or Sets ContactTypeCode",
+          "format": "int32"
+        },
+        "receivesRequests": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "description": "Gets or Sets ReceivesRequests"
+        },
+        "creAgentVideoURL": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets CreAgentVideoURL"
+        },
+        "receiveScheduledReportEmail": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "description": "Gets or Sets ReceiveScheduledReportEmail"
+        }
+      },
+      "additionalProperties": false,
+      "description": "ContactInAgencyList",
+      "x-data-access-level-info": {
+        "Basic": [
+          "AgencyId",
+          "Id",
+          "ContactTypeCode",
+          "FacebookUrl",
+          "FirstName",
+          "LastName",
+          "GooglePlusUrl",
+          "MugShotNew",
+          "Phone",
+          "Photo",
+          "ProfileText",
+          "TwitterUrl"
+        ],
+        "Detailed": [
+          "AgencyId",
+          "Id",
+          "ContactTypeCode",
+          "FacebookUrl",
+          "FirstName",
+          "LastName",
+          "GooglePlusUrl",
+          "MugShotNew",
+          "Phone",
+          "Photo",
+          "ProfileText",
+          "TwitterUrl",
+          "AgentVideo",
+          "CreAgentVideoURL",
+          "Email",
+          "LinkedInUrl",
+          "Mobile",
+          "PersonalWebsiteUrl",
+          "SecondaryEmail"
+        ],
+        "Full": [
+          "AgencyId",
+          "Id",
+          "ContactTypeCode",
+          "FacebookUrl",
+          "FirstName",
+          "LastName",
+          "GooglePlusUrl",
+          "MugShotNew",
+          "Phone",
+          "Photo",
+          "ProfileText",
+          "TwitterUrl",
+          "AgentVideo",
+          "CreAgentVideoURL",
+          "Email",
+          "LinkedInUrl",
+          "Mobile",
+          "PersonalWebsiteUrl",
+          "SecondaryEmail",
+          "Fax",
+          "IsActiveProfilePage",
+          "IsHideSoldLeasedListings",
+          "ReceiveScheduledReportEmail",
+          "ReceivesRequests",
+          "RentalActive",
+          "SaleActive"
+        ]
+      }
+    },
+    "Agencies.V2.EmailDomain": {
+      "type": "object",
+      "properties": {
+        "domain": {
+          "maxLength": 50,
+          "minLength": 0,
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets Domain"
+        }
+      },
+      "additionalProperties": false,
+      "description": "EmailDomain",
+      "x-data-access-level-info": {
+        "Basic": [
+          "*"
+        ],
+        "Detailed": [
+          "*"
+        ],
+        "Full": [
+          "*"
+        ]
+      }
+    },
+    "Agencies.V2.EmailPhone": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "maxLength": 100,
+          "minLength": 0,
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets Email"
+        },
+        "phone": {
+          "maxLength": 50,
+          "minLength": 0,
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets Phone"
+        }
+      },
+      "additionalProperties": false,
+      "description": "EmailPhone",
+      "x-data-access-level-info": {
+        "Basic": [
+          "*"
+        ],
+        "Detailed": [
+          "*"
+        ],
+        "Full": [
+          "*"
+        ]
+      }
+    },
+    "Agencies.V2.GeneralAgencyContactDetails": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "maxLength": 100,
+          "minLength": 0,
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets Email"
+        },
+        "fax": {
+          "maxLength": 50,
+          "minLength": 0,
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets Fax"
+        },
+        "phone": {
+          "maxLength": 50,
+          "minLength": 0,
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets Phone"
+        },
+        "mobile": {
+          "maxLength": 20,
+          "minLength": 0,
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets Mobile"
+        }
+      },
+      "additionalProperties": false,
+      "description": "GeneralAgencyContactDetails",
+      "x-data-access-level-info": {
+        "Basic": [
+          "*"
+        ],
+        "Detailed": [
+          "*"
+        ],
+        "Full": [
+          "*"
+        ]
+      }
+    }
+  }
+}

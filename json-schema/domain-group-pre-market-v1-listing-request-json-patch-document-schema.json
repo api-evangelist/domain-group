@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/domain-group/main/json-schema/domain-group-pre-market-v1-listing-request-json-patch-document-schema.json",
+  "title": "PreMarket.v1.ListingRequestJsonPatchDocument",
+  "x-generated": "2026-10-21",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/domain-group-premarket-api-openapi.yml#/components/schemas/PreMarket.v1.ListingRequestJsonPatchDocument",
+  "type": "object",
+  "properties": {
+    "operations": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/$defs/PreMarket.v1.ListingRequestOperation"
+      },
+      "readOnly": true
+    },
+    "contractResolver": {
+      "$ref": "#/$defs/PreMarket.v1.IContractResolver"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "PreMarket.v1.IContractResolver": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "PreMarket.v1.ListingRequestOperation": {
+      "type": "object",
+      "properties": {
+        "operationType": {
+          "$ref": "#/$defs/PreMarket.v1.OperationType"
+        },
+        "path": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "op": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "from": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "value": {}
+      },
+      "additionalProperties": false
+    },
+    "PreMarket.v1.OperationType": {
+      "enum": [
+        "add",
+        "remove",
+        "replace",
+        "move",
+        "copy",
+        "test",
+        "invalid"
+      ],
+      "type": "string"
+    }
+  }
+}

@@ -98,31 +98,19 @@ paths:
       x-domain-environment: Primary
 components:
   schemas:
-    ProblemDetails:
+    Schools.V2.SchoolWithDistance:
       type: object
       properties:
-        type:
+        distance:
           type:
-          - string
+          - number
           - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        instance:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
+          description: Gets or Sets Distance
+          format: double
+        school:
+          $ref: '#/components/schemas/Schools.V2.School'
+      additionalProperties: false
+      description: SchoolWithDistance
       x-data-access-level-info:
         Basic:
         - '*'
@@ -148,103 +136,6 @@ components:
         Detailed: []
         Full:
         - Type
-    Schools.V2.SchoolProfile:
-      type: object
-      properties:
-        url:
-          type:
-          - string
-          - 'null'
-          description: Website for the school
-        yearRange:
-          type:
-          - string
-          - 'null'
-          description: The range of year levels offered by the school.
-        icsea:
-          type:
-          - integer
-          - 'null'
-          description: The Index of Community Socio-Educational Advantage score for the school. This score is derived from a number of variables including parental school and non-school education and occupation, the school’s geographical location and proportion of Indigenous students.
-          format: int32
-        bottomSeaQuarter:
-          type:
-          - integer
-          - 'null'
-          description: The percentage of students positioned in the lowest socio-educational advantage quarter.
-          format: int32
-        lowerMiddleSeaQuarter:
-          type:
-          - integer
-          - 'null'
-          description: The percentage of students positioned in the lower middle socio-educational advantage quarter.
-          format: int32
-        upperMiddleSeaQuarter:
-          type:
-          - integer
-          - 'null'
-          description: The percentage of students positioned in the higher middle socio-educational advantage quarter.
-          format: int32
-        topSeaQuarter:
-          type:
-          - integer
-          - 'null'
-          description: The percentage of students positioned in the highest socio-educational advantage quarter.
-          format: int32
-        totalEnrolments:
-          type:
-          - integer
-          - 'null'
-          description: The total number of students, including both full-time and part-time students, who are enrolled at the school in the calendar year specified.
-          format: int32
-        girlsEnrolments:
-          type:
-          - integer
-          - 'null'
-          description: The total number of female students, including both full-time and part-time students, who are enrolled at the school in the calendar year specified.
-          format: int32
-        boysEnrolments:
-          type:
-          - integer
-          - 'null'
-          description: The total number of male students, including full-time and part-time students, who are enrolled at the school in the calendar year specified.
-          format: int32
-      additionalProperties: false
-      description: SchoolProfile
-      x-data-access-level-info:
-        Basic:
-        - Url
-        - YearRange
-        - GirlsEnrolments
-        - BoysEnrolments
-        - TotalEnrolments
-        - TopSeaQuarter
-        - UpperMiddleSeaQuarter
-        - LowerMiddleSeaQuarter
-        - BottomSeaQuarter
-        - Icsea
-        Detailed:
-        - Url
-        - YearRange
-        - GirlsEnrolments
-        - BoysEnrolments
-        - TotalEnrolments
-        - TopSeaQuarter
-        - UpperMiddleSeaQuarter
-        - LowerMiddleSeaQuarter
-        - BottomSeaQuarter
-        - Icsea
-        Full:
-        - Url
-        - YearRange
-        - GirlsEnrolments
-        - BoysEnrolments
-        - TotalEnrolments
-        - TopSeaQuarter
-        - UpperMiddleSeaQuarter
-        - LowerMiddleSeaQuarter
-        - BottomSeaQuarter
-        - Icsea
     Schools.V2.School:
       type: object
       properties:
@@ -353,19 +244,128 @@ components:
         - Centroid
         - Gender
         - Catchments
-    Schools.V2.SchoolWithDistance:
+    Schools.V2.SchoolProfile:
       type: object
       properties:
-        distance:
+        url:
           type:
-          - number
+          - string
           - 'null'
-          description: Gets or Sets Distance
-          format: double
-        school:
-          $ref: '#/components/schemas/Schools.V2.School'
+          description: Website for the school
+        yearRange:
+          type:
+          - string
+          - 'null'
+          description: The range of year levels offered by the school.
+        icsea:
+          type:
+          - integer
+          - 'null'
+          description: The Index of Community Socio-Educational Advantage score for the school. This score is derived from a number of variables including parental school and non-school education and occupation, the school’s geographical location and proportion of Indigenous students.
+          format: int32
+        bottomSeaQuarter:
+          type:
+          - integer
+          - 'null'
+          description: The percentage of students positioned in the lowest socio-educational advantage quarter.
+          format: int32
+        lowerMiddleSeaQuarter:
+          type:
+          - integer
+          - 'null'
+          description: The percentage of students positioned in the lower middle socio-educational advantage quarter.
+          format: int32
+        upperMiddleSeaQuarter:
+          type:
+          - integer
+          - 'null'
+          description: The percentage of students positioned in the higher middle socio-educational advantage quarter.
+          format: int32
+        topSeaQuarter:
+          type:
+          - integer
+          - 'null'
+          description: The percentage of students positioned in the highest socio-educational advantage quarter.
+          format: int32
+        totalEnrolments:
+          type:
+          - integer
+          - 'null'
+          description: The total number of students, including both full-time and part-time students, who are enrolled at the school in the calendar year specified.
+          format: int32
+        girlsEnrolments:
+          type:
+          - integer
+          - 'null'
+          description: The total number of female students, including both full-time and part-time students, who are enrolled at the school in the calendar year specified.
+          format: int32
+        boysEnrolments:
+          type:
+          - integer
+          - 'null'
+          description: The total number of male students, including full-time and part-time students, who are enrolled at the school in the calendar year specified.
+          format: int32
       additionalProperties: false
-      description: SchoolWithDistance
+      description: SchoolProfile
+      x-data-access-level-info:
+        Basic:
+        - Url
+        - YearRange
+        - GirlsEnrolments
+        - BoysEnrolments
+        - TotalEnrolments
+        - TopSeaQuarter
+        - UpperMiddleSeaQuarter
+        - LowerMiddleSeaQuarter
+        - BottomSeaQuarter
+        - Icsea
+        Detailed:
+        - Url
+        - YearRange
+        - GirlsEnrolments
+        - BoysEnrolments
+        - TotalEnrolments
+        - TopSeaQuarter
+        - UpperMiddleSeaQuarter
+        - LowerMiddleSeaQuarter
+        - BottomSeaQuarter
+        - Icsea
+        Full:
+        - Url
+        - YearRange
+        - GirlsEnrolments
+        - BoysEnrolments
+        - TotalEnrolments
+        - TopSeaQuarter
+        - UpperMiddleSeaQuarter
+        - LowerMiddleSeaQuarter
+        - BottomSeaQuarter
+        - Icsea
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
       x-data-access-level-info:
         Basic:
         - '*'
@@ -389,18 +389,19 @@ components:
             api_addresslocators_read: api_addresslocators_read
             api_agencies_read: api_agencies_read
             api_agencies_write: api_agencies_write
+            api_auction_read: api_auction_read
+            api_auction_write: api_auction_write
             api_authorities_write: api_authorities_write
             api_avm_read: api_avm_read
+            api_avmhistory_read: api_avmhistory_read
             api_campaignperformance_read: api_campaignperformance_read
             api_dataset_read: api_dataset_read
             api_demographics_read: api_demographics_read
             api_enquiries_read: api_enquiries_read
             api_enquiries_write: api_enquiries_write
-            api_listingperformance_read: api_listingperformance_read
             api_listings_read: api_listings_read
             api_listings_write: api_listings_write
             api_locations_read: api_locations_read
-            api_projectperformance_read: api_projectperformance_read
             api_properties_read: api_properties_read
             api_propertyportfolio_read: api_propertyportfolio_read
             api_propertyportfolio_write: api_propertyportfolio_write
@@ -419,18 +420,19 @@ components:
             api_addresslocators_read: api_addresslocators_read
             api_agencies_read: api_agencies_read
             api_agencies_write: api_agencies_write
+            api_auction_read: api_auction_read
+            api_auction_write: api_auction_write
             api_authorities_write: api_authorities_write
             api_avm_read: api_avm_read
+            api_avmhistory_read: api_avmhistory_read
             api_campaignperformance_read: api_campaignperformance_read
             api_dataset_read: api_dataset_read
             api_demographics_read: api_demographics_read
             api_enquiries_read: api_enquiries_read
             api_enquiries_write: api_enquiries_write
-            api_listingperformance_read: api_listingperformance_read
             api_listings_read: api_listings_read
             api_listings_write: api_listings_write
             api_locations_read: api_locations_read
-            api_projectperformance_read: api_projectperformance_read
             api_properties_read: api_properties_read
             api_propertyportfolio_read: api_propertyportfolio_read
             api_propertyportfolio_write: api_propertyportfolio_write

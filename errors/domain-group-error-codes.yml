@@ -1,0 +1,34 @@
+generated: '2026-10-21'
+method: searched
+source: https://developer.domain.com.au/docs/latest/troubleshooting/
+format: http-status plus X-Domain-Security-Reason header
+envelope:
+  header: X-Domain-Security-Reason
+  note: As a first step, always check any returned error responses for a X-Domain-Security-Reason header. It will usually indicate the cause of the issue.
+problems:
+- status: 401/403
+  title: Missing Required Scope
+  description: The authorisation token used for the request does not have the required scope to access the resource.
+  remediation: Review the documentation for the API you are trying to access to ensure you have the correct scope; if the problem continues, create a new OAuth client or API Key with updated scopes.
+- status: 401/403
+  title: An internal system has denied access to this resource
+  description: The API call is attempting to access data not permitted. I.e. agency specific data, without appropriate consent.
+  remediation: Ensure the user context is set or the correct user is logged in (verify with GET /v1/me).
+- status: 401/403
+  title: The API call is not allowed on the current Plan
+  remediation: Check the API Plans that the current Project has available.
+- status: 401/403
+  title: The Authorization token or API Key has expired or is invalid
+  remediation: Try and obtain a new access_token.
+- status: 401/403
+  title: Project restricted from access to this environment
+  remediation: Ensure the Project is configured for the environment in use (Primary or Sandbox).
+- status: unstated
+  title: invalid_grant / unauthorized_client
+  description: Errors returned when obtaining an access token.
+  remediation: Check the credential is set to Implicit or Authorization Code, the authorization code is unused and unexpired, and the redirect_uri is present and correct (callback url changes can take up to 10 minutes to take effect).
+  note: The status code for token errors is not stated on the page.
+- status: 429
+  title: Requests over quota
+  description: Request rate too high, or too many requests over a 24 hour period.
+  remediation: Add throttling; honour Retry-After; see rate-limits/.

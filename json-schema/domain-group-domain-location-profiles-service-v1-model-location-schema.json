@@ -1,0 +1,314 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/domain-group/main/json-schema/domain-group-domain-location-profiles-service-v1-model-location-schema.json",
+  "title": "Domain.LocationProfilesService.v1.Model.Location",
+  "x-generated": "2026-10-21",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/domain-group-locations-api-openapi.yml#/components/schemas/Domain.LocationProfilesService.v1.Model.Location",
+  "type": "object",
+  "properties": {
+    "domainLocationId": {
+      "type": "integer",
+      "format": "int32"
+    },
+    "postcode": {
+      "type": "string"
+    },
+    "pfLocationId": {
+      "type": "string"
+    },
+    "surroundingSuburbs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Domain.LocationProfilesService.v1.Model.LocationSurroundingSuburbs"
+      }
+    },
+    "urlSlug": {
+      "type": "string"
+    },
+    "suburbName": {
+      "type": "string"
+    },
+    "data": {
+      "$ref": "#/$defs/Domain.LocationProfilesService.v1.Model.LocationData"
+    },
+    "apmLocationId": {
+      "type": "integer",
+      "format": "int32"
+    },
+    "locationId": {
+      "type": "integer",
+      "format": "int32"
+    },
+    "areaName": {
+      "type": "string"
+    },
+    "regionName": {
+      "type": "string"
+    },
+    "state": {
+      "type": "string"
+    }
+  },
+  "x-data-access-level-info": {
+    "Basic": [
+      "*"
+    ],
+    "Detailed": [
+      "*"
+    ],
+    "Full": [
+      "*"
+    ]
+  },
+  "$defs": {
+    "Domain.LocationProfilesService.v1.Model.LocationData": {
+      "type": "object",
+      "properties": {
+        "studiosForRent": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "terracedHousesForSale": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "semiDetachedHousesForSale": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "townhousesForRent": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "apartmentsAndUnitsForSale": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "apartmentsAndUnitsForRent": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "villasForSale": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "duplexesForSale": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "semiDetachedHousesForRent": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "studiosForSale": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "singlePercentage": {
+          "type": "number",
+          "format": "double"
+        },
+        "mostCommonAgeBracket": {
+          "type": "string"
+        },
+        "renterPercentage": {
+          "type": "number",
+          "format": "double"
+        },
+        "penthousesForSale": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "villasForRent": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "duplexesForRent": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "housesForSale": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "ownerOccupierPercentage": {
+          "type": "number",
+          "format": "double"
+        },
+        "propertyCategories": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Domain.LocationProfilesService.v1.Model.LocationDataPropertyCategories"
+          }
+        },
+        "population": {
+          "type": "number",
+          "format": "double"
+        },
+        "penthousesForRent": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "townhousesForSale": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "terracedHousesForRent": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "marriedPercentage": {
+          "type": "number",
+          "format": "double"
+        },
+        "housesForRent": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "blockOfUnitsForSale": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "x-data-access-level-info": {
+        "Basic": [
+          "*"
+        ],
+        "Detailed": [
+          "*"
+        ],
+        "Full": [
+          "*"
+        ]
+      }
+    },
+    "Domain.LocationProfilesService.v1.Model.LocationDataPropertyCategories": {
+      "type": "object",
+      "properties": {
+        "luxuryLevelPrice": {
+          "type": "number",
+          "format": "double"
+        },
+        "numberSold": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "estimatedRepayments": {
+          "type": "number",
+          "format": "double"
+        },
+        "forSale": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "medianSoldPrice": {
+          "type": "number",
+          "format": "double"
+        },
+        "medianRentPrice": {
+          "type": "number",
+          "format": "double"
+        },
+        "daysOnMarket": {
+          "type": "number",
+          "format": "double"
+        },
+        "bedrooms": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "forRent": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "entryLevelPrice": {
+          "type": "number",
+          "format": "double"
+        },
+        "salesGrowthList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Domain.LocationProfilesService.v1.Model.LocationDataSalesGrowthList"
+          }
+        },
+        "auctionClearanceRate": {
+          "type": "number",
+          "format": "double"
+        },
+        "propertyCategory": {
+          "type": "string"
+        },
+        "mostRecentSale": {
+          "type": "string"
+        }
+      },
+      "x-data-access-level-info": {
+        "Basic": [
+          "*"
+        ],
+        "Detailed": [
+          "*"
+        ],
+        "Full": [
+          "*"
+        ]
+      }
+    },
+    "Domain.LocationProfilesService.v1.Model.LocationDataSalesGrowthList": {
+      "type": "object",
+      "properties": {
+        "medianSoldPrice": {
+          "type": "number",
+          "format": "double"
+        },
+        "annualGrowth": {
+          "type": "number",
+          "format": "double"
+        },
+        "numberSold": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "year": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "x-data-access-level-info": {
+        "Basic": [
+          "*"
+        ],
+        "Detailed": [
+          "*"
+        ],
+        "Full": [
+          "*"
+        ]
+      }
+    },
+    "Domain.LocationProfilesService.v1.Model.LocationSurroundingSuburbs": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "urlSlug": {
+          "type": "string"
+        }
+      },
+      "x-data-access-level-info": {
+        "Basic": [
+          "*"
+        ],
+        "Detailed": [
+          "*"
+        ],
+        "Full": [
+          "*"
+        ]
+      }
+    }
+  }
+}

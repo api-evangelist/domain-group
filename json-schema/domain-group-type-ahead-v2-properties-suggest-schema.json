@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/domain-group/main/json-schema/domain-group-type-ahead-v2-properties-suggest-schema.json",
+  "title": "TypeAhead.v2.PropertiesSuggest",
+  "x-generated": "2026-10-21",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/domain-group-properties-api-openapi.yml#/components/schemas/TypeAhead.v2.PropertiesSuggest",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "address": {
+        "type": "string"
+      },
+      "addressComponents": {
+        "type": "object",
+        "properties": {
+          "unitNumber": {
+            "type": "string"
+          },
+          "streetNumber": {
+            "type": "string"
+          },
+          "streetName": {
+            "type": "string"
+          },
+          "streetType": {
+            "type": "string"
+          },
+          "streetTypeLong": {
+            "type": "string"
+          },
+          "suburb": {
+            "type": "string"
+          },
+          "postCode": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          }
+        }
+      },
+      "id": {
+        "type": "string"
+      },
+      "relativeScore": {
+        "type": "integer"
+      }
+    }
+  }
+}

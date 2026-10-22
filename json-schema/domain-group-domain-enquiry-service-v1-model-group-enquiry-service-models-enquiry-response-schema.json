@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/domain-group/main/json-schema/domain-group-domain-enquiry-service-v1-model-group-enquiry-service-models-enquiry-response-schema.json",
+  "title": "Domain.EnquiryService.v1.Model.GroupEnquiryServiceModelsEnquiryResponse",
+  "x-generated": "2026-10-21",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/domain-group-enquiries-api-openapi.yml#/components/schemas/Domain.EnquiryService.v1.Model.GroupEnquiryServiceModelsEnquiryResponse",
+  "type": "object",
+  "properties": {
+    "s3Key": {
+      "type": "string"
+    },
+    "message": {
+      "type": "string"
+    },
+    "enquiryReceiptTimestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "x-data-access-level-info": {
+    "Basic": [
+      "*"
+    ],
+    "Detailed": [
+      "*"
+    ],
+    "Full": [
+      "*"
+    ]
+  }
+}

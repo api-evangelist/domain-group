@@ -207,134 +207,6 @@ components:
         - '*'
         Full:
         - '*'
-    Enquiries.V1.EnquiryReport:
-      type: object
-      properties:
-        deliveryMethod:
-          enum:
-          - email
-          - sms
-          type:
-          - string
-          - 'null'
-        enquiryType:
-          enum:
-          - listing
-          - devProject
-          - newDevLanding
-          - agencyProfile
-          - agentProfile
-          - contractRequest
-          - vendorEnquiry
-          - prePortalListing
-          - suburbVendorEnquiry
-          type:
-          - string
-          - 'null'
-        id:
-          type:
-          - string
-          - 'null'
-        message:
-          type:
-          - string
-          - 'null'
-        metaData:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            type: string
-          x-data-access-level-info:
-            Basic:
-            - '*'
-            Detailed:
-            - '*'
-            Full:
-            - '*'
-        recipientsDeliveryStatus:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/Enquiries.V1.RecipientDeliveryStatus'
-        referenceId:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        sender:
-          $ref: '#/components/schemas/Enquiries.V1.Sender'
-        dateReceived:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        agencyId:
-          type:
-          - integer
-          - 'null'
-          format: int32
-      additionalProperties: false
-      x-data-access-level-info:
-        Basic:
-        - '*'
-        Detailed:
-        - '*'
-        Full:
-        - '*'
-    ProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        instance:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
-      x-data-access-level-info:
-        Basic:
-        - '*'
-        Detailed:
-        - '*'
-        Full:
-        - '*'
-    Domain.Public.Adapter.Web.Api.Models.v1.Enquiries.Sender:
-      type: object
-      properties:
-        firstName:
-          type: string
-          description: Sender first name
-        lastName:
-          type: string
-          description: Sender lastname/surname
-        email:
-          type: string
-          description: Sender email address
-        phoneNumber:
-          type: string
-          description: Sender phone number
-        postcode:
-          pattern: ^\d*$
-          type: string
-          description: Postcode of sender's location
-      description: Contains enquiry sender details
     Enquiries.V1.Recipient:
       required:
       - address
@@ -425,6 +297,82 @@ components:
         - '*'
         Full:
         - '*'
+    Enquiries.V1.EnquiryReport:
+      type: object
+      properties:
+        deliveryMethod:
+          enum:
+          - email
+          - sms
+          type:
+          - string
+          - 'null'
+        enquiryType:
+          enum:
+          - listing
+          - devProject
+          - newDevLanding
+          - agencyProfile
+          - agentProfile
+          - contractRequest
+          - vendorEnquiry
+          - prePortalListing
+          - suburbVendorEnquiry
+          type:
+          - string
+          - 'null'
+        id:
+          type:
+          - string
+          - 'null'
+        message:
+          type:
+          - string
+          - 'null'
+        metaData:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+          x-data-access-level-info:
+            Basic:
+            - '*'
+            Detailed:
+            - '*'
+            Full:
+            - '*'
+        recipientsDeliveryStatus:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Enquiries.V1.RecipientDeliveryStatus'
+        referenceId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        sender:
+          $ref: '#/components/schemas/Enquiries.V1.Sender'
+        dateReceived:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        agencyId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+      additionalProperties: false
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
     Enquiries.V1.RecipientDeliveryStatus:
       type: object
       properties:
@@ -455,6 +403,58 @@ components:
         - '*'
         Full:
         - '*'
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+      x-data-access-level-info:
+        Basic:
+        - '*'
+        Detailed:
+        - '*'
+        Full:
+        - '*'
+    Domain.Public.Adapter.Web.Api.Models.v1.Enquiries.Sender:
+      type: object
+      properties:
+        firstName:
+          type: string
+          description: Sender first name
+        lastName:
+          type: string
+          description: Sender lastname/surname
+        email:
+          type: string
+          description: Sender email address
+        phoneNumber:
+          type: string
+          description: Sender phone number
+        postcode:
+          pattern: ^\d*$
+          type: string
+          description: Postcode of sender's location
+      description: Contains enquiry sender details
   securitySchemes:
     apikey:
       type: apiKey
@@ -471,18 +471,19 @@ components:
             api_addresslocators_read: api_addresslocators_read
             api_agencies_read: api_agencies_read
             api_agencies_write: api_agencies_write
+            api_auction_read: api_auction_read
+            api_auction_write: api_auction_write
             api_authorities_write: api_authorities_write
             api_avm_read: api_avm_read
+            api_avmhistory_read: api_avmhistory_read
             api_campaignperformance_read: api_campaignperformance_read
             api_dataset_read: api_dataset_read
             api_demographics_read: api_demographics_read
             api_enquiries_read: api_enquiries_read
             api_enquiries_write: api_enquiries_write
-            api_listingperformance_read: api_listingperformance_read
             api_listings_read: api_listings_read
             api_listings_write: api_listings_write
             api_locations_read: api_locations_read
-            api_projectperformance_read: api_projectperformance_read
             api_properties_read: api_properties_read
             api_propertyportfolio_read: api_propertyportfolio_read
             api_propertyportfolio_write: api_propertyportfolio_write
@@ -501,18 +502,19 @@ components:
             api_addresslocators_read: api_addresslocators_read
             api_agencies_read: api_agencies_read
             api_agencies_write: api_agencies_write
+            api_auction_read: api_auction_read
+            api_auction_write: api_auction_write
             api_authorities_write: api_authorities_write
             api_avm_read: api_avm_read
+            api_avmhistory_read: api_avmhistory_read
             api_campaignperformance_read: api_campaignperformance_read
             api_dataset_read: api_dataset_read
             api_demographics_read: api_demographics_read
             api_enquiries_read: api_enquiries_read
             api_enquiries_write: api_enquiries_write
-            api_listingperformance_read: api_listingperformance_read
             api_listings_read: api_listings_read
             api_listings_write: api_listings_write
             api_locations_read: api_locations_read
-            api_projectperformance_read: api_projectperformance_read
             api_properties_read: api_properties_read
             api_propertyportfolio_read: api_propertyportfolio_read
             api_propertyportfolio_write: api_propertyportfolio_write

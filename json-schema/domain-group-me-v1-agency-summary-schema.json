@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/domain-group/main/json-schema/domain-group-me-v1-agency-summary-schema.json",
+  "title": "Me.V1.AgencySummary",
+  "x-generated": "2026-10-21",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/domain-group-me-api-openapi.yml#/components/schemas/Me.V1.AgencySummary",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "format": "int32"
+    },
+    "name": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "admin": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "True if this user is an admin of this agency"
+    }
+  },
+  "additionalProperties": false,
+  "x-data-access-level-info": {
+    "Basic": [
+      "Id",
+      "Name"
+    ],
+    "Detailed": [
+      "Id",
+      "Name"
+    ],
+    "Full": [
+      "Id",
+      "Name",
+      "Admin"
+    ]
+  }
+}

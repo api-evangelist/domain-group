@@ -1,0 +1,860 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/domain-group/main/json-schema/domain-group-domain-listing-admin-service-v1-model-commercial-listing-schema.json",
+  "title": "Domain.ListingAdminService.v1.Model.CommercialListing",
+  "description": "Commercial Listing V1",
+  "x-generated": "2026-10-21",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/domain-group-listings-api-openapi.yml#/components/schemas/Domain.ListingAdminService.v1.Model.CommercialListing",
+  "type": "object",
+  "properties": {
+    "occupancyType": {
+      "enum": [
+        "tenanted",
+        "vacant"
+      ],
+      "type": "string",
+      "description": "Occupancy. Can be 'Tenanted', 'Vacant'"
+    },
+    "listingAction": {
+      "enum": [
+        "sale",
+        "rent",
+        "saleAndLease"
+      ],
+      "type": "string",
+      "description": "Sale or Rent"
+    },
+    "contactPreference": {
+      "enum": [
+        "byPhone"
+      ],
+      "type": "string",
+      "description": "Indicates the listing preferred contact method. Default by both phone and email if not provided."
+    },
+    "price": {
+      "$ref": "#/$defs/Domain.ListingAdminService.v1.Model.CommercialPrice"
+    },
+    "lease": {
+      "$ref": "#/$defs/Domain.ListingAdminService.v1.Model.Lease"
+    },
+    "eoi": {
+      "$ref": "#/$defs/Domain.ListingAdminService.v1.Model.EOI"
+    },
+    "tenant": {
+      "$ref": "#/$defs/Domain.ListingAdminService.v1.Model.Tenant"
+    },
+    "tender": {
+      "$ref": "#/$defs/Domain.ListingAdminService.v1.Model.Tender"
+    },
+    "annualReturn": {
+      "type": "integer",
+      "description": "Integer value of percentage return on this property or business.",
+      "format": "int32"
+    },
+    "unitsOffered": {
+      "type": "integer",
+      "description": "Integer value of units offered for sale or lease",
+      "format": "int32"
+    },
+    "unitDetails": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Domain.ListingAdminService.v1.Model.SpecificUnitDetail"
+      },
+      "description": "Units details"
+    },
+    "nabers": {
+      "type": "number",
+      "description": "The NABERS Rating is the energy efficiency rating that the property has been measured to have.   This rating is measured in increments of .5 and can range from 0 to 6.   The NABERS rating is required for spaces within office buildings of 1000 square metres or more.  For more information on the NABERS rating system please visit http://www.nabers.gov.au",
+      "format": "double"
+    },
+    "saleTerms": {
+      "type": "string",
+      "description": "Information relating to aspects of the sale, such as required deposit, settlement time. Up to 50 characters, optional. Ignored for lease listings"
+    },
+    "auction": {
+      "$ref": "#/$defs/Domain.ListingAdminService.v1.Model.CommercialAuction"
+    },
+    "propertyDetails": {
+      "$ref": "#/$defs/Domain.ListingAdminService.v1.Model.CommercialProperty"
+    },
+    "conjunctionAgents": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Domain.ListingAdminService.v1.Model.AgentContact"
+      },
+      "description": "List of conjunction agents"
+    },
+    "highlights": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Highlight Items"
+    },
+    "underOfferOrContract": {
+      "type": "boolean",
+      "description": "Set for Sale listings only"
+    },
+    "domainAdId": {
+      "type": "integer",
+      "description": "Domain Advertisement Id, not applicable for creating new ads.  Mandatory when updating a listing that belongs to an agency that  is in the process of being migrated between listing providers.",
+      "format": "int32"
+    },
+    "domainAgencyID": {
+      "type": "integer",
+      "description": "The Domain Agency Id number",
+      "format": "int32"
+    },
+    "providerAdId": {
+      "type": "string",
+      "description": "External Advertisement Id of up to 50 characters will be stored.&lt;br /&gt;  This value is used to identify an Advertisement for updates and should be unique for listing provider.&lt;br /&gt;  This value is case-insensitive (meaning AAAA will update aaaa)."
+    },
+    "features": {
+      "type": "string",
+      "description": "Comma-separated list of features. 1000 characters in length. Select as appropriate or write your own.  INSIDE: Air conditioning, Ensuite, Floorboards, Indoor Spa, Gym, Alarm System, Intercom, Built in wardrobes, Furnished, Internal Laundry, Pets allowed, Cable or Satellite, Gas, Broadband internet access, Bath, Fireplace(s), Separate Dining Room, Heating, Dishwasher, Study.  OUTSIDE: Tennis Court, Secure Parking, Shed, Fully fenced, Balcony / Deck, Garden / Courtyard, Swimming Pool, Outdoor Spa.  LOCATION: Ground floor, Water Views, North Facing, City Views.  ECO FRIENDLY: Double glazed windows, Energy efficient appliances, Water efficient appliances, Wall / ceiling insulation, Rainwater storage tank, Greywater system, Water efficient fixtures, Solar hot water, Solar panels"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the property.  6000 characters in length. The following HTML elements are permitted: &amp;lt;br /&amp;gt;, &amp;lt;p&amp;gt;&amp;lt;/p&amp;gt;, &amp;amp;nbsp;. HTML must be well-formed.  Carriage Returns are interpreted as line breaks. Foreign characters must be HTML encoded, e.g., façade for façade.  Unicode characters which are unsupported by Latin-1 (ISO-8859-1 range from U+0080 to U+00FF), will be removed https://en.wikipedia.org/wiki/ISO/IEC_8859-1"
+    },
+    "summary": {
+      "type": "string",
+      "description": "'Headline' Any HTML stripped out.  If the Summary is less than 80 characters long then the description is concatenated to it and the total trimmed to 250 characters."
+    },
+    "inspectionDetails": {
+      "$ref": "#/$defs/Domain.ListingAdminService.v1.Model.InspectionDetails"
+    },
+    "media": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Domain.ListingAdminService.v1.Model.PropertyMedia"
+      },
+      "description": "Links to VideoURL, virtual tour or weblink. Maximum length of media URLs is 255 characters."
+    },
+    "contacts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Domain.ListingAdminService.v1.Model.Contact"
+      },
+      "description": "Minimum required attributes: First name, last name and E-mail.  If the DomainAgentId is provided, contact information will be based on the existing agent found for that id.  Otherwise first name, last name and email will be used to find the matching contact. A new contact will be created if no contact can be found."
+    },
+    "otherEnquiryEmail": {
+      "type": "string",
+      "description": "Sets an additional Email Address to which enquiries on the Listing will be sent"
+    },
+    "receiveEmailsToDefaultAddress": {
+      "type": "boolean",
+      "description": "Send email enquiries to the default address for this listing type"
+    },
+    "isRural": {
+      "type": "boolean",
+      "description": "True if the property is rural"
+    },
+    "supplementary": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Domain.ListingAdminService.v1.Model.ListingSupplementary"
+      },
+      "description": "Rural attributes    *Improvements* (optional)    Available `types` (fixed list, optional):  * Machinery Shed  * Shearing Shed  * Workshop  * Shearers Quarters  * Silos  * Other Housing  * Managers Accommodation    *Fencing* (optional)    `description` (string, optional): free text fencing description, maximum 250 characters.    *Yards* (optional)    Available `types` (fixed list, optional):  * Sheep  * Cattle    *Homestead* (optional)    `description` (string, optional): description of the homestead and construction, maximum 250 characters.    `metadata` (optional)  * `area` (decimal, optional): homestead area in square metres.    Available `types` (fixed list, optional):  * Office  * Ensuite  * Tennis Court  * Mains Gas  * Floorboards  * Internal Laundry    *Water* (optional)    `description` (string, optional): water comments, maximum 250 characters.    Available `types` (fixed list, optional):  * Tank  * Well  * Reticulated  * Bores  * Springs  * Creeks  * Dams  * River    *Crops* (optional)    `description` (string, optional): description of the crops, maximum 250 characters.    `metadata` (optional)  * `croppedAnnually` (decimal, optional): average annual area cropped in hectares.  * `fallowAnnually` (decimal, optional): average annual fallow area in hectares.  * `pastures` (string, optional): description of pastures available, maximum 250 characters.    *Livestock* (optional)    `description` (string, optional): additional comments, maximum 250 characters.    `metadata` (optional)  * `capacity` (decimal, optional): property carrying capacity in DSE (unit of carry capacity).    Available `types` (fixed list, optional):  * Sheep  * Pigs  * Cattle  * Poultry  * Horses  * Exotic  * Goats  * Stud    *Inclusions* (optional)    `description` (string, optional): description of plant and machinery included in sale, maximum 250 characters.    `metadata` (optional)  * `livestock` (string, optional): description of livestock included in sale, maximum 250 characters.  * `crop` (string, optional): description of crops included in sale, maximum 250 characters.    *Irrigation* (optional)    `description` (string, optional): irrigation comments, maximum 250 characters    `metadata` (optional)  * `rainfall` (decimal, optional): annual rainfall in millimetres."
+    }
+  },
+  "$defs": {
+    "Domain.ListingAdminService.v1.Model.Address": {
+      "type": "object",
+      "properties": {
+        "displayOption": {
+          "enum": [
+            "unspecified",
+            "fullAddress",
+            "streetAndSuburb",
+            "suburbOnly",
+            "regionOnly",
+            "areaOnly",
+            "stateOnly"
+          ],
+          "type": "string",
+          "description": "What granularity to display the properties location at. For residential listings, the accepted displayOption values are `FullAddress`, `StreetAndSuburb` or `SuburbOnly`."
+        },
+        "state": {
+          "enum": [
+            "nsw",
+            "vic",
+            "act",
+            "sa",
+            "wa",
+            "tas",
+            "qld",
+            "nt"
+          ],
+          "type": "string",
+          "description": "State"
+        },
+        "unitNumber": {
+          "type": "string",
+          "description": "Unit number for apartments, maximum 30 characters"
+        },
+        "street": {
+          "type": "string",
+          "description": "Street name, maximum 100 characters"
+        },
+        "suggestedGeoLocation": {
+          "$ref": "#/$defs/Domain.ListingAdminService.v1.Model.GeoLocation"
+        },
+        "streetNumber": {
+          "type": "string",
+          "description": "Street number, maximum 20 characters"
+        },
+        "suburb": {
+          "type": "string",
+          "description": "Suburb name , maximum 50 characters"
+        },
+        "postcode": {
+          "type": "string",
+          "description": "Postcode"
+        }
+      },
+      "description": "Address structure for property"
+    },
+    "Domain.ListingAdminService.v1.Model.AgentContact": {
+      "type": "object",
+      "properties": {
+        "agencyId": {
+          "type": "integer",
+          "description": "Conjunction agent's agency",
+          "format": "int32"
+        },
+        "domainAgentId": {
+          "type": "integer",
+          "description": "Domain ID of the contact person at the agency",
+          "format": "int32"
+        },
+        "firstName": {
+          "type": "string",
+          "description": "First name. Maximum 50 characters."
+        },
+        "lastName": {
+          "type": "string",
+          "description": "Last name. Maximum 50 characters."
+        },
+        "phone": {
+          "type": "string",
+          "description": "Phone. Maximum 20 characters."
+        },
+        "fax": {
+          "type": "string",
+          "description": "Fax. Maximum 20 characters."
+        },
+        "mobile": {
+          "type": "string",
+          "description": "Mobile. Maximum 20 characters."
+        },
+        "email": {
+          "type": "string",
+          "description": "Email. Maximum 100 characters."
+        },
+        "receiveEmails": {
+          "type": "boolean",
+          "description": "Indicates whether the contact person should receive emails for the listing"
+        }
+      },
+      "description": "Represents a agent or conjunction agent domain model  The only difference to normal contacts is agent contacts needs to have their agency specified"
+    },
+    "Domain.ListingAdminService.v1.Model.Area": {
+      "type": "object",
+      "properties": {
+        "unit": {
+          "enum": [
+            "squareMetres",
+            "acres",
+            "hectares",
+            "squareFeet",
+            "squareYards",
+            "squares"
+          ],
+          "type": "string",
+          "description": "Unit of measure, defaults to SquareMetres if not provided."
+        },
+        "value": {
+          "type": "number",
+          "description": "Area. Will be rounded to 2 decimals.",
+          "format": "double"
+        },
+        "from": {
+          "type": "number",
+          "description": "Minimum area",
+          "format": "double"
+        },
+        "to": {
+          "type": "number",
+          "description": "Maximum area",
+          "format": "double"
+        }
+      },
+      "description": "Area information, Either single value or from and To must be provided"
+    },
+    "Domain.ListingAdminService.v1.Model.CommercialAuction": {
+      "type": "object",
+      "properties": {
+        "auctionTerms": {
+          "type": "string",
+          "description": "Terms for the auctions, up to 200 characters. Example: \\\"10% deposit, balance 60 days\\\""
+        },
+        "dateTime": {
+          "type": "string",
+          "description": "Date of the auction. format: yyyy-MM-ddTHH:mm:ss",
+          "format": "date-time"
+        },
+        "location": {
+          "type": "string",
+          "description": "Optional. Venue for the Auction. String max 100 characters. If the Location is omitted, or included but empty, the Venue will default to \\\"On Site\\\"."
+        },
+        "url": {
+          "type": "string",
+          "description": "Optional on-line auction URL. Must be a valid URL and maximum 255 characters. If an empty string is received, the property will be re-set."
+        }
+      },
+      "description": "Commercial Auction Details"
+    },
+    "Domain.ListingAdminService.v1.Model.CommercialPrice": {
+      "type": "object",
+      "properties": {
+        "priceUnitType": {
+          "enum": [
+            "totalAmount",
+            "perSqm"
+          ],
+          "type": "string",
+          "description": "Price Unit type. Can have the values \\\"TotalAmount\\\", \\\"PerSqm\\\". Default = \\\"TotalAmount\\\""
+        },
+        "priceType": {
+          "enum": [
+            "gross",
+            "net"
+          ],
+          "type": "string",
+          "description": "Type can have the values \\\"Gross\\\", \\\"Net\\\". Default \\\"Net\\\""
+        },
+        "gstOptionType": {
+          "enum": [
+            "na",
+            "inc",
+            "ex"
+          ],
+          "type": "string",
+          "description": "GST Option Type. Can have the values \\\"NA\\\", \\\"Inc\\\", \\\"Ex\\\". Default = \\\"NA\\\""
+        },
+        "priceReduction": {
+          "type": "boolean",
+          "description": "Indicates if this property is under price reduction"
+        },
+        "displayText": {
+          "type": "string",
+          "description": "When provided this will be shown instead of the price range, e.g.: \\\"Offers over $450K considered\\\""
+        },
+        "from": {
+          "type": "integer",
+          "description": "Lowest price the property is expected to sell/rent for to set search price. For a fixed price, set this value the same as To",
+          "format": "int32"
+        },
+        "to": {
+          "type": "integer",
+          "description": "Highest price the property is expected to sell/rent for to set search price.   For a fixed price, set this value the same as From",
+          "format": "int32"
+        }
+      },
+      "description": "Commercial component for price"
+    },
+    "Domain.ListingAdminService.v1.Model.CommercialProperty": {
+      "type": "object",
+      "properties": {
+        "propertyType": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "aquaculture",
+              "dairyFarming",
+              "developmentLand",
+              "fishingForestry",
+              "hotelLeisure",
+              "industrialWarehouse",
+              "irrigationServices",
+              "livestock",
+              "internationalCommercial",
+              "medicalConsulting",
+              "offices",
+              "parkingCarSpace",
+              "retail",
+              "ruralCommercialFarming",
+              "showroomsBulkyGoods",
+              "servicedOffices",
+              "other",
+              "cropping",
+              "viticulture",
+              "mixedFarming",
+              "grazing",
+              "horticulture",
+              "equine",
+              "farmlet",
+              "orchard",
+              "ruralLifestyle"
+            ],
+            "type": "string"
+          },
+          "description": "Commercial property types ['aquaculture', 'dairyFarming', 'developmentLand', 'fishingForestry', 'hotelLeisure', 'industrialWarehouse', 'irrigationServices', 'livestock', 'internationalCommercial', 'medicalConsulting', 'offices', 'parkingCarSpace', 'retail', 'ruralCommercialFarming', 'showroomsBulkyGoods', 'servicedOffices', 'other', 'cropping', 'viticulture', 'mixedFarming', 'grazing', 'horticulture', 'equine', 'farmlet', 'orchard', 'ruralLifestyle']."
+        },
+        "buildingType": {
+          "enum": [
+            "whole",
+            "part",
+            "na"
+          ],
+          "type": "string",
+          "description": "Building Type"
+        },
+        "parking": {
+          "$ref": "#/$defs/Domain.ListingAdminService.v1.Model.Parking"
+        },
+        "pdfs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Domain.ListingAdminService.v1.Model.PropertyPdf"
+          },
+          "description": "List of PDF files related to the listing"
+        },
+        "isMarkedForLiveability": {
+          "type": "boolean",
+          "description": "Is the property liveability compliant"
+        },
+        "propertyName": {
+          "type": "string",
+          "description": "Name of the property up to 70 characters"
+        },
+        "location": {
+          "type": "string",
+          "description": "Short location information up to 30 character, e.g.: Greenhills Beach"
+        },
+        "images": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Domain.ListingAdminService.v1.Model.PropertyMedia"
+          },
+          "description": "List of image files, photos or floor plans related to the listing."
+        },
+        "address": {
+          "$ref": "#/$defs/Domain.ListingAdminService.v1.Model.Address"
+        },
+        "area": {
+          "$ref": "#/$defs/Domain.ListingAdminService.v1.Model.Area"
+        },
+        "landArea": {
+          "$ref": "#/$defs/Domain.ListingAdminService.v1.Model.LandArea"
+        }
+      },
+      "description": "Commercial Property"
+    },
+    "Domain.ListingAdminService.v1.Model.Contact": {
+      "type": "object",
+      "properties": {
+        "domainAgentId": {
+          "type": "integer",
+          "description": "Domain ID of the contact person at the agency",
+          "format": "int32"
+        },
+        "firstName": {
+          "type": "string",
+          "description": "First name. Maximum 50 characters."
+        },
+        "lastName": {
+          "type": "string",
+          "description": "Last name. Maximum 50 characters."
+        },
+        "phone": {
+          "type": "string",
+          "description": "Phone. Maximum 20 characters."
+        },
+        "fax": {
+          "type": "string",
+          "description": "Fax. Maximum 20 characters."
+        },
+        "mobile": {
+          "type": "string",
+          "description": "Mobile. Maximum 20 characters."
+        },
+        "email": {
+          "type": "string",
+          "description": "Email. Maximum 100 characters."
+        },
+        "receiveEmails": {
+          "type": "boolean",
+          "description": "Indicates whether the contact person should receive emails for the listing"
+        }
+      },
+      "description": "Contact domain model"
+    },
+    "Domain.ListingAdminService.v1.Model.EOI": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string",
+          "description": "Street address, up to 100 characters"
+        },
+        "endDate": {
+          "type": "string",
+          "description": "End date of EOI",
+          "format": "date-time"
+        },
+        "recipientName": {
+          "type": "string",
+          "description": "The recipient name of the EOI, up to 50 characters"
+        }
+      },
+      "description": "Express of Interest"
+    },
+    "Domain.ListingAdminService.v1.Model.GeoLocation": {
+      "type": "object",
+      "properties": {
+        "latitude": {
+          "type": "number",
+          "description": "Latitude",
+          "format": "double"
+        },
+        "longitude": {
+          "type": "number",
+          "description": "Longitude",
+          "format": "double"
+        }
+      },
+      "description": "Contains geocoding of an address"
+    },
+    "Domain.ListingAdminService.v1.Model.Inspection": {
+      "type": "object",
+      "properties": {
+        "from": {
+          "type": "string",
+          "description": "Format: yyyy-mm-dd HH:mm:ss eg: 2015-10-20 13:30:00",
+          "format": "date-time"
+        },
+        "to": {
+          "type": "string",
+          "description": "Format: yyyy-mm-dd HH:mm:ss, eg: 2015-10-20 14:30:00",
+          "format": "date-time"
+        },
+        "repeat": {
+          "type": "boolean",
+          "description": "Specifies if the inspection is recurring weekly"
+        }
+      },
+      "description": "Inspection times"
+    },
+    "Domain.ListingAdminService.v1.Model.InspectionDetails": {
+      "type": "object",
+      "properties": {
+        "inspectionDescription": {
+          "type": "string",
+          "description": "Free text field for inspections"
+        },
+        "inspections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Domain.ListingAdminService.v1.Model.Inspection"
+          },
+          "description": "Inspection times of the listing"
+        }
+      },
+      "description": "Inspection details"
+    },
+    "Domain.ListingAdminService.v1.Model.LandArea": {
+      "type": "object",
+      "properties": {
+        "unit": {
+          "enum": [
+            "squareMetres",
+            "acres",
+            "hectares",
+            "squareFeet",
+            "squareYards",
+            "squares"
+          ],
+          "type": "string",
+          "description": "Unit of measure"
+        },
+        "value": {
+          "type": "number",
+          "description": "Area. Will be rounded to 2 decimals.",
+          "format": "double"
+        },
+        "from": {
+          "type": "number",
+          "description": "Minimum area",
+          "format": "double"
+        },
+        "to": {
+          "type": "number",
+          "description": "Maximum area",
+          "format": "double"
+        }
+      },
+      "description": "Area information, Either single value or from and To must be provided"
+    },
+    "Domain.ListingAdminService.v1.Model.Lease": {
+      "type": "object",
+      "properties": {
+        "termOfLeaseFrom": {
+          "type": "integer",
+          "description": "Integer value of lease term range from",
+          "format": "int32"
+        },
+        "termOfLeaseTo": {
+          "type": "integer",
+          "description": "Integer value of lease term range to",
+          "format": "int32"
+        },
+        "leaseOutgoings": {
+          "type": "integer",
+          "description": "Outgoing cost of current lease",
+          "format": "int32"
+        }
+      },
+      "description": "Properties for lease listings"
+    },
+    "Domain.ListingAdminService.v1.Model.ListingSupplementary": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description"
+        },
+        "types": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Types"
+        },
+        "metadata": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Domain.ListingAdminService.v1.Model.SupplementaryMetadata"
+          },
+          "description": "Metadata"
+        }
+      },
+      "description": "Listing supplementary"
+    },
+    "Domain.ListingAdminService.v1.Model.Parking": {
+      "type": "object",
+      "properties": {
+        "parkingType": {
+          "enum": [
+            "onSite",
+            "onStreet",
+            "noParking"
+          ],
+          "type": "string",
+          "description": "Can have the value \\\"OnSite\\\", \\\"OnStreet\\\", \\\"NoParking\\\". Default \\\"NoParking\\\""
+        },
+        "numberOnSite": {
+          "type": "integer",
+          "description": "Number On Site",
+          "format": "int32"
+        },
+        "information": {
+          "type": "string",
+          "description": "Additional information regarding the parking condition"
+        }
+      },
+      "description": "Parking Details"
+    },
+    "Domain.ListingAdminService.v1.Model.PropertyMedia": {
+      "type": "object",
+      "properties": {
+        "resourceType": {
+          "enum": [
+            "photograph",
+            "floorPlan",
+            "video",
+            "virtualTour",
+            "webLink"
+          ],
+          "type": "string",
+          "description": "Type of the resource"
+        },
+        "url": {
+          "type": "string",
+          "description": "shows the place from where file can be downloaded"
+        }
+      },
+      "description": "Resource related to the listing"
+    },
+    "Domain.ListingAdminService.v1.Model.PropertyPdf": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "commercialPdf",
+            "newDevBrochurePdf",
+            "floorplanPdf",
+            "devProjectPdf"
+          ],
+          "type": "string",
+          "description": "Type of the PDF"
+        },
+        "url": {
+          "type": "string",
+          "description": "Url of the PDF"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the PDF"
+        }
+      },
+      "description": "PDF file related to the listing"
+    },
+    "Domain.ListingAdminService.v1.Model.SpecificUnitDetail": {
+      "type": "object",
+      "properties": {
+        "occupancy": {
+          "enum": [
+            "tenanted",
+            "vacant"
+          ],
+          "type": "string",
+          "description": "Occupancy type"
+        },
+        "priceUnit": {
+          "enum": [
+            "totalAmount",
+            "perSqm"
+          ],
+          "type": "string",
+          "description": "Price unit type"
+        },
+        "name": {
+          "type": "string",
+          "description": "Unit number"
+        },
+        "size": {
+          "type": "integer",
+          "description": "Unit size",
+          "format": "int32"
+        },
+        "price": {
+          "type": "number",
+          "description": "Unit price",
+          "format": "double"
+        },
+        "notes": {
+          "type": "string",
+          "description": "Additional notes"
+        },
+        "isSoldOrLeased": {
+          "type": "boolean",
+          "description": "Is it available?"
+        },
+        "leasePriceForSaleorLease": {
+          "type": "number",
+          "description": "Lease price for sale or lease",
+          "format": "double"
+        }
+      },
+      "description": "offered units details"
+    },
+    "Domain.ListingAdminService.v1.Model.SupplementaryMetadata": {
+      "type": "object",
+      "properties": {
+        "measurementUnit": {
+          "enum": [
+            "squareMetres",
+            "hectares",
+            "millimetres",
+            "dse"
+          ],
+          "type": "string",
+          "description": "Measurement unit"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description"
+        },
+        "measurement": {
+          "type": "number",
+          "description": "Measurement",
+          "format": "double"
+        }
+      },
+      "description": "Supplementary metadata"
+    },
+    "Domain.ListingAdminService.v1.Model.Tenant": {
+      "type": "object",
+      "properties": {
+        "leaseStart": {
+          "type": "string",
+          "description": "The date on which the tenants lease began, or is due to begin.",
+          "format": "date-time"
+        },
+        "leaseEnd": {
+          "type": "string",
+          "description": "The date on which the tenants lease is due to end",
+          "format": "date-time"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the current tenant of the property, up to 100 characters"
+        },
+        "rentalDetails": {
+          "type": "string",
+          "description": "Information regarding current rental, up to 100 characters"
+        },
+        "leaseOptions": {
+          "type": "string",
+          "description": "Leasing options available to a prospective tenant, up to 100 characters"
+        },
+        "tenantInfoTermOfLeaseFrom": {
+          "type": "integer",
+          "description": "The from range of the tenant's current lease",
+          "format": "int32"
+        },
+        "tenantInfoTermOfLeaseTo": {
+          "type": "integer",
+          "description": "The to range of the tenant's current lease",
+          "format": "int32"
+        },
+        "leaseDateVariable": {
+          "type": "boolean",
+          "description": "Is tenant lease date variable"
+        }
+      },
+      "description": "Tenant Information"
+    },
+    "Domain.ListingAdminService.v1.Model.Tender": {
+      "type": "object",
+      "properties": {
+        "recipientName": {
+          "type": "string",
+          "description": "The recipient name of the tender, up to 50 characters"
+        },
+        "address": {
+          "type": "string",
+          "description": "Street address, up to 100 characters."
+        },
+        "endDate": {
+          "type": "string",
+          "description": "Closing Date",
+          "format": "date-time"
+        }
+      },
+      "description": "Tender Information"
+    }
+  }
+}

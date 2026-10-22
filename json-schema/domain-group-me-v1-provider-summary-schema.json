@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/domain-group/main/json-schema/domain-group-me-v1-provider-summary-schema.json",
+  "title": "Me.V1.ProviderSummary",
+  "description": "Create provider response",
+  "x-generated": "2026-10-21",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/domain-group-me-api-openapi.yml#/components/schemas/Me.V1.ProviderSummary",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Provider identifier - this will map to the username"
+    },
+    "companyName": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Company name"
+    },
+    "contactNameTechnical": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Contact person's name for technical related enquiries"
+    },
+    "emailTechnical": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Email address to receive technical related emails"
+    },
+    "phoneTechnical": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Phone to be contact for technical related enquiries"
+    },
+    "contactNameBusiness": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Contact person's name for business related enquiries"
+    },
+    "emailBusiness": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Email address to receive business related emails"
+    },
+    "phoneBusiness": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Phone to be contact for business related enquiries"
+    }
+  },
+  "additionalProperties": false,
+  "x-data-access-level-info": {
+    "Basic": [
+      "*"
+    ],
+    "Detailed": [
+      "*"
+    ],
+    "Full": [
+      "*"
+    ]
+  }
+}

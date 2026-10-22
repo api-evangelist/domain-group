@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/domain-group/main/json-schema/domain-group-webhooks-v1-webhook-subscription-schema.json",
+  "title": "Webhooks.v1.WebhookSubscription",
+  "x-generated": "2026-10-21",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/domain-group-webhooks-api-openapi.yml#/components/schemas/Webhooks.v1.WebhookSubscription",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "createdBy": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets CreatedBy"
+    },
+    "created": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets Created",
+      "format": "date-time"
+    },
+    "updatedBy": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets UpdatedBy"
+    },
+    "updated": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets Updated",
+      "format": "date-time"
+    },
+    "deletedBy": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets DeletedBy"
+    },
+    "deleted": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets Deleted",
+      "format": "date-time"
+    },
+    "subscriptionId": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets SubscriptionId"
+    },
+    "subscriberId": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets SubscriberId"
+    },
+    "ownerType": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets OwnerType"
+    },
+    "ownerId": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets OwnerId"
+    },
+    "resourceType": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets ResourceType"
+    }
+  },
+  "additionalProperties": false,
+  "x-data-access-level-info": {
+    "Basic": [
+      "*"
+    ],
+    "Detailed": [
+      "*"
+    ],
+    "Full": [
+      "*"
+    ]
+  }
+}

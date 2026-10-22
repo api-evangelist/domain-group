@@ -81,7 +81,15 @@ rate_limiting:
   token_caching: Access tokens should be cached and reused until their expiry.
 
 idempotency:
+  coverage: none
   supported: false
+  note: >-
+    No replay-protection key exists. Several listing writes are PUT upserts
+    (Listings_UpsertResidentialListing, Listings_UpsertCommercialListing,
+    Listings_UpsertBusinessListing, listings_upsertcommerciallisting) which are
+    idempotent by HTTP semantics, but no Idempotency-Key mechanism is documented
+    for the POST writes (Enquiries_Post, PreMarket_Post, Authorities_Create,
+    PropertyRadar_CreatePortfolio, Statistics_Post ...).
   evidence: >-
     No idempotency key header or parameter is documented in the Conventions
     section, and a case-insensitive search for "idempoten" across all three
@@ -119,3 +127,36 @@ cross_links:
   errors: errors/domain-group-problem-types.yml
   lifecycle: lifecycle/domain-group-lifecycle.yml
   sandbox: sandbox/domain-group-sandbox.yml
+  rate_limits: rate-limits/domain-group-rate-limits.yml
+
+reversibility:
+  graded: documented
+  source: derived from openapi/ (operation pairs); no reversal window is stated in the docs
+  docs_checked:
+  - https://developer.domain.com.au/docs/latest/conventions/
+  - https://developer.domain.com.au/docs/latest/troubleshooting/
+  surfaces:
+  - write: PropertyRadar_CreatePortfolio / PropertyRadar_AddToPortfolio
+    reversal: [PropertyRadar_DeletePortfolio, PropertyRadar_RemoveFromPortfolio]
+    window: null
+  - write: LimitedInventory_ReserveByBatch
+    reversal: [LimitedInventory_Unreserve, LimitedInventory_UnreserveByBatch]
+    window: null
+  - write: Webhooks_CreateSubscription
+    reversal: [Webhooks_DeleteSubscription]
+    window: null
+  - write: Authorities_Subscribe
+    reversal: [Authorities_Unsubscribe]
+    window: null
+  - write: Listings_UpsertResidentialListing / Listings_UpsertCommercialListing / Listings_UpsertBusinessListing
+    reversal: [Listings_UpdateOffmarketDetails]
+    window: null
+    note: A listing can be taken off market by a further write; no delete or undo operation exists.
+  - write: Enquiries_Post / Statistics_Post / PreMarket_Post / Authorities_Create
+    reversal: []
+    window: null
+    note: No cancel, delete or undo operation is published for these writes.
+  note: >-
+    Reversal paths exist only as paired delete/unreserve/unsubscribe operations in the
+    contract. The documentation states no window inside which any reversal works, so
+    nothing here is graded verified.

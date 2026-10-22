@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/domain-group/main/json-schema/domain-group-auction-collection-v1-put-auction-update-request-schema.json",
+  "title": "AuctionCollection.v1.PutAuctionUpdateRequest",
+  "x-generated": "2026-10-21",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/domain-group-auctioncollection-api-openapi.yml#/components/schemas/AuctionCollection.v1.PutAuctionUpdateRequest",
+  "required": [
+    "eventDate",
+    "listingId",
+    "result",
+    "submissionSource",
+    "submittedAt"
+  ],
+  "type": "object",
+  "properties": {
+    "listingId": {
+      "minLength": 1,
+      "pattern": "^\\d*$",
+      "type": "string",
+      "description": "Domain listing id"
+    },
+    "eventDate": {
+      "type": "string",
+      "description": "Scheduled auction date and time in Sydney timezone in format yyyy-MM-ddTHH:mm:ss.",
+      "format": "date-time"
+    },
+    "result": {
+      "minLength": 1,
+      "type": "string",
+      "description": "Auction result, one of: AUSD, AUSP, AUSA, AUWD, AUPP, AUPI"
+    },
+    "price": {
+      "maximum": 1000000000,
+      "minimum": 0,
+      "type": [
+        "number",
+        "null"
+      ],
+      "format": "double"
+    },
+    "soldDate": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Sold date and time in Sydney timezone in format yyyy-MM-ddTHH:mm:ss",
+      "format": "date-time"
+    },
+    "isPriceDisclosed": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "Is price disclosed flag"
+    },
+    "canPublish": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "Listing can be published flag"
+    },
+    "submittedAt": {
+      "type": "string",
+      "description": "Submission date and time of agent form submission in UTC timezone in format yyyy-MM-ddTHH:mm:ss",
+      "format": "date-time"
+    },
+    "submissionSource": {
+      "minLength": 1,
+      "type": "string",
+      "description": "Submission source, one of: sms_form, call_centre"
+    },
+    "registeredBidders": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "Total number of registered bidders - required except withdrawn",
+      "format": "int32"
+    },
+    "activeBidders": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "Number of bidders who placed a bid - required except withdrawn",
+      "format": "int32"
+    },
+    "isVendorBid": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "Is vendor bid flag"
+    },
+    "withdrawalReason": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Required for withdrawal, one of: sold_prior, lack_of_interest, vendor_changed_mind, other"
+    },
+    "contractStatus": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Required for sold after (AUSA), one of: unconditional or conditional"
+    }
+  },
+  "additionalProperties": false
+}

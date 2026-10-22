@@ -1,0 +1,310 @@
+openapi: 3.2.0
+info:
+  title: Domain Public Auction Collection API
+  description: See https://developer.domain.com.au for more information
+  termsOfService: https://developer.domain.com.au/docs/latest/support/terms
+  contact:
+    name: Domain Developer Support
+    email: api@domain.com.au
+  version: latest
+servers:
+- url: https://api.domain.com.au/
+  description: Primary
+- url: https://api.domain.com.au/sandbox/
+  description: Sandbox
+tags:
+- name: AuctionCollection
+paths:
+  /v2/auctions/calling-sheet/{state}:
+    get:
+      tags:
+      - AuctionCollection
+      summary: Get calling sheet with collection of auction that haven't received results yet
+      operationId: AuctionCollection_CallingSheet
+      parameters:
+      - name: state
+        in: path
+        required: true
+        schema:
+          type: string
+          description: 'State code, one of: NSW, VIC, QLD, SA, WA, TAS, NT, ACT'
+      - name: startDate
+        in: query
+        schema:
+          type: string
+          description: Start date and time in UTC timezone in format yyyy-MM-ddTHH:mm:ss. By default it is the last Sunday's date
+          format: date-time
+      - name: endDate
+        in: query
+        schema:
+          type: string
+          description: End date and time in UTC timezone in format yyyy-MM-ddTHH:mm:ss. By default it is the current Saturday's date
+          format: date-time
+      - name: isGreatArea
+        in: query
+        schema:
+          type: boolean
+          description: Is property located in Greater Capital City Statistical Areas according to Australian Statistical Geography Standard
+          default: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AuctionCollection.v1.CallingSheetResponse'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      security:
+      - apikey: []
+      - oauth2:
+        - api_auction_read
+      x-domain-endpointcost: 1
+      x-domain-usercontextrequired: false
+      x-domain-environment: Primary
+  /v2/auctions/update:
+    put:
+      tags:
+      - AuctionCollection
+      summary: Update auction information
+      operationId: AuctionCollection_AuctionUpdate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuctionCollection.v1.PutAuctionUpdateRequest'
+        required: true
+      responses:
+        '201':
+          description: Updated
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      security:
+      - apikey: []
+      - oauth2:
+        - api_auction_write
+      x-domain-endpointcost: 1
+      x-domain-usercontextrequired: false
+      x-domain-environment: Primary
+components:
+  schemas:
+    AuctionCollection.v1.PutAuctionUpdateRequest:
+      required:
+      - eventDate
+      - listingId
+      - result
+      - submissionSource
+      - submittedAt
+      type: object
+      properties:
+        listingId:
+          minLength: 1
+          pattern: ^\d*$
+          type: string
+          description: Domain listing id
+          example: '2020202020'
+        eventDate:
+          type: string
+          description: Scheduled auction date and time in Sydney timezone in format yyyy-MM-ddTHH:mm:ss.
+          format: date-time
+        result:
+          minLength: 1
+          type: string
+          description: 'Auction result, one of: AUSD, AUSP, AUSA, AUWD, AUPP, AUPI'
+        price:
+          maximum: 1000000000
+          minimum: 0
+          type:
+          - number
+          - 'null'
+          format: double
+        soldDate:
+          type:
+          - string
+          - 'null'
+          description: Sold date and time in Sydney timezone in format yyyy-MM-ddTHH:mm:ss
+          format: date-time
+        isPriceDisclosed:
+          type:
+          - boolean
+          - 'null'
+          description: Is price disclosed flag
+        canPublish:
+          type:
+          - boolean
+          - 'null'
+          description: Listing can be published flag
+        submittedAt:
+          type: string
+          description: Submission date and time of agent form submission in UTC timezone in format yyyy-MM-ddTHH:mm:ss
+          format: date-time
+        submissionSource:
+          minLength: 1
+          type: string
+          description: 'Submission source, one of: sms_form, call_centre'
+        registeredBidders:
+          type:
+          - integer
+          - 'null'
+          description: Total number of registered bidders - required except withdrawn
+          format: int32
+        activeBidders:
+          type:
+          - integer
+          - 'null'
+          description: Number of bidders who placed a bid - required except withdrawn
+          format: int32
+        isVendorBid:
+          type:
+          - boolean
+          - 'null'
+          description: Is vendor bid flag
+        withdrawalReason:
+          type:
+          - string
+          - 'null'
+          description: 'Required for withdrawal, one of: sold_prior, lack_of_interest, vendor_changed_mind, other'
+        contractStatus:
+          type:
+          - string
+          - 'null'
+          description: 'Required for sold after (AUSA), one of: unconditional or conditional'
+      additionalProperties: false
+    AuctionCollection.v1.CallingSheetResponse:
+      type: object
+      properties:
+        agencyName:
+          type:
+          - string
+          - 'null'
+          description: Agency name
+        id:
+          type:
+          - string
+          - 'null'
+          description: Domain listing id
+        address:
+          type:
+          - string
+          - 'null'
+          description: Full property address
+        bedroomCount:
+          type:
+          - string
+          - 'null'
+        propertyType:
+          type:
+          - string
+          - 'null'
+          description: Property type, House, Unity etc.
+        auctionDate:
+          type: string
+          description: Auction date and time in Sydney timezone in format yyyy-MM-ddTHH:mm:ss
+          format: date-time
+        agentId:
+          type:
+          - string
+          - 'null'
+        agentName:
+          type:
+          - string
+          - 'null'
+        agentContactNumber:
+          type:
+          - string
+          - 'null'
+        secondaryAgentId:
+          type:
+          - string
+          - 'null'
+        secondaryAgentName:
+          type:
+          - string
+          - 'null'
+        secondaryAgentContactNumber:
+          type:
+          - string
+          - 'null'
+        agencyId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+  securitySchemes:
+    apikey:
+      type: apiKey
+      description: API Key in Header
+      name: x-api-key
+      in: header
+    oauth2:
+      type: oauth2
+      description: OAuth 2
+      flows:
+        clientCredentials:
+          tokenUrl: https://auth.domain.com.au/v1/connect/token
+          scopes:
+            api_addresslocators_read: api_addresslocators_read
+            api_agencies_read: api_agencies_read
+            api_agencies_write: api_agencies_write
+            api_auction_read: api_auction_read
+            api_auction_write: api_auction_write
+            api_authorities_write: api_authorities_write
+            api_avm_read: api_avm_read
+            api_avmhistory_read: api_avmhistory_read
+            api_campaignperformance_read: api_campaignperformance_read
+            api_dataset_read: api_dataset_read
+            api_demographics_read: api_demographics_read
+            api_enquiries_read: api_enquiries_read
+            api_enquiries_write: api_enquiries_write
+            api_listings_read: api_listings_read
+            api_listings_write: api_listings_write
+            api_locations_read: api_locations_read
+            api_properties_read: api_properties_read
+            api_propertyportfolio_read: api_propertyportfolio_read
+            api_propertyportfolio_write: api_propertyportfolio_write
+            api_propertyreports_read: api_propertyreports_read
+            api_salesresults_read: api_salesresults_read
+            api_statistics_write: api_statistics_write
+            api_suburbhistorical_read: api_suburbhistorical_read
+            api_suburbperformance_read: api_suburbperformance_read
+            api_suburbsummary_read: api_suburbsummary_read
+            api_webhooks_write: api_webhooks_write
+        authorizationCode:
+          authorizationUrl: https://auth.domain.com.au/v1/connect/authorize
+          tokenUrl: https://auth.domain.com.au/v1/connect/token
+          refreshUrl: https://auth.domain.com.au/v1/connect/token
+          scopes:
+            api_addresslocators_read: api_addresslocators_read
+            api_agencies_read: api_agencies_read
+            api_agencies_write: api_agencies_write
+            api_auction_read: api_auction_read
+            api_auction_write: api_auction_write
+            api_authorities_write: api_authorities_write
+            api_avm_read: api_avm_read
+            api_avmhistory_read: api_avmhistory_read
+            api_campaignperformance_read: api_campaignperformance_read
+            api_dataset_read: api_dataset_read
+            api_demographics_read: api_demographics_read
+            api_enquiries_read: api_enquiries_read
+            api_enquiries_write: api_enquiries_write
+            api_listings_read: api_listings_read
+            api_listings_write: api_listings_write
+            api_locations_read: api_locations_read
+            api_properties_read: api_properties_read
+            api_propertyportfolio_read: api_propertyportfolio_read
+            api_propertyportfolio_write: api_propertyportfolio_write
+            api_propertyreports_read: api_propertyreports_read
+            api_salesresults_read: api_salesresults_read
+            api_statistics_write: api_statistics_write
+            api_suburbhistorical_read: api_suburbhistorical_read
+            api_suburbperformance_read: api_suburbperformance_read
+            api_suburbsummary_read: api_suburbsummary_read
+            api_webhooks_write: api_webhooks_write

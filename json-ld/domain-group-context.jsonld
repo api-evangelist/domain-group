@@ -1,0 +1,2114 @@
+{
+  "@context": {
+    "@vocab": "https://domain.com.au/schema#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "domain": "https://domain.com.au/schema#",
+    "Agencies.V2.EmailPhone": "domain:Agencies.V2.EmailPhone",
+    "email": {
+      "@id": "domain:email",
+      "@type": "xsd:string"
+    },
+    "phone": {
+      "@id": "domain:phone",
+      "@type": "xsd:string"
+    },
+    "ListingPerformance.v1.Statistics": "domain:ListingPerformance.v1.Statistics",
+    "listingId": {
+      "@id": "domain:listingId",
+      "@type": "xsd:integer"
+    },
+    "totalListingViews": {
+      "@id": "domain:totalListingViews",
+      "@type": "xsd:integer"
+    },
+    "totalPhotoViews": {
+      "@id": "domain:totalPhotoViews",
+      "@type": "xsd:integer"
+    },
+    "totalPhotoGalleryViews": {
+      "@id": "domain:totalPhotoGalleryViews",
+      "@type": "xsd:integer"
+    },
+    "totalFloorplanViews": {
+      "@id": "domain:totalFloorplanViews",
+      "@type": "xsd:integer"
+    },
+    "totalMapViews": {
+      "@id": "domain:totalMapViews",
+      "@type": "xsd:integer"
+    },
+    "totalVideoViews": {
+      "@id": "domain:totalVideoViews",
+      "@type": "xsd:integer"
+    },
+    "totalEbrochureViews": {
+      "@id": "domain:totalEbrochureViews",
+      "@type": "xsd:integer"
+    },
+    "totalAgentDetailViews": {
+      "@id": "domain:totalAgentDetailViews",
+      "@type": "xsd:integer"
+    },
+    "totalShortlisted": {
+      "@id": "domain:totalShortlisted",
+      "@type": "xsd:integer"
+    },
+    "totalPrinted": {
+      "@id": "domain:totalPrinted",
+      "@type": "xsd:integer"
+    },
+    "totalAgentPhoneNumberReveals": {
+      "@id": "domain:totalAgentPhoneNumberReveals",
+      "@type": "xsd:integer"
+    },
+    "totalEnquiries": {
+      "@id": "domain:totalEnquiries",
+      "@type": "xsd:integer"
+    },
+    "totalEmailToFriend": {
+      "@id": "domain:totalEmailToFriend",
+      "@type": "xsd:integer"
+    },
+    "totalSharedViaSocialMedia": {
+      "@id": "domain:totalSharedViaSocialMedia",
+      "@type": "xsd:integer"
+    },
+    "totalInspectionTimeSaving": {
+      "@id": "domain:totalInspectionTimeSaving",
+      "@type": "xsd:integer"
+    },
+    "totalCallToAgentFromMobile": {
+      "@id": "domain:totalCallToAgentFromMobile",
+      "@type": "xsd:integer"
+    },
+    "percentageWebsiteViews": {
+      "@id": "domain:percentageWebsiteViews",
+      "@type": "xsd:decimal"
+    },
+    "percentageMobileSiteViews": {
+      "@id": "domain:percentageMobileSiteViews",
+      "@type": "xsd:decimal"
+    },
+    "percentageSmartPhoneViews": {
+      "@id": "domain:percentageSmartPhoneViews",
+      "@type": "xsd:decimal"
+    },
+    "percentageTabletViews": {
+      "@id": "domain:percentageTabletViews",
+      "@type": "xsd:decimal"
+    },
+    "Listings.V1.SaleDetails": "domain:Listings.V1.SaleDetails",
+    "saleMethod": {
+      "@id": "domain:saleMethod",
+      "@type": "xsd:string"
+    },
+    "soldDetails": {
+      "@id": "domain:soldDetails",
+      "@type": "@id"
+    },
+    "auctionDetails": {
+      "@id": "domain:auctionDetails",
+      "@type": "@id"
+    },
+    "tenderDetails": {
+      "@id": "domain:tenderDetails",
+      "@type": "@id"
+    },
+    "tenantDetails": {
+      "@id": "domain:tenantDetails",
+      "@type": "@id"
+    },
+    "annualReturn": {
+      "@id": "domain:annualReturn",
+      "@type": "xsd:integer"
+    },
+    "saleTerms": {
+      "@id": "domain:saleTerms",
+      "@type": "xsd:string"
+    },
+    "Listings.V1.AustralianPropertyMonitorsIdentifiers": "domain:Listings.V1.AustralianPropertyMonitorsIdentifiers",
+    "addressId": {
+      "@id": "domain:addressId",
+      "@type": "xsd:integer"
+    },
+    "streetId": {
+      "@id": "domain:streetId",
+      "@type": "xsd:integer"
+    },
+    "suburbId": {
+      "@id": "domain:suburbId",
+      "@type": "xsd:integer"
+    },
+    "cadastreId": {
+      "@id": "domain:cadastreId",
+      "@type": "xsd:integer"
+    },
+    "postcodeId": {
+      "@id": "domain:postcodeId",
+      "@type": "xsd:integer"
+    },
+    "stateId": {
+      "@id": "domain:stateId",
+      "@type": "xsd:integer"
+    },
+    "state": {
+      "@id": "domain:state",
+      "@type": "xsd:string"
+    },
+    "propertyTypeId": {
+      "@id": "domain:propertyTypeId",
+      "@type": "xsd:integer"
+    },
+    "propertyTypeCategoryId": {
+      "@id": "domain:propertyTypeCategoryId",
+      "@type": "xsd:integer"
+    },
+    "streetNumber": {
+      "@id": "domain:streetNumber",
+      "@type": "xsd:string"
+    },
+    "Listings.V1.SoldDetails": "domain:Listings.V1.SoldDetails",
+    "soldAction": {
+      "@id": "domain:soldAction",
+      "@type": "xsd:string"
+    },
+    "source": {
+      "@id": "domain:source",
+      "@type": "xsd:string"
+    },
+    "soldPrice": {
+      "@id": "domain:soldPrice",
+      "@type": "xsd:integer"
+    },
+    "governmentRecordedSoldPrice": {
+      "@id": "domain:governmentRecordedSoldPrice",
+      "@type": "xsd:integer"
+    },
+    "soldDate": {
+      "@id": "domain:soldDate",
+      "@type": "xsd:dateTime"
+    },
+    "canDisplayPrice": {
+      "@id": "domain:canDisplayPrice",
+      "@type": "xsd:boolean"
+    },
+    "Agencies.V2.AgencyContactDetails": "domain:Agencies.V2.AgencyContactDetails",
+    "businessSale": {
+      "@id": "domain:businessSale",
+      "@type": "@id"
+    },
+    "businessRent": {
+      "@id": "domain:businessRent",
+      "@type": "@id"
+    },
+    "commercialLease": {
+      "@id": "domain:commercialLease",
+      "@type": "@id"
+    },
+    "commercialSale": {
+      "@id": "domain:commercialSale",
+      "@type": "@id"
+    },
+    "emailDomains": {
+      "@id": "domain:emailDomains",
+      "@container": "@list"
+    },
+    "general": {
+      "@id": "domain:general",
+      "@type": "@id"
+    },
+    "residentialRent": {
+      "@id": "domain:residentialRent",
+      "@type": "@id"
+    },
+    "residentialSale": {
+      "@id": "domain:residentialSale",
+      "@type": "@id"
+    },
+    "Agencies.V2.Agency": "domain:Agencies.V2.Agency",
+    "accountType": {
+      "@id": "domain:accountType",
+      "@type": "xsd:string"
+    },
+    "profile": {
+      "@id": "domain:profile",
+      "@type": "@id"
+    },
+    "dateUpdated": {
+      "@id": "domain:dateUpdated",
+      "@type": "xsd:dateTime"
+    },
+    "name": {
+      "@id": "domain:name",
+      "@type": "xsd:string"
+    },
+    "details": {
+      "@id": "domain:details",
+      "@type": "@id"
+    },
+    "id": {
+      "@id": "domain:id",
+      "@type": "xsd:integer"
+    },
+    "creId": {
+      "@id": "domain:creId",
+      "@type": "xsd:integer"
+    },
+    "agents": {
+      "@id": "domain:agents",
+      "@container": "@list"
+    },
+    "contactDetails": {
+      "@id": "domain:contactDetails",
+      "@type": "@id"
+    },
+    "homepassEnabled": {
+      "@id": "domain:homepassEnabled",
+      "@type": "xsd:boolean"
+    },
+    "suburbsServed": {
+      "@id": "domain:suburbsServed",
+      "@type": "xsd:string"
+    },
+    "subscribedToAgencyPerformanceReport": {
+      "@id": "domain:subscribedToAgencyPerformanceReport",
+      "@type": "xsd:boolean"
+    },
+    "agencyOptions": {
+      "@id": "domain:agencyOptions",
+      "@type": "@id"
+    },
+    "welcomeMessage": {
+      "@id": "domain:welcomeMessage",
+      "@type": "xsd:string"
+    },
+    "adFormat": {
+      "@id": "domain:adFormat",
+      "@type": "xsd:string"
+    },
+    "providerAgencyId": {
+      "@id": "domain:providerAgencyId",
+      "@type": "xsd:string"
+    },
+    "Listings.v1.AuctionDetails": "domain:Listings.v1.AuctionDetails",
+    "auctionSchedule": {
+      "@id": "domain:auctionSchedule",
+      "@type": "@id"
+    },
+    "auctionedPrice": {
+      "@id": "domain:auctionedPrice",
+      "@type": "xsd:integer"
+    },
+    "auctionedDate": {
+      "@id": "domain:auctionedDate",
+      "@type": "xsd:dateTime"
+    },
+    "Listings.v1.AuctionSchedule": "domain:Listings.v1.AuctionSchedule",
+    "locationDescription": {
+      "@id": "domain:locationDescription",
+      "@type": "xsd:string"
+    },
+    "openingDateTime": {
+      "@id": "domain:openingDateTime",
+      "@type": "xsd:dateTime"
+    },
+    "terms": {
+      "@id": "domain:terms",
+      "@type": "xsd:string"
+    },
+    "url": {
+      "@id": "domain:url",
+      "@type": "xsd:string"
+    },
+    "Listings.v1.ListingMedia": "domain:Listings.v1.ListingMedia",
+    "category": {
+      "@id": "domain:category",
+      "@type": "xsd:string"
+    },
+    "type": {
+      "@id": "domain:type",
+      "@type": "xsd:string"
+    },
+    "Agencies.V2.AgencyProfile": "domain:Agencies.V2.AgencyProfile",
+    "agencyPhotos": {
+      "@id": "domain:agencyPhotos",
+      "@container": "@list"
+    },
+    "profileWebsite": {
+      "@id": "domain:profileWebsite",
+      "@type": "xsd:string"
+    },
+    "agencyBanner": {
+      "@id": "domain:agencyBanner",
+      "@type": "xsd:string"
+    },
+    "agencyWebsite": {
+      "@id": "domain:agencyWebsite",
+      "@type": "xsd:string"
+    },
+    "agencyLogoStandard": {
+      "@id": "domain:agencyLogoStandard",
+      "@type": "xsd:string"
+    },
+    "agencyLogoSmall": {
+      "@id": "domain:agencyLogoSmall",
+      "@type": "xsd:string"
+    },
+    "logoColour": {
+      "@id": "domain:logoColour",
+      "@type": "xsd:string"
+    },
+    "primaryAgencyColour": {
+      "@id": "domain:primaryAgencyColour",
+      "@type": "xsd:string"
+    },
+    "backgroundColour": {
+      "@id": "domain:backgroundColour",
+      "@type": "xsd:string"
+    },
+    "mapLatitude": {
+      "@id": "domain:mapLatitude",
+      "@type": "xsd:string"
+    },
+    "mapLongitude": {
+      "@id": "domain:mapLongitude",
+      "@type": "xsd:string"
+    },
+    "mapCertainty": {
+      "@id": "domain:mapCertainty",
+      "@type": "xsd:integer"
+    },
+    "agencyVideoUrl": {
+      "@id": "domain:agencyVideoUrl",
+      "@type": "xsd:string"
+    },
+    "agencyDescription": {
+      "@id": "domain:agencyDescription",
+      "@type": "xsd:string"
+    },
+    "agencyDescriptionCre": {
+      "@id": "domain:agencyDescriptionCre",
+      "@type": "xsd:string"
+    },
+    "creProfileWebsite": {
+      "@id": "domain:creProfileWebsite",
+      "@type": "xsd:string"
+    },
+    "agencyCreBanner": {
+      "@id": "domain:agencyCreBanner",
+      "@type": "xsd:string"
+    },
+    "agencyCreWebsite": {
+      "@id": "domain:agencyCreWebsite",
+      "@type": "xsd:string"
+    },
+    "agencyCreLogoStandard": {
+      "@id": "domain:agencyCreLogoStandard",
+      "@type": "xsd:string"
+    },
+    "numberForSale": {
+      "@id": "domain:numberForSale",
+      "@type": "xsd:integer"
+    },
+    "numberForRent": {
+      "@id": "domain:numberForRent",
+      "@type": "xsd:integer"
+    },
+    "numberForSaleCommercial": {
+      "@id": "domain:numberForSaleCommercial",
+      "@type": "xsd:integer"
+    },
+    "numberForRentCommercial": {
+      "@id": "domain:numberForRentCommercial",
+      "@type": "xsd:integer"
+    },
+    "creAgencyVideoUrl": {
+      "@id": "domain:creAgencyVideoUrl",
+      "@type": "xsd:string"
+    },
+    "Listings.v1.TenantDetails": "domain:Listings.v1.TenantDetails",
+    "leaseDateVariable": {
+      "@id": "domain:leaseDateVariable",
+      "@type": "xsd:boolean"
+    },
+    "leaseOptions": {
+      "@id": "domain:leaseOptions",
+      "@type": "xsd:string"
+    },
+    "tenantInfoTermOfLeaseFrom": {
+      "@id": "domain:tenantInfoTermOfLeaseFrom",
+      "@type": "xsd:integer"
+    },
+    "tenantInfoTermOfLeaseTo": {
+      "@id": "domain:tenantInfoTermOfLeaseTo",
+      "@type": "xsd:integer"
+    },
+    "tenantName": {
+      "@id": "domain:tenantName",
+      "@type": "xsd:string"
+    },
+    "tenantRentDetails": {
+      "@id": "domain:tenantRentDetails",
+      "@type": "xsd:string"
+    },
+    "leaseStartDate": {
+      "@id": "domain:leaseStartDate",
+      "@type": "xsd:dateTime"
+    },
+    "leaseEndDate": {
+      "@id": "domain:leaseEndDate",
+      "@type": "xsd:dateTime"
+    },
+    "Listings.V1.PriceDetails": "domain:Listings.V1.PriceDetails",
+    "gstOption": {
+      "@id": "domain:gstOption",
+      "@type": "xsd:string"
+    },
+    "priceType": {
+      "@id": "domain:priceType",
+      "@type": "xsd:string"
+    },
+    "priceUnit": {
+      "@id": "domain:priceUnit",
+      "@type": "xsd:string"
+    },
+    "price": {
+      "@id": "domain:price",
+      "@type": "xsd:decimal"
+    },
+    "priceFrom": {
+      "@id": "domain:priceFrom",
+      "@type": "xsd:integer"
+    },
+    "priceTo": {
+      "@id": "domain:priceTo",
+      "@type": "xsd:integer"
+    },
+    "pricePrefix": {
+      "@id": "domain:pricePrefix",
+      "@type": "xsd:string"
+    },
+    "hiddenReasons": {
+      "@id": "domain:hiddenReasons",
+      "@container": "@list"
+    },
+    "displayPrice": {
+      "@id": "domain:displayPrice",
+      "@type": "xsd:string"
+    },
+    "bond": {
+      "@id": "domain:bond",
+      "@type": "xsd:decimal"
+    },
+    "priceReduction": {
+      "@id": "domain:priceReduction",
+      "@type": "xsd:boolean"
+    },
+    "Listings.V1.RentalDetails": "domain:Listings.V1.RentalDetails",
+    "rentalMethod": {
+      "@id": "domain:rentalMethod",
+      "@type": "xsd:string"
+    },
+    "leasedDate": {
+      "@id": "domain:leasedDate",
+      "@type": "xsd:dateTime"
+    },
+    "leasedPrice": {
+      "@id": "domain:leasedPrice",
+      "@type": "xsd:integer"
+    },
+    "leasedMonths": {
+      "@id": "domain:leasedMonths",
+      "@type": "xsd:integer"
+    },
+    "termOfLeaseFrom": {
+      "@id": "domain:termOfLeaseFrom",
+      "@type": "xsd:integer"
+    },
+    "termOfLeaseTo": {
+      "@id": "domain:termOfLeaseTo",
+      "@type": "xsd:integer"
+    },
+    "leaseOutgoings": {
+      "@id": "domain:leaseOutgoings",
+      "@type": "xsd:integer"
+    },
+    "Agencies.V2.AgencySummary": "domain:Agencies.V2.AgencySummary",
+    "inSuburb": {
+      "@id": "domain:inSuburb",
+      "@type": "xsd:boolean"
+    },
+    "querySuburb": {
+      "@id": "domain:querySuburb",
+      "@type": "xsd:string"
+    },
+    "hasRecentlySold": {
+      "@id": "domain:hasRecentlySold",
+      "@type": "xsd:boolean"
+    },
+    "suburb": {
+      "@id": "domain:suburb",
+      "@type": "xsd:string"
+    },
+    "logoUrl": {
+      "@id": "domain:logoUrl",
+      "@type": "xsd:string"
+    },
+    "baseUrl": {
+      "@id": "domain:baseUrl",
+      "@type": "xsd:string"
+    },
+    "address1": {
+      "@id": "domain:address1",
+      "@type": "xsd:string"
+    },
+    "address2": {
+      "@id": "domain:address2",
+      "@type": "xsd:string"
+    },
+    "telephone": {
+      "@id": "domain:telephone",
+      "@type": "xsd:string"
+    },
+    "rentalTelephone": {
+      "@id": "domain:rentalTelephone",
+      "@type": "xsd:string"
+    },
+    "mobile": {
+      "@id": "domain:mobile",
+      "@type": "xsd:string"
+    },
+    "fax": {
+      "@id": "domain:fax",
+      "@type": "xsd:string"
+    },
+    "description": {
+      "@id": "domain:description",
+      "@type": "xsd:string"
+    },
+    "rentalEmail": {
+      "@id": "domain:rentalEmail",
+      "@type": "xsd:string"
+    },
+    "homePageSearchOptions": {
+      "@id": "domain:homePageSearchOptions",
+      "@type": "xsd:string"
+    },
+    "domainUrl": {
+      "@id": "domain:domainUrl",
+      "@type": "xsd:string"
+    },
+    "showTabSoldLastYear": {
+      "@id": "domain:showTabSoldLastYear",
+      "@type": "xsd:boolean"
+    },
+    "ProblemDetails": "domain:ProblemDetails",
+    "title": {
+      "@id": "domain:title",
+      "@type": "xsd:string"
+    },
+    "status": {
+      "@id": "domain:status",
+      "@type": "xsd:integer"
+    },
+    "detail": {
+      "@id": "domain:detail",
+      "@type": "xsd:string"
+    },
+    "instance": {
+      "@id": "domain:instance",
+      "@type": "xsd:string"
+    },
+    "Listings.v1.PropertyInspections": "domain:Listings.v1.PropertyInspections",
+    "inspections": {
+      "@id": "domain:inspections",
+      "@container": "@list"
+    },
+    "pastInspections": {
+      "@id": "domain:pastInspections",
+      "@container": "@list"
+    },
+    "isByAppointmentOnly": {
+      "@id": "domain:isByAppointmentOnly",
+      "@type": "xsd:boolean"
+    },
+    "Agencies.V2.AgencyPhoto": "domain:Agencies.V2.AgencyPhoto",
+    "Listings.v1.MedianPriceData": "domain:Listings.v1.MedianPriceData",
+    "postcode": {
+      "@id": "domain:postcode",
+      "@type": "xsd:string"
+    },
+    "medianPrice": {
+      "@id": "domain:medianPrice",
+      "@type": "xsd:integer"
+    },
+    "sourceDateFrom": {
+      "@id": "domain:sourceDateFrom",
+      "@type": "xsd:string"
+    },
+    "sourceDateTo": {
+      "@id": "domain:sourceDateTo",
+      "@type": "xsd:string"
+    },
+    "sourceCollectionDate": {
+      "@id": "domain:sourceCollectionDate",
+      "@type": "xsd:string"
+    },
+    "Listings.v1.StatementOfInformation": "domain:Listings.v1.StatementOfInformation",
+    "estimatedPrice": {
+      "@id": "domain:estimatedPrice",
+      "@type": "@id"
+    },
+    "comparableData": {
+      "@id": "domain:comparableData",
+      "@type": "@id"
+    },
+    "suburbMedianPrice": {
+      "@id": "domain:suburbMedianPrice",
+      "@type": "@id"
+    },
+    "documentationUrl": {
+      "@id": "domain:documentationUrl",
+      "@type": "xsd:string"
+    },
+    "Listings.V1.Listing": "domain:Listings.V1.Listing",
+    "objective": {
+      "@id": "domain:objective",
+      "@type": "xsd:string"
+    },
+    "saleMode": {
+      "@id": "domain:saleMode",
+      "@type": "xsd:string"
+    },
+    "channel": {
+      "@id": "domain:channel",
+      "@type": "xsd:string"
+    },
+    "addressParts": {
+      "@id": "domain:addressParts",
+      "@type": "@id"
+    },
+    "advertiserIdentifiers": {
+      "@id": "domain:advertiserIdentifiers",
+      "@type": "@id"
+    },
+    "apmIdentifiers": {
+      "@id": "domain:apmIdentifiers",
+      "@type": "@id"
+    },
+    "bathrooms": {
+      "@id": "domain:bathrooms",
+      "@type": "xsd:decimal"
+    },
+    "bedrooms": {
+      "@id": "domain:bedrooms",
+      "@type": "xsd:decimal"
+    },
+    "buildingArea": {
+      "@id": "domain:buildingArea",
+      "@type": "xsd:string"
+    },
+    "buildingAreaSqm": {
+      "@id": "domain:buildingAreaSqm",
+      "@type": "xsd:decimal"
+    },
+    "carspaces": {
+      "@id": "domain:carspaces",
+      "@type": "xsd:decimal"
+    },
+    "dateAvailable": {
+      "@id": "domain:dateAvailable",
+      "@type": "xsd:dateTime"
+    },
+    "dateCreated": {
+      "@id": "domain:dateCreated",
+      "@type": "xsd:dateTime"
+    },
+    "dateMinorUpdated": {
+      "@id": "domain:dateMinorUpdated",
+      "@type": "xsd:dateTime"
+    },
+    "datePurged": {
+      "@id": "domain:datePurged",
+      "@type": "xsd:dateTime"
+    },
+    "dateListed": {
+      "@id": "domain:dateListed",
+      "@type": "xsd:dateTime"
+    },
+    "devProjectId": {
+      "@id": "domain:devProjectId",
+      "@type": "xsd:integer"
+    },
+    "energyEfficiencyRating": {
+      "@id": "domain:energyEfficiencyRating",
+      "@type": "xsd:integer"
+    },
+    "features": {
+      "@id": "domain:features",
+      "@container": "@list"
+    },
+    "geoLocation": {
+      "@id": "domain:geoLocation",
+      "@type": "@id"
+    },
+    "headline": {
+      "@id": "domain:headline",
+      "@type": "xsd:string"
+    },
+    "inspectionDetails": {
+      "@id": "domain:inspectionDetails",
+      "@type": "@id"
+    },
+    "isNewDevelopment": {
+      "@id": "domain:isNewDevelopment",
+      "@type": "xsd:boolean"
+    },
+    "landArea": {
+      "@id": "domain:landArea",
+      "@type": "xsd:string"
+    },
+    "landAreaSqm": {
+      "@id": "domain:landAreaSqm",
+      "@type": "xsd:decimal"
+    },
+    "media": {
+      "@id": "domain:media",
+      "@container": "@list"
+    },
+    "priceDetails": {
+      "@id": "domain:priceDetails",
+      "@type": "@id"
+    },
+    "propertyId": {
+      "@id": "domain:propertyId",
+      "@type": "xsd:string"
+    },
+    "propertyTypes": {
+      "@id": "domain:propertyTypes",
+      "@container": "@list"
+    },
+    "providerDetails": {
+      "@id": "domain:providerDetails",
+      "@type": "@id"
+    },
+    "rentalDetails": {
+      "@id": "domain:rentalDetails",
+      "@type": "@id"
+    },
+    "saleDetails": {
+      "@id": "domain:saleDetails",
+      "@type": "@id"
+    },
+    "isWithdrawn": {
+      "@id": "domain:isWithdrawn",
+      "@type": "xsd:boolean"
+    },
+    "seoUrl": {
+      "@id": "domain:seoUrl",
+      "@type": "xsd:string"
+    },
+    "virtualTourUrl": {
+      "@id": "domain:virtualTourUrl",
+      "@type": "xsd:string"
+    },
+    "statementOfInformation": {
+      "@id": "domain:statementOfInformation",
+      "@type": "@id"
+    },
+    "numberOfDwellings": {
+      "@id": "domain:numberOfDwellings",
+      "@type": "xsd:integer"
+    },
+    "highlights": {
+      "@id": "domain:highlights",
+      "@container": "@list"
+    },
+    "Agencies.V2.EmailDomain": "domain:Agencies.V2.EmailDomain",
+    "Listings.v1.PastSaleData": "domain:Listings.v1.PastSaleData",
+    "unitNumber": {
+      "@id": "domain:unitNumber",
+      "@type": "xsd:string"
+    },
+    "street": {
+      "@id": "domain:street",
+      "@type": "xsd:string"
+    },
+    "displayAddress": {
+      "@id": "domain:displayAddress",
+      "@type": "xsd:string"
+    },
+    "dateOfSale": {
+      "@id": "domain:dateOfSale",
+      "@type": "xsd:string"
+    },
+    "Agencies.V2.AgencyDetails": "domain:Agencies.V2.AgencyDetails",
+    "streetAddress1": {
+      "@id": "domain:streetAddress1",
+      "@type": "xsd:string"
+    },
+    "streetAddress2": {
+      "@id": "domain:streetAddress2",
+      "@type": "xsd:string"
+    },
+    "principalName": {
+      "@id": "domain:principalName",
+      "@type": "xsd:string"
+    },
+    "principalEmail": {
+      "@id": "domain:principalEmail",
+      "@type": "xsd:string"
+    },
+    "showPastSalesPrices": {
+      "@id": "domain:showPastSalesPrices",
+      "@type": "xsd:boolean"
+    },
+    "isAgencyReportEnabled": {
+      "@id": "domain:isAgencyReportEnabled",
+      "@type": "xsd:boolean"
+    },
+    "salesEmail": {
+      "@id": "domain:salesEmail",
+      "@type": "xsd:string"
+    },
+    "isPromotionalTelephoneActive": {
+      "@id": "domain:isPromotionalTelephoneActive",
+      "@type": "xsd:boolean"
+    },
+    "hideMarketPriceEstimate": {
+      "@id": "domain:hideMarketPriceEstimate",
+      "@type": "xsd:boolean"
+    },
+    "limitEmailDomain": {
+      "@id": "domain:limitEmailDomain",
+      "@type": "xsd:boolean"
+    },
+    "Listings.v1.ComparableData": "domain:Listings.v1.ComparableData",
+    "comparableProperty": {
+      "@id": "domain:comparableProperty",
+      "@container": "@list"
+    },
+    "declarationText": {
+      "@id": "domain:declarationText",
+      "@type": "xsd:string"
+    },
+    "Agencies.V2.GeneralAgencyContactDetails": "domain:Agencies.V2.GeneralAgencyContactDetails",
+    "Listings.v1.TenderDetails": "domain:Listings.v1.TenderDetails",
+    "tenderRecipientName": {
+      "@id": "domain:tenderRecipientName",
+      "@type": "xsd:string"
+    },
+    "tenderAddress": {
+      "@id": "domain:tenderAddress",
+      "@type": "xsd:string"
+    },
+    "tenderEndDate": {
+      "@id": "domain:tenderEndDate",
+      "@type": "xsd:dateTime"
+    },
+    "Listings.v1.AdvertiserIdentifiers": "domain:Listings.v1.AdvertiserIdentifiers",
+    "advertiserType": {
+      "@id": "domain:advertiserType",
+      "@type": "xsd:string"
+    },
+    "advertiserId": {
+      "@id": "domain:advertiserId",
+      "@type": "xsd:integer"
+    },
+    "contactIds": {
+      "@id": "domain:contactIds",
+      "@container": "@list"
+    },
+    "agentIds": {
+      "@id": "domain:agentIds",
+      "@container": "@list"
+    },
+    "conjunctionContactIds": {
+      "@id": "domain:conjunctionContactIds",
+      "@container": "@list"
+    },
+    "conjunctionAgentIds": {
+      "@id": "domain:conjunctionAgentIds",
+      "@container": "@list"
+    },
+    "Agencies.V2.ContactInAgencyList": "domain:Agencies.V2.ContactInAgencyList",
+    "agencyId": {
+      "@id": "domain:agencyId",
+      "@type": "xsd:integer"
+    },
+    "firstName": {
+      "@id": "domain:firstName",
+      "@type": "xsd:string"
+    },
+    "photo": {
+      "@id": "domain:photo",
+      "@type": "xsd:string"
+    },
+    "lastName": {
+      "@id": "domain:lastName",
+      "@type": "xsd:string"
+    },
+    "isActiveProfilePage": {
+      "@id": "domain:isActiveProfilePage",
+      "@type": "xsd:string"
+    },
+    "saleActive": {
+      "@id": "domain:saleActive",
+      "@type": "xsd:boolean"
+    },
+    "rentalActive": {
+      "@id": "domain:rentalActive",
+      "@type": "xsd:boolean"
+    },
+    "secondaryEmail": {
+      "@id": "domain:secondaryEmail",
+      "@type": "xsd:string"
+    },
+    "facebookUrl": {
+      "@id": "domain:facebookUrl",
+      "@type": "xsd:string"
+    },
+    "twitterUrl": {
+      "@id": "domain:twitterUrl",
+      "@type": "xsd:string"
+    },
+    "agentVideo": {
+      "@id": "domain:agentVideo",
+      "@type": "xsd:string"
+    },
+    "profileText": {
+      "@id": "domain:profileText",
+      "@type": "xsd:string"
+    },
+    "isHideSoldLeasedListings": {
+      "@id": "domain:isHideSoldLeasedListings",
+      "@type": "xsd:boolean"
+    },
+    "googlePlusUrl": {
+      "@id": "domain:googlePlusUrl",
+      "@type": "xsd:string"
+    },
+    "personalWebsiteUrl": {
+      "@id": "domain:personalWebsiteUrl",
+      "@type": "xsd:string"
+    },
+    "linkedInUrl": {
+      "@id": "domain:linkedInUrl",
+      "@type": "xsd:string"
+    },
+    "mugShotNew": {
+      "@id": "domain:mugShotNew",
+      "@type": "xsd:string"
+    },
+    "contactTypeCode": {
+      "@id": "domain:contactTypeCode",
+      "@type": "xsd:integer"
+    },
+    "receivesRequests": {
+      "@id": "domain:receivesRequests",
+      "@type": "xsd:boolean"
+    },
+    "creAgentVideoURL": {
+      "@id": "domain:creAgentVideoURL",
+      "@type": "xsd:string"
+    },
+    "receiveScheduledReportEmail": {
+      "@id": "domain:receiveScheduledReportEmail",
+      "@type": "xsd:boolean"
+    },
+    "Agencies.V2.AgencyOptions": "domain:Agencies.V2.AgencyOptions",
+    "saleListingsGstOption": {
+      "@id": "domain:saleListingsGstOption",
+      "@type": "xsd:integer"
+    },
+    "leaseListingsGstOption": {
+      "@id": "domain:leaseListingsGstOption",
+      "@type": "xsd:integer"
+    },
+    "receiveLookForPropertyRequests": {
+      "@id": "domain:receiveLookForPropertyRequests",
+      "@type": "xsd:boolean"
+    },
+    "receiveSellPropertyRequests": {
+      "@id": "domain:receiveSellPropertyRequests",
+      "@type": "xsd:boolean"
+    },
+    "receivePropertyValuationRequests": {
+      "@id": "domain:receivePropertyValuationRequests",
+      "@type": "xsd:boolean"
+    },
+    "agentDirectoryListing": {
+      "@id": "domain:agentDirectoryListing",
+      "@type": "xsd:boolean"
+    },
+    "Listings.V1.AddressParts": "domain:Listings.V1.AddressParts",
+    "stateAbbreviation": {
+      "@id": "domain:stateAbbreviation",
+      "@type": "xsd:string"
+    },
+    "displayType": {
+      "@id": "domain:displayType",
+      "@type": "xsd:string"
+    },
+    "Listings.v1.Inspection": "domain:Listings.v1.Inspection",
+    "recurrence": {
+      "@id": "domain:recurrence",
+      "@type": "xsd:string"
+    },
+    "closingDateTime": {
+      "@id": "domain:closingDateTime",
+      "@type": "xsd:dateTime"
+    },
+    "Listings.v1.BasicPrice": "domain:Listings.v1.BasicPrice",
+    "from": {
+      "@id": "domain:from",
+      "@type": "xsd:integer"
+    },
+    "to": {
+      "@id": "domain:to",
+      "@type": "xsd:integer"
+    },
+    "Listings.v1.ProviderDetails": "domain:Listings.v1.ProviderDetails",
+    "providerSystem": {
+      "@id": "domain:providerSystem",
+      "@type": "xsd:string"
+    },
+    "providerAdID": {
+      "@id": "domain:providerAdID",
+      "@type": "xsd:string"
+    },
+    "Listings.v1.GeoLocation": "domain:Listings.v1.GeoLocation",
+    "latitude": {
+      "@id": "domain:latitude",
+      "@type": "xsd:decimal"
+    },
+    "longitude": {
+      "@id": "domain:longitude",
+      "@type": "xsd:decimal"
+    },
+    "Listings.V2.AuctionSchedule": "domain:Listings.V2.AuctionSchedule",
+    "Listings.V2.GeoLocation": "domain:Listings.V2.GeoLocation",
+    "Listings.V2.BasicPrice": "domain:Listings.V2.BasicPrice",
+    "Listings.V2.TenantDetails": "domain:Listings.V2.TenantDetails",
+    "Listings.V2.AdvertiserIdentifiers": "domain:Listings.V2.AdvertiserIdentifiers",
+    "Listings.V2.PropertyInspections": "domain:Listings.V2.PropertyInspections",
+    "Listings.V2.Inspection": "domain:Listings.V2.Inspection",
+    "Listings.V2.AddressParts": "domain:Listings.V2.AddressParts",
+    "Listings.V2.SaleDetails": "domain:Listings.V2.SaleDetails",
+    "Listings.V2.MedianPriceData": "domain:Listings.V2.MedianPriceData",
+    "Listings.V2.AuctionDetails": "domain:Listings.V2.AuctionDetails",
+    "Listings.V2.Listing": "domain:Listings.V2.Listing",
+    "Listings.V2.RentalDetails": "domain:Listings.V2.RentalDetails",
+    "Listings.V2.StatementOfInformation": "domain:Listings.V2.StatementOfInformation",
+    "Listings.V2.ProviderDetails": "domain:Listings.V2.ProviderDetails",
+    "Listings.V2.TenderDetails": "domain:Listings.V2.TenderDetails",
+    "Listings.V2.ComparableData": "domain:Listings.V2.ComparableData",
+    "Listings.V2.SoldDetails": "domain:Listings.V2.SoldDetails",
+    "Listings.V2.ListingMedia": "domain:Listings.V2.ListingMedia",
+    "Listings.V2.PriceDetails": "domain:Listings.V2.PriceDetails",
+    "Listings.V2.AustralianPropertyMonitorsIdentifiers": "domain:Listings.V2.AustralianPropertyMonitorsIdentifiers",
+    "Listings.V2.PastSaleData": "domain:Listings.V2.PastSaleData",
+    "Agencies.V1.Agent": "domain:Agencies.V1.Agent",
+    "agentId": {
+      "@id": "domain:agentId",
+      "@type": "xsd:integer"
+    },
+    "mugShotURL": {
+      "@id": "domain:mugShotURL",
+      "@type": "xsd:string"
+    },
+    "profileUrl": {
+      "@id": "domain:profileUrl",
+      "@type": "xsd:string"
+    },
+    "jobPosition": {
+      "@id": "domain:jobPosition",
+      "@type": "xsd:string"
+    },
+    "Domain.AgentSearch.v1.Model.AutoSuggestAgentResultDto": "domain:Domain.AgentSearch.v1.Model.AutoSuggestAgentResultDto",
+    "agencyName": {
+      "@id": "domain:agencyName",
+      "@type": "xsd:string"
+    },
+    "thumbnail": {
+      "@id": "domain:thumbnail",
+      "@type": "xsd:string"
+    },
+    "Agencies.V2.AgentReviewLiteResponse": "domain:Agencies.V2.AgentReviewLiteResponse",
+    "overallStarRating": {
+      "@id": "domain:overallStarRating",
+      "@type": "xsd:decimal"
+    },
+    "overallStarRatingRecent": {
+      "@id": "domain:overallStarRatingRecent",
+      "@type": "xsd:decimal"
+    },
+    "numberOfReviews": {
+      "@id": "domain:numberOfReviews",
+      "@type": "xsd:integer"
+    },
+    "numberOfReviewsRecent": {
+      "@id": "domain:numberOfReviewsRecent",
+      "@type": "xsd:integer"
+    },
+    "Agencies.V2.AgentSearchPageResultContactStatsDto": "domain:Agencies.V2.AgentSearchPageResultContactStatsDto",
+    "total": {
+      "@id": "domain:total",
+      "@type": "xsd:integer"
+    },
+    "totalPages": {
+      "@id": "domain:totalPages",
+      "@type": "xsd:integer"
+    },
+    "pageNumber": {
+      "@id": "domain:pageNumber",
+      "@type": "xsd:integer"
+    },
+    "results": {
+      "@id": "domain:results",
+      "@container": "@list"
+    },
+    "Agencies.V2.GetAgentsByLocationRequest": "domain:Agencies.V2.GetAgentsByLocationRequest",
+    "suburbs": {
+      "@id": "domain:suburbs",
+      "@container": "@list"
+    },
+    "suburbIds": {
+      "@id": "domain:suburbIds",
+      "@container": "@list"
+    },
+    "sortBy": {
+      "@id": "domain:sortBy",
+      "@type": "xsd:string"
+    },
+    "page": {
+      "@id": "domain:page",
+      "@type": "xsd:integer"
+    },
+    "pageSize": {
+      "@id": "domain:pageSize",
+      "@type": "xsd:integer"
+    },
+    "agentNameKeyword": {
+      "@id": "domain:agentNameKeyword",
+      "@type": "xsd:string"
+    },
+    "agentType": {
+      "@id": "domain:agentType",
+      "@type": "xsd:string"
+    },
+    "propertyType": {
+      "@id": "domain:propertyType",
+      "@type": "xsd:string"
+    },
+    "Agencies.V2.ContactStatsDto": "domain:Agencies.V2.ContactStatsDto",
+    "agentIdV2": {
+      "@id": "domain:agentIdV2",
+      "@type": "xsd:string"
+    },
+    "profileTier": {
+      "@id": "domain:profileTier",
+      "@type": "xsd:string"
+    },
+    "depthTier": {
+      "@id": "domain:depthTier",
+      "@type": "xsd:string"
+    },
+    "currentProductTier": {
+      "@id": "domain:currentProductTier",
+      "@type": "xsd:string"
+    },
+    "profilePhoto": {
+      "@id": "domain:profilePhoto",
+      "@type": "xsd:string"
+    },
+    "jobTitle": {
+      "@id": "domain:jobTitle",
+      "@type": "xsd:string"
+    },
+    "jobCategory": {
+      "@id": "domain:jobCategory",
+      "@type": "xsd:string"
+    },
+    "averageSoldDaysOnMarket": {
+      "@id": "domain:averageSoldDaysOnMarket",
+      "@type": "xsd:decimal"
+    },
+    "averageSoldPrice": {
+      "@id": "domain:averageSoldPrice",
+      "@type": "xsd:decimal"
+    },
+    "averageSoldPriceIncWithheld": {
+      "@id": "domain:averageSoldPriceIncWithheld",
+      "@type": "xsd:decimal"
+    },
+    "maxSoldPrice": {
+      "@id": "domain:maxSoldPrice",
+      "@type": "xsd:decimal"
+    },
+    "maxSoldPriceIncWithheld": {
+      "@id": "domain:maxSoldPriceIncWithheld",
+      "@type": "xsd:decimal"
+    },
+    "minSoldPrice": {
+      "@id": "domain:minSoldPrice",
+      "@type": "xsd:decimal"
+    },
+    "minSoldPriceIncWithheld": {
+      "@id": "domain:minSoldPriceIncWithheld",
+      "@type": "xsd:decimal"
+    },
+    "totalForRent": {
+      "@id": "domain:totalForRent",
+      "@type": "xsd:integer"
+    },
+    "totalLeased": {
+      "@id": "domain:totalLeased",
+      "@type": "xsd:integer"
+    },
+    "totalForSale": {
+      "@id": "domain:totalForSale",
+      "@type": "xsd:integer"
+    },
+    "totalSold": {
+      "@id": "domain:totalSold",
+      "@type": "xsd:integer"
+    },
+    "totalJointSold": {
+      "@id": "domain:totalJointSold",
+      "@type": "xsd:integer"
+    },
+    "totalJointLeased": {
+      "@id": "domain:totalJointLeased",
+      "@type": "xsd:integer"
+    },
+    "totalSoldAndAuctioned": {
+      "@id": "domain:totalSoldAndAuctioned",
+      "@type": "xsd:integer"
+    },
+    "totalJointSoldAndAuctioned": {
+      "@id": "domain:totalJointSoldAndAuctioned",
+      "@type": "xsd:integer"
+    },
+    "totalDaysOnMarket": {
+      "@id": "domain:totalDaysOnMarket",
+      "@type": "xsd:decimal"
+    },
+    "totalSoldPrice": {
+      "@id": "domain:totalSoldPrice",
+      "@type": "xsd:integer"
+    },
+    "totalSoldPriceIncWithheld": {
+      "@id": "domain:totalSoldPriceIncWithheld",
+      "@type": "xsd:integer"
+    },
+    "totalAuctioned": {
+      "@id": "domain:totalAuctioned",
+      "@type": "xsd:integer"
+    },
+    "totalNotWithheldSoldCount": {
+      "@id": "domain:totalNotWithheldSoldCount",
+      "@type": "xsd:integer"
+    },
+    "totalSoldWithValidDaysOnMarket": {
+      "@id": "domain:totalSoldWithValidDaysOnMarket",
+      "@type": "xsd:integer"
+    },
+    "agencyLogoUrl": {
+      "@id": "domain:agencyLogoUrl",
+      "@type": "xsd:string"
+    },
+    "brandColour": {
+      "@id": "domain:brandColour",
+      "@type": "xsd:string"
+    },
+    "agencyProfileUrl": {
+      "@id": "domain:agencyProfileUrl",
+      "@type": "xsd:string"
+    },
+    "showRecentlySold": {
+      "@id": "domain:showRecentlySold",
+      "@type": "xsd:boolean"
+    },
+    "AuctionCollection.v1.PutAuctionUpdateRequest": "domain:AuctionCollection.v1.PutAuctionUpdateRequest",
+    "eventDate": {
+      "@id": "domain:eventDate",
+      "@type": "xsd:dateTime"
+    },
+    "result": {
+      "@id": "domain:result",
+      "@type": "xsd:string"
+    },
+    "isPriceDisclosed": {
+      "@id": "domain:isPriceDisclosed",
+      "@type": "xsd:boolean"
+    },
+    "canPublish": {
+      "@id": "domain:canPublish",
+      "@type": "xsd:boolean"
+    },
+    "submittedAt": {
+      "@id": "domain:submittedAt",
+      "@type": "xsd:dateTime"
+    },
+    "submissionSource": {
+      "@id": "domain:submissionSource",
+      "@type": "xsd:string"
+    },
+    "registeredBidders": {
+      "@id": "domain:registeredBidders",
+      "@type": "xsd:integer"
+    },
+    "activeBidders": {
+      "@id": "domain:activeBidders",
+      "@type": "xsd:integer"
+    },
+    "isVendorBid": {
+      "@id": "domain:isVendorBid",
+      "@type": "xsd:boolean"
+    },
+    "withdrawalReason": {
+      "@id": "domain:withdrawalReason",
+      "@type": "xsd:string"
+    },
+    "contractStatus": {
+      "@id": "domain:contractStatus",
+      "@type": "xsd:string"
+    },
+    "AuctionCollection.v1.CallingSheetResponse": "domain:AuctionCollection.v1.CallingSheetResponse",
+    "address": {
+      "@id": "domain:address",
+      "@type": "xsd:string"
+    },
+    "bedroomCount": {
+      "@id": "domain:bedroomCount",
+      "@type": "xsd:string"
+    },
+    "auctionDate": {
+      "@id": "domain:auctionDate",
+      "@type": "xsd:dateTime"
+    },
+    "agentName": {
+      "@id": "domain:agentName",
+      "@type": "xsd:string"
+    },
+    "agentContactNumber": {
+      "@id": "domain:agentContactNumber",
+      "@type": "xsd:string"
+    },
+    "secondaryAgentId": {
+      "@id": "domain:secondaryAgentId",
+      "@type": "xsd:string"
+    },
+    "secondaryAgentName": {
+      "@id": "domain:secondaryAgentName",
+      "@type": "xsd:string"
+    },
+    "secondaryAgentContactNumber": {
+      "@id": "domain:secondaryAgentContactNumber",
+      "@type": "xsd:string"
+    },
+    "Authorities.v1.IndividualResponse": "domain:Authorities.v1.IndividualResponse",
+    "Authorities.v1.Attachments": "domain:Authorities.v1.Attachments",
+    "attachment": {
+      "@id": "domain:attachment",
+      "@type": "xsd:string"
+    },
+    "fileType": {
+      "@id": "domain:fileType",
+      "@type": "xsd:string"
+    },
+    "Authorities.v1.MarketingCampaignRequest": "domain:Authorities.v1.MarketingCampaignRequest",
+    "advertising": {
+      "@id": "domain:advertising",
+      "@type": "xsd:string"
+    },
+    "campaignType": {
+      "@id": "domain:campaignType",
+      "@type": "xsd:string"
+    },
+    "marketingCampaignItems": {
+      "@id": "domain:marketingCampaignItems",
+      "@container": "@list"
+    },
+    "comments": {
+      "@id": "domain:comments",
+      "@type": "xsd:string"
+    },
+    "commentsFallback": {
+      "@id": "domain:commentsFallback",
+      "@type": "xsd:string"
+    },
+    "discountAmount": {
+      "@id": "domain:discountAmount",
+      "@type": "xsd:string"
+    },
+    "discountPercent": {
+      "@id": "domain:discountPercent",
+      "@type": "xsd:string"
+    },
+    "expense": {
+      "@id": "domain:expense",
+      "@type": "xsd:string"
+    },
+    "other": {
+      "@id": "domain:other",
+      "@type": "xsd:string"
+    },
+    "payableOn": {
+      "@id": "domain:payableOn",
+      "@type": "xsd:date"
+    },
+    "realhubQuoteId": {
+      "@id": "domain:realhubQuoteId",
+      "@type": "xsd:string"
+    },
+    "Authorities.v1.SubscriptionResponse": "domain:Authorities.v1.SubscriptionResponse",
+    "subscriptionId": {
+      "@id": "domain:subscriptionId",
+      "@type": "xsd:string"
+    },
+    "Authorities.v1.AgentResponse": "domain:Authorities.v1.AgentResponse",
+    "Authorities.v1.MarketingCampaignItemResponse": "domain:Authorities.v1.MarketingCampaignItemResponse",
+    "Authorities.v1.VendorAttachments": "domain:Authorities.v1.VendorAttachments",
+    "Authorities.v1.CompanyRequest": "domain:Authorities.v1.CompanyRequest",
+    "phoneNumber": {
+      "@id": "domain:phoneNumber",
+      "@type": "xsd:string"
+    },
+    "abn": {
+      "@id": "domain:abn",
+      "@type": "xsd:string"
+    },
+    "acn": {
+      "@id": "domain:acn",
+      "@type": "xsd:string"
+    },
+    "gstRegistered": {
+      "@id": "domain:gstRegistered",
+      "@type": "xsd:boolean"
+    },
+    "Authorities.v1.MarketingCampaignResponse": "domain:Authorities.v1.MarketingCampaignResponse",
+    "Authorities.v1.AuthorityResponse": "domain:Authorities.v1.AuthorityResponse",
+    "marketingCampaigns": {
+      "@id": "domain:marketingCampaigns",
+      "@container": "@list"
+    },
+    "vendors": {
+      "@id": "domain:vendors",
+      "@container": "@list"
+    },
+    "Authorities.v1.CrmDetails": "domain:Authorities.v1.CrmDetails",
+    "Authorities.v1.VendorRequest": "domain:Authorities.v1.VendorRequest",
+    "contact": {
+      "@id": "domain:contact",
+      "@type": "@id"
+    },
+    "contactRepresented": {
+      "@id": "domain:contactRepresented",
+      "@type": "@id"
+    },
+    "conciergeOptedIn": {
+      "@id": "domain:conciergeOptedIn",
+      "@type": "xsd:boolean"
+    },
+    "nature": {
+      "@id": "domain:nature",
+      "@type": "xsd:string"
+    },
+    "trust": {
+      "@id": "domain:trust",
+      "@type": "xsd:string"
+    },
+    "order": {
+      "@id": "domain:order",
+      "@type": "xsd:integer"
+    },
+    "authorityAttachments": {
+      "@id": "domain:authorityAttachments",
+      "@container": "@list"
+    },
+    "Authorities.v1.CompanyResponse": "domain:Authorities.v1.CompanyResponse",
+    "Authorities.v1.AgentRequest": "domain:Authorities.v1.AgentRequest",
+    "user": {
+      "@id": "domain:user",
+      "@type": "xsd:string"
+    },
+    "officeNumber": {
+      "@id": "domain:officeNumber",
+      "@type": "xsd:string"
+    },
+    "licenseNumber": {
+      "@id": "domain:licenseNumber",
+      "@type": "xsd:string"
+    },
+    "Authorities.v1.VendorResponse": "domain:Authorities.v1.VendorResponse",
+    "Authorities.v1.Address": "domain:Authorities.v1.Address",
+    "country": {
+      "@id": "domain:country",
+      "@type": "xsd:string"
+    },
+    "number": {
+      "@id": "domain:number",
+      "@type": "xsd:string"
+    },
+    "Authorities.v1.IndividualRequest": "domain:Authorities.v1.IndividualRequest",
+    "dateOfBirth": {
+      "@id": "domain:dateOfBirth",
+      "@type": "xsd:date"
+    },
+    "middleName": {
+      "@id": "domain:middleName",
+      "@type": "xsd:string"
+    },
+    "Authorities.v1.AuthorityRequest": "domain:Authorities.v1.AuthorityRequest",
+    "parking": {
+      "@id": "domain:parking",
+      "@type": "xsd:integer"
+    },
+    "created": {
+      "@id": "domain:created",
+      "@type": "xsd:dateTime"
+    },
+    "modified": {
+      "@id": "domain:modified",
+      "@type": "xsd:dateTime"
+    },
+    "createdAt": {
+      "@id": "domain:createdAt",
+      "@type": "xsd:dateTime"
+    },
+    "updatedAt": {
+      "@id": "domain:updatedAt",
+      "@type": "xsd:dateTime"
+    },
+    "administrationFee": {
+      "@id": "domain:administrationFee",
+      "@type": "xsd:string"
+    },
+    "agentDetailsDate": {
+      "@id": "domain:agentDetailsDate",
+      "@type": "xsd:dateTime"
+    },
+    "auctionType": {
+      "@id": "domain:auctionType",
+      "@type": "xsd:string"
+    },
+    "chattelsExcluded": {
+      "@id": "domain:chattelsExcluded",
+      "@type": "xsd:string"
+    },
+    "chattelsIncluded": {
+      "@id": "domain:chattelsIncluded",
+      "@container": "@list"
+    },
+    "continuingPeriod": {
+      "@id": "domain:continuingPeriod",
+      "@type": "xsd:decimal"
+    },
+    "espRangeHigher": {
+      "@id": "domain:espRangeHigher",
+      "@type": "xsd:decimal"
+    },
+    "espRangeLower": {
+      "@id": "domain:espRangeLower",
+      "@type": "xsd:decimal"
+    },
+    "exclusivePeriod": {
+      "@id": "domain:exclusivePeriod",
+      "@type": "xsd:decimal"
+    },
+    "exclusivePeriodStartDate": {
+      "@id": "domain:exclusivePeriodStartDate",
+      "@type": "xsd:dateTime"
+    },
+    "exclusiveSoldAs": {
+      "@id": "domain:exclusiveSoldAs",
+      "@type": "xsd:string"
+    },
+    "isOwnersCorporationManaged": {
+      "@id": "domain:isOwnersCorporationManaged",
+      "@type": "xsd:boolean"
+    },
+    "isPropertyTenanted": {
+      "@id": "domain:isPropertyTenanted",
+      "@type": "xsd:boolean"
+    },
+    "occupationState": {
+      "@id": "domain:occupationState",
+      "@type": "xsd:string"
+    },
+    "optOutInformation": {
+      "@id": "domain:optOutInformation",
+      "@type": "xsd:boolean"
+    },
+    "payableIn": {
+      "@id": "domain:payableIn",
+      "@container": "@list"
+    },
+    "paymentMethod": {
+      "@id": "domain:paymentMethod",
+      "@type": "xsd:string"
+    },
+    "paymentSum": {
+      "@id": "domain:paymentSum",
+      "@type": "xsd:decimal"
+    },
+    "reservePrice": {
+      "@id": "domain:reservePrice",
+      "@type": "xsd:decimal"
+    },
+    "salePriceGstType": {
+      "@id": "domain:salePriceGstType",
+      "@type": "xsd:string"
+    },
+    "saleSignPermission": {
+      "@id": "domain:saleSignPermission",
+      "@type": "xsd:boolean"
+    },
+    "searchCriteriaAmount": {
+      "@id": "domain:searchCriteriaAmount",
+      "@type": "xsd:decimal"
+    },
+    "searchCriteriaPriceType": {
+      "@id": "domain:searchCriteriaPriceType",
+      "@type": "xsd:string"
+    },
+    "transactionType": {
+      "@id": "domain:transactionType",
+      "@type": "xsd:string"
+    },
+    "vendorMktPriceNa": {
+      "@id": "domain:vendorMktPriceNa",
+      "@type": "xsd:boolean"
+    },
+    "waivedCoolingOff": {
+      "@id": "domain:waivedCoolingOff",
+      "@type": "xsd:boolean"
+    },
+    "lot": {
+      "@id": "domain:lot",
+      "@type": "xsd:string"
+    },
+    "plan": {
+      "@id": "domain:plan",
+      "@type": "xsd:string"
+    },
+    "titleReference": {
+      "@id": "domain:titleReference",
+      "@type": "xsd:string"
+    },
+    "certificateOfTitleType": {
+      "@id": "domain:certificateOfTitleType",
+      "@type": "xsd:string"
+    },
+    "certificateOfTitleFolio": {
+      "@id": "domain:certificateOfTitleFolio",
+      "@type": "xsd:string"
+    },
+    "certificateOfTitleVolume": {
+      "@id": "domain:certificateOfTitleVolume",
+      "@type": "xsd:string"
+    },
+    "improvedLand": {
+      "@id": "domain:improvedLand",
+      "@type": "xsd:boolean"
+    },
+    "crmDetails": {
+      "@id": "domain:crmDetails",
+      "@type": "@id"
+    },
+    "Authorities.v1.SubscriptionRequest": "domain:Authorities.v1.SubscriptionRequest",
+    "webhookId": {
+      "@id": "domain:webhookId",
+      "@type": "xsd:string"
+    },
+    "Authorities.v1.MarketingCampaignItemRequest": "domain:Authorities.v1.MarketingCampaignItemRequest",
+    "itemId": {
+      "@id": "domain:itemId",
+      "@type": "xsd:string"
+    },
+    "finalPrice": {
+      "@id": "domain:finalPrice",
+      "@type": "xsd:string"
+    },
+    "vendorPrice": {
+      "@id": "domain:vendorPrice",
+      "@type": "xsd:string"
+    },
+    "selected": {
+      "@id": "domain:selected",
+      "@type": "xsd:boolean"
+    },
+    "hidden": {
+      "@id": "domain:hidden",
+      "@type": "xsd:boolean"
+    },
+    "AvmHistory.v1.HttpValidationProblemDetails": "domain:AvmHistory.v1.HttpValidationProblemDetails",
+    "errors": {
+      "@id": "domain:errors"
+    },
+    "AvmHistory.v1.SaleAvm": "domain:AvmHistory.v1.SaleAvm",
+    "confidence": {
+      "@id": "domain:confidence",
+      "@type": "xsd:string"
+    },
+    "estimate": {
+      "@id": "domain:estimate",
+      "@type": "xsd:integer"
+    },
+    "estimateDate": {
+      "@id": "domain:estimateDate",
+      "@type": "xsd:string"
+    },
+    "estimateHigh": {
+      "@id": "domain:estimateHigh",
+      "@type": "xsd:integer"
+    },
+    "estimateLow": {
+      "@id": "domain:estimateLow",
+      "@type": "xsd:integer"
+    },
+    "AvmHistory.v1.Response": "domain:AvmHistory.v1.Response",
+    "valuations": {
+      "@id": "domain:valuations",
+      "@container": "@list"
+    },
+    "AvmHistory.v1.ProblemDetails": "domain:AvmHistory.v1.ProblemDetails",
+    "AvmHistory.v1.Valuation": "domain:AvmHistory.v1.Valuation",
+    "saleAvm": {
+      "@id": "domain:saleAvm",
+      "@type": "@id"
+    },
+    "CampaignAPI.v1.HttpValidationProblemDetails": "domain:CampaignAPI.v1.HttpValidationProblemDetails",
+    "CampaignAPI.v1.ProjectPerformanceResponse": "domain:CampaignAPI.v1.ProjectPerformanceResponse",
+    "date": {
+      "@id": "domain:date",
+      "@type": "xsd:date"
+    },
+    "domainAgencyId": {
+      "@id": "domain:domainAgencyId",
+      "@type": "xsd:string"
+    },
+    "ioNumber": {
+      "@id": "domain:ioNumber",
+      "@type": "xsd:string"
+    },
+    "projectId": {
+      "@id": "domain:projectId",
+      "@type": "xsd:string"
+    },
+    "projectName": {
+      "@id": "domain:projectName",
+      "@type": "xsd:string"
+    },
+    "pageViews": {
+      "@id": "domain:pageViews",
+      "@type": "xsd:integer"
+    },
+    "saveAndShares": {
+      "@id": "domain:saveAndShares",
+      "@type": "xsd:integer"
+    },
+    "totalLeads": {
+      "@id": "domain:totalLeads",
+      "@type": "xsd:integer"
+    },
+    "emailEnquiries": {
+      "@id": "domain:emailEnquiries",
+      "@type": "xsd:integer"
+    },
+    "phoneLeads": {
+      "@id": "domain:phoneLeads",
+      "@type": "xsd:integer"
+    },
+    "phoneReveals": {
+      "@id": "domain:phoneReveals",
+      "@type": "xsd:integer"
+    },
+    "agentDetailsViews": {
+      "@id": "domain:agentDetailsViews",
+      "@type": "xsd:integer"
+    },
+    "photoViews": {
+      "@id": "domain:photoViews",
+      "@type": "xsd:integer"
+    },
+    "videoViews": {
+      "@id": "domain:videoViews",
+      "@type": "xsd:integer"
+    },
+    "mapViews": {
+      "@id": "domain:mapViews",
+      "@type": "xsd:integer"
+    },
+    "spend": {
+      "@id": "domain:spend",
+      "@type": "xsd:decimal"
+    },
+    "cpe": {
+      "@id": "domain:cpe",
+      "@type": "xsd:decimal"
+    },
+    "CampaignAPI.v1.ListingPerformanceDataResponse": "domain:CampaignAPI.v1.ListingPerformanceDataResponse",
+    "data": {
+      "@id": "domain:data",
+      "@container": "@list"
+    },
+    "CampaignAPI.v1.Leads": "domain:CampaignAPI.v1.Leads",
+    "CampaignAPI.v1.ProjectPerformanceDataResponse": "domain:CampaignAPI.v1.ProjectPerformanceDataResponse",
+    "CampaignAPI.v1.Shares": "domain:CampaignAPI.v1.Shares",
+    "listingLinkCopied": {
+      "@id": "domain:listingLinkCopied",
+      "@type": "xsd:integer"
+    },
+    "sharedViaSocial": {
+      "@id": "domain:sharedViaSocial",
+      "@type": "xsd:integer"
+    },
+    "sharedViaEmail": {
+      "@id": "domain:sharedViaEmail",
+      "@type": "xsd:integer"
+    },
+    "CampaignAPI.v1.ListingPerformanceResponse": "domain:CampaignAPI.v1.ListingPerformanceResponse",
+    "leads": {
+      "@id": "domain:leads",
+      "@type": "@id"
+    },
+    "floorPlanViews": {
+      "@id": "domain:floorPlanViews",
+      "@type": "xsd:integer"
+    },
+    "shares": {
+      "@id": "domain:shares",
+      "@type": "@id"
+    },
+    "shortlisted": {
+      "@id": "domain:shortlisted",
+      "@type": "xsd:integer"
+    },
+    "CampaignAPI.v1.SocialPerformanceResponse": "domain:CampaignAPI.v1.SocialPerformanceResponse",
+    "creativeId": {
+      "@id": "domain:creativeId",
+      "@type": "xsd:string"
+    },
+    "creativeName": {
+      "@id": "domain:creativeName",
+      "@type": "xsd:string"
+    },
+    "campaignName": {
+      "@id": "domain:campaignName",
+      "@type": "xsd:string"
+    },
+    "impressions": {
+      "@id": "domain:impressions",
+      "@type": "xsd:integer"
+    },
+    "enquiries": {
+      "@id": "domain:enquiries",
+      "@type": "xsd:integer"
+    },
+    "clicks": {
+      "@id": "domain:clicks",
+      "@type": "xsd:integer"
+    },
+    "ctr": {
+      "@id": "domain:ctr",
+      "@type": "xsd:decimal"
+    },
+    "CampaignAPI.v1.SocialPerformanceDataResponse": "domain:CampaignAPI.v1.SocialPerformanceDataResponse",
+    "totalCount": {
+      "@id": "domain:totalCount",
+      "@type": "xsd:integer"
+    },
+    "DemographicsResponse": "domain:DemographicsResponse",
+    "demographics": {
+      "@id": "domain:demographics",
+      "@container": "@list"
+    },
+    "Enquiries.V1.Sender": "domain:Enquiries.V1.Sender",
+    "Enquiries.V1.EnquiryReport": "domain:Enquiries.V1.EnquiryReport",
+    "deliveryMethod": {
+      "@id": "domain:deliveryMethod",
+      "@type": "xsd:string"
+    },
+    "enquiryType": {
+      "@id": "domain:enquiryType",
+      "@type": "xsd:string"
+    },
+    "message": {
+      "@id": "domain:message",
+      "@type": "xsd:string"
+    },
+    "metaData": {
+      "@id": "domain:metaData"
+    },
+    "recipientsDeliveryStatus": {
+      "@id": "domain:recipientsDeliveryStatus",
+      "@container": "@list"
+    },
+    "referenceId": {
+      "@id": "domain:referenceId",
+      "@type": "xsd:integer"
+    },
+    "sender": {
+      "@id": "domain:sender",
+      "@type": "@id"
+    },
+    "dateReceived": {
+      "@id": "domain:dateReceived",
+      "@type": "xsd:dateTime"
+    },
+    "Domain.Public.Adapter.Web.Api.Models.v1.Enquiries.Sender": "domain:Domain.Public.Adapter.Web.Api.Models.v1.Enquiries.Sender",
+    "Enquiries.V1.Recipient": "domain:Enquiries.V1.Recipient",
+    "recipientType": {
+      "@id": "domain:recipientType",
+      "@type": "xsd:string"
+    },
+    "Domain.Public.Adapter.Web.Api.Models.v1.Enquiries.Enquiry": "domain:Domain.Public.Adapter.Web.Api.Models.v1.Enquiries.Enquiry",
+    "subject": {
+      "@id": "domain:subject",
+      "@type": "xsd:string"
+    },
+    "Domain.EnquiryService.v1.Model.GroupEnquiryServiceModelsEnquiryResponse": "domain:Domain.EnquiryService.v1.Model.GroupEnquiryServiceModelsEnquiryResponse",
+    "s3Key": {
+      "@id": "domain:s3Key",
+      "@type": "xsd:string"
+    },
+    "enquiryReceiptTimestamp": {
+      "@id": "domain:enquiryReceiptTimestamp",
+      "@type": "xsd:dateTime"
+    },
+    "warnings": {
+      "@id": "domain:warnings",
+      "@container": "@list"
+    },
+    "Enquiries.V1.RecipientDeliveryStatus": "domain:Enquiries.V1.RecipientDeliveryStatus",
+    "deliveryStatus": {
+      "@id": "domain:deliveryStatus",
+      "@type": "xsd:string"
+    },
+    "recipient": {
+      "@id": "domain:recipient",
+      "@type": "@id"
+    },
+    "Domain.Public.Adapter.Web.Api.Models.v1.Listings.Business.Ad": "domain:Domain.Public.Adapter.Web.Api.Models.v1.Listings.Business.Ad",
+    "adType": {
+      "@id": "domain:adType",
+      "@type": "xsd:string"
+    },
+    "ListingAdmin.v2.ListingResponse": "domain:ListingAdmin.v2.ListingResponse",
+    "providerId": {
+      "@id": "domain:providerId",
+      "@type": "xsd:string"
+    },
+    "providerAdId": {
+      "@id": "domain:providerAdId",
+      "@type": "xsd:string"
+    },
+    "versionId": {
+      "@id": "domain:versionId",
+      "@type": "xsd:string"
+    },
+    "processStatus": {
+      "@id": "domain:processStatus",
+      "@type": "xsd:string"
+    },
+    "Domain.Public.Adapter.Web.Api.Models.v1.Listings.Commercial.Contact": "domain:Domain.Public.Adapter.Web.Api.Models.v1.Listings.Commercial.Contact",
+    "imageUrl": {
+      "@id": "domain:imageUrl",
+      "@type": "xsd:string"
+    },
+    "displayFullName": {
+      "@id": "domain:displayFullName",
+      "@type": "xsd:string"
+    },
+    "phoneNumbers": {
+      "@id": "domain:phoneNumbers",
+      "@container": "@list"
+    },
+    "emailAddress": {
+      "@id": "domain:emailAddress",
+      "@type": "xsd:string"
+    },
+    "Domain.Public.Adapter.Web.Api.Models.v1.Listings.Commercial.Media": "domain:Domain.Public.Adapter.Web.Api.Models.v1.Listings.Commercial.Media",
+    "mediaType": {
+      "@id": "domain:mediaType",
+      "@type": "xsd:string"
+    },
+    "videoUrl": {
+      "@id": "domain:videoUrl",
+      "@type": "xsd:string"
+    },
+    "Domain.ListingAdminService.v1.Model.PastSaleAddress": "domain:Domain.ListingAdminService.v1.Model.PastSaleAddress",
+    "Domain.ListingAdminService.v1.Model.LandArea": "domain:Domain.ListingAdminService.v1.Model.LandArea",
+    "unit": {
+      "@id": "domain:unit",
+      "@type": "xsd:string"
+    },
+    "value": {
+      "@id": "domain:value",
+      "@type": "xsd:decimal"
+    },
+    "Domain.Public.Adapter.Web.Api.Models.v1.Listings.Commercial.LocationSearch": "domain:Domain.Public.Adapter.Web.Api.Models.v1.Listings.Commercial.LocationSearch",
+    "area": {
+      "@id": "domain:area",
+      "@type": "xsd:string"
+    },
+    "region": {
+      "@id": "domain:region",
+      "@type": "xsd:string"
+    },
+    "ListingAdmin.v2.GeoLocation": "domain:ListingAdmin.v2.GeoLocation",
+    "ListingAdmin.v2.AgentContact": "domain:ListingAdmin.v2.AgentContact",
+    "domainAgentId": {
+      "@id": "domain:domainAgentId",
+      "@type": "xsd:integer"
+    },
+    "receiveEmails": {
+      "@id": "domain:receiveEmails",
+      "@type": "xsd:boolean"
+    },
+    "Domain.ListingAdminService.v1.Model.ParkingInfo": "domain:Domain.ListingAdminService.v1.Model.ParkingInfo",
+    "information": {
+      "@id": "domain:information",
+      "@type": "xsd:string"
+    },
+    "ListingAdmin.v2.SaleInfo": "domain:ListingAdmin.v2.SaleInfo",
+    "annualSales": {
+      "@id": "domain:annualSales",
+      "@type": "xsd:decimal"
+    },
+    "annualProfit": {
+      "@id": "domain:annualProfit",
+      "@type": "xsd:decimal"
+    },
+    "stockValue": {
+      "@id": "domain:stockValue",
+      "@type": "xsd:decimal"
+    },
+    "ListingAdmin.v2.Lease": "domain:ListingAdmin.v2.Lease",
+    "Domain.ListingAdminService.v1.Model.SupplementaryMetadata": "domain:Domain.ListingAdminService.v1.Model.SupplementaryMetadata",
+    "measurementUnit": {
+      "@id": "domain:measurementUnit",
+      "@type": "xsd:string"
+    },
+    "measurement": {
+      "@id": "domain:measurement",
+      "@type": "xsd:decimal"
+    }
+  },
+  "@type": "schema:Dataset",
+  "schema:name": "Domain Group API JSON-LD context",
+  "schema:description": "A JSON-LD @context for the objects Domain Group's own API contract declares: one class per component schema, one property per declared field, typed from the contract. Derived by script (derive-json-ld.py, 2026-10-21) from openapi/domain-group-addresslocators-api-openapi.yml, openapi/domain-group-agencies-api-openapi.yml, openapi/domain-group-agents-api-openapi.yml.",
+  "dcterms:created": "2026-10-21",
+  "dcterms:source": [
+    "openapi/domain-group-addresslocators-api-openapi.yml",
+    "openapi/domain-group-agencies-api-openapi.yml",
+    "openapi/domain-group-agents-api-openapi.yml",
+    "openapi/domain-group-agentsearch-api-openapi.yml",
+    "openapi/domain-group-auctioncollection-api-openapi.yml"
+  ]
+}

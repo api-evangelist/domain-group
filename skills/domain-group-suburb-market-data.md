@@ -1,32 +1,37 @@
 ---
-name: Pull Australian suburb market data from Domain
-description: >-
-  Assemble a suburb market picture - performance statistics, historical series,
-  demographics, weekend auction and sales results, and nearby schools - the way
-  banks and fintechs consume Domain.
-api: openapi/domain-group-openapi-latest.json
+name: domain-group-suburb-market-data
+title: Pull Australian suburb market data from Domain
+description: Assemble a suburb market picture - performance statistics, historical series, demographics,
+  weekend auction and sales results, and nearby schools - the way banks and fintechs consume Domain.
+api: openapi/domain-group-statistics-api-openapi.yml
+apis:
+- openapi/domain-group-statistics-api-openapi.yml
+- openapi/domain-group-demographics-api-openapi.yml
+- openapi/domain-group-locations-api-openapi.yml
+- openapi/domain-group-salesresults-api-openapi.yml
+- openapi/domain-group-schools-api-openapi.yml
 operations:
-  - SuburbPerformance_Get_ByNamedSuburb
-  - SuburbPerformance_Get_ByNamedSuburb_WithoutPostcode
-  - SuburbHistorical_Get
-  - SuburbSummary_Get
-  - Demographics_Get_ByNamedSuburb
-  - LocationProfiles_Get
-  - SalesResults_Get
-  - SalesResults_Listings
-  - SalesResults_SaturdayReport
-  - SalesResults_WeeklyMediaReport
-  - Schools_Search_ByLocation
-  - Schools_Get_ById
+- SuburbPerformance_Get_ByNamedSuburb
+- SuburbPerformance_Get_ByNamedSuburb_WithoutPostcode
+- SuburbHistorical_Get
+- SuburbSummary_Get
+- Demographics_Get_ByNamedSuburb
+- LocationProfiles_Get
+- SalesResults_Get
+- SalesResults_Listings
+- SalesResults_SaturdayReport
+- SalesResults_WeeklyMediaReport
+- Schools_Search_ByLocation
+- Schools_Get_ById
 scopes:
-  - api_suburbperformance_read
-  - api_demographics_read
-  - api_locations_read
-  - api_salesresults_read
-  - api_schools_read
-generated: '2026-07-26'
+- api_suburbperformance_read
+- api_demographics_read
+- api_locations_read
+- api_salesresults_read
+- api_schools_read
+generated: '2026-10-21'
 method: generated
-source: openapi/domain-group-openapi-latest.json + https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations
+source: openapi/ per-API documents + https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations
 ---
 
 # Pull Australian suburb market data from Domain

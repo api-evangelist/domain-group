@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/domain-group/main/json-schema/domain-group-bookings-v2-rate-for-new-listing-schema.json",
+  "title": "Bookings.V2.RateForNewListing",
+  "description": "NewListingRateResponse",
+  "x-generated": "2026-10-21",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/domain-group-products-api-openapi.yml#/components/schemas/Bookings.V2.RateForNewListing",
+  "type": "object",
+  "properties": {
+    "costExGst": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "description": "Gets or Sets CostExGst",
+      "format": "double"
+    },
+    "costIncGst": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "description": "Gets or Sets CostIncGst",
+      "format": "double"
+    },
+    "contractEndDate": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets ContractEndDate",
+      "format": "date-time"
+    },
+    "message": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets Message"
+    },
+    "priceMatrixId": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "Gets or Sets PriceMatrixId",
+      "format": "int32"
+    },
+    "productName": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets ProductName"
+    }
+  },
+  "additionalProperties": false,
+  "x-data-access-level-info": {
+    "Basic": [
+      "*"
+    ],
+    "Detailed": [
+      "*"
+    ],
+    "Full": [
+      "*"
+    ]
+  }
+}

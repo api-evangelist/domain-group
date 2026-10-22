@@ -1,30 +1,35 @@
 ---
-name: Search Domain listings and enquire on one
-description: >-
-  Run a residential, commercial or business listing search across
-  domain.com.au, page through the results correctly, pull the full listing and
-  its agency/agent, and submit an enquiry.
-api: openapi/domain-group-openapi-latest.json
+name: domain-group-listing-search
+title: Search Domain listings and enquire on one
+description: Run a residential, commercial or business listing search across domain.com.au, page through
+  the results correctly, pull the full listing and its agency/agent, and submit an enquiry.
+api: openapi/domain-group-listings-api-openapi.yml
+apis:
+- openapi/domain-group-listingsearch-api-openapi.yml
+- openapi/domain-group-listings-api-openapi.yml
+- openapi/domain-group-agencies-api-openapi.yml
+- openapi/domain-group-agents-api-openapi.yml
+- openapi/domain-group-enquiries-api-openapi.yml
 operations:
-  - Listings_ResidentialSearch
-  - Listings_DetailedResidentialSearch
-  - Listings_DetailedSoldResidentialSearch
-  - Listings_DetailedCommercialSearch
-  - Listings_DetailedBusinessSearch
-  - ListingLocations_Search
-  - Listings_Get
-  - Agencies_Get
-  - Agents_Get
-  - Enquiries_Post
-  - Enquiries_Get
+- Listings_ResidentialSearch
+- Listings_DetailedResidentialSearch
+- Listings_DetailedSoldResidentialSearch
+- Listings_DetailedCommercialSearch
+- Listings_DetailedBusinessSearch
+- ListingLocations_Search
+- Listings_Get
+- Agencies_Get
+- Agents_Get
+- Enquiries_Post
+- Enquiries_Get
 scopes:
-  - api_listings_read
-  - api_agencies_read
-  - api_enquiries_write
-  - api_enquiries_read
-generated: '2026-07-26'
+- api_listings_read
+- api_agencies_read
+- api_enquiries_write
+- api_enquiries_read
+generated: '2026-10-21'
 method: generated
-source: openapi/domain-group-openapi-latest.json + https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings
+source: openapi/ per-API documents + https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings
 ---
 
 # Search Domain listings and enquire on one

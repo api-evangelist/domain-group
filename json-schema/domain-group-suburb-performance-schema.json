@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/domain-group/main/json-schema/domain-group-suburb-performance-schema.json",
+  "title": "SuburbPerformance",
+  "x-generated": "2026-10-21",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/domain-group-statistics-api-openapi.yml#/components/schemas/SuburbPerformance",
+  "type": "object",
+  "properties": {
+    "header": {
+      "type": "object",
+      "properties": {
+        "suburb": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "propertyCategory": {
+          "type": "string"
+        }
+      }
+    },
+    "series": {
+      "type": "object",
+      "properties": {
+        "seriesInfo": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "year": {
+                "type": "integer"
+              },
+              "month": {
+                "type": "integer"
+              },
+              "values": {
+                "type": "object",
+                "properties": {
+                  "medianSoldPrice": {
+                    "type": "integer"
+                  },
+                  "numberSold": {
+                    "type": "integer"
+                  },
+                  "highestSoldPrice": {
+                    "type": "integer"
+                  },
+                  "lowestSoldPrice": {
+                    "type": "integer"
+                  },
+                  "5thPercentileSoldPrice": {
+                    "type": "integer"
+                  },
+                  "25thPercentileSoldPrice": {
+                    "type": "integer"
+                  },
+                  "75thPercentileSoldPrice": {
+                    "type": "integer"
+                  },
+                  "95thPercentileSoldPrice": {
+                    "type": "integer"
+                  },
+                  "medianSaleListingPrice": {
+                    "type": "integer"
+                  },
+                  "numberSaleListing": {
+                    "type": "integer"
+                  },
+                  "highestSaleListingPrice": {
+                    "type": "integer"
+                  },
+                  "lowestSaleListingPrice": {
+                    "type": "integer"
+                  },
+                  "auctionNumberAuctioned": {
+                    "type": "integer"
+                  },
+                  "auctionNumberSold": {
+                    "type": "integer"
+                  },
+                  "auctionNumberWithdrawn": {
+                    "type": "integer"
+                  },
+                  "daysOnMarket": {
+                    "type": "integer"
+                  },
+                  "discountPercentage": {
+                    "type": "number",
+                    "format": "float"
+                  },
+                  "medianRentListingPrice": {
+                    "type": "integer"
+                  },
+                  "numberRentListing": {
+                    "type": "integer"
+                  },
+                  "highestRentListingPrice": {
+                    "type": "integer"
+                  },
+                  "lowestRentListingPrice": {
+                    "type": "integer"
+                  },
+                  "meanRentYield": {
+                    "type": "number",
+                    "format": "float"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

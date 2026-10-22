@@ -1,0 +1,245 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/domain-group/main/json-schema/domain-group-enquiries-v1-enquiry-report-schema.json",
+  "title": "Enquiries.V1.EnquiryReport",
+  "x-generated": "2026-10-21",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/domain-group-enquiries-api-openapi.yml#/components/schemas/Enquiries.V1.EnquiryReport",
+  "type": "object",
+  "properties": {
+    "deliveryMethod": {
+      "enum": [
+        "email",
+        "sms"
+      ],
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "enquiryType": {
+      "enum": [
+        "listing",
+        "devProject",
+        "newDevLanding",
+        "agencyProfile",
+        "agentProfile",
+        "contractRequest",
+        "vendorEnquiry",
+        "prePortalListing",
+        "suburbVendorEnquiry"
+      ],
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "message": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "metaData": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": {
+        "type": "string"
+      },
+      "x-data-access-level-info": {
+        "Basic": [
+          "*"
+        ],
+        "Detailed": [
+          "*"
+        ],
+        "Full": [
+          "*"
+        ]
+      }
+    },
+    "recipientsDeliveryStatus": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/$defs/Enquiries.V1.RecipientDeliveryStatus"
+      }
+    },
+    "referenceId": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "format": "int32"
+    },
+    "sender": {
+      "$ref": "#/$defs/Enquiries.V1.Sender"
+    },
+    "dateReceived": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "agencyId": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "format": "int32"
+    }
+  },
+  "additionalProperties": false,
+  "x-data-access-level-info": {
+    "Basic": [
+      "*"
+    ],
+    "Detailed": [
+      "*"
+    ],
+    "Full": [
+      "*"
+    ]
+  },
+  "$defs": {
+    "Enquiries.V1.Recipient": {
+      "required": [
+        "address"
+      ],
+      "type": "object",
+      "properties": {
+        "recipientType": {
+          "enum": [
+            "primary",
+            "secondary",
+            "hidden"
+          ],
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets RecipientType"
+        },
+        "address": {
+          "minLength": 1,
+          "type": "string",
+          "description": "Delivery address ( email address, phone number etc. )  of the recipient"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Recipient of an Group.Enquiry.Model.Enquiry",
+      "x-data-access-level-info": {
+        "Basic": [
+          "*"
+        ],
+        "Detailed": [
+          "*"
+        ],
+        "Full": [
+          "*"
+        ]
+      }
+    },
+    "Enquiries.V1.RecipientDeliveryStatus": {
+      "type": "object",
+      "properties": {
+        "deliveryStatus": {
+          "enum": [
+            "queued",
+            "delivered",
+            "failed",
+            "deferred"
+          ],
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets DeliveryStatus"
+        },
+        "recipient": {
+          "$ref": "#/$defs/Enquiries.V1.Recipient"
+        },
+        "date": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Last time when the email delivery status was polled",
+          "format": "date-time"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Used for reporting enquiry delivery statusses to recipients",
+      "x-data-access-level-info": {
+        "Basic": [
+          "*"
+        ],
+        "Detailed": [
+          "*"
+        ],
+        "Full": [
+          "*"
+        ]
+      }
+    },
+    "Enquiries.V1.Sender": {
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "lastName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "email": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "phoneNumber": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "postcode": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "x-data-access-level-info": {
+        "Basic": [
+          "*"
+        ],
+        "Detailed": [
+          "*"
+        ],
+        "Full": [
+          "*"
+        ]
+      }
+    }
+  }
+}

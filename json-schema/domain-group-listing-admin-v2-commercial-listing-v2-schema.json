@@ -1,0 +1,1018 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/domain-group/main/json-schema/domain-group-listing-admin-v2-commercial-listing-v2-schema.json",
+  "title": "ListingAdmin.v2.CommercialListingV2",
+  "description": "Commercial Listing V2",
+  "x-generated": "2026-10-21",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/domain-group-listings-api-openapi.yml#/components/schemas/ListingAdmin.v2.CommercialListingV2",
+  "required": [
+    "propertyDetails",
+    "domainAgencyID",
+    "providerAdId",
+    "listingAction"
+  ],
+  "type": "object",
+  "properties": {
+    "salePrice": {
+      "$ref": "#/$defs/ListingAdmin.v2.CommercialPrice"
+    },
+    "leasePrice": {
+      "$ref": "#/$defs/ListingAdmin.v2.CommercialPrice"
+    },
+    "lease": {
+      "$ref": "#/$defs/ListingAdmin.v2.Lease"
+    },
+    "eoi": {
+      "$ref": "#/$defs/ListingAdmin.v2.EOI"
+    },
+    "tenant": {
+      "$ref": "#/$defs/ListingAdmin.v2.Tenant"
+    },
+    "tender": {
+      "$ref": "#/$defs/ListingAdmin.v2.Tender"
+    },
+    "occupancyType": {
+      "enum": [
+        "tenanted",
+        "vacant"
+      ],
+      "type": "string",
+      "description": "Occupancy. Can be 'Tenanted', 'Vacant'"
+    },
+    "annualReturn": {
+      "type": "integer",
+      "description": "Integer value of percentage return on this property or business.",
+      "format": "int32"
+    },
+    "unitsOffered": {
+      "maximum": 2147483647,
+      "minimum": 0,
+      "type": "integer",
+      "description": "Integer value of units offered for sale or lease",
+      "format": "int32"
+    },
+    "unitDetails": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/ListingAdmin.v2.SpecificUnitDetail"
+      },
+      "description": "Units details"
+    },
+    "nabers": {
+      "maximum": 6,
+      "minimum": 0,
+      "type": "number",
+      "description": "The NABERS Rating is the energy efficiency rating that the property has been measured to have. \nThis rating is measured in increments of .5 and can range from 0 to 6. \nThe NABERS rating is required for spaces within office buildings of 1000 square metres or more.\nFor more information on the NABERS rating system please visit http://www.nabers.gov.au",
+      "format": "double"
+    },
+    "saleTerms": {
+      "maxLength": 50,
+      "minLength": 0,
+      "type": "string",
+      "description": "Information relating to aspects of the sale, such as required deposit, settlement time. Up to 50 characters, optional. Ignored for lease listings"
+    },
+    "auction": {
+      "$ref": "#/$defs/ListingAdmin.v2.CommercialAuction"
+    },
+    "propertyDetails": {
+      "$ref": "#/$defs/ListingAdmin.v2.CommercialProperty"
+    },
+    "conjunctionAgents": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/ListingAdmin.v2.AgentContact"
+      },
+      "description": "List of conjunction agents"
+    },
+    "highlights": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Highlight Items"
+    },
+    "underOfferOrContract": {
+      "type": "boolean",
+      "description": "Set for Sale listings only"
+    },
+    "domainAdId": {
+      "maximum": 2147483647,
+      "minimum": 0,
+      "type": "integer",
+      "description": "Domain Advertisement Id, not applicable for creating new ads.\nMandatory when updating a listing that belongs to an agency that\nis in the process of being migrated between listing providers.",
+      "format": "int32"
+    },
+    "listingProvider": {
+      "type": "string",
+      "description": "A string identifying the data provider"
+    },
+    "domainAgencyID": {
+      "maximum": 2147483647,
+      "minimum": 0,
+      "type": "integer",
+      "description": "The Domain Agency Id number",
+      "format": "int32"
+    },
+    "providerAdId": {
+      "maxLength": 50,
+      "minLength": 0,
+      "type": "string",
+      "description": "External Advertisement Id of up to 50 characters will be stored.<br />\nThis value is used to identify an Advertisement for updates and should be unique for listing provider.<br />\nThis value is case-insensitive (meaning AAAA will update aaaa)."
+    },
+    "features": {
+      "maxLength": 1000,
+      "minLength": 0,
+      "type": "string",
+      "description": " Comma-separated list of features. 1000 characters in length. Select as appropriate or write your own.\nINSIDE: Air conditioning, Ensuite, Floorboards, Indoor Spa, Gym, Alarm System, Intercom, Built in wardrobes, Furnished, Internal Laundry, Pets allowed, Cable or Satellite, Gas, Broadband internet access, Bath, Fireplace(s), Separate Dining Room, Heating, Dishwasher, Study.\nOUTSIDE: Tennis Court, Secure Parking, Shed, Fully fenced, Balcony / Deck, Garden / Courtyard, Swimming Pool, Outdoor Spa.\nLOCATION: Ground floor, Water Views, North Facing, City Views.\nECO FRIENDLY: Double glazed windows, Energy efficient appliances, Water efficient appliances, Wall / ceiling insulation, Rainwater storage tank, Greywater system, Water efficient fixtures, Solar hot water, Solar panels"
+    },
+    "description": {
+      "maxLength": 6000,
+      "minLength": 0,
+      "type": "string",
+      "description": "Description of the property.\n6000 characters in length. The following HTML elements are permitted: &lt;br /&gt;, &lt;p&gt;&lt;/p&gt;, &amp;nbsp;. HTML must be well-formed.\nCarriage Returns are interpreted as line breaks. Foreign characters must be HTML encoded, e.g., façade for façade.\nUnicode characters which are unsupported by Latin-1 (ISO-8859-1 range from U+0080 to U+00FF), will be removed https://en.wikipedia.org/wiki/ISO/IEC_8859-1"
+    },
+    "summary": {
+      "maxLength": 250,
+      "minLength": 0,
+      "type": "string",
+      "description": "'Headline' Any HTML stripped out.  If the Summary is less than 80 characters long then the description is concatenated to it and the total trimmed to 250 characters."
+    },
+    "inspectionDetails": {
+      "$ref": "#/$defs/ListingAdmin.v2.InspectionDetails"
+    },
+    "media": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/ListingAdmin.v2.PropertyMedia"
+      },
+      "description": "Links to VideoURL, virtual tour or weblink. Maximum length of media URLs is 255 characters."
+    },
+    "listingAction": {
+      "enum": [
+        "sale",
+        "rent",
+        "saleAndLease"
+      ],
+      "type": "string",
+      "description": "Sale or Rent"
+    },
+    "contactPreference": {
+      "enum": [
+        "byPhone"
+      ],
+      "type": "string",
+      "description": "Indicates the listing preferred contact method. Default by both phone and email if not provided."
+    },
+    "contacts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/ListingAdmin.v2.Contact"
+      },
+      "description": "Minimum required attributes: First name, last name and E-mail.\nIf the DomainAgentId is provided, contact information will be based on the existing agent found for that id.\nOtherwise first name, last name and email will be used to find the matching contact. A new contact will be created if no contact can be found."
+    },
+    "otherEnquiryEmail": {
+      "type": "string",
+      "description": "Sets up to 3 additional email addresses, separated by commas, to which enquiries on the listing will be sent."
+    },
+    "receiveEmailsToDefaultAddress": {
+      "type": "boolean",
+      "description": "Send email enquiries to the default address for this listing type"
+    },
+    "isRural": {
+      "type": "boolean",
+      "description": "True if the property is rural"
+    },
+    "supplementary": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/ListingAdmin.v2.ListingSupplementary"
+      },
+      "description": "Rural attributes\n\n*Improvements* (optional)\n\nAvailable `types` (fixed list, optional):\n* Machinery Shed\n* Shearing Shed\n* Workshop\n* Shearers Quarters\n* Silos\n* Other Housing\n* Managers Accommodation\n\n*Fencing* (optional)\n\n`description` (string, optional): free text fencing description, maximum 250 characters.\n\n*Yards* (optional)\n\nAvailable `types` (fixed list, optional):\n* Sheep\n* Cattle\n\n*Homestead* (optional)\n\n`description` (string, optional): description of the homestead and construction, maximum 250 characters.\n\n`metadata` (optional)\n* `area` (decimal, optional): homestead area in square metres.\n\nAvailable `types` (fixed list, optional):\n* Office\n* Ensuite\n* Tennis Court\n* Mains Gas\n* Floorboards\n* Internal Laundry\n\n*Water* (optional)\n\n`description` (string, optional): water comments, maximum 250 characters.\n\nAvailable `types` (fixed list, optional):\n* Tank\n* Well\n* Reticulated\n* Bores\n* Springs\n* Creeks\n* Dams\n* River\n\n*Crops* (optional)\n\n`description` (string, optional): description of the crops, maximum 250 characters.\n\n`metadata` (optional)\n* `croppedAnnually` (decimal, optional): average annual area cropped in hectares.\n* `fallowAnnually` (decimal, optional): average annual fallow area in hectares.\n* `pastures` (string, optional): description of pastures available, maximum 250 characters.\n\n*Livestock* (optional)\n\n`description` (string, optional): additional comments, maximum 250 characters.\n\n`metadata` (optional)\n* `capacity` (decimal, optional): property carrying capacity in DSE (unit of carry capacity).\n\nAvailable `types` (fixed list, optional):\n* Sheep\n* Pigs\n* Cattle\n* Poultry\n* Horses\n* Exotic\n* Goats\n* Stud\n\n*Inclusions* (optional)\n\n`description` (string, optional): description of plant and machinery included in sale, maximum 250 characters.\n\n`metadata` (optional)\n* `livestock` (string, optional): description of livestock included in sale, maximum 250 characters.\n* `crop` (string, optional): description of crops included in sale, maximum 250 characters.\n\n*Irrigation* (optional)\n\n`description` (string, optional): irrigation comments, maximum 250 characters\n\n`metadata` (optional)\n* `rainfall` (decimal, optional): annual rainfall in millimetres."
+    }
+  },
+  "$defs": {
+    "ListingAdmin.v2.Address": {
+      "required": [
+        "street",
+        "suburb",
+        "postcode",
+        "state"
+      ],
+      "type": "object",
+      "properties": {
+        "unitNumber": {
+          "maxLength": 30,
+          "minLength": 0,
+          "type": "string",
+          "description": "Unit number for apartments, maximum 30 characters"
+        },
+        "street": {
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string",
+          "description": "Street name, maximum 100 characters"
+        },
+        "displayOption": {
+          "enum": [
+            "unspecified",
+            "fullAddress",
+            "streetAndSuburb",
+            "suburbOnly",
+            "regionOnly",
+            "areaOnly",
+            "stateOnly"
+          ],
+          "type": "string",
+          "description": "What granularity to display the properties location at. \nFor residential listings, the accepted displayOption values are \"FullAddress\", \"StreetAndSuburb\" or \"SuburbOnly\"."
+        },
+        "suggestedGeoLocation": {
+          "$ref": "#/$defs/ListingAdmin.v2.GeoLocation"
+        },
+        "streetNumber": {
+          "maxLength": 20,
+          "minLength": 0,
+          "type": "string",
+          "description": "Street number, maximum 20 characters"
+        },
+        "suburb": {
+          "maxLength": 50,
+          "minLength": 0,
+          "type": "string",
+          "description": "Suburb name , maximum 50 characters"
+        },
+        "postcode": {
+          "pattern": "^[0-9]{3,4}$",
+          "type": "string",
+          "description": "Postcode"
+        },
+        "state": {
+          "enum": [
+            "nsw",
+            "vic",
+            "act",
+            "sa",
+            "wa",
+            "tas",
+            "qld",
+            "nt"
+          ],
+          "type": "string",
+          "description": "State"
+        }
+      },
+      "description": "Address structure for property"
+    },
+    "ListingAdmin.v2.AgentContact": {
+      "required": [
+        "agencyId"
+      ],
+      "type": "object",
+      "properties": {
+        "agencyId": {
+          "type": "integer",
+          "description": "Conjunction agent's agency",
+          "format": "int32"
+        },
+        "domainAgentId": {
+          "type": "integer",
+          "description": "Domain ID of the contact person at the agency",
+          "format": "int32"
+        },
+        "firstName": {
+          "type": "string",
+          "description": "First name. Maximum 50 characters."
+        },
+        "lastName": {
+          "type": "string",
+          "description": "Last name. Maximum 50 characters."
+        },
+        "phone": {
+          "type": "string",
+          "description": "Phone. Maximum 20 characters."
+        },
+        "fax": {
+          "type": "string",
+          "description": "Fax. Maximum 20 characters."
+        },
+        "mobile": {
+          "type": "string",
+          "description": "Mobile. Maximum 20 characters."
+        },
+        "email": {
+          "type": "string",
+          "description": "Email. Maximum 100 characters."
+        },
+        "receiveEmails": {
+          "type": "boolean",
+          "description": "Indicates whether the contact person should receive emails for the listing"
+        }
+      },
+      "description": "Represents a agent or conjunction agent domain model\nThe only difference to normal contacts is agent contacts needs to have their agency specified"
+    },
+    "ListingAdmin.v2.Area": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "maximum": 2147483647,
+          "minimum": 0,
+          "type": "number",
+          "description": "Area. Will be rounded to 2 decimals.",
+          "format": "double"
+        },
+        "from": {
+          "maximum": 2147483647,
+          "minimum": 0,
+          "type": "number",
+          "description": "Minimum area",
+          "format": "double"
+        },
+        "to": {
+          "maximum": 2147483647,
+          "minimum": 0,
+          "type": "number",
+          "description": "Maximum area",
+          "format": "double"
+        },
+        "unit": {
+          "enum": [
+            "squareMetres",
+            "acres",
+            "hectares",
+            "squareFeet",
+            "squareYards",
+            "squares"
+          ],
+          "type": "string",
+          "description": "Unit of measure, defaults to SquareMetres if not provided."
+        }
+      },
+      "description": "Area information, Either single value or from and To must be provided"
+    },
+    "ListingAdmin.v2.CommercialAuction": {
+      "required": [
+        "dateTime"
+      ],
+      "type": "object",
+      "properties": {
+        "auctionTerms": {
+          "maxLength": 200,
+          "minLength": 0,
+          "type": "string",
+          "description": "Terms for the auctions, up to 200 characters. Example: \"10% deposit, balance 60 days\""
+        },
+        "dateTime": {
+          "type": "string",
+          "description": "Date of the auction. format: yyyy-MM-ddTHH:mm:ss",
+          "format": "date-time"
+        },
+        "location": {
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string",
+          "description": "Optional. Venue for the Auction. String max 100 characters. If the Location is omitted, or included but empty, the Venue will default to \"On Site\"."
+        },
+        "url": {
+          "pattern": "^http[s]?:+.*",
+          "type": "string",
+          "description": "Optional on-line auction URL. Must be a valid URL and maximum 255 characters. If an empty string is received, the property will be re-set."
+        }
+      },
+      "description": "Commercial Auction Details"
+    },
+    "ListingAdmin.v2.CommercialPrice": {
+      "required": [
+        "from",
+        "to"
+      ],
+      "type": "object",
+      "properties": {
+        "priceUnitType": {
+          "enum": [
+            "totalAmount",
+            "perSqm"
+          ],
+          "type": "string",
+          "description": "Price Unit type. Can have the values \"TotalAmount\", \"PerSqm\". Default = \"TotalAmount\""
+        },
+        "priceType": {
+          "enum": [
+            "gross",
+            "net"
+          ],
+          "type": "string",
+          "description": "Type can have the values \"Gross\", \"Net\". Default \"Net\""
+        },
+        "gstOptionType": {
+          "enum": [
+            "nA",
+            "inc",
+            "ex"
+          ],
+          "type": "string",
+          "description": "GST Option Type. Can have the values \"NA\", \"Inc\", \"Ex\". Default = \"NA\""
+        },
+        "priceReduction": {
+          "type": "boolean",
+          "description": "Indicates if this property is under price reduction"
+        },
+        "displayText": {
+          "maxLength": 80,
+          "minLength": 0,
+          "type": "string",
+          "description": "When provided this will be shown instead of the price range, e.g.: \"Offers over $450K considered\""
+        },
+        "depositTaken": {
+          "type": "boolean",
+          "description": "When provided this will be shown instead of the price range, e.g.: \"Offers over $450K considered\""
+        },
+        "from": {
+          "maximum": 2147483647,
+          "minimum": 0,
+          "type": "integer",
+          "description": "Lowest price the property is expected to sell/rent for to set search price. For a fixed price, set this value the same as To",
+          "format": "int32"
+        },
+        "to": {
+          "maximum": 2147483647,
+          "minimum": 0,
+          "type": "integer",
+          "description": "Highest price the property is expected to sell/rent for to set search price. \nFor a fixed price, set this value the same as From",
+          "format": "int32"
+        }
+      },
+      "description": "Commercial component for price"
+    },
+    "ListingAdmin.v2.CommercialProperty": {
+      "required": [
+        "propertyType",
+        "address"
+      ],
+      "type": "object",
+      "properties": {
+        "propertyType": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "aquaculture",
+              "dairyFarming",
+              "developmentLand",
+              "fishingForestry",
+              "hotelLeisure",
+              "industrialWarehouse",
+              "irrigationServices",
+              "livestock",
+              "internationalCommercial",
+              "medicalConsulting",
+              "offices",
+              "parkingCarSpace",
+              "retail",
+              "ruralCommercialFarming",
+              "showroomsBulkyGoods",
+              "servicedOffices",
+              "other",
+              "cropping",
+              "viticulture",
+              "mixedFarming",
+              "grazing",
+              "horticulture",
+              "equine",
+              "farmlet",
+              "orchard",
+              "ruralLifestyle"
+            ],
+            "type": "string"
+          },
+          "description": "Commercial property types ['aquaculture', 'dairyFarming', 'developmentLand', 'fishingForestry', 'hotelLeisure', 'industrialWarehouse', 'irrigationServices', 'livestock', 'internationalCommercial', 'medicalConsulting', 'offices', 'parkingCarSpace', 'retail', 'ruralCommercialFarming', 'showroomsBulkyGoods', 'servicedOffices', 'other', 'cropping', 'viticulture', 'mixedFarming', 'grazing', 'horticulture', 'equine', 'farmlet', 'orchard', 'ruralLifestyle']."
+        },
+        "buildingType": {
+          "enum": [
+            "whole",
+            "part",
+            "nA"
+          ],
+          "type": "string",
+          "description": "Building Type"
+        },
+        "parking": {
+          "$ref": "#/$defs/ListingAdmin.v2.Parking"
+        },
+        "pdfs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ListingAdmin.v2.PropertyPdf"
+          },
+          "description": "List of PDF files related to the listing"
+        },
+        "propertyName": {
+          "maxLength": 70,
+          "minLength": 0,
+          "type": "string",
+          "description": "Name of the property up to 70 characters"
+        },
+        "location": {
+          "maxLength": 30,
+          "minLength": 0,
+          "type": "string",
+          "description": "Short location information up to 30 character, e.g.: Greenhills Beach"
+        },
+        "images": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ListingAdmin.v2.PropertyMedia"
+          },
+          "description": "List of image files, photos or floor plans related to the listing.\nSupported image file formats: AVIF, BMP, GIF, HEIF/HEIC, JPEG, JPEG 2000, PNG, TIFF, WebP.\nThe file size is restricted to maximum 100MB.\nWe recommend against using transparent backgrounds.\nSome image formats, such as PNG, support transparency, but when images with transparent areas are resized, they may be converted to a format that doesn’t support transparency, such as JPEG.\nBy default, transparent areas are converted to black, but the application displaying the image may convert the transparent area to the most appropriate colour for the area where the image is being placed."
+        },
+        "address": {
+          "$ref": "#/$defs/ListingAdmin.v2.Address"
+        },
+        "area": {
+          "$ref": "#/$defs/ListingAdmin.v2.Area"
+        },
+        "landArea": {
+          "$ref": "#/$defs/ListingAdmin.v2.LandArea"
+        }
+      },
+      "description": "Commercial Property"
+    },
+    "ListingAdmin.v2.Contact": {
+      "type": "object",
+      "properties": {
+        "domainAgentId": {
+          "type": "integer",
+          "description": "Domain ID of the contact person at the agency",
+          "format": "int32"
+        },
+        "firstName": {
+          "type": "string",
+          "description": "First name. Maximum 50 characters."
+        },
+        "lastName": {
+          "type": "string",
+          "description": "Last name. Maximum 50 characters."
+        },
+        "phone": {
+          "type": "string",
+          "description": "Phone. Maximum 20 characters."
+        },
+        "fax": {
+          "type": "string",
+          "description": "Fax. Maximum 20 characters."
+        },
+        "mobile": {
+          "type": "string",
+          "description": "Mobile. Maximum 20 characters."
+        },
+        "email": {
+          "type": "string",
+          "description": "Email. Maximum 100 characters."
+        },
+        "receiveEmails": {
+          "type": "boolean",
+          "description": "Indicates whether the contact person should receive emails for the listing"
+        }
+      },
+      "description": "Contact domain model"
+    },
+    "ListingAdmin.v2.EOI": {
+      "required": [
+        "endDate"
+      ],
+      "type": "object",
+      "properties": {
+        "address": {
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string",
+          "description": "Street address, up to 100 characters"
+        },
+        "endDate": {
+          "type": "string",
+          "description": "End date of EOI",
+          "format": "date-time"
+        },
+        "recipientName": {
+          "maxLength": 50,
+          "minLength": 0,
+          "type": "string",
+          "description": "The recipient name of the EOI, up to 50 characters"
+        }
+      },
+      "description": "Express of Interest"
+    },
+    "ListingAdmin.v2.GeoLocation": {
+      "type": "object",
+      "properties": {
+        "latitude": {
+          "type": "number",
+          "description": "Latitude",
+          "format": "double"
+        },
+        "longitude": {
+          "type": "number",
+          "description": "Longitude",
+          "format": "double"
+        }
+      },
+      "description": "Contains geocoding of an address"
+    },
+    "ListingAdmin.v2.Inspection": {
+      "required": [
+        "from",
+        "to"
+      ],
+      "type": "object",
+      "properties": {
+        "from": {
+          "type": "string",
+          "description": "Format: yyyy-mm-dd HH:mm:ss eg: 2015-10-20 13:30:00",
+          "format": "date-time"
+        },
+        "to": {
+          "type": "string",
+          "description": "Format: yyyy-mm-dd HH:mm:ss, eg: 2015-10-20 14:30:00",
+          "format": "date-time"
+        },
+        "repeat": {
+          "type": "boolean",
+          "description": "Specifies if the inspection is recurring weekly"
+        }
+      },
+      "description": "Inspection times"
+    },
+    "ListingAdmin.v2.InspectionDetails": {
+      "type": "object",
+      "properties": {
+        "inspectionDescription": {
+          "maxLength": 500,
+          "minLength": 0,
+          "type": "string",
+          "description": "Free text field for inspections"
+        },
+        "inspections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ListingAdmin.v2.Inspection"
+          },
+          "description": "Inspection times of the listing"
+        }
+      },
+      "description": "Inspection details"
+    },
+    "ListingAdmin.v2.LandArea": {
+      "required": [
+        "unit"
+      ],
+      "type": "object",
+      "properties": {
+        "unit": {
+          "enum": [
+            "squareMetres",
+            "acres",
+            "hectares",
+            "squareFeet",
+            "squareYards",
+            "squares"
+          ],
+          "type": "string",
+          "description": "Unit of measure"
+        },
+        "value": {
+          "maximum": 2147483647,
+          "minimum": 0,
+          "type": "number",
+          "description": "Area. Will be rounded to 2 decimals.",
+          "format": "double"
+        },
+        "from": {
+          "maximum": 2147483647,
+          "minimum": 0,
+          "type": "number",
+          "description": "Minimum area",
+          "format": "double"
+        },
+        "to": {
+          "maximum": 2147483647,
+          "minimum": 0,
+          "type": "number",
+          "description": "Maximum area",
+          "format": "double"
+        }
+      },
+      "description": "Area information, Either single value or from and To must be provided"
+    },
+    "ListingAdmin.v2.Lease": {
+      "type": "object",
+      "properties": {
+        "termOfLeaseFrom": {
+          "maximum": 2147483647,
+          "minimum": 0,
+          "type": "integer",
+          "description": "Integer value of lease term range from",
+          "format": "int32"
+        },
+        "termOfLeaseTo": {
+          "maximum": 2147483647,
+          "minimum": 0,
+          "type": "integer",
+          "description": "Integer value of lease term range to",
+          "format": "int32"
+        },
+        "leaseOutgoings": {
+          "maximum": 2147483647,
+          "minimum": 0,
+          "type": "integer",
+          "description": "Outgoing cost of current lease",
+          "format": "int32"
+        }
+      },
+      "description": "Properties for lease listings"
+    },
+    "ListingAdmin.v2.ListingSupplementary": {
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "maxLength": 250,
+          "minLength": 0,
+          "type": "string",
+          "description": "Name"
+        },
+        "description": {
+          "maxLength": 250,
+          "minLength": 0,
+          "type": "string",
+          "description": "Description"
+        },
+        "types": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Types"
+        },
+        "metadata": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ListingAdmin.v2.SupplementaryMetadata"
+          },
+          "description": "Metadata"
+        }
+      },
+      "description": "Listing supplementary"
+    },
+    "ListingAdmin.v2.Parking": {
+      "type": "object",
+      "properties": {
+        "parkingType": {
+          "enum": [
+            "onSite",
+            "onStreet",
+            "noParking"
+          ],
+          "type": "string",
+          "description": "Can have the value \"OnSite\", \"OnStreet\", \"NoParking\". Default \"NoParking\""
+        },
+        "numberOnSite": {
+          "maximum": 2147483647,
+          "minimum": 0,
+          "type": "integer",
+          "description": "Number On Site",
+          "format": "int32"
+        },
+        "information": {
+          "maxLength": 200,
+          "minLength": 0,
+          "type": "string",
+          "description": "Additional information regarding the parking condition"
+        }
+      },
+      "description": "Parking Details"
+    },
+    "ListingAdmin.v2.PropertyMedia": {
+      "required": [
+        "url"
+      ],
+      "type": "object",
+      "properties": {
+        "resourceType": {
+          "enum": [
+            "photograph",
+            "floorPlan",
+            "video",
+            "virtualTour",
+            "webLink"
+          ],
+          "type": "string",
+          "description": "Type of the resource"
+        },
+        "url": {
+          "pattern": "^http[s]?:+.*",
+          "type": "string",
+          "description": "shows the place from where file can be downloaded"
+        }
+      },
+      "description": "Resource related to the listing"
+    },
+    "ListingAdmin.v2.PropertyPdf": {
+      "required": [
+        "url"
+      ],
+      "type": "object",
+      "properties": {
+        "url": {
+          "pattern": "^http[s]?:+.*",
+          "type": "string",
+          "description": "Url of the PDF"
+        },
+        "type": {
+          "enum": [
+            "commercialPdf",
+            "newDevBrochurePdf",
+            "floorplanPdf",
+            "devProjectPdf",
+            "devProjectMasterplanPdf"
+          ],
+          "type": "string",
+          "description": "Type of the PDF. `DevProjectPdf` PDF files are only visible, if the listing is a child listing of an active development project."
+        },
+        "description": {
+          "maxLength": 255,
+          "minLength": 0,
+          "type": "string",
+          "description": "Description of the PDF"
+        }
+      },
+      "description": "PDF file related to the listing"
+    },
+    "ListingAdmin.v2.SpecificUnitDetail": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "maxLength": 15,
+          "minLength": 0,
+          "type": "string",
+          "description": "Unit number"
+        },
+        "size": {
+          "type": "integer",
+          "description": "Unit size",
+          "format": "int32"
+        },
+        "price": {
+          "type": "number",
+          "description": "Unit price",
+          "format": "double"
+        },
+        "notes": {
+          "maxLength": 70,
+          "minLength": 0,
+          "type": "string",
+          "description": "Additional notes"
+        },
+        "isSoldOrLeased": {
+          "type": "boolean",
+          "description": "Is it available?"
+        },
+        "occupancy": {
+          "enum": [
+            "tenanted",
+            "vacant"
+          ],
+          "type": "string",
+          "description": "Occupancy type"
+        },
+        "priceUnit": {
+          "enum": [
+            "totalAmount",
+            "perSqm"
+          ],
+          "type": "string",
+          "description": "Price unit type"
+        },
+        "leasePriceForSaleorLease": {
+          "type": "number",
+          "description": "Lease price for sale or lease",
+          "format": "double"
+        }
+      },
+      "description": "offered units details"
+    },
+    "ListingAdmin.v2.SupplementaryMetadata": {
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "maxLength": 250,
+          "minLength": 0,
+          "type": "string",
+          "description": "Name"
+        },
+        "description": {
+          "maxLength": 250,
+          "minLength": 0,
+          "type": "string",
+          "description": "Description"
+        },
+        "measurement": {
+          "maximum": 2147483647,
+          "minimum": 0,
+          "type": "number",
+          "description": "Measurement",
+          "format": "double"
+        },
+        "measurementUnit": {
+          "enum": [
+            "squareMetres",
+            "hectares",
+            "millimetres",
+            "dse"
+          ],
+          "type": "string",
+          "description": "Measurement unit"
+        }
+      },
+      "description": "Supplementary metadata"
+    },
+    "ListingAdmin.v2.Tenant": {
+      "type": "object",
+      "properties": {
+        "leaseStart": {
+          "type": "string",
+          "description": "The date on which the tenants lease began, or is due to begin.",
+          "format": "date-time"
+        },
+        "leaseEnd": {
+          "type": "string",
+          "description": "The date on which the tenants lease is due to end",
+          "format": "date-time"
+        },
+        "name": {
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string",
+          "description": "Name of the current tenant of the property, up to 100 characters"
+        },
+        "rentalDetails": {
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string",
+          "description": "Information regarding current rental, up to 100 characters"
+        },
+        "leaseOptions": {
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string",
+          "description": "Leasing options available to a prospective tenant, up to 100 characters"
+        },
+        "tenantInfoTermOfLeaseFrom": {
+          "maximum": 2147483647,
+          "minimum": 0,
+          "type": "integer",
+          "description": "The from range of the tenant's current lease",
+          "format": "int32"
+        },
+        "tenantInfoTermOfLeaseTo": {
+          "maximum": 2147483647,
+          "minimum": 0,
+          "type": "integer",
+          "description": "The to range of the tenant's current lease",
+          "format": "int32"
+        },
+        "leaseDateVariable": {
+          "type": "boolean",
+          "description": "Is tenant lease date variable"
+        }
+      },
+      "description": "Tenant Information"
+    },
+    "ListingAdmin.v2.Tender": {
+      "type": "object",
+      "properties": {
+        "recipientName": {
+          "maxLength": 50,
+          "minLength": 0,
+          "type": "string",
+          "description": "The recipient name of the tender, up to 50 characters"
+        },
+        "address": {
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string",
+          "description": "Street address, up to 100 characters."
+        },
+        "endDate": {
+          "type": "string",
+          "description": "Closing Date",
+          "format": "date-time"
+        }
+      },
+      "description": "Tender Information"
+    }
+  }
+}

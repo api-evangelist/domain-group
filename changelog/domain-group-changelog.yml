@@ -1,0 +1,10 @@
+generated: '2026-10-21'
+method: none
+source: https://developer.domain.com.au/docs/latest/
+scheme: uri-path major versions (v1, v2) with a combined "latest" OpenAPI
+entries: []
+note: >-
+  No dated changelog or release notes are published in the developer docs table of
+  contents (Getting Started, Portal Overview, Conventions, Authentication, APIs,
+  Libraries, Troubleshooting, Support, Live API Browser). See lifecycle/ for the
+  versioning policy and the earlier 404 probes of /changelog and /release-notes.

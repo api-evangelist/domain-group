@@ -1,0 +1,417 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/domain-group/main/json-schema/domain-group-pre-market-v1-listing-request-schema.json",
+  "title": "PreMarket.v1.ListingRequest",
+  "description": "Pre-portal listing request.",
+  "x-generated": "2026-10-21",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/domain-group-premarket-api-openapi.yml#/components/schemas/PreMarket.v1.ListingRequest",
+  "required": [
+    "address",
+    "bathrooms",
+    "bedrooms",
+    "carspaces",
+    "domainAgencyId",
+    "estimatedSalePrice",
+    "listingProvider",
+    "listingStatus",
+    "propertyTypes",
+    "providerAdId"
+  ],
+  "type": "object",
+  "properties": {
+    "listingStatus": {
+      "$ref": "#/$defs/PreMarket.v1.PrePortalListingStatus"
+    },
+    "address": {
+      "$ref": "#/$defs/PreMarket.v1.Address"
+    },
+    "domainAgencyId": {
+      "maximum": 2147483647,
+      "minimum": 1,
+      "type": "integer",
+      "description": "The Domain agency ID. Must match an existing Domain agency ID.",
+      "format": "int32"
+    },
+    "listingProvider": {
+      "maxLength": 50,
+      "minLength": 1,
+      "type": "string",
+      "description": "A string identifying the source of the listing."
+    },
+    "providerAdId": {
+      "maxLength": 50,
+      "minLength": 1,
+      "type": "string",
+      "description": "External Advertisement Id of up to 50 characters will be stored.\nThis value is correlated with actual Domain listing when it is created, and it should be unique for the listing provider.\nThis value is case-insensitive (meaning AAAA will update aaaa)."
+    },
+    "contacts": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/$defs/PreMarket.v1.Contact"
+      }
+    },
+    "bedrooms": {
+      "minimum": 0,
+      "type": "number",
+      "description": "Number of bedrooms divisible by 0.5.",
+      "format": "float"
+    },
+    "bathrooms": {
+      "minimum": 0,
+      "type": "number",
+      "description": "Number of bathrooms divisible by 0.5.",
+      "format": "float"
+    },
+    "carspaces": {
+      "minimum": 0,
+      "type": "number",
+      "description": "Number of car spaces divisible by 0.5.",
+      "format": "float"
+    },
+    "summary": {
+      "maxLength": 250,
+      "minLength": 0,
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Headline of the advertisement. Any HTML will be stripped out."
+    },
+    "description": {
+      "maxLength": 6000,
+      "minLength": 0,
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Description of the property.\nAllow up to 6000 characters in length. The following HTML elements are permitted: ```<br />, <p></p>, &nbsp;``` . HTML must be well-formed.\nCarriage Returns are interpreted as line breaks. Foreign characters must be HTML encoded, e.g., façade for façade"
+    },
+    "authorityExecutedDate": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The date on which the authority contract was executed.\nThe date must comply with the ISO 8601 and be in the UTC format, e.g. 2009-06-15T13:45:30.0000000Z.",
+      "format": "date-time"
+    },
+    "reservePrice": {
+      "minimum": 0,
+      "type": [
+        "number",
+        "null"
+      ],
+      "description": "Vendor reserve price.",
+      "format": "double"
+    },
+    "estimatedSalePrice": {
+      "$ref": "#/$defs/PreMarket.v1.Price"
+    },
+    "propertyTypes": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/PreMarket.v1.PropertyType"
+      },
+      "description": "The property types (e.g. house, apartment/unit/flat, etc.)."
+    },
+    "authorityType": {
+      "$ref": "#/$defs/PreMarket.v1.AuthorityType"
+    },
+    "exclusivePeriodDays": {
+      "maximum": 2147483647,
+      "minimum": 0,
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "The time (in days) that the agent has exclusive authority to sell the property.",
+      "format": "int32"
+    },
+    "exclusiveContinuingPeriodDays": {
+      "maximum": 2147483647,
+      "minimum": 0,
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "The time (in days) that exclusive authority has been extended.",
+      "format": "int32"
+    },
+    "exclusivePeriodStartDate": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Start date of the exclusivity period.\nThe date must comply with the ISO 8601 and be in the UTC format, e.g. 2009-06-15T13:45:30.0000000Z.",
+      "format": "date-time"
+    },
+    "statementOfInformation": {
+      "$ref": "#/$defs/PreMarket.v1.StatementOfInformation"
+    },
+    "images": {
+      "maxItems": 20,
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/$defs/PreMarket.v1.PropertyMedia"
+      }
+    },
+    "metadata": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Optional listing metadata."
+    },
+    "comment": {
+      "maxLength": 100,
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Optional listing comment."
+    },
+    "soldDetails": {
+      "$ref": "#/$defs/PreMarket.v1.SoldDetails"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "PreMarket.v1.Address": {
+      "required": [
+        "postcode",
+        "state",
+        "street",
+        "streetNumber",
+        "suburb"
+      ],
+      "type": "object",
+      "properties": {
+        "streetNumber": {
+          "maxLength": 20,
+          "minLength": 1,
+          "type": "string",
+          "description": "Street (and possibly unit) number component of an address. E.g. 23, 1a, 11/1."
+        },
+        "street": {
+          "maxLength": 50,
+          "minLength": 1,
+          "type": "string",
+          "description": "Street name, e.g. Punt Road."
+        },
+        "suburb": {
+          "maxLength": 50,
+          "minLength": 1,
+          "type": "string"
+        },
+        "state": {
+          "$ref": "#/$defs/PreMarket.v1.State"
+        },
+        "postcode": {
+          "minLength": 1,
+          "pattern": "^[0-9]{3,4}$",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "PreMarket.v1.AuthorityType": {
+      "enum": [
+        "privateSale",
+        "auction",
+        "expressionOfInterest"
+      ],
+      "type": "string"
+    },
+    "PreMarket.v1.Contact": {
+      "required": [
+        "email",
+        "firstName",
+        "lastName"
+      ],
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "maxLength": 50,
+          "minLength": 1,
+          "type": "string",
+          "description": "First name of the agent contact."
+        },
+        "lastName": {
+          "maxLength": 50,
+          "minLength": 1,
+          "type": "string",
+          "description": "Last name of the agent contact."
+        },
+        "email": {
+          "maxLength": 100,
+          "minLength": 1,
+          "type": "string",
+          "description": "Agent contact email. Valid email address.",
+          "format": "email"
+        },
+        "phone": {
+          "maxLength": 20,
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Agent contact phone number. Valid phone number."
+        },
+        "mobile": {
+          "maxLength": 20,
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Agent contact mobile number. Valid mobile number."
+        },
+        "fax": {
+          "maxLength": 20,
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "PreMarket.v1.PrePortalListingStatus": {
+      "enum": [
+        "preMarket",
+        "sold",
+        "listed",
+        "withdrawn",
+        "draft"
+      ],
+      "type": "string"
+    },
+    "PreMarket.v1.Price": {
+      "required": [
+        "from",
+        "to"
+      ],
+      "type": "object",
+      "properties": {
+        "from": {
+          "minimum": 0,
+          "type": "number",
+          "description": "Lower end of the price range.",
+          "format": "double"
+        },
+        "to": {
+          "minimum": 0,
+          "type": "number",
+          "description": "Upper end of the price range.",
+          "format": "double"
+        },
+        "displayText": {
+          "maxLength": 80,
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "When provided this will be shown instead of the price range, e.g.: \"Offers over $450K considered\""
+        }
+      },
+      "additionalProperties": false
+    },
+    "PreMarket.v1.PropertyMedia": {
+      "required": [
+        "resourceType",
+        "url"
+      ],
+      "type": "object",
+      "properties": {
+        "resourceType": {
+          "$ref": "#/$defs/PreMarket.v1.ResourceType"
+        },
+        "url": {
+          "minLength": 1,
+          "pattern": "^http[s]?:+.*",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "PreMarket.v1.PropertyType": {
+      "enum": [
+        "house",
+        "townhouse",
+        "apartmentUnitFlat",
+        "vacantLand"
+      ],
+      "type": "string"
+    },
+    "PreMarket.v1.ResourceType": {
+      "enum": [
+        "photograph",
+        "floorPlan"
+      ],
+      "type": "string"
+    },
+    "PreMarket.v1.SoldDetails": {
+      "type": "object",
+      "properties": {
+        "soldPrice": {
+          "maximum": 2147483647,
+          "minimum": 0,
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Price the property was sold for.",
+          "format": "int32"
+        },
+        "soldDate": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The date when the property was sold.\nThe date must comply with the ISO 8601 and be in the UTC format, e.g. 2021-10-15T13:45:30.0000000Z.",
+          "format": "date-time"
+        }
+      },
+      "additionalProperties": false
+    },
+    "PreMarket.v1.State": {
+      "enum": [
+        "nsw",
+        "vic",
+        "act",
+        "sa",
+        "wa",
+        "tas",
+        "qld",
+        "nt"
+      ],
+      "type": "string",
+      "description": "Australian states"
+    },
+    "PreMarket.v1.StatementOfInformation": {
+      "required": [
+        "documentationUrl"
+      ],
+      "type": "object",
+      "properties": {
+        "documentationUrl": {
+          "minLength": 1,
+          "pattern": "^http[s]?:+.*",
+          "type": "string",
+          "description": "Link to the statement of information documentation file.\nMust be a PDF file.\nFile should be less than 10 MB in size\nThe Statement of Information must be updated if there is a change in the indicative selling price."
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

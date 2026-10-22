@@ -1,0 +1,193 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/domain-group/main/json-schema/domain-group-property-enrichment-v2-sale-history-schema.json",
+  "title": "Property.Enrichment.v2.SaleHistory",
+  "x-generated": "2026-10-21",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/domain-group-properties-api-openapi.yml#/components/schemas/Property.Enrichment.v2.SaleHistory",
+  "type": "object",
+  "properties": {
+    "propertyId": {
+      "type": "string",
+      "description": "Unique ID for the property"
+    },
+    "addressComponents": {
+      "$ref": "#/$defs/Property.Enrichment.v2.AddressBasic"
+    },
+    "salesHistory": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Property.Enrichment.v2.SaleHistoryListing"
+      },
+      "description": "An array of the sale histories for the listing"
+    },
+    "rentalHistory": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Property.Enrichment.v2.RentHistoryListing"
+      },
+      "description": "An array of the rent histories for the listing"
+    }
+  },
+  "$defs": {
+    "Property.Enrichment.v2.AddressBasic": {
+      "type": "object",
+      "properties": {
+        "flatNumber": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "streetNumber": {
+          "type": "string"
+        },
+        "streetName": {
+          "type": "string"
+        },
+        "streetType": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "streetTypeLong": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "suburb": {
+          "type": "string"
+        },
+        "postcode": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Address of property"
+    },
+    "Property.Enrichment.v2.RentHistoryListing": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "agencyName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "agencyId": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "firstListedDate": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "First activity date in YYYY-MM-DD format",
+          "format": "date"
+        },
+        "lastListedDate": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Last activity date in YYYY-MM-DD format",
+          "format": "date"
+        },
+        "lastListedPrice": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "daysOnMarket": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        }
+      }
+    },
+    "Property.Enrichment.v2.SaleHistoryListing": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "agencyName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "agencyId": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "firstListedDate": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "First activity date in YYYY-MM-DD format",
+          "format": "date"
+        },
+        "lastListedDate": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Last activity date in YYYY-MM-DD format",
+          "format": "date"
+        },
+        "lastListedPrice": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "daysOnMarket": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "soldDate": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Sold date in YYYY-MM-DD format",
+          "format": "date"
+        },
+        "soldPrice": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "sold price"
+        },
+        "saleType": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Sale type ['Auction', 'Private Treaty']"
+        }
+      }
+    }
+  }
+}

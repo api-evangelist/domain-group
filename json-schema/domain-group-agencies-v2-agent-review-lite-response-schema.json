@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/domain-group/main/json-schema/domain-group-agencies-v2-agent-review-lite-response-schema.json",
+  "title": "Agencies.V2.AgentReviewLiteResponse",
+  "description": "DomainAgencyModelResponseAgentReviewLiteResponse",
+  "x-generated": "2026-10-21",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/domain-group-agents-api-openapi.yml#/components/schemas/Agencies.V2.AgentReviewLiteResponse",
+  "type": "object",
+  "properties": {
+    "agentId": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "Gets or Sets AgentId",
+      "format": "int32"
+    },
+    "overallStarRating": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "description": "Gets or Sets OverallStarRating",
+      "format": "double"
+    },
+    "overallStarRatingRecent": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "description": "Gets or Sets OverallStarRatingRecent",
+      "format": "double"
+    },
+    "numberOfReviews": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "Gets or Sets NumberOfReviews",
+      "format": "int32"
+    },
+    "numberOfReviewsRecent": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "Gets or Sets NumberOfReviewsRecent",
+      "format": "int32"
+    }
+  },
+  "additionalProperties": false,
+  "x-data-access-level-info": {
+    "Basic": [
+      "*"
+    ],
+    "Detailed": [
+      "*"
+    ],
+    "Full": [
+      "*"
+    ]
+  }
+}

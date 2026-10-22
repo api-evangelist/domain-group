@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/domain-group/main/json-schema/domain-group-domain-public-adapter-web-api-models-v1-enquiries-enquiry-schema.json",
+  "title": "Domain.Public.Adapter.Web.Api.Models.v1.Enquiries.Enquiry",
+  "description": "An enquiry with associated reference (eg. listing)",
+  "x-generated": "2026-10-21",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/domain-group-enquiries-api-openapi.yml#/components/schemas/Domain.Public.Adapter.Web.Api.Models.v1.Enquiries.Enquiry",
+  "type": "object",
+  "properties": {
+    "deliveryMethod": {
+      "enum": [
+        "email",
+        "sms"
+      ],
+      "type": "string",
+      "description": "Delivery method of the enquiry"
+    },
+    "enquiryType": {
+      "enum": [
+        "listing",
+        "devProject",
+        "newDevLanding",
+        "agencyProfile",
+        "agentProfile",
+        "contractRequest",
+        "vendorEnquiry",
+        "prePortalListing"
+      ],
+      "type": "string",
+      "description": "Type of enquiry"
+    },
+    "referenceId": {
+      "type": "integer",
+      "description": "Listing identifier",
+      "format": "int32"
+    },
+    "id": {
+      "type": "string",
+      "description": "Enquiry identifier"
+    },
+    "sender": {
+      "$ref": "#/$defs/Domain.Public.Adapter.Web.Api.Models.v1.Enquiries.Sender"
+    },
+    "subject": {
+      "type": "string",
+      "description": "Enquiry subject"
+    },
+    "message": {
+      "type": "string",
+      "description": "Enquiry message"
+    },
+    "metaData": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "MetaData of the enquiry"
+    }
+  },
+  "$defs": {
+    "Domain.Public.Adapter.Web.Api.Models.v1.Enquiries.Sender": {
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "type": "string",
+          "description": "Sender first name"
+        },
+        "lastName": {
+          "type": "string",
+          "description": "Sender lastname/surname"
+        },
+        "email": {
+          "type": "string",
+          "description": "Sender email address"
+        },
+        "phoneNumber": {
+          "type": "string",
+          "description": "Sender phone number"
+        },
+        "postcode": {
+          "pattern": "^\\d*$",
+          "type": "string",
+          "description": "Postcode of sender's location"
+        }
+      },
+      "description": "Contains enquiry sender details"
+    }
+  }
+}

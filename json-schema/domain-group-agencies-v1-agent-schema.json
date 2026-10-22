@@ -1,0 +1,303 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/domain-group/main/json-schema/domain-group-agencies-v1-agent-schema.json",
+  "title": "Agencies.V1.Agent",
+  "description": "AgentDto",
+  "x-generated": "2026-10-21",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/domain-group-agents-api-openapi.yml#/components/schemas/Agencies.V1.Agent",
+  "type": "object",
+  "properties": {
+    "dateUpdated": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets DateUpdated",
+      "format": "date-time"
+    },
+    "agencyId": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "Gets or Sets AgencyId",
+      "format": "int32"
+    },
+    "agentId": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "Gets or Sets AgentId",
+      "format": "int32"
+    },
+    "email": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets Email"
+    },
+    "firstName": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets FirstName"
+    },
+    "mobile": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets Mobile"
+    },
+    "photo": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets Photo"
+    },
+    "lastName": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets LastName"
+    },
+    "isActiveProfilePage": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets IsActiveProfilePage"
+    },
+    "phone": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets Phone"
+    },
+    "saleActive": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "Gets or Sets SaleActive"
+    },
+    "rentalActive": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "Gets or Sets RentalActive"
+    },
+    "secondaryEmail": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets SecondaryEmail"
+    },
+    "facebookUrl": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets FacebookUrl"
+    },
+    "twitterUrl": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets TwitterUrl"
+    },
+    "agentVideo": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets AgentVideo"
+    },
+    "profileText": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets ProfileText"
+    },
+    "isHideSoldLeasedListings": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "Gets or Sets IsHideSoldLeasedListings"
+    },
+    "googlePlusUrl": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets GooglePlusUrl"
+    },
+    "personalWebsiteUrl": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets PersonalWebsiteUrl"
+    },
+    "linkedInUrl": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets LinkedInUrl"
+    },
+    "fax": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets Fax"
+    },
+    "mugShotURL": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets MugShotURL"
+    },
+    "mugShotNew": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets MugShotNew"
+    },
+    "contactTypeCode": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "Gets or Sets ContactTypeCode",
+      "format": "int32"
+    },
+    "receivesRequests": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "Gets or Sets ReceivesRequests"
+    },
+    "creAgentVideoURL": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets CreAgentVideoURL"
+    },
+    "receiveScheduledReportEmail": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "Gets or Sets ReceiveScheduledReportEmail"
+    },
+    "profileUrl": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets ProfileUrl"
+    },
+    "jobPosition": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Gets or Sets JobPosition"
+    }
+  },
+  "additionalProperties": false,
+  "x-data-access-level-info": {
+    "Basic": [
+      "AgencyId",
+      "AgentId",
+      "ContactTypeCode",
+      "FacebookUrl",
+      "FirstName",
+      "GooglePlusUrl",
+      "JobPosition",
+      "LastName",
+      "MugShotNew",
+      "MugShotURL",
+      "Phone",
+      "Photo",
+      "ProfileText",
+      "ProfileUrl",
+      "TwitterUrl"
+    ],
+    "Detailed": [
+      "AgencyId",
+      "AgentId",
+      "ContactTypeCode",
+      "FacebookUrl",
+      "FirstName",
+      "GooglePlusUrl",
+      "JobPosition",
+      "LastName",
+      "MugShotNew",
+      "MugShotURL",
+      "Phone",
+      "Photo",
+      "ProfileText",
+      "ProfileUrl",
+      "TwitterUrl",
+      "AgentVideo",
+      "CreAgentVideoURL",
+      "Email",
+      "LinkedInUrl",
+      "Mobile",
+      "PersonalWebsiteUrl",
+      "SecondaryEmail"
+    ],
+    "Full": [
+      "AgencyId",
+      "AgentId",
+      "ContactTypeCode",
+      "FacebookUrl",
+      "FirstName",
+      "GooglePlusUrl",
+      "JobPosition",
+      "LastName",
+      "MugShotNew",
+      "MugShotURL",
+      "Phone",
+      "Photo",
+      "ProfileText",
+      "ProfileUrl",
+      "TwitterUrl",
+      "AgentVideo",
+      "CreAgentVideoURL",
+      "Email",
+      "LinkedInUrl",
+      "Mobile",
+      "PersonalWebsiteUrl",
+      "SecondaryEmail",
+      "DateUpdated",
+      "Fax",
+      "IsActiveProfilePage",
+      "IsHideSoldLeasedListings",
+      "ReceiveScheduledReportEmail",
+      "ReceivesRequests",
+      "RentalActive",
+      "SaleActive"
+    ]
+  }
+}

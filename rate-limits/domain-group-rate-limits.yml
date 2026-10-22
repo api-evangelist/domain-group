@@ -1,0 +1,36 @@
+name: Domain Group rate limits
+generated: '2026-10-21'
+method: searched
+source: https://developer.domain.com.au/docs/latest/conventions/rate-limiting
+docs: https://developer.domain.com.au/docs/latest/conventions/rate-limiting
+limit_count: 3
+limits:
+- name: Authorisation token requests
+  limit_text: not more than 3000 Requests Per Hour
+  max: 3000
+  window: 1 hour
+  scope: token generation
+  endpoint: authorisation token endpoint (see authentication/)
+  note: Generated access tokens should be cached for reuse until the designated expiry time.
+- name: Daily API quota
+  limit_text: Access to each API may be limited to a daily quota based on the plan you have chosen when adding the API to your project.
+  window: 1 day
+  scope: per project, per API package plan
+  reset: Daily quotas are currently reset at 10am AEST.
+  note: The exact number is shown only on the Reports tab of the project in the developer portal; no figure is published.
+- name: General request rate
+  limit_text: A general limit of 1000-3000 Requests Per Minute (depending on plan) also applies to all API requests
+  window: 1 minute
+  scope: all API requests, per plan (includes Unlimited plans)
+headers:
+  informational:
+  - X-Quota-PerMinute-Limit
+  - X-Quota-PerMinute-Remaining
+  - X-Quota-PerDay-Limit
+  - X-Quota-PerDay-Remaining
+  on_exhaustion:
+  - Retry-After
+  - X-Quota-Exceeded
+  note: You may have more, or fewer, headers indicating limits for varying time periods such as Day, Month, etc.
+exhaustion_status: 429
+retry_after: This header indicates how many seconds your client should wait until attempting to make any further requests.

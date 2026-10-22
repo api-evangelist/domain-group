@@ -1,0 +1,412 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/domain-group/main/json-schema/domain-group-agencies-v2-agent-search-page-result-contact-stats-dto-schema.json",
+  "title": "Agencies.V2.AgentSearchPageResultContactStatsDto",
+  "description": "DomainAgencyModelResponseAgentSearchPageResult1",
+  "x-generated": "2026-10-21",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/domain-group-agentsearch-api-openapi.yml#/components/schemas/Agencies.V2.AgentSearchPageResultContactStatsDto",
+  "type": "object",
+  "properties": {
+    "total": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "Gets or Sets Total",
+      "format": "int32"
+    },
+    "totalPages": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "Gets or Sets TotalPages",
+      "format": "int32"
+    },
+    "pageNumber": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "Gets or Sets PageNumber",
+      "format": "int32"
+    },
+    "results": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/$defs/Agencies.V2.ContactStatsDto"
+      },
+      "description": "Gets or Sets Results"
+    }
+  },
+  "additionalProperties": false,
+  "x-data-access-level-info": {
+    "Basic": [
+      "*"
+    ],
+    "Detailed": [
+      "*"
+    ],
+    "Full": [
+      "*"
+    ]
+  },
+  "$defs": {
+    "Agencies.V2.ContactStatsDto": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Gets or Sets Id",
+          "format": "int32"
+        },
+        "name": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets Name"
+        },
+        "agentIdV2": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets AgentIdV2"
+        },
+        "propertyType": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets PropertyType"
+        },
+        "bedrooms": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "Gets or Sets Bedrooms",
+          "format": "double"
+        },
+        "profileTier": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets ProfileTier"
+        },
+        "depthTier": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets DepthTier"
+        },
+        "currentProductTier": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets CurrentProductTier",
+          "readOnly": true
+        },
+        "profileUrl": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets ProfileUrl"
+        },
+        "profilePhoto": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets ProfilePhoto"
+        },
+        "thumbnail": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets Thumbnail"
+        },
+        "jobTitle": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets JobTitle"
+        },
+        "jobCategory": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets JobCategory"
+        },
+        "mobile": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets Mobile"
+        },
+        "telephone": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets Telephone"
+        },
+        "email": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets Email"
+        },
+        "averageSoldDaysOnMarket": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "Gets or Sets AverageSoldDaysOnMarket",
+          "format": "double"
+        },
+        "averageSoldPrice": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "Gets or Sets AverageSoldPrice",
+          "format": "double"
+        },
+        "averageSoldPriceIncWithheld": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "Gets or Sets AverageSoldPriceIncWithheld",
+          "format": "double"
+        },
+        "maxSoldPrice": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "Gets or Sets MaxSoldPrice",
+          "format": "double"
+        },
+        "maxSoldPriceIncWithheld": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "Gets or Sets MaxSoldPriceIncWithheld",
+          "format": "double"
+        },
+        "minSoldPrice": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "Gets or Sets MinSoldPrice",
+          "format": "double"
+        },
+        "minSoldPriceIncWithheld": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "Gets or Sets MinSoldPriceIncWithheld",
+          "format": "double"
+        },
+        "totalForRent": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Gets or Sets TotalForRent",
+          "format": "int32"
+        },
+        "totalLeased": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Gets or Sets TotalLeased",
+          "format": "int32"
+        },
+        "totalForSale": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Gets or Sets TotalForSale",
+          "format": "int32"
+        },
+        "totalSold": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Gets or Sets TotalSold",
+          "format": "int32"
+        },
+        "totalJointSold": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Gets or Sets TotalJointSold",
+          "format": "int32"
+        },
+        "totalJointLeased": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Gets or Sets TotalJointLeased",
+          "format": "int32"
+        },
+        "totalSoldAndAuctioned": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Gets or Sets TotalSoldAndAuctioned",
+          "format": "int32"
+        },
+        "totalJointSoldAndAuctioned": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Gets or Sets TotalJointSoldAndAuctioned",
+          "format": "int32"
+        },
+        "totalDaysOnMarket": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "Gets or Sets TotalDaysOnMarket",
+          "format": "double"
+        },
+        "totalSoldPrice": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Gets or Sets TotalSoldPrice",
+          "format": "int64"
+        },
+        "totalSoldPriceIncWithheld": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Gets or Sets TotalSoldPriceIncWithheld",
+          "format": "int64"
+        },
+        "totalAuctioned": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Gets or Sets TotalAuctioned",
+          "format": "int32"
+        },
+        "totalNotWithheldSoldCount": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Gets or Sets TotalNotWithheldSoldCount",
+          "format": "int32"
+        },
+        "totalSoldWithValidDaysOnMarket": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Gets or Sets TotalSoldWithValidDaysOnMarket",
+          "format": "int32"
+        },
+        "agencyId": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Gets or Sets AgencyId",
+          "format": "int32"
+        },
+        "agencyName": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets AgencyName"
+        },
+        "agencyLogoSmall": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets AgencyLogoSmall"
+        },
+        "agencyLogoUrl": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets AgencyLogoUrl"
+        },
+        "brandColour": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets BrandColour"
+        },
+        "agencyProfileUrl": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Gets or Sets AgencyProfileUrl"
+        },
+        "showRecentlySold": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "description": "Gets or Sets ShowRecentlySold"
+        }
+      },
+      "additionalProperties": false,
+      "description": "DomainAgencyModelResponseAgentSearchContactStatsDto",
+      "x-data-access-level-info": {
+        "Basic": [
+          "*"
+        ],
+        "Detailed": [
+          "*"
+        ],
+        "Full": [
+          "*"
+        ]
+      }
+    }
+  }
+}

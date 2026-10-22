@@ -1436,6 +1436,76 @@
         "x-domain-environment": "Primary"
       }
     },
+    "/v1/avmHistory/{propertyId}": {
+      "get": {
+        "tags": [
+          "AvmHistory"
+        ],
+        "summary": "Retrieves valuation history for the property.",
+        "operationId": "AvmHistory_Get",
+        "parameters": [
+          {
+            "name": "propertyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AvmHistory.v1.Response"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AvmHistory.v1.HttpValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AvmHistory.v1.ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "apikey": []
+          },
+          {
+            "oauth2": [
+              "api_avmhistory_read"
+            ]
+          }
+        ],
+        "x-domain-endpointcost": 1,
+        "x-domain-usercontextrequired": false,
+        "x-domain-environment": "Any"
+      }
+    },
     "/v1/campaign/listing-performance": {
       "get": {
         "tags": [
@@ -1509,8 +1579,7 @@
           },
           {
             "oauth2": [
-              "api_campaignperformance_read",
-              "api_listingperformance_read"
+              "api_campaignperformance_read"
             ]
           }
         ],
@@ -1585,8 +1654,93 @@
           },
           {
             "oauth2": [
-              "api_campaignperformance_read",
-              "api_projectperformance_read"
+              "api_campaignperformance_read"
+            ]
+          }
+        ],
+        "x-domain-endpointcost": 1,
+        "x-domain-usercontextrequired": false,
+        "x-domain-environment": "Any"
+      }
+    },
+    "/v1/campaign/social-performance": {
+      "get": {
+        "tags": [
+          "CampaignReporting"
+        ],
+        "summary": "Retrieves social performance metrics for campaigns managed by advertisers.",
+        "operationId": "Campaign_GetSocialPerformance_Report",
+        "parameters": [
+          {
+            "name": "startDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "pageNumber",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 500
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CampaignAPI.v1.SocialPerformanceDataResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CampaignAPI.v1.HttpValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "apikey": []
+          },
+          {
+            "oauth2": [
+              "api_campaignperformance_read"
             ]
           }
         ],
@@ -8350,7 +8504,7 @@
           }
         },
         "additionalProperties": false,
-        "description": "AgencySummary",
+        "description": "DomainAgencyDtosV2AgencySummary",
         "x-data-access-level-info": {
           "Basic": [
             "AccountType",
@@ -8482,7 +8636,7 @@
           }
         },
         "additionalProperties": false,
-        "description": "AgencyPhoto",
+        "description": "DomainAgencyDtosV2AgencyPhoto",
         "x-data-access-level-info": {
           "Basic": [
             "*"
@@ -8658,7 +8812,7 @@
           }
         },
         "additionalProperties": false,
-        "description": "AgencyProfile",
+        "description": "DomainAgencyDtosV2AgencyProfile",
         "x-data-access-level-info": {
           "Basic": [
             "AgencyBanner",
@@ -8846,7 +9000,7 @@
           }
         },
         "additionalProperties": false,
-        "description": "AgencyDetails",
+        "description": "DomainAgencyDtosV2AgencyDetails",
         "x-data-access-level-info": {
           "Basic": [
             "AgencyWebsite",
@@ -9027,7 +9181,7 @@
           }
         },
         "additionalProperties": false,
-        "description": "ContactInAgencyList",
+        "description": "DomainAgencyDtosV2ContactInAgencyList",
         "x-data-access-level-info": {
           "Basic": [
             "AgencyId",
@@ -9113,7 +9267,7 @@
           }
         },
         "additionalProperties": false,
-        "description": "EmailPhone",
+        "description": "DomainAgencyDtosV2EmailPhone",
         "x-data-access-level-info": {
           "Basic": [
             "*"
@@ -9138,7 +9292,7 @@
           }
         },
         "additionalProperties": false,
-        "description": "EmailDomain",
+        "description": "DomainAgencyDtosV2EmailDomain",
         "x-data-access-level-info": {
           "Basic": [
             "*"
@@ -9184,7 +9338,7 @@
           }
         },
         "additionalProperties": false,
-        "description": "GeneralAgencyContactDetails",
+        "description": "DomainAgencyDtosV2GeneralAgencyContactDetails",
         "x-data-access-level-info": {
           "Basic": [
             "*"
@@ -9231,7 +9385,7 @@
           }
         },
         "additionalProperties": false,
-        "description": "AgencyContactDetails",
+        "description": "DomainAgencyDtosV2AgencyContactDetails",
         "x-data-access-level-info": {
           "Basic": [
             "*"
@@ -9283,7 +9437,7 @@
           }
         },
         "additionalProperties": false,
-        "description": "AgencyOptions",
+        "description": "DomainAgencyDtosV2AgencyOptions",
         "x-data-access-level-info": {
           "Basic": [
             "*"
@@ -9299,20 +9453,6 @@
       "Agencies.V2.Agency": {
         "type": "object",
         "properties": {
-          "accountType": {
-            "enum": [
-              "none",
-              "residential",
-              "commercialLight",
-              "commercialFull",
-              "developer",
-              "holiday",
-              "business"
-            ],
-            "type": "string",
-            "description": "Gets or Sets AccountType",
-            "nullable": true
-          },
           "profile": {
             "$ref": "#/components/schemas/Agencies.V2.AgencyProfile"
           },
@@ -9343,6 +9483,19 @@
             "description": "Gets or Sets CreId",
             "format": "int32",
             "nullable": true
+          },
+          "accountType": {
+            "enum": [
+              "none",
+              "residential",
+              "commercialLight",
+              "commercialFull",
+              "developer",
+              "holiday",
+              "business"
+            ],
+            "type": "string",
+            "description": "Gets or Sets AccountType"
           },
           "agents": {
             "type": "array",
@@ -9390,7 +9543,7 @@
           }
         },
         "additionalProperties": false,
-        "description": "Agency",
+        "description": "DomainAgencyDtosV2Agency",
         "x-data-access-level-info": {
           "Basic": [
             "AccountType",
@@ -12515,6 +12668,121 @@
           }
         }
       },
+      "AvmHistory.v1.SaleAvm": {
+        "type": "object",
+        "properties": {
+          "confidence": {
+            "type": "string",
+            "nullable": true
+          },
+          "estimate": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "estimateDate": {
+            "type": "string",
+            "nullable": true
+          },
+          "estimateHigh": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "estimateLow": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AvmHistory.v1.Valuation": {
+        "type": "object",
+        "properties": {
+          "saleAvm": {
+            "$ref": "#/components/schemas/AvmHistory.v1.SaleAvm"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AvmHistory.v1.Response": {
+        "type": "object",
+        "properties": {
+          "valuations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AvmHistory.v1.Valuation"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AvmHistory.v1.HttpValidationProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "instance": {
+            "type": "string",
+            "nullable": true
+          },
+          "errors": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": {}
+      },
+      "AvmHistory.v1.ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "instance": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": {}
+      },
       "CampaignAPI.v1.Leads": {
         "type": "object",
         "properties": {
@@ -12775,6 +13043,90 @@
               "$ref": "#/components/schemas/CampaignAPI.v1.ProjectPerformanceResponse"
             },
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CampaignAPI.v1.SocialPerformanceResponse": {
+        "required": [
+          "creativeId",
+          "creativeName",
+          "domainAgencyId"
+        ],
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "domainAgencyId": {
+            "type": "string",
+            "nullable": true
+          },
+          "creativeId": {
+            "type": "string",
+            "nullable": true
+          },
+          "creativeName": {
+            "type": "string",
+            "nullable": true
+          },
+          "campaignName": {
+            "type": "string",
+            "nullable": true
+          },
+          "projectId": {
+            "type": "string",
+            "nullable": true
+          },
+          "projectName": {
+            "type": "string",
+            "nullable": true
+          },
+          "impressions": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "enquiries": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "clicks": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ctr": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CampaignAPI.v1.SocialPerformanceDataResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CampaignAPI.v1.SocialPerformanceResponse"
+            },
+            "nullable": true
+          },
+          "pageNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -25280,22 +25632,6 @@
         "additionalProperties": false,
         "description": "Advert of properties"
       },
-      "Property.Enrichment.v2.Claim": {
-        "type": "object",
-        "properties": {
-          "claimant": {
-            "enum": [
-              "Owner",
-              "Tenant",
-              "Investor",
-              "Unspecified"
-            ],
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "description": "Advert of properties"
-      },
       "Property.Enrichment.v2.PropertyId-ActivityBoundary": {
         "type": "object",
         "properties": {
@@ -25431,6 +25767,15 @@
             "items": {
               "type": "object",
               "properties": {
+                "date": {
+                  "type": "string",
+                  "format": "date",
+                  "nullable": true
+                },
+                "daysOnMarket": {
+                  "type": "integer",
+                  "nullable": true
+                },
                 "id": {
                   "type": "integer",
                   "format": "int64"
@@ -25492,21 +25837,6 @@
       "Property.Enrichment.v2.Property": {
         "type": "object",
         "properties": {
-          "cadastreType": {
-            "enum": [
-              "Point",
-              "MultiPoint",
-              "LineString",
-              "MultiLineString",
-              "Polygon",
-              "MultiPolygon",
-              "GeometryCollection",
-              "Feature",
-              "FeatureCollection"
-            ],
-            "type": "string",
-            "nullable": true
-          },
           "onMarketTypes": {
             "type": "array",
             "items": {
@@ -25555,8 +25885,9 @@
             "type": "integer",
             "nullable": true
           },
-          "claim": {
-            "$ref": "#/components/schemas/Property.Enrichment.v2.Claim"
+          "ensuites": {
+            "type": "integer",
+            "nullable": true
           },
           "created": {
             "type": "string",
@@ -25592,10 +25923,6 @@
             "type": "boolean",
             "nullable": true
           },
-          "landUse": {
-            "type": "string",
-            "nullable": true
-          },
           "lotNumber": {
             "type": "string",
             "nullable": true
@@ -25618,16 +25945,8 @@
             "type": "string",
             "nullable": true
           },
-          "propertyCategoryId": {
-            "type": "integer",
-            "nullable": true
-          },
           "propertyType": {
             "type": "string",
-            "nullable": true
-          },
-          "propertyTypeId": {
-            "type": "integer",
             "nullable": true
           },
           "state": {
@@ -25635,7 +25954,7 @@
             "nullable": true
           },
           "storeys": {
-            "type": "string",
+            "type": "integer",
             "nullable": true
           },
           "streetAddress": {
@@ -25666,13 +25985,9 @@
             "type": "integer",
             "nullable": true
           },
-          "title": {
-            "type": "string",
-            "nullable": true
-          },
           "updated": {
             "type": "string",
-            "format": "date",
+            "format": "date-time",
             "nullable": true
           },
           "urlSlug": {
@@ -25692,14 +26007,6 @@
             "items": {
               "type": "object",
               "properties": {
-                "monthNo": {
-                  "type": "integer",
-                  "nullable": true
-                },
-                "yearNo": {
-                  "type": "integer",
-                  "nullable": true
-                },
                 "gnafPID": {
                   "type": "string",
                   "nullable": true
@@ -25713,10 +26020,6 @@
           },
           "canonicalUrl": {
             "type": "string",
-            "nullable": true
-          },
-          "hasStrata": {
-            "type": "boolean",
             "nullable": true
           }
         }
@@ -26006,10 +26309,12 @@
             "nullable": true
           },
           "streetNumber": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "streetName": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "streetType": {
             "type": "string",
@@ -26020,13 +26325,16 @@
             "nullable": true
           },
           "suburb": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "postcode": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "state": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false,
@@ -27820,14 +28128,13 @@
               "api_agencies_write": "api_agencies_write",
               "api_authorities_write": "api_authorities_write",
               "api_avm_read": "api_avm_read",
+              "api_avmhistory_read": "api_avmhistory_read",
               "api_campaignperformance_read": "api_campaignperformance_read",
               "api_enquiries_read": "api_enquiries_read",
               "api_enquiries_write": "api_enquiries_write",
-              "api_listingperformance_read": "api_listingperformance_read",
               "api_listings_read": "api_listings_read",
               "api_listings_write": "api_listings_write",
               "api_locations_read": "api_locations_read",
-              "api_projectperformance_read": "api_projectperformance_read",
               "api_properties_read": "api_properties_read",
               "api_propertyportfolio_read": "api_propertyportfolio_read",
               "api_propertyportfolio_write": "api_propertyportfolio_write",
@@ -27850,14 +28157,13 @@
               "api_agencies_write": "api_agencies_write",
               "api_authorities_write": "api_authorities_write",
               "api_avm_read": "api_avm_read",
+              "api_avmhistory_read": "api_avmhistory_read",
               "api_campaignperformance_read": "api_campaignperformance_read",
               "api_enquiries_read": "api_enquiries_read",
               "api_enquiries_write": "api_enquiries_write",
-              "api_listingperformance_read": "api_listingperformance_read",
               "api_listings_read": "api_listings_read",
               "api_listings_write": "api_listings_write",
               "api_locations_read": "api_locations_read",
-              "api_projectperformance_read": "api_projectperformance_read",
               "api_properties_read": "api_properties_read",
               "api_propertyportfolio_read": "api_propertyportfolio_read",
               "api_propertyportfolio_write": "api_propertyportfolio_write",

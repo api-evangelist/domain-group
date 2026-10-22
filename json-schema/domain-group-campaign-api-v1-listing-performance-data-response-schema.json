@@ -1,0 +1,153 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/domain-group/main/json-schema/domain-group-campaign-api-v1-listing-performance-data-response-schema.json",
+  "title": "CampaignAPI.v1.ListingPerformanceDataResponse",
+  "x-generated": "2026-10-21",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/domain-group-campaignreporting-api-openapi.yml#/components/schemas/CampaignAPI.v1.ListingPerformanceDataResponse",
+  "required": [
+    "data"
+  ],
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/$defs/CampaignAPI.v1.ListingPerformanceResponse"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "CampaignAPI.v1.Leads": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "emailEnquiries": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "phoneLeads": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "phoneReveals": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "additionalProperties": false
+    },
+    "CampaignAPI.v1.ListingPerformanceResponse": {
+      "required": [
+        "agencyName",
+        "domainAgencyId",
+        "ioNumber",
+        "leads",
+        "listingId",
+        "projectId",
+        "projectName",
+        "shares"
+      ],
+      "type": "object",
+      "properties": {
+        "listingId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "projectId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "projectName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "domainAgencyId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "agencyName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "ioNumber": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "date": {
+          "type": "string",
+          "format": "date"
+        },
+        "leads": {
+          "$ref": "#/$defs/CampaignAPI.v1.Leads"
+        },
+        "photoViews": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "mapViews": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "pageViews": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "floorPlanViews": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "shares": {
+          "$ref": "#/$defs/CampaignAPI.v1.Shares"
+        },
+        "shortlisted": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "additionalProperties": false
+    },
+    "CampaignAPI.v1.Shares": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "listingLinkCopied": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "sharedViaSocial": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "sharedViaEmail": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

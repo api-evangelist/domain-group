@@ -61,7 +61,6 @@ paths:
       - apikey: []
       - oauth2:
         - api_campaignperformance_read
-        - api_listingperformance_read
       x-domain-endpointcost: 1
       x-domain-usercontextrequired: false
       x-domain-environment: Any
@@ -112,7 +111,64 @@ paths:
       - apikey: []
       - oauth2:
         - api_campaignperformance_read
-        - api_projectperformance_read
+      x-domain-endpointcost: 1
+      x-domain-usercontextrequired: false
+      x-domain-environment: Any
+    servers:
+    - url: https://api.domain.com.au/
+      description: Primary
+    - url: https://api.domain.com.au/sandbox/
+      description: Sandbox
+  /v1/campaign/social-performance:
+    get:
+      tags:
+      - CampaignReporting
+      summary: Retrieves social performance metrics for campaigns managed by advertisers
+      operationId: Campaign_GetSocialPerformance_Report
+      parameters:
+      - name: startDate
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: endDate
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: pageNumber
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 500
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CampaignAPI.v1.SocialPerformanceDataResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/CampaignAPI.v1.HttpValidationProblemDetails'
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      security:
+      - apikey: []
+      - oauth2:
+        - api_campaignperformance_read
       x-domain-endpointcost: 1
       x-domain-usercontextrequired: false
       x-domain-environment: Any
@@ -123,39 +179,65 @@ paths:
       description: Sandbox
 components:
   schemas:
-    CampaignAPI.v1.HttpValidationProblemDetails:
+    CampaignAPI.v1.ListingPerformanceResponse:
+      required:
+      - agencyName
+      - domainAgencyId
+      - ioNumber
+      - leads
+      - listingId
+      - projectId
+      - projectName
+      - shares
       type: object
       properties:
-        type:
+        listingId:
           type:
           - string
           - 'null'
-        title:
+        projectId:
           type:
           - string
           - 'null'
-        status:
+        projectName:
           type:
-          - integer
+          - string
           - 'null'
+        domainAgencyId:
+          type:
+          - string
+          - 'null'
+        agencyName:
+          type:
+          - string
+          - 'null'
+        ioNumber:
+          type:
+          - string
+          - 'null'
+        date:
+          type: string
+          format: date
+        leads:
+          $ref: '#/components/schemas/CampaignAPI.v1.Leads'
+        photoViews:
+          type: integer
           format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        instance:
-          type:
-          - string
-          - 'null'
-        errors:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            type: array
-            items:
-              type: string
-      additionalProperties: {}
+        mapViews:
+          type: integer
+          format: int32
+        pageViews:
+          type: integer
+          format: int32
+        floorPlanViews:
+          type: integer
+          format: int32
+        shares:
+          $ref: '#/components/schemas/CampaignAPI.v1.Shares'
+        shortlisted:
+          type: integer
+          format: int32
+      additionalProperties: false
     CampaignAPI.v1.ProjectPerformanceResponse:
       required:
       - domainAgencyId
@@ -223,46 +305,6 @@ components:
           - 'null'
           format: double
       additionalProperties: false
-    CampaignAPI.v1.ListingPerformanceDataResponse:
-      required:
-      - data
-      type: object
-      properties:
-        data:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/CampaignAPI.v1.ListingPerformanceResponse'
-      additionalProperties: false
-    CampaignAPI.v1.Leads:
-      type: object
-      properties:
-        total:
-          type: integer
-          format: int32
-        emailEnquiries:
-          type: integer
-          format: int32
-        phoneLeads:
-          type: integer
-          format: int32
-        phoneReveals:
-          type: integer
-          format: int32
-      additionalProperties: false
-    CampaignAPI.v1.ProjectPerformanceDataResponse:
-      required:
-      - data
-      type: object
-      properties:
-        data:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/CampaignAPI.v1.ProjectPerformanceResponse'
-      additionalProperties: false
     CampaignAPI.v1.Shares:
       type: object
       properties:
@@ -279,19 +321,90 @@ components:
           type: integer
           format: int32
       additionalProperties: false
-    CampaignAPI.v1.ListingPerformanceResponse:
+    CampaignAPI.v1.ListingPerformanceDataResponse:
       required:
-      - agencyName
-      - domainAgencyId
-      - ioNumber
-      - leads
-      - listingId
-      - projectId
-      - projectName
-      - shares
+      - data
       type: object
       properties:
-        listingId:
+        data:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/CampaignAPI.v1.ListingPerformanceResponse'
+      additionalProperties: false
+    CampaignAPI.v1.HttpValidationProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+        errors:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: array
+            items:
+              type: string
+      additionalProperties: {}
+    CampaignAPI.v1.Leads:
+      type: object
+      properties:
+        total:
+          type: integer
+          format: int32
+        emailEnquiries:
+          type: integer
+          format: int32
+        phoneLeads:
+          type: integer
+          format: int32
+        phoneReveals:
+          type: integer
+          format: int32
+      additionalProperties: false
+    CampaignAPI.v1.SocialPerformanceResponse:
+      required:
+      - creativeId
+      - creativeName
+      - domainAgencyId
+      type: object
+      properties:
+        date:
+          type: string
+          format: date
+        domainAgencyId:
+          type:
+          - string
+          - 'null'
+        creativeId:
+          type:
+          - string
+          - 'null'
+        creativeName:
+          type:
+          - string
+          - 'null'
+        campaignName:
           type:
           - string
           - 'null'
@@ -303,40 +416,52 @@ components:
           type:
           - string
           - 'null'
-        domainAgencyId:
+        impressions:
+          type: integer
+          format: int32
+        enquiries:
+          type: integer
+          format: int32
+        clicks:
+          type: integer
+          format: int32
+        ctr:
+          type: number
+          format: double
+      additionalProperties: false
+    CampaignAPI.v1.SocialPerformanceDataResponse:
+      type: object
+      properties:
+        data:
           type:
-          - string
+          - array
           - 'null'
-        agencyName:
+          items:
+            $ref: '#/components/schemas/CampaignAPI.v1.SocialPerformanceResponse'
+        pageNumber:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        totalCount:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+      additionalProperties: false
+    CampaignAPI.v1.ProjectPerformanceDataResponse:
+      required:
+      - data
+      type: object
+      properties:
+        data:
           type:
-          - string
+          - array
           - 'null'
-        ioNumber:
-          type:
-          - string
-          - 'null'
-        date:
-          type: string
-          format: date
-        leads:
-          $ref: '#/components/schemas/CampaignAPI.v1.Leads'
-        photoViews:
-          type: integer
-          format: int32
-        mapViews:
-          type: integer
-          format: int32
-        pageViews:
-          type: integer
-          format: int32
-        floorPlanViews:
-          type: integer
-          format: int32
-        shares:
-          $ref: '#/components/schemas/CampaignAPI.v1.Shares'
-        shortlisted:
-          type: integer
-          format: int32
+          items:
+            $ref: '#/components/schemas/CampaignAPI.v1.ProjectPerformanceResponse'
       additionalProperties: false
   securitySchemes:
     apikey:
@@ -354,18 +479,19 @@ components:
             api_addresslocators_read: api_addresslocators_read
             api_agencies_read: api_agencies_read
             api_agencies_write: api_agencies_write
+            api_auction_read: api_auction_read
+            api_auction_write: api_auction_write
             api_authorities_write: api_authorities_write
             api_avm_read: api_avm_read
+            api_avmhistory_read: api_avmhistory_read
             api_campaignperformance_read: api_campaignperformance_read
             api_dataset_read: api_dataset_read
             api_demographics_read: api_demographics_read
             api_enquiries_read: api_enquiries_read
             api_enquiries_write: api_enquiries_write
-            api_listingperformance_read: api_listingperformance_read
             api_listings_read: api_listings_read
             api_listings_write: api_listings_write
             api_locations_read: api_locations_read
-            api_projectperformance_read: api_projectperformance_read
             api_properties_read: api_properties_read
             api_propertyportfolio_read: api_propertyportfolio_read
             api_propertyportfolio_write: api_propertyportfolio_write
@@ -384,18 +510,19 @@ components:
             api_addresslocators_read: api_addresslocators_read
             api_agencies_read: api_agencies_read
             api_agencies_write: api_agencies_write
+            api_auction_read: api_auction_read
+            api_auction_write: api_auction_write
             api_authorities_write: api_authorities_write
             api_avm_read: api_avm_read
+            api_avmhistory_read: api_avmhistory_read
             api_campaignperformance_read: api_campaignperformance_read
             api_dataset_read: api_dataset_read
             api_demographics_read: api_demographics_read
             api_enquiries_read: api_enquiries_read
             api_enquiries_write: api_enquiries_write
-            api_listingperformance_read: api_listingperformance_read
             api_listings_read: api_listings_read
             api_listings_write: api_listings_write
             api_locations_read: api_locations_read
-            api_projectperformance_read: api_projectperformance_read
             api_properties_read: api_properties_read
             api_propertyportfolio_read: api_propertyportfolio_read
             api_propertyportfolio_write: api_propertyportfolio_write

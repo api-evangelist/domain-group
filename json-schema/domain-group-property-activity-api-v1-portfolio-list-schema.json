@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/domain-group/main/json-schema/domain-group-property-activity-api-v1-portfolio-list-schema.json",
+  "title": "PropertyActivityAPI.v1.PortfolioList",
+  "x-generated": "2026-10-21",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/domain-group-propertyradar-api-openapi.yml#/components/schemas/PropertyActivityAPI.v1.PortfolioList",
+  "type": "object",
+  "properties": {
+    "Portfolios": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "PortfolioId": {
+            "type": "string"
+          },
+          "PropertyIdCount": {
+            "type": "integer",
+            "description": "Total number of property ids defined"
+          },
+          "GnafIdCount": {
+            "type": "integer",
+            "description": "Total number of gnaf ids defined"
+          }
+        }
+      }
+    }
+  }
+}

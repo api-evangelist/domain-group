@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/domain-group/main/json-schema/domain-group-property-enrichment-v2-point-radius-lat-lon-schema.json",
+  "title": "Property.Enrichment.v2.PointRadiusLatLon",
+  "x-generated": "2026-10-21",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/domain-group-property-search-api-openapi.yml#/components/schemas/Property.Enrichment.v2.PointRadiusLatLon",
+  "required": [
+    "latitude",
+    "longitude"
+  ],
+  "type": "object",
+  "properties": {
+    "latitude": {
+      "type": "number",
+      "description": "latitude of the coordinates to use as the center of the search radius."
+    },
+    "longitude": {
+      "type": "number",
+      "description": "longitude of the coordinates to use as the center of the search radius."
+    }
+  }
+}
