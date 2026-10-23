@@ -221,3 +221,9 @@ components:
             api_suburbperformance_read: api_suburbperformance_read
             api_suburbsummary_read: api_suburbsummary_read
             api_webhooks_write: api_webhooks_write
+x-provenance:
+  method: harvested
+  publisher: Domain Group
+  source: https://developer.domain.com.au/static/latest/media/latest/openapi.json
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
