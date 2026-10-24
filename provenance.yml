@@ -18,6 +18,9 @@ artifacts:
   capabilities/domain-group-capability-edges.yml:
     method: unknown
     evidence: no authorship recorded
+  changelog/domain-group-changelog.yml:
+    method: unknown
+    evidence: no authorship recorded
   collections/domain-group-openapi-latest.opencollection.json:
     method: unknown
     evidence: no authorship recorded
@@ -45,133 +48,256 @@ artifacts:
   data-model/domain-group-data-model.yml:
     method: derived
     evidence: declared in the artifact
+  errors/domain-group-error-codes.yml:
+    method: searched
+    evidence: declared in the artifact
   errors/domain-group-problem-types.yml:
     method: derived
     evidence: declared in the artifact
   front-door-ai/2026-09-17.yml:
     method: unknown
     evidence: no authorship recorded
-  kin/checks-2026-09-24T161608.yml:
+  hosts/domain-group-hosts.yml:
+    method: derived
+    evidence: declared in the artifact
+  integrations/_index.yml:
     method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T125852.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T133943.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T143147.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T154045.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-26T215308.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T094438.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T103455.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T123021.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T132314.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T140727.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-28T221322.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-29T213958.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-29T230545.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-30T203505.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-30T220315.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-31T223420.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-01T063623.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-01T210448.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-01T222808.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-02T211804.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-02T224043.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-03T161828.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-03T174231.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-04T062714.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-04T212454.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-04T224856.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T055819.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T072335.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T144739.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T195450.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T211839.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-06T011047.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-06T211804.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-06T224210.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-07T200636.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-07T213054.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-08T214843.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-08T232836.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-10T204815.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-10T222408.yml:
+    evidence: carries an API Evangelist house phrase
+  integrations/domain-group-integration-edges.yml:
+    method: unknown
+    evidence: no authorship recorded
+  json-ld/domain-group-context.jsonld:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-agencies-v1-agent-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-agencies-v2-agency-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-agencies-v2-agency-summary-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-agencies-v2-agent-review-lite-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-agencies-v2-agent-search-page-result-contact-stats-dto-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-agencies-v2-get-agents-by-location-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-auction-collection-v1-calling-sheet-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-auction-collection-v1-put-auction-update-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-auction-results-v1-listing-event-item-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-auction-results-v1-summary-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-authorities-v1-attachments-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-authorities-v1-authority-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-authorities-v1-authority-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-authorities-v1-subscription-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-authorities-v1-subscription-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-authorities-v1-vendor-attachments-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-avm-history-v1-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-booking-v2-api-v1-get-listing-price-quote-by-agency-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-booking-v2-api-v1-get-quote-listing-price-by-suburbs-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-booking-v2-api-v1-get-quote-listing-price-by-suburbs-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-bookings-v2-rate-for-new-listing-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-bookings-v2-rate-for-new-listing-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-campaign-api-v1-listing-performance-data-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-campaign-api-v1-project-performance-data-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-campaign-api-v1-social-performance-data-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-demographics-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-domain-agent-search-v1-model-auto-suggest-agent-result-dto-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-domain-avm-pi-v1-property-price-estimate-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-domain-avm-v1-avm-report-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-domain-avm-v1-avm-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-domain-enquiry-service-v1-model-group-enquiry-service-models-enquiry-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-domain-listing-admin-service-v1-model-business-listing-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-domain-listing-admin-service-v1-model-commercial-listing-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-domain-listing-admin-service-v1-model-residential-listing-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-domain-location-profiles-service-v1-model-location-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-domain-public-adapter-web-api-models-v1-enquiries-enquiry-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-enquiries-v1-enquiry-report-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-listing-admin-v2-commercial-listing-v2-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-listing-performance-v1-project-listing-statistics-report-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-listing-performance-v1-project-statistics-report-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-listing-performance-v1-statistics-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-listings-v1-listing-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-listings-v2-listing-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-listings-v2-project-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-me-v1-agency-summary-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-me-v1-my-details-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-me-v1-provider-summary-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-pre-market-v1-create-or-update-listing-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-pre-market-v1-listing-request-json-patch-document-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-pre-market-v1-listing-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-pre-market-v1-listing-response-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-property-activity-api-v1-portfolio-created-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-property-activity-api-v1-portfolio-details-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-property-activity-api-v1-portfolio-list-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-property-enrichment-v2-point-radius-gnaf-id-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-property-enrichment-v2-point-radius-lat-lon-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-property-enrichment-v2-point-radius-params-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-property-enrichment-v2-point-radius-property-id-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-property-enrichment-v2-property-address-v2-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-property-enrichment-v2-property-features-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-property-enrichment-v2-property-perils-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-property-enrichment-v2-property-results-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-property-enrichment-v2-property-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-property-enrichment-v2-sale-history-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-property-enrichment-v2-search-item-output-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-schools-v2-school-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-schools-v2-school-with-distance-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-search-service-v2-domain-search-contracts-v2-search-results-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-search-service-v2-domain-search-web-api-v2-models-search-parameters-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-search-service-v2-domain-search-web-api-v2-models-sold-search-parameters-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-social-boost-v1-rate-for-new-social-boost-request-model-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-suburb-performance-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-suburb-summary-and-historical-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-type-ahead-v2-properties-suggest-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-webhooks-v1-add-subscription-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/domain-group-webhooks-v1-webhook-subscription-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  kin/checks-2026-10-11T110117.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
   kin/score-2026-09-12T062655.yml:
@@ -255,19 +381,31 @@ artifacts:
   kin/score-2026-09-24T161608.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-25T210408.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-25T232841.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-10-03T000835.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-10-03T024842.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-10-11T110117.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
   lifecycle/domain-group-lifecycle.yml:
     method: searched
     evidence: declared in the artifact
-  llms/domain-group-llms.txt:
-    method: generated
-    evidence: carries an API Evangelist house phrase
   mcp/domain-group-mcp.yml:
     method: derived
     evidence: declared in the artifact
   openapi/_original/domain-group-openapi-latest.json:
     method: harvested
-    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
-      to the provider's source is unverified
+    evidence: the same operations as https://developer.domain.com.au/static/latest/media/latest/openapi.json
+      (sha256 22ad87b9c0cf, fetched 2026-10-04)
   openapi/_original/domain-group-openapi-v1.json:
     method: harvested
     evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
@@ -285,7 +423,16 @@ artifacts:
   openapi/domain-group-agents-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/domain-group-agentsearch-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/domain-group-auctioncollection-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/domain-group-authorities-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/domain-group-avmhistory-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/domain-group-campaignreporting-api-openapi.yml:
@@ -360,17 +507,113 @@ artifacts:
   openapi/domain-group-webhooks-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  overlays/domain-group-latest-overlay.yaml:
-    method: unknown
-    evidence: no authorship recorded
-  overlays/domain-group-v1-overlay.yaml:
-    method: unknown
-    evidence: no authorship recorded
-  overlays/domain-group-v2-overlay.yaml:
-    method: unknown
-    evidence: no authorship recorded
+  overlays/domain-group-addresslocators-api-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
+  overlays/domain-group-agencies-api-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
+  overlays/domain-group-agents-api-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
+  overlays/domain-group-agentsearch-api-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
+  overlays/domain-group-auctioncollection-api-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
+  overlays/domain-group-authorities-api-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
+  overlays/domain-group-avmhistory-api-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
+  overlays/domain-group-campaignreporting-api-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
+  overlays/domain-group-dataset-api-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
+  overlays/domain-group-demographics-api-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
+  overlays/domain-group-disclaimers-api-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
+  overlays/domain-group-enquiries-api-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
+  overlays/domain-group-leadscope-api-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
+  overlays/domain-group-listings-api-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
+  overlays/domain-group-listingsearch-api-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
+  overlays/domain-group-locations-api-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
+  overlays/domain-group-me-api-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
+  overlays/domain-group-premarket-api-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
+  overlays/domain-group-products-api-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
+  overlays/domain-group-projects-api-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
+  overlays/domain-group-properties-api-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
+  overlays/domain-group-property-search-api-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
+  overlays/domain-group-propertyavm-api-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
+  overlays/domain-group-propertyfeatures-api-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
+  overlays/domain-group-propertylike-api-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
+  overlays/domain-group-propertyradar-api-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
+  overlays/domain-group-propertyzoningperils-api-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
+  overlays/domain-group-salesresults-api-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
+  overlays/domain-group-schools-api-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
+  overlays/domain-group-statistics-api-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
+  overlays/domain-group-webhooks-api-overlay.yaml:
+    method: derived
+    evidence: an API Evangelist overlay (title) over the provider's contract
   packages/domain-group-packages.yml:
+    method: unknown
+    evidence: no authorship recorded
+  plans/domain-group-plans-pricing.yml:
+    method: unknown
+    evidence: no authorship recorded
+  rate-limits/domain-group-rate-limits.yml:
     method: searched
+    evidence: declared in the artifact
+  regulatory/domain-group-regulatory-posture.yml:
+    method: searched
+    evidence: declared in the artifact
+  rules/domain-group-rules.yml:
+    method: generated
     evidence: declared in the artifact
   sandbox/domain-group-sandbox.yml:
     method: searched
@@ -398,6 +641,12 @@ artifacts:
     evidence: declared in the artifact
   skills/domain-group-webhook-subscriptions.md:
     method: generated
+    evidence: declared in the artifact
+  vendors/domain-group-vendors.yml:
+    method: unknown
+    evidence: no authorship recorded
+  vocabulary/domain-group-vocabulary.yml:
+    method: derived
     evidence: declared in the artifact
   well-known/domain-group-jwks.json:
     method: unknown
