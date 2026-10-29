@@ -1,4 +1,4 @@
-# Domain Group (domain-group)
+# Domain Group
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,323 +66,252 @@
 
 Domain Group (Domain Holdings Australia Ltd, trading as domain.com.au) is the second of Australia's two national residential property portals, alongside REA Group's realestate.com.au, and since 27 August 2025 has been a wholly owned subsidiary of CoStar Group. Headquartered in Sydney, Domain operates the domain.com.au consumer marketplace plus commercial, agent, and developer-project brands, and sits in the middle of the Australian value chain between selling and leasing agencies on one side and buyers, renters, banks, and PropTech builders on the other. Unlike most of the real estate sector, Domain runs a genuine, self-serve public developer portal at developer.domain.com.au: a developer signs up with GitHub, Google, or email, creates a project, and is immediately granted the "Agents & Listings" and "Properties & Locations" packages, with the remaining eleven packages - Address Suggestions, Campaign reporting, Listings Management, Price Estimation, Property Enrichment, Property Package, PropertyRadar, Rental AVM, Schools Data, and Webhooks - added per project and negotiated with an account manager. Domain publishes three machine-readable OpenAPI 3.0.4 documents (latest, v1, v2) directly from its Libraries page, backs them with an OpenID Connect discovery document at auth.domain.com.au, and serves everything from api.domain.com.au behind API-key or OAuth 2.0 (client credentials, authorization code, implicit) credentials. Write access is a different gate entirely: uploading or updating listings requires sandbox sign-off by email to api@domain.com.au and written permission from the principal agent of each agency, making listing management broker-authorised even though the read surface is self-serve. Domain carries no RESO Web API or RESO Data Dictionary certification, exposes no OData $metadata document and no Universal Property Identifier - RESO is a North American NAR-driven standard with no presence in the Australian portal duopoly - and it publishes no open, unlicensed dataset; all data is licensed under the Domain Group API Terms and Conditions.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/domain-group/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/domain-group/refs/heads/main/apis.yml)
+**Areas:** Real Estate · Australia · Property Listings · Property Data · Valuation · AVM · Rentals · Listing Management · PropTech · Portal Marketplace
+
+## Domain Group on APIs.io
+
+Everything profiled for Domain Group is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/domain-group/](https://apis.io/providers/domain-group/)** — or go straight to one of the APIs or properties below.
+
+### APIs (31)
+
+- [Domain Group Address Locators API](https://apis.io/apis/domain-group/domain-group-addresslocators-api/) — The AddressLocators API from Domain Group — 1 operation(s) for addresslocators.
+- [Domain Group Agencies API](https://apis.io/apis/domain-group/domain-group-agencies-api/) — The Agencies API from Domain Group — 6 operation(s) for agencies.
+- [Domain Group Agents API](https://apis.io/apis/domain-group/domain-group-agents-api/) — The Agents API from Domain Group — 5 operation(s) for agents.
+- [Domain Group Authorities API](https://apis.io/apis/domain-group/domain-group-authorities-api/) — The Authorities API from Domain Group — 6 operation(s) for authorities.
+- [Domain Group Campaign Reporting API](https://apis.io/apis/domain-group/domain-group-campaignreporting-api/) — The CampaignReporting API from Domain Group — 3 operation(s) for campaignreporting.
+- [Domain Group Dataset API](https://apis.io/apis/domain-group/domain-group-dataset-api/) — The Dataset API from Domain Group — 1 operation(s) for dataset.
+- [Domain Group Demographics API](https://apis.io/apis/domain-group/domain-group-demographics-api/) — The Demographics API from Domain Group — 1 operation(s) for demographics.
+- [Domain Group Disclaimers API](https://apis.io/apis/domain-group/domain-group-disclaimers-api/) — The Disclaimers API from Domain Group — 2 operation(s) for disclaimers.
+- [Domain Group Enquiries API](https://apis.io/apis/domain-group/domain-group-enquiries-api/) — The Enquiries API from Domain Group — 2 operation(s) for enquiries.
+- [Domain Group Leadscope API](https://apis.io/apis/domain-group/domain-group-leadscope-api/) — The Leadscope API from Domain Group — 2 operation(s) for leadscope.
+- [Domain Group Listings API](https://apis.io/apis/domain-group/domain-group-listings-api/) — The Listings API from Domain Group — 19 operation(s) for listings.
+- [Domain Group Listing Search API](https://apis.io/apis/domain-group/domain-group-listingsearch-api/) — The ListingSearch API from Domain Group — 2 operation(s) for listingsearch.
+- [Domain Group Locations API](https://apis.io/apis/domain-group/domain-group-locations-api/) — The Locations API from Domain Group — 1 operation(s) for locations.
+- [Domain Group Me API](https://apis.io/apis/domain-group/domain-group-me-api/) — The Me API from Domain Group — 3 operation(s) for me.
+- [Domain Group Pre Market API](https://apis.io/apis/domain-group/domain-group-premarket-api/) — The PreMarket API from Domain Group — 2 operation(s) for premarket.
+- [Domain Group Products API](https://apis.io/apis/domain-group/domain-group-products-api/) — The Products API from Domain Group — 8 operation(s) for products.
+- [Domain Group Projects API](https://apis.io/apis/domain-group/domain-group-projects-api/) — The Projects API from Domain Group — 6 operation(s) for projects.
+- [Domain Group Properties API](https://apis.io/apis/domain-group/domain-group-properties-api/) — The Properties API from Domain Group — 10 operation(s) for properties.
+- [Domain Group Property Avm API](https://apis.io/apis/domain-group/domain-group-propertyavm-api/) — The PropertyAvm API from Domain Group — 2 operation(s) for propertyavm.
+- [Domain Group Property Features API](https://apis.io/apis/domain-group/domain-group-propertyfeatures-api/) — The PropertyFeatures API from Domain Group — 1 operation(s) for propertyfeatures.
+- [Domain Group Property Like API](https://apis.io/apis/domain-group/domain-group-propertylike-api/) — The PropertyLike API from Domain Group — 1 operation(s) for propertylike.
+- [Domain Group Property Radar API](https://apis.io/apis/domain-group/domain-group-propertyradar-api/) — The PropertyRadar API from Domain Group — 7 operation(s) for propertyradar.
+- [Domain Group Property Zoning Perils API](https://apis.io/apis/domain-group/domain-group-propertyzoningperils-api/) — The PropertyZoningPerils API from Domain Group — 1 operation(s) for propertyzoningperils.
+- [Domain Group Sales Results API](https://apis.io/apis/domain-group/domain-group-salesresults-api/) — The SalesResults API from Domain Group — 5 operation(s) for salesresults.
+- [Domain Group Schools API](https://apis.io/apis/domain-group/domain-group-schools-api/) — The Schools API from Domain Group — 2 operation(s) for schools.
+- [Domain Group Statistics API](https://apis.io/apis/domain-group/domain-group-statistics-api/) — The Statistics API from Domain Group — 6 operation(s) for statistics.
+- [Domain Group Webhooks API](https://apis.io/apis/domain-group/domain-group-webhooks-api/) — The Webhooks API from Domain Group — 2 operation(s) for webhooks.
+- [Domain Group Avm History API](https://apis.io/apis/domain-group/domain-group-avmhistory-api/) — The Avm History API from Domain Group — 1 operation(s) for property valuation history (GET /v1/avmHistory/{propertyId}, "Retrieves valuation history for the…
+- [Domain Group Auction Collection API](https://apis.io/apis/domain-group/domain-group-auctioncollection-api/) — The Auction Collection API from Domain Group — 2 operation(s) for auction collection: the auction calling sheet of auctions without results yet (GET…
+- [Domain Group Agent Search API](https://apis.io/apis/domain-group/domain-group-agentsearch-api/) — The Agent Search API from Domain Group — 1 operation(s) for agent search by location (POST /v2/agentsearch/agents/location, "Retrieves agents matching the…
+- [Domain Group Property Search API](https://apis.io/apis/domain-group/domain-group-property-search-api/) — The Property Search API from Domain Group — 1 operation(s) for property search.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### AsyncAPI (2)
+
+Event-driven and webhook contracts.
+
+- [Domain Group Webhooks](https://apis.io/asyncapis/domain-group/domain-group-webhooks/)
+- [Domain Group Webhooks](https://apis.io/asyncapis/domain-group/domain-group-webhooks-asyncapi/)
+
+#### Event channels (7)
+
+Individual events and webhooks the provider emits.
+
+- [agencies](https://apis.io/channels/domain-group/agencies/)
+- [agents](https://apis.io/channels/domain-group/agents/)
+- [enquiries](https://apis.io/channels/domain-group/enquiries/)
+- [heartbeat](https://apis.io/channels/domain-group/heartbeat/)
+- [listingProcessingReports](https://apis.io/channels/domain-group/listingprocessingreports/)
+- [listings](https://apis.io/channels/domain-group/listings/)
+- [projects](https://apis.io/channels/domain-group/projects/)
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [domain-group](https://apis.io/servers/domain-group/domain-group/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Domain Group Agentic Access](https://apis.io/agentic-access/domain-group/domain-group-agentic-access/)
+
+#### JSON Schema (76)
+
+The data models the API reads and writes.
+
+- [Agencies.V1.Agent](https://apis.io/schemas/domain-group/domain-group-agencies-v1-agent/)
+- [Agencies.V2.Agency](https://apis.io/schemas/domain-group/domain-group-agencies-v2-agency/)
+- [Agencies.V2.AgencySummary](https://apis.io/schemas/domain-group/domain-group-agencies-v2-agency-summary/)
+- [Agencies.V2.AgentReviewLiteResponse](https://apis.io/schemas/domain-group/domain-group-agencies-v2-agent-review-lite-response/)
+- [Agencies.V2.AgentSearchPageResultContactStatsDto](https://apis.io/schemas/domain-group/domain-group-agencies-v2-agent-search-page-result-contact-stats-dto/)
+- [Agencies.V2.GetAgentsByLocationRequest](https://apis.io/schemas/domain-group/domain-group-agencies-v2-get-agents-by-location-request/)
+- [AuctionCollection.v1.CallingSheetResponse](https://apis.io/schemas/domain-group/domain-group-auction-collection-v1-calling-sheet-response/)
+- [AuctionCollection.v1.PutAuctionUpdateRequest](https://apis.io/schemas/domain-group/domain-group-auction-collection-v1-put-auction-update-request/)
+- [AuctionResults.v1.listingEventItem](https://apis.io/schemas/domain-group/domain-group-auction-results-v1-listing-event-item/)
+- [AuctionResults.v1.summaryResponse](https://apis.io/schemas/domain-group/domain-group-auction-results-v1-summary-response/)
+- [Authorities.v1.Attachments](https://apis.io/schemas/domain-group/domain-group-authorities-v1-attachments/)
+- [Authorities.v1.AuthorityRequest](https://apis.io/schemas/domain-group/domain-group-authorities-v1-authority-request/)
+- [Authorities.v1.AuthorityResponse](https://apis.io/schemas/domain-group/domain-group-authorities-v1-authority-response/)
+- [Authorities.v1.SubscriptionRequest](https://apis.io/schemas/domain-group/domain-group-authorities-v1-subscription-request/)
+- [Authorities.v1.SubscriptionResponse](https://apis.io/schemas/domain-group/domain-group-authorities-v1-subscription-response/)
+- [Authorities.v1.VendorAttachments](https://apis.io/schemas/domain-group/domain-group-authorities-v1-vendor-attachments/)
+- [AvmHistory.v1.Response](https://apis.io/schemas/domain-group/domain-group-avm-history-v1-response/)
+- [BookingV2Api.v1.GetListingPriceQuoteByAgencyResponse](https://apis.io/schemas/domain-group/domain-group-booking-v2-api-v1-get-listing-price-quote-by-agency-response/)
+- [BookingV2Api.v1.GetQuoteListingPriceBySuburbsRequest](https://apis.io/schemas/domain-group/domain-group-booking-v2-api-v1-get-quote-listing-price-by-suburbs-request/)
+- [BookingV2Api.v1.GetQuoteListingPriceBySuburbsResponse](https://apis.io/schemas/domain-group/domain-group-booking-v2-api-v1-get-quote-listing-price-by-suburbs-response/)
+- [Bookings.V2.RateForNewListing](https://apis.io/schemas/domain-group/domain-group-bookings-v2-rate-for-new-listing/)
+- [Bookings.V2.RateForNewListingRequest](https://apis.io/schemas/domain-group/domain-group-bookings-v2-rate-for-new-listing-request/)
+- [CampaignAPI.v1.ListingPerformanceDataResponse](https://apis.io/schemas/domain-group/domain-group-campaign-api-v1-listing-performance-data-response/)
+- [CampaignAPI.v1.ProjectPerformanceDataResponse](https://apis.io/schemas/domain-group/domain-group-campaign-api-v1-project-performance-data-response/)
+- [CampaignAPI.v1.SocialPerformanceDataResponse](https://apis.io/schemas/domain-group/domain-group-campaign-api-v1-social-performance-data-response/)
+- …and 51 more published on APIs.io
 
-## Tags
+#### JSON-LD (1)
 
-- Real Estate
-- Australia
-- Property Listings
-- Property Data
-- Valuation
-- AVM
-- Rentals
-- Listing Management
-- PropTech
-- Portal Marketplace
+Linked-data contexts for the provider's vocabulary.
 
-## Timestamps
+- [Domain Group Context](https://apis.io/jsonld/domain-group/domain-group-context/)
 
-- **Created:** 2026-07-26
-- **Modified:** 2026-07-26
+#### Collections (3)
 
-## APIs
+Postman and Open Collection request collections.
 
-### Domain Address Suggestions API
+- [Domain Public API](https://apis.io/collections/domain-group/open-domain-group-openapi-latest/)
+- [Domain Public API](https://apis.io/collections/domain-group/open-domain-group-openapi-v1/)
+- [Domain Public API](https://apis.io/collections/domain-group/open-domain-group-openapi-v2/)
 
-Search for valid Australian property addresses and resolve them to Domain property identifiers. Backed by GET /v1/properties/_suggest and GET /v1/addressLocators. Requires the api_properties_read or api_addresslocators_read scope.
+#### Overlays (31)
 
-- **Human URL:** [https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion](https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion)
-- **Base URL:** `https://api.domain.com.au`
+OpenAPI overlays, including conversational phrasing for each operation.
 
-#### Tags
+- [Domain Group Addresslocators Api Overlay](https://apis.io/overlays/domain-group/domain-group-addresslocators-api-overlay/)
+- [Domain Group Agencies Api Overlay](https://apis.io/overlays/domain-group/domain-group-agencies-api-overlay/)
+- [Domain Group Agents Api Overlay](https://apis.io/overlays/domain-group/domain-group-agents-api-overlay/)
+- [Domain Group Agentsearch Api Overlay](https://apis.io/overlays/domain-group/domain-group-agentsearch-api-overlay/)
+- [Domain Group Auctioncollection Api Overlay](https://apis.io/overlays/domain-group/domain-group-auctioncollection-api-overlay/)
+- [Domain Group Authorities Api Overlay](https://apis.io/overlays/domain-group/domain-group-authorities-api-overlay/)
+- [Domain Group Avmhistory Api Overlay](https://apis.io/overlays/domain-group/domain-group-avmhistory-api-overlay/)
+- [Domain Group Campaignreporting Api Overlay](https://apis.io/overlays/domain-group/domain-group-campaignreporting-api-overlay/)
+- [Domain Group Dataset Api Overlay](https://apis.io/overlays/domain-group/domain-group-dataset-api-overlay/)
+- [Domain Group Demographics Api Overlay](https://apis.io/overlays/domain-group/domain-group-demographics-api-overlay/)
+- [Domain Group Disclaimers Api Overlay](https://apis.io/overlays/domain-group/domain-group-disclaimers-api-overlay/)
+- [Domain Group Enquiries Api Overlay](https://apis.io/overlays/domain-group/domain-group-enquiries-api-overlay/)
+- [Domain Group Leadscope Api Overlay](https://apis.io/overlays/domain-group/domain-group-leadscope-api-overlay/)
+- [Domain Group Listings Api Overlay](https://apis.io/overlays/domain-group/domain-group-listings-api-overlay/)
+- [Domain Group Listingsearch Api Overlay](https://apis.io/overlays/domain-group/domain-group-listingsearch-api-overlay/)
+- [Domain Group Locations Api Overlay](https://apis.io/overlays/domain-group/domain-group-locations-api-overlay/)
+- [Domain Group Me Api Overlay](https://apis.io/overlays/domain-group/domain-group-me-api-overlay/)
+- [Domain Group Premarket Api Overlay](https://apis.io/overlays/domain-group/domain-group-premarket-api-overlay/)
+- [Domain Group Products Api Overlay](https://apis.io/overlays/domain-group/domain-group-products-api-overlay/)
+- [Domain Group Projects Api Overlay](https://apis.io/overlays/domain-group/domain-group-projects-api-overlay/)
+- [Domain Group Properties Api Overlay](https://apis.io/overlays/domain-group/domain-group-properties-api-overlay/)
+- [Domain Group Property Search Api Overlay](https://apis.io/overlays/domain-group/domain-group-property-search-api-overlay/)
+- [Domain Group Propertyavm Api Overlay](https://apis.io/overlays/domain-group/domain-group-propertyavm-api-overlay/)
+- [Domain Group Propertyfeatures Api Overlay](https://apis.io/overlays/domain-group/domain-group-propertyfeatures-api-overlay/)
+- [Domain Group Propertylike Api Overlay](https://apis.io/overlays/domain-group/domain-group-propertylike-api-overlay/)
+- …and 6 more published on APIs.io
 
-- Address
-- Geocoding
-- Real Estate
+#### Governance rules (1)
 
-#### Properties
+Spectral rulesets for the provider's contracts.
 
-- [OpenAPI](openapi/domain-group-openapi-latest.json)
-- [Documentation](https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion)
-- [APIReference](https://developer.domain.com.au/docs/latest/apis/pkg_address_suggestion/references/properties_suggest)
-- [DeveloperPortal](https://developer.domain.com.au/)
+- [Domain Group API Rules](https://apis.io/rules/domain-group/domain-group-rules/)
 
-### Domain Agents & Listings API
+#### Security (2)
 
-Access data on agencies, agents, and for-sale, for-rent, commercial, business, and project listings directly from Domain. Covers agency and agent search and profiles, residential/commercial/business listing search, listing locations, project search, and enquiry submission. Granted automatically on signup along with Properties & Locations.
+Authentication, trust centre, and vulnerability disclosure.
 
-- **Human URL:** [https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings](https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings)
-- **Base URL:** `https://api.domain.com.au`
+- [Domain Group Authentication](https://apis.io/security/domain-group/domain-group-authentication/)
+- [Domain Group Domain Security](https://apis.io/security/domain-group/domain-group-domain-security/)
 
-#### Tags
+#### OAuth scopes (1)
 
-- Property Listings
-- Agents
-- Agencies
-- Real Estate
+The permissions the API asks for.
 
-#### Properties
+- [Domain Group Scopes](https://apis.io/scopes/domain-group/domain-group-scopes/)
 
-- [OpenAPI](openapi/domain-group-openapi-latest.json)
-- [OpenAPI](openapi/domain-group-openapi-v1.json)
-- [Documentation](https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings)
-- [APIReference](https://developer.domain.com.au/docs/latest/apis/pkg_agents_listings/references/listings_detailedresidentialsearch)
-- [DeveloperPortal](https://developer.domain.com.au/)
+#### Plans and pricing (1)
 
-### Domain Campaign API
+Published plans, tiers and prices.
 
-Lets authenticated media agencies retrieve advertising campaign performance metrics for Domain listings and developer projects, via GET /v1/campaign/listing-performance and GET /v1/campaign/project-performance. Restricted to authorised media agency clients.
+- [Domain Group Plans Pricing](https://apis.io/plans/domain-group/domain-group-plans-pricing/)
 
-- **Human URL:** [https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api](https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api)
-- **Base URL:** `https://api.domain.com.au`
+#### Rate limits (1)
 
-#### Tags
+Published request limits.
 
-- Advertising
-- Analytics
-- Real Estate
+- [Domain Group Rate Limits](https://apis.io/rate-limits/domain-group/domain-group-rate-limits/)
 
-#### Properties
+## Where to find this API
 
-- [OpenAPI](openapi/domain-group-openapi-latest.json)
-- [Documentation](https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api)
-- [APIReference](https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api/references/campaign_getlistingperformance_report)
-- [DeveloperPortal](https://developer.domain.com.au/)
-
-### Domain Campaign API - Preview
-
-Preview channel of the Campaign API, giving authorised media agencies early access to campaign performance metrics ahead of general release. Documented as a separate API package on the Domain developer portal.
-
-- **Human URL:** [https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api_preview](https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api_preview)
-- **Base URL:** `https://api.domain.com.au`
-
-#### Tags
-
-- Advertising
-- Analytics
-- Preview
-
-#### Properties
-
-- [OpenAPI](openapi/domain-group-openapi-latest.json)
-- [Documentation](https://developer.domain.com.au/docs/latest/apis/pkg_campaign_api_preview)
-- [DeveloperPortal](https://developer.domain.com.au/)
-
-### Domain Listings Management API
-
-View, create, and update residential, commercial, business, project, and off-market listings on domain.com.au, and manage the resulting enquiries, listing reports, and performance statistics. This is the CRM upload surface used by Australian agency software; production access requires a sandbox sign-off process by email to api@domain.com.au plus written authorisation from the principal agent of each agency whose listings are being managed.
-
-- **Human URL:** [https://developer.domain.com.au/docs/latest/apis/pkg_listing_management](https://developer.domain.com.au/docs/latest/apis/pkg_listing_management)
-- **Base URL:** `https://api.domain.com.au`
-
-#### Tags
-
-- Listing Management
-- CRM
-- Enquiries
-- Real Estate
-
-#### Properties
-
-- [OpenAPI](openapi/domain-group-openapi-latest.json)
-- [OpenAPI](openapi/domain-group-openapi-v2.json)
-- [Documentation](https://developer.domain.com.au/docs/latest/apis/pkg_listing_management)
-- [Documentation](https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/upload-listings)
-- [Documentation](https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/agency-authorisation)
-- [Documentation](https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/production-access)
-- [Documentation](https://developer.domain.com.au/docs/latest/apis/pkg_listing_management/guides/migrating-from-xml)
-- [DeveloperPortal](https://developer.domain.com.au/)
-
-### Domain Price Estimation API
-
-Returns the current automated price estimate for a Domain property identifier via GET /v1/properties/{propertyId}/priceEstimate, including lower, mid, and upper price, a confidence indicator, and estimate history. Requires the api_properties_read scope.
-
-- **Human URL:** [https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation](https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation)
-- **Base URL:** `https://api.domain.com.au`
-
-#### Tags
-
-- Valuation
-- AVM
-- Property Data
-
-#### Properties
-
-- [OpenAPI](openapi/domain-group-openapi-latest.json)
-- [Documentation](https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation)
-- [APIReference](https://developer.domain.com.au/docs/latest/apis/pkg_price_estimation/references/properties_getpriceestimate)
-- [DeveloperPortal](https://developer.domain.com.au/)
-
-### Domain Properties & Locations API
-
-Property records, address locators, location profiles, weekend auction and sales results, suburb performance and historical statistics, and suburb demographics. Granted automatically on signup along with Agents & Listings, and the package most commonly used by banks and fintechs for suburb medians and market performance.
-
-- **Human URL:** [https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations](https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations)
-- **Base URL:** `https://api.domain.com.au`
-
-#### Tags
-
-- Property Data
-- Market Statistics
-- Demographics
-- Auction Results
-
-#### Properties
-
-- [OpenAPI](openapi/domain-group-openapi-latest.json)
-- [OpenAPI](openapi/domain-group-openapi-v2.json)
-- [Documentation](https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations)
-- [APIReference](https://developer.domain.com.au/docs/latest/apis/pkg_properties_locations/references/suburbperformance_get_bynamedsuburb)
-- [DeveloperPortal](https://developer.domain.com.au/)
-
-### Domain Property Enrichment API
-
-Enhances a known property with additional Domain-held detail through GET /v1/propertyenrichment, alongside the v2 property features and zoning/perils endpoints. Sold as a separate API package.
-
-- **Human URL:** [https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment](https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment)
-- **Base URL:** `https://api.domain.com.au`
-
-#### Tags
-
-- Property Data
-- Enrichment
-- Zoning
-
-#### Properties
-
-- [OpenAPI](openapi/domain-group-openapi-latest.json)
-- [Documentation](https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment)
-- [APIReference](https://developer.domain.com.au/docs/latest/apis/pkg_property_enrichment/references/propertyenrichment_get)
-- [DeveloperPortal](https://developer.domain.com.au/)
-
-### Domain Property Package API
-
-A bundled package giving comprehensive property coverage in one subscription - address suggestion, property records, price estimates, residential listing search, location profiles, project data, schools, suburb performance, and demographics - assembled from endpoints that also appear in the narrower packages.
-
-- **Human URL:** [https://developer.domain.com.au/docs/latest/apis/pkg_property](https://developer.domain.com.au/docs/latest/apis/pkg_property)
-- **Base URL:** `https://api.domain.com.au`
-
-#### Tags
-
-- Property Data
-- Bundle
-- Real Estate
-
-#### Properties
-
-- [OpenAPI](openapi/domain-group-openapi-latest.json)
-- [Documentation](https://developer.domain.com.au/docs/latest/apis/pkg_property)
-- [APIReference](https://developer.domain.com.au/docs/latest/apis/pkg_property/references/properties_get)
-- [DeveloperPortal](https://developer.domain.com.au/)
-
-### Domain PropertyRadar API
-
-Create and manage watchlist portfolios of properties and read them back in summary or full form, including lookup by G-NAF address identifier. Covers POST/GET/DELETE on /v1/propertyradar/portfolio and its property members. Requires api_propertyportfolio_read and api_propertyportfolio_write scopes.
-
-- **Human URL:** [https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar](https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar)
-- **Base URL:** `https://api.domain.com.au`
-
-#### Tags
-
-- Property Portfolio
-- Monitoring
-- Property Data
-
-#### Properties
-
-- [OpenAPI](openapi/domain-group-openapi-latest.json)
-- [Documentation](https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar)
-- [APIReference](https://developer.domain.com.au/docs/latest/apis/pkg_propertyradar/references/propertyradar_listportfolios)
-- [DeveloperPortal](https://developer.domain.com.au/)
-
-### Domain Rental AVM API
-
-Automated rental estimates for a Domain property identifier via GET /v1/properties/{propertyId}/rentalEstimate, plus the /v1/avm and /v1/avmReport endpoints. Requires the api_avm_read scope.
-
-- **Human URL:** [https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm](https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm)
-- **Base URL:** `https://api.domain.com.au`
-
-#### Tags
-
-- Rentals
-- AVM
-- Valuation
-
-#### Properties
-
-- [OpenAPI](openapi/domain-group-openapi-latest.json)
-- [Documentation](https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm)
-- [APIReference](https://developer.domain.com.au/docs/latest/apis/pkg_rental_avm/references/properties_getrentalestimate)
-- [DeveloperPortal](https://developer.domain.com.au/)
-
-### Domain Schools Data API
-
-Detailed information on Australian schools, retrievable by school identifier (GET /v2/schools/{id}) or by latitude and longitude (GET /v2/schools/{latitude}/{longitude}) for school-catchment style property search experiences.
-
-- **Human URL:** [https://developer.domain.com.au/docs/latest/apis/pkg_schools_data](https://developer.domain.com.au/docs/latest/apis/pkg_schools_data)
-- **Base URL:** `https://api.domain.com.au`
-
-#### Tags
-
-- Schools
-- Location Data
-- Property Data
-
-#### Properties
-
-- [OpenAPI](openapi/domain-group-openapi-latest.json)
-- [OpenAPI](openapi/domain-group-openapi-v2.json)
-- [Documentation](https://developer.domain.com.au/docs/latest/apis/pkg_schools_data)
-- [APIReference](https://developer.domain.com.au/docs/latest/apis/pkg_schools_data/references/schools_search_bylocation)
-- [DeveloperPortal](https://developer.domain.com.au/)
-
-### Domain Webhooks API
-
-Subscription management for push notifications when data changes in the Domain system. Create, read, list, and delete webhook subscriptions via /v1/webhooks/{id}/subscriptions and /v1/subscriptions/{id}, with configuration, processing, and troubleshooting guides. Requires the api_webhooks_write scope.
-
-- **Human URL:** [https://developer.domain.com.au/docs/latest/apis/pkg_webhooks](https://developer.domain.com.au/docs/latest/apis/pkg_webhooks)
-- **Base URL:** `https://api.domain.com.au`
-
-#### Tags
-
-- Webhooks
-- Events
-- Real Estate
-
-#### Properties
-
-- [OpenAPI](openapi/domain-group-openapi-latest.json)
-- [Documentation](https://developer.domain.com.au/docs/latest/apis/pkg_webhooks)
-- [Documentation](https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/guides/subscriptions)
-- [APIReference](https://developer.domain.com.au/docs/latest/apis/pkg_webhooks/references/webhooks_createsubscription)
-- [DeveloperPortal](https://developer.domain.com.au/)
-
-## Common Properties
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://www.domain.com.au/)
-- [DeveloperPortal](https://developer.domain.com.au/)
 - [Documentation](https://developer.domain.com.au/docs/latest)
-- [APIReference](https://developer.domain.com.au/docs/latest/apis)
-- [SignUp](https://developer.domain.com.au/docs/latest/getting-started/creating-first-project)
-- [GettingStarted](https://developer.domain.com.au/docs/latest/getting-started)
-- [Authentication](https://developer.domain.com.au/docs/latest/authentication)
-- [OpenAPI](https://developer.domain.com.au/static/latest/media/latest/openapi.json)
-- [WellKnown](well-known/domain-group-openid-configuration.json)
-- [OpenIDConnect](https://auth.domain.com.au/v1/.well-known/openid-configuration)
-- [RateLimits](https://developer.domain.com.au/docs/latest/conventions/rate-limiting)
-- [Sandbox](https://developer.domain.com.au/docs/latest/conventions/sandbox)
-- [Conventions](https://developer.domain.com.au/docs/latest/conventions)
-- [Versioning](https://developer.domain.com.au/docs/latest/conventions/versioning)
-- [Libraries](https://developer.domain.com.au/docs/latest/libraries)
-- [SDKs](https://developer.domain.com.au/docs/latest/libraries)
+- [Getting started](https://developer.domain.com.au/docs/latest/getting-started)
+- [API reference](https://developer.domain.com.au/docs/latest/apis)
+- [Sign up](https://developer.domain.com.au/docs/latest/getting-started/creating-first-project)
 - [Support](https://developer.domain.com.au/docs/latest/support)
-- [SLA](https://developer.domain.com.au/docs/latest/support/sla)
-- [TermsOfService](https://www.domain.com.au/group/api-terms-and-conditions/)
-- [Policies](https://developer.domain.com.au/docs/latest/support/policies)
-- [Troubleshooting](https://developer.domain.com.au/docs/latest/troubleshooting)
-- [GitHubOrganization](https://github.com/domain-group)
+- [Terms of service](https://www.domain.com.au/group/api-terms-and-conditions/)
+- [GitHub](https://github.com/domain-group)
 
-## Maintainers
+## API Evangelist rating
 
-- Kin Lane — kin@apievangelist.com
+**Kin Score 58.7** — strong · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 71.4 |
+| Contract quality | 69.7 |
+| Contract governance | 22.0 |
+| Operational transparency | 65.8 |
+| Developer ergonomics | 63.7 |
+| Access clarity | 23.7 |
+
+**Agent readiness 43.6** — agent-ready (gated down from agent-native)
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | yes |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | partial |
+| Operation Distinctiveness | mostly |
+
+**Regulatory alignment 30.4** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/domain-group/](https://apis.io/providers/domain-group/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Domain Group: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/domain-group/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
